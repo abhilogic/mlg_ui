@@ -1,0 +1,181 @@
+.teacher_dashboard {
+  .universal_searchbar {
+    margin-bottom: 45px;
+
+  }
+  .panel {
+    .panel-heading {
+      .student_curr_status{
+          float: right;
+          margin-bottom: 0px;
+          margin-top: -3px;
+        li {
+            margin-right: 10px;
+          span {
+            color: $gray;
+            display: inline-block;
+            font-size: 12px;
+            vertical-align: middle;
+            &.dot {
+              @include border-radius(100%);
+              height:10px;
+              margin-right: 10px;
+              width: 10px;
+              &.gifted {
+                background: $cornFlowerFlue;
+              }
+              &.outstanding {
+                background: $seaGreen;
+              }
+              &.onTarget {
+                background: $springGreen;
+              }
+              &.struggling {
+                background: $orange;
+              }
+              &.remedial {
+                background: $fireBrick;
+                }
+            }
+          }
+        }
+      }
+    }
+    .panel-footer {
+      border-top: 1px solid $alto;
+      background: $white;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      .para {
+        color: $gray;
+        font-size: 12px;
+        font-family: $font-primary;
+        font-weight: bold;
+        margin-bottom: 0px;
+        text-align: center;
+      }
+    }
+    .panel-body {
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-bottom: 25px;
+      .circular_listing, .group_list{
+
+        li {
+            margin-left: 16px;
+            margin-right: 16px;
+            margin-bottom: 40px;
+            max-width: 104px;
+            vertical-align: text-top;
+          @media screen and (min-width: 1389px)   {
+            margin-left: 24px;
+            margin-right: 24px;
+            margin-bottom: 56px;
+            max-width: 115px;
+          }
+
+          &:nth-child(1){
+            margin-left: 0px;
+          }
+          &:nth-child(7n){
+            margin-right: 0px;
+          }
+          &:nth-child(8n){
+            margin-left: 0px;
+          }
+          &:nth-last-child(-n+7){
+            margin-bottom: 0px;
+          }
+          @media screen and (min-width: 1390px)   {
+            margin-left: 24px !important;
+            margin-right: 24px !important;
+            margin-bottom: 25px !important;
+            margin-top: 25px !important;
+          }
+          .stud__img,.group__img{
+            @include border-radius(100%);
+            display: block;
+            height: 102px;
+            margin: auto;
+            position: relative;
+            width: 102px;
+          }
+          .stud__img {
+            &:before {
+              background-color: $cornFlowerFlue;
+              border: 5px solid $white;
+              @include border-radius(100%);
+              @include box-sizing(inset 0px 0px 11px rgba(0,0,0,0.15));
+              content: '';
+              height: 24px;
+              position: absolute;
+              width: 24px;
+            }
+          }
+          .stud__name,.group__name{
+            color: $doveGray;
+            display: block;
+            font-family: $font-secondary;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+              @media screen and (min-width: 1389px)   {
+                font-size: 16px;
+              }
+          }
+        }
+      }
+      .circular_listing {
+        .stud_img_cover {
+          position: relative;
+          &.status {
+          &:before {
+            border: 5px solid $white;
+            @include border-radius(100%);
+            content: '';
+            bottom: -12px;
+            left: 37%;
+            height: 24px;
+            position: absolute;
+            width: 24px;
+            z-index: 10;
+          }
+          &.gifted {
+            &:before {
+               background: $cornFlowerFlue;
+              }
+          }
+          &.outstanding {
+            &:before {
+              background: $seaGreen;
+            }
+          }
+          &.onTarget {
+            &:before {
+              background: $springGreen;
+            }
+          }
+          &.struggling {
+            &:before {
+              background: $orange;
+            }
+          }
+          &.remedial {
+            &:before {
+              background: $fireBrick;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// teacher_planer
+.teacher_planer {
+  margin-bottom: 45px;
+.calender___img {
+  width: 100%;
+}
+}

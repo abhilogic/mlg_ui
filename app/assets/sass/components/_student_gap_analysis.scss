@@ -1,0 +1,137 @@
+.student_gap_analysis {
+  background: $white;
+  @include box-shadow(0 0 65px rgba(0,0,0,0.10));
+  .left__side {
+    >.hd {
+      @include box-shadow(inset -5px 0px 10px rgba(105, 101, 101, 0.15));
+      color: $gray;
+      font-size: 18px;
+      font-weight: $semibold;
+      padding: 23px 33px;
+      text-transform: uppercase;
+    }
+    .nav-tabs {
+      @include box-shadow(inset -9px 0px 24px rgba(105, 101, 101, 0.15));
+      border-bottom: 0px;
+      li {
+        display: block;
+        position: relative;
+        border-top: 1px solid $alto;
+        width: 100%;
+        &:not(:last-child){
+          border-bottom: 1px solid $alto;
+        }
+        &:first-child{
+          &.active {
+            border-top: 1px solid transparent;
+          }
+        }
+
+        &.active {
+          @include box-shadow(inset -498px 0px 24px rgba(255, 255, 255, 1));
+          border-top: 1px solid $alto;
+          &:before {
+          background: $cornFlowerFlue;
+          content: '';
+          height: 100%;
+          left: 0px;
+          position: absolute;
+          top: 0px;
+          width: 5px;
+          z-index: 10;
+          }
+          a {
+            background: none !important;
+          }
+        }
+        a{
+          border: 0px;
+          padding: 23px 33px;
+          &:hover {
+            background: rgba($dimGray,0.05);
+          }
+        }
+        .hd {
+          color: $gray;
+          font-size: 16px;
+          font-family: $font-secondary;
+          text-transform: uppercase;
+          span {
+            color: $dimGray;
+          }
+        }
+        .para {
+          color: $black;
+          font-size: 12px;
+          font-family: $font-secondary;
+          margin-top: 13px;
+        }
+      }
+    }
+    .bottom_arrow {
+      text-align: center;
+      .fa {
+        color: $gray;
+        font-size: 30px;
+      }
+    }
+  }
+  .right__side {
+    .tab-content {
+      @include padding(null 15px 20px 15px);
+    }
+    .tab-pane {
+        text-align: center;
+      .analysis_img_cover {
+        display: inline-block;
+        margin-top:100px;
+        position: relative;
+        &:hover {
+          .report_indicator {
+            display: block;
+          }
+        }
+        .report_indicator {
+          @include border-radius(5px);
+          background: $gray;
+          color: $white;
+          display: none;
+          max-width: 140px;
+          position: absolute;
+          padding: 10px 15px;
+          right: 65px;
+          top: -5px;
+          &:before {
+            border-top: 10px solid transparent;
+            border-right: 10px solid $gray;
+            border-bottom: 10px solid transparent;
+            content: '';
+            height: 0px;
+            left: -10px;
+            position: absolute;
+            top: 31%;
+            width: 0px;
+
+          }
+        }
+        .analysis__img {
+          display: block;
+          margin: auto;
+          max-width: 100%;
+        }
+      }
+      .btn_create_assignment {
+        border:1px solid $doveGray;
+        @include border-radius(0px);
+        color: $doveGray;
+        display: block;
+        font-size: 16px;
+        font-family: $font-secondary;
+        margin: auto;
+        margin-top: 80px;
+        padding: 10px 30px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

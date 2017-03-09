@@ -1,0 +1,29 @@
+.signpage__body {
+  &.student_no_selection {
+    text-align: center;
+    .___status_icon {
+      background: $springGreen;
+      @include border-radius(100%);
+      display: block;
+      color: $white;
+      font-size: 30px;
+      height: 70px;
+      margin:auto;
+      padding-top: 16px;
+      text-align: center;
+      width: 70px;
+    }
+    .__tag_line {
+    color: rgba($black, 0.7);
+    font-weight: $light;
+    font-size: 16px;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    span {
+      display: block;
+      font-weight: $semibold;
+    }
+    }
+  }
+}

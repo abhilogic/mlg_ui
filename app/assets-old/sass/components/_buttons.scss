@@ -1,0 +1,7 @@
+/* --- BUTTONS --- */
+.btn-primary {
+  @include border-radius(3px);
+  background: $pictonBlue;
+  border-color: $pictonBlue;
+  padding: 8px 20px;
+}

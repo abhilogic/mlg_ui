@@ -1,0 +1,34 @@
+.universal_searchbar {
+    background-color: $white;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  .__searchbar {
+    @include border-radius(5px);
+    @include box-shadow(inset 0px 0px 40px rgba(0, 0, 0, 0.15));
+    background: {
+      image: url(../img/search-icon.png);
+      position: 46% center;
+      repeat: no-repeat;
+    }
+    padding-left: 48%;
+    border: 0px;
+    height: 40px;
+    width: 100%;
+    &.active {
+      background: none;
+      padding-left: 0px;
+      text-align: center;
+    }
+    &:focus {
+      @include border-radius(5px !important);
+      @include box-shadow(inset 0px 0px 40px rgba(0, 0, 0, 0.15) !important);
+    }
+  }
+  @include placeholders(input){
+      font-size: 16px;
+      color: red;
+      text-transform: capitalize;
+  }
+}

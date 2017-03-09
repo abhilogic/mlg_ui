@@ -1,0 +1,66 @@
+/* --- Panels --- */
+$panel-padding-left : 30px;
+$panel-padding-left-sm : 15px;
+$panel-padding-right : 30px;
+$panel-padding-right-sm : 15px;
+$panel-padding-top: 30px;
+$panel-margin-bottom : 45px;
+$panel-border-bottom-width : 1px;
+$panel-border-bottom-color : $alto;
+$panel-heading-padding-top : 25px;
+$panel-heading-padding-top-sm : 15px;
+$panel-heading-padding-bottom : 15px;
+$panel-heading-padding-bottom-sm : 15px;
+$panel-title-font-size : 16px;
+$panel-title-color : $dimGray;
+
+.panel{
+  border: 0px;
+  @include padding(null $panel-padding-left null $panel-padding-right);
+  &:not(:last-child){
+    margin-bottom: $panel-margin-bottom;
+  }
+  @include respond-to(mobileMedium){
+    @include padding(null $panel-padding-left-sm null $panel-padding-right-sm);
+  }
+  .panel-heading {
+    @include border-width(null null $panel-border-bottom-width null);
+    @include border-color(null null $panel-border-bottom-color null);
+    @include border-style(null null solid null);
+    background-color: transparent;
+    @include padding($panel-heading-padding-top 0px $panel-heading-padding-bottom 0px);
+    @include respond-to(mobileMedium){
+      @include padding($panel-heading-padding-top-sm 0px $panel-heading-padding-bottom-sm 0px);
+    }
+    .panel-title {
+        color: $panel-title-color;
+        font-size: $panel-title-font-size;
+        font-family: $font-primary;
+        font-weight: $semibold;
+        float: left;
+        text-transform: uppercase;
+        @include respond-to(mobileMedium){
+          border-bottom: 1px solid $alto;
+          clear: both;
+          float: none;
+          padding-bottom: 10px;
+          text-align: center;
+        }
+    }
+  }
+  .panel-body {
+    @include respond-to(mobileMedium) {
+      padding-top: 20px;
+      padding-bottom: 0px !important;
+    }
+  }
+  &.no_heading {
+    padding-top: $panel-padding-top;
+  }
+  &.no_status {
+    .panel-title {
+      border-bottom: 0px;
+      padding-bottom: 0px;
+    }
+  }
+}

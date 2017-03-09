@@ -1,0 +1,47 @@
+// Merge all stylesheets into one
+// Global
+// Bourbon
+@import "bourbon/bourbon";
+
+// Animate Scss
+@import "animate/animate";
+
+// Core bootstrap variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Core App variables and mixins
+@import "modules/variables";
+@import "modules/mixins";
+
+// Base Style
+@import "base/fonts";
+@import "base/global";
+@import "base/typography";
+@import "base/helpers";
+
+// Sprite Style
+@import "sprites/sprite";
+
+// Layout Style
+@import "layout/header";
+@import "layout/sidebar";
+@import "layout/footer";
+
+// Components
+@import "components/buttons";
+@import "components/forms";
+@import "components/panels";
+@import "components/universal_searchbar";
+@import "components/student_gap_analysis";
+@import "components/circular_listing";
+@import "components/boot_popup";
+@import "components/toggle_button";
+
+
+// Pages
+@import "pages/home";
+@import "pages/teacher_dashboard";
+@import "pages/signup";
+@import "pages/user_selection";
+@import "pages/student_no_selection";
