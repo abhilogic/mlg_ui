@@ -1,0 +1,42 @@
+
+	<div class="sign_pages">
+  <div class="signpage_block">
+      <div class="signpage__heading">
+        <h5 class="signpage___title">MLG</h5>
+          <div class="pull-right">Welcome  {{$root.username}} <a href="parent_login">(logout)</a></div>
+      </div>
+      <div class="signpage__body">
+        <div class="row">
+          <div class="col-sm-12 col-xs-12 text-center">
+           Welcome Parent Dashboard
+          
+          </div>
+         
+        </div>
+      </div>
+  </div>
+	<!-- Latest compiled and minified jQuery -->
+	
+	
+	<!-- Latest compiled and minified JavaScript -->
+
+	
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('input,textarea').on('focusin', function() {
+      $(this).siblings('span').addClass('active');
+    });
+    $('input,textarea').on('focusout', function() {
+      if (!this.value) {
+        $(this).siblings('span').removeClass('active');
+      }
+    });
+
+    $(".signpage_block").centerfy();
+    $(window).resize(function(){
+          $(".signpage_block").centerfy();
+    });
+  });
+
+  </script>
+</div>

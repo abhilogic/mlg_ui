@@ -52,8 +52,8 @@ angular.module('mlg')
 	 		
 			loginHttpService.login(data).success(function(response) {
 if(response.status=='false'){$scope.msg="Invalid username or password";}
-else{alert('Welcome '+data.username);}					
-					//window.location.href='/dashboard';
+else{}					
+					window.location.href='parent_dashboard?uid='+data.username;
 			}).error(function(error) {				
 					$scope.msg="Invalid Username Password";
 				
@@ -86,6 +86,9 @@ else{alert('Welcome '+data.username);}
 			});
 	};
 	
+}])
+.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,user_roles,$location) {
+   $rootScope.username=$location.search().uid;
 }])
 .controller('passwordCtrl',['$scope','loginHttpService','$location','$timeout',function($scope, loginHttpService,$location,$timeout) {
     $scope.form={};	

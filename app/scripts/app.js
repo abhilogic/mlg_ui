@@ -34,6 +34,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	}).when('/parent_confirmation/:id', {
 		templateUrl : 'views/parent_confirmation.html',
 		controller : 'loginCtrl',		
+	}).when('/parent_dashboard', {
+		templateUrl : 'views/parent_dashboard.html',
+		controller : 'parentDashboardCtrl',		
 	}).otherwise({
 		redirectTo : '/',
 	});;
