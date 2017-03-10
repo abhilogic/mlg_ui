@@ -3,7 +3,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	users : '/users',
 	login: '/users/login',
 	registerUser:'/users/registerUser',
-	baseURL : 'http://localhost/mlg',	
+	baseURL : 'http://35.185.54.127/mlg',	
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -14,20 +14,20 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	DATEFORMAT : '/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/'
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	//var access = routingConfig.accessLevels;
-	$routeProvider.when('/', {
-		templateUrl : '/views/landing.html',
+	$routeProvider.when('/mlg_ui/app/', {
+		templateUrl : 'views/landing.html',
 		controller : 'loginCtrl',		
-	}).when('/signin', {
-		templateUrl : '/views/user-selection.html',
+	}).when('/mlg_ui/app/signin', {
+		templateUrl : 'views/user-selection.html',
 		controller : 'loginCtrl',		
-	}).when('/parent_login', {
-		templateUrl : '/views/user-parent.html',
+	}).when('/mlg_ui/app/parent_login', {
+		templateUrl : 'views/user-parent.html',
 		controller : 'loginCtrl',		
-	}).when('/signup/:type', {
-		templateUrl : '/views/signup.html',
+	}).when('/mlg_ui/app/signup', {
+		templateUrl : 'views/signup.html',
 		controller : 'loginCtrl',		
 	}).otherwise({
-		redirectTo : '/',
+		redirectTo : '/mlg_ui/app/',
 	});;
 
 	$locationProvider.html5Mode({

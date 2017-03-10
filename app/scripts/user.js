@@ -50,7 +50,8 @@ angular.module('mlg')
 	 $scope.login = function(data){
 	 		
 			loginHttpService.login(data).success(function(response) {
-					
+if(response.status=='false'){$scope.msg="Invalid username or password";}
+else{alert('Welcome '+data.username);}					
 					//window.location.href='/dashboard';
 			}).error(function(error) {				
 					$scope.msg="Invalid Username Password";
@@ -59,7 +60,7 @@ angular.module('mlg')
 	};
 
 	$scope.gohome=function(){
-		window.location.href='/';
+		window.location.href='/mlg_ui/app';
 	}
 
 
