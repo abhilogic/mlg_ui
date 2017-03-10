@@ -6,12 +6,12 @@
       @include border-radius(100%);
       display: block;
       color: $white;
-      font-size: 30px;
-      height: 70px;
+      font-size: 24px;
+      height: 50px;
       margin:auto;
-      padding-top: 16px;
+      padding-top: 12px;
       text-align: center;
-      width: 70px;
+      width: 50px;
     }
     .__tag_line {
     color: rgba($black, 0.7);
@@ -20,10 +20,36 @@
     margin: auto;
     margin-top: 20px;
     text-align: center;
-    span {
-      display: block;
-      font-weight: $semibold;
+    width: 46%;
+    @include respond-to(tabletPort){
+      width: 65%;
     }
+    @include respond-to(mobileMedium){
+      width: 100%;
+    }
+    span {
+      font-weight: $semibold;
+     }
+    }
+    .hd {
+      color: rgba($black,0.8);
+      font-size: 20px;
+      margin-top: 100px;
+      margin-bottom: 50px;
+      text-align: center;
+      @include respond-to(tabletPort){
+        margin-top: 50px;
+      }
+    }
+
+    .child_rangeSlider {
+        max-width: 502px;
+        margin: auto;
+        margin-bottom: 99px;
+        padding-left: 8px;
+        @include respond-to(mobileMedium){
+          @include padding(null 15px null 15px);
+        }
     }
   }
 }

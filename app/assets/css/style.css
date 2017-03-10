@@ -1041,9 +1041,9 @@ p {
 
 .signpage_block {
   background-color: rgba(255, 255, 255, 0.85);
-  -webkit-box-shadow: 0 0 65px rgba(0, 0, 0, 0.55);
-  -moz-box-shadow: 0 0 65px rgba(0, 0, 0, 0.55);
-  box-shadow: 0 0 65px rgba(0, 0, 0, 0.55);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
   margin: auto;
   min-height: 700px;
   padding: 40px;
@@ -1080,6 +1080,9 @@ p {
   padding: 0px;
   font-size: 12px;
   float: right;
+}
+.signpage_block .signpage__heading .btn:hover {
+  text-decoration: underline;
 }
 .signpage_block .signpage__body {
   clear: both;
@@ -1271,12 +1274,12 @@ p {
   border-radius: 100%;
   display: block;
   color: white;
-  font-size: 30px;
-  height: 70px;
+  font-size: 24px;
+  height: 50px;
   margin: auto;
-  padding-top: 16px;
+  padding-top: 12px;
   text-align: center;
-  width: 70px;
+  width: 50px;
 }
 .signpage__body.student_no_selection .__tag_line {
   color: rgba(0, 0, 0, 0.7);
@@ -1285,8 +1288,42 @@ p {
   margin: auto;
   margin-top: 20px;
   text-align: center;
+  width: 46%;
+}
+@media only screen and (max-width: 1023px) {
+  .signpage__body.student_no_selection .__tag_line {
+    width: 65%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_no_selection .__tag_line {
+    width: 100%;
+  }
 }
 .signpage__body.student_no_selection .__tag_line span {
-  display: block;
   font-weight: 600;
+}
+.signpage__body.student_no_selection .hd {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 20px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+@media only screen and (max-width: 1023px) {
+  .signpage__body.student_no_selection .hd {
+    margin-top: 50px;
+  }
+}
+.signpage__body.student_no_selection .child_rangeSlider {
+  max-width: 502px;
+  margin: auto;
+  margin-bottom: 99px;
+  padding-left: 8px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_no_selection .child_rangeSlider {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
 }
