@@ -3,7 +3,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	users : '/users',
 	login: '/users/login',
 	registerUser:'/users/registerUser',
-	baseURL : 'http://35.185.54.127/mlg',	
+	baseURL : 'http://localhost/mlg',	
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -12,22 +12,27 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	LANDLINE : '/^[0-9]*$/',
 	DATE : '/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/',
 	DATEFORMAT : '/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/'
+}).value('user_roles', {
+	admin:1,
+	student : 2,
+	teacher : 3,
+	parent : 4,
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	//var access = routingConfig.accessLevels;
-	$routeProvider.when('/mlg_ui/app/', {
+	$routeProvider.when('/', {
 		templateUrl : 'views/landing.html',
 		controller : 'loginCtrl',		
-	}).when('/mlg_ui/app/signin', {
+	}).when('/signin', {
 		templateUrl : 'views/user-selection.html',
 		controller : 'loginCtrl',		
-	}).when('/mlg_ui/app/parent_login', {
-		templateUrl : 'views/user-parent.html',
+	}).when('/parent_login', {
+		templateUrl : 'views/parent_login.html',
 		controller : 'loginCtrl',		
-	}).when('/mlg_ui/app/signup', {
-		templateUrl : 'views/signup.html',
+	}).when('/parent_signup', {
+		templateUrl : 'views/parent_signup.html',
 		controller : 'loginCtrl',		
 	}).otherwise({
-		redirectTo : '/mlg_ui/app/',
+		redirectTo : '/',
 	});;
 
 	$locationProvider.html5Mode({
@@ -37,6 +42,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 
 } ]).run([ '$rootScope', '$location', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, urlParams, $http, $cookies, $cookieStore) {
 
+    urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
 	// $rootScope.logout = function() {
 	// 	// api call for logout
 	// 	$http({

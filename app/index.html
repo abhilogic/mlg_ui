@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="mlg">
 <head>
-
+<base href="/mlg_ui/app/" target="_blank">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Learing Guru</title>
@@ -80,15 +80,8 @@
 <body class="signup_background">
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-fixed-top" id="menu_id" role="navigation" style="display: none">
-			<div class="col-lg-3 navbar-header">
-				<button ng-show="pagename!=='/'" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation_id">
-					Menu&nbsp;<span class="fa fa-lg fa-bars"></span>
-				</button>
-				<a ng-show="pagename!=='/'  && pagename!=='/setPassword'  && pagename!=='/forgot_password' && pagename!=='/printReport' && pagename!=='/compliance-dashboard-print'" class="navbar-brand" href="index.html"><img  src="/images/logo.gif" height="52px" style="margin-top: -7px;"></a>
-
-
-			</div>
-			<div class="collapse navbar-collapse" role="navigation" id="navigation_id" style="background-color: #efefef; display: none" ng-show="pagename!=='/'  && pagename!=='/setPassword'  && pagename!=='/forgot_password' && pagename!=='/printReport' && pagename!=='/compliance-dashboard-print'" >
+			
+			<div class="collapse navbar-collapse" role="navigation" id="navigation_id" style="background-color: #efefef; display: none"  >
 				<div class="col-lg-5 text-center" style="font-size: 1.7em;padding-top: 12px; padding-right: 25px; font-weight: bold;color:#0091A0">My Learning Guru</div>
 				<ul class="nav navbar-nav navbar-right" style="padding-top: 15px; padding-right: 25px; font-weight: bold">
 					

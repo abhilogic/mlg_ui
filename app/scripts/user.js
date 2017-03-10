@@ -36,12 +36,13 @@ angular.module('mlg')
 	return loginHttpResponse;
 	
 }])
-.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location',function($rootScope,$scope, loginHttpService,$location) {
+.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles',function($rootScope,$scope, loginHttpService,$location,user_roles) {
     $scope.form={};	
     $scope.msg='';
     $scope.range = function(n) {
         return new Array(n);
     }; 
+
     function setCookie(key, value) {
 		var expires = new Date();
 		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
@@ -60,12 +61,18 @@ else{alert('Welcome '+data.username);}
 	};
 
 	$scope.gohome=function(){
+
 		window.location.href='/mlg_ui/app';
 	}
 
 
-	 $scope.register = function(data){
-	 		
+	 $scope.register = function(data,user_type){
+	 		var role_id=user_roles[user_type];
+	 		if(typeof data=='undefined'){
+	 			data={};
+	 		}
+
+	 		data.role_id=role_id;
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
 					$scope.msg=response.message;

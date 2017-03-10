@@ -1,0 +1,118 @@
+
+	<div class="sign_pages">
+  <div class="signpage_block">
+      <div class="signpage__heading">
+        <h5 class="signpage___title">MLG</h5>
+        <button type="button" class="btn"><a href="signin">Already have an account?</a></button>
+      </div>
+      <div class="signpage__body">
+        <div class="row">
+          <div class="col-sm-6 col-xs-12 signpage___left_side">
+            <h5 class="signpage___heading">
+                Boost your Subject Skills and check progress online with
+                <span>MY LEARNING GURU</span>
+            </h5>
+            <img src="assets/img/pri-login-images/rocket_img.png" alt="" class="rocket__img img-responsive">
+          </div>
+          <div class=" col-sm-6 col-xs-12 signpage___right_side">
+            <h5 class="signpage____heading">Sign up</h5>
+            <p class="signpage____tag_line">Hello there! Sign up and start improving your skills</p>
+            <form name="frmregister" class="form signpage____form" role="form"  xt-form novalidate ng-submit="register(userObj,'parent')">
+              <div class="row">
+                <div class="col-xs-6">
+                  <div class="form-group">
+                    <label>
+                      <span class="placholder">first name</span>
+                      <input type="text" name="first_name" class="form-control" ng-model="userObj.first_name" xt-validate required/>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <div class="form-group">
+                    <label>
+                      <span class="placholder">last name</span>
+                      <input type="text" class="form-control" ng-model="userObj.last_name"/>
+                    </label>
+                  </div>
+                </div>
+              </div>
+               <div class="form-group">
+                <label>
+                  <span class="placholder">User Name</span>
+                  <input type="text" class="form-control" ng-model="userObj.username"/>
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <span class="placholder">EMAIL ADDRESS</span>
+                  <input type="email" class="form-control" ng-model="userObj.email"/>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>
+                  <span class="placholder">CREATE A PASSWORD</span>
+                  <input type="password" class="form-control"/ ng-model="userObj.password">
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <span class="placholder">RE-TYPE PASSWORD</span>
+                  <input type="password" class="form-control" ng-model="userObj.repass"/>
+                </label>
+                <span class="has_error">{{msg}}</span>
+              </div>
+              <button type="submit" class="btn btn-primary">Join MyLearningGuru</button>
+            </form>
+            <span class="term_condition">Terms and Conditions</span>
+          </div>
+        </div>
+      </div>
+  </div>
+	<!-- Latest compiled and minified jQuery -->
+	
+	
+	<!-- Latest compiled and minified JavaScript -->
+  <!-- bootstrap modal  -->
+    <section class="modal__section">
+      <div id="emailConfirmation" class="modal fade" role="dialog">
+        <div class="modal-dialog boot_popup">
+          <!-- Modal content-->
+          <div class="modal-content">
+           <!--  <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+            </div> -->
+            <div class="modal-body">
+                  <span class="___status_icon">
+                    <i class="icon icon-check"></i>
+                  </span>
+                  <p class="___tag_line">Verification mail has been sent to your email please check</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="gohome();">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- bootstrap modal  -->
+	
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('input,textarea').on('focusin', function() {
+      $(this).siblings('span').addClass('active');
+    });
+    $('input,textarea').on('focusout', function() {
+      if (!this.value) {
+        $(this).siblings('span').removeClass('active');
+      }
+    });
+
+    $(".signpage_block").centerfy();
+    $(window).resize(function(){
+          $(".signpage_block").centerfy();
+    });
+  });
+
+  </script>
+</div>
