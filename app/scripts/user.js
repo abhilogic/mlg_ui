@@ -52,8 +52,8 @@ angular.module('mlg')
 	 		
 			loginHttpService.login(data).success(function(response) {
 if(response.status=='false'){$scope.msg="Invalid username or password";}
-else{}					
-					window.location.href='parent_dashboard?uid='+data.username;
+else{window.location.href='parent_dashboard?uid='+data.username;}					
+					
 			}).error(function(error) {				
 					$scope.msg="Invalid Username Password";
 				
