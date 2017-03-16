@@ -37,6 +37,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	}).when('/parent_dashboard', {
 		templateUrl : 'views/parent_dashboard.html',
 		controller : 'parentDashboardCtrl',		
+	}).when('/select_children', {
+		templateUrl : 'views/number_children.html',
+		controller : 'parentDashboardCtrl',		
 	}).otherwise({
 		redirectTo : '/',
 	});;
