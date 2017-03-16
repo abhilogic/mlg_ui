@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="assets/css/plugins/radios-to-slider.css"/>
+	<div  class="sign_pages">
+    <div class="signpage_block">
+      <div class="signpage__heading">
+        <h5 class="signpage___title">MLG</h5>
+        <!-- <button type="button" class="btn">Already have an account?</button> -->
+      </div>
+      <div class="signpage__body student_no_selection">
+        
+          <h5 class="hd">Now specify how many children?</h5>
+          <div class="child_rangeSlider">
+            <div id="radios">
+              <input id="option1" name="options" type="radio">
+              <label for="option1">1</label>
+              <input id="option2" name="options" type="radio">
+              <label for="option2">2</label>
+              <input id="option3" name="options" type="radio" checked>
+              <label for="option3">3</label>
+              <input id="option4" name="options" type="radio">
+              <label for="option4">4</label>
+              <input id="option5" name="options" type="radio">
+              <label for="option5">5</label>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary">Proceed</button>
+      </div>
+  </div>
+  
+  <script type="text/javascript">
+   $(document).ready(function(){
+    $(".signpage_block").centerfy();
+    $(window).resize(function(){
+          $(".signpage_block").centerfy();
+    });
+     $("#radios").radiosToSlider();
+  });
+ 
+  </script>
+</div>
