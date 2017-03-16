@@ -4,6 +4,9 @@
     border-top: 1px solid rgba($white,.65);
     background-color: $darkstateblue_1;
     margin-top: 152px;
+    &.parent_sidebar {
+      border-top: 0px;
+    }
 .side_main_menu {
   li {
     display: block;
@@ -14,6 +17,36 @@
     }
     &:hover {
         border-left: 4px solid $cyan;
+    }
+    &.user_info {
+      background: $darkstateblue;
+      border-top: 0px !important;
+      @include padding(22px 0px 22px 20px);
+      &:hover {
+          border-left: 4px solid transparent;
+      }
+      a {
+        border: 0px;
+        padding: 0px;
+      }
+      .user_img {
+        @include border-radius(100%);
+        display: inline-block;
+        height: 50px;
+        vertical-align: middle;
+        margin-right: 5px;
+        width: 50px;
+      }
+      .user_name {
+        display: inline-block;
+        font-size: 20px;
+        font-family: $font-secondary;
+        margin: 0px;
+        margin-right: 10px;
+        vertical-align: middle;
+        text-transform: capitalize;
+
+      }
     }
     a {
       border-bottom: 1px solid $darkstateblue_border;

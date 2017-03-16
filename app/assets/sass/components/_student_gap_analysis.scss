@@ -134,4 +134,72 @@
       }
     }
   }
+  &.area_to_focus {
+    .right__side {
+      padding: 49px;
+      padding-left: 20px;
+      text-align: left;
+      .hd {
+        color: $gray;
+        font-size: 20px;
+        text-align: center;
+        span {
+          color: $dimGray;
+          font-weight: $bold;
+        }
+      }
+      .score_details {
+        margin-top: 50px;
+        li {
+          display: block;
+          padding-top: 14px;
+          paddin-bottom: 14px;
+          span {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: $semibold;
+            &:first-child {
+              color: $gray;
+              text-align: left;
+              width: 70%;
+            }
+            &:last-child {
+              text-align: right;
+              width: 29%;
+            }
+            &.bad {
+              color: $cinnabar;
+            }
+            &.avarage {
+              color: $zest;
+            }
+            &.good {
+              color: $springGreen;
+            }
+          }
+        }
+      }
+      .problem_areas {
+        margin-top: 76px;
+        .para {
+          font-size: 14px;
+          font-weight: $semibold;
+          margin-bottom: 15px;
+          text-transform: uppercase;
+          text-align: left;
+        }
+        .btn-default {
+          background: $cinnabar;
+          border: $cinnabar;
+          @include border-radius(50px);
+          color: $white;
+          font-size: 13px;
+        }
+        .btn_create_assignment {
+          background: none;
+          margin-top: 40px;
+        }
+      }
+    }
+  }
 }

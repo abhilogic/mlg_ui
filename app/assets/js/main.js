@@ -25,7 +25,44 @@ $.fn.centerfy = function(){
 	};
 	// toggle function plugins
 
+	//js plugin for the radio button
+	$.fn.radio_button = function(color){
+			var opts = $.extend( {}, $.fn.radio_button.defaults, color );
+			this.filter( "input[type='radio']" ).each(function() {
+			var element = $(this);
+			element.addClass("radio-proceed");
+			element.after("<a class='radio-btn'></a>");
+		});
+	};
+
+	//js plugin for the checkbox button
+$.fn.checkbox_button = function(color){
+		var opts = $.extend( {}, $.fn.radio_button.defaults, color );
+		this.filter( "input[type='checkbox']" ).each(function() {
+		var element = $(this);
+		element.addClass("checkbox-proceed");
+		element.after("<a class='checkbox-btn'></a>");
+	});
+};
 // custom plugins
+
+// input field animation
+$('input,textarea,select').on('focusin', function() {
+	$(this).siblings('span').addClass('active');
+});
+$('input,textarea,select').on('focusout', function() {
+	if (!this.value) {
+		$(this).siblings('span').removeClass('active');
+	}
+});
+// input field animation
+
+
+// signpage center
+	$(".signpage_block").centerfy();
+	$(window).resize(function(){
+				$(".signpage_block").centerfy();
+	});
 
 	// main right side width
 	function mainRightWidth(){
@@ -79,4 +116,37 @@ $.fn.centerfy = function(){
 		$(".main_left_side").css("transform","translateX(-"+leftTransVal+"px)");
 		console.log("clicksecond");
 	});
+
+
+// radio button js
+
+$("body").on('click','.radio-btn', function(){
+		var name = $(this).siblings("input[type='radio']").attr("name");
+		$("input[type='radio'][name='" +name+"']").attr("checked", false);
+		$(this).siblings("input[type='radio']").attr("checked", true);
+		$(".radio-btn").each(function(){
+			if($(this).siblings("input").attr("name") == name){
+				$(this).removeClass("checked");
+			}
+		});
+		$(this).toggleClass("checked");
+
+});
+
+// chechbox button
+$("body").on('click','.checkbox-btn', function(){
+		var checked = $(this).siblings("input[type='checkbox']:checked").length>0;
+		console.log(checked);
+		if(checked == false){
+			$(this).siblings("input[type='checkbox']").attr("checked", true);
+		}
+		else {
+			$(this).siblings("input[type='checkbox']").attr("checked", false);
+		}
+		$(this).toggleClass("checked");
+
+});
+
+
+
 });

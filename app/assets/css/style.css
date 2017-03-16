@@ -142,6 +142,10 @@ p {
   text-align: left;
 }
 
+.check_before:before {
+  content: '\0043';
+}
+
 /* --- TYPOGRAPHY --- */
 /* --- Helpers --- */
 /**
@@ -277,6 +281,9 @@ p {
   background-color: #192d46;
   margin-top: 152px;
 }
+.sidebar.parent_sidebar {
+  border-top: 0px;
+}
 .sidebar .side_main_menu li {
   display: block;
   padding-left: 30px;
@@ -287,6 +294,37 @@ p {
 }
 .sidebar .side_main_menu li:hover {
   border-left: 4px solid #60d3e5;
+}
+.sidebar .side_main_menu li.user_info {
+  background: #162840;
+  border-top: 0px !important;
+  padding: 22px 0 22px 20px;
+}
+.sidebar .side_main_menu li.user_info:hover {
+  border-left: 4px solid transparent;
+}
+.sidebar .side_main_menu li.user_info a {
+  border: 0px;
+  padding: 0px;
+}
+.sidebar .side_main_menu li.user_info .user_img {
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  display: inline-block;
+  height: 50px;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 50px;
+}
+.sidebar .side_main_menu li.user_info .user_name {
+  display: inline-block;
+  font-size: 20px;
+  font-family: "MyriadPro-Regular", sans-serif;
+  margin: 0px;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-transform: capitalize;
 }
 .sidebar .side_main_menu li a {
   border-bottom: 1px solid #223a56;
@@ -318,6 +356,65 @@ p {
   padding: 8px 20px;
 }
 
+label {
+  margin-right: 10px;
+}
+label input[type="radio"], label input[type="checkbox"] {
+  vertical-align: sub;
+}
+label span {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/* custom radio button */
+.radio-proceed {
+  display: none !Important;
+}
+.radio-proceed + .radio-btn {
+  background-image: url(../img/btn-icons.png);
+  background-position: -125px -5px;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  margin: 0px;
+  margin-right: 5px;
+  vertical-align: middle;
+  width: 20px;
+}
+.radio-proceed + .radio-btn + span {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 16px;
+  text-transform: capitalize;
+}
+.radio-proceed + .radio-btn.checked {
+  background-position: -155px -5px;
+}
+.radio-proceed + .radio-btn.checked + span {
+  color: black;
+}
+
+/* custom radio button */
+/* custom checkbox button */
+.checkbox-proceed {
+  display: none !Important;
+}
+.checkbox-proceed + .checkbox-btn {
+  background-image: url(../img/btn-icons.png);
+  background-position: -5px -5px;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  margin: 0px;
+  margin-right: 5px;
+  vertical-align: middle;
+  width: 20px;
+}
+.checkbox-proceed + .checkbox-btn.checked {
+  background-position: -35px -5px;
+}
+
+/* custom checkbox button */
 /* --- FORMS --- */
 /* --- Panels --- */
 .panel {
@@ -601,6 +698,74 @@ p {
   margin-top: 80px;
   padding: 10px 30px;
   text-transform: uppercase;
+}
+.student_gap_analysis.area_to_focus .right__side {
+  padding: 49px;
+  padding-left: 20px;
+  text-align: left;
+}
+.student_gap_analysis.area_to_focus .right__side .hd {
+  color: #8e8e8e;
+  font-size: 20px;
+  text-align: center;
+}
+.student_gap_analysis.area_to_focus .right__side .hd span {
+  color: #3f3f3f;
+  font-weight: 700;
+}
+.student_gap_analysis.area_to_focus .right__side .score_details {
+  margin-top: 50px;
+}
+.student_gap_analysis.area_to_focus .right__side .score_details li {
+  display: block;
+  padding-top: 14px;
+  paddin-bottom: 14px;
+}
+.student_gap_analysis.area_to_focus .right__side .score_details li span {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 600;
+}
+.student_gap_analysis.area_to_focus .right__side .score_details li span:first-child {
+  color: #8e8e8e;
+  text-align: left;
+  width: 70%;
+}
+.student_gap_analysis.area_to_focus .right__side .score_details li span:last-child {
+  text-align: right;
+  width: 29%;
+}
+.student_gap_analysis.area_to_focus .right__side .score_details li span.bad {
+  color: #e74c3c;
+}
+.student_gap_analysis.area_to_focus .right__side .score_details li span.avarage {
+  color: #e67e22;
+}
+.student_gap_analysis.area_to_focus .right__side .score_details li span.good {
+  color: #2cd875;
+}
+.student_gap_analysis.area_to_focus .right__side .problem_areas {
+  margin-top: 76px;
+}
+.student_gap_analysis.area_to_focus .right__side .problem_areas .para {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  text-align: left;
+}
+.student_gap_analysis.area_to_focus .right__side .problem_areas .btn-default {
+  background: #e74c3c;
+  border: #e74c3c;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  color: white;
+  font-size: 13px;
+}
+.student_gap_analysis.area_to_focus .right__side .problem_areas .btn_create_assignment {
+  background: none;
+  margin-top: 40px;
 }
 
 @media only screen and (max-width: 413px) {
@@ -923,35 +1088,267 @@ p {
     transform: translateY(8px) rotate(0deg);
   }
 }
+.circular_page_listing {
+  counter-reset: child_number;
+  text-align: center;
+}
+.circular_page_listing li {
+  max-width: 122px;
+  font-weight: 700;
+  padding: 0px 20px;
+  position: relative;
+  vertical-align: text-top;
+  z-index: 2;
+}
+.circular_page_listing li:not(:last-child):before {
+  background-color: #2d94ed;
+  content: '';
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  top: 12px;
+  width: 105%;
+  z-index: -1;
+}
+.circular_page_listing li:nth-last-child(2):before {
+  width: 80%;
+}
+.circular_page_listing li:not(:first-child) {
+  margin-left: -4px;
+}
+.circular_page_listing li ._serial_num {
+  border: 2px solid #2d94ed;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  display: block;
+  font-weight: 700;
+  margin: auto;
+  margin-bottom: 5px;
+}
+.circular_page_listing li .__text {
+  line-height: 15px;
+  display: block;
+}
+.circular_page_listing li.done {
+  color: #2d94ed;
+  max-width: 80px;
+}
+.circular_page_listing li.done ._serial_num {
+  background: #2d94ed;
+  color: white;
+  font-size: 14px;
+  height: 25px;
+  width: 25px;
+}
+.circular_page_listing li.done .__text {
+  font-size: 10px;
+}
+.circular_page_listing li.active {
+  color: #2d94ed;
+}
+.circular_page_listing li.active:before {
+  background-color: #d6d6d6;
+}
+.circular_page_listing li.active ._serial_num {
+  background-color: white;
+  color: #2d94ed;
+  font-size: 20px;
+  height: 37px;
+  margin-top: -5px;
+  padding-top: 2px;
+  width: 37px;
+}
+.circular_page_listing li.active .__text {
+  font-size: 12px;
+}
+.circular_page_listing li.not_done {
+  color: #d6d6d6;
+}
+.circular_page_listing li.not_done:before {
+  background-color: #d6d6d6;
+}
+.circular_page_listing li.not_done ._serial_num {
+  background-color: white;
+  border-color: #d6d6d6;
+  color: #d6d6d6;
+  height: 30px;
+  padding-top: 3px;
+  width: 30px;
+}
+.circular_page_listing li.not_done .__text {
+  font-size: 10px;
+}
+.circular_page_listing li ._serial_num:before {
+  counter-increment: child_number;
+  content: counter(child_number);
+}
+
+.js-tabcollapse-panel .panel:not(:last-child) {
+  margin-bottom: 5px;
+}
+.js-tabcollapse-panel .panel .panel-heading {
+  padding: 0px;
+}
+.js-tabcollapse-panel .panel .panel-heading .panel-title {
+  border-bottom: 0px;
+  padding-bottom: 0px;
+}
+.js-tabcollapse-panel .panel .panel-heading .panel-title a {
+  display: block;
+  padding: 15px 0px;
+  text-align: center;
+}
+@media only screen and (max-width: 374px) {
+  .js-tabcollapse-panel .panel .panel-collapse .panel-body {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .js-tabcollapse-panel .panel .panel-collapse .panel-body .para {
+    font-size: 12px;
+    padding-right: 15px;
+  }
+}
+.js-tabcollapse-panel .panel .mCustomScrollBox {
+  max-width: 100% !important;
+  min-height: 300px !important;
+  margin-bottom: 25px;
+  overflow: scroll;
+}
+.js-tabcollapse-panel .panel .mCustomScrollBox .mCSB_container {
+  margin-right: 0px;
+}
+
+.panel.progress_tab .panel-body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.panel.progress_tab .panel-body .overall_progress_report {
+  border-right: 1px solid #d6d6d6;
+}
+.panel.progress_tab .spent_time_details {
+  max-width: 150px;
+  margin: auto;
+}
+.panel.progress_tab .spent_time_details > li {
+  display: block;
+  padding: 10px 0;
+}
+.panel.progress_tab .spent_time_details > li:not(:last-child) {
+  border-bottom: 1px solid #d6d6d6;
+  margin-bottom: 10px;
+}
+.panel.progress_tab .spent_time_details > li ul li {
+  display: block;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+}
+.panel.progress_tab .spent_time_details > li ul li.time_taken {
+  color: #8e8e8e;
+}
+.panel.progress_tab .spent_time_details > li ul li.action_taken {
+  color: #a6a6a6;
+}
+.panel.progress_tab .watch_img {
+  display: block;
+  margin: auto;
+  margin-bottom: 21px;
+}
+.panel.progress_tab .spent_hrs time, .panel.progress_tab .spent_hrs span {
+  display: block;
+  text-align: center;
+}
+.panel.progress_tab .spent_hrs time {
+  color: #8e8e8e;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+}
+.panel.progress_tab .spent_hrs span {
+  color: #a6a6a6;
+  font-size: 14px;
+}
+
+.panel.awards_achieved {
+  margin-top: 43px;
+}
+.panel.awards_achieved .award_achived_block .item {
+  max-width: 190px;
+  height: 250px;
+  -webkit-transition: 0.3s all;
+  -o-transition: 0.3s all;
+  transition: 0.3s all;
+}
+.panel.awards_achieved .award_achived_block .item .btn-share {
+  background: none;
+  border: 1px solid #d6d6d6;
+  display: none;
+  margin-top: 11px;
+}
+.panel.awards_achieved .award_achived_block .item:hover {
+  -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+}
+.panel.awards_achieved .award_achived_block .item:hover .btn-share {
+  display: inline-block;
+}
+.panel.awards_achieved .award_achived_block .item:hover .gray_strip {
+  margin-top: 18px;
+}
+.panel.awards_achieved .img_cover {
+  min-height: 85px;
+}
+.panel.awards_achieved .awward_img {
+  display: block;
+  max-width: 60px;
+  margin: auto;
+}
+.panel.awards_achieved .gray_strip {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  margin-top: 20px;
+}
+.panel.awards_achieved .awwards_name {
+  color: #e1a515;
+  font-size: 16px;
+  font-family: "MyriadPro-Regular", sans-serif;
+  text-align: center;
+  margin-top: 20px;
+}
+
 /* --- Home page --- */
-.teacher_dashboard .universal_searchbar {
+.universal_searchbar {
   margin-bottom: 45px;
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status {
+
+.panel .panel-heading .student_curr_status {
   float: right;
   margin-bottom: 0px;
   margin-top: -3px;
 }
 @media only screen and (max-width: 767px) {
-  .teacher_dashboard .panel .panel-heading .student_curr_status {
+  .panel .panel-heading .student_curr_status {
     margin-top: 10px;
   }
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status li {
+.panel .panel-heading .student_curr_status li {
   margin-right: 10px;
 }
 @media only screen and (max-width: 767px) {
-  .teacher_dashboard .panel .panel-heading .student_curr_status li {
+  .panel .panel-heading .student_curr_status li {
     margin-right: 11px;
   }
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status li span {
+.panel .panel-heading .student_curr_status li span {
   color: #8e8e8e;
   display: inline-block;
   font-size: 12px;
   vertical-align: middle;
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status li span.dot {
+.panel .panel-heading .student_curr_status li span.dot {
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   border-radius: 100%;
@@ -959,28 +1356,28 @@ p {
   margin-right: 10px;
   width: 10px;
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status li span.dot.gifted {
+.panel .panel-heading .student_curr_status li span.dot.gifted {
   background: #3498db;
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status li span.dot.outstanding {
+.panel .panel-heading .student_curr_status li span.dot.outstanding {
   background: #0e7a65;
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status li span.dot.onTarget {
+.panel .panel-heading .student_curr_status li span.dot.onTarget {
   background: #2cd875;
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status li span.dot.struggling {
+.panel .panel-heading .student_curr_status li span.dot.struggling {
   background: #f39c12;
 }
-.teacher_dashboard .panel .panel-heading .student_curr_status li span.dot.remedial {
+.panel .panel-heading .student_curr_status li span.dot.remedial {
   background: #c0392b;
 }
-.teacher_dashboard .panel .panel-footer {
+.panel .panel-footer {
   border-top: 1px solid #d6d6d6;
   background: white;
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.teacher_dashboard .panel .panel-footer .para {
+.panel .panel-footer .para {
   color: #8e8e8e;
   font-size: 12px;
   font-family: "Open Sans", sans-serif;
@@ -988,7 +1385,7 @@ p {
   margin-bottom: 0px;
   text-align: center;
 }
-.teacher_dashboard .panel .panel-body {
+.panel .panel-body {
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 25px;
@@ -1001,16 +1398,20 @@ p {
   width: 100%;
 }
 
-.signup_background {
+.signup_background, .teacher_signup_bg {
   background-image: url(../img/pri-login-images/sigup_bg_img.jpg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
 @media only screen and (max-width: 767px) {
-  .signup_background {
+  .signup_background, .teacher_signup_bg {
     background-size: auto 100%;
   }
+}
+
+.teacher_signup_bg {
+  background-image: url(../img/pri-login-images/teacher_sigup_bg_img.jpg);
 }
 
 .sign_pages {
@@ -1037,6 +1438,11 @@ p {
   .sign_pages {
     min-height: 100vh;
   }
+}
+.sign_pages .note {
+  color: #e74c3c;
+  font-size: 10px;
+  text-align: center;
 }
 
 .signpage_block {
@@ -1121,7 +1527,9 @@ p {
   text-align: center;
   text-transform: uppercase;
 }
-.signpage_block .signpage__body .signpage___left_side .rocket__img {
+.signpage_block .signpage__body .signpage___left_side .signup_left_ilustration_img {
+  display: block;
+  margin: auto;
   margin-top: 100px;
 }
 .signpage_block .signpage__body .signpage___right_side {
@@ -1152,15 +1560,53 @@ p {
     width: 70%;
   }
 }
-.signpage_block .signpage__body .signpage___right_side .signpage____form {
+.signpage_block .signpage__body .signpage___right_side .term_condition {
+  color: rgba(0, 0, 0, 0.7);
+  display: block;
+  font-size: 11px;
+  margin-top: 60px;
+  text-align: center;
+  text-decoration: underline;
+}
+.signpage_block .signpage__body.teacher_setup_account .signpage___right_side .signpage____tag_line {
+  font-size: 24px;
+  width: 100%;
+}
+
+.signpage____form {
   margin-top: 30px;
   text-align: center;
 }
-.signpage_block .signpage__body .signpage___right_side .signpage____form label {
+.signpage____form button.btn {
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+.form-group input, .form-group select {
+  border: 0px;
+  border-bottom: 1px solid rgba(142, 142, 142, 0.35);
+  background: none;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: #2d94ed;
+  font-weight: 600;
+  padding-left: 0px;
+}
+.form-group input:focus, .form-group select:focus {
+  border-bottom-color: rgba(142, 142, 142, 0.35) !important;
+}
+.form-group label {
   position: relative;
   width: 100%;
 }
-.signpage_block .signpage__body .signpage___right_side .signpage____form label .placholder {
+.form-group label .placholder {
   color: rgba(0, 0, 0, 0.7);
   font-weight: 300;
   left: 0px;
@@ -1171,43 +1617,31 @@ p {
   -o-transition: 0.2s all;
   transition: 0.2s all;
 }
-.signpage_block .signpage__body .signpage___right_side .signpage____form label .placholder.active {
+.form-group label .placholder.active {
   top: -10px;
   font-size: 10px;
 }
-.signpage_block .signpage__body .signpage___right_side .signpage____form .form-group {
-  margin-top: 25px;
-  margin-bottom: 0px;
+.form-group label.email_done {
+  position: relative;
 }
-.signpage_block .signpage__body .signpage___right_side .signpage____form input {
-  border: 0px;
-  border-bottom: 1px solid rgba(142, 142, 142, 0.35);
-  background: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  -moz-border-radius: 0px;
-  -webkit-border-radius: 0px;
-  border-radius: 0px;
+.form-group label.email_done:before {
   color: #2d94ed;
-  font-weight: 600;
-  padding-left: 0px;
+  display: inline-block;
+  font-family: 'Glyphter';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  right: 5px;
+  top: 11px;
 }
-.signpage_block .signpage__body .signpage___right_side .signpage____form input:focus {
-  border-bottom-color: rgba(142, 142, 142, 0.35) !important;
+.form-group input[type="email"] {
+  position: relative;
 }
-.signpage_block .signpage__body .signpage___right_side .signpage____form input[type="password"] {
+.form-group input[type="password"] {
   color: #8e8e8e;
-}
-.signpage_block .signpage__body .signpage___right_side .signpage____form button.btn {
-  margin-top: 30px;
-}
-.signpage_block .signpage__body .signpage___right_side .term_condition {
-  color: rgba(0, 0, 0, 0.7);
-  display: block;
-  font-size: 11px;
-  margin-top: 16px;
-  text-align: center;
 }
 
 .signpage__body.user_selection .signpage___heading {
@@ -1325,5 +1759,604 @@ p {
   .signpage__body.student_no_selection .child_rangeSlider {
     padding-right: 15px;
     padding-left: 15px;
+  }
+}
+
+.signpage__body.student_account_creation {
+  clear: inherit;
+  margin-top: 0px;
+}
+.signpage__body.student_account_creation .main_content {
+  margin-top: 51px;
+}
+.signpage__body.student_account_creation .main_content .child_account_information .hd {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 300;
+  font-size: 20px;
+  margin: auto;
+  margin-top: 0px;
+  text-align: center;
+}
+.signpage__body.student_account_creation .main_content .child_account_information .signpage____form {
+  margin-top: 6px;
+}
+.signpage__body.student_account_creation .main_content .child_account_information .signpage____form input {
+  color: black;
+  font-size: 16px;
+}
+.signpage__body.student_account_creation .main_content .child_account_information .signpage____form .form-group {
+  margin-top: 30px;
+}
+.signpage__body.student_account_creation .main_content .child_account_information .signpage____form .placholder {
+  font-weight: normal;
+  font-size: 12px;
+}
+.signpage__body.student_account_creation .main_content .child_account_information .signpage____form .child_email_id_opt {
+  margin-top: 30px;
+}
+.signpage__body.student_account_creation .main_content .child_account_information .signpage____form .child_email_id_opt .radio_ul {
+  margin-bottom: 0px;
+  text-align: left;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .main_content .child_account_information .signpage____form .child_email_id_opt {
+    text-align: left;
+  }
+  .signpage__body.student_account_creation .main_content .child_account_information .signpage____form .child_email_id_opt .radio_ul {
+    margin-top: 10px;
+  }
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .main_content .child_account_information .signpage____form .child_email_id_opt .tag_line {
+    font-size: 13px;
+  }
+}
+.signpage__body.student_account_creation .main_content .subject_package_type {
+  margin-top: 30px;
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .hd {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: left;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .main_content .subject_package_type .hd {
+    text-align: center;
+  }
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .subject_package {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .main_content .subject_package_type .subject_package {
+    text-align: center;
+  }
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .subject_package li {
+  border: 1px solid #d6d6d6;
+  color: #929d9f;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  height: 53px;
+  padding-top: 7px;
+  vertical-align: middle;
+  width: 92px;
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .subject_package li:not(:last-child) {
+  margin-right: 20px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .main_content .subject_package_type .subject_package li:not(:last-child) {
+    margin-right: 0px;
+  }
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .subject_package li.no_offers {
+  padding-top: 17px;
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .subject_package li.active {
+  border: 1px solid #2d94ed;
+  color: #2d94ed;
+  position: relative;
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .subject_package li.active:before {
+  background: #2d94ed;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  color: white;
+  content: '\0043';
+  display: inline-block;
+  height: 15px;
+  font-family: 'Glyphter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 1;
+  position: absolute;
+  padding-top: 4px;
+  right: -5px;
+  top: -5px;
+  text-align: center;
+  width: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .subject_package li span {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.signpage__body.student_account_creation .main_content .subject_package_type .subject_package li span:last-child {
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 0px;
+  text-transform: lowercase;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .main_content .subject_package_type .subject_package li {
+    margin-bottom: 15px;
+  }
+  .signpage__body.student_account_creation .main_content .subject_package_type .subject_package li:nth-child(3n-1) {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .main_content .subject_package_type .subject_package li {
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+.signpage__body.student_account_creation .child_plan_selection {
+  padding-right: 0px;
+  border-left: 1px solid #d6d6d6;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .child_plan_selection {
+    padding-right: 15px;
+  }
+}
+.signpage__body.student_account_creation .child_plan_selection .hd {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .child_plan_selection ._chose_plan {
+    margin-top: 20px;
+  }
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_plan ._plan {
+  margin-top: 20px;
+  text-align: center;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_plan ._plan li {
+  border: 1px solid #d6d6d6;
+  color: #929d9f;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  height: 73px;
+  text-align: center;
+  width: 73px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_plan ._plan li:not(:last-child) {
+  margin-right: 20px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_plan ._plan li.active {
+  border: 1px solid #2d94ed;
+  color: #2d94ed;
+  position: relative;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_plan ._plan li span.time_period {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_plan ._plan li .icon {
+  font-size: 36px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject {
+  margin-top: 40px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject {
+  margin-top: 20px;
+  text-align: center;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li {
+  border: 1px solid #d6d6d6;
+  color: #929d9f;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  height: 73px;
+  padding-top: 5px;
+  width: 109px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li:not(:last-child) {
+  margin-right: 4px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li:not(:last-child) {
+    margin-right: 0px;
+  }
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li.active {
+  border: 1px solid #2d94ed;
+  color: #2d94ed;
+  position: relative;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li.active:before {
+  background: #2d94ed;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  color: white;
+  display: inline-block;
+  height: 15px;
+  font-family: 'Glyphter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 1;
+  position: absolute;
+  padding-top: 4px;
+  right: -5px;
+  top: -5px;
+  text-align: center;
+  width: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li span {
+  display: block;
+  line-height: 20px;
+  text-align: center;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li span._sub {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li span._price {
+  font-size: 26px;
+  font-weight: 700;
+}
+.signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li span._month {
+  font-size: 10px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li {
+    margin-bottom: 8px;
+  }
+  .signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li:nth-child(3n-1) {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
+@media only screen and (max-width: 413px) {
+  .signpage__body.student_account_creation .child_plan_selection ._chose_subject ._subject li {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing {
+  margin-top: 50px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost {
+  text-align: center;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li {
+  display: block;
+  width: 100%;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li:not(:last-child) {
+  margin-bottom: 11px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li span {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li span .discount {
+  color: #929d9f;
+  display: block;
+  font-size: 12px;
+  font-style: normal;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li span._parameter {
+  width: calc(100% - 105px);
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li span._parameter .form-control {
+  display: inline-block;
+  vertical-align: bottom;
+  width: auto;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li span._parameter .btn-apply {
+  padding: 6px 20px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .child_plan_selection ._costing ._cost li span._parameter .btn-apply {
+    margin-top: 15px;
+  }
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li span._amount {
+  width: 100px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing ._cost li span .btn-promocode {
+  background: none;
+  border: 0px;
+  color: #2d94ed;
+  font-weight: 600;
+  padding-left: 0px;
+}
+.signpage__body.student_account_creation .child_plan_selection ._costing .promocode_form {
+  display: none;
+}
+
+.signpage__body.student_account_creation .account_preferences {
+  margin-top: 88px;
+}
+.signpage__body.student_account_creation .account_preferences > .hd {
+  color: #676767;
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .account_preferences > .hd {
+    font-size: 20px;
+  }
+}
+.signpage__body.student_account_creation .account_preferences .report_mail {
+  max-width: 420px;
+  margin: auto;
+  margin-top: 81px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .account_preferences .report_mail {
+    margin-top: 40px;
+  }
+}
+.signpage__body.student_account_creation .account_preferences .report_mail .radio_ul {
+  margin-top: 18px;
+  text-align: center;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .account_preferences .report_mail .radio_ul {
+    text-align: left;
+  }
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .account_preferences .report_mail .radio_ul {
+    margin-top: 0px;
+  }
+}
+.signpage__body.student_account_creation .account_preferences .report_mail .radio_ul li:not(:last-child) {
+  margin-right: 62px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .account_preferences .report_mail .radio_ul li:not(:last-child) {
+    margin-right: 30px;
+  }
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .account_preferences .report_mail .radio_ul li:not(:last-child) {
+    margin-right: 2px;
+  }
+}
+.signpage__body.student_account_creation .account_preferences .report_mail .radio_ul li span {
+  font-size: 16px;
+  font-weight: 600;
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .account_preferences .report_mail .radio_ul li span {
+    font-size: 12px;
+  }
+}
+.signpage__body.student_account_creation .account_preferences .report_mail .form {
+  text-align: center;
+}
+.signpage__body.student_account_creation .account_preferences .report_mail .form .form-group {
+  text-align: left;
+}
+.signpage__body.student_account_creation .account_preferences .report_mail .form .placholder {
+  font-weight: 600;
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .account_preferences .report_mail .form .placholder {
+    font-size: 12px;
+  }
+}
+.signpage__body.student_account_creation .account_preferences .report_mail .form .send_msg {
+  margin-top: 0px;
+}
+.signpage__body.student_account_creation .account_preferences .report_mail .form .btn-proceed {
+  margin-top: 55px;
+}
+
+.signpage__body.student_account_creation .term_condition .hd {
+  color: #676767;
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.signpage__body.student_account_creation .term_condition .term_condition_nav {
+  border-bottom: 0px;
+  border-right: 3px solid #d6d6d6;
+}
+.signpage__body.student_account_creation .term_condition .term_condition_nav li {
+  display: block;
+  width: 100%;
+}
+.signpage__body.student_account_creation .term_condition .term_condition_nav li a {
+  border: 0px;
+  border-right: 3px solid transparent;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  margin-right: -3px;
+  text-align: right;
+}
+.signpage__body.student_account_creation .term_condition .term_condition_nav li a:hover {
+  background: none;
+  border-right: 3px solid #2d94ed;
+}
+.signpage__body.student_account_creation .term_condition .term_condition_nav li.active a {
+  border-right: 3px solid #2d94ed;
+  background: transparent;
+  color: #2d94ed;
+}
+.signpage__body.student_account_creation .term_condition .tab-content .tab-pane {
+  max-height: 351px;
+  overflow: hidden;
+}
+.signpage__body.student_account_creation .term_condition .tab-content .btn-proceed {
+  margin-top: 21px;
+}
+
+.signpage__body.student_account_creation .account_payment_brief {
+  border-right: 1px solid #d6d6d6;
+}
+.signpage__body.student_account_creation .account_payment_brief .hd {
+  color: #676767;
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+}
+.signpage__body.student_account_creation .account_payment_brief .total_amount {
+  color: #2d94ed;
+  font-size: 30px;
+  font-weight: 300;
+  margin-top: 24px;
+  text-align: center;
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .account_payment_brief .total_amount {
+    font-size: 20px;
+    margin-top: 17px;
+  }
+}
+.signpage__body.student_account_creation .account_payment_brief .payment_brief {
+  display: block;
+  margin-top: 26px;
+}
+.signpage__body.student_account_creation .account_payment_brief .payment_brief > li {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+.signpage__body.student_account_creation .account_payment_brief .payment_brief > li:not(:last-child) {
+  border-bottom: 1px solid #d6d6d6;
+}
+.signpage__body.student_account_creation .account_payment_brief .payment_brief .sub li {
+  display: block;
+  width: 100%;
+}
+.signpage__body.student_account_creation .account_payment_brief .payment_brief .sub li span {
+  color: rgba(103, 103, 103, 0.8);
+  display: inline-block;
+  font-weight: 600;
+  vertical-align: middle;
+}
+.signpage__body.student_account_creation .account_payment_brief .payment_brief .sub li span.parmeter {
+  width: calc(100% - 160px);
+}
+.signpage__body.student_account_creation .account_payment_brief .payment_brief .sub li span.value {
+  width: 150px;
+}
+.signpage__body.student_account_creation .account_payment_brief .payment_brief .sub li span.value .amount {
+  font-style: normal;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .credit_card_details {
+    border-top: 1px solid rgba(142, 142, 142, 0.35);
+    margin-top: 20px;
+    padding-top: 30px;
+  }
+}
+.signpage__body.student_account_creation .credit_card_details .hd {
+  color: #676767;
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .credit_card_details .hd {
+    font-size: 20px;
+  }
+}
+.signpage__body.student_account_creation .credit_card_details .form {
+  margin-top: 53px;
+}
+@media only screen and (max-width: 767px) {
+  .signpage__body.student_account_creation .credit_card_details .form {
+    margin-top: 30px;
+  }
+}
+.signpage__body.student_account_creation .credit_card_details .form .placholder {
+  color: black;
+  font-weight: 300;
+}
+.signpage__body.student_account_creation .credit_card_details .form .btn-proceed {
+  margin-top: 70px;
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .credit_card_details .form .btn-proceed {
+    margin-top: 30px;
+  }
+}
+.signpage__body.student_account_creation .credit_card_details .form ul li:first-child {
+  margin-right: 8px;
+}
+.signpage__body.student_account_creation .credit_card_details .form ul li span {
+  color: rgba(0, 0, 0, 0.58);
+}
+.signpage__body.student_account_creation .credit_card_details .form ul li select {
+  border: 0px;
+  border-bottom: 1px solid rgba(142, 142, 142, 0.35);
+  background: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+.signpage__body.student_account_creation .credit_card_details .form ul li input {
+  display: inline-block;
+}
+.signpage__body.student_account_creation .credit_card_details .form ul li input.ccv_num {
+  width: 80px;
+}
+.signpage__body.student_account_creation .credit_card_details .note {
+  font-size: 12px;
+  margin-top: 28px;
+  text-align: left;
+}
+@media only screen and (max-width: 374px) {
+  .signpage__body.student_account_creation .credit_card_details .note {
+    font-size: 11px;
   }
 }
