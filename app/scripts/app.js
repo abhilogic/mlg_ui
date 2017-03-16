@@ -41,7 +41,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 
 	}).when('/select_children', {
 		templateUrl : 'views/number_children.html',
-		controller : 'parentDashboardCtrl',		
+		controller : 'addChild',		
 	}).when('/add_child_account', {
 		templateUrl : 'views/child_account_creation.html',
 		controller : 'addChild',		
