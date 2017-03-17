@@ -47,10 +47,10 @@ $.fn.checkbox_button = function(color){
 // custom plugins
 
 // input field animation
-$('input,textarea,select').on('focusin', function() {
+$('body').on('focusin', 'input,textarea,select', function() {
 	$(this).siblings('span').addClass('active');
 });
-$('input,textarea,select').on('focusout', function() {
+$('body').on('focusout', 'input,textarea,select', function() {
 	if (!this.value) {
 		$(this).siblings('span').removeClass('active');
 	}
