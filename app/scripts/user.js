@@ -48,6 +48,13 @@ angular.module('mlg')
 		});
 	}
 
+	loginHttpResponse.setStatusActive=function(data){
+		return $http({
+			method:'POST',
+            data  : data,
+			url   : urlParams.baseURL+urlParams.setUserStatus
+		});
+	}
 
 	return loginHttpResponse;
 	
@@ -103,19 +110,30 @@ angular.module('mlg')
 	};
 
 }])
-.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,user_roles,$location) {
+.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams) {
+
   $rootScope.username=$location.search().uid;
-   $scope.setPreference = function(data) {
-     loginHttpService.setPreference(data).success(function(response) {
-       if (response.status == true) {
-         window.location.href='/mlg_ui/app';
-       } else {
-         $scope.msg = response.message;
-       }
-     }).error(function(error) {
-       $scope.msg = 'some error occured';
-     });
-   };
+  if (typeof $routeParams.id != 'undefined') {
+    loginHttpService.setStatusActive($routeParams).success(function(response) {
+      if (response.status == false) {
+        alert('Some error occured, kindly refresh the page');
+      }
+    }).error(function() {
+      alert('Unable to activate account, contact to the administrator');
+    });
+  }
+
+  $scope.setPreference = function(data) {
+   loginHttpService.setPreference(data).success(function(response) {
+     if (response.status == true) {
+       window.location.href='/mlg_ui/app';
+     } else {
+       $scope.msg = response.message;
+     }
+   }).error(function(error) {
+     $scope.msg = 'some error occured';
+   });
+ };
 }])
 .controller('addChild',['$rootScope','$scope','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,$http,user_roles,$location) {
    //$rootScope.username=$location.search().uid;
