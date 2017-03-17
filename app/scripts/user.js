@@ -40,6 +40,15 @@ angular.module('mlg')
         url   : urlParams.baseURL+urlParams.parentPreference
       });
     }
+
+	loginHttpResponse.gradeList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.gradeList
+		});
+	}
+
+
 	return loginHttpResponse;
 	
 }])
@@ -92,7 +101,7 @@ angular.module('mlg')
 				alert('registration fail');
 			});
 	};
-	
+
 }])
 .controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,user_roles,$location) {
   $rootScope.username=$location.search().uid;
@@ -107,6 +116,31 @@ angular.module('mlg')
        $scope.msg = 'some error occured';
      });
    };
+}])
+.controller('addChild',['$rootScope','$scope','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,$http,user_roles,$location) {
+   //$rootScope.username=$location.search().uid;
+   	 $scope.submitChildrenCount = function() {
+        $http({
+          method  : 'POST',
+          url     : 'add_child_account',
+          data    : $scope.childrencount, //forms user object
+          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+         })
+          .success(function(data) {           
+             // $scope.message = data.message;
+             
+             $scope.PostChildCount = data;
+             $location.path('/add_child_account');
+            
+          });
+        };
+
+        $scope.childrencount = ["1", "2", "3"];
+
+         loginHttpService.gradeList().success(function(response) {
+  		  $scope.grades = response.response.Grades;  
+  	  });
+
 }])
 .controller('passwordCtrl',['$scope','loginHttpService','$location','$timeout',function($scope, loginHttpService,$location,$timeout) {
     $scope.form={};	

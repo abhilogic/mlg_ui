@@ -30,6 +30,7 @@
 
 // Components
 @import "components/buttons";
+@import "components/radio_checkbox_btn";
 @import "components/forms";
 @import "components/panels";
 @import "components/universal_searchbar";
@@ -37,7 +38,10 @@
 @import "components/circular_listing";
 @import "components/boot_popup";
 @import "components/toggle_button";
-
+@import "components/circular_page_listing";
+@import "components/js-tabcollapse";
+@import "components/progress_tab";
+@import "components/awards_achieved";
 
 // Pages
 @import "pages/home";
@@ -45,3 +49,7 @@
 @import "pages/signup";
 @import "pages/user_selection";
 @import "pages/student_no_selection";
+@import "pages/student_account_creation";
+@import "pages/account_preferences";
+@import "pages/term_condition";
+@import "pages/payment";

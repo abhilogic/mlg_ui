@@ -128,3 +128,8 @@ p {
 	display: block;
 	text-align: left;
 }
+.check_before{
+	&:before  {
+		  content: '\0043';
+		}
+}

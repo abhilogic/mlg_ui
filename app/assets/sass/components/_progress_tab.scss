@@ -1,0 +1,56 @@
+.panel.progress_tab {
+  .panel-body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .overall_progress_report {
+      border-right: 1px solid $alto;
+    }
+  }
+  .spent_time_details {
+      max-width:150px;
+      margin: auto;
+      >li {
+        display: block;
+        @include padding(10px 0px 10px 0px);
+          &:not(:last-child){
+            border-bottom: 1px solid $alto;
+            margin-bottom: 10px;
+          }
+        ul {
+          li {
+            display: block;
+            font-weight: $semibold;
+            font-size: 18px;
+            text-align: center;
+            &.time_taken {
+              color: $gray;
+            }
+            &.action_taken {
+              color: $silverChalice;
+          }
+        }
+      }
+    }
+  }
+  .watch_img {
+    display: block;
+    margin: auto;
+    margin-bottom: 21px;
+  }
+  .spent_hrs {
+    time,span {
+      display: block;
+      text-align: center;
+    }
+    time {
+      color: $gray;
+      font-family: $font-primary;
+      font-weight: $semibold;
+      font-size: 26px;
+    }
+    span {
+      color: $silverChalice;
+      font-size: 14px;
+    }
+  }
+}

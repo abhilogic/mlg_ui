@@ -1,0 +1,50 @@
+.signpage__body {
+  &.student_account_creation {
+    .term_condition{
+      .hd {
+        color: $doveGray;
+        font-size: 24px;
+        font-weight: $light;
+        margin-bottom: 50px;
+        text-align: center;
+      }
+      .term_condition_nav {
+        border-bottom: 0px;
+        border-right: 3px solid $alto;
+        li {
+          display: block;
+          width: 100%;
+          a {
+            border: 0px;
+            border-right: 3px solid transparent;
+            @include border-radius(0px);
+            color: rgba($black,0.6);
+            font-size: 14px;
+            margin-right: -3px;
+            text-align: right;
+            &:hover {
+              background: none;
+              border-right: 3px solid $pictonBlue;
+            }
+          }
+          &.active {
+            a {
+              border-right: 3px solid $pictonBlue;
+              background: transparent;
+              color: $pictonBlue;
+            }
+          }
+        }
+      }
+      .tab-content {
+        .tab-pane {
+          max-height: 351px;
+          overflow: hidden;
+        }
+        .btn-proceed {
+          margin-top: 21px;
+        }
+      }
+    }
+  }
+}

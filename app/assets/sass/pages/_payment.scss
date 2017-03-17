@@ -1,0 +1,127 @@
+.signpage__body {
+  &.student_account_creation {
+    .account_payment_brief{
+      border-right: 1px solid $alto;
+      .hd {
+        color: $doveGray;
+        font-size: 24px;
+        font-weight: $light;
+        text-align: center;
+     }
+     .total_amount {
+       color: $pictonBlue;
+       font-size: 30px;
+       font-weight: $light;
+       margin-top: 24px;
+       text-align: center;
+       @include respond-to(mobileExtraSmall){
+         font-size: 20px;
+         margin-top: 17px;
+       }
+     }
+     .payment_brief {
+       display: block;
+       margin-top: 26px;
+       >li {
+         display: block;
+         @include padding(10px null 10px null);
+         width: 100%;
+         &:not(:last-child){
+           border-bottom: 1px solid $alto;
+         }
+       }
+       .sub {
+         li {
+           display: block;
+           width: 100%;
+           span {
+             color: rgba($doveGray,0.8);
+             display: inline-block;
+             font-weight: $semibold;
+             vertical-align: middle;
+             &.parmeter {
+               width: calc(100% - 160px);
+             }
+             &.value {
+               width: 150px;
+               .amount {
+                 font-style: normal;
+                 font-size: 20px;
+               }
+
+             }
+           }
+         }
+       }
+     }
+    }
+  }
+}
+
+
+
+.signpage__body {
+  &.student_account_creation {
+    .credit_card_details{
+       @include respond-to(mobileMedium){
+          border-top: 1px solid rgba($gray,0.35);
+          margin-top: 20px;
+          padding-top: 30px;
+       }
+      .hd {
+        color: $doveGray;
+        font-size: 24px;
+        font-weight: $light;
+        text-align: center;
+        @include respond-to(mobileExtraSmall){
+          font-size: 20px;
+        }
+     }
+     .form {
+       margin-top: 53px;
+       @include respond-to(mobileMedium){
+         margin-top: 30px;
+       }
+       .placholder {
+         color: $black;
+         font-weight: $light;
+       }
+       .btn-proceed {
+         margin-top: 70px;
+         @include respond-to(mobileExtraSmall){
+           margin-top: 30px;
+         }
+       }
+       ul li {
+         &:first-child {
+           margin-right: 8px;
+         }
+         span {
+           color: rgba($black,0.58);
+         }
+         select {
+           border:0px;
+           border-bottom: 1px solid rgba($gray,0.35);
+           background: none;
+           @include box-shadow(none);
+           @include border-radius(0px);
+         }
+         input {
+           display: inline-block;
+           &.ccv_num {
+             width: 80px;
+           }
+        }
+       }
+     }
+     .note {
+       font-size: 12px;
+       margin-top: 28px;
+       text-align: left;
+       @include respond-to(mobileExtraSmall){
+         font-size: 11px;
+       }
+     }
+   }
+ }
+}

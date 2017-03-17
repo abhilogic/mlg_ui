@@ -5,6 +5,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	registerUser:'/users/registerUser',
 	parentPreference:'/users/setUserPreference',
 	baseURL : 'http://localhost/mlg',
+	gradeList : '/users/getGradeList',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -34,19 +35,22 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 		controller : 'loginCtrl',		
 	}).when('/parent_confirmation/:id', {
 		templateUrl : 'views/parent_confirmation.html',
-		controller : 'loginCtrl',		
+		controller : 'parentDashboardCtrl',
 	}).when('/parent_dashboard', {
 		templateUrl : 'views/parent_dashboard.html',
-		controller : 'parentDashboardCtrl',		
+		controller : 'parentDashboardCtrl',
 	}).when('/select_children', {
 		templateUrl : 'views/number_children.html',
-		controller : 'parentDashboardCtrl',		
+		controller : 'addChild',		
 	}).when('/parent_preferences', {
 		templateUrl : 'views/account_preferenceces.html',
 		controller : 'parentDashboardCtrl',
+	}).when('/add_child_account', {
+		templateUrl : 'views/child_account_creation.html',
+		controller : 'addChild',		
 	}).otherwise({
 		redirectTo : '/',
-	});;
+	});
 
 	$locationProvider.html5Mode({
 		enabled : true,
