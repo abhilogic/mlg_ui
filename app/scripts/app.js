@@ -3,7 +3,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	users : '/users',
 	login: '/users/login',
 	registerUser:'/users/registerUser',
-	baseURL : 'http://localhost/mlg',	
+	parentPreference:'/users/setUserPreference',
+	baseURL : 'http://localhost/mlg',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -40,6 +41,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	}).when('/select_children', {
 		templateUrl : 'views/number_children.html',
 		controller : 'parentDashboardCtrl',		
+	}).when('/parent_preferences', {
+		templateUrl : 'views/account_preferenceces.html',
+		controller : 'parentDashboardCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});;

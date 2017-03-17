@@ -33,6 +33,13 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.forgotPassword
 		});
 	}
+    loginHttpResponse.setPreference = function(data) {
+      return $http({
+        method: 'POST',
+        data  : data,
+        url   : urlParams.baseURL+urlParams.parentPreference
+      });
+    }
 	return loginHttpResponse;
 	
 }])
@@ -48,16 +55,16 @@ angular.module('mlg')
 		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
 		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
 	}
-	 $scope.login = function(data){
-	 		
-			loginHttpService.login(data).success(function(response) {
-if(response.status=='false'){$scope.msg="Invalid username or password";}
-else{window.location.href='select_children?uid='+data.username;}
-					
-			}).error(function(error) {				
-					$scope.msg="Invalid Username Password";
-				
-			});
+	 $scope.login = function(data) {
+	   loginHttpService.login(data).success(function(response) {
+         if (response.status=='false') {
+           $scope.msg = response.message;
+         } else {
+           window.location.href='select_children?uid='+data.username;
+         }
+	   }).error(function(error) {
+		  $scope.msg="Invalid Username Password";
+	   });
 	};
 
 	$scope.gohome=function(){
@@ -88,7 +95,18 @@ else{window.location.href='select_children?uid='+data.username;}
 	
 }])
 .controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,user_roles,$location) {
-   $rootScope.username=$location.search().uid;
+  $rootScope.username=$location.search().uid;
+   $scope.setPreference = function(data) {
+     loginHttpService.setPreference(data).success(function(response) {
+       if (response.status == true) {
+         window.location.href='/mlg_ui/app';
+       } else {
+         $scope.msg = response.message;
+       }
+     }).error(function(error) {
+       $scope.msg = 'some error occured';
+     });
+   };
 }])
 .controller('passwordCtrl',['$scope','loginHttpService','$location','$timeout',function($scope, loginHttpService,$location,$timeout) {
     $scope.form={};	

@@ -1,0 +1,57 @@
+<body class="signup_background">
+  <div  class="sign_pages">
+    <div class="signpage_block">
+      <div class="signpage__heading">
+        <h5 class="signpage___title">MLG</h5>
+      </div>
+      <div class="signpage__body student_account_creation">
+        <ul class="circular_page_listing">
+          <li class="done"><span class="_serial_num"></span><span class="__text">Melissa Gordon</span></li>
+          <li class="done"><span class="_serial_num"></span><span class="__text">James Gordon</span></li>
+          <li class="done"><span class="_serial_num"></span><span class="__text">Jimmy Gordon</span></li>
+          <li class="done" ><span class="_serial_num"></span><span class="__text">Child Account</span></li>
+          <li class="active"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
+          <li class="not_done"><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
+          <li class="not_done"><span class="_serial_num"></span><span class="__text">Payment</span></li>
+        </ul>
+        <div class="main_content account_preferences">
+          <h5 class="hd">Set up preferences for your children account </h5>
+          <div class="report_mail">
+            <h5 class="hd">How often should we send you the report :</h5>
+            <form class="form">
+              <ul class="radio_ul">
+                <li><label for=""><input ng-model="frm.frequency" value="daily" type="radio" name="freq" ><span>Daily</span></label></li>
+                <li><label for=""><input ng-model="frm.frequency" value="weekly" type="radio" name="freq"><span>Weekly</span></label></li>
+                <li><label for=""><input ng-model="frm.frequency" value="fornightly" type="radio" name="freq"> <span>Fornightly</span></label></li>           
+              </ul>
+              <div class="form-group">
+                <label>
+                  <span class="placholder">Mobile Number</span>
+                  <input ng-model="frm.mobile"  type="tel" class="form-control"/>
+                </label>
+              </div>
+              <div class="form-group send_msg">
+                <label>
+                  <input ng-model="frm.sms" value="1" type="checkbox"/>
+                  <span>Send Text Messages</span>
+                </label>
+              </div>
+              <span class="has_error" ng-if="msg">{{msg}}</span>
+              <button ng-click="setPreference(frm)" type="submit" class="btn btn-primary btn-proceed">Proceed</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".signpage_block").centerfy();
+      $(window).resize(function() {
+        $(".signpage_block").centerfy();
+      });
+      // $("input[type='radio']").radio_button();
+      //   $("input[type='checkbox']").checkbox_button();
+    });
+  </script>
+</body>
