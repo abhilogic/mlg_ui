@@ -137,7 +137,7 @@ angular.module('mlg')
     data.user_id = $rootScope.logged_user.id;
     loginHttpService.setPreference(data).success(function(response) {
       if (response.status == true) {
-        if (response.warning == true) {
+        if ((typeof response.warning != 'undefined') && (response.warning == true)) {
           alert(response.message);
         }
         $location.url('/terms_and_conditions');
