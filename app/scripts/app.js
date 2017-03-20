@@ -7,6 +7,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	baseURL : 'http://localhost/mlg',
 	gradeList : '/users/getGradeList',
 	setUserStatus : '/users/setUserStatus',
+	setTermsAndConditions : '/users/setTermsAndConditions',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -43,12 +44,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	}).when('/select_children', {
 		templateUrl : 'views/number_children.html',
 		controller : 'addChild',		
-	}).when('/parent_preferences', {
-		templateUrl : 'views/account_preferenceces.html',
-		controller : 'parentDashboardCtrl',
 	}).when('/add_child_account', {
 		templateUrl : 'views/child_account_creation.html',
 		controller : 'addChild',		
+	}).when('/parent_preferences', {
+		templateUrl : 'views/account_preferenceces.html',
+		controller : 'parentDashboardCtrl',
+	}).when('/terms_and_conditions', {
+		templateUrl : 'views/term_condition.html',
+		controller : 'parentDashboardCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});
@@ -61,6 +65,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 } ]).run([ '$rootScope', '$location', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, urlParams, $http, $cookies, $cookieStore) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
+    console.log(urlParams.baseURL);
 	// $rootScope.logout = function() {
 	// 	// api call for logout
 	// 	$http({

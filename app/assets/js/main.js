@@ -133,19 +133,18 @@ $("body").on('click','.radio-btn', function(){
 
 });
 
-// chechbox button
-$("body").on('click','.checkbox-btn', function(){
-		var checked = $(this).siblings("input[type='checkbox']:checked").length>0;
-		console.log(checked);
-		if(checked == false){
-			$(this).siblings("input[type='checkbox']").attr("checked", true);
-		}
-		else {
-			$(this).siblings("input[type='checkbox']").attr("checked", false);
-		}
-		$(this).toggleClass("checked");
-
-});
+  // chechbox button
+  $("body").on('click','.checkbox-btn', function(){
+//    var checked = $(this).siblings("input[type='checkbox']:checked").length>0;
+//    if(checked == false) {
+//        $(this).siblings("input[type='checkbox']").attr("checked", true);
+//    } else {
+//      $(this).siblings("input[type='checkbox']").attr("checked", false);
+//    }
+      
+    
+    $(this).toggleClass("checked");
+  });
 
 
 

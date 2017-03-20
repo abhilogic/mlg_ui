@@ -76,7 +76,8 @@ angular.module('mlg')
          if (response.status=='false') {
            $scope.msg = response.message;
          } else {
-           window.location.href='select_children?uid='+data.username;
+           $rootScope.logged_user = response.user;
+           $location.url('select_children?uid='+data.username);
          }
 	   }).error(function(error) {
 		  $scope.msg="Invalid Username Password";
@@ -96,6 +97,7 @@ angular.module('mlg')
 	 		}
 
 	 		data.role_id=role_id;
+//            data.source_url = '';
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
 					$scope.msg=response.message;
@@ -110,7 +112,7 @@ angular.module('mlg')
 	};
 
 }])
-.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams) {
+.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams', function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams) {
 
   $rootScope.username=$location.search().uid;
   if (typeof $routeParams.id != 'undefined') {
@@ -123,17 +125,29 @@ angular.module('mlg')
     });
   }
 
+  $scope.termsAndConditions = function(data) {
+    alert('Term and condition completed');
+  }
+
   $scope.setPreference = function(data) {
-   loginHttpService.setPreference(data).success(function(response) {
-     if (response.status == true) {
-       window.location.href='/mlg_ui/app';
-     } else {
-       $scope.msg = response.message;
-     }
-   }).error(function(error) {
-     $scope.msg = 'some error occured';
-   });
- };
+    if (typeof $rootScope.logged_user == 'undefined') {
+      alert('kindly login');
+      window.location.href='/mlg_ui/app';
+    }
+    data.user_id = $rootScope.logged_user.id;
+    loginHttpService.setPreference(data).success(function(response) {
+      if (response.status == true) {
+        if (response.warning == true) {
+          alert(response.message);
+        }
+        $location.url('/terms_and_conditions');
+      } else {
+        $scope.msg = response.message;
+      }
+    }).error(function(error) {
+      $scope.msg = 'some error occured';
+    });
+  };
 }])
 .controller('addChild',['$rootScope','$scope','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,$http,user_roles,$location) {
    //$rootScope.username=$location.search().uid;
@@ -146,7 +160,7 @@ angular.module('mlg')
          })
           .success(function(data) {           
              // $scope.message = data.message;
-             
+
              $scope.PostChildCount = data;
              $location.path('/add_child_account');
             
@@ -159,6 +173,9 @@ angular.module('mlg')
   		  $scope.grades = response.response.Grades;  
   	  });
 
+      $scope.addChildAccount = function() {
+        $location.path('/parent_preferences');
+      }
 }])
 .controller('passwordCtrl',['$scope','loginHttpService','$location','$timeout',function($scope, loginHttpService,$location,$timeout) {
     $scope.form={};	
