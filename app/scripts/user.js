@@ -113,6 +113,7 @@ angular.module('mlg')
 
 }])
 .controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams', function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams) {
+  $scope.frm = {}
 
   $rootScope.username=$location.search().uid;
   if (typeof $routeParams.id != 'undefined') {
