@@ -8,7 +8,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	baseURL : 'http://localhost/mlg',
 	gradeList : '/users/getGradeList',
 	setUserStatus : '/users/setUserStatus',
-	setTermsAndConditions : '/users/setTermsAndConditions',
+	getTermsAndConditions : '/users/getStaticContents',
+	getPaymentBrief : '/users/getPaymentBrief',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -19,9 +20,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	DATEFORMAT : '/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/'
 }).value('user_roles', {
 	admin:1,
-	student : 2,
+	parent : 2,
 	teacher : 3,
-	parent : 4,
+	student : 4,
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	//var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {
@@ -53,10 +54,13 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		controller : 'parentDashboardCtrl',
 	}).when('/terms_and_conditions', {
 		templateUrl : 'views/term_condition.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'termsAndConditionsCtrl',
 	}).when('/parent/dashboard', {
 		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
+	}).when('/payment_page', {
+		templateUrl : 'views/payment_page.html',
+		controller : 'paymentPageCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});
@@ -69,7 +73,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 } ]).run([ '$rootScope', '$location', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, urlParams, $http, $cookies, $cookieStore) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
-    console.log(urlParams.baseURL);
+
 	// $rootScope.logout = function() {
 	// 	// api call for logout
 	// 	$http({

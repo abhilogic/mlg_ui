@@ -56,6 +56,14 @@ angular.module('mlg')
 		});
 	}
 
+	loginHttpResponse.getPaymentBrief=function(data){
+		return $http({
+			method:'POST',
+            data  : data,
+			url   : urlParams.baseURL+urlParams.getPaymentBrief
+		});
+	}
+
 	return loginHttpResponse;
 	
 }])
@@ -97,7 +105,7 @@ angular.module('mlg')
 	 		}
 
 	 		data.role_id=role_id;
-//            data.source_url = '';
+            data.source_url = $location.protocol()+'://'+$location.host() + '/mlg_ui/app/';
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
 					$scope.msg=response.message;
@@ -124,10 +132,6 @@ angular.module('mlg')
     }).error(function() {
       alert('Unable to activate account, contact to the administrator');
     });
-  }
-
-  $scope.termsAndConditions = function(data) {
-    alert('Term and condition completed');
   }
 
   $scope.setPreference = function(data) {
@@ -231,6 +235,25 @@ angular.module('mlg')
 			}).error(function(error) {	
 				$scope.msg=error;
 				$scope.spinner=false;
-			});	
+			});
 	};	
+}])
+.controller('termsAndConditionsCtrl',['$scope', 'loginHttpService','$location','$timeout', function($scope, loginHttpService,$location,$timeout) {
+//    $scope.pagehtml = '';
+//    loginHttpService.getPaymentBrief(data).success(function(response) {
+//      $scope.pagehtml = response.data;
+//    });
+    $scope.termsAndConditions = function () {
+      $location.url('/payment_page');
+    }
+
+}])
+.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','$location','$timeout',
+  function($scope, $rootScope, loginHttpService,$location,$timeout) {
+    $scope.children = {};
+    data = {user_id : $rootScope.logged_user.id};
+    loginHttpService.getPaymentBrief(data).success(function(response) {
+      $scope.children = response.data;
+      $scope.total_amount = response.total_amount;
+    });
 }]);
