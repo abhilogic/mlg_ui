@@ -1,0 +1,123 @@
+<body class="signup_background">
+  <div  class="sign_pages">
+    <div class="signpage_block">
+      <div class="signpage__heading">
+        <h5 class="signpage___title">MLG</h5>
+      </div>
+      <div class="signpage__body student_account_creation">
+        <ul class="circular_page_listing">
+          <li class="done"><span class="_serial_num"></span><span class="__text">Melissa Gordon</span></li>
+          <li class="done"><span class="_serial_num"></span><span class="__text">James Gordon</span></li>
+          <li class="done"><span class="_serial_num"></span><span class="__text">Jimmy Gordon</span></li>
+          <li class="done"><span class="_serial_num"></span><span class="__text">Child Account</span></li>
+          <li class="done"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
+          <li class="done"><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
+          <li class="active"><span class="_serial_num"></span><span class="__text">Payment</span></li>
+        </ul>
+        <div class="main_content">
+          <div class="row">
+            <div class="col-md-6 col-xs-12 account_payment_brief">
+              <h5 class="hd">Payment Brief</h5>
+              <ul ng-repeat="child in children" class="payment_brief">
+                <li>
+                  <ul class="sub">
+                    <li><span class="parmeter">USER :</span><span class="value">{{child.child_name}}</span></li>
+                    <li><span class="parmeter">PACKAGE :	</span><span class="value">{{child.package_subjects}}</span></li>
+                    <li><span class="parmeter">SUB TOTAL :</span><span class="value"><i class="amount">${{child.package_amount}}</i>/{{child.plan_duration}}</span></li>
+                  </ul>
+                </li>
+              </ul>
+              <h5 class="total_amount">TOTAL: <span>${{total_amount}}</span></h5>
+
+            </div>
+            <div class="col-md-6 col-xs-12 credit_card_details">
+              <h5 class="hd">Enter Credit Card Details</h5>
+              <form class="form">
+                <div class="form-group">
+                  <label>
+                    <span class="placholder">Name on the card</span>
+                    <input type="text" class="form-control"/>
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label>
+                    <span class="placholder">CARD NUMBER</span>
+                    <input type="number" class="form-control"/>
+                  </label>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8 col-xs-12">
+                    <div class="form-group">
+                      <ul>
+                        <li><span>CARD NUMBER</span></li>
+                        <li>
+                          <select name="" id="" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                        </li>
+                        <li>
+                          <select name="" id="" class="form-control">
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2016</option>
+                          </select>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 col-xs-12">
+                    <div class="form-group">
+                      <ul>
+                        <li><span>CVV</span></li>
+                        <li><input type="number" class="form-control ccv_num"/></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <p class="note">*Your money will be deducted after 30 days of trial.</p>
+                <button type="button" class="btn btn-primary btn-promocode" >Have promocode?</button>
+                <div class="promocode_form">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <input type="text" class="form-control" placeholder="Enter your promocode"/>
+                    </div>
+                    <div class="col-xs-6">
+                      <button type="submit" class="btn btn-primary btn-apply">Apply</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-proceed">Proceed</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function () {
+//      $(".signpage_block").centerfy();
+//      $(window).resize(function () {
+//        $(".signpage_block").centerfy();
+//      });
+//      $("input[type='radio']").radio_button();
+//      $(".btn-promocode").click(function () {
+//        $(".promocode_form").slideToggle();
+//      });
+    });
+  </script>
+</body>
