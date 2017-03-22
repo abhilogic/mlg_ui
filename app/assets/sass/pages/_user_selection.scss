@@ -1,54 +1,23 @@
-.signpage__body {
-  &.user_selection {
-  .signpage___heading {
-    color: $pictonBlue;
-    font-weight: $light;
-    font-size: 60px;
-    text-align: center;
-  }
-  .signpage____tag_line {
-    color: rgba($black,0.7);
-    font-weight: $light;
-    font-size: 20px;
-    margin: auto;
-    margin-top: 65px;
-    text-align: center;
-    width: 50%;
-    @include respond-to(mobileMedium){
-        margin-top: 30px;
+// Select type of user
+
+
+.list-select-userType{
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin: 30px auto;
+  li{
+    display: inline-block;
+    float: none;
+    a{
+      display: block;
+      text-align: center;
+      @include padding(15px);
+      img, picture{
+        display: inline-block;
       }
-      @include respond-to(mobilesmall){
-          font-size: 18px;
-          width: 100% !important;
-        }
-    @include respond-to(tabletPort){
-        width: 76%;
-      }
-     }
-    }
-    .user_selection_ul{
-        margin-top: 33px;
-        text-align: center;
-      li {
-        &:not(:last-child){
-          margin-bottom: 20px;
-        }
-        @include respond-to(mobileMedium){
-            display: block;
-          }
-        .user_img {
-          max-width: 100%;
-        }
-        span {
-          display: block;
-      }
-      &:nth-child(2n){
-        margin-left: 123px;
-        margin-right: 123px;
-        @include respond-to(mobileMedium){
-            margin-left: 0px;
-            margin-right: 0px;
-        }
+      @media(max-width: $screen-xs-max){
+        @include padding(15px 10px);
       }
     }
   }

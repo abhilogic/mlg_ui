@@ -1,205 +1,102 @@
-.student_gap_analysis {
-  background: $white;
-  @include box-shadow(0 0 65px rgba(0,0,0,0.10));
-  .left__side {
-    >.hd {
-      @include box-shadow(inset -5px 0px 10px rgba(105, 101, 101, 0.15));
-      color: $gray;
-      font-size: 18px;
-      font-weight: $semibold;
-      padding: 23px 33px;
-      text-transform: uppercase;
+
+$analysis-nav-border-color: $gray-lighter;
+
+
+.tabs-analysis{
+  .tab-content{
+    vertical-align: top;
+    @media (min-width: $screen-sm){
+      display: table-cell;
+      float: none;
     }
-    .nav-tabs {
-      @include box-shadow(inset -9px 0px 24px rgba(105, 101, 101, 0.15));
-      border-bottom: 0px;
-      li {
-        display: block;
-        position: relative;
-        border-top: 1px solid $alto;
+    &-right{
+      //@include padding(20px null);
+      .tab-pane{
+        @include padding(20px);
+      }
+    }
+  }
+
+  .nav__title{
+    text-transform: uppercase;
+    font-weight: $bold;
+    color: $gray-light;
+    span{
+      color: $gray-dark;
+    }
+  }
+}
+
+.nav-tabs-analysis{
+  @include box-shadow(inset -9px 0px 24px rgba(105, 101, 101, 0.15));
+  border-bottom: 0;
+  li{
+    display: block;
+    position: relative;
+    width: 100%;
+    &:not(:last-child){
+      border-bottom: 1px solid $analysis-nav-border-color;
+    }
+    a{
+      display: block;
+      color: $gray-light;
+      &:hover{
+        background-color: transparent;
+      }
+    }
+    .nav__text{
+      font-size: $font-size-base;
+      @media(max-width: $screen-xs){
+        display: none;
+      }
+    }
+    &.active{
+      border-left-color: $brand-primary;
+      &::before{
+        content: '';
+        @include position(absolute, 0 null 0 0);
         width: 100%;
-        &:not(:last-child){
-          border-bottom: 1px solid $alto;
-        }
-        &:first-child{
-          &.active {
-            border-top: 1px solid transparent;
-          }
-        }
-
-        &.active {
-          @include box-shadow(inset -498px 0px 24px rgba(255, 255, 255, 1));
-          border-top: 1px solid $alto;
-          &:before {
-          background: $cornFlowerFlue;
-          content: '';
-          height: 100%;
-          left: 0px;
-          position: absolute;
-          top: 0px;
-          width: 5px;
-          z-index: 10;
-          }
-          a {
-            background: none !important;
-          }
-        }
-        a{
-          border: 0px;
-          padding: 23px 33px;
-          &:hover {
-            background: rgba($dimGray,0.05);
-          }
-        }
-        .hd {
-          color: $gray;
-          font-size: 16px;
-          font-family: $font-secondary;
-          text-transform: uppercase;
-          span {
-            color: $dimGray;
-          }
-        }
-        .para {
-          color: $black;
-          font-size: 12px;
-          font-family: $font-secondary;
-          margin-top: 13px;
-        }
-      }
-    }
-    .bottom_arrow {
-      text-align: center;
-      .fa {
-        color: $gray;
-        font-size: 30px;
-      }
-    }
-  }
-  .right__side {
-    .tab-content {
-      @include padding(null 15px 20px 15px);
-    }
-    .tab-pane {
-        text-align: center;
-      .analysis_img_cover {
-        display: inline-block;
-        margin-top:100px;
-        position: relative;
-        &:hover {
-          .report_indicator {
-            display: block;
-          }
-        }
-        .report_indicator {
-          @include border-radius(5px);
-          background: $gray;
-          color: $white;
-          display: none;
-          max-width: 140px;
-          position: absolute;
-          padding: 10px 15px;
-          right: 65px;
-          top: -5px;
-          &:before {
-            border-top: 10px solid transparent;
-            border-right: 10px solid $gray;
-            border-bottom: 10px solid transparent;
-            content: '';
-            height: 0px;
-            left: -10px;
-            position: absolute;
-            top: 31%;
-            width: 0px;
-
-          }
-        }
-        .analysis__img {
-          display: block;
-          margin: auto;
-          max-width: 100%;
-        }
-      }
-      .btn_create_assignment {
-        border:1px solid $doveGray;
-        @include border-radius(0px);
-        color: $doveGray;
+        border-left: 5px solid $brand-primary;
+        background-color: white;
         display: block;
-        font-size: 16px;
-        font-family: $font-secondary;
-        margin: auto;
-        margin-top: 80px;
-        padding: 10px 30px;
-        text-transform: uppercase;
+        z-index: 0;
+        @include box-shadow(inset 0px 0px 6px rgba(105, 101, 101, 0.15));
+      }
+      a{
+        background-color: transparent;
+        position: relative;
+        z-index: 1;
+        color: $gray-base;
+      }
+      .nav__title{
+        span{
+          color: $gray-base;
+        }
       }
     }
   }
-  &.area_to_focus {
-    .right__side {
-      padding: 49px;
-      padding-left: 20px;
-      text-align: left;
-      .hd {
-        color: $gray;
-        font-size: 20px;
-        text-align: center;
-        span {
-          color: $dimGray;
-          font-weight: $bold;
-        }
-      }
-      .score_details {
-        margin-top: 50px;
-        li {
-          display: block;
-          padding-top: 14px;
-          paddin-bottom: 14px;
-          span {
-            display: inline-block;
-            font-size: 18px;
-            font-weight: $semibold;
-            &:first-child {
-              color: $gray;
-              text-align: left;
-              width: 70%;
-            }
-            &:last-child {
-              text-align: right;
-              width: 29%;
-            }
-            &.bad {
-              color: $cinnabar;
-            }
-            &.avarage {
-              color: $zest;
-            }
-            &.good {
-              color: $springGreen;
-            }
-          }
-        }
-      }
-      .problem_areas {
-        margin-top: 76px;
-        .para {
-          font-size: 14px;
-          font-weight: $semibold;
-          margin-bottom: 15px;
-          text-transform: uppercase;
-          text-align: left;
-        }
-        .btn-default {
-          background: $cinnabar;
-          border: $cinnabar;
-          @include border-radius(50px);
-          color: $white;
-          font-size: 13px;
-        }
-        .btn_create_assignment {
-          background: none;
-          margin-top: 40px;
-        }
-      }
+}
+
+.list_scoreAnalysis{
+  @include margin(30px auto);
+  font-size: 16px;
+  li{
+    display: block;
+    border-bottom: 1px solid $gray-lighter;
+    @include padding(10px null);
+    .score__value{
+      float: right;
+      display: inline-block;
+      margin-left: 8px;
     }
+  }
+}
+
+.tags-problems-area{
+  .label{
+    display: inline-block;
+    margin-bottom: 8px;
+    @include padding(8px null);
+    border-radius: 20px;
   }
 }

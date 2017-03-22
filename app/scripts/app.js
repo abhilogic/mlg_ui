@@ -1,5 +1,6 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).value('urlParams', {
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
+.value('urlParams', {
 	users : '/users',
 	login: '/users/login',
 	registerUser:'/users/registerUser',
@@ -52,6 +53,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 		controller : 'parentDashboardCtrl',
 	}).when('/terms_and_conditions', {
 		templateUrl : 'views/term_condition.html',
+		controller : 'parentDashboardCtrl',
+	}).when('/parent/dashboard', {
+		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
 	}).otherwise({
 		redirectTo : '/',
