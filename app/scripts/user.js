@@ -47,6 +47,13 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.gradeList
 		});
 	}
+    
+	loginHttpResponse.isUserlogin=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.isUserLogin
+		});
+	}
 
 	loginHttpResponse.setStatusActive=function(data){
 		return $http({
@@ -63,7 +70,7 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.getPaymentBrief
 		});
 	}
-
+    
 	return loginHttpResponse;
 	
 }])
