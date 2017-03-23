@@ -85,7 +85,7 @@ angular.module('mlg')
            $scope.msg = response.message;
          } else {
            $rootScope.logged_user = response.user;
-           $location.url('select_children?uid='+data.username);
+           $location.url('select_children');
          }
 	   }).error(function(error) {
 		  $scope.msg="Invalid Username Password";
@@ -251,9 +251,14 @@ angular.module('mlg')
 .controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','$location','$timeout',
   function($scope, $rootScope, loginHttpService,$location,$timeout) {
     $scope.children = {};
-    data = {user_id : $rootScope.logged_user.id};
-    loginHttpService.getPaymentBrief(data).success(function(response) {
-      $scope.children = response.data;
-      $scope.total_amount = response.total_amount;
-    });
+    $scope.total_amount = 0;
+    if (typeof $rootScope.logged_user != 'undefined') {
+      data = {user_id : $rootScope.logged_user.id};
+      loginHttpService.getPaymentBrief(data).success(function(response) {
+        if (response.status) {
+          $scope.children = response.data;
+          $scope.total_amount = response.total_amount;
+        }
+      });
+    }
 }]);
