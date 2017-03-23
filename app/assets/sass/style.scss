@@ -34,28 +34,27 @@
 // Components
 @import "components/gridflex";
 @import "components/buttons";
+@import "components/switch";
 @import "components/radio_checkbox_btn";
 @import "components/forms";
 @import "components/awesome-bootstrap-checkbox";
 @import "components/radioslider";
 @import "components/wells";
 @import "components/panels";
-@import "components/universal_searchbar";
 @import "components/student_gap_analysis";
-@import "components/circular_listing";
 @import "components/boot_popup";
 @import "components/toggle_button";
-@import "components/circular_page_listing";
-@import "components/js-tabcollapse";
 
-// Pages
+// Pages Login/signup
 @import "pages/home";
-@import "pages/teacher_dashboard";
-@import "pages/subscriptions";
-@import "pages/signup";
 @import "pages/user_selection";
-@import "pages/student_no_selection";
 @import "pages/student_account_creation";
-@import "pages/account_preferences";
 @import "pages/term_condition";
 @import "pages/payment";
+
+// Pages Dashboard
+@import "pages/teacher-dashboard";
+@import "pages/subscriptions";
+
+@import "pages/parent-redeem";
+@import "pages/parent-offers";

@@ -15,6 +15,7 @@ h6, .h6 {
 .link{
   display: inline-block;
   text-decoration: none;
+  cursor: pointer;
   &.link-gray-light{
     color: $gray-light;
   }

@@ -3,6 +3,9 @@
 .form-control{
   color: $gray-base;
   font-size: $font-size-base + 2;
+  //height: 36px;
+  border-radius: $border-radius-small;
+  box-shadow: none;
 }
 .control-label{
   font-weight: $regular;
@@ -11,7 +14,19 @@
     color: $gray-light;
   }
 }
-
+.form-group-inline{
+  .control-label, .form-control{
+    display: inline-block;
+    width: auto;
+  }
+  >.form-control{
+    margin-left: 8px
+  }
+  .float-label{
+    display: inline-block;
+    margin: 0
+  }
+}
 // Input Floating labels Style
 .float-label{
   position: relative;

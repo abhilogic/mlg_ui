@@ -1,5 +1,6 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).value('urlParams', {
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
+.value('urlParams', {
 	users : '/users',
 	login: '/users/login',
 	registerUser:'/users/registerUser',
@@ -7,15 +8,17 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	baseURL : 'http://localhost/mlg',
 	gradeList : '/users/getGradeList',
 	setUserStatus : '/users/setUserStatus',
-	setTermsAndConditions : '/users/setTermsAndConditions',
+	getTermsAndConditions : '/users/getStaticContents',
+	getPaymentBrief : '/users/getPaymentBrief',
+	isUserLogin : '/users/isUserLoggedin',
 	packageList : '/users/getPackageList',
 	planList : '/users/getPlanList',
 	getCourseByGrade :'/courses/getCourseListForLevel',
 	setChildrenCount :'/users/setCountOfChildrenOfParent',
 	getChildrenCount :'/users/getCountOfChildrenOfParent',
 	getAddedChildren :'/users/getChildrenListOfParent',
-	addChild : '/users/addChildren',	
-
+	addChild : '/users/addChildren',
+	
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -26,9 +29,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	DATEFORMAT : '/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/'
 }).value('user_roles', {
 	admin:1,
-	student : 2,
+	parent : 2,
 	teacher : 3,
-	parent : 4,
+	student : 4,
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	//var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {
@@ -58,13 +61,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	}).when('/parent_preferences', {
 		templateUrl : 'views/account_preferenceces.html',
 		controller : 'parentDashboardCtrl',
-	}).when('/test', {
-		templateUrl : 'views/test.html',
-		controller : 'addChild',
-	})
-	.when('/terms_and_conditions', {
+	}).when('/terms_and_conditions', {
 		templateUrl : 'views/term_condition.html',
+		controller : 'termsAndConditionsCtrl',
+	}).when('/parent/dashboard', {
+		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
+	}).when('/payment_page', {
+		templateUrl : 'views/payment_page.html',
+		controller : 'paymentPageCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});
@@ -74,10 +79,18 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope', '$location', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, urlParams, $http, $cookies, $cookieStore) {
+} ]).run([ '$rootScope', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
-    console.log(urlParams.baseURL);
+    loginHttpService.isUserlogin().success(function(response) {
+         if (response.status=='false') {
+           $rootScope.logged_user = '';
+         } else {
+           $rootScope.logged_user = response.user_info;
+         }
+	   }).error(function(error) {
+		  $rootScope.logged_user = '';
+	   });
 	// $rootScope.logout = function() {
 	// 	// api call for logout
 	// 	$http({

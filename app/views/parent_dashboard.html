@@ -1,42 +1,202 @@
-
-	<div class="sign_pages">
-  <div class="signpage_block">
-      <div class="signpage__heading">
-        <h5 class="signpage___title">MLG</h5>
-          <div class="pull-right">Welcome  {{$root.username}} <a href="parent_login">(logout)</a></div>
+<body>
+  <!-- Main navbar -->
+  <nav class="navbar navbar-default navbar-dashboard navbar-static-top">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle sidebar-mobile-main-toggle" aria-expanded="false">
+        <span class="sr-only">Menu</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="dashboard.html">MLG</a>
+    </div>
+    <div class="search_form">
+      <div class="form-group has-feedback has-feedback-left">
+        <input type="search" class="form-control" placeholder="Type here to search...">
+        <div class="form-control-feedback"><i class="fa fa-search"></i><span class="sr-only">Search</span></div>
       </div>
-      <div class="signpage__body">
-        <div class="row">
-          <div class="col-sm-12 col-xs-12 text-center">
-           Welcome Parent Dashboard
-          
+    </div>
+  </nav>
+  <!-- /main navbar -->
+
+  <!-- Page container -->
+  <div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+      <!-- Main Sidebar -->
+      <aside class="sidebar sidebar-main">
+          <div class="sidebar-user">
+            <br><br>
           </div>
-         
+          <ul class="nav sidebar_nav sidebar_nav-main">
+            <li class="active">
+              <a href="teacher-dashboard.html"><i class="icon icon-my_class"></i><span class="link__text">Analytics</span></a>
+            </li>
+            <li >
+              <a href="parent-offers.html"><i class="icon icon-my_subscriptions"></i><span class="link__text">Offers</span></a>
+            </li>
+            <li >
+              <a href="parent-subscription.html"><i class="icon icon-my_rewards"></i><span class="link__text">Subscription</span></a>
+            </li>
+            <li >
+              <a href="parent-redeem.html"><i class="icon icon-my_data"></i><span class="link__text">Redeem</span></a>
+            </li>
+            <li>
+              <a href="parent-settings.html"><i class="icon icon-my_settings"></i><span class="link__text">Settings</span></a>
+            </li>
+            <li>
+              <a href="#"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
+            </li>
+          </ul>
+      </aside>
+      <!-- /sidebar -->
+
+
+      <!-- Main content -->
+      <div class="content-wrapper">
+        <!-- Content area -->
+        <div class="content">
+
+          <!-- Student List Panel  -->
+          <div class="panel panel-flat">
+            <div class="panel-heading">
+              <h5 class="panel-title text-uppercase">Progress</h5>
+            </div>
+            <div class="panel-body progress_content">
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <img src="../assets/img/" alt="Overall Progress Chart">
+                  </div>
+
+                  <div class="col-md-6 text-center">
+                    <img src="../assets/img/" alt="Time Spent on platform">
+                    <br>
+                    <h2>2 hrs</h2>
+                    <h5>Time spent on plateform</h5>
+                  </div>
+
+                </div>
+            </div>
+          </div>
+          <!-- /student list panel  -->
+
+          <!-- Areas of Focus Panel  -->
+          <div class="well well-flat tabs-analysis">
+            <div class="row">
+              <div class="tab-content tab-content-left col-sm-6 ">
+                <h4 class="category-content text-uppercase no-margin">Areas of Focus</h4>
+                <ul id="myNav" class="nav nav-tabs-analysis row">
+                  <li class="active">
+                    <a data-toggle="tab" href="#menu">
+                        <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span></h5>
+                        <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu1">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu2">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu3">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                </ul>
+                <h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
+              </div>
+
+              <div class="tab-content tab-content-right col-sm-6">
+                <div id="menu" class="tab-pane fade in active">
+                  <h3 class="nav__title text-center">MATHS - <span>H.C.F & L.C.M</span></h3>
+
+                   <ul class="list-unstyled list_scoreAnalysis">
+                       <li>
+                         Andrew's Score <span class="text-danger score__value">42</span>
+                       </li>
+                       <li>
+                         Peer Group Average <span class="text-warning score__value">42</span>
+                       </li>
+                       <li>
+                         Class Average <span class="text-succes score__value">42</span>
+                       </li>
+                   </ul>
+                   <br>
+                   <h5 class="text-uppercase">Problem Areas:</h5>
+                   <div class="tags-problems-area">
+                     <h4>
+                       <span class="label label-danger">Loreum ipsum dolor sit</span>
+                       <span class="label label-danger">dolor sit</span>
+                       <span class="label label-danger">ipsum dolor</span>
+                     </h4>
+                   </div>
+                   <br>
+                   <div class="text-center">
+                     <button class="btn btn-default btn-outline">Create Assignment</button>
+                   </div>
+                </div>
+
+                <div id="menu1" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                   <img src="../assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
+
+                   <br>
+                   <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
+                </div>
+
+                <div id="menu2" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                   <img src="../assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
+
+                   <br>
+                   <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
+                </div>
+
+                <div id="menu3" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                   <img src="../assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
+
+                   <br>
+                   <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- /student gap analysis panel  -->
+
         </div>
+        <!-- /content area -->
+
       </div>
+      <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
   </div>
-	<!-- Latest compiled and minified jQuery -->
-	
-	
-	<!-- Latest compiled and minified JavaScript -->
+  <!-- page container -->
 
-	
-  <script type="text/javascript">
-  $(document).ready(function(){
-    $('input,textarea').on('focusin', function() {
-      $(this).siblings('span').addClass('active');
-    });
-    $('input,textarea').on('focusout', function() {
-      if (!this.value) {
-        $(this).siblings('span').removeClass('active');
-      }
-    });
+  <!-- Latest compiled and minified jQuery -->
+  <script src="../assets/js/pages/parent-dashboard.js"></script>
 
-    $(".signpage_block").centerfy();
-    $(window).resize(function(){
-          $(".signpage_block").centerfy();
-    });
-  });
-
-  </script>
-</div>
+</body>

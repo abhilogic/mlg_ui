@@ -41,13 +41,13 @@ angular.module('mlg')
       });
     }
 
-	loginHttpResponse.gradeList=function(){
+  
+	loginHttpResponse.isUserlogin=function(){
 		return $http({
 			method:'GET',			
-			url   : urlParams.baseURL+urlParams.gradeList
+			url   : urlParams.baseURL+urlParams.isUserLogin
 		});
 	}
-
 
 	loginHttpResponse.setStatusActive=function(data){
 		return $http({
@@ -56,6 +56,62 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.setUserStatus
 		});
 	}
+
+	loginHttpResponse.getPaymentBrief=function(data){
+		return $http({
+			method:'POST',
+            data  : data,
+			url   : urlParams.baseURL+urlParams.getPaymentBrief
+		});
+	}
+
+	loginHttpResponse.gradeList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.gradeList
+		});
+	}
+
+	loginHttpResponse.packageList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.packageList
+		});
+	}
+
+	loginHttpResponse.planList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.planList
+		});
+	}
+
+	loginHttpResponse.getCourseByGrade=function(grade_id){		
+		return $http({
+			method:'GET',	
+			data : grade_id,		
+			url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+grade_id.id
+		});
+	}
+
+	loginHttpResponse.setChildrenCount=function(ccount){		
+		return $http({
+			method:'POST',	
+			data : ccount,		
+			url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+grade_id.id
+		});
+	}
+
+
+	loginHttpResponse.addChild=function(data){
+		return $http({
+			method:'POST',	
+			data : data,		
+			url  : urlParams.baseURL+urlParams.addChild
+		});
+	}
+
+
 
 	loginHttpResponse.packageList=function(){
 		return $http({
@@ -100,7 +156,6 @@ angular.module('mlg')
 		});
 	}
 
-
 	loginHttpResponse.addChild=function(childdata){
 		return $http({
 			method:'POST',	
@@ -109,6 +164,7 @@ angular.module('mlg')
 		});
 	}
 
+    
 	return loginHttpResponse;
 	
 }])
@@ -130,8 +186,7 @@ angular.module('mlg')
            $scope.msg = response.message;
          } else {
            $rootScope.logged_user = response.user;
-           setCookie('uid', $rootScope.logged_user.id);
-           $location.url('select_children?uid='+data.username);
+           $location.url('select_children');
          }
 	   }).error(function(error) {
 		  $scope.msg="Invalid Username Password";
@@ -150,7 +205,7 @@ angular.module('mlg')
 	 		}
 
 	 		data.role_id=role_id;
-//            data.source_url = '';
+            data.source_url = $location.protocol()+'://'+$location.host() + '/mlg_ui/app/';
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
 					$scope.msg=response.message;
@@ -179,10 +234,6 @@ angular.module('mlg')
     });
   }
 
-  $scope.termsAndConditions = function(data) {
-    alert('Term and condition completed');
-  }
-
   $scope.setPreference = function(data) {
     if (typeof $rootScope.logged_user == 'undefined') {
       alert('kindly login');
@@ -203,12 +254,12 @@ angular.module('mlg')
     });
   };
 }])
+
+/* ****************************** */
 .controller('addChild',['$rootScope','$scope','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,$http,user_roles,$location) {
    //$rootScope.username=$location.search().uid;
 
-
-
-   //  get children count
+  //  get children count
    	$scope.number=5;
    	$scope.counter = Array; 
 
@@ -229,6 +280,7 @@ angular.module('mlg')
 	    return "";
 	}
 	var get_uid=getCookie('uid'); 
+	//var get_uid=$rootScope.logged_user.id; 
 	
 
    	// Call to redirect on add child after child selection
@@ -298,14 +350,13 @@ angular.module('mlg')
     	})
     }
 
-    $scope.submitChildDetails = function(data){
-       	//how many childeren has been added n
-       	loginHttpService.getAddedChildren(get_uid).success(function(response) {
-			if (typeof response.response.added_children !='undefined') {
-					$rootScope.added_children =	response.response.added_children;
-			}
-		});
-       		console($rootScope.added_children);
+
+
+
+
+/* *************************************************************************** */
+    $scope.submitChildDetails = function(data){ 
+         		
        	var childdata={
        			first_name 	: data.first_name,
        			last_name 	: data.last_name,
@@ -319,36 +370,46 @@ angular.module('mlg')
        			plan_id		: 4,
        			package_id	: 6,
        	};
-       //		console.log(childdata); 
 
 
-/*
-       	if($rootScope.added_children!=$rootScope.childrencount){
-       		//call API to check the number of child has been added
-       		loginHttpService.addChild(childdata).success(function(response_childadd) {
-				if (response_childadd.response.status == "True") {
-						alert('redirect on add child account page'); 
-				}
-			});
+       //console.log(childdata); 
+       //how many childeren has been added n
+       	loginHttpService.getAddedChildren(get_uid).success(function(response) {
+			if (typeof response.response.added_children !='undefined') {
+					var added_children =	response.response.added_children;
 
-
+					if(added_children!=$rootScope.childrencount){       				       		       		
+		       		//call API to check the number of child has been added
+		       		loginHttpService.addChild(childdata).success(function(response_childadd) {
+						if (response_childadd.response.status == "True") {
+								window.location.href=urlParams.siteRoot+'add_child_account'; 
+						}
+			}); 
        	}
-       	elseif($rootScope.added_children==$rootScope.childrencount){
+       	else{
        		alert('redirect on preference page');
        	}
-       		*/
+
+
+
+
+			}
+		});
+
+
+       	
+       	
+       		
 
 	 		
 	};
+/* ********************************************************************** */
 
-
-
-
-
-    $scope.addChildAccount = function() {
-        $location.path('/parent_preferences');
-      }
+   
 }])
+
+/** ************************ */
+
 .controller('passwordCtrl',['$scope','loginHttpService','$location','$timeout',function($scope, loginHttpService,$location,$timeout) {
     $scope.form={};	
     $scope.msg='';
@@ -402,6 +463,30 @@ angular.module('mlg')
 			}).error(function(error) {	
 				$scope.msg=error;
 				$scope.spinner=false;
-			});	
+			});
 	};	
+}])
+.controller('termsAndConditionsCtrl',['$scope', 'loginHttpService','$location','$timeout', function($scope, loginHttpService,$location,$timeout) {
+//    $scope.pagehtml = '';
+//    loginHttpService.getPaymentBrief(data).success(function(response) {
+//      $scope.pagehtml = response.data;
+//    });
+    $scope.termsAndConditions = function () {
+      $location.url('/payment_page');
+    }
+
+}])
+.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','$location','$timeout',
+  function($scope, $rootScope, loginHttpService,$location,$timeout) {
+    $scope.children = {};
+    $scope.total_amount = 0;
+    if (typeof $rootScope.logged_user != 'undefined') {
+      data = {user_id : $rootScope.logged_user.id};
+      loginHttpService.getPaymentBrief(data).success(function(response) {
+        if (response.status) {
+          $scope.children = response.data;
+          $scope.total_amount = response.total_amount;
+        }
+      });
+    }
 }]);

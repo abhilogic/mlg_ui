@@ -1,17 +1,13 @@
 /* --- BUTTONS --- */
-/*.btn-primary {
-  @include border-radius(3px);
-  background: $pictonBlue;
-  border-color: $pictonBlue;
-  padding: 8px 20px;
-}*/
 
 .btn{
   border: 0;
-  @include padding(10px 15px);
+  @include padding(8px 15px);
   border-radius: 2px;
 }
-
+.btn-rounded{
+  border-radius: 100px;
+}
 .icon{
     display: inline-block;
     border: 0;
