@@ -21,7 +21,7 @@ $(function() {
         $('.page-container').attr('style', 'min-height:' + availableHeight + 'px');
     }
     // Initialize
-   // containerHeight();
+    containerHeight();
 
 
 
