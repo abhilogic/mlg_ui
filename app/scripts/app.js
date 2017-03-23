@@ -10,6 +10,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	setUserStatus : '/users/setUserStatus',
 	getTermsAndConditions : '/users/getStaticContents',
 	getPaymentBrief : '/users/getPaymentBrief',
+	isUserLogin : '/users/isUserLoggedin',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -70,10 +71,18 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope', '$location', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, urlParams, $http, $cookies, $cookieStore) {
+} ]).run([ '$rootScope', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
-
+    loginHttpService.isUserlogin().success(function(response) {
+         if (response.status=='false') {
+           $rootScope.logged_user = '';
+         } else {
+           $rootScope.logged_user = response.user_info;
+         }
+	   }).error(function(error) {
+		  $rootScope.logged_user = '';
+	   });
 	// $rootScope.logout = function() {
 	// 	// api call for logout
 	// 	$http({
