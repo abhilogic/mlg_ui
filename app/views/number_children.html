@@ -1,17 +1,26 @@
-<link rel="stylesheet" href="assets/css/plugins/radios-to-slider.css"/>
-	<div  class="sign_pages">
-    <div class="signpage_block">
-      <div class="signpage__heading">
-        <h5 class="signpage___title">MLG</h5>
-        <!-- <button type="button" class="btn">Already have an account?</button> -->
-      </div>
-      <div class="signpage__body student_no_selection">
-        
-          <h5 class="hd">Now specify how many children?</h5>
-          <form name="userForm" ng-submit="submitChildrenCount(childrencount)">
-          <div class="child_rangeSlider">
-            <div id="radios" >
-              <input id="option1" name="options" type="radio" ng-model="childrencount" ng-value="1">
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+      <!-- Main content -->
+      <div class="content-wrapper">
+
+        <!-- Onboarding: Select Number of children -->
+
+        <div class="panel panel-flat panel-onboarding">
+          
+           
+            <form  class="form-login" ng-submit="submitChildrenCount(childrencount)">
+              <br>
+              <h2 class="text-light text-gray-light text-center">Now specify how many children?</h2>
+              <br>
+              <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text-center">
+
+                  <div class="select-child-rangeSlider">
+                    <div id="selectChildren">
+                      <input id="option1" name="options" type="radio" ng-model="childrencount" ng-value="1">
               <label for="option1">1</label>
               <input id="option2" name="options" type="radio" ng-model="childrencount" ng-value="2">
               <label for="option2">2</label>
@@ -21,21 +30,35 @@
               <label for="option4">4</label>
               <input id="option5" name="options" type="radio" ng-model="childrencount" ng-value="5">
               <label for="option5">5</label>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Proceed</button>
-        </form>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">Proceed</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+         
+
+        </div>
+        <!-- /.onboarding: login teacher-->
+
       </div>
-  </div>
-  
+      <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+  </div>  
+  <script type="text/javascript" src="assets/js/main.js"></script>
+  <script src="assets/js/plugins/jquery.radios-to-slider.min.js"></script>
   <script type="text/javascript">
-   $(document).ready(function(){
-    $(".signpage_block").centerfy();
-    $(window).resize(function(){
-          $(".signpage_block").centerfy();
-    });
-     $("#radios").radiosToSlider();
-  });
- 
+      $(document).ready(function(){
+         $("#selectChildren").radiosToSlider();
+      });
   </script>
 </div>

@@ -1,66 +1,69 @@
+ 
+  <!-- Page container -->
+  <div class="page-container">
 
-	<div class="sign_pages">
-  <div class="signpage_block">
-      <div class="signpage__heading">
-        <h5 class="signpage___title">MLG</h5>
-        <button type="button" class="btn"><a href="parent_signup">Don't have an account?</a></button>
-      </div>
-      <div class="signpage__body">
-        <div class="row">
-          <div class="col-sm-6 col-xs-12 signpage___left_side">
-            <h5 class="signpage___heading">
-                Boost your Subject Skills and check progress online with
-                <span>MY LEARNING GURU</span>
-            </h5>
-            <img src="assets/img/pri-login-images/rocket_img.png" alt="" class="rocket__img img-responsive">
-          </div>
-          <div class=" col-sm-6 col-xs-12 signpage___right_side">
-            <h5 class="signpage____heading">Sign In</h5>
-            <p class="signpage____tag_line">Hello there! Sign in and start improving your skills</p>
-            <form  class="form signpage____form">
+    <!-- Page content -->
+    <div class="page-content">
 
-              <div class="form-group">
-                <label>
-                  <span class="placholder">USERNAME</span>
-                  <input type="text" class="form-control"/ ng-model="form.username">
-                </label>
+      <!-- Main content -->
+      <div class="content-wrapper">
+
+        <!-- Onboarding: Login Teacher -->
+
+          <div class="panel panel-flat panel-onboarding">
+            <div class="panel-heading">
+              <h4 class="spanel-title"><b>MLG</b> <small class="pull-right"><a href="parent_signup" class="link link-gray-light">Don't have an account?</a></small></h4>
+            </div>
+
+            <div class="panel-body">
+              <div class="row as-table">
+                <div class="col-sm-6 col-left">
+                  <h4 class="text-center">
+                      Boost your Subject Skills and check progress online with
+                      <span class="display-block text-muted">MY LEARNING GURU</span>
+                  </h4>
+                  <br>
+                  <br>
+                  <img src="assets/img/rocket_img.png" class="img-responsive img-content">
+                </div>
+
+                <div class=" col-sm-6 col-right">
+
+                  <div class="content-header">
+                    <h1 class="content-title">Sign In</h1>
+                    <p class="content-tagline">Hello there! Sign in and start improving your skills</p>
+                  </div>
+
+                  <form  class="form-login">
+                    <div class="form-group float-label">
+                      <label class="control-label">USERNAME</label>
+                      <input type="text" class="form-control float-input" ng-model="form.username"/ >
+                    </div>
+                    <div class="form-group float-label">
+                      <label class="control-label">PASSWORD</label>
+                      <input type="password" class="form-control float-input" ng-model="form.password"/>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary" ng-click="login(form)">Sign in</button>
+                    </div>
+                    <span class="has_error" ng-if="msg">{{msg}}</span>
+                  </form>
+                </div><!-- /.col-right-->
               </div>
-							<div class="form-group">
-								<label>
-									<span class="placholder">PASSWORD</span>
-									<input type="password" ng-model="form.password" class="form-control"/>
-								</label>
-							</div>
-              <button type="submit" class="btn btn-primary" ng-click="login(form)">Sign in</button>
-              <span class="has_error" ng-if="msg">{{msg}}</span>
-            </form>
+            </div>
 
           </div>
-        </div>
+          <!-- /.onboarding: login teacher-->
+
       </div>
+      <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
   </div>
-	<!-- Latest compiled and minified jQuery -->
-	
-	
-	<!-- Latest compiled and minified JavaScript -->
+  <!-- page container -->
 
-	
-  <script type="text/javascript">
-  $(document).ready(function(){
-    $('input,textarea').on('focusin', function() {
-      $(this).siblings('span').addClass('active');
-    });
-    $('input,textarea').on('focusout', function() {
-      if (!this.value) {
-        $(this).siblings('span').removeClass('active');
-      }
-    });
-
-    $(".signpage_block").centerfy();
-    $(window).resize(function(){
-          $(".signpage_block").centerfy();
-    });
-  });
-
-  </script>
-</div>
+  <!-- Latest compiled and minified jQuery -->
+ <script type="text/javascript" src="assets/js/main.js"></script>

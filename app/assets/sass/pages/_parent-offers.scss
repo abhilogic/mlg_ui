@@ -1,0 +1,77 @@
+
+.parentOffers-content{
+
+}
+.offers-list{
+    .offer-item{
+
+    }
+
+    .offer-thumbnail{
+      position: relative;
+      margin: 24px auto;
+      max-width: 320px;
+      .caption{
+        min-height: 124px;
+      }
+    }
+
+    .new-offer{
+      @include position(absolute, 20px null null 20px);
+      color: $brand-danger;
+    }
+
+
+    .thumb-img{
+      position: relative;
+      height: 140px;
+      .offer-img{
+        margin: 0 auto;
+        height: 100%;
+        max-width: 140px;
+        object-fit: contain;
+      }
+    }
+
+    .offer-price{
+      position: relative;
+      min-height: 140px;
+      max-height: 140px;
+      text-align: center;
+      vertical-align: middle;
+      .new-price{
+        margin: 0;
+        height: 100%;
+        object-fit: contain;
+        line-height: 140px;
+        color: $brand-primary;
+        b{
+          font-size: 72px;
+          font-weight: $ultrabold;
+        }
+      }
+      .old-price{
+        margin: 0;
+        @include position(absolute, 10px 10px null null);
+        display: inline-block;
+        color: $gray-light;
+        text-decoration: line-through;
+      }
+    }
+
+
+    .offer-text{
+      line-height: normal;
+      min-height: 60px;
+      overflow: hidden;
+      //text-overflow: ellipsis;
+      //white-space: nowrap;
+    }
+
+    .offer-time-remain{
+      color: $gray-light;
+      span{
+        color: $gray-base;
+      }
+    }
+}

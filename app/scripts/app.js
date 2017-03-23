@@ -1,5 +1,6 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).value('urlParams', {
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
+.value('urlParams', {
 	users : '/users',
 	login: '/users/login',
 	registerUser:'/users/registerUser',
@@ -54,6 +55,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	}).when('/terms_and_conditions', {
 		templateUrl : 'views/term_condition.html',
 		controller : 'termsAndConditionsCtrl',
+	}).when('/parent/dashboard', {
+		templateUrl : 'views/dashboard/parent-dashboard.html',
+		controller : 'parentDashboardCtrl',
 	}).when('/payment_page', {
 		templateUrl : 'views/payment_page.html',
 		controller : 'paymentPageCtrl',
