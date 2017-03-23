@@ -1,5 +1,28 @@
 /* --- Helpers --- */
 
+//
+// Image sizing
+//
+
+// Large
+.img-lg {
+    width: 44px!important;
+    height: 44px!important;
+}
+
+// Small
+.img-sm {
+    width: 36px!important;
+    height: 36px!important;
+}
+
+// Mini
+.img-xs {
+    width: 32px!important;
+    height: 32px!important;
+}
+
+
 /**
  * Animated class
  */

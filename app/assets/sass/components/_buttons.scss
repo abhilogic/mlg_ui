@@ -1,13 +1,21 @@
 /* --- BUTTONS --- */
 
 .btn{
-  border: 0;
+  border-width: 0;
   @include padding(8px 15px);
   border-radius: 2px;
+
+  &.btn-outline{
+    &:not(:hover){
+      background-color: transparent;
+    }
+    border-width: 1px;
+  }
 }
 .btn-rounded{
   border-radius: 100px;
 }
+
 .icon{
     display: inline-block;
     border: 0;

@@ -11,13 +11,16 @@
       position: relative;
       margin: 24px auto;
       max-width: 320px;
+      &.offer-subscription{
+        @include background-cover('../img/offer-bg.png');
+      }
       .caption{
         min-height: 124px;
       }
     }
 
     .new-offer{
-      @include position(absolute, 20px null null 20px);
+      @include position(absolute, 12px null null 12px);
       color: $brand-danger;
     }
 
@@ -45,16 +48,22 @@
         object-fit: contain;
         line-height: 140px;
         color: $brand-primary;
+        sup{
+          top: -1em;
+        }
         b{
-          font-size: 72px;
+          font-size: 62px;
           font-weight: $ultrabold;
+        }
+        small{
+          color: $brand-primary;
         }
       }
       .old-price{
         margin: 0;
-        @include position(absolute, 10px 10px null null);
+        @include position(absolute, 30px 30px null null);
         display: inline-block;
-        color: $gray-light;
+        color: lighten($gray-light, 15%);
         text-decoration: line-through;
       }
     }
@@ -64,6 +73,7 @@
       line-height: normal;
       min-height: 60px;
       overflow: hidden;
+      margin-top: 0;
       //text-overflow: ellipsis;
       //white-space: nowrap;
     }

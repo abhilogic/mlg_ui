@@ -24,6 +24,7 @@
 		z-index: 1000;
     border: 0;
     margin: 0;
+		padding-top: 40px;
 	}
   .sidebar-mobile-main &{
     @include position(absolute, null null null 0);
@@ -34,8 +35,21 @@
 }
 
 .sidebar-user{
-  @include padding(15px);
-  background-color: lighten($sidebar-dark-bg, 4%);
+  background-color: $sidebar-user-bg;
+	color: $sidebar-link-color;
+	a{
+		color: $sidebar-link-color;
+		&:hover, &:active, &:focus{
+			text-decoration:none;
+		}
+	}
+}
+
+.media-user{
+	font-family: 'MyriadProBoldCondensed';
+	.media-heading{
+
+	}
 }
 
 .sidebar_nav{
