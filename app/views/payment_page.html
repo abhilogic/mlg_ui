@@ -1,123 +1,108 @@
-<body class="signup_background">
-  <div  class="sign_pages">
-    <div class="signpage_block">
-      <div class="signpage__heading">
-        <h5 class="signpage___title">MLG</h5>
-      </div>
-      <div class="signpage__body student_account_creation">
-        <ul class="circular_page_listing">
-          <li class="done"><span class="_serial_num"></span><span class="__text">Melissa Gordon</span></li>
-          <li class="done"><span class="_serial_num"></span><span class="__text">James Gordon</span></li>
-          <li class="done"><span class="_serial_num"></span><span class="__text">Jimmy Gordon</span></li>
-          <li class="done"><span class="_serial_num"></span><span class="__text">Child Account</span></li>
-          <li class="done"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
-          <li class="done"><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
-          <li class="active"><span class="_serial_num"></span><span class="__text">Payment</span></li>
-        </ul>
-        <div class="main_content">
-          <div class="row">
-            <div class="col-md-6 col-xs-12 account_payment_brief">
-              <h5 class="hd">Payment Brief</h5>
-              <ul ng-repeat="child in children" class="payment_brief">
-                <li>
-                  <ul class="sub">
-                    <li><span class="parmeter">USER :</span><span class="value">{{child.child_name}}</span></li>
-                    <li><span class="parmeter">PACKAGE :	</span><span class="value">{{child.package_subjects}}</span></li>
-                    <li><span class="parmeter">SUB TOTAL :</span><span class="value"><i class="amount">${{child.package_amount}}</i>/{{child.plan_duration}}</span></li>
-                  </ul>
-                </li>
+<body class="page-onboarding onboarding-cover">
+  <!-- Page container -->
+  <div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+      <!-- Main content -->
+      <div class="content-wrapper">
+        <!-- Onboarding: Preferences -->
+        <div class="panel panel-flat panel-onboarding">
+          <div class="panel-heading">
+            <h4 class="spanel-title"><b>MLG</b></h4>
+          </div>
+          <div class="panel-body">
+            <!-- Steps -->
+            <div class="steps-container">
+              <ul class="steps">
+                <li class="completed"><span>Melissa Gordon</span></li>
+                <li class="completed"><span>James Gordon</span></li>
+                <li class="completed"><span>Jimmy Gordon</span></li>
+                <li class="completed"><span>Child Account</span></li>
+                <li class="completed"><span>Preferences</span></li>
+                <li class="completed"><span>Terms & Conditions</span></li>
+                <li class="active"><span>Payment</span></li>
               </ul>
-              <h5 class="total_amount">TOTAL: <span>${{total_amount}}</span></h5>
-
             </div>
-            <div class="col-md-6 col-xs-12 credit_card_details">
-              <h5 class="hd">Enter Credit Card Details</h5>
-              <form class="form">
-                <div class="form-group">
-                  <label>
-                    <span class="placholder">Name on the card</span>
-                    <input type="text" class="form-control"/>
-                  </label>
-                </div>
 
-                <div class="form-group">
-                  <label>
-                    <span class="placholder">CARD NUMBER</span>
-                    <input type="number" class="form-control"/>
-                  </label>
+            <div class="row as-table">
+              <div class="col-sm-6 col-left">
+                <br>
+                <h2 class="text-light text-gray-light text-center">Payment Brief</h2>
+                <br>
+
+                <ul ng-repeat="child in children" class="list-cartItems">
+                  <li class="cart-item">
+                    <p><span class="item-label">USER :</span><span class="item-value name">{{child.child_name}}</span></p>
+                    <p><span class="item-label">PACKAGE :	</span><span class="item-value package">{{child.package_subjects}}</span></p>
+                    <p><span class="item-label">SUB TOTAL :</span><span class="item-value price">${{child.package_amount}}<small>/{{child.plan_duration}}</small></span></p>
+                  </li>
+                </ul>
+
+                <div class="total-cartValue">
+                  <h1 class="text-center text-light text-primary">Total: <span>${{total_amount}}</span><small class="text-muted"></small></h1>
                 </div>
-                <div class="row">
-                  <div class="col-sm-8 col-xs-12">
-                    <div class="form-group">
-                      <ul>
-                        <li><span>CARD NUMBER</span></li>
-                        <li>
-                          <select name="" id="" class="form-control">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                          </select>
-                        </li>
-                        <li>
-                          <select name="" id="" class="form-control">
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2016</option>
-                          </select>
-                        </li>
-                      </ul>
+              </div>
+
+              <div class="col-sm-6 col-right">
+                <br>
+                <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
+                <br>
+                <form class="form-payment">
+                  <div class="form-group float-label">
+                    <label class="control-label">Name on the card</label>
+                    <input ng-model="frm.name" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Card number</label>
+                    <input ng-model="frm.card_number" type="text" class="form-control float-input"/>
+                  </div>
+
+                  <div class="form-group form-group-inline form-group-cardDetails">
+                    <label class="control-label">Expiry Date</label>
+                    <select class="form-control input-mm">
+                      <option ng-model="frm.expiry_month" value="mm">MM</option>
+                    </select>
+                    <select class="form-control input-yy">
+                      <option ng-model="frm.expiry_year" value="mm">YYYY</option>
+                    </select>
+                    <div class="form-group float-label">
+                      <label class="control-label">CVV</label>
+                      <input ng-model="frm.cvv" type="text" class="form-control float-input input-cvv"/>
                     </div>
                   </div>
-                  <div class="col-sm-4 col-xs-12">
-                    <div class="form-group">
-                      <ul>
-                        <li><span>CVV</span></li>
-                        <li><input type="number" class="form-control ccv_num"/></li>
-                      </ul>
+                  <p class="text-danger"><small><sup>*</sup>Your money will be deducted after 30 days of trial.</small></p>
+
+                  <!--Note: ng-if will be easy to show or hide promo input container-->
+                  <div class="form-group">
+                    <h4><a class="link">Have a promo code?</a></h4>
+                    <div class="form-inline promo-inputContainer">
+                      <input ng-model="frm.promo_code" type="text" class="form-control"/>
+                      <button class="btn btn-primary">Apply</button>
                     </div>
                   </div>
-                </div>
-                <p class="note">*Your money will be deducted after 30 days of trial.</p>
-                <button type="button" class="btn btn-primary btn-promocode" >Have promocode?</button>
-                <div class="promocode_form">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <input type="text" class="form-control" placeholder="Enter your promocode"/>
-                    </div>
-                    <div class="col-xs-6">
-                      <button type="submit" class="btn btn-primary btn-apply">Apply</button>
-                    </div>
+
+                  <br><br>
+                  <span class="has_error" ng-if="msg">{{msg}}</span>
+                  <div class="form-group text-center">
+                    <button ng-click="submitCardDetail(frm)" type="submit" class="btn btn-primary">Proceed</button>
                   </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary btn-proceed">Proceed</button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+        <!-- /.onboarding: Preferences-->
       </div>
+      <!-- /main content -->
     </div>
+    <!-- /page content -->
   </div>
   <script type="text/javascript">
     $(document).ready(function () {
-//      $(".signpage_block").centerfy();
-//      $(window).resize(function () {
-//        $(".signpage_block").centerfy();
-//      });
-//      $("input[type='radio']").radio_button();
-//      $(".btn-promocode").click(function () {
-//        $(".promocode_form").slideToggle();
-//      });
+      //Make tabs to accordian
+//      $('#termsTab').tabCollapse();
+      // Custom Scroll
+//      $(".tab-pane, .js-tabcollapse-panel-body").mCustomScrollbar();
     });
   </script>
 </body>
