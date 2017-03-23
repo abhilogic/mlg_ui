@@ -1,327 +1,254 @@
-.signpage__body {
-  &.student_account_creation {
-    clear: inherit;
-    margin-top: 0px;
-    .main_content {
-      margin-top: 51px;
-      .child_account_information {
-    .hd {
-      color: rgba($black, 0.7);
-      font-weight: $light;
-      font-size: 20px;
-      margin: auto;
-      margin-top: 0px;
-      text-align: center;
-      }
-      .signpage____form {
-        margin-top: 6px;
-        input {
-          color: $black;
-          font-size: 16px;
-        }
-        .form-group {
-          margin-top: 30px;
-        }
-        .placholder {
-          font-weight: normal;
-          font-size: 12px;
-        }
-        .child_email_id_opt {
-          margin-top: 30px;
-          .radio_ul {
-            margin-bottom: 0px;
-            text-align: left;
-           }
-           @include respond-to(mobileMedium){
-             text-align: left;
-             .radio_ul {
-               margin-top: 10px;
-             }
-           }
-           @include respond-to(mobileExtraSmall){
-             .tag_line {
-               font-size: 13px;
-             }
-           }
+
+/*
+// Setup child Account
+--------------------*/
+
+.btn-group.package-group{
+  padding: 0;
+  .btn.package{
+    text-align: center;
+    border: 1px solid $gray-lighter;
+    border-radius: 6px !important;
+    color: $gray-light;
+    float: none;
+    min-height: 50px;
+    @include margin(15px 0 null 4%);
+    @include align-self(center);
+    &:first-child{
+      margin-left: 0;
+    }
+    &.subject{
+      @include flex(0, 0, 22%);
+      max-width: 22%;
+    }
+    &.subscription{
+      @include flex(0, 0, 30.66%);
+      max-width: 30.66%;
+    }
+    @media (max-width: $screen-sm){
+      &.subject{
+        @include flex(0, 0, 48%);
+        max-width: 48%;
+        &:nth-child(2n + 1){
+          margin-left: 0;
         }
       }
     }
-    .subject_package_type {
-      margin-top: 30px;
-      .hd {
-        color: rgba($black,0.7);
-        font-size: 12px;
-        font-weight: $bold;
-        text-transform: uppercase;
-        text-align: left;
-        @include respond-to(mobileMedium){
-          text-align: center;
-        }
+    span, strong, small{
+      display: block;
+    }
+    .package-price {
+        font-size: 24px;
+    }
+
+    &.active{
+      border-color: $brand-primary;
+      color: $brand-primary;
+      box-shadow: none;
+      outline: 0;
+      &:before{
+        content: '\0043';
+        display: inline-block;
+        font-family: 'Glyphter';
+        font-style: normal;
+        font-weight: normal;
+        line-height: 16px;
+        font-size: 9px;
+        height: 16px;
+        width: 16px;
+        background-color: $brand-primary;
+        color: white;
+        border-radius: 100%;
+        @include position(absolute, -6px -6px null null);
       }
-      .subject_package {
-        margin-top: 20px;
-        margin-bottom: 0px;
-        @include respond-to(mobileMedium){
-          text-align: center;
-        }
-        li {
-          border: 1px solid $alto;
-          color: $grannySmith;
-          @include border-radius(5px);
-          height: 53px;
-          padding-top: 7px;
-          vertical-align: middle;
-          width: 92px;
-          &:not(:last-child){
-            margin-right: 20px;
-              @include respond-to(mobileMedium){
-                margin-right: 0px;
-              }
-          }
-          &.no_offers {
-              padding-top: 17px;
-          }
-          &.active {
-            border: 1px solid $pictonBlue;
-            color: $pictonBlue;
-            position: relative;
-            &:before {
-              background: $pictonBlue;
-              @include border-radius(100%);
-              color: $white;
-              content: '\0043';
-              display: inline-block;
-              height: 15px;
-              font-family: 'Glyphter';
-              font-style: normal;
-              font-weight: normal;
-              font-size: 8px;
-              line-height: 1;
-              position: absolute;
-              padding-top: 4px;
-              right: -5px;
-              top: -5px;
-              text-align: center;
-              width: 15px;
-              -webkit-font-smoothing: antialiased;
-              -moz-osx-font-smoothing: grayscale
-            }
-          }
-          span {
-            display: block;
-            font-weight: $regular;
-            font-size: 12px;
-            text-transform: uppercase;
-            text-align: center;
-            &:last-child {
-              font-weight: $bold;
-              font-size: 16px;
-              margin-top: 0px;
-              text-transform: lowercase;
-             }
-            }
-            @include respond-to(mobileMedium){
-              margin-bottom: 15px;
-              &:nth-child(3n-1){
-                margin-left: 20px;
-                margin-right: 20px;
-              }
-            }
-            @include respond-to(mobileExtraSmall){
-              margin-bottom: 15px;
-              margin-left: 20px;
-              margin-right: 20px;
-            }
-          }
+    }
+  }
+}
+
+
+/*
+// Subscription Plan
+----------------------*/
+.subscriptionPlan-group{
+  &.btn-group{
+    padding: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    .btn.plan{
+      text-align: center;
+      border: 1px solid $gray-lighter;
+      border-radius: 6px !important;
+      color: $gray-light;
+      float: none;
+      min-height: 50px;
+      display: inline-block;
+      @include margin(15px 0 null 2%);
+      @include padding(10px);
+      text-transform: uppercase;
+      min-width: 90px;
+
+      .plan-title{
+        display: block;
+        margin-bottom: 5px;
+        font-size: $font-size-base - 2;
+      }
+      .plan-icon{
+          font-size: 40px;
+      }
+      &.active{
+        border-color: $brand-primary;
+        color: $brand-primary;
+        box-shadow: none;
+        outline: 0;
+      }
+      &:first-child{
+        margin-left: 0;
+      }
+      @media (max-width: $screen-xs){
+        display: block;
+        @include margin(15px 0 null 0);
+        .plan-title{
+          font-size: $font-size-base;
         }
       }
     }
   }
 }
 
-.signpage__body {
-  &.student_account_creation{
-  .child_plan_selection {
-    padding-right: 0px;
-    border-left: 1px solid $alto;
-    @include respond-to(mobileMedium){
-      padding-right: 15px;
+
+/*
+// Total cost table
+------------------*/
+.table-totalCost{
+  @include margin(30px null);
+  tbody{
+    tr td{
+        border: 0;
+        vertical-align: middle;
+        &:last-child{
+          text-align: right;
+        }
+      }
+  }
+}
+
+/*
+// Form steps-color-base
+------------------*/
+$steps-color-base: darken($gray-lighter, 18%);
+.steps-container{
+  @include margin(0 auto 30px auto);
+  @media(min-width: $screen-sm){
+    width: 90%;
+    margin-top: -20px;
+  }
+}
+/* Accout Setup Steps */
+.steps {
+  @include margin(0);
+  @include padding(10px 0 0 0);
+	//overflow: hidden;
+  display: table;
+  width: 100%;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+  li {
+  	list-style-type: none;
+  	color: $steps-color-base;
+    display: table-cell;
+  	width: 1%;
+  	position: relative;
+    text-align: center;
+    font-size: 12px;
+    line-height: normal;
+    font-weight: $semibold;
+    span{
+      display: block;
+      @include padding(null 5px);
+      word-break: break-all;
+      @media(max-width: $screen-xs-max){
+        display: none;
+      }
     }
-    .hd {
-      color: rgba($black,0.8);
-      font-size: 14px;
+
+    @media(max-width: $screen-xs-max){
+
+    }
+
+    &:before {
+    	content: counter(step);
+    	counter-increment: step;
+      border: 2px solid $steps-color-base;
+      background-color: white;
+      color: $steps-color-base;
+    	width: 28px;
+      height: 28px;
+    	line-height: 24px;
+    	display: block;
+    	font-size: 14px;
       font-weight: $semibold;
       text-align: center;
-     }
-    ._chose_plan {
-      @include respond-to(mobileMedium){
-        margin-top: 20px;
+    	border-radius: 100%;
+    	margin: 0 auto 6px auto;
+      position: relative;
+      z-index: 100;
+
+      @media(max-width: $screen-xs-max){
+
       }
-        ._plan {
-          margin-top: 20px;
-          text-align: center;
-          li {
-            border: 1px solid $alto;
-            color: $grannySmith;
-            @include border-radius(5px);
-            height: 73px;
-            text-align: center;
-            width: 73px;
-            &:not(:last-child){
-              margin-right: 20px;
-            }
-            &.active {
-              border: 1px solid $pictonBlue;
-              color: $pictonBlue;
-              position: relative;
-            }
-            span {
-              &.time_period {
-                display: block;
-                font-size: 10px;
-                font-weight: $semibold;
-                margin-top: 5px;
-                text-transform: uppercase;
-              }
-            }
-            .icon {
-              font-size: 36px;
-            }
-          }
-         }
+    }
+    /*steps connectors*/
+    &:after {
+    	content: '';
+    	width: 100%;
+    	height: 2px;
+      background-color: $steps-color-base;
+    	position: absolute;
+    	left: -50%;
+    	top: 12px;
+    	//z-index: -1; /*put it behind the numbers*/
+    }
+    &:first-child:after {
+    	/*connector not needed before the first step*/
+    	content: none;
+    }
+  }
 
-        }
-    ._chose_subject{
-      margin-top: 40px;
-      ._subject {
-        margin-top:20px;
-        text-align: center;
-          li {
-            border: 1px solid $alto;
-            color: $grannySmith;
-            @include border-radius(5px);
-            height: 73px;
-            padding-top: 5px;
-            width: 109px;
-            &:not(:last-child){
-              margin-right: 4px;
-                @include respond-to(mobileMedium){
-                  margin-right: 0px;
-                }
-            }
-            &.active {
-              border: 1px solid $pictonBlue;
-              color: $pictonBlue;
-              position: relative;
-              &:before {
-                background: $pictonBlue;
-                @include border-radius(100%);
-                color: $white;
-                display: inline-block;
-                height: 15px;
-                font-family: 'Glyphter';
-                font-style: normal;
-                font-weight: normal;
-                font-size: 8px;
-                line-height: 1;
-                position: absolute;
-                padding-top: 4px;
-                right: -5px;
-                top: -5px;
-                text-align: center;
-                width: 15px;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale
-              }
-            }
-            span {
-              display: block;
-              line-height: 20px;
-              text-align: center;
-              &._sub {
-                font-size: 12px;
-                font-weight: $semibold;
-                margin-bottom: 5px;
-                text-transform: uppercase;
-              }
-              &._price {
-                font-size: 26px;
-                font-weight: $bold;
-              }
-              &._month {
-                font-size: 10px;
-            }
-           }
-             @include respond-to(mobileMedium){
-               margin-bottom: 8px;
-               &:nth-child(3n-1){
-                 margin-left: 4px;
-                 margin-right: 4px;
-               }
-             }
-             @include respond-to(mobileSmall){
-               margin-left: 4px;
-               margin-right: 4px;
-             }
-
-          }
-        }
+  /*Marking completed steps*/
+  li.completed{
+    color: $brand-primary;
+    &:before{
+      color: white;
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+    }
+    &:after{
+      background-color: $brand-primary;
+    }
+  }
+  li.active{
+    color: $brand-primary;
+    &:before{
+      background-color: white;
+      border-color: $brand-primary;
+      color: $brand-primary;
+      @include transform(scale(1.4));
+      @media(max-width: $screen-xs-max){
+        @include transform(scale(1.1));
       }
-     ._costing {
-       margin-top: 50px;
-       ._cost {
-         text-align: center;
-         li {
-           display: block;
-           width: 100%;
-           &:not(:last-child){
-             margin-bottom: 11px;
-           }
-           span{
-             color: rgba($black,0.8);
-             font-size: 14px;
-             font-weight: $semibold;
-             display: inline-block;
-             text-align: left;
-             vertical-align: middle;
-             .discount {
-               color: $grannySmith;
-               display: block;
-               font-size: 12px;
-               font-style: normal;
-
-             }
-             &._parameter {
-               width: calc(100% - 105px);
-               .form-control {
-                 display: inline-block;
-                 vertical-align: bottom;
-                 width: auto;
-               }
-               .btn-apply {
-                 padding: 6px 20px;
-                   @include respond-to(mobileMedium){
-                     margin-top: 15px;
-                   }
-               }
-             }
-             &._amount{
-               width: 100px;
-             }
-             .btn-promocode {
-               background: none;
-               border: 0px;
-               color: $pictonBlue;
-               font-weight: $semibold;
-               padding-left: 0px;
-             }
-           }
-         }
-       }
-       .promocode_form {
-         display: none;
-       }
-     }
+    }
+    &:after{
+      background-color: $brand-primary;
+    }
+    @media(max-width: $screen-xs-max){
+      span{
+        display: block;
+        width: 120px;
+        @include position(absolute, 100% null null 50%);
+        margin-left: -60px;
+        z-index: 100;
+      }
     }
   }
 }

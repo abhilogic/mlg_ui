@@ -24,14 +24,21 @@
 @import "sprites/sprite";
 
 // Layout Style
+@import "layout/nav";
+@import "layout/content";
+@import "layout/content-onboarding";
 @import "layout/header";
 @import "layout/sidebar";
 @import "layout/footer";
 
 // Components
+@import "components/gridflex";
 @import "components/buttons";
 @import "components/radio_checkbox_btn";
 @import "components/forms";
+@import "components/awesome-bootstrap-checkbox";
+@import "components/radioslider";
+@import "components/wells";
 @import "components/panels";
 @import "components/universal_searchbar";
 @import "components/student_gap_analysis";
@@ -40,12 +47,11 @@
 @import "components/toggle_button";
 @import "components/circular_page_listing";
 @import "components/js-tabcollapse";
-@import "components/progress_tab";
-@import "components/awards_achieved";
 
 // Pages
 @import "pages/home";
 @import "pages/teacher_dashboard";
+@import "pages/subscriptions";
 @import "pages/signup";
 @import "pages/user_selection";
 @import "pages/student_no_selection";

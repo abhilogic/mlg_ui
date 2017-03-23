@@ -8,7 +8,7 @@
       <div class="signpage__body student_no_selection">
         
           <h5 class="hd">Now specify how many children?</h5>
-          <form name="userForm" ng-submit="submitChildrenCount(childrencount)">
+          <!--<form name="userForm"> -->
           <div class="child_rangeSlider">
             <div id="radios" >
               <input id="option1" name="options" type="radio" ng-model="childrencount" ng-value="1">
@@ -23,8 +23,8 @@
               <label for="option5">5</label>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Proceed</button>
-        </form>
+          <button type="submit" class="btn btn-primary" ng-click="submitChildrenCount(childrencount)">Proceed</button>
+       <!-- </form> -->
       </div>
   </div>
   
@@ -34,7 +34,7 @@
     $(window).resize(function(){
           $(".signpage_block").centerfy();
     });
-     $("#radios").radiosToSlider();
+    // $("#radios").radiosToSlider();
   });
  
   </script>

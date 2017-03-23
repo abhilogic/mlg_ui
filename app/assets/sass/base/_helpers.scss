@@ -35,3 +35,46 @@
 .delay--18{@include delay(1.8s);}
 .delay--19{@include delay(1.9s);}
 .delay--20{@include delay(2.0s);}
+
+.category-content {
+    position: relative;
+    @include padding(15px);
+    &-sm{
+      @include padding(5px);
+    }
+    &-lg{
+      @include padding(20px);
+    }
+}
+
+// display type
+.display-block{
+  display: block;
+}
+.display-inline{
+  display: inline;
+}
+.display-inline-block{
+  display: inline-block;
+}
+
+
+// Paddings and Margin
+.no-padding{
+  padding: 0 !important;
+}
+.padding-h{
+  @include padding(null $content-padding-base);
+}
+.padding-h{
+  @include padding($content-padding-base null);
+}
+.no-margin{
+  margin: 0 !important;
+}
+.margin-h{
+  @include margin(null $content-padding-base);
+}
+.margin-v{
+  @include margin($content-padding-base null);
+}

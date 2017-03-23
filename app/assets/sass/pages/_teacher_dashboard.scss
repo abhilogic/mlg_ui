@@ -1,4 +1,148 @@
-.universal_searchbar {
+/* Student List Grid */
+.student_status_legend{
+  font-size: 12px;
+  margin-top: 10px;
+  .fa-circle{
+    margin-right: 5px;
+    font-size: 11px;
+  }
+  .gifted{
+    .fa-circle{color: $color-gifted;}
+  }
+  .outstanding{
+    .fa-circle{color: $color-outstanding;}
+  }
+  .ontarget{
+    .fa-circle{color: $color-ontarget;}
+  }
+  .struggling{
+    .fa-circle{color: $color-struggling;}
+  }
+  .remedial{
+    .fa-circle{color: $color-remedial;}
+  }
+}
+
+.list-thumb{
+  list-style: none;
+  text-align: justify;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  li{
+    display: inline-block;
+    text-align: center;
+    @include padding(10px);
+    vertical-align: top;
+    a{
+      display: block;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+  .img-circle{
+
+  }
+}
+
+.student_list{
+  li{
+    max-width: 140px;
+    min-width: 140px;
+    @media(max-width:$screen-sm-max ){
+      min-width: 131px;
+      min-width: 131px;
+    }
+    @media(max-width:$screen-xs-max ){
+      max-width: 105px;
+      min-width: 105px;
+    }
+  }
+  .student__name{
+    display: block;
+    @include padding(15px null null null);
+    font-weight: $bold;
+    color: $gray-dark;
+  }
+}
+
+.student__img{
+  max-width: 100px;
+  max-height: 100px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+  &::before{
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 4px solid white;
+    background-color: $gray-light;
+    @include border-radius(100%);
+    @include position(absolute, null null -12px 50%);
+    margin-left: -12px;
+    .gifted &{
+      background-color: $color-gifted;
+    }
+    .outstanding &{
+      background-color: $color-outstanding;
+    }
+    .ontarget &{
+      background-color: $color-ontarget;
+    }
+    .struggling &{
+      background-color: $color-struggling;
+    }
+    .remedial &{
+      background-color: $color-remedial;
+    }
+  }
+  .img-circle{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+}
+
+.group_list{
+  .group{
+    max-width: 150px;
+    min-width: 150px;
+    @media(max-width:$screen-sm-max){
+      max-width: 130px;
+      min-width: 130px;
+    }
+    @media(max-width:$screen-xs){
+      display: block;
+      text-align: center;
+      width: 100%;
+      min-width: 100%;
+    }
+    .group-thumb{
+      width: 90px;
+      height: 90px;
+      display: inline-block;
+      img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .group__name{
+      display: block;
+      font-weight: $bold;
+      color: $gray-dark;
+    }
+  }
+}
+
+
+/*
+.teacher_dashboard {
+  .universal_searchbar {
     margin-bottom: 45px;
 
   }
@@ -64,6 +208,9 @@
       padding-left: 0px;
       padding-right: 0px;
       padding-bottom: 25px;
+
+
+    }
   }
 }
 // teacher_planer
@@ -72,4 +219,4 @@
 .calender___img {
   width: 100%;
 }
-}
+}*/

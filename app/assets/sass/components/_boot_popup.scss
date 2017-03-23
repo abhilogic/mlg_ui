@@ -1,10 +1,8 @@
-.boot_popup {
-    max-width: 500px;
+.modal-emailConfirmation{
   .modal-header {
-    border-bottom: 0px;
+    border-bottom: 0;
     .close {
       @include border-radius(100%);
-      border: 0px solid $gray;
       width: 25px;
       height: 25px;
       text-align: center;
@@ -12,11 +10,12 @@
   }
   .modal-body {
       padding-bottom: 37px;
-    .___status_icon {
-      background: $springGreen;
+      text-align: center;
+    .status_icon {
+      background: $brand-success;
       @include border-radius(100%);
       display: block;
-      color: $white;
+      color: white;
       font-size: 30px;
       height: 70px;
       margin:auto;
@@ -24,24 +23,24 @@
       text-align: center;
       width: 70px;
     }
-    .___tag_line {
-      color: rgba($black,.8);
+    .tag_line {
+      color: $gray-light;
       font-size: 16px;
       font-weight: $light;
       text-align: center;
     }
   }
   .modal-footer {
-    border-color: $funBlue;
+    border-color: darken($brand-primary, 15%);
     border-width: 3px;
-    background-color: $pictonBlue;
+    background-color: $brand-primary;
     @include padding(30px null 30px null);
     position: relative;
     text-align: center;
     &:before {
-      background: $white;
+      background-color: white;
       @include border-width(0px 2px 2px 0px);
-      @include border-color(null $funBlue $funBlue null);
+      @include border-color(null darken($brand-primary, 15%) darken($brand-primary, 15%) null);
       @include border-style(solid);
       content: '';
       height: 20px;
@@ -51,11 +50,8 @@
       @include transform(rotate(45deg));
       width: 20px;
     }
-    .btn {
-      @include border-radius(3px);
-      background: $funBlue;
-      border: $funBlue;
-      color: $white;
+    .btn-primary {
+      background-color: darken($brand-primary, 15%);
       @include padding(10px 78px 10px 78px);
     }
   }

@@ -7,4 +7,54 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
 
+  .display-block{
+    margin-top: 8px;
+  }
+}
+
+.link{
+  display: inline-block;
+  text-decoration: none;
+  &.link-gray-light{
+    color: $gray-light;
+  }
+  &.link-gray-lighter{
+    color: $gray-lighter;
+  }
+  &.link-gray-dark{
+    color: $gray-dark;
+  }
+  &:hover, &:focus, &:active{
+    color: $gray-base;
+    text-decoration: none;
+    outline: 0;
+  }
+}
+
+// text-color
+.text-gray{
+  color: $gray;
+}
+.text-gray-dark{
+  color: $gray-dark;
+}
+.text-gray-light{
+  color: $gray-light;
+}
+.text-gray-lighter{
+  color: $gray-lighter;
+}
+
+// Text weight
+.text-light{
+  font-weight: $light;
+}
+.text-thin{
+  font-weight: $thin;
+}
+.text-bold{
+  font-weight: $bold;
+}
+.text-semibold{
+  font-weight: $semibold;
 }

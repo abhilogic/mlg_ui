@@ -8,6 +8,14 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	gradeList : '/users/getGradeList',
 	setUserStatus : '/users/setUserStatus',
 	setTermsAndConditions : '/users/setTermsAndConditions',
+	packageList : '/users/getPackageList',
+	planList : '/users/getPlanList',
+	getCourseByGrade :'/courses/getCourseListForLevel',
+	setChildrenCount :'/users/setCountOfChildrenOfParent',
+	getChildrenCount :'/users/getCountOfChildrenOfParent',
+	getAddedChildren :'/users/getChildrenListOfParent',
+	addChild : '/users/addChildren',	
+
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -50,7 +58,11 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',]).v
 	}).when('/parent_preferences', {
 		templateUrl : 'views/account_preferenceces.html',
 		controller : 'parentDashboardCtrl',
-	}).when('/terms_and_conditions', {
+	}).when('/test', {
+		templateUrl : 'views/test.html',
+		controller : 'addChild',
+	})
+	.when('/terms_and_conditions', {
 		templateUrl : 'views/term_condition.html',
 		controller : 'parentDashboardCtrl',
 	}).otherwise({

@@ -1,7 +1,40 @@
 /* --- BUTTONS --- */
-.btn-primary {
+/*.btn-primary {
   @include border-radius(3px);
   background: $pictonBlue;
   border-color: $pictonBlue;
   padding: 8px 20px;
+}*/
+
+.btn{
+  border: 0;
+  @include padding(10px 15px);
+  border-radius: 2px;
+}
+
+.icon{
+    display: inline-block;
+    border: 0;
+    color: inherit;
+    &.icon-success{
+      background-color: $brand-success;
+      color: white;
+    }
+}
+.icon-rounded{
+  border-radius: 100px;
+}
+
+.icon-float{
+  @include padding(18px);
+  i{
+    display: block;
+    margin: 0;
+    top: 0;
+  }
+  &.float-lg{
+    i{
+      font-size: 32px;
+    }
+  }
 }

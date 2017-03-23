@@ -1,3 +1,6 @@
+/*
+  // Dashboard: Teacher
+--------------------------------*/
 
 $(document).ready(function () {
             var $selected = $('.selected');

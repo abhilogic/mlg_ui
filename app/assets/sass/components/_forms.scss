@@ -1,1 +1,98 @@
 /* --- FORMS --- */
+
+.form-control{
+  color: $gray-base;
+  font-size: $font-size-base + 2;
+}
+.control-label{
+  font-weight: $regular;
+  color: $gray-light;
+  .has-success &, .has-error &, .has-warning &{
+    color: $gray-light;
+  }
+}
+
+// Input Floating labels Style
+.float-label{
+  position: relative;
+  padding-top: 15px;
+
+  .control-label{
+    pointer-events: none;
+    @include transition(all linear 0.1s);
+    @include position(absolute, null null null null);
+
+  }
+  &.focus{
+    .control-label{
+      font-size: 12px;
+      top: 0;
+    }
+  }
+  &.has-feedback label ~ .form-control-feedback {
+        top: 12px;
+  }
+
+  // On Success
+  &.has-success{
+    .form-control-feedback{
+      color: $brand-primary;
+    }
+    .float-input{
+      border-color: $input-border-color;
+      color: $brand-primary;
+    }
+  }
+}
+
+
+.float-input{
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid $input-border-color;
+  box-shadow: none;
+  background-color: transparent;
+
+  &:focus, &:active, &.active{
+    border-color: $brand-primary;
+    box-shadow: none;
+    .has-success &, .has-error &, .has-warning &{
+      box-shadow: none;
+    }
+  }
+  .has-feedback{
+    box-shadow: none;
+  }
+  .has-success &, .has-error &, .has-warning &{
+    box-shadow: none;
+  }
+  .has-error &{
+    border-color: $brand-danger;
+    color: $brand-danger;
+  }
+  .has-warning &{
+    border-color: $brand-warning;
+    color: $brand-warning;
+  }
+}
+.help-block{
+  font-size: 12px;
+}
+
+.has-feedback-left{
+  &.has-feedback{
+    .form-control{
+      padding-left: 42.5px;
+      padding-right: 12px;
+    }
+    .form-control-feedback{
+      left: 0;
+      right: auto;
+    }
+  }
+  &.float-label{
+    .control-label{
+      left: 42.5px;
+    }
+  }
+}

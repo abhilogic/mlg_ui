@@ -1,5 +1,88 @@
 /* --- Panels --- */
-$panel-padding-left : 30px;
+.panel{
+
+  &-flat{
+    box-shadow: 0 0 20px rgba($gray-dark, 0.10);
+    border: 0;
+    @include margin(null null 40px null);
+    .panel-heading{
+      position: relative;
+      @include padding($content-padding-base $content-padding-large);
+      &::before{
+        content: '';
+        height: 1px;
+        background-color: $gray-lighter;
+        @include position(absolute, null $content-padding-large 0 $content-padding-large);
+      }
+    }
+
+    .panel-body{
+      @include padding($content-padding-base $content-padding-large);
+      @media(max-width: $screen-xs){
+        @include padding($content-padding-base $content-padding-base);
+      }
+    }
+
+    .panel-footer{
+      background-color: transparent;
+      border: 0;
+      position: relative;
+      @include padding($content-padding-base $content-padding-large);
+      &::before{
+        content: '';
+        height: 1px;
+        background-color: $gray-lighter;
+        @include position(absolute, 0 $content-padding-large null $content-padding-large);
+      }
+    }
+
+  }
+}
+
+
+// Heading elements base
+.heading-elements {
+    display: block;
+    @include margin(($input-height-base / 2) null null null);
+
+    @media (min-width: $screen-md-min) {
+      background-color: inherit;
+      position: absolute;
+      top: 50%;
+      right: $grid-gutter-width;
+      height: $input-height-base;
+      margin-top: -($input-height-base / 2);
+    }
+
+    .list-inline{
+      margin-bottom: 0;
+    }
+
+    // Make them visible starting from tablet
+    @media (min-width: $screen-md-min) {
+
+        // Make them inline
+        .heading-text,
+        > .btn-group {
+            float: left;
+            margin-left: $content-padding-large;
+        }
+
+        // Heading text
+        .heading-text {
+            display: inline-block;
+
+            & + .heading-text {
+                margin-left: $content-padding-large;
+            }
+        }
+      }
+
+}
+
+
+
+/*$panel-padding-left : 30px;
 $panel-padding-left-sm : 15px;
 $panel-padding-right : 30px;
 $panel-padding-right-sm : 15px;
@@ -63,4 +146,4 @@ $panel-title-color : $dimGray;
       padding-bottom: 0px;
     }
   }
-}
+}*/

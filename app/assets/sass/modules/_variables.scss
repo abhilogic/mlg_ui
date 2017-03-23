@@ -7,7 +7,6 @@ $regular: 400;
 $semibold: 600;
 $bold: 700;
 $ultrabold: 800;
-// Font weights
 
 // Colors
 $white: #fff;
@@ -32,19 +31,49 @@ $pictonBlue: #2D94ED;
 $cinnabar: #E74C3C;
 $funBlue: #1D70B7;
 $grannySmith: #929D9F;
-$silverChalice: #A6A6A6;
-$dixie: #E1A515;
-$zest : #E67E22;
 
-// Colors
+// Colors Student Status
+$color-gifted: #3498db;
+$color-outstanding: #0e7a65;
+$color-ontarget: #2cd875;
+$color-struggling: #f39c12;
+$color-remedial: #c0392b;
 
 // Font family
 $font-primary: 'Open Sans', sans-serif;
-$font-secondary: 'MyriadPro-Regular', sans-serif;
+$font-secondary: 'MyriadProBoldCondensed', sans-serif;
 
 // Image dir path
 $imagedir: "../img/";
 
+
+// Form Components
+$input-border-color: darken($gray-lighter, 10%);
+
+// sidebar
+$sidebar-dark-bg: #192d46;
+$sidebar-base-width: 230px;
+$sidebar-width-xs: 130px;
+
+$sidebar-active-border-color: $cyan;
+$sidebar-link-color: white;
+$sidebar-active-link-color: $cyan;
+
+//Content Wrapper
+$content-wrapper-bg: #ecf1f7;
+
+//** Required additional padding options, integrated to other less files
+$content-padding-large: 				     30px;
+$content-padding-base: 					     15px;
+$content-padding-small: 				     10px;
+
+// Grids
+// -------------------------------
+
+$grid-padding-width:              10px !default;
+$grid-responsive-sm-break:        767px !default;  // smaller than landscape phone
+$grid-responsive-md-break:        992px !default;  // smaller than portrait tablet
+$grid-responsive-lg-break:        1023px !default; // smaller than landscape tablet
 
 // media width
 $screen-large : 1489px;
