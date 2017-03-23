@@ -193,6 +193,7 @@ angular.module('mlg')
            $scope.msg = response.message;
          } else {
            $rootScope.logged_user = response.user;
+           setCookie('uid', $rootScope.logged_user.id);
            $location.url('select_children');
          }
 	   }).error(function(error) {
