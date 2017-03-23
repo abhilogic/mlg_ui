@@ -49,6 +49,13 @@ angular.module('mlg')
 		});
 	}
 
+	loginHttpResponse.logout=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.logout
+		});
+	}
+
 	loginHttpResponse.setStatusActive=function(data){
 		return $http({
 			method:'POST',

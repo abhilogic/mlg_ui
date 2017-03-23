@@ -1,0 +1,13 @@
+
+//Time spent Section Style
+
+.time-spent{
+  font-weight: $semibold;
+  color: $gray;
+  .time-value{
+    margin-bottom: 0
+  }
+  .text-muted{
+    color: lighten($gray, 15%);
+  }
+}

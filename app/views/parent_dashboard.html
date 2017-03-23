@@ -1,5 +1,5 @@
 <body>
-  <!-- Main navbar -->
+ <!-- Main navbar -->
   <nav class="navbar navbar-default navbar-dashboard navbar-static-top">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle sidebar-mobile-main-toggle" aria-expanded="false">
@@ -27,12 +27,24 @@
 
       <!-- Main Sidebar -->
       <aside class="sidebar sidebar-main">
-          <div class="sidebar-user">
-            <br><br>
-          </div>
+        <div class="sidebar-user">
+            <div class="category-content">
+              <div class="media" data-toggle="collapse" data-target="#collapseUserOptions">
+                  <div class="media-left"><img src="../assets/img/placeholder.jpg" class="img-circle img-lg" alt="Andrew Garfield"></div>
+                  <div class="media-body media-middle">
+                    <span class="media-heading text-semibold">Andrew Garfield <i class="fa fa-angle-down"></i></span>
+                  </div>
+              </div>
+            </div>
+            <div class="collapse" id="collapseUserOptions">
+              <div class="category-content">
+                ...
+              </div>
+            </div>
+        </div>
           <ul class="nav sidebar_nav sidebar_nav-main">
             <li class="active">
-              <a href="teacher-dashboard.html"><i class="icon icon-my_class"></i><span class="link__text">Analytics</span></a>
+              <a href="parent-dashboard.html"><i class="icon icon-my_class"></i><span class="link__text">Analytics</span></a>
             </li>
             <li >
               <a href="parent-offers.html"><i class="icon icon-my_subscriptions"></i><span class="link__text">Offers</span></a>
@@ -68,14 +80,28 @@
                 <div class="row">
 
                   <div class="col-md-6">
-                    <img src="../assets/img/" alt="Overall Progress Chart">
+                    <img src="../assets/img/progress-chart-1.png" alt="Overall Progress Chart">
                   </div>
 
                   <div class="col-md-6 text-center">
-                    <img src="../assets/img/" alt="Time Spent on platform">
-                    <br>
-                    <h2>2 hrs</h2>
-                    <h5>Time spent on plateform</h5>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <img src="../assets/img/" alt="Time Spent on platform">
+                        <div class="time-spent total">
+                          <h2 class="time-value">2 hrs</h2>
+                          <span class="text-muted">Time spent on plateform</span>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="time-spent week">
+                          <h4 class="time-value">50 mins <span class="text-muted display-block">Week</span></h4>
+                        </div>
+                        <hr>
+                        <div class="time-spent month">
+                          <h4 class="time-value">1 hr 10 mins <span class="text-muted display-block">Month</span></h4>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                 </div>
@@ -194,8 +220,6 @@
     <!-- /page content -->
 
   </div>
-  <!-- page container -->
-
   <!-- Latest compiled and minified jQuery -->
   <script src="../assets/js/pages/parent-dashboard.js"></script>
 

@@ -3,6 +3,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 .value('urlParams', {
 	users : '/users',
 	login: '/users/login',
+	logout: '/users/logout',
 	registerUser:'/users/registerUser',
 	parentPreference:'/users/setUserPreference',
 	baseURL : 'http://localhost/mlg',
@@ -91,6 +92,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	   }).error(function(error) {
 		  $rootScope.logged_user = '';
 	   });
+
+	   $rootScope.logout=function(){
+		   	loginHttpService.logout().success(function(response) {
+		   		$rootScope.logged_user = '';
+	         window.location.href='/mlg_ui/app';
+		   }).error(function(error) {
+			  $rootScope.logged_user = '';
+		   });
+		}
 	// $rootScope.logout = function() {
 	// 	// api call for logout
 	// 	$http({

@@ -57,13 +57,14 @@ $imagedir: "../img/";
 $input-border-color: darken($gray-lighter, 10%);
 
 // sidebar
-$sidebar-dark-bg: #192d46;
+$sidebar-user-bg: #192d46;
+$sidebar-dark-bg: lighten($sidebar-user-bg, 4%);
 $sidebar-base-width: 230px;
 $sidebar-width-xs: 130px;
 
-$sidebar-active-border-color: $cyan;
-$sidebar-link-color: white;
-$sidebar-active-link-color: $cyan;
+$sidebar-active-border-color: lighten($brand-primary, 10%);;
+$sidebar-link-color: #c7dbf4;
+$sidebar-active-link-color: lighten($brand-primary, 10%);
 
 //Content Wrapper
 $content-wrapper-bg: #ecf1f7;

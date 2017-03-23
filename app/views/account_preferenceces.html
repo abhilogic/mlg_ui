@@ -1,53 +1,93 @@
-<body class="signup_background">
-  <div  class="sign_pages">
-    <div class="signpage_block">
-      <div class="signpage__heading">
-        <h5 class="signpage___title">MLG</h5>
-      </div>
-      <div class="signpage__body student_account_creation">
-        <ul class="circular_page_listing">
-          <li class="done"><span class="_serial_num"></span><span class="__text">Melissa Gordon</span></li>
-          <li class="done"><span class="_serial_num"></span><span class="__text">James Gordon</span></li>
-          <li class="done"><span class="_serial_num"></span><span class="__text">Jimmy Gordon</span></li>
-          <li class="done" ><span class="_serial_num"></span><span class="__text">Child Account</span></li>
-          <li class="active"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
-          <li class="not_done"><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
-          <li class="not_done"><span class="_serial_num"></span><span class="__text">Payment</span></li>
-        </ul>
-        <div class="main_content account_preferences">
-          <h5 class="hd">Set up preferences for your children account </h5>
-          <div class="report_mail">
-            <h5 class="hd">How often should we send you the report :</h5>
-            <form class="form">
-              <ul class="radio_ul">
-                <li><label for=""><input ng-model="frm.frequency" value="daily" type="radio" name="freq" ><span>Daily</span></label></li>
-                <li><label for=""><input ng-model="frm.frequency" value="weekly" type="radio" name="freq"><span>Weekly</span></label></li>
-                <li><label for=""><input ng-model="frm.frequency" value="fornightly" type="radio" name="freq"> <span>Fornightly</span></label></li>           
+<body class="page-onboarding onboarding-cover">
+
+  <!-- Page container -->
+  <div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+      <!-- Main content -->
+      <div class="content-wrapper">
+
+        <!-- Onboarding: Preferences -->
+
+        <div class="panel panel-flat panel-onboarding">
+          <div class="panel-heading">
+            <h4 class="spanel-title"><b>MLG</b></h4>
+          </div>
+
+          <div class="panel-body">
+            <!-- Steps -->
+            <div class="steps-container">
+              <ul class="steps">
+                <li class="completed"><span>Melissa Gordon</span></li>
+                <li class="completed"><span>James Gordon</span></li>
+                <li class="completed"><span>Jimmy Gordon</span></li>
+                <li class="completed"><span>Child Account</span></li>
+                <li class="active"><span>Preferences</span></li>
+                <li><span>Terms & Conditions</span></li>
+                <li><span>Payment</span></li>
               </ul>
-              <div class="form-group">
-                <label>
-                  <span class="placholder">Mobile Number</span>
-                  <input ng-model="frm.mobile"  type="tel" class="form-control"/>
-                </label>
-              </div>
-              <div class="form-group send_msg">
-                <label>
-                  <input ng-model="frm.sms" value="1" type="checkbox"/>
-                  <span>Send Text Messages</span>
-                </label>
-              </div>
-              <span class="has_error" ng-if="msg">{{msg}}</span>
-              <button ng-click="setPreference(frm)" type="submit" class="btn btn-primary btn-proceed">Proceed</button>
+            </div>
+
+            <form  class="form-login">
+              <br>
+              <h2 class="text-light text-gray-light text-center">Set up preferences for your children account</h4>
+                <br>
+
+                <div class="row">
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <div class="form-group">
+                      <label class="control-label">How often should we send you the report :</label>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="radio radio-primary radio-inline">
+                        <input ng-model="frm.frequency" type="radio" id="reportDaily" value="daily" name="sendreport" checked>
+                        <label for="reportDaily"> Daily</label>
+                      </div>
+                      <div class="radio radio-primary radio-inline">
+                        <input ng-model="frm.frequency" type="radio" id="reportWeekly" value="weekly" name="sendreport">
+                        <label for="reportWeekly"> Weekly</label>
+                      </div>
+                      <div class="radio radio-primary radio-inline">
+                        <input ng-model="frm.frequency" type="radio" id="reportFortnightly" value="fornightly" name="sendreport">
+                        <label for="reportFortnightly"> Fortnightly</label>
+                      </div>
+                    </div>
+
+                    <div class="form-group float-label has-feedback has-feedback-left">
+                      <label class="control-label">Mobile Number</label>
+                      <input ng-model="frm.mobile" type="tel" class="form-control float-input">
+                      <div class="form-control-feedback">+1</div>
+                    </div>
+                    <div class="form-group">
+                      <div class="checkbox checkbox-primary checkbox-inline">
+                        <input ng-model="frm.sms" value="1"  type="checkbox" name="sendTextMessage" checked>
+                        <label for="sendTextMessage"> Send Text Messages</label>
+                      </div>
+                    </div>
+
+                    <br>
+                    <span class="has_error" ng-if="msg">{{msg}}</span>
+                    <div class="form-group text-center">
+                      <button ng-click="setPreference(frm)" type="submit" class="btn btn-primary">Proceed</button>
+                    </div>
+                  </div>
+                </div>
+
             </form>
           </div>
         </div>
+        <!-- /.onboarding: Preferences-->
+
       </div>
+      <!-- /main content -->
+
     </div>
+    <!-- /page content -->
+
   </div>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      // $("input[type='radio']").radio_button();
-      //   $("input[type='checkbox']").checkbox_button();
-    });
-  </script>
+  <!-- page container -->
+
 </body>
