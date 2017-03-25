@@ -26,7 +26,7 @@ kkk{{childrencount}}
                       </ul>
               </div>
 
-              <form action="preferences.html" class="form-login">
+              <form class="form-login">
                 <div class="row as-table">
                   <div class=" col-sm-6 col-left">
                     <h3 class="text-center text-light text-gray-light no-margin">Setup your child's account</h3>
@@ -98,13 +98,9 @@ kkk{{childrencount}}
 
             <div class="form-group">
               <label class="control-label text-uppercase"><b>Select subject package type</b></label>
-              <div id="subjectPackages" class="flex-row flex-row-wrap btn-group package-group" data-toggle="buttons">
-                <!--<label ng-repeat="package in packages">
-                  <input type="checkbox" ng-model="frm.packagechoice" checklist-value="package.id" ng-checked="isChecked(package.id,package.name)">{{package.name}}
-                  </label> -->
-
-                  <label class="flex-col btn package subject" ng-repeat="package in packages">
-                    <input type="radio" name="subjectPackages" id="ubjectPackage{{package.id}}" autocomplete="off" ng-model="frm.packagechoice" ng-value="package.id"> {{package.name}}<br>{{package.discount}}%off
+              <div id="subjectPackages" class="flex-row flex-row-wrap btn-group package-group" data1-toggle="buttons">
+                    <label class="flex-col btn package subject" ng-repeat="package in packages">
+                    <input type="radio" name="package" ng-value="package.id" ng-change="onSelectedPackageDiscount(package)" ng-model="$parent.selectedPackage"> {{package.name}}<br>{{package.discount}}%off
                 </label>
               </div>
                   </div>
@@ -116,7 +112,7 @@ kkk{{childrencount}}
           <div class="col-sm-6 col-right">
             <div class="form-group text-center">
               <label class="control-label text-uppercase"><b>Choose a plan</b></label>
-              <div id="subscriptionPlans" class="btn-group subscriptionPlan-group" data-toggle="buttons">
+              <div id="subscriptionPlans" class="btn-group subscriptionPlan-group" data-toggle1="buttons">
                 <!--
                 <label class="btn plan">
                   <input type="radio" name="subscriptionPlans" id="planMonthly" autocomplete="off" ng-model="frm.planchoice" value="1" checked>
@@ -125,7 +121,7 @@ kkk{{childrencount}}
                 </label> -->
                 
                 <label class="btn plan" ng-repeat="plan in plans">
-                  <input type="radio" name="subscriptionPlans" id="planYearly" autocomplete="off" ng-model="frm.planchoice" ng-value="plan.id">
+                  <input type="radio" name="plan" id="planYearly" autocomplete="off" ng-value="plan.id" ng-change="onSelectplan(plan)" ng-model="$parent.selectedplan">
                   <span class="plan-title">{{plan.name}}</span>
                   <i class="icon icon-yearly plan-icon"></i>
                 </label>
@@ -142,9 +138,9 @@ kkk{{childrencount}}
                       <strong class="msg">{{msg}}</strong>
                 </div>
                 <div ng-if="courserecords>0 ">
-                <div id="subjectsPrice" class="flex-row flex-row-wrap btn-group package-group" data-toggle="buttons">
+                <div id="subjectsPrice" class="flex-row flex-row-wrap btn-group package-group" data-toggle1="buttons">
                     <label class="flex-col btn package subject" ng-repeat="course in cousesListByGrade">
-                      <input type="checkbox" name="{{course.course_name}}" autocomplete="off" ng-model="frm.cousechoice" checklist-value="course.id" ng-checked="isChecked(course.id,course.course_name)">
+                      <input type="checkbox" ng-change="onSelectCourse(frm.selectedcourse)" ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}}'" ng-false-value="''" >                      
                       <span class="package-title">{{course.course_name}}</span>
                       <strong class="package-price">${{course.price}}</strong>
                       <small class="package-type">monthly</small>
@@ -153,23 +149,27 @@ kkk{{childrencount}}
                 </div>      
               </div>
 
-                  <div class="form-group">
-                    <table class="table table-totalCost">
-                      <tbody>
-                        <tr>
-                          <td><b>Cost:</b></td>
-                          <td><b>$100/month</b></td>
+               <div class="form-group">
+                  <table class="table table-totalCost">
+                    <tbody>
+                      <tr>
+                        <td><b>Cost:</b></td>
+                        <td><b>{{currency}} {{price}} {{permonth}}</b></td>
                         </tr>
                         <tr>
                           <td>
                             <b>Discount:</b>
-                            <span class="display-block text-muted">10% off</span>
+                            <span class="display-block text-muted">{{discount}} off</span>
                           </td>
-                          <td><b>$10/month</b></td>
+                          <td><b>{{currency}} {{dis_amount}} {{permonth}}</b></td>
                         </tr>
                         <tr>
                           <td><b>Sub total:</b></td>
-                          <td><b>$90/month</b></td>
+                          <td><b>{{currency}} {{subtotal}} {{permonth}}</b></td>
+                        </tr>
+                        <tr>
+                          <td><b>Total:</b></td>
+                          <td><b>{{currency}} {{subtotal * num_months}} /{{num_months}}months</b></td>
                         </tr>
                       </tbody>
                     </table>

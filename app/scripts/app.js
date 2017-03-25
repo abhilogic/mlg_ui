@@ -17,7 +17,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	getCourseByGrade :'/courses/getCourseListForLevel',
 	setChildrenCount :'/users/setCountOfChildrenOfParent',
 	getChildrenCount :'/users/getCountOfChildrenOfParent',
-	getAddedChildren :'/users/getChildrenListOfParent',
+	getAddedChildren :'/users/getChildrenListOfParent',	
+	priceCalcOnSeclectedCourse :'/users/priceCalOnCourse',
 	addChild : '/users/addChildren',
 	
 }).value('REGEX', {
@@ -71,6 +72,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/payment_page', {
 		templateUrl : 'views/payment_page.html',
 		controller : 'paymentPageCtrl',
+	}).when('/test', {
+		templateUrl : 'views/test.html',
+		controller : 'addChild',
 	}).otherwise({
 		redirectTo : '/',
 	});

@@ -163,6 +163,15 @@ angular.module('mlg')
 		});
 	}
 
+	loginHttpResponse.pricecalc=function(course_ids){
+		return $http({
+			method:'POST',	
+			data : course_ids,		
+			url  : urlParams.baseURL+urlParams.priceCalcOnSeclectedCourse
+		});
+	}
+
+
 	loginHttpResponse.addChild=function(childdata){
 		return $http({
 			method:'POST',	
@@ -170,6 +179,10 @@ angular.module('mlg')
 			url  : urlParams.baseURL+urlParams.addChild
 		});
 	}
+
+
+	
+
 
     
 	return loginHttpResponse;
@@ -359,24 +372,88 @@ angular.module('mlg')
     }
 
 
+    //On select of plan
+    $scope.num_months=1;
+    $scope.currency='$';
+		$scope.permonth='/month';
+		$scope.price =0;
+		$scope.dis_amount=0;
+		$scope.subtotal=0;	
+    $scope.onSelectplan = function(dataplan){
+    	$scope.num_months=dataplan.num_months;
+    	//$scope.plan=dataplan.id;
+    }
+
+    // On selection of package
+	$scope.onSelectedPackageDiscount = function(data){
+		$scope.frm.selectedcourse = [];
+		$scope.currency='$';
+		$scope.permonth='/month';
+		$scope.price =0;
+		$scope.dis_amount=0;
+		$scope.subtotal=0;	
+			
+
+		if(data.type=='percent'){	
+			$scope.discount=data.discount+' %';
+						
+			// On selection of course calculate price
+			$scope.onSelectCourse = function(dataa){				
+				loginHttpService.pricecalc(dataa).success(function(courseprice) {
+					$scope.price =courseprice.response.amount; 
+					$scope.dis_amount= courseprice.response.amount*data.discount*0.01;	
+					$scope.subtotal=courseprice.response.amount-courseprice.response.amount*data.discount*0.01;
+				});
+			}
+		}
+
+		if(data.type=='fixed'){
+			$scope.discount=data.discount+' fixed';
+			$scope.onSelectCourse = function(dataa){	
+				console.log(data.discount);	
+				loginHttpService.pricecalc(dataa).success(function(courseprice) {
+					$scope.price =courseprice.response.amount; 
+					$scope.dis_amount= data.discount;
+					if(courseprice.response.amount>0){
+						$scope.subtotal=courseprice.response.amount-data.discount;
+					}else{
+						$scope.subtotal=0;
+					}
+
+				});
+			}
+		}
+
+	/*		
+	    loginHttpService.packageDiscount().success(function(packrecords) {
+			$scope.packages = packrecords.response.package; 
+		});
+		*/
+	}
+
+
+
+	
 
 
 
 /* *************************************************************************** */
-    $scope.submitChildDetails = function(data){ 
-         		
+    $scope.submitChildDetails = function(data){         
+
        	var childdata={
        			first_name 	: data.first_name,
        			last_name 	: data.last_name,
-       			level_id 	: 	data.levelchoice.id,
+       			level_id 	: data.levelchoice.id,
        			dob 	 	: data.dob,
        			created 	:'now()',
        			email 	    : data.email,
        			school		: data.school,
        			parent_id	: get_uid,
        			status 		: 1,
-       			plan_id		: 4,
-       			package_id	: 6,
+       			plan_id		: $scope.selectedplan,
+       			package_id	: $scope.selectedPackage,
+       			course_id	: data.selectedcourse, 
+
        	};
 
 
@@ -401,16 +478,28 @@ angular.module('mlg')
 
 
 
-			}
+	}
 		});
 
 
        	
-       	
+
        		
 
 	 		
 	};
+
+	$scope.testsubmitChildDetails = function(data){
+
+		console.log(data);
+		console.log($scope.usr = "usr");
+
+
+		console.log($scope.selectedoption);              
+        $scope.submitCalled = "submit called " + $scope.selectedoption;
+
+        
+       	};
 /* ********************************************************************** */
 
    
