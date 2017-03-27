@@ -172,7 +172,7 @@ angular.module('mlg')
 	}
 
 
-	loginHttpResponse.addChild=function(childdata){
+	loginHttpResponse.addChildRecord=function(childdata){
 		return $http({
 			method:'POST',	
 			data : childdata,		
@@ -277,7 +277,7 @@ angular.module('mlg')
 }])
 
 /* ****************************** */
-.controller('addChild',['$rootScope','$scope','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,$http,user_roles,$location) {
+.controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope,$filter, loginHttpService,$location,$http,user_roles,$location) {
    //$rootScope.username=$location.search().uid;
 
   //  get children count
@@ -433,28 +433,34 @@ angular.module('mlg')
 
 
 
-	
-
-
-
 /* *************************************************************************** */
-    $scope.submitChildDetails = function(data){         
+    $scope.submitChildDetails = function(data){   
 
-       	var childdata={
+       
+    //data.selectedcourses = JSON.parse(JSON.stringify(data.selectedcourse));
+      data.selectedcourses = Object.assign({}, data.selectedcourse);
+      $scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
+
+      	var childdata={
        			first_name 	: data.first_name,
        			last_name 	: data.last_name,
        			level_id 	: data.levelchoice.id,
        			dob 	 	: data.dob,
-       			created 	:'now()',
-       			email 	    : data.email,
+       			created 	: $scope.today,
+       			emailchoice	: data.emailchoice,
+       			email 	    : data.childemail,
        			school		: data.school,
        			parent_id	: get_uid,
+       			role_id		: 4, 
        			status 		: 1,
-       			plan_id		: $scope.selectedplan,
-       			package_id	: $scope.selectedPackage,
-       			course_id	: data.selectedcourse, 
+       			//plan_id	: $scope.selectedplan,
+       			//package_id: $scope.selectedPackage,
+       			plan_id		: data.selectedplan,
+       			package_id	: data.selectedPackage,
+       			courses		: data.selectedcourses, 
 
-       	};
+       	}; 
+
 
 
        //console.log(childdata); 
@@ -462,10 +468,10 @@ angular.module('mlg')
        	loginHttpService.getAddedChildren(get_uid).success(function(response) {
 			if (typeof response.response.added_children !='undefined') {
 					var added_children =	response.response.added_children;
-
+					
 					if(added_children!=$rootScope.childrencount){       				       		       		
 		       		//call API to check the number of child has been added
-		       		loginHttpService.addChild(childdata).success(function(response_childadd) {
+		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
 						if (response_childadd.response.status == "True") {
 								window.location.href=urlParams.siteRoot+'add_child_account'; 
 						}
@@ -480,13 +486,7 @@ angular.module('mlg')
 
 	}
 		});
-
-
-       	
-
-       		
-
-	 		
+ 		
 	};
 
 	$scope.testsubmitChildDetails = function(data){
