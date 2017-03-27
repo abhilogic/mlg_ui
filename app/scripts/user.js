@@ -474,9 +474,10 @@ angular.module('mlg')
 		       		//call API to check the number of child has been added
 		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
 						if (response_childadd.response.status == "True") {
-								window.location.href=urlParams.siteRoot+'add_child_account';
 								data={};
 								childdata={};
+								window.location.href=urlParams.siteRoot+'add_child_account';
+
 
 						}
 			}); 
