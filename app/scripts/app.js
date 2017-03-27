@@ -13,6 +13,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	getTermsAndConditions : '/users/getStaticContents',
 	getPaymentBrief : '/users/getPaymentBrief',
 	isUserLogin : '/users/isUserLoggedin',
+	saveCardToPaypal : '/users/saveCardToPaypal',
 	packageList : '/users/getPackageList',
 	planList : '/users/getPlanList',
 	getCourseByGrade :'/courses/getCourseListForLevel',
@@ -21,7 +22,6 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	getAddedChildren :'/users/getChildrenListOfParent',	
 	priceCalcOnSeclectedCourse :'/users/priceCalOnCourse',
 	addChild : '/users/addChildren',
-	
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -35,6 +35,25 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	parent : 2,
 	teacher : 3,
 	student : 4,
+}).value('card_months', {
+	1  : '1',
+	2  : '2',
+	3  : '3',
+	4  : '4',
+	5  : '5',
+	6  : '6',
+	7  : '7',
+	8  : '8',
+	9  : '9',
+	10 : '10',
+	11 : '11',
+	12 : '12',
+}).value('card_years', {
+	2018  : '2018',
+	2019  : '2019',
+	2020  : '2020',
+	2021  : '2021',
+	2022  : '2022',
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	//var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {
@@ -123,4 +142,3 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	// };
 
 } ]);
-
