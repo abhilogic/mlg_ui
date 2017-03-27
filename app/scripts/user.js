@@ -277,7 +277,7 @@ angular.module('mlg')
 }])
 
 /* ****************************** */
-.controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope,$filter, loginHttpService,$location,$http,user_roles,$location) {
+.controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
    //$rootScope.username=$location.search().uid;
 
   //  get children count
