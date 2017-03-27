@@ -442,6 +442,7 @@ angular.module('mlg')
       $scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
 
       	var childdata={
+       			username 	: data.first_name,
        			first_name 	: data.first_name,
        			last_name 	: data.last_name,
        			level_id 	: data.levelchoice.id,
@@ -478,7 +479,8 @@ angular.module('mlg')
 			}); 
        	}
        	else{
-       		alert('redirect on preference page');
+       		//alert('redirect on preference page');
+       		window.location.href=urlParams.siteRoot+'parent_preferences'; 
        	}
 
 
