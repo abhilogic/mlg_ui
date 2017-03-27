@@ -45,6 +45,7 @@
 
               <div class="col-sm-6 col-right">
                 <br>
+                **DEFAULT CARD TYPE IS VISA**
                 <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
                 <br>
                 <form class="form-payment">
@@ -54,20 +55,20 @@
                   </div>
                   <div class="form-group float-label">
                     <label class="control-label">Card number</label>
-                    <input ng-model="frm.card_number" type="text" class="form-control float-input"/>
+                    <input ng-model="frm.card_number" type="number"  class="form-control float-input" required/>
                   </div>
 
                   <div class="form-group form-group-inline form-group-cardDetails">
                     <label class="control-label">Expiry Date</label>
-                    <select class="form-control input-mm">
-                      <option ng-model="frm.expiry_month" value="mm">MM</option>
+                    <select ng-model="frm.expiry_month" class="form-control input-mm" required>
+                      <option ng-repeat="(key , value) in card_months" value="{{key}}">{{value}}</option>
                     </select>
-                    <select class="form-control input-yy">
-                      <option ng-model="frm.expiry_year" value="mm">YYYY</option>
+                    <select ng-model="frm.expiry_year" class="form-control input-yy" required>
+                      <option ng-repeat="(key , value) in card_years"  value="{{key}}">{{value}}</option>
                     </select>
                     <div class="form-group float-label">
                       <label class="control-label">CVV</label>
-                      <input ng-model="frm.cvv" type="text" class="form-control float-input input-cvv"/>
+                      <input ng-required="true" ng-model="frm.cvv" type="text" class="form-control float-input input-cvv"/>
                     </div>
                   </div>
                   <p class="text-danger"><small><sup>*</sup>Your money will be deducted after 30 days of trial.</small></p>

@@ -78,6 +78,14 @@ angular.module('mlg')
 		});
 	}
     
+	loginHttpResponse.saveCardToPaypal=function(data){
+		return $http({
+			method:'POST',
+            data  : data,
+			url   : urlParams.baseURL+urlParams.saveCardToPaypal
+		});
+	}
+    
 	return loginHttpResponse;
 	
 }])
@@ -262,10 +270,11 @@ angular.module('mlg')
     }
 
 }])
-.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','$location','$timeout',
-  function($scope, $rootScope, loginHttpService,$location,$timeout) {
+.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','$location','card_months', 'card_years',
+  function($scope, $rootScope, loginHttpService,$location, card_months, card_years) {
     $scope.children = {};
     $scope.total_amount = 0;
+    console.log($rootScope.logged_user);
     if (typeof $rootScope.logged_user != 'undefined') {
       data = {user_id : $rootScope.logged_user.id};
       loginHttpService.getPaymentBrief(data).success(function(response) {
@@ -275,4 +284,21 @@ angular.module('mlg')
         }
       });
     }
+
+    $scope.frm = {};
+    $scope.card_months = card_months;
+    $scope.card_years = card_years;
+    $scope.frm.expiry_month = card_months['1'];
+    $scope.frm.expiry_year = card_years['2018'];
+    $scope.submitCardDetail = function(data) {
+      data.user_id = $rootScope.logged_user.id;
+      data.amount = $scope.total_amount;
+      loginHttpService.saveCardToPaypal(data).success(function(response) {
+        if (response.status == true) {
+          $location.url('/parent/dashboard');
+        } else {
+          $scope.msg = response.message;
+        }
+      });
+    };
 }]);
