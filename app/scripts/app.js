@@ -4,6 +4,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	users : '/users',
 	login: '/users/login',
 	logout: '/users/logout',
+	siteRoot : '/mlg_ui/app',
 	registerUser:'/users/registerUser',
 	parentPreference:'/users/setUserPreference',
 	baseURL : 'http://localhost/mlg',
@@ -13,6 +14,14 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	getPaymentBrief : '/users/getPaymentBrief',
 	isUserLogin : '/users/isUserLoggedin',
 	saveCardToPaypal : '/users/saveCardToPaypal',
+	packageList : '/users/getPackageList',
+	planList : '/users/getPlanList',
+	getCourseByGrade :'/courses/getCourseListForLevel',
+	setChildrenCount :'/users/setCountOfChildrenOfParent',
+	getChildrenCount :'/users/getCountOfChildrenOfParent',
+	getAddedChildren :'/users/getChildrenListOfParent',	
+	priceCalcOnSeclectedCourse :'/users/priceCalOnCourse',
+	addChild : '/users/addChildren',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -83,6 +92,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/payment_page', {
 		templateUrl : 'views/payment_page.html',
 		controller : 'paymentPageCtrl',
+	}).when('/test', {
+		templateUrl : 'views/test.html',
+		controller : 'addChild',
 	}).otherwise({
 		redirectTo : '/',
 	});

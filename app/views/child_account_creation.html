@@ -1,191 +1,216 @@
+  <!-- Page container -->
+  <div class="page-container">
 
-<div  class="sign_pages">
-  <div class="signpage_block">
-    <div class="signpage__heading">
-      <h5 class="signpage___title">MLG</h5>
-    </div>
-    <div class="signpage__body student_account_creation">Wecome {{$root.logged_user.first_name}}
+    <!-- Page content -->
+    <div class="page-content">
 
-      <!--  <ul class="circular_page_listing"> <li ng-repeat="x in childrencount">{{x}}</li>
-         <li class="done"><span class="_serial_num"></span><span class="__text">Melissa Gordon</span></li>
-         <li class="done"><span class="_serial_num"></span><span class="__text">James Gordon</span></li>
-         <li class="done"><span class="_serial_num"></span><span class="__text">Jimmy Gordon</span></li>
-         <li class="active"><span class="_serial_num"></span><span class="__text">Child Account</span></li>
-         <li class="not_done"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
-         <li class="not_done"><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
-         <li class="not_done"><span class="_serial_num"></span><span class="__text">Payment</span></li>
-       </ul> -->
+      <!-- Main content -->
+      <div class="content-wrapper">
 
-      <ul class="circular_page_listing">
+        <!-- Onboarding: Login Teacher -->
+          <div class="panel panel-flat panel-onboarding">
+            <div class="panel-heading">
+              <h4 class="spanel-title"><b>MLG</b></h4>
+            </div>
 
-        <li class="not_done" ><span class="_serial_num"></span><span class="__text">Child Account{{x}}</span></li>
-        <li class="not_done"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
-        <li class="not_done"><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
-        <li class="not_done"><span class="_serial_num"></span><span class="__text">Payment</span></li>
-      </ul>
-      <div class="main_content">
-        <div class="row">
-          <div class="col-md-6 col-xs-12 child_account_information">
-            <h5 class="hd">Set up your children account </h5>
-            <form class="form signpage____form">
-              <div class="row">
-                <div class="col-xs-6">
-                  <div class="form-group">
-                    <label>
-                      <span class="placholder">first name</span>
-                      <input type="text" class="form-control"/>
-                    </label>
-                  </div>
-                </div>
-                <div class="col-xs-6">
-                  <div class="form-group">
-                    <label>
-                      <span class="placholder">last name</span>
-                      <input type="text" class="form-control"/>
-                    </label>
-                  </div>
-                </div>
+            <div class="panel-body">
+              <!-- Steps -->                
+              <div class="steps-container">             
+                <ul class="steps">                  
+                        <li class="" ng-repeat="a in counter(childrencount) track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">Child Account</span></li>
+                         <li class=""><span class="_serial_num"></span><span class="__text">Preferences</span></li>
+                        <li class=""><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
+                        <li class=""><span class="_serial_num"></span><span class="__text">Payment</span></li>
+                      </ul>
               </div>
 
-              <div class="form-group">
-                <label>
-                  <span class="placholder">School</span>
-                  <input type="email" class="form-control"/>
+              <form name="childform" class="form-login">
+                <div class="row as-table">
+                  <div class=" col-sm-6 col-left">
+                    <h3 class="text-center text-light text-gray-light no-margin">Setup your child's account</h3>
+                    <br>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group float-label">
+                            <label class="control-label">First Name</label>
+                            <input type="text" name="fname" class="form-control float-input" ng-model="frm.first_name" required/>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group float-label">
+                            <label class="control-label">Last Name</label>
+                            <input type="text" class="form-control float-input" ng-model="frm.last_name" required />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group float-label">
+                        <label class="control-label">School</label>
+                        <input type="text" class="form-control float-input" ng-model="frm.school" required/>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group float-label">
+                            <label class="control-label">Grade</label>
+                            <select name="gradename" class="form-control float-input" ng-options="grade.name for grade in grades"  ng-model="frm.levelchoice" ng-change="changeCourseList(frm.levelchoice)" required>
+                              <option value="">Select Grade</option>
+                              <!--<option ng-repeat="grade in grades" value="{{grade.id}}">{{grade.name}}</option> -->                                
+                            </select>
+                            <span ng-show="childform.gradename.$error.required">Select service</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group float-label">
+                            <label class="control-label">Date of Birth</label>
+                            <input type="date" class="form-control float-input" ng-model="frm.dob"/>
+                          </div>
+                        </div>
+                      </div>
+
+                      <br>
+
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="form-group">
+                            <label class="control-label">Would you like to give your child's email?</label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="radio radio-primary radio-inline">
+                          <input type="radio" id="inlineRadio1" value="1" name="radioInline"  ng-model="frm.emailchoice" ng-click="myStyle={display:'block'}" ng-checked="true">
+                              <label for="inlineRadio1">Yes</label>
+                          </div>
+                          <div class="radio radio-primary radio-inline">
+                              <input type="radio" id="inlineRadio2" value="0" name="radioInline" ng-model="frm.emailchoice" ng-click="myStyle={display:'none'}">
+                              <label for="inlineRadio2"> No</label>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="form-group float-label has-success has-feedback" ng-style="myStyle">
+                        <label class="control-label">EMAIL Id</label>
+                        <input type="text" class="form-control float-input" id="inputEmail" aria-describedby="inputEmailSuccessStatus" value="hello@mlg.com" ng-model="frm.childemail" required>
+                        <div class="form-control-feedback"><i class="icon icon-check"></i></div>
+                      </div>
+
+            <div class="form-group">
+              <label class="control-label text-uppercase"><b>Select subject package type</b></label>
+              <div id="subjectPackages" class="flex-row flex-row-wrap btn-group package-group" data1-toggle="buttons">
+                    <label class="flex-col btn package subject" ng-repeat="package in packages">
+                    <input type="radio" name="package" ng-value="package.id" ng-change="onSelectedPackageDiscount(package)" ng-model="$parent.frm.selectedPackage"> {{package.name}}<br>{{package.discount}}%off
+                </label>
+              </div>
+                  </div>
+          </div><!-- /.col-left-->
+
+
+
+
+          <div class="col-sm-6 col-right">
+            <div class="form-group text-center">
+              <label class="control-label text-uppercase"><b>Choose a plan</b></label>
+              <div id="subscriptionPlans" class="btn-group subscriptionPlan-group" data-toggle1="buttons">
+                <!--
+                <label class="btn plan">
+                  <input type="radio" name="subscriptionPlans" id="planMonthly" autocomplete="off" ng-model="frm.planchoice" value="1" checked>
+                  <span class="plan-title">Monthly</span>
+                  <i class="icon icon-monthly plan-icon"></i>
+                </label> -->
+                
+                <label class="btn plan" ng-repeat="plan in plans">
+                  <input type="radio" name="plan" id="planYearly" autocomplete="off" ng-value="plan.id" ng-change="onSelectplan(plan)" ng-model="$parent.frm.selectedplan">
+                  <span class="plan-title">{{plan.name}}</span>
+                  <i class="icon icon-yearly plan-icon"></i>
                 </label>
               </div>
 
-              <div class="row">
-                <div class="col-xs-6">
-                  <div class="form-group">
-                    <label>
-                      <span class="placholder">Grade</span>
-                      <input type="text" class="form-control"/>
+              <p class="text-center text-danger"><small><sup>*</sup>Your selected plan will activate after free trail of 30 days</small></p>
+              <br><br>
+            </div>
+
+            <div class="form-group text-center">
+              <label class="control-label text-uppercase"><b>Choose your subjects</b></label>               
+                      
+                <div ng-if="courserecords=='0' ">
+                      <strong class="msg">{{msg}}</strong>
+                </div>
+                <div ng-if="courserecords>0 ">
+                <div id="subjectsPrice" class="flex-row flex-row-wrap btn-group package-group" data-toggle1="buttons">
+                    <label class="flex-col btn package subject" ng-repeat="course in cousesListByGrade">
+                      <input type="checkbox" ng-change="onSelectCourse(frm.selectedcourse)" ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}}'" ng-false-value="''" >                      
+                      <span class="package-title">{{course.course_name}}</span>
+                      <strong class="package-price">${{course.price}}</strong>
+                      <small class="package-type">monthly</small>
                     </label>
                   </div>
-                </div>
-                <div class="col-xs-6">
-                  <div class="form-group">
-                    <label>
-                      <span class="placholder active">Date of Birth</span>
-                      <input type="date" class="form-control"/>
-                    </label>
+                </div>      
+              </div>
+
+               <div class="form-group">
+                  <table class="table table-totalCost">
+                    <tbody>
+                      <tr>
+                        <td><b>Cost:</b></td>
+                        <td><b>{{currency}} {{price}} {{permonth}}</b></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <b>Discount:</b>
+                            <span class="display-block text-muted">{{discount}} off</span>
+                          </td>
+                          <td><b>{{currency}} {{dis_amount}} {{permonth}}</b></td>
+                        </tr>
+                        <tr>
+                          <td><b>Sub total:</b></td>
+                          <td><b>{{currency}} {{subtotal}} {{permonth}}</b></td>
+                        </tr>
+                        <tr>
+                          <td><b>Total:</b></td>
+                          <td><b>{{currency}} {{subtotal * num_months}} /{{num_months}}months</b></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary" ng-click="submitChildDetails(frm)">Proceed</button>
                   </div>
                 </div>
+
               </div>
-              <div class="child_email_id_opt">
-                <div class="row">
-                  <div class="col-sm-8 col-xs-12">
-                    <span class="tag_line">Would you like to give your child’s Email ID :</span>
-                  </div>
-                  <div class="col-sm-4 col-xs-12">
-                    <ul class="radio_ul">
-                      <li><label><input type="radio"><span>Yes</span></label></li>
-                      <li><label><input type="radio"><span>No</span></label></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="email_done check_before">
-                  <span class="placholder">email id</span>
-                  <input type="email" class="form-control"/>
-                </label>
-              </div>
-            </form>
-            <div class="subject_package_type">
-              <h5 class="hd">SELECT SUBJECT PACKAGE TYPE</h5>
-              <ul class="subject_package">
-                <li class="no_offers"><span class="no_sub">1 SUBJECT</span><span class="offer"></span></li>
-                <li class="active check_before"><span class="no_sub">2 SUBJECTS</span><span class="offer">10% off</span></li>
-                <li><span class="no_sub">3 SUBJECTS</span><span class="offer"> 15% off</span></li>
-                <li><span class="no_sub">ALL SUBJECTS </span><span class="offer">20% off</span></li>
-              </ul>
+
+              </form>
             </div>
+
           </div>
-          <div class="col-md-6 col-xs-12 child_plan_selection">
-            <div class="_chose_plan">
-              <h5 class="hd">Choose a Plan</h5>
-              <ul class="_plan">
-                <li class="active"><span class="time_period">Monthly</span><i class="icon icon-monthly"></i></li>
-                <li><span class="time_period">Monthly</span><i class="icon icon-quarterly"></i></li>
-                <li><span class="time_period">Monthly</span><i class="icon icon-yearly"></i></li>
-              </ul>
-              <p class="note">*Your Selected Plan will activate after a free trial of 30 days.</p>
-            </div>
-            <div class="_chose_subject">
-              <h5 class="hd">Choose your subjects</h5>
-              <ul class="_subject">
-                <li class="active check_before">
-                  <span class="_sub">Math</span>
-                  <span class="_price">$50</span>
-                  <span class="_month">per month</span>
-                </li>
-                <li>
-                  <span class="_sub">English</span>
-                  <span class="_price">$50</span>
-                  <span class="_month">per month</span>
-                </li>
-                <li class="active check_before">
-                  <span class="_sub">Science</span>
-                  <span class="_price">$50</span>
-                  <span class="_month">per month</span>
-                </li>
-                <li>
-                  <span class="_sub">Social Science</span>
-                  <span class="_price">$50</span>
-                  <span class="_month">per month</span>
-                </li>
-              </ul>
-            </div>
-            <div class="_costing">
-              <ul class="_cost">
-                <li>
-                  <span class="_parameter">Cost:</span>
-                  <span class="_amount">$100/mo</span>
-                </li>
-                <li>
-                  <span class="_parameter">Discount:<i class="discount">10% off</i></span>
-                  <span class="_amount">$10/mo</span>
-                </li>
-                <li>
-                  <span class="_parameter">Sub Total: </span>
-                  <span class="_amount">$90/mo</span>
-                </li>
-                <li>
-                  <span class="_parameter">
-                    <button type="button" class="btn btn-primary btn-promocode">Have promocode?</button>
-                    <form class="form promocode_form">
-                      <input type="text" class="form-control" placeholder="Enter your promocode"/>
-                      <button type="submit" class="btn btn-primary btn-apply">Apply</button>
-                    </form>
-                  </span>
-                  <span class="_amount">
-                    <button type="submit" ng-click="addChildAccount()" class="btn btn-primary btn-proceed">proceed</button>
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+          <!-- /.onboarding: login teacher-->
       </div>
+      <!-- /main content -->
     </div>
+    <!-- /page content -->
+
   </div>
-</div>
-<!-- Latest compiled and minified jQuery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="assets/js/main.js"></script>
-<script type="text/javascript">
-$(document).ready(function () {
-  $(".signpage_block").centerfy();
-  $(window).resize(function () {
-    $(".signpage_block").centerfy();
-  });
-  $("input[type='radio']").radio_button();
-  $(".btn-promocode").click(function () {
-    $(".promocode_form").slideToggle();
-  });
-});
-</script>
+  <!-- page container -->
+
+  <!-- Footer -->
+  <div class="footer text-muted">
+    &copy; 2017. <a href="#">Terms of use</a> & <a href="#" target="_blank">Privacy policy</a>
+  </div>
+  <!-- /footer -->
+
+
+  <!-- Latest compiled and minified jQuery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ 
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      //$("input[type='radio']").radio_button();
+    });
+  </script>
+
+

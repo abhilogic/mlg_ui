@@ -160,62 +160,62 @@
    button.btn {
      margin-top: 30px;
    }
-  }
-  .form-group {
-    margin-top: 25px;
-    margin-bottom: 0px;
+   .form-group {
+     margin-top: 25px;
+     margin-bottom: 0px;
 
-  input,select {
-    border:0px;
-    border-bottom: 1px solid rgba($gray,0.35);
-    background: none;
-    @include box-shadow(none !important);
-    @include border-radius(0px);
-    color: $pictonBlue;
-    font-weight: $semibold;
-    padding-left: 0px;
-    &:focus {
-      border-bottom-color:  rgba($gray,0.35) !important;
-    }
-  }
-  label{
-    position: relative;
-    width: 100%;
-    .placholder {
-      color: rgba($black,0.7);
-      font-weight: $light;
-      left: 0px;
-      top: 8px;
-      position: absolute;
-      text-transform: uppercase;
-      @include transition(0.2s all);
-      &.active {
-        top: -10px;
-        font-size: 10px;
-      }
-    }
-    &.email_done {
-      position: relative;
-      &:before  {
-         color: $pictonBlue;
-         display: inline-block;
-         font-family: 'Glyphter';
-         font-style: normal;
-         font-weight: normal;
-         line-height: 1;
-         -webkit-font-smoothing: antialiased;
-         -moz-osx-font-smoothing: grayscale;
-         position: absolute;
-         right: 5px;
-         top: 11px;
-      }
-    }
-  }
-  input[type="email"]{
-    position: relative;
+   input,select {
+     border:0px;
+     border-bottom: 1px solid rgba($gray,0.35);
+     background: none;
+     @include box-shadow(none !important);
+     @include border-radius(0px);
+     color: $pictonBlue;
+     font-weight: $semibold;
+     padding-left: 0px;
+     &:focus {
+       border-bottom-color:  rgba($gray,0.35) !important;
+     }
+   }
+   label{
+     position: relative;
+     width: 100%;
+     .placholder {
+       color: rgba($black,0.7);
+       font-weight: $light;
+       left: 0px;
+       top: 8px;
+       position: absolute;
+       text-transform: uppercase;
+       @include transition(0.2s all);
+       &.active {
+         top: -10px;
+         font-size: 10px;
+       }
+     }
+     &.email_done {
+       position: relative;
+       &:before  {
+          color: $pictonBlue;
+          display: inline-block;
+          font-family: 'Glyphter';
+          font-style: normal;
+          font-weight: normal;
+          line-height: 1;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          position: absolute;
+          right: 5px;
+          top: 11px;
+       }
+     }
+   }
+   input[type="email"]{
+     position: relative;
 
+   }
+   input[type="password"]{
+     color: $gray;
+   }
   }
-  input[type="password"]{
-    color: $gray;
   }
- }

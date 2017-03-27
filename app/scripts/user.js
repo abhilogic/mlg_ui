@@ -41,13 +41,7 @@ angular.module('mlg')
       });
     }
 
-	loginHttpResponse.gradeList=function(){
-		return $http({
-			method:'GET',			
-			url   : urlParams.baseURL+urlParams.gradeList
-		});
-	}
-    
+  
 	loginHttpResponse.isUserlogin=function(){
 		return $http({
 			method:'GET',			
@@ -77,6 +71,119 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.getPaymentBrief
 		});
 	}
+
+	loginHttpResponse.gradeList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.gradeList
+		});
+	}
+
+	loginHttpResponse.packageList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.packageList
+		});
+	}
+
+	loginHttpResponse.planList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.planList
+		});
+	}
+
+	loginHttpResponse.getCourseByGrade=function(grade_id){		
+		return $http({
+			method:'GET',	
+			data : grade_id,		
+			url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+grade_id.id
+		});
+	}
+
+	loginHttpResponse.setChildrenCount=function(ccount){		
+		return $http({
+			method:'POST',	
+			data : ccount,		
+			url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+grade_id.id
+		});
+	}
+
+
+	loginHttpResponse.addChild=function(data){
+		return $http({
+			method:'POST',	
+			data : data,		
+			url  : urlParams.baseURL+urlParams.addChild
+		});
+	}
+
+
+
+	loginHttpResponse.packageList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.packageList
+		});
+	}
+
+	loginHttpResponse.planList=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.planList
+		});
+	}
+
+	loginHttpResponse.getCourseByGrade=function(grade_id){		
+		return $http({
+			method:'GET',	
+			data : grade_id,		
+			url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+grade_id.id
+		});
+	}
+
+	loginHttpResponse.setChildrenCount=function(data){
+		return $http({
+			method:'PUT',
+			url   : urlParams.baseURL+urlParams.setChildrenCount+'/'+data.uid+'/'+data.numofchild
+		});
+	}
+
+	loginHttpResponse.getChildrenCount=function(get_uid){
+		return $http({
+			method:'PUT',
+			url   : urlParams.baseURL+urlParams.getChildrenCount+'/'+get_uid
+		});
+	}
+
+	loginHttpResponse.getAddedChildren=function(pid){
+		return $http({
+			method:'GET',
+			url   : urlParams.baseURL+urlParams.getAddedChildren+'/'+pid
+		});
+	}
+
+	loginHttpResponse.pricecalc=function(course_ids){
+		return $http({
+			method:'POST',	
+			data : course_ids,		
+			url  : urlParams.baseURL+urlParams.priceCalcOnSeclectedCourse
+		});
+	}
+
+
+	loginHttpResponse.addChildRecord=function(childdata){
+		return $http({
+			method:'POST',	
+			data : childdata,		
+			url  : urlParams.baseURL+urlParams.addChild
+		});
+	}
+
+
+	
+
+
     
 	loginHttpResponse.saveCardToPaypal=function(data){
 		return $http({
@@ -107,6 +214,7 @@ angular.module('mlg')
            $scope.msg = response.message;
          } else {
            $rootScope.logged_user = response.user;
+           setCookie('uid', $rootScope.logged_user.id);
            $location.url('select_children');
          }
 	   }).error(function(error) {
@@ -115,7 +223,6 @@ angular.module('mlg')
 	};
 
 	$scope.gohome=function(){
-
 		window.location.href='/mlg_ui/app';
 	}
 
@@ -176,34 +283,243 @@ angular.module('mlg')
     });
   };
 }])
-.controller('addChild',['$rootScope','$scope','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope, loginHttpService,$location,$http,user_roles,$location) {
+
+/* ****************************** */
+.controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','$http','user_roles','$location',function($rootScope,$scope,$filter, loginHttpService,$location,$http,user_roles,$location) {
    //$rootScope.username=$location.search().uid;
-   	 $scope.submitChildrenCount = function() {
-        $http({
-          method  : 'POST',
-          url     : 'add_child_account',
-          data    : $scope.childrencount, //forms user object
-          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
-         })
-          .success(function(data) {           
-             // $scope.message = data.message;
 
-             $scope.PostChildCount = data;
-             $location.path('/add_child_account');
-            
-          });
-        };
+  //  get children count
+   	$scope.number=5;
+   	$scope.counter = Array; 
 
-        $scope.childrencount = ["1", "2", "3"];
+   	//get cookies
+   	function getCookie(cname) {
+	    var name = cname + "=";
+	    var decodedCookie = decodeURIComponent(document.cookie);
+	    var ca = decodedCookie.split(';');
+	    for(var i = 0; i <ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') {
+	            c = c.substring(1);
+	        }
+	        if (c.indexOf(name) == 0) {
+	            return c.substring(name.length, c.length);
+	        }
+	    }
+	    return "";
+	}
+	var get_uid=getCookie('uid'); 
+	//var get_uid=$rootScope.logged_user.id; 
+	
 
-         loginHttpService.gradeList().success(function(response) {
+   	// Call to redirect on add child after child selection
+    $scope.submitChildrenCount = function(childrencount) {
+   		
+   		//call API to save number of children of a parents   			
+   		if (typeof get_uid !="") {   				
+   			data={};
+	   		data.uid = get_uid;
+	   		data.numofchild=childrencount;
+   				
+   			loginHttpService.setChildrenCount(data).success(function(response) {	   			
+	        	if (response.response.status == "True") {
+	           	 	//alert('updated');
+	               	 $location.url('/add_child_account');          		
+	           	}else{
+	           		//alert('No updated');
+	           		$location.url('/add_child_account');
+	           	}
+           				
+        	})
+   		}else{
+   			alert('kindly login');
+      		window.location.href='/mlg_ui/app';
+   		}		
+   		
+    };   
+
+
+    // call API to check number of Childrent
+    if (typeof get_uid !="") {
+	    loginHttpService.getChildrenCount(get_uid).success(function(response) {
+	  		  $rootScope.childrencount = response.response.number_of_children;  
+	  	});
+	}else{
+		alert('kindly login');
+      		window.location.href='/mlg_ui/app';
+	}
+
+
+	 // call API to get grades
+     loginHttpService.gradeList().success(function(response) {
   		  $scope.grades = response.response.Grades;  
-  	  });
+  	});
 
-      $scope.addChildAccount = function() {
-        $location.path('/parent_preferences');
-      }
+    // call API to get packages
+    loginHttpService.packageList().success(function(packrecords) {
+		$scope.packages = packrecords.response.package; 
+	});
+
+    // call API to get plans
+    loginHttpService.planList().success(function(planrecord) {
+		$scope.plans = planrecord.response.plans; 
+	});
+
+    //call API to getCourseList for a level on change of grade
+     $scope.changeCourseList = function(grade_id) {
+	   	loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
+	        if(!courseslistresult.response.courses){  // value is null, empty
+	    	    $scope.msg=courseslistresult.response.message; 
+	        	$scope.records=courseslistresult.response.course_list;        
+	        }else{
+	        	$scope.cousesListByGrade= courseslistresult.response.courses;
+	          	$scope.msg=courseslistresult.response.message;
+	          	$scope.courserecords=courseslistresult.response.course_list; 
+	        }         
+    	})
+    }
+
+
+    //On select of plan
+    $scope.num_months=1;
+    $scope.currency='$';
+		$scope.permonth='/month';
+		$scope.price =0;
+		$scope.dis_amount=0;
+		$scope.subtotal=0;	
+    $scope.onSelectplan = function(dataplan){
+    	$scope.num_months=dataplan.num_months;
+    	//$scope.plan=dataplan.id;
+    }
+
+    // On selection of package
+	$scope.onSelectedPackageDiscount = function(data){
+		$scope.frm.selectedcourse = [];
+		$scope.currency='$';
+		$scope.permonth='/month';
+		$scope.price =0;
+		$scope.dis_amount=0;
+		$scope.subtotal=0;	
+			
+
+		if(data.type=='percent'){	
+			$scope.discount=data.discount+' %';
+						
+			// On selection of course calculate price
+			$scope.onSelectCourse = function(dataa){				
+				loginHttpService.pricecalc(dataa).success(function(courseprice) {
+					$scope.price =courseprice.response.amount; 
+					$scope.dis_amount= courseprice.response.amount*data.discount*0.01;	
+					$scope.subtotal=courseprice.response.amount-courseprice.response.amount*data.discount*0.01;
+				});
+			}
+		}
+
+		if(data.type=='fixed'){
+			$scope.discount=data.discount+' fixed';
+			$scope.onSelectCourse = function(dataa){	
+				console.log(data.discount);	
+				loginHttpService.pricecalc(dataa).success(function(courseprice) {
+					$scope.price =courseprice.response.amount; 
+					$scope.dis_amount= data.discount;
+					if(courseprice.response.amount>0){
+						$scope.subtotal=courseprice.response.amount-data.discount;
+					}else{
+						$scope.subtotal=0;
+					}
+
+				});
+			}
+		}
+
+	/*		
+	    loginHttpService.packageDiscount().success(function(packrecords) {
+			$scope.packages = packrecords.response.package; 
+		});
+		*/
+	}
+
+
+
+/* *************************************************************************** */
+    $scope.submitChildDetails = function(data){   
+
+       
+    //data.selectedcourses = JSON.parse(JSON.stringify(data.selectedcourse));
+      data.selectedcourses = Object.assign({}, data.selectedcourse);
+      $scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
+
+      	var childdata={
+       			username 	: data.first_name,
+       			first_name 	: data.first_name,
+       			last_name 	: data.last_name,
+       			level_id 	: data.levelchoice.id,
+       			dob 	 	: data.dob,
+       			created 	: $scope.today,
+       			emailchoice	: data.emailchoice,
+       			email 	    : data.childemail,
+       			school		: data.school,
+       			parent_id	: get_uid,
+       			role_id		: 4, 
+       			status 		: 1,
+       			//plan_id	: $scope.selectedplan,
+       			//package_id: $scope.selectedPackage,
+       			plan_id		: data.selectedplan,
+       			package_id	: data.selectedPackage,
+       			courses		: data.selectedcourses, 
+
+       	}; 
+
+
+
+       //console.log(childdata); 
+       //how many childeren has been added n
+       	loginHttpService.getAddedChildren(get_uid).success(function(response) {
+			if (typeof response.response.added_children !='undefined') {
+					var added_children =	response.response.added_children;
+					
+					if(added_children!=$rootScope.childrencount){       				       		       		
+		       		//call API to check the number of child has been added
+		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
+						if (response_childadd.response.status == "True") {
+								window.location.href=urlParams.siteRoot+'add_child_account';
+								data={};
+								childdata={};
+
+						}
+			}); 
+       	}
+       	else{
+       		//alert('redirect on preference page');
+       		window.location.href=urlParams.siteRoot+'parent_preferences'; 
+       	}
+
+
+
+
+	}
+		});
+ 		
+	};
+
+	$scope.testsubmitChildDetails = function(data){
+
+		console.log(data);
+		console.log($scope.usr = "usr");
+
+
+		console.log($scope.selectedoption);              
+        $scope.submitCalled = "submit called " + $scope.selectedoption;
+
+        
+       	};
+/* ********************************************************************** */
+
+   
 }])
+
+/** ************************ */
+
 .controller('passwordCtrl',['$scope','loginHttpService','$location','$timeout',function($scope, loginHttpService,$location,$timeout) {
     $scope.form={};	
     $scope.msg='';

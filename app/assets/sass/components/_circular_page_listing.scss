@@ -2,32 +2,10 @@
     counter-reset: child_number;
     text-align: center;
     li {
-      max-width: 122px;
+      max-width: 82px;
       font-weight: $bold;
-      padding: 0px 20px;
-      position: relative;
+      text-transform: capitalize;
       vertical-align: text-top;
-      z-index: 2;
-      &:not(:last-child){
-        &:before {
-          background-color: $pictonBlue;
-          content:'';
-          height: 2px;
-          left: 50%;
-          position: absolute;
-          top: 12px;
-          width: 105%;
-          z-index: -1;
-        }
-      }
-      &:nth-last-child(2){
-        &:before {
-          width: 80%;
-        }
-      }
-      &:not(:first-child){
-        margin-left: -4px;
-      }
       ._serial_num {
         border: 2px solid $pictonBlue;
         @include border-radius(100%);
@@ -40,9 +18,12 @@
         line-height: 15px;
         display: block;
       }
+      &:not(:last-child){
+        margin-right: 40px;
+      }
       &.done {
         color: $pictonBlue;
-        max-width: 80px;
+        max-width: 40px;
         ._serial_num {
           background: $pictonBlue;
           color: $white;
@@ -55,12 +36,8 @@
         }
       }
       &.active {
-        &:before {
-          background-color: $alto;
-        }
         color: $pictonBlue;
         ._serial_num {
-          background-color: $white;
           color: $pictonBlue;
           font-size: 20px;
           height: 37px;
@@ -75,11 +52,7 @@
       }
       &.not_done {
         color: $alto;
-        &:before {
-          background-color: $alto;
-        }
         ._serial_num {
-          background-color: $white;
           border-color: $alto;
           color: $alto;
           height: 30px;
