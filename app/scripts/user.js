@@ -318,7 +318,7 @@ angular.module('mlg')
 	           	 	//alert('updated');
 	               	 $location.url('/add_child_account');          		
 	           	}else{
-	           		alert('No updated');
+	           		//alert('No updated');
 	           		$location.url('/add_child_account');
 	           	}
            				
