@@ -26,43 +26,8 @@
 		<div class="page-content">
 
 			<!-- Main Sidebar -->
-			<aside class="sidebar sidebar-main">
-				<div class="sidebar-user">
-						<div class="category-content">
-							<div class="media" data-toggle="collapse" data-target="#collapseUserOptions">
-									<div class="media-left"><img src="assets/img/placeholder.jpg" class="img-circle img-lg" alt="Andrew Garfield"></div>
-									<div class="media-body media-middle">
-										<span class="media-heading text-semibold">Andrew Garfield <i class="fa fa-angle-down"></i></span>
-									</div>
-							</div>
-						</div>
-						<div class="collapse" id="collapseUserOptions">
-							<div class="category-content">
-								...
-							</div>
-						</div>
-				</div>
-					<ul class="nav sidebar_nav sidebar_nav-main">
-						<li class="active">
-							<a href=""><i class="icon icon-my_class"></i><span class="link__text">Analytics</span></a>
-						</li>
-						<li >
-							<a href=""><i class="icon icon-my_subscriptions"></i><span class="link__text">Offers</span></a>
-						</li>
-						<li >
-							<a href=""><i class="icon icon-my_rewards"></i><span class="link__text">Subscription</span></a>
-						</li>
-						<li >
-							<a href=""><i class="icon icon-my_data"></i><span class="link__text">Redeem</span></a>
-						</li>
-						<li>
-							<a href=""><i class="icon icon-my_settings"></i><span class="link__text">Settings</span></a>
-						</li>
-						<li>
-							<a href="" ng-click="logout()"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
-						</li>
-					</ul>
-			</aside>
+			
+			<aside class="sidebar sidebar-main" ng-include='"include/sidebar.html"'></aside>
 			<!-- /sidebar -->
 
 
