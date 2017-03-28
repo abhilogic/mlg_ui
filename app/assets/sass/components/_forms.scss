@@ -2,10 +2,18 @@
 
 .form-control{
   color: $gray-base;
-  font-size: $font-size-base + 2;
   //height: 36px;
   border-radius: $border-radius-small;
   box-shadow: none;
+  &:not(.input-sm){
+    font-size: $font-size-base + 2;
+  }
+  &.no-border{
+    border-width: 0;
+    &:focus, &:active{
+      box-shadow: none;
+    }
+  }
 }
 .control-label{
   font-weight: $regular;

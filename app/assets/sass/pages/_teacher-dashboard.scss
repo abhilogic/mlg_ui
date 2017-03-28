@@ -2,26 +2,36 @@
 .student_status_legend{
   font-size: 12px;
   margin-top: 10px;
+  text-align: right;
   .fa-circle{
     margin-right: 5px;
     font-size: 11px;
   }
-  .gifted{
-    .fa-circle{color: $color-gifted;}
-  }
-  .outstanding{
-    .fa-circle{color: $color-outstanding;}
-  }
-  .ontarget{
-    .fa-circle{color: $color-ontarget;}
-  }
-  .struggling{
-    .fa-circle{color: $color-struggling;}
-  }
-  .remedial{
-    .fa-circle{color: $color-remedial;}
+}
+.gifted{
+  .fa-circle{color: $color-gifted;}
+}
+.outstanding{
+  .fa-circle{color: $color-outstanding;}
+}
+.ontarget{
+  .fa-circle{color: $color-ontarget;}
+}
+.struggling{
+  .fa-circle{color: $color-struggling;}
+}
+.remedial{
+  .fa-circle{color: $color-remedial;}
+}
+
+.list-filters{
+  .form-control{
+    text-transform: uppercase;
+    color: $gray-light;
+    font-weight: $semibold;
   }
 }
+
 
 .list-thumb{
   list-style: none;
@@ -49,8 +59,8 @@
 
 .student_list{
   li{
-    max-width: 140px;
-    min-width: 140px;
+    max-width: 139px;
+    min-width: 139px;
     @media(max-width:$screen-sm-max ){
       min-width: 131px;
       min-width: 131px;

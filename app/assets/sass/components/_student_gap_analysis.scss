@@ -3,6 +3,7 @@ $analysis-nav-border-color: $gray-lighter;
 
 
 .tabs-analysis{
+  padding-bottom: 0;
   .tab-content{
     vertical-align: top;
     @media (min-width: $screen-sm){
@@ -21,8 +22,11 @@ $analysis-nav-border-color: $gray-lighter;
     text-transform: uppercase;
     font-weight: $bold;
     color: $gray-light;
-    span{
+    span:not(.status){
       color: $gray-dark;
+    }
+    .status{
+      float: right;
     }
   }
 }
@@ -99,4 +103,8 @@ $analysis-nav-border-color: $gray-lighter;
     @include padding(8px null);
     border-radius: 20px;
   }
+}
+
+.analysis-chart-container{
+  @include margin(30px null);
 }

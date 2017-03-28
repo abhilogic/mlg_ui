@@ -10,6 +10,18 @@
       background-color: transparent;
     }
     border-width: 1px;
+    &.btn-danger:not(:hover){
+      color: $brand-danger;
+    }
+    &.btn-success:not(:hover){
+      color: $brand-success;
+    }
+    &.btn-info:not(:hover){
+      color: $brand-info;
+    }
+    &.btn-warning:not(:hover){
+      color: $brand-warning;
+    }
   }
 }
 .btn-rounded{

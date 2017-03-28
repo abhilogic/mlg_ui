@@ -56,6 +56,11 @@
 .content {
     padding: 0 $grid-gutter-width ($line-height-computed * 3) $grid-gutter-width;
 
+    @media(max-width: $screen-xs-max){
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
     // Clear floats
     &:after {
         content: '';

@@ -1,0 +1,85 @@
+.panel-student-profile{
+  .panel-title{
+    text-transform: uppercase;
+    .select-subject{
+      float: right;
+      display: inline-block;
+      width: auto;
+      text-transform: uppercase;
+    }
+  }
+
+  .tabs-analysis{
+    background-color: #f5f8fb;
+  }
+}
+
+.student-profile{
+  .media-left{
+    @include padding(null 20px);
+  }
+  .status{
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+    color: $gray-light;
+    font-size: 12px;
+  }
+  .student-name{
+    font-weight: $bold;
+    color: $gray-dark;
+    margin-bottom: 15px;
+    margin-top: 0;
+    .class{
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: $gray-dark;
+    }
+  }
+  .time-spent{
+    @include margin(20px null);
+    font-weight: $semibold;
+    color: lighten($gray-light, 15%);
+
+    .time-value{
+      font-size: 22px;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: $semibold;
+      color: $gray-light;
+      i{
+        color: $brand-danger;
+      }
+    }
+  }
+}
+
+.container-progress-chart{
+  @include margin(null null 20px null);
+}
+
+.student-progress-allover{
+
+}
+
+
+
+#subjectAccordion .panel-heading { padding: 0;}
+#subjectAccordion .panel-title > a {
+	display: block;
+	padding: 0.4em 0.6em;
+    outline: none;
+    font-weight:bold;
+    text-decoration: none;
+}
+
+#subjectAccordion .panel-title > a.accordion-toggle::before, #subjectAccordion a[data-toggle="collapse"]::before  {
+    content:"\e113";
+    float: left;
+    font-family: 'Glyphicons Halflings';
+	margin-right :1em;
+}
+#subjectAccordion .panel-title > a.accordion-toggle.collapsed::before, #subjectAccordion a.collapsed[data-toggle="collapse"]::before  {
+    content:"\e114";
+}

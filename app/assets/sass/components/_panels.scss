@@ -8,11 +8,18 @@
     .panel-heading{
       position: relative;
       @include padding($content-padding-base $content-padding-large);
+      @media(max-width: $screen-xs){
+        @include padding($content-padding-base $content-padding-base);
+      }
       &::before{
         content: '';
         height: 1px;
         background-color: $gray-lighter;
         @include position(absolute, null $content-padding-large 0 $content-padding-large);
+        @media(max-width: $screen-xs-max){
+          left: $content-padding-base;
+          right: $content-padding-base;
+        }
       }
     }
 
@@ -28,11 +35,18 @@
       border: 0;
       position: relative;
       @include padding($content-padding-base $content-padding-large);
+      @media(max-width: $screen-xs){
+        @include padding($content-padding-base $content-padding-base);
+      }
       &::before{
         content: '';
         height: 1px;
         background-color: $gray-lighter;
         @include position(absolute, 0 $content-padding-large null $content-padding-large);
+        @media(max-width: $screen-xs-max){
+          left: $content-padding-base;
+          right: $content-padding-base;
+        }
       }
     }
 
