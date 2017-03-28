@@ -1,3 +1,4 @@
+ kkk{{remainchild}}
   <!-- Page container -->
   <div class="page-container">
 
@@ -16,12 +17,21 @@
             <div class="panel-body">
               <!-- Steps -->                
               <div class="steps-container">             
-                <ul class="steps">                  
+                  <ul class="steps" ng-if="childname===null">                  
                         <li class="" ng-repeat="a in counter(childrencount) track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">Child Account</span></li>
                          <li class=""><span class="_serial_num"></span><span class="__text">Preferences</span></li>
                         <li class=""><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
                         <li class=""><span class="_serial_num"></span><span class="__text">Payment</span></li>
-                      </ul>
+                  </ul>
+
+
+                  <ul class="steps" ng-if="childname!=null">                  
+                        <li class="completed" ng-repeat="cname in childname track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">{{cname}}</span></li>
+                        <li class="" ng-repeat="cname in counter(remainchildAccount) track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">Add Child</span></li>
+                         <li class=""><span class="_serial_num"></span><span class="__text">Preferences</span></li>
+                        <li class=""><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
+                        <li class=""><span class="_serial_num"></span><span class="__text">Payment</span></li>
+                  </ul>
               </div>
 
               <form name="childform" class="form-login">

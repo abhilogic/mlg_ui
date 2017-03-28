@@ -156,12 +156,21 @@ angular.module('mlg')
 		});
 	}
 
+
 	loginHttpResponse.getAddedChildren=function(pid){
 		return $http({
 			method:'GET',
 			url   : urlParams.baseURL+urlParams.getAddedChildren+'/'+pid
 		});
 	}
+
+	loginHttpResponse.getChildrenDetails=function(pid){
+		return $http({
+			method:'GET',
+			url   : urlParams.baseURL+urlParams.getChildrenDetails+'/'+pid
+		});
+	}
+
 
 	loginHttpResponse.pricecalc=function(course_ids){
 		return $http({
@@ -365,6 +374,18 @@ angular.module('mlg')
 		$scope.plans = planrecord.response.plans; 
 	});
 
+	//call API to get added chidren name of a parent
+	loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+		$scope.childname = chidrenName.response.children_name; 
+	});
+
+	loginHttpService.getAddedChildren(get_uid).success(function(response) {
+			$scope.remainchildAccount=$rootScope.childrencount-response.response.added_children;
+
+		})
+
+
+
     //call API to getCourseList for a level on change of grade
      $scope.changeCourseList = function(grade_id) {
 	   	loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
@@ -387,10 +408,11 @@ angular.module('mlg')
 		$scope.price =0;
 		$scope.dis_amount=0;
 		$scope.subtotal=0;	
-    $scope.onSelectplan = function(dataplan){
-    	$scope.num_months=dataplan.num_months;
+   		
+   		$scope.onSelectplan = function(dataplan){
+    		$scope.num_months=dataplan.num_months;
     	//$scope.plan=dataplan.id;
-    }
+    	}
 
     // On selection of package
 	$scope.onSelectedPackageDiscount = function(data){
@@ -449,7 +471,8 @@ angular.module('mlg')
       data.selectedcourses = Object.assign({}, data.selectedcourse);
       $scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
 
-      	var childdata={
+      	var childdata={};
+      	 childdata={
        			username 	: data.first_name,
        			first_name 	: data.first_name,
        			last_name 	: data.last_name,
@@ -476,14 +499,16 @@ angular.module('mlg')
        //how many childeren has been added n
        	loginHttpService.getAddedChildren(get_uid).success(function(response) {
 			if (typeof response.response.added_children !='undefined') {
-					var added_children =	response.response.added_children;
+					var added_children =	response.response.added_children;					
 					
 					if(added_children!=$rootScope.childrencount){       				       		       		
 		       		//call API to check the number of child has been added
 		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
 						if (response_childadd.response.status == "True") {
-								data={};
-								childdata={};
+									/*data={};
+									childdata={};*/
+									//$scope.childform.$setPristine();
+                					//$scope.childform.$setUntouched();
 								window.location.href=urlParams.siteRoot+'add_child_account';
 
 
