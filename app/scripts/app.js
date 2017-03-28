@@ -95,6 +95,12 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/test', {
 		templateUrl : 'views/test.html',
 		controller : 'addChild',
+	}).when('/parent/dashboard/offers', {
+		templateUrl : 'views/dashboard/parent-offers.html',
+		controller : 'parentDashboardCtrl',
+	}).when('/parent/dashboard/redeem',{
+		templateUrl : 'views/dashboard/parent-redeem.html',
+		controller : 'parentDashboardCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});
