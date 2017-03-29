@@ -1,5 +1,4 @@
- kkk{{remainchild}}
-  <!-- Page container -->
+   <!-- Page container -->
   <div class="page-container">
 
     <!-- Page content -->
@@ -26,7 +25,7 @@
 
 
                   <ul class="steps" ng-if="childname!=null">                  
-                        <li class="completed" ng-repeat="cname in childname track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">{{cname}}</span></li>
+                        <li class="completed" ng-repeat="cname in childname track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">{{cname.children_name}}</span></li>
                         <li class="" ng-repeat="cname in counter(remainchildAccount) track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">Add Child</span></li>
                          <li class=""><span class="_serial_num"></span><span class="__text">Preferences</span></li>
                         <li class=""><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
@@ -104,6 +103,13 @@
                         <input type="text" class="form-control float-input" id="inputEmail" aria-describedby="inputEmailSuccessStatus" value="hello@mlg.com" ng-model="frm.childemail" required>
                         <div class="form-control-feedback"><i class="icon icon-check"></i></div>
                       </div>
+
+                      <div class="form-group float-label has-success has-feedback">
+                        <label class="control-label">UserName (Required to login to your child)</label>
+                        <input type="text" class="form-control float-input" id="inputEmail" value="" ng-model="frm.user_name" required>
+                        <div class="form-control-feedback"><i class="icon icon-check"></i></div>
+                      </div>
+
 
             <div class="form-group">
               <label class="control-label text-uppercase"><b>Select subject package type</b></label>

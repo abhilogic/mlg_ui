@@ -21,7 +21,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	getChildrenCount :'/users/getCountOfChildrenOfParent',
 	getAddedChildren :'/users/getChildrenListOfParent',	
 	priceCalcOnSeclectedCourse :'/users/priceCalOnCourse',
-	addChild : '/users/addChildren',
+	getChildrenDetails :'/users/getChildrenDetails',
+	addChildRecord : '/users/addChildrenRecord',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
