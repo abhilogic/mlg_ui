@@ -495,7 +495,7 @@ angular.module('mlg')
 
       	var childdata={};
       	 childdata={
-       			//username 	: data.user_name,
+       			username 	: data.user_name,
        			first_name 	: data.first_name,
        			last_name 	: data.last_name,
        			level_id 	: data.levelchoice.id,
@@ -528,17 +528,11 @@ angular.module('mlg')
 		       		//call API to check the number of child has been added
 		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
 		       		
-						if (response_childadd.response.status == "True") {
-									/*data={};
-									childdata={};*/
-									//$scope.childform.$setPristine();
-                					//$scope.childform.$setUntouched();
-								//window.location.href=urlParams.siteRoot+'add_child_account';
-								//window.location.reload();\
-
-								alert('kk');
-
-
+						if (response_childadd.response.status == "True") {									
+								window.location.href=urlParams.siteRoot+'add_child_account';
+								//window.location.reload();
+						}else{
+							response_childadd.response.message;
 						}
 			}); 
        	}
