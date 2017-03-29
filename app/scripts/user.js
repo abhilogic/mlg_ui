@@ -261,6 +261,29 @@ angular.module('mlg')
 .controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams', function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams) {
   $scope.frm = {}
 
+//user id
+//get cookies
+   	function getCookie(cname) {
+	    var name = cname + "=";
+	    var decodedCookie = decodeURIComponent(document.cookie);
+	    var ca = decodedCookie.split(';');
+	    for(var i = 0; i <ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') {
+	            c = c.substring(1);
+	        }
+	        if (c.indexOf(name) == 0) {
+	            return c.substring(name.length, c.length);
+	        }
+	    }
+	    return "";
+	}
+	var get_uid=getCookie('uid'); 
+
+
+// end- user id
+
+
   $rootScope.username=$location.search().uid;
   if (typeof $routeParams.id != 'undefined') {
     loginHttpService.setStatusActive($routeParams).success(function(response) {
@@ -273,11 +296,12 @@ angular.module('mlg')
   }
 
   $scope.setPreference = function(data) {
-    if (typeof $rootScope.logged_user == 'undefined') {
+    /*if (typeof $rootScope.logged_user == 'undefined') {
       alert('kindly login');
       window.location.href='/mlg_ui/app';
-    }
-    data.user_id = $rootScope.logged_user.id;
+    }*/
+   // data.user_id = $rootScope.logged_user.id;
+   data.user_id = get_uid;
     loginHttpService.setPreference(data).success(function(response) {
       if (response.status == true) {
         if ((typeof response.warning != 'undefined') && (response.warning == true)) {
@@ -638,15 +662,40 @@ angular.module('mlg')
     $scope.children = {};
     $scope.total_amount = 0;
     console.log($rootScope.logged_user);
-    if (typeof $rootScope.logged_user != 'undefined') {
-      data = {user_id : $rootScope.logged_user.id};
+//user id
+//get cookies
+   	function getCookie(cname) {
+	    var name = cname + "=";
+	    var decodedCookie = decodeURIComponent(document.cookie);
+	    var ca = decodedCookie.split(';');
+	    for(var i = 0; i <ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) == ' ') {
+	            c = c.substring(1);
+	        }
+	        if (c.indexOf(name) == 0) {
+	            return c.substring(name.length, c.length);
+	        }
+	    }
+	    return "";
+	}
+	var get_uid=getCookie('uid'); 
+
+
+// end- user id
+
+
+    
+    //if (typeof $rootScope.logged_user != 'undefined') {
+     // data = {user_id : $rootScope.logged_user.id};
+     data = {user_id : get_uid};
       loginHttpService.getPaymentBrief(data).success(function(response) {
         if (response.status) {
           $scope.children = response.data;
           $scope.total_amount = response.total_amount;
         }
       });
-    }
+    //}
 
     $scope.frm = {};
     $scope.card_months = card_months;
