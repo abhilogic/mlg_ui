@@ -23,6 +23,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	priceCalcOnSeclectedCourse :'/users/priceCalOnCourse',
 	getChildrenDetails :'/users/getChildrenDetails',
 	addChildRecord : '/users/addChildrenRecord',
+	addChild : '/users/addChildren',
+	offerRecords: '/users/getOffers',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -98,7 +100,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		controller : 'addChild',
 	}).when('/parent/dashboard/offers', {
 		templateUrl : 'views/dashboard/parent-offers.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'parentOffers',
 	}).when('/parent/dashboard/redeem',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
 		controller : 'parentDashboardCtrl',
@@ -149,3 +151,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	// };
 
 } ]);
+
+
+/*app.controller('PageCtrl', function () {
+	
+});*/

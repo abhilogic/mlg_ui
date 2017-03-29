@@ -36,6 +36,9 @@
 	<link rel="stylesheet" href="../assets/css/style.css" >
 </head>
 <body>
+	
+	<div ng-controller="parentOffers">
+	
 	<!-- Main navbar -->
 	<nav class="navbar navbar-default navbar-dashboard navbar-static-top">
 		<div class="navbar-header">
@@ -49,7 +52,7 @@
 		</div>
 		<div class="search_form">
 			<div class="form-group has-feedback has-feedback-left">
-				<input type="search" class="form-control" placeholder="Type here to search...">
+				<input ng-model="search" type="search" class="form-control" placeholder="Type here to search...">
 				<div class="form-control-feedback"><i class="fa fa-search"></i><span class="sr-only">Search</span></div>
 			</div>
 		</div>
@@ -99,19 +102,20 @@
 
 					<!-- Areas of Focus Panel  -->
 					<div class="row offers-list">
-						<div class="col-sm-6 col-md-4 offer-item">
+										
+						<div class="col-sm-6 col-md-4 offer-item" ng-repeat="offer in offers | filter:search | orderBy:'-name'">
 							<div class="thumbnail offer-thumbnail">
-									<span class="new-offer">New</span>
-									<div class="thumb-img">
-										<img class="img-responsive offer-img" src="assets/img/amazon-logo.png" alt="Get coupen worth $12 for 200points">
-									</div>
-									<div class="caption">
-										<h4 class="offer-text">Get 50% extra points on completeting 7 challanges.</h4>
-										<p class="offer-time-remain">Time Remaining: <span>1 day 23 hrs</span></p>
-									</div>
+								<span class="new-offer">New</span>
+								<div class="thumb-img">
+									<img class="img-responsive offer-img" ng-src="views/offerimg/{{offer.image}}" alt="Get coupen worth $12 for 200points">
+								</div>
+								<div class="caption">
+									<h4 class="offer-text">{{offer.description}}</h4>
+									<p class="offer-time-remain">Time Remaining: <span>{{offer.validity}}</span></p>
+								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-4 offer-item">
+						<!--<div class="col-sm-6 col-md-4 offer-item">
 							<div class="thumbnail offer-thumbnail">
 									<div class="offer-price">
 										<h4 class="old-price"><sup>$</sup><b>120</b><small>/qu</small></h4>
@@ -145,7 +149,7 @@
 									</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 					<!-- /student gap analysis panel  -->
 
 				</div>
@@ -159,6 +163,8 @@
 
 	</div>
 	<!-- page container -->
+	
+	</div><!--End of parentOffers--->
 
 	<!-- Latest compiled and minified jQuery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

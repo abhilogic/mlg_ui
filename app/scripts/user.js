@@ -188,6 +188,16 @@ angular.module('mlg')
 			url  : urlParams.baseURL+urlParams.addChildRecord
 		});
 	}
+	
+	
+	//offers
+	loginHttpResponse.offerRecords=function(){
+		return $http({
+			method:'GET',	
+			//data : childdata,		
+			url  : urlParams.baseURL+urlParams.offerRecords
+		});
+	}
 
 
 	
@@ -713,4 +723,31 @@ angular.module('mlg')
         }
       });
     };
+}])
+
+
+/* *************************************************************** */
+.controller('parentOffers',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+//$scope.abc=function(){}
+	loginHttpService.offerRecords().success(function(response) {
+       console.log(response);
+	   $scope.offers = response.response;
+	   //$scope.img_root=siteRoot+'/views/offerimg';
+      });
+	  
+}])
+.run(['$rootScope',function($rootScope){
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+      console.log(toState);
+      $rootScope.home = (toState.name == 'parent/dashboard');
+  });
 }]);
+
+/*.run(['$location', '$rootScope', function($location, $rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+        $rootScope.home = (toState.name == 'mlg.home');
+    });
+}]);*/
+
+
+
