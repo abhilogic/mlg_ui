@@ -290,8 +290,7 @@ angular.module('mlg')
            setCookie('uid', $rootScope.logged_user.id);
           // $location.url('select_children');
           if (user_type == 'teacher') {
-            alert('Successfully logged in');
-            return true;
+            $location.url('teacher/create_account');
           }
             // To Redirect User on his account last step page.
              // call API to get last step track             

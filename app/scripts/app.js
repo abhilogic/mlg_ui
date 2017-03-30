@@ -111,6 +111,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/parent/dashboard/redeem',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
 		controller : 'parentDashboardCtrl',
+	}).when('/teacher/create_account',{
+		templateUrl : 'views/account-teacher.html',
+		controller : 'parentDashboardCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});
