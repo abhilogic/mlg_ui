@@ -13,6 +13,7 @@
 	<!-- Bootstrap and core app CSS -->
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css" >
+	<link rel="stylesheet" href="custom.css">
 
 
 
@@ -68,7 +69,7 @@
 
 
 </head>
-<body class="page-onboarding onboarding-cover" ng-class="{'my-home-class':$root.home}">  
+<body class="page-onboarding {{this_route()}}onboarding-cover" ng-cloak ng-controller="TopController" >  
 	
 		<ng-view> </ng-view>		
 </body>

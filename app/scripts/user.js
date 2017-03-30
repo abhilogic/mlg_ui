@@ -735,12 +735,6 @@ angular.module('mlg')
 	   //$scope.img_root=siteRoot+'/views/offerimg';
       });
 	  
-}])
-.run(['$rootScope',function($rootScope){
-  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-      console.log(toState);
-      $rootScope.home = (toState.name == 'parent/dashboard');
-  });
 }]);
 
 /*.run(['$location', '$rootScope', function($location, $rootScope) {

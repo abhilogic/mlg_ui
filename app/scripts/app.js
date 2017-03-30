@@ -125,7 +125,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	   }).error(function(error) {
 		  $rootScope.logged_user = '';
 	   });
-
+		
+		/*$rootScope.$on("$routeChangeSuccess", function(event, next, current) {
+			$scope.atHome = ($location.path() === "parent/dashboard/offers");
+		});*/
+		/*$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+		  $rootScope.atHome = (toState.name == '/parent/dashboard');
+		});*/
+		  
+		
 	   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
@@ -150,7 +158,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 
 	// };
 
-} ]);
+} ])
+.controller("TopController", function($rootScope, $scope, $location) {
+  $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
+    //$scope.atHome = ($location.path() === "/");
+	$scope.this_route = function(){
+         return $location.path().replace('/', '');
+    };
+  });
+});
 
 
 /*app.controller('PageCtrl', function () {
