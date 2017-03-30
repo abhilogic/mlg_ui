@@ -1,4 +1,5 @@
-.signinonboarding-cover, .parent_signuponboarding-cover, .parent_loginonboarding-cover, .select_childrenonboarding-cover {
+.signinonboarding-cover, .parent_signuponboarding-cover, .parent_loginonboarding-cover, .select_childrenonboarding-cover,
+.add_child_accountonboarding-cover, .parent_preferencesonboarding-cover, .payment_pageonboarding-cover {
   background-color: #333333;
   background-position: top center;
   background-repeat: no-repeat;
@@ -8,4 +9,6 @@
 }
 
 .signinonboarding-cover .content-wrapper, .parent_signuponboarding-cover .content-wrapper,
-.parent_loginonboarding-cover .content-wrapper, .select_childrenonboarding-cover .content-wrapper{background: transparent !important;}
+.parent_loginonboarding-cover .content-wrapper, .select_childrenonboarding-cover .content-wrapper,
+.add_child_accountonboarding-cover .content-wrapper, .parent_preferencesonboarding-cover .content-wrapper,
+.payment_pageonboarding-cover .content-wrapper{background: transparent !important;}
