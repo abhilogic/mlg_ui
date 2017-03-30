@@ -577,7 +577,7 @@ angular.module('mlg')
 			if (typeof response.response.added_children !='undefined') {
 					var added_children =response.response.added_children;					
 					
-					if(added_children==$rootScope.childrencount){       				       		       		
+					if( (added_children==$rootScope.childrencount) && (added_children>0 ) ){       				       		       		
 		     			window.location.href=urlParams.siteRoot+'parent_preferences'; 
        				}
        			}
