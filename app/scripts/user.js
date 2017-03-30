@@ -293,11 +293,21 @@ angular.module('mlg')
     		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
     			if(stepNum.response.step.step_completed!=null ){    				
     				//var step_page = stepNum.response.step.step_completed; 
-					if(stepNum.response.step.step_completed===0 ){ $location.url('select_children'); }
-					else if(stepNum.response.step.step_completed===1){ $location.url('add_child_account'); }
-					else if(stepNum.response.step.step_completed===2){ $location.url('parent_preferences'); }
-					else if(stepNum.response.step.step_completed===3){ $location.url('payment_page'); }
-					else if(stepNum.response.step.step_completed===4){ $location.url('parent/dashboard'); }				
+					if(stepNum.response.step.step_completed==0 ){ 
+						$location.url('select_children'); 
+					}
+					else if(stepNum.response.step.step_completed==1){
+					 $location.url('add_child_account');
+					  }
+					else if(stepNum.response.step.step_completed==2){
+					 $location.url('parent_preferences');
+					  }
+					else if(stepNum.response.step.step_completed==3){ 
+						$location.url('payment_page'); 
+					}
+					else if(stepNum.response.step.step_completed==4){
+					 $location.url('parent/dashboard');
+					 }				
 	   			}
 			});
 
