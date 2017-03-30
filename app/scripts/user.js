@@ -297,8 +297,7 @@ angular.module('mlg')
 					else if(stepNum.response.step.step_completed===1){ $location.url('add_child_account'); }
 					else if(stepNum.response.step.step_completed===2){ $location.url('parent_preferences'); }
 					else if(stepNum.response.step.step_completed===3){ $location.url('payment_page'); }
-					else if(stepNum.response.step.step_completed===4){ $location.url('parent/dashboard'); }
-				
+					else if(stepNum.response.step.step_completed===4){ $location.url('parent/dashboard'); }				
 	   			}
 			});
 
