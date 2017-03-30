@@ -632,8 +632,8 @@ angular.module('mlg')
 		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
 		       		
 						if (response_childadd.response.status == "True") {									
-								window.location.href=urlParams.siteRoot+'add_child_account';
-								//window.location.reload();
+								//window.location.href=urlParams.siteRoot+'add_child_account';
+								window.location.reload();
 						}else{
 							response_childadd.response.message;
 						}
