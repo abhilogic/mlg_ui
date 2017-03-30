@@ -25,6 +25,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	addChildRecord : '/users/addChildrenRecord',
 	addChild : '/users/addChildren',
 	offerRecords: '/users/getOffers',
+	getStepNum 	   :'/users/getStepNum', 
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -113,7 +114,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
     loginHttpService.isUserlogin().success(function(response) {
@@ -142,6 +143,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 			  $rootScope.logged_user = '';
 		   });
 		}
+
+
+
+		 $rootScope.$on('$viewContentLoaded', function() {
+      $templateCache.removeAll();
+   });
+
+
+
 	// $rootScope.logout = function() {
 	// 	// api call for logout
 	// 	$http({

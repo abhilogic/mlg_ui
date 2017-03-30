@@ -199,11 +199,7 @@ angular.module('mlg')
 		});
 	}
 
-
-	
-
-
-    
+  
 	loginHttpResponse.saveCardToPaypal=function(data){
 		return $http({
 			method:'POST',
@@ -211,10 +207,66 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.saveCardToPaypal
 		});
 	}
+
+	loginHttpResponse.getStepNum=function(pid){
+		return $http({
+			method:'GET',
+			url   : urlParams.baseURL+urlParams.getStepNum+'/'+pid
+		});
+	}
     
 	return loginHttpResponse;
 	
 }])
+.factory('commonActions',['$http','urlParams','loginHttpService',function($http,urlParams,loginHttpService){
+//.factory('commonActions',['$rootScope','$scope','loginHttpService','$location' function($rootScope, $scope,loginHttpService,$location) {
+		var commonActions={};
+		var counter = Array; 
+
+
+		// get cookies
+		function getCookie(cname) {
+		    var name = cname + "=";
+	    	var decodedCookie = decodeURIComponent(document.cookie);
+	    	var ca = decodedCookie.split(';');
+	    	for(var i = 0; i <ca.length; i++) {
+	        	var c = ca[i];
+	        	while (c.charAt(0) == ' ') {
+	            	c = c.substring(1);
+	        	}
+	        	if (c.indexOf(name) == 0) {
+	            	return c.substring(name.length, c.length);
+	        	}
+	    	}
+	    	return "";
+		}
+
+		// To get user id that is set at time of login in cookie
+		commonActions.getcookies=function(uid){
+				var get_uid=getCookie('uid');
+				return get_uid;
+		}
+
+		
+
+		// To find number of children
+		commonActions.chidrenNameFactory = function (get_uid) {
+			
+				var childname= loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+					var childcount=chidrenName.response.length;
+						console.log(chidrenName);
+						if(childcount>0){
+								//$rootScope.childname 	= chidrenName.response;													
+								return  chidrenName.response;
+						}						
+				});
+
+				return childname;
+		}
+
+		return commonActions;
+	}])
+
 .controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles',function($rootScope,$scope, loginHttpService,$location,user_roles) {
     $scope.form={};	
     $scope.msg='';
@@ -234,11 +286,30 @@ angular.module('mlg')
          } else {
            $rootScope.logged_user = response.user;
            setCookie('uid', $rootScope.logged_user.id);
-           $location.url('select_children');
+          // $location.url('select_children');
+
+            // To Redirect User on his account last step page.
+             // call API to get last step track             
+    		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
+    			if(stepNum.response.step.step_completed!=null ){    				
+    				//var step_page = stepNum.response.step.step_completed; 
+					if(stepNum.response.step.step_completed===0 ){ $location.url('select_children'); }
+					else if(stepNum.response.step.step_completed===1){ $location.url('add_child_account'); }
+					else if(stepNum.response.step.step_completed===2){ $location.url('parent_preferences'); }
+					else if(stepNum.response.step.step_completed===3){ $location.url('payment_page'); }
+					else if(stepNum.response.step.step_completed===4){ $location.url('parent/dashboard'); }				
+	   			}
+			});
+
          }
 	   }).error(function(error) {
 		  $scope.msg="Invalid Username Password";
 	   });
+
+
+	  
+
+
 	};
 
 	$scope.gohome=function(){
@@ -268,30 +339,28 @@ angular.module('mlg')
 	};
 
 }])
-.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams', function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams) {
+.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
   $scope.frm = {}
+  $scope.childname={};
 
-//user id
-//get cookies
-   	function getCookie(cname) {
-	    var name = cname + "=";
-	    var decodedCookie = decodeURIComponent(document.cookie);
-	    var ca = decodedCookie.split(';');
-	    for(var i = 0; i <ca.length; i++) {
-	        var c = ca[i];
-	        while (c.charAt(0) == ' ') {
-	            c = c.substring(1);
-	        }
-	        if (c.indexOf(name) == 0) {
-	            return c.substring(name.length, c.length);
-	        }
-	    }
-	    return "";
-	}
-	var get_uid=getCookie('uid'); 
+  //alert(commonActions.getcookies(get_uid));
+  var get_uid=commonActions.getcookies(get_uid);
+  //alert(commonActions.chidrenNameFactory(get_uid));
 
 
-// end- user id
+	// To call dynamic step slider
+		loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+			var childcount=chidrenName.response.length;
+			console.log(chidrenName);
+			if(childcount>0){
+				//$rootScope.childname 	= chidrenName.response;													
+					$scope.childname=chidrenName.response;
+			}else{
+				$scope.childname=0;;
+			}
+			
+		});
+	// end to call dynamic step slider
 
 
   $rootScope.username=$location.search().uid;
@@ -411,7 +480,7 @@ angular.module('mlg')
 	//call API to get added chidren name of a parent
 	loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
 		var childcount=chidrenName.response.length;
-		console.log(chidrenName);
+		//console.log(chidrenName);
 		if(childcount>0){
 			$rootScope.childname = chidrenName.response;
 		}
@@ -480,7 +549,7 @@ angular.module('mlg')
 		if(data.type=='fixed'){
 			$scope.discount=data.discount+' fixed';
 			$scope.onSelectCourse = function(dataa){	
-				console.log(data.discount);	
+				//console.log(data.discount);	
 				loginHttpService.pricecalc(dataa).success(function(courseprice) {
 					$scope.price =courseprice.response.amount; 
 					$scope.dis_amount= data.discount;
@@ -508,7 +577,7 @@ angular.module('mlg')
 			if (typeof response.response.added_children !='undefined') {
 					var added_children =response.response.added_children;					
 					
-					if(added_children==$rootScope.childrencount){       				       		       		
+					if( (added_children==$rootScope.childrencount) && (added_children>0 ) ){       				       		       		
 		     			window.location.href=urlParams.siteRoot+'parent_preferences'; 
        				}
        			}
@@ -563,8 +632,8 @@ angular.module('mlg')
 		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
 		       		
 						if (response_childadd.response.status == "True") {									
-								window.location.href=urlParams.siteRoot+'add_child_account';
-								//window.location.reload();
+								//window.location.href=urlParams.siteRoot+'add_child_account';
+								window.location.reload();
 						}else{
 							response_childadd.response.message;
 						}
@@ -657,42 +726,54 @@ angular.module('mlg')
 			});
 	};	
 }])
-.controller('termsAndConditionsCtrl',['$scope', 'loginHttpService','$location','$timeout', function($scope, loginHttpService,$location,$timeout) {
+.controller('termsAndConditionsCtrl',['$scope', 'loginHttpService','commonActions','$location','$timeout', function($scope, loginHttpService,commonActions,$location,$timeout) {
 //    $scope.pagehtml = '';
 //    loginHttpService.getPaymentBrief(data).success(function(response) {
 //      $scope.pagehtml = response.data;
 //    });
+
+	// To call dynamic step slider
+	var get_uid=commonActions.getcookies(get_uid);
+	loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+			var childcount=chidrenName.response.length;
+			console.log(chidrenName);
+			if(childcount>0){
+				//$rootScope.childname 	= chidrenName.response;													
+					$scope.childname=chidrenName.response;
+			}else{
+				$scope.childname=0;;
+			}
+			
+		});
+	// end to call dynamic step slider
+
+
     $scope.termsAndConditions = function () {
       $location.url('/payment_page');
     }
 
 }])
-.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','$location','card_months', 'card_years',
-  function($scope, $rootScope, loginHttpService,$location, card_months, card_years) {
+.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','commonActions','$location','card_months', 'card_years',
+  function($scope, $rootScope, loginHttpService,commonActions,$location, card_months, card_years) {
     $scope.children = {};
     $scope.total_amount = 0;
     console.log($rootScope.logged_user);
-//user id
-//get cookies
-   	function getCookie(cname) {
-	    var name = cname + "=";
-	    var decodedCookie = decodeURIComponent(document.cookie);
-	    var ca = decodedCookie.split(';');
-	    for(var i = 0; i <ca.length; i++) {
-	        var c = ca[i];
-	        while (c.charAt(0) == ' ') {
-	            c = c.substring(1);
-	        }
-	        if (c.indexOf(name) == 0) {
-	            return c.substring(name.length, c.length);
-	        }
-	    }
-	    return "";
-	}
-	var get_uid=getCookie('uid'); 
 
+	// To call dynamic step slider
+		var get_uid=commonActions.getcookies(get_uid);
+		loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+				var childcount=chidrenName.response.length;
+				console.log(chidrenName);
+				if(childcount>0){
+					//$rootScope.childname 	= chidrenName.response;													
+						$scope.childname=chidrenName.response;
+				}else{
+					$scope.childname=0;;
+				}
+				
+			});
+		// end to call dynamic step slider
 
-// end- user id
 
 
     
