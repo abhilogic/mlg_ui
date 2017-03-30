@@ -114,7 +114,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope, $location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
     loginHttpService.isUserlogin().success(function(response) {
@@ -135,6 +135,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 			  $rootScope.logged_user = '';
 		   });
 		}
+
+
+
+		 $rootScope.$on('$viewContentLoaded', function() {
+      $templateCache.removeAll();
+   });
+
+
+
 	// $rootScope.logout = function() {
 	// 	// api call for logout
 	// 	$http({
