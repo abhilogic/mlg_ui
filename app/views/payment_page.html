@@ -13,15 +13,13 @@
           <div class="panel-body">
             <!-- Steps -->
             <div class="steps-container">
-              <ul class="steps">
-                <li class="completed"><span>Melissa Gordon</span></li>
-                <li class="completed"><span>James Gordon</span></li>
-                <li class="completed"><span>Jimmy Gordon</span></li>
-                <li class="completed"><span>Child Account</span></li>
-                <li class="completed"><span>Preferences</span></li>
-                <li class="completed"><span>Terms & Conditions</span></li>
-                <li class="active"><span>Payment</span></li>
-              </ul>
+                    <ul class="steps" ng-if="childname!=null">                  
+                        <li class="completed" ng-repeat="cname in childname track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">{{cname.children_name}}</span></li>
+                        <li class="" ng-repeat="cname in counter(remainchildAccount) track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">Add Child</span></li>
+                         <li class="completed"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
+                        <li class="completed"><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
+                        <li class="completed"><span class="_serial_num"></span><span class="__text">Payment</span></li>
+                  </ul> 
             </div>
 
             <div class="row as-table">
