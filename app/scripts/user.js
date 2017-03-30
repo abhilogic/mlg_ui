@@ -279,7 +279,9 @@ angular.module('mlg')
 		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
 		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
 	}
-	 $scope.login = function(data) {
+	 $scope.login = function(data, user_type) {
+       var role_id = user_roles[user_type];
+       data.role_id= role_id;
 	   loginHttpService.login(data).success(function(response) {
          if (response.status=='false') {
            $scope.msg = response.message;
@@ -287,7 +289,10 @@ angular.module('mlg')
            $rootScope.logged_user = response.user;
            setCookie('uid', $rootScope.logged_user.id);
           // $location.url('select_children');
-
+          if (user_type == 'teacher') {
+            alert('Successfully logged in');
+            return true;
+          }
             // To Redirect User on his account last step page.
              // call API to get last step track             
     		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
@@ -371,15 +376,6 @@ angular.module('mlg')
 
 
   $rootScope.username=$location.search().uid;
-  if (typeof $routeParams.id != 'undefined') {
-    loginHttpService.setStatusActive($routeParams).success(function(response) {
-      if (response.status == false) {
-        alert('Some error occured, kindly refresh the page');
-      }
-    }).error(function() {
-      alert('Unable to activate account, contact to the administrator');
-    });
-  }
 
   $scope.setPreference = function(data) {
     /*if (typeof $rootScope.logged_user == 'undefined') {
@@ -402,7 +398,17 @@ angular.module('mlg')
     });
   };
 }])
-
+.controller('emailConfirmationCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
+if (typeof $routeParams.id != 'undefined') {
+    loginHttpService.setStatusActive($routeParams).success(function(response) {
+      if (response.status == false) {
+        alert('Some error occured, kindly refresh the page');
+      }
+    }).error(function() {
+      alert('Unable to activate account, contact to the administrator');
+    });
+  }
+}])
 /* ****************************** */
 .controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
    //$rootScope.username=$location.search().uid;
