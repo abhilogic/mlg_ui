@@ -823,6 +823,32 @@ angular.module('mlg')
 	   //$scope.img_root=siteRoot+'/views/offerimg';
       });
 	  
+}])
+.controller('teacherLoginCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+     $scope.msg = '';
+     $scope.gohome=function(){
+		window.location.href='/mlg_ui/app';
+  	}
+
+	 $scope.register = function(data,user_type){
+	 		var role_id=user_roles[user_type];
+	 		if(typeof data=='undefined'){
+	 			data={};
+	 		}
+
+	 		data.role_id=role_id;
+            data.source_url = $location.protocol()+'://'+$location.host() + '/mlg_ui/app/';
+			loginHttpService.register(data).success(function(response) {
+				if(!response.data.response){
+					$scope.msg=response.message;
+				}else{
+					$("#emailConfirmation").modal();	
+				}
+				//alert('registered succefully');
+			}).error(function(error) {
+				alert('registration fail');
+			});
+	};
 }]);
 
 /*.run(['$location', '$rootScope', function($location, $rootScope) {

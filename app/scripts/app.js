@@ -69,6 +69,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/parent_login', {
 		templateUrl : 'views/parent_login.html',
 		controller : 'loginCtrl',		
+	}).when('/teacher/signup',{
+		templateUrl : 'views/teacher_signup.html',
+		controller : 'teacherLoginCtrl',
 	}).when('/parent_signup', {
 		templateUrl : 'views/parent_signup.html',
 		controller : 'loginCtrl',		
