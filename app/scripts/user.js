@@ -293,6 +293,7 @@ angular.module('mlg')
     		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
     			if(stepNum.response.step.step_completed!=null ){    				
     				//var step_page = stepNum.response.step.step_completed; 
+
 					if(stepNum.response.step.step_completed==0 ){ 
 						$location.url('select_children'); 
 					}
@@ -308,6 +309,7 @@ angular.module('mlg')
 					else if(stepNum.response.step.step_completed==4){
 					 $location.url('parent/dashboard');
 					 }				
+
 	   			}
 			});
 
@@ -315,11 +317,6 @@ angular.module('mlg')
 	   }).error(function(error) {
 		  $scope.msg="Invalid Username Password";
 	   });
-
-
-	  
-
-
 	};
 
 	$scope.gohome=function(){
