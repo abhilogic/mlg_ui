@@ -1,0 +1,107 @@
+<!-- Page container -->
+<div class="page-container">
+
+  <!-- Page content -->
+  <div class="page-content">
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+
+      <!-- Onboarding: Login Teacher -->
+
+        <div class="panel panel-flat panel-onboarding">
+          <div class="panel-heading">
+            <h4 class="spanel-title"><b>MLG</b> <small class="pull-right"><a href="login.html" class="link link-gray-light">Already have an account?</a></small></h4>
+          </div>
+
+          <div class="panel-body">
+            <div class="row as-table">
+              <div class="col-sm-6 col-left">
+                <div class="content-header">
+                  <h5 class="content-tagline">Track your Class Progress with</h5>
+                  <h4 class="content-title">MY LEARNING GURU</h4>
+                </div>
+                <img src="assets/img/lense_img.png" class="img-responsive img-content">
+              </div>
+
+              <div class=" col-sm-6 col-right">
+
+                <div class="content-header">
+                  <p class="content-tagline">Setup your account</p>
+                </div>
+
+                <form name="teacher_form" class="form-login">
+                  <div class="form-group float-label">
+                    <label class="control-label">School Name</label>
+                    <input type="text" class="form-control float-input" ng-model="tch.school"/>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Country</label>
+                        <select type="text" class="form-control float-input" ng-model="tch.country">
+                          <option value=""></option>
+                          <option value="india">India</option>
+                          <option value="Bangla Desh">Bangla Desh</option>
+                          <option value="Afganishtan">Afganishtan</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">STATE / PROVINCE</label>
+                        <select type="text" class="form-control float-input" ng-model="tch.state">
+                          <option value=""></option>
+                          <option value="Delhi">Delhi</option>
+                          <option value="Rajesthan">Rajesthan</option>
+                          <option value="Kerla">Kerla</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">City</label>
+                        <select type="text" class="form-control float-input" ng-model="tch.city">
+                          <option value=""></option>
+                          <option value="india">India</option>
+                          <option value="Bangla Desh">Bangla Desh</option>
+                          <option value="Afganishtan">Afganishtan</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">District</label>
+                        <select type="text" class="form-control float-input" ng-model="tch.district">
+                          <option value=""></option>
+                          <option value="Delhi">Delhi</option>
+                          <option value="Rajesthan">Rajesthan</option>
+                          <option value="Kerla">Kerla</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary" ng-click="submitTeacherDetail(tch)">Proceed</button>
+                     <span class="has_error" ng-if="msg">{{msg}}</span>
+                  </div>
+                </form>
+              </div><!-- /.col-right-->
+            </div>
+          </div>
+
+        </div>
+        <!-- /.onboarding: login teacher-->
+
+    </div>
+    <!-- /main content -->
+
+  </div>
+  <!-- /page content -->
+
+</div>
+<!-- page container -->

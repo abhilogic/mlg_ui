@@ -24,8 +24,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	getChildrenDetails :'/users/getChildrenDetails',
 	addChildRecord : '/users/addChildrenRecord',
 	addChild : '/users/addChildren',
-	offerRecords: '/users/getOffers',
-	getStepNum 	   :'/users/getStepNum', 
+	offerRecords : '/users/getOffers',
+	getStepNum :'/users/getStepNum',
+  signUpTeacher :'/teachers/setTeacherRecord',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -69,15 +70,18 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/parent_login', {
 		templateUrl : 'views/parent_login.html',
 		controller : 'loginCtrl',		
+	}).when('/teacher/login', {
+		templateUrl : 'views/login-teacher.html',
+		controller : 'loginCtrl',	
 	}).when('/teacher/signup',{
 		templateUrl : 'views/teacher_signup.html',
 		controller : 'teacherLoginCtrl',
 	}).when('/parent_signup', {
 		templateUrl : 'views/parent_signup.html',
-		controller : 'loginCtrl',		
-	}).when('/parent_confirmation/:id', {
+		controller : 'loginCtrl',
+	}).when('/email/confirmation/:id',{
 		templateUrl : 'views/parent_confirmation.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'emailConfirmationCtrl',
 	}).when('/parent_dashboard', {
 		templateUrl : 'views/parent_dashboard.html',
 		controller : 'parentDashboardCtrl',
@@ -108,6 +112,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/parent/dashboard/redeem',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
 		controller : 'parentDashboardCtrl',
+	}).when('/teacher/create_account',{
+		templateUrl : 'views/account-teacher.html',
+		controller : 'teacherDashboardCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});
@@ -149,7 +156,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 
 
 
-		 $rootScope.$on('$viewContentLoaded', function() {
+	$rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
    });
 

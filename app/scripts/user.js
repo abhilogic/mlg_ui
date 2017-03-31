@@ -214,6 +214,13 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.getStepNum+'/'+pid
 		});
 	}
+  loginHttpResponse.signUpTeacher=function(teacherdata){
+		return $http({
+			method:'POST',	
+			data : teacherdata,		
+			url  : urlParams.baseURL+urlParams.signUpTeacher
+		});
+	}
     
 	return loginHttpResponse;
 	
@@ -267,7 +274,8 @@ angular.module('mlg')
 		return commonActions;
 	}])
 
-.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles',function($rootScope,$scope, loginHttpService,$location,user_roles) {
+.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles',function($rootScope,$scope,
+   loginHttpService,$location,user_roles) {
     $scope.form={};	
     $scope.msg='';
     $scope.range = function(n) {
@@ -279,7 +287,9 @@ angular.module('mlg')
 		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
 		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
 	}
-	 $scope.login = function(data) {
+	 $scope.login = function(data, user_type) {
+       var role_id = user_roles[user_type];
+       data.role_id= role_id;
 	   loginHttpService.login(data).success(function(response) {
          if (response.status=='false') {
            $scope.msg = response.message;
@@ -287,7 +297,10 @@ angular.module('mlg')
            $rootScope.logged_user = response.user;
            setCookie('uid', $rootScope.logged_user.id);
           // $location.url('select_children');
-
+          if (user_type == 'teacher') {
+            $location.url('teacher/create_account');
+            return true;
+          }
             // To Redirect User on his account last step page.
              // call API to get last step track             
     		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
@@ -309,7 +322,11 @@ angular.module('mlg')
 					else if(stepNum.response.step.step_completed==4){
 					 $location.url('parent/dashboard');
 					 }				
-
+					if(stepNum.response.step.step_completed==0 ){ $location.url('select_children'); }
+					else if(stepNum.response.step.step_completed==1){ $location.url('add_child_account'); }
+					else if(stepNum.response.step.step_completed==2){ $location.url('parent_preferences'); }
+					else if(stepNum.response.step.step_completed==3){ $location.url('payment_page'); }
+					else if(stepNum.response.step.step_completed==4){ $location.url('parent/dashboard'); }				
 	   			}
 			});
 
@@ -352,34 +369,39 @@ angular.module('mlg')
 
   //alert(commonActions.getcookies(get_uid));
   var get_uid=commonActions.getcookies(get_uid);
-  //alert(commonActions.chidrenNameFactory(get_uid));
-
-
+  
 	// To call dynamic step slider
 		loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
 			var childcount=chidrenName.response.length;
 			console.log(chidrenName);
-			if(childcount>0){
-				//$rootScope.childname 	= chidrenName.response;													
+			if(childcount>0){																
 					$scope.childname=chidrenName.response;
 			}else{
 				$scope.childname=0;;
-			}
-			
+			}			
 		});
 	// end to call dynamic step slider
 
 
   $rootScope.username=$location.search().uid;
-  if (typeof $routeParams.id != 'undefined') {
-    loginHttpService.setStatusActive($routeParams).success(function(response) {
-      if (response.status == false) {
-        alert('Some error occured, kindly refresh the page');
-      }
-    }).error(function() {
-      alert('Unable to activate account, contact to the administrator');
-    });
-  }
+
+
+	// Call API to get child details for deshboard naming	
+		$scope.frm={};
+		//$scope.frm.abc="uyuy";
+	loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+
+		var childcount=chidrenName.response.length;
+		//console.log(chidrenName);
+		if(childcount>0){
+			$scope.frm.childnames = chidrenName.response;
+		}
+		else{
+		$scope.frm.childnames =null;
+		}
+	});
+
+
 
   $scope.setPreference = function(data) {
     /*if (typeof $rootScope.logged_user == 'undefined') {
@@ -402,7 +424,17 @@ angular.module('mlg')
     });
   };
 }])
-
+.controller('emailConfirmationCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
+if (typeof $routeParams.id != 'undefined') {
+    loginHttpService.setStatusActive($routeParams).success(function(response) {
+      if (response.status == false) {
+        alert('Some error occured, kindly refresh the page');
+      }
+    }).error(function() {
+      alert('Unable to activate account, contact to the administrator');
+    });
+  }
+}])
 /* ****************************** */
 .controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
    //$rootScope.username=$location.search().uid;
@@ -596,9 +628,17 @@ angular.module('mlg')
 
 
 /* *************************************************************************** */
-    $scope.submitChildDetails = function(data){   
+    $scope.submitChildDetails = function(data){  
+    		if(typeof data.emailchoice=='undefined' || data.emailchoice==null){
+    			data.emailchoice==1;
+    		}
 
-       
+
+    		if(typeof data.selectedplan=='undefined' || data.selectedplan==null){
+    			data.selectedplan==1;
+    		}
+
+
     //data.selectedcourses = JSON.parse(JSON.stringify(data.selectedcourse));
       data.selectedcourses = Object.assign({}, data.selectedcourse);
       $scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
@@ -626,7 +666,6 @@ angular.module('mlg')
        	}; 
 
 
-
        //console.log(childdata); 
        //how many childeren has been added n
        	loginHttpService.getAddedChildren(get_uid).success(function(response) {
@@ -642,7 +681,7 @@ angular.module('mlg')
 								//window.location.href=urlParams.siteRoot+'add_child_account';
 								window.location.reload();
 						}else{
-							response_childadd.response.message;
+							$scope.message=response_childadd.response.message;
 						}
 			}); 
        	}
@@ -650,9 +689,6 @@ angular.module('mlg')
        		//alert('redirect on preference page');
        		window.location.href=urlParams.siteRoot+'parent_preferences'; 
        	}
-
-
-
 
 	}
 		});
@@ -664,7 +700,6 @@ angular.module('mlg')
 		console.log(data);
 		console.log($scope.usr = "usr");
 
-
 		console.log($scope.selectedoption);              
         $scope.submitCalled = "submit called " + $scope.selectedoption;
 
@@ -674,8 +709,6 @@ angular.module('mlg')
 
    
 }])
-
-/** ************************ */
 
 .controller('passwordCtrl',['$scope','loginHttpService','$location','$timeout',function($scope, loginHttpService,$location,$timeout) {
     $scope.form={};	
@@ -849,13 +882,44 @@ angular.module('mlg')
 				alert('registration fail');
 			});
 	};
-}]);
-
+}])
+.run(['$rootScope',function($rootScope){
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+      console.log(toState);
+      $rootScope.home = (toState.name == 'parent/dashboard');
+  });
+}])
 /*.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         $rootScope.home = (toState.name == 'mlg.home');
     });
 }]);*/
+/**
+ *Controller for Teacher 
+ **/
+.controller('teacherDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','commonActions',function($rootScope,$scope,loginHttpService,$location,user_roles,commonActions) {
+  $scope.tch = {};
+  $scope.submitTeacherDetail = function(data){
+    var teacherDetail = {};
+    var get_uid=commonActions.getcookies(get_uid);
+    teacherDetail = {
+       user_id : get_uid,
+       school_name : data.school,
+       country : data.country,
+       state : data.state,
+       city : data.city,
+       district : data.district,
+    };
+    console.log(teacherDetail);
+    loginHttpService.signUpTeacher(teacherDetail).success(function(response) {
+      if(response.status == true) {
+        $location.url('#');
+      }else{
+        $scope.msg= response.message;
+      }     		
+		}).error(function(error) {
+		  $scope.msg= 'Some technical error occured.'
+	   }); 
+  };
 
-
-
+}]);
