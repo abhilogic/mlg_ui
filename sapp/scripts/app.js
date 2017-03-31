@@ -63,6 +63,9 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	$routeProvider.when('/journey', {
 		templateUrl : 'views/my_journey.html',
 		controller : 'journeyCtrl',		
+	}).when('/profile', {
+		templateUrl : 'views/my_profile.html',
+		controller : 'journeyCtrl',		
 	}).otherwise({
 		redirectTo : '/journey',
 	});
