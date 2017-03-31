@@ -1,0 +1,137 @@
+.video_cover {
+  .video_icon {
+    display: inline-block;
+    vertical-align: middle;
+    &.play{
+      @include cssSprite($video_play);
+    }
+    &.pause{
+      @include cssSprite($video_pause);
+    }
+    &.speaker{
+      @include cssSprite($video_speaker);
+    }
+    &.fs_view{
+      @include cssSprite($video_fs_view);
+    }
+    &.Ns_view{
+      @include cssSprite($video_fs_view);
+    }
+  }
+
+
+  .video_controller {
+    background: {
+      image: url(../img/video_element/controlbar_bg.png);
+      repeat: no-repeat;
+      position: center center;
+      size: 100% 100%;
+    }
+    padding: 11px 5px 3px 5px;
+    margin-top: -5px;
+    .progress_bar {
+      width: 166px;
+      margin-right: 5px;
+      background: rgba($sweetCorn,0.6);
+      border-color: transparent;
+      @include box-shadow(inset 0px 0px 4px rgba($sweetCorn,0.9));
+      &.ui-slider {
+        .ui-slider-handle {
+        display: none;
+       }
+       .ui-slider-range {
+         background: rgba($brown,0.9);
+         @include border-radius(0px null null 0px);
+         border-top-right-radius: 2px;
+         border-bottom-right-radius: 2px;
+         top: -1px;
+         right: -1px;
+         height: 117%;
+       }
+      }
+      &.volume_bar {
+        width: 4px;
+        position: absolute;
+        bottom: 20px;
+        margin-right: 0px;
+        right: 6px;
+        display: none;
+        &.on {
+          display: block;
+        }
+        .ui-slider-handle {
+        background: rgba($sweetCorn,0.6);
+        @include border-radius(100%);
+        display: block;
+        left: -7px;
+        &:focus {
+          outline: 0px;
+        }
+       }
+      }
+    }
+    .btnPlay {
+      background: none;
+      border: 0px;
+      width: 33px;
+      height: 22px;
+      &:focus {
+        outline: 0px;
+      }
+      &:active {
+        outline: 0px;
+      }
+      i {
+        color: $vanCleef;
+        display: none;
+      }
+        .fa-play {
+          display: inline-block;
+        }
+    }
+    ul {
+      i {
+        color: $vanCleef;
+      }
+      >li {
+        &:last-child {
+          margin-right: 2px;
+          margin-left: -3px;
+          li {
+            margin-right: 3px;
+            span {
+              color: $vanCleef;
+              font-family: $font-times_bold;
+            }
+            &:first-child {
+              width: 100px;
+              text-align: center;
+            }
+          }
+        }
+      }
+      li {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        .screen_icon {
+          width: 11px;
+          margin-left: 10px;
+          margin-top: -3px;
+        }
+      }
+    }
+  }
+  &.start {
+    .video_play_btn {
+      display: none !important;
+    }
+    .fa-pause-circle {
+      display: inline-block !important;
+      font-size: 20px;
+   }
+   .fa-play {
+     display: none !important;
+   }
+  }
+}

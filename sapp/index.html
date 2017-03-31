@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="mlg_student">
+<head>
+<base href="/mlg_ui/sapp/" target="_blank">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Learing Guru: Student Application</title>
+<!-- CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/icons/css/Glyphter.css">
+	<!-- Glyphter icons  -->
+	<!-- Bootstrap and core app CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/style.css" >
+	
+
+
+
+<!-- SCRIPTS -->
+<!--mock scripts  -->
+
+<!-- build:remove:dist -->
+
+
+<!-- endbuild -->
+<!--mock scripts end  -->
+
+<!-- build:js({.tmp,app}) /scripts/angular-bundle.js -->
+<script src="scripts/angular/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="scripts/angular/angular.js" type="text/javascript"></script>
+<script src="scripts/angular/json3/lib/json3.js" type="text/javascript"></script>
+<!-- <script src="scripts/angular/angular-resource.js" type="text/javascript"></script> -->
+<script src="scripts/angular/angular-cookies.js" type="text/javascript"></script>
+<!-- <script src="scripts/angular/angular-sanitize.js" type="text/javascript"></script> -->
+<script src="scripts/angular/angular-animate.js" type="text/javascript"></script>
+<!-- <script src="/scripts/angular/ui/dialogs.min.js" type="text/javascript"></script> -->
+<!-- <script src="/scripts/angular/angular-touch.js" type="text/javascript"></script> -->
+<script src="scripts/angular/angular-route.js" type="text/javascript"></script>
+<script src="scripts/angular/angular-mocks.js" type="text/javascript"></script>
+<!-- <script src="/scripts/angular/moment.js" type="text/javascript"></script> -->
+<script src="scripts/angular/ui/ui-bootstrap-tpls-0.13.4.js" type="text/javascript"></script>
+<!-- <script src="scripts/angular/select.js" type="text/javascript"></script> -->
+<!-- <script src="scripts/angular/ng-tags-input.js" type="text/javascript"></script> -->
+
+<!-- endbuild -->
+<script src="scripts/auth/routingConfig.js" type="text/javascript" ></script>
+<script src="scripts/app.js" type="text/javascript"></script>
+<!-- build:remove:dist -->
+<script src="scripts/backend.js" type="text/javascript"></script>
+<!-- endbuild -->
+<!-- build:js({.tmp,app}) /scripts/common.js -->
+
+
+<script src="scripts/auth/auth-module.js" type="text/javascript"></script>
+<script src="scripts/student.js" type="text/javascript"></script>
+<script src="scripts/utility-module.js" type="text/javascript"></script>
+<script src="scripts/notification.js" type="text/javascript"></script>
+<script src="scripts/validation/bootstrap.min.js" type="text/javascript"></script>
+<script src="scripts/validation/xtForm.js" type="text/javascript"></script>
+<!-- <script type="text/javascript" src="assets/js/plugins/jquery.mCustomScrollbar.min.js"></script> -->
+<script type="text/javascript" src="assets/js/main.js"></script>
+
+
+<!-- endbuild -->
+
+
+</head>
+<body class="page-onboarding {{this_route()}}onboarding-cover" ng-cloak ng-controller="TopController" >  
+	
+		<ng-view> </ng-view>		
+</body>
+</html>

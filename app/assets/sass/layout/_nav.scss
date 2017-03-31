@@ -23,11 +23,70 @@
         color: white;
       }
     }
+  }
 
-    &-landing{
+  //Primary Index Navbar
+  &-primary{
+    background-color: #fdd75e;
+    border: 0;
+    margin: 0;
+    font-size: 18px;
+    @include padding(10px null);
+    .navbar-btn{
+      @extend .btn-rounded;
+      border-width: 2px;
+      border-color: white;
+      color: $gray-base;
+      min-width: 100px;
+      font-size: 18px;
+      &:hover{
+        background-color: white;
+      }
+    }
+    .navbar-btn + .navbar-btn{
+      margin-left: 15px;
+    }
 
+    .navbar-nav{
+      li{
+        a{
+          color: $gray-base;
+          font-weight: $regular;
+          @include padding(null 30px);
+          &:hover, &:focus{
+            background-color: transparent;
+          }
+        }
+        .nav-text{
+          border-bottom: 2px solid transparent;
+        }
+        a:hover .nav-text{
+          border-color: white;
+        }
+        &.active{
+          .nav-text{
+            border-color: white;
+          }
+          a:hover, a:focus{
+            background-color: transparent
+          }
+        }
+      }
+    }
+
+    .navbar-brand{
+      background-color: transparent;
+      color: $gray-base;
+      font-weight: $bold;
+      font-size: 24px;
+      &:hover{
+        background-color: transparent;
+        color: $gray-dark;
+      }
     }
   }
+
+  //Dashboard Navbar
   &-dashboard{
     box-shadow: 0 2px 6px rgba($sidebar-dark-bg, 0.4);
     .navbar-header{

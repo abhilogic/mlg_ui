@@ -1,0 +1,63 @@
+/* --- FONTS --- */
+
+// Example of Google Font include
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i);
+@import url(https://fonts.googleapis.com/css?family=Just+Another+Hand);
+@font-face {
+  font-family: 'HighTowerText-Italic';
+  src: url('../font/HighTowerText-Italic.eot');
+  src: url('../font/HighTowerText-Italic.eot') format('embedded-opentype'),
+  url('../font/HighTowerText-Italic.woff2') format('woff2'),
+  url('../font/HighTowerText-Italic.woff') format('woff'),
+  url('../font/HighTowerText-Italic.ttf') format('truetype'),
+  url('../font/HighTowerText-Italic.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'HighTowerText-Reg';
+  src: url('../font/HighTowerText-Reg.eot');
+  src: url('../font/HighTowerText-Reg.eot') format('embedded-opentype'),
+  url('../font/HighTowerText-Reg.woff2') format('woff2'),
+  url('../font/HighTowerText-Reg.woff') format('woff'),
+  url('../font/HighTowerText-Reg.ttf') format('truetype'),
+  url('../font/HighTowerText-Reg.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'Wizzta';
+  src: url('../font/Wizzta.eot');
+  src: url('../font/Wizzta.eot') format('embedded-opentype'),
+  url('../font/Wizzta.woff2') format('woff2'),
+  url('../font/Wizzta.woff') format('woff'),
+  url('../font/Wizzta.ttf') format('truetype'),
+  url('../font/Wizzta.svg') format('svg');
+}
+@font-face {
+  font-family: 'AutographScriptEFBold';
+  src: url('../font/AutographScriptEFBold.eot');
+  src: url('../font/AutographScriptEFBold.eot') format('embedded-opentype'),
+  url('../font/AutographScriptEFBold.woff2') format('woff2'),
+  url('../font/AutographScriptEFBold.woff') format('woff'),
+  url('../font/AutographScriptEFBold.ttf') format('truetype'),
+  url('../font/AutographScriptEFBold.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'MyriadPro-Regular';
+  src: url('../font/MyriadPro-Regular.eot');
+  src: url('../font/MyriadPro-Regular.eot') format('embedded-opentype'),
+  url('../font/MyriadPro-Regular.woff2') format('woff2'),
+  url('../font/MyriadPro-Regular.woff') format('woff'),
+  url('../font/MyriadPro-Regular.ttf') format('truetype'),
+  url('../font/MyriadPro-Regular.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'TimesNewRomanPS-BoldMT';
+  src: url('../font/TimesNewRomanPS-BoldMT.eot');
+  src: url('../font/TimesNewRomanPS-BoldMT.eot') format('embedded-opentype'),
+  url('../font/TimesNewRomanPS-BoldMT.woff2') format('woff2'),
+  url('../font/TimesNewRomanPS-BoldMT.woff') format('woff'),
+  url('../font/TimesNewRomanPS-BoldMT.ttf') format('truetype'),
+  url('../font/TimesNewRomanPS-BoldMT.svg') format('svg');
+}

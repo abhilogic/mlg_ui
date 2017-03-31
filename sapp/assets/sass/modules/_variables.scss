@@ -1,0 +1,64 @@
+/* --- $VARIABLES --- */
+
+// Font weights
+$thin: 100;
+$light: 300;
+$regular: 400;
+$semibold: 500;
+$bold: 700;
+$ultrabold: 800;
+// Font weights
+
+// Colors
+$white: #fff;
+$black: #000;
+$white-65: rgba(#fff,0.65);
+$white-70: rgba(#fff,0.70);
+$maroon: #46110f;
+$light-black: rgba(#000,0.6);
+$drover: #FBFAAF;
+$anzac: #E1B64B;
+$rosewood: #550000;
+$blackMarlin: #3A2E1A;
+$pizza: #C29316;
+$cola: #432A01;
+$dune: #3A3837;
+$cinnabar: #E74C3C;
+$vanCleef: #49150C;
+$brown: #994F00;
+$sweetCorn: #FAE38A;
+$colabrown: #352a25;
+$crocodile: #7C6D59;
+$mondo: #463C2D;
+$korma: #8C3B10;
+$teak: #BC976E;
+$rodeoDust: #CCB099;
+$darkBurgundy: #6D1A06;
+$dandelion: #FDD75E;
+$Comet: #5A667F;
+$mineShaft: #3B3B3B;
+$alto: #DDDDDD;
+$shamrock: #29C886;
+// Colors
+
+// Font family
+$font-primary: 'HighTowerText-Reg', 'Lato', sans-serif;
+$font-secondary: 'Wizzta', 'Lato', sans-serif;
+$font-primary-italic: 'HighTowerText-Italic', 'Lato', sans-serif;
+$font-tartiary: "MyriadPro-Regular", sans-serif;
+$font-times_bold: 'TimesNewRomanPS-BoldMT', sans-serif;
+$font-open-sans: 'Open Sans', sans-serif;
+$journey_castel_font: "AutographScriptEFBold",'Wizzta', sans-serif;
+$justanotherhand: 'Just Another Hand', cursive;
+
+// Image dir path
+$imagedir: "../img/";
+
+// media width
+$screen-large : 1489px;
+$screen-tb-land : 1024px;
+$screen-tb-port: 1023px;
+$screen-mobile-md: 767px;
+$screen-mobile-sm: 413px;
+$screen-mobile-xs: 374px;
+// media width

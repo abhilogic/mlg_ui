@@ -2,66 +2,78 @@
 /*
 // Setup child Account
 --------------------*/
+.selected_package{
+  content: '\0043';
+  display: inline-block;
+  font-family: 'Glyphter';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 16px;
+  font-size: 9px;
+  height: 16px;
+  width: 16px;
+  background-color: $brand-primary;
+  color: white;
+  border-radius: 100%;
+  @include position(absolute, -6px -6px null null);
 
-.btn-group.package-group{
+  &.disabled{
+    background-color: darken($gray-lighter, 10%);
+  }
+}
+.package-box{
+  text-align: center;
+  border: 1px solid $gray-lighter;
+  border-radius: 6px !important;
+  color: $gray-light;
+  float: none;
+  min-height: 50px;
+  min-width: 100px;
+  @include margin(10px null null null);
+  @include padding(6px 8px);
+  display: inline-block;
+
+  &.active{
+    border-color: $brand-primary;
+    color: $brand-primary;
+    box-shadow: none;
+    outline: 0;
+    
+    &.disabled{
+      border-color: darken($gray-lighter, 10%);
+      color: darken($gray-lighter, 10%);
+      pointer-events: none;
+    }
+    &:before{
+      @extend .selected_package;
+    }
+  }
+  span, strong, small{
+    display: block;
+  }
+  .package-title{
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: $semibold;
+  }
+  .package-price{
+    font-weight: $ultrabold;
+    font-size: 26px;
+  }
+  .package-icon{
+    font-size: 40px;
+  }
+  .package-type{
+    font-size: 11px;
+  }
+  span, strong, small{
+    display: block;
+  }
+}
+.package-group{
   padding: 0;
-  .btn.package{
-    text-align: center;
-    border: 1px solid $gray-lighter;
-    border-radius: 6px !important;
-    color: $gray-light;
-    float: none;
-    min-height: 50px;
-    @include margin(15px 0 null 4%);
-    @include align-self(center);
-    &:first-child{
-      margin-left: 0;
-    }
-    &.subject{
-      @include flex(0, 0, 22%);
-      max-width: 22%;
-    }
-    &.subscription{
-      @include flex(0, 0, 30.66%);
-      max-width: 30.66%;
-    }
-    @media (max-width: $screen-sm){
-      &.subject{
-        @include flex(0, 0, 48%);
-        max-width: 48%;
-        &:nth-child(2n + 1){
-          margin-left: 0;
-        }
-      }
-    }
-    span, strong, small{
-      display: block;
-    }
-    .package-price {
-        font-size: 24px;
-    }
-
-    &.active{
-      border-color: $brand-primary;
-      color: $brand-primary;
-      box-shadow: none;
-      outline: 0;
-      &:before{
-        content: '\0043';
-        display: inline-block;
-        font-family: 'Glyphter';
-        font-style: normal;
-        font-weight: normal;
-        line-height: 16px;
-        font-size: 9px;
-        height: 16px;
-        width: 16px;
-        background-color: $brand-primary;
-        color: white;
-        border-radius: 100%;
-        @include position(absolute, -6px -6px null null);
-      }
-    }
+  .btn{
+    @extend .package-box;
   }
 }
 
@@ -69,7 +81,7 @@
 /*
 // Subscription Plan
 ----------------------*/
-.subscriptionPlan-group{
+/*.subscriptionPlan-group{
   &.btn-group{
     padding: 0;
     display: block;
@@ -101,6 +113,9 @@
         color: $brand-primary;
         box-shadow: none;
         outline: 0;
+        &:before{
+          //@extend .selected;
+        }
       }
       &:first-child{
         margin-left: 0;
@@ -114,7 +129,7 @@
       }
     }
   }
-}
+}*/
 
 
 /*

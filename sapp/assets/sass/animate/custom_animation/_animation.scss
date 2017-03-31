@@ -1,0 +1,24 @@
+@include  keyframes(upword-arrow-animation) {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-5px);
+  }
+100% {
+      transform: translateY(0);
+  }
+
+}
+
+@include keyframes(goBackAnimation) {
+  0% {
+    left: -76px;
+  }
+  50% {
+    left: -70px;
+  }
+  100% {
+    left: -76px;
+  }
+}

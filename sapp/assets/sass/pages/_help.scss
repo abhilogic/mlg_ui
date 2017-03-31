@@ -1,0 +1,127 @@
+.help_page {
+  @include background-img("help_bg.jpg");
+  padding-left: 15px;
+  padding-right: 15px;
+  @include respond-to(mobileMedium){
+      @include background-img("help_mobile_bg.jpg");
+  }
+  &.element_center > div > div {
+    vertical-align: bottom;
+  }
+  @media screen and (max-width: $screen-large){
+    padding-top: 30px;
+  }
+  .frame {
+    background-color: transparent;
+    @include background-cover("challenge_frame.png");
+    background-size: 100% 100%;
+    height: 606px;
+    margin: auto;
+    padding: 40px 35px;
+    width: 959px;
+    @include respond-to(tabletPort){
+      height: 540px;
+      width: 100%;
+    }
+    @include respond-to(mobileMedium){
+      background: none;
+      padding: 0px 15px;
+      height: auto;
+    }
+  }
+  .content_cover {
+    background-color: transparent;
+    @include background-cover("challenge_content_frame.png");
+    background-size: 100% 100%;
+    height: 525px;
+    padding: 31px 30px;
+    width: 886px;
+    @include respond-to(tabletPort){
+      height: 100%;
+      width: 100%;
+    }
+    @include respond-to(mobileMedium){
+      padding: 0px;
+      background: none;
+    }
+    h1 {
+      color: $vanCleef;
+      font-size: 18px;
+      font-weight: $bold;
+      @include margin(20px null 18px null);
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .video {
+      padding-left: 0px;
+      video {
+        width: 100%;
+      }
+      .video_play_btn{
+        background: transparent;
+        border: 0px;
+        left: 39%;
+        position: absolute;
+        top: 42%;
+        z-index: 1000;
+        &:focus {
+          outline: 0px;
+        }
+      }
+      .video_controller .progress_bar {
+        width: 400px;
+        @include respond-to(tabletPort){
+          width: 275px;
+        }
+        &.volume_bar {
+          width: 4px;
+        }
+      }
+    }
+    .help_video_list {
+      .vc_list {
+        h1 {
+          color: $vanCleef;
+          font-size: 11px;
+          margin-top: 5px;
+          margin-bottom:0px;
+          text-transform: uppercase;
+          @include respond-to(mobileMedim){
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.help_modal_section {
+  .modal-dialog {
+    margin-top: 28px;
+  }
+  .modal-content {
+    padding:0px;
+    background: none;
+    border: 0px;
+    .modal-body {
+      background: none;
+      padding: 0px;
+      video {
+        width: 100%;
+      }
+      .video_controller .progress_bar {
+        width: 188px;
+      }
+    }
+  }
+  .modal-heading {
+    background: none;
+    .close {
+      opacity: 1;
+      position: absolute;
+      right: -10px;
+      top: -13px;
+      z-index: 1000;
+    }
+  }
+}

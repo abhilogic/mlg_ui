@@ -1,0 +1,296 @@
+.navbar-default {
+  &.my_profile {
+    .main_logo {
+      margin-right: 30px;
+        @media screen and (max-width: $screen-mobile-sm){
+          margin-right: 8px;
+        }
+    }
+    @media screen and (min-width: $screen-mobile-md){
+      .search__input {
+        @include cssSprite($search_tablet);
+      }
+    }
+    .search_form {
+      float: left !important;
+      margin-left: 40px;
+      @media screen and (max-width: $screen-tb-port){
+        position: absolute;
+        bottom: -22px;
+        right: 0px;
+      }
+      @media screen and (max-width: $screen-mobile-md){
+        bottom: -40px;
+        width: 200px;
+        .search__input {
+          background-image: url(../img/sm-mobile-search-bar.png);
+        }
+      }
+
+    }
+    .icon_more_bar {
+     @include cssSprite($get_more_points_bar);
+     color: $white;
+     font-size: 17px;
+     padding-top: 10px;
+     padding-left: 27px;
+     @media screen and (max-width: $screen-mobile-sm){
+       @include cssSprite($get_more_points_bar-sm);
+     }
+    }
+    .navbar-nav {
+      float: right;
+      li:last-child {
+        a {
+          padding-right: 0px;
+        }
+      }
+      @media screen and (max-width: $screen-mobile-md){
+        li {
+          &:first-child {
+            position: absolute;
+            top: 21px;
+            right: 0px;
+            a {
+              padding-left: 0px;
+              padding-right: 0px;
+            }
+          }
+          &:last-child {
+            position: absolute;
+            top: 105px;
+            left: 0px;
+            right: inherit;
+            a {
+              padding-left: 0px;
+              padding-right: 0px;
+              span i {
+                font-style: normal;
+                @media screen and (max-width: $screen-mobile-sm){
+                  white-space: nowrap;
+                  position: absolute;
+                  bottom: -9px;
+                  left: 0px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.my_profile_cover {
+  @media screen and (max-width: $screen-tb-land){
+    background: {
+      image: none;
+    }
+  }
+}
+@media screen and (max-width: $screen-tb-land){
+  body {
+    @include background-cover('bg-wood.jpg');
+  }
+}
+.profile_block {
+  margin-top: 83px;
+    @media screen and (max-width: $screen-tb-port){
+        margin-top: 126px;
+    }
+  .student_progress_info {
+    padding-left: 0px;
+    text-decoration: none;
+    li {
+      display: inline-block;
+      vertical-align: middle;
+      img, span {
+        display: block;
+        margin: auto;
+        text-align: center;
+      }
+      span {
+        color: $white;
+      }
+      &.student_img {
+        margin-right: 57px;
+        position: relative;
+        text-align: center;
+        @media screen and (max-width: $screen-mobile-md){
+          margin-right: 7px;
+        }
+      span {
+        &:first-child {
+          position: absolute;
+          top: -35px;
+          text-align: center;
+          width: 100%;
+        }
+      }
+        .profile_img_cover {
+          position: relative;
+          background: {
+            image: url(../img/student_prof_img_bg.png);
+            size: 100%;
+            repeat: no-repeat;
+          }
+          height: 88px;
+          width: 88px;
+          img {
+            position: absolute;
+            left: -14px;
+            top: -22px;
+          }
+        }
+      }
+    }
+  }
+  .progress_bar {
+    margin-top: 50px;
+    position: relative;
+    text-align: center;
+    @media screen and (max-width: $screen-mobile-xs){
+      margin-top: 110px;
+    }
+    span {
+      color: $white;
+      display: block;
+      font-size: 18px;
+      @media screen and (max-width: $screen-mobile-sm){
+        padding-left: 15px;
+        text-align: left;
+      }
+    }
+    .dragon_img {
+      bottom: 26px;
+      right: 200px;
+      position: absolute;
+      @media screen and (max-width: $screen-tb-port){
+        right: -12px;
+      }
+      @media screen and (max-width: $screen-mobile-md){
+        bottom: 17px;
+        width: 188px;
+      }
+      @media screen and (max-width: $screen-mobile-sm){
+        bottom: 12px;
+      }
+    }
+    .progress_bar_img {
+        max-width: 100%;
+    }
+  }
+}
+
+
+.redeem_coupon {
+  background: none;
+  border: 0px;
+  margin-top: 84px;
+  @media screen and (max-width: $screen-mobile-sm){
+    margin-top: 20px;
+  }
+  .panel-heading {
+    background: none;
+    border-bottom: 0px;
+    .panel-title {
+      span {
+        color: $white;
+        &:first-child {
+          float: left;
+          font-size: 20px;
+        }
+        &:last-child {
+          font-size: 14px;
+          float: right;
+        }
+      }
+    }
+  }
+  .coupon_cover {
+    background: {
+      image:url(../img/redeem_coupon_bg.png);
+      repeat: no-repeat;
+      position: center center;
+    }
+    height: 180px;
+    margin-bottom: 20px;
+    padding-top: 26px;
+    text-align: center;
+    width: 140px;
+    @media screen and (max-width: $screen-mobile-md){
+      margin: auto;
+      margin-bottom: 20px;
+    }
+    .coupon_provider_logo {
+      max-width: 72px;
+    }
+    ul {
+      list-style: none;
+      margin-top: 13px;
+      padding-left: 0px;
+      li {
+        span {
+          color: $rosewood;
+          display: inline-block;
+          font-size: 16px;
+          vertical-align: text-bottom;
+          &.coin {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.unlocked_game {
+  background: none;
+  border: 0px;
+  margin-top: 84px;
+  @media screen and (max-width: $screen-mobile-sm){
+    margin-top: 11px;
+  }
+  .panel-heading {
+    background: none;
+    border-bottom: 0px;
+    .panel-title {
+      span {
+        color: $white;
+        &:first-child {
+          float: left;
+          font-size: 20px;
+        }
+        &:last-child {
+          font-size: 14px;
+          float: right;
+        }
+      }
+    }
+  }
+  .panel-body {
+    .thumbnail {
+      background: none;
+      border: 0px;
+      margin-bottom: 20px;
+      max-width: 217px;
+      padding: 0px;
+      @media screen and (max-width: $screen-mobile-md){
+        margin: auto;
+        margin-bottom: 20px;
+      }
+      .game_name {
+        color: $white;
+        font-size: 20px;
+      }
+      .btn {
+        background: $blackMarlin;
+        @include box-shadow(inset 0px 0px 4px rgba($blackMarlin,.4));
+        color: $pizza;
+        padding: 3px 12px;
+      }
+    }
+  }
+}

@@ -4,3 +4,16 @@
   min-height: 100%;
   background-color: red;
 }
+
+.section-features{
+  @include padding(50px null);
+  &-parent{
+
+  }
+  &-teacher{
+
+  }
+  &-student{
+
+  }
+}

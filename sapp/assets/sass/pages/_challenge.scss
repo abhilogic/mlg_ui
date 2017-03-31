@@ -1,0 +1,268 @@
+.main_cover.challenge_page {
+  position: relative;
+  &:before {
+    @include background-cover("cloud_cover_img.png");
+    background-color: transparent;
+    content:'';
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 1500;
+  }
+
+  @include respond-to(mobileMedium){
+    margin: 0px;
+    height: auto;
+    &:before {
+      @include background-img("subskill_mobile_bg.jpg");
+    }
+  }
+  .wooden_frame {
+    .castle.challenge_mountain {
+      display: none;
+    }
+  }
+  .castle.challenge_mountain {
+    z-index: 1550;
+    bottom: 10%;
+    right: 4%;
+    @include respond-to(tabletLand){
+      bottom: 0%;
+    }
+    @include respond-to(mobileMedium){
+      top: -15px;
+      right: 12px;
+      left: auto;
+    }
+    .castle__text {
+      padding-right: 0px;
+      position: relative;
+      text-align: right;
+      display: block;
+    }
+  }
+  .challenge_modal {
+    display: block;
+    z-index: 1500;
+    overflow: scroll;
+    @include respond-to(tabletPort){
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+    }
+    @include respond-to(mobileMedium){
+      padding-top: 104px;
+    }
+    .modal-dialog {
+      width: auto;
+    }
+    .modal-body {
+      padding: 0px;
+    }
+  }
+  .challenge_frame {
+    background-color: transparent;
+    @include background-cover("challenge_frame.png");
+    background-size: 100% 100%;
+    height: 606px;
+    margin: auto;
+    padding: 42px 36px;
+    max-width: 959px;
+    @include respond-to(mobileMedium){
+      background: none;
+      padding: 0px;
+      @include box-shadow(none);
+      border: 0px;
+    }
+  }
+  .challenge_content_frame {
+    @include respond-to(mobileMedium){
+      .panel-default {
+        background: none;
+        border: 0px;
+        .panel-heading {
+          @include border-radius(3px);
+          padding: 0px;
+          a {
+            @include border-radius(3px);
+            @include box-shadow(inset 0px 0px 16px rgba($mondo,0.2), 0px 0px 4px rgba($mondo,0.5));
+            background-color: rgba($sweetCorn,0.5);
+            color: rgba($mondo,0.8);
+            display: block;
+            font-size: 16px;
+            font-weight: $bold;
+            font-family: $font-open-sans;
+            padding: 10px 20px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+          }
+        }
+        .panel-body {
+          border-top: 0px;
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+      }
+    }
+    .nav-tabs {
+      border-bottom: 0px;
+      display: block;
+      margin-bottom: -20px;
+      text-align: center;
+      li {
+        @include box-shadow( 0 -4 10px rgba($black,.3));
+        @include background-cover("challenge_nav_bg.png");
+        @include border-radius(8px 8px 0 0);
+        @include box-sizing(border-box);
+        border: 2px solid $colabrown;
+        border-bottom: 0px;
+        display: inline-block;
+        float: none;
+        @include padding(5px 4px 0px 4px);
+        position: relative;
+        vertical-align: bottom;
+        &:not(:first-child){
+          margin-left: 2px;
+        }
+        &.active {
+          &::before{
+            @include border-radius(5px 5px 0 0);
+            background-color: rgba($korma,0.85);
+            content: '';
+            display: block;
+            height: 100%;
+            left: 0px;
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            z-index: 1;
+          }
+          a {
+            @include box-shadow(inset 0px -4px 26px rgba($black, 0.3));
+            border-color: rgba($white,0.07);
+            color: $white;
+            font-size: 24px;
+            padding: 6px 23px 6px 23px;
+            position: relative;
+            @include text-shadow(0 0 10px rgba($colabrown,1));
+            z-index: 2;
+          }
+        }
+        a {
+          @include box-shadow(inset -2px -1px 10px rgba($black, 0.3));
+          border: 2px solid rgba($white,0.3);
+          border-bottom: 0px;
+          background: transparent;
+          @include border-radius(8px 8px 0 0);
+          font-family: $font-times_bold;
+          font-size: 16px;
+          padding: 3px 15px 0px 15px;
+          text-transform: uppercase;
+          &:hover {
+            background: transparent;
+          }
+        }
+      }
+    }
+    .tab-content {
+      background-color: transparent;
+      @include background-cover("challenge_content_frame.png");
+      background-size: 100% 100%;
+      height: 478px;
+      padding: 40px 50px;
+      width: 100%;
+     }
+    .challenge_option {
+      margin-top: 6%;
+      .item {
+        @include background-cover("challenge_container_bg.png");
+        @include border-radius(8px);
+        font-family: $font-open-sans;
+        height: 249px;
+        padding: 19px 23px;
+        width: 177px;
+        text-align: center;
+        text-transform: uppercase;
+        @include respond-to(mobileMedium){
+          margin: auto;
+        }
+        h1 {
+          color: rgba($mondo,0.8);
+          font-size: 14px;
+          font-weight: $ultrabold;
+          line-height: 18px;
+        }
+        h2 {
+          color: $mondo;
+          font-size: 12px;
+          font-weight: $bold;
+        }
+        .img_cover {
+          @include radial-gradient( farthest-side at  47% 57%, rgba($black, 0.6), rgba(193, 186, 186, 0.8));
+          @include border-radius(8px);
+          border: 2px solid $crocodile;
+          display: table;
+          margin: auto;
+          @include margin(9px auto 13px auto);
+          height: 123px;
+          width: 123px;
+          >div {
+            display: table-row;
+            >div {
+              display: table-cell;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+      .owl-nav  {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        .owl-prev, .owl-next {
+          @include cssSprite($btn_bg);
+          color: $teak;
+          font-family: $font-open-sans;
+          font-weight: $bold;
+          display: inline-block;
+          padding-top: 19px;
+          text-align: center;
+          text-transform: uppercase;
+          span {
+            display: block;
+            background: linear-gradient(90deg, $teak 100%, rgba($black,0) 0%);
+            -webkit-background-clip: text;
+            font-size: 19px;
+            -webkit-text-fill-color: transparent;
+          }
+          @include text-shadow(0px 0px 0 rgba($black,0), -1px -1px 1px rgba($black,0.5));
+          &.disabled {
+            opacity: 0.6;
+          }
+        }
+
+        @include respond-to(mobileMedium){
+          position: absolute;
+          top: 40%;
+          width: 100%;
+          .owl-next {
+            @include cssSprite($owl-next-mb);
+            float: right;
+            span {
+              display: none;
+            }
+          }
+          .owl-prev {
+              @include cssSprite($owl-prev-mb);
+            float: left;
+            span {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,104 @@
+/* --- Header --- */
+
+.navbar-default{
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  max-width: 985px;
+  margin: auto;
+  position: relative;
+  z-index: 1000;
+  @include padding(20px null 5px);
+  .navbar-nav{
+  @include margin(-5px null null 10px);
+  @media screen and (max-width: $screen-mobile-md){
+    float: right;
+    margin-top: 0px;
+  }
+    li{
+      display: inline-block;
+      float: none !Important;
+      vertical-align: middle;
+      @media screen and (max-width: $screen-mobile-sm){
+        position: absolute;
+        top: 18px;
+        right: -7px;
+      }
+      a{
+        text-align: center;
+        color: #fff ;
+      }
+      &.active {
+        a {
+          background: none;
+          color: #fff ;
+        }
+      }
+    }
+    .nav_text{
+      display: block;
+      font-size: 14px;
+    }
+    .nav_icon{
+      display: inline-block;
+      &.ico_profile{
+        @include cssSprite($ico_profile);
+      }
+      &.ico_dragon{
+        @include cssSprite($ico_dragon);
+      }
+      &.ico_coins {
+        @include cssSprite($coins);
+      }
+    }
+  }
+.navbar-form {
+  margin-right: 0px;
+  @media screen and (max-width: $screen-mobile-md){
+    border: 0px;
+    box-shadow: none;
+    clear: both;
+    margin-left: 0px;
+    text-align: center;
+   }
+  }
+}
+
+.main_logo {
+    float: left;
+    margin-right: 46px;
+    margin-top: 13px;
+    @media screen and (max-width: $screen-tb-port){
+      margin-right: 23px;
+    }
+    @media screen and (max-width: $screen-mobile-sm){
+      margin-right: 8px;
+    }
+}
+.student_growth{
+  float: left;
+  display: inline-block;
+  position: relative;
+  @include cssSprite($ico_trophy);
+  color: white;
+  @media screen and (max-width: $screen-mobile-md){
+    margin-bottom:14px;
+  }
+  .growth_text{
+    @include position(absolute, 8px null null 72px);
+    width: 100%;
+
+&:hover {
+  color: $white-70;
+   }
+}
+  .growth_value{
+    display: block;
+    color: white;
+    text-align: center;
+    @include margin(25px null null);
+    @include padding(null 10px null 70px);
+    font-size: 24px;
+    line-height: 1.5;
+  }
+}

@@ -1,0 +1,162 @@
+.parent-subscription-table{
+  border: 1px solid $gray-lighter;
+  @media(min-width: $screen-md){
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  .col-title{
+    @include margin(0 null);
+    font-weight: $semibold;
+    color: #9398ac;
+    text-align: center;
+    font-size: 20px;
+  }
+  .table-col{
+    vertical-align: top;
+    @media(min-width: $screen-md){
+      display: table-cell;
+      &.col-left{
+        width: 30%;
+        border-right: 1px solid $gray-lighter;
+      }
+      &.col-right{
+        width: 70%;
+      }
+    }
+    &.col-left{
+      @media(max-width: $screen-sm-max){
+        border-bottom: 1px solid $gray-lighter;
+      }
+    }
+  }
+  .table-item{
+    @include padding(20px 10px);
+    border-top: 1px solid $gray-lighter;
+    text-align: center;
+    color: $gray-light;
+    &:first-child{
+      border-top: 0;
+    }
+  }
+}
+
+
+/// subscriptions style
+.package-box{
+//for Current Subject
+  &.current-subject{
+  }
+//for Current Plan
+  &.current-plan{
+  }
+//for Current subscription Package
+  &.current-package{
+  }
+
+  &.block{
+    display: block;
+    min-height: inherit;
+    height: auto;
+    span, strong, small{
+      display: inline-block;
+    }
+  }
+}
+
+
+.subscription-checkout{
+  background-color: #fafbfb;
+  @include padding(15px);
+  @include margin(42px auto);
+  position: relative;
+  border-right: 4px solid #e8e9e9;
+  &::before, &::after{
+    content: '';
+    width: 100%;
+    @include position(absolute, -10px 0 null 0);
+    height: 10px;
+    background-image: url('../img/panel-border-strip.png');
+    background-repeat: repeat-x;
+    background-position: right top;
+  }
+  &::after{
+    top: auto;
+    bottom: -11px;
+    height: 16px;
+    background-position: right -10px;
+  }
+  .col-title{
+    font-weight: $semibold;
+    margin-bottom: 20px;
+    color: #9398ac;
+    text-align: center;
+  }
+}
+
+.expected-subscription{
+
+  .col-table{
+    @include padding(null null);
+    @media(min-width: $screen-sm){
+      display: table-cell;
+      &.col-left{
+        width: 40%;
+      }
+      &.col-right{
+          width: 60%;
+          border-left: 1px solid #d5d6d6;
+      }
+    }
+    @media(max-width: $screen-xs-max){
+      &.col-right{
+          border-top: 1px solid #d5d6d6;
+      }
+    }
+  }
+
+  .table-item{
+    @include padding(15px);
+    text-align: center;
+    display: block;
+  }
+  .table-item + .table-item{
+    border-top: 1px solid #d5d6d6;
+  }
+  .package-box{
+    margin-top: 10px;
+    .package-price{
+      font-size: 16px;
+    }
+  }
+  @media(min-width: $screen-sm){
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+  }
+}
+
+.table-checkout{
+  color: $gray-light;
+  .subscription-checkout &{
+    @media(min-width: $screen-sm){
+      margin-top: 30px;
+    }
+  }
+
+  tbody{
+    tr{
+      td{
+        border-width: 0;
+        font-size: 14px;
+        @include padding(15px null);
+        &:last-child{
+          text-align: right;
+        }
+      }
+    }
+  }
+  tfoot{
+    font-size: 16px;
+  }
+}

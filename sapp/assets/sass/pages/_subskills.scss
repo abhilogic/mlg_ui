@@ -1,0 +1,479 @@
+
+
+.subskills_page {
+  background:{
+    image: url("../img/subskills_bg.jpg");
+  }
+  &.in {
+     background:{
+       image: url("../img/subskills_bg_in.jpg"),url("../img/subskills_bg.jpg");
+     }
+     @media screen and (min-width: $screen-tb-land) {
+       overflow: hidden;
+     }
+  }
+  .scroll_animation {
+    display: none;
+    position: absolute;
+    top: 13.4%;
+    left: 18%;
+    z-index: 100;
+    &.show {
+      display: block;
+    }
+  }
+  .subkils_paper_block {
+    background: transparent;
+    position: absolute;
+    height: 40%;
+    width: 38%;
+    left: 35%;
+    top: 36%;
+    cursor: pointer;
+    text-align: center;
+    .up_arrow {
+      display: inline-block;
+      @include animation(upword-arrow-animation 1.0s infinite);
+      @include cssSprite($castle__arrowUp);
+      margin-top: 26%;
+      z-index: 1;
+    }
+  }
+  .modal-dialog {
+    transition: transform 2s ease-out !important;
+    transform: none !important;
+    width: auto;
+    background: none;
+    @include box-shadow(none);
+    .modal-content {
+      background: none;
+      border: 0px;
+      @include box-shadow(none);
+    }
+  }
+// subskills-icons
+  .subskill_icons {
+    display: inline-block;
+    vertical-align: middle;
+      &.arrow_left {
+        @include cssSprite($subskill_left_arrow);
+        &.active {
+          @include cssSprite($subskill_left_arrow_active);
+        }
+      }
+      &.arrow_right {
+        @include cssSprite($subskill_right_arrow);
+        &.active {
+          @include cssSprite($subskill_right_arrow_active);
+        }
+      }
+      &.play {
+        @include cssSprite($subskill_play);
+        &.active {
+          @include cssSprite($subskill_play_active);
+        }
+        &.inactive {
+          @include cssSprite($subskill_play_inactive);
+        }
+      }
+      &.paper {
+        @include cssSprite($subskill_paper);
+        &.active {
+          @include cssSprite($subskill_paper_active);
+        }
+        &.inactive {
+          @include cssSprite($subskill_paper_inactive);
+        }
+      }
+      &.puzzle {
+        @include cssSprite($subskill_puzzle);
+        &.active {
+          @include cssSprite($subskill_puzzle_active);
+        }
+        &.inactive {
+          @include cssSprite($subskill_puzzle_inactive);
+        }
+      }
+  }
+// subskills icons
+  .wooden_frame {
+    background: none;
+    video {
+      max-width: 100%;
+      width: 400px;
+    }
+    @media screen and (max-width: $screen-tb-land){
+      width: 993px;
+    }
+    @media screen and (max-width: $screen-tb-port){
+      width: 740px;
+    }
+    @media screen and (max-width: $screen-mobile-md){
+      width: 100%;
+      height: auto;
+      background: none;
+      padding-bottom: 30px;
+      background: none;
+    }
+    .wooden_frame_content_cover {
+      background-image: url("../img/subskillquiz_bg.png");
+      width: 906px;
+      height: 567px;
+      padding-top: 40px;
+      margin: auto;
+      position: relative;
+    @include respond-to(mobileMedium){
+        background: none;
+        width: auto;
+        height: auto;
+        padding-top: 0px;
+      }
+      .content-cover {
+        max-height: calc(100% - 28px);
+        margin: auto;
+        padding-top: 37px;
+        width: 80%;
+      @include respond-to(tabletPort){
+          width: 100%;
+          padding-top: 20px;
+        }
+        @include respond-to(mobileMedium){
+            padding-top: 0px;
+          }
+      }
+      .panel, .panel-heading, .panel-footer {
+        background: none;
+        border: 0px;
+      }
+      .panel-title,.footer-title {
+        span {
+          display: block;
+        }
+        color: $vanCleef;
+        font-size: 14px ;
+        font-family:$font-times_bold;
+      }
+      .nav-tabs {
+        border: 0px;
+        li {
+          display: block;
+          a {
+            background: none;
+            border:0px;
+          }
+          &.active {
+            a {
+              background: none;
+            }
+          }
+        }
+      }
+      .pager {
+        margin-top: 0px;
+        &:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        li {
+          &:first-child {
+            float: left;
+          }
+          &:last-child {
+            float: right;
+          }
+          .btn {
+            color: rgba($vanCleef,0.5);
+            font-family: $font-times_bold;
+            font-size: 18px;
+            &.active {
+              color: $vanCleef;
+            }
+          }
+          .btn-prev {
+            @include cssSprite($subskill_prev);
+          }
+          .btn-next {
+            @include cssSprite($subskill_next);
+          }
+        }
+      }
+      .btn {
+        background-color: transparent !important;
+        border: 0px !important;
+        @include box-shadow(none);
+        &:focus {
+          outline: 0px;
+        }
+      }
+      .option {
+        list-style: none;
+        padding-left: 0px;
+        li {
+          display: block;
+          span {
+            color: $vanCleef;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: $semibold;
+            font-family: $font-open-sans;
+            &:last-child {
+              margin-left: 20px;
+            }
+          }
+        }
+      }
+      .ques {
+          span {
+            color: $vanCleef;
+            display: inline-block;
+            font-family: $font-open-sans;
+            vertical-align: text-top;
+            &:last-child {
+              width: calc(100% - 64px);
+              margin-left: 15px;
+            }
+          }
+        }
+      .panel-body {
+        .papar_cover {
+          background: {
+            image: url(../img/question-paper-bg.png);
+            position: center center;
+            size: 100% 100%;
+          }
+          width: 308px;
+          height: 340px;
+          margin: auto;
+          padding: 20px 15px 15px 20px;
+          overflow: hidden;
+          @media screen and (max-width: $screen-mobile-md){
+            width: 100%;
+          }
+          .para {
+            color: $vanCleef;
+            font-family: $font-open-sans;
+            font-size: 14px;
+          }
+        }
+      }
+      .btn-submit {
+        background: {
+          image: url(../img/submit_btn.png);
+          position: center center;
+          size: 100% 100%;
+        }
+        font-size: 18px;
+        color: $vanCleef;
+        font-family: $font-times_bold;
+        padding: 10px 70px 10px 23px;
+        text-align: left;
+      }
+      .topics {
+        #subskils_nav_tabs-accordion {
+          .panel-title {
+            background: none;
+            padding: 5px 0px;
+          }
+        }
+        .js-tabcollapse-panel-heading {
+          span {
+            display: inline-block;
+            width: calc(100% - 45px);
+            margin-left: 10px;
+          }
+        }
+        .js-tabcollapse-panel-body {
+          border: 0px;
+          .panel-body {
+            padding: 15px;
+          }
+        }
+        .panel-body {
+          padding: 0px;
+        }
+        .panel-title {
+          background: {
+            image: url(../img/subskill_bg.png);
+            size: 100% 100%;
+            position: center center;
+          }
+          padding: 20px;
+          span {
+            &:first-child {
+              text-transform: uppercase;
+            }
+          }
+        }
+        .footer-title {
+          background: {
+            image: url(../img/subskill_bg_conitnue.png);
+            size: 100% 100%;
+            position: center center;
+          }
+          padding: 20px;
+        }
+        .nav-tabs {
+          margin-top: 20px;
+          margin-bottom: 20px;
+          li {
+              width: 100%;
+            a {
+              display: block;
+              padding: 0px 15px;
+              span {
+                color: rgba($vanCleef,0.5);
+                border-bottom: 2px solid rgba($vanCleef,0.07);
+                padding-bottom: 5px;
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 14px;
+                font-size: 12px;
+                font-weight: $bold;
+                font-family: $font-open-sans;
+                width: calc(100% - 50px);
+              }
+            }
+            &.active {
+              a {
+                span {
+                  color: $vanCleef;
+                }
+              }
+            }
+          }
+        }
+      }
+      .questions {
+        .panel-body {
+          padding-top: 0px;
+        }
+        .panel-heading {
+          margin-top: 15px;
+          @include respond-to(mobileMedium){
+              display: none;
+          }
+          .btn-prev {
+            @include cssSprite($subskill_left_arrow);
+            &.active {
+              @include cssSprite($subskill_left_arrow_active);
+            }
+          }
+          .btn-next {
+              @include cssSprite($subskill_right_arrow);
+              &.active {
+                @include cssSprite($subskill_right_arrow_active);
+              }
+          }
+          .panel-title {
+            font-size: 16px;
+            text-align: center;
+          }
+        }
+        .panel {
+
+          .panel-footer {
+          }
+        }
+      }
+      // subskillsquiz start here
+      .subskills_quiz {
+        .panel-heading {
+          position: relative;
+          .time {
+            &:after {
+              content:'';
+              display: table;
+              clear: both;
+            }
+            li {
+              display: inline;
+              vertical-align: middle;
+              float: left;
+              span {
+                color: $vanCleef;
+                font-size: 14px;
+                font-family: $font-times_bold;
+                display: block;
+                &:last-child {
+                  font-size: 18px;
+                }
+              }
+              &:last-child {
+                width: calc(100% - 50px);
+                margin-left: 10px;
+              }
+            }
+          }
+          .panel-title {
+            background: {
+              image: url(../img/quiz_heading.png);
+              repeat: no-repeat;
+            }
+            padding: 11px 0px;
+            font-size: 20px;
+          }
+          .close {
+            opacity: 1;
+          }
+          .close_icon_cover {
+            @include respond-to(mobileMedium){
+               position: absolute;
+               top: 15px;
+               right: 15px;
+            }
+          }
+        }
+        .panel-body {
+          @include respond-to(mobileMedium){
+            padding: 0px;
+          }
+          .ques {
+            font-family: $font-open-sans;
+            font-weight: $bold;
+            @include respond-to(mobileMedium){
+              font-size: 14px;
+            }
+          }
+          .content {
+            max-width: 471px;
+            min-height: 368px;
+            margin: auto;
+            padding: 50px;
+            position: relative;
+              @include respond-to(mobileMedium){
+                padding: 28px 20px 28px 20px;
+                min-height: 300px;
+              }
+            .option {
+              margin-top: 40px;
+            }
+            .form {
+              label {
+                font-family: $font-open-sans;
+                font-weight: $semibold;
+                color: $vanCleef;
+                font-size: 16px;
+              }
+              textarea {
+                background: {
+                  color: transparent;
+                }
+                border:0px;
+                @include border-radius(0px);
+                border-bottom: 2px solid $vanCleef;
+
+              }
+            }
+            .btn_submit_cover {
+              position: absolute;
+              bottom: 80px;
+              width: 90%;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

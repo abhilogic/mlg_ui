@@ -43,9 +43,31 @@
 			text-decoration:none;
 		}
 	}
+	.nav-child{
+		@include padding(null 15px 15px 80px);
+		list-style: inherit;
+		li{
+			color: darken($brand-primary, 10%);
+			width: 100%;
+			font-size: $font-size-base;
+			a{
+				display: block;
+				color: $gray-lighter;
+				@include padding(5px null);
+				font-size: $font-size-base - 2;
+			}
+			&.active, &:hover{
+				color: lighten($brand-primary, 10%);
+				a{
+					color: white;
+				}
+			}
+		}
+	}
 }
 
 .media-user{
+	cursor: pointer;
 	font-family: 'MyriadProBoldCondensed';
 	.media-heading{
 
@@ -55,7 +77,7 @@
 .sidebar_nav{
   &-main{
     border: 0;
-    li {
+    >li {
       display: block;
       padding-left: 30px;
       border-left: 4px solid transparent;
@@ -88,6 +110,24 @@
       }
     }
   }
+
+	//Sub Menu
+	.sub-menu{
+		margin: 0;
+		padding-left: 35px;
+		>li{
+			padding: 0;
+			a{
+				text-transform: none;
+				border-width: 0;
+				line-height: normal;
+				@include padding(5px  null);
+				.link__text{
+					margin: 0;
+				}
+			}
+		}
+	}
 }
 
 

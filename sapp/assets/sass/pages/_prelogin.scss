@@ -1,0 +1,486 @@
+.prelogin {
+    font-family: $font-open-sans;
+    background: none !important;
+  .navigation {
+      background: $dandelion;
+    .navbar-default {
+      @include padding(25px null 22px null);
+      @include respond-to(mobileMedium){
+        @include padding(3px null 3px null);
+        .navbar-toggle {
+          border-color: $white;
+        }
+      }
+      .navbar-brand {
+        color: $black;
+        height: auto;
+        font-size: 24px;
+        font-weight: $bold;
+        padding: 10px 15px;
+        text-transform: uppercase;
+          @include respond-to(mobileMedium){
+            padding: 15px;
+          }
+      }
+      .navbar-collapse {
+        @include respond-to(mobileMedium){
+          padding: 0px;
+        }
+      }
+      .navbar-nav {
+        li {
+            @include padding(10px 28px);
+            border: 2px solid transparent;
+            @include border-radius(40px);
+            position: relative;
+            &.bd {
+              border-color: $white;
+              &:not(:last-child){
+                margin-right: 41px;
+                @include respond-to(mobileMedium){
+                  margin-right: 0px;
+                }
+              }
+              a {
+                border: 0px;
+              }
+            }
+          a {
+            color: $black;
+            font-size: 18px;
+            padding: 0px;
+            border-bottom: 3px solid transparent;
+            &:hover {
+              background: none;
+              border-color: $white;
+            }
+          }
+          &.active {
+            a {
+              background: none;
+              border-color: $white;
+              @include respond-to(mobileMedium){
+                border:0px;
+              }
+            }
+          }
+          @include respond-to(mobileMedium){
+            display: block;
+            border: 0px;
+            @include border-radius(0px);
+            border-bottom: 1px solid $white;
+            top: 0px;
+            right: 0px;
+          }
+        }
+          @include respond-to(mobileMedium){
+            float: none;
+            margin: auto;
+          }
+       }
+    }
+  }
+  .carousel {
+    .carousel-inner {
+      .item {
+        img {
+          min-width: 100%;
+        }
+        .img_info {
+          background: rgba($Comet,0.85);
+          color: $white;
+          position: absolute;
+          width: 100%;
+          height: 198px;
+          bottom: 0px;
+          left: 0px;
+          @include padding(53px 198px 53px 198px);
+          @include respond-to(tabletPort){
+            @include padding(22px 198px);
+            height: 106px;
+          }
+          h4 {
+            font-size: 36px;
+            font-weight: $bold;
+            color: $white;
+            @include respond-to(tabletPort){
+              font-size: 24px;
+            }
+          }
+          p {
+            color: $white;
+            font-size: 24px;
+            margin-top: 10px;
+            @include respond-to(tabletPort){
+              font-size: 16px;
+            }
+          }
+          @include respond-to(mobileMedium){
+            display: none;
+          }
+        }
+      }
+    }
+    .carousel-control {
+      .fa-angle-left, .fa-angle-right {
+        font-size: 60px;
+        @include respond-to(tabletPort){
+          font-size: 49px;
+        }
+        @include respond-to(mobileMedium){
+          top: 36%;
+        }
+      }
+    }
+  }
+  .main_content_section {
+    padding-top: 160px;
+    @include respond-to(mobileMedium){
+      padding-top: 50px;
+    }
+    .about_us {
+      h1 {
+        font-size: 36px;
+        color: $mineShaft;
+        margin-bottom: 60px;
+        text-align: center;
+        @include respond-to(mobileMedium){
+          margin-bottom: 15px;
+        }
+      }
+      p {
+        color: $light-black;
+        font-size: 24px;
+        text-align: center;
+        @include respond-to(mobileMedium){
+          font-size: 16px;
+        }
+      }
+    }
+    .core_compitancy {
+      padding-top: 160px;
+      @include respond-to(mobileMedium){
+        padding-top: 50px;
+      }
+      .thumbnail {
+        background: none;
+        border: 0px;
+        padding: 0px;
+        text-align: center;
+        margin-bottom: 40px;
+        h4 {
+          color: $mineShaft;
+          font-size: 16px;
+          margin-top: 49px;
+          @include respond-to(mobileMedium){
+            font-size: 23px;
+            margin-top: 13px;
+          }
+        }
+        p {
+          color: $light-black;
+          font-size: 18px;
+          margin-top: 10px;
+        }
+      }
+    }
+    .feature_section {
+      >div {
+        padding-bottom: 160px;
+        @include respond-to(mobileMedium){
+          padding-bottom: 50px;
+          text-align: center;
+        }
+      h1 {
+        font-size: 36px;
+        color: $black;
+        margin-top: 40px;
+        font-weight: $bold;
+      }
+      p {
+        font-size: 18px;
+        margin-top: 20px;
+        color: $light-black;
+      }
+      .learn_more {
+        display:block;
+        font-size: 18px;
+        color: $dandelion;
+        text-transform: uppercase;
+        margin-top: 20px;
+        }
+      }
+    }
+    .testimonial_section {
+      text-align: center;
+      h4 {
+        color: $black;
+        font-size: 32px;
+      }
+      p {
+        color: rgba($black,0.4);
+        font-size: 32px;
+        font-style: italic;
+        margin-top: 28px;
+        max-width: 815px;
+        @include margin(null auto null auto);
+        @include respond-to(mobileMedium){
+          font-size: 24px;
+        }
+      }
+      .testimonials_info {
+        text-align: center;
+        margin-top: 90px;
+        .img_cover {
+          @include border-radius(100%);
+          width: 120px;
+          height: 120px;
+          border: 6px solid $dandelion;
+          padding-top: 4px;
+          margin: auto;
+          img {
+            @include border-radius(100%);
+            width: 100px;
+            height: 100px;
+          }
+        }
+        .testimonial_name {
+          color: rgba($black, 0.8);
+          font-size: 20px;
+          display: block;
+          margin-bottom: 5px;
+        }
+        .testimonial_post {
+          color: rgba($black,0.5);
+          font-size: 20px;
+          display: block;
+        }
+      }
+        .owl-theme .owl-controls{
+           position: absolute;
+           top: 38%;
+           width: 100%;
+           opacity: 1;
+           @include respond-to(mobileMedium) {
+              top: 48%;
+            }
+         .owl-buttons div{
+           width: 50px;
+           height: 50px;
+           line-height: 40px;
+           background: transparent;
+           border-radius: 0;
+         }
+        }
+        .owl-prev{
+           position: absolute;
+           left: -3%;
+        }
+        .owl-next{
+           position: absolute;
+           right: -3%;
+        }
+        .owl-prev:after,
+        .owl-next:after{
+           content: "\f104";
+           font-family: 'FontAwesome';
+           font-size: 50px;
+           color: #808080;
+        }
+        .owl-next:after{
+           content: "\f105";
+      }
+    }
+    .get_in_touch {
+      padding-top: 160px;
+      @include respond-to(mobileMedium){
+        padding-top: 50px;
+      }
+      h1 {
+        color: $black;
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 90px;
+        @include respond-to(mobileMedium){
+          font-size: 26px;
+          margin-bottom: 20px;
+        }
+      }
+      .cover {
+        max-width: 938px;
+        margin: auto;
+        @include box-shadow(0 0 16px rgba(0,0,0,0.4));
+        @include border-radius(10px);
+        h4 {
+          font-size: 20px;
+          font-weight: $bold;
+          margin-bottom: 39px;
+        }
+        .form_cover {
+            @include padding(41px 36px);
+          h4 {
+            color: $Comet;
+            margin-bottom: 60px;
+          }
+          .form {
+            position: relative;
+            .form-group {
+              position: relative;
+              margin-bottom: 40px;
+              &.focus {
+                label {
+                  top: -20px;
+                }
+              }
+              label {
+                color: rgba($Comet,1);
+                font-size: 12px;
+                font-weight: $light;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                text-transform: uppercase;
+                @include transition(0.3s top);
+              }
+              .form-control {
+                @include box-shadow(none);
+                @include border-radius(0px);
+                border:0px;
+                border-bottom: 2px solid $alto;
+                font-size: 20px;
+                color: rgba($Comet,0.85);
+                padding-left: 0px;
+              }
+            }
+            .btn-send {
+              @include box-shadow(0 0 16px rgba(0,0,0,0.4));
+              color: $white;
+              width: 60px;
+              height: 60px;
+              border: 0px;
+              @include border-radius(100%);
+              background: $shamrock;
+              font-size: 30px;
+              position: absolute;
+              bottom: -30px;
+              right: -30px;
+              &:focus {
+                outline: 0px;
+              }
+            }
+          }
+        }
+        .detail_cover {
+          @include border-radius(0px 10px 10px 0px);
+          background: $dandelion;
+          height: 100%;
+          @include padding(41px 47px);
+          @include respond-to(mobileMedium){
+              @include border-radius(0px 0px 10px 10px);
+              @include padding(41px 30px);
+          }
+          h4 {
+            color: $black;
+          }
+          .details {
+            li {
+              display: block;
+              margin-bottom: 28px;
+              .fa ,span {
+                color: rgba($black,0.4);
+                font-size: 18px;
+                display: inline-block;
+              }
+              span {
+                color: $black;
+                margin-left: 20px;
+              }
+            }
+          }
+          .map {
+            width: 257px;
+            height: 152px;
+            margin: auto;
+            margin-bottom: 41px;
+          }
+          .social_icon {
+            text-align: center;
+            li {
+              display: inline-block;
+              &:not(:last-child){
+                margin-right: 27px;
+                @include respond-to(mobileMedium){
+                  margin-right: 15px;
+                }
+              }
+              a {
+                display: block;
+                color: $dandelion;
+                background: rgba($black,0.31);
+                @include border-radius(100%);
+                height: 45px;
+                width: 45px;
+                text-align: center;
+                font-size: 30px;
+                padding-top: 2px;
+                &:hover {
+                  background: $shamrock;
+                  color: $white;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .footer {
+    margin-top: 187px;
+    background: $Comet;
+    @include padding(66px null 0px null);
+    @include respond-to(mobileMedium){
+      margin-top: 50px;
+    }
+    h4 {
+      font-size: 20px;
+      color: $white-65;
+      text-transform: uppercase;
+      font-weight: $bold;
+      @include respond-to(mobileMedium){
+        margin-top: 20px;
+      }
+    }
+    ul {
+      margin-top: 18px;
+      li {
+        display: block;
+        margin-bottom: 5px;
+        a {
+          font-size: 18px;
+          font-weight: $light;
+          color: $white-65;
+        }
+      }
+    }
+    .company_tab_line {
+      margin-top: 54px;
+      border-top: 1px solid rgba($white,0.3);
+      @include padding(5px null 31px null);
+      p {
+        color: $white-65;
+        font-size: 14px;
+        font-weight: $light;
+        @include respond-to(mobileMedium){
+          text-align: center;
+        }
+        &.policy_line {
+          text-align: right;
+          @include respond-to(mobileMedium){
+            text-align: center;
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+}

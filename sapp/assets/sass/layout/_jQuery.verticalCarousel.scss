@@ -1,0 +1,105 @@
+/* line 9, ../sass/style.scss */
+
+/* line 19, ../sass/style.scss */
+.verticalCarousel {
+  margin: auto;
+  max-width: 500px;
+  background-color: transparent;
+}
+
+/* line 24, ../sass/style.scss */
+.verticalCarouselHeader {
+  background: transparent;
+  border-width: 0px;
+  border-style: solid;
+  padding: 0px;
+}
+/* line 27, ../sass/style.scss */
+.verticalCarouselHeader:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+/* line 32, ../sass/style.scss */
+.verticalCarouselHeader h3 {
+  float: left;
+  margin: 0px;
+}
+/* line 36, ../sass/style.scss */
+.vc_goUp, .vc_goDown {
+  display: block;
+  background: transparent;
+  text-align: center;
+  color: #000;
+}
+/* line 45, ../sass/style.scss */
+.vc_goUp:active, .vc_goDown:active {
+  -moz-transform: scale(0.7, 0.7);
+  -ms-transform: scale(0.7, 0.7);
+  -webkit-transform: scale(0.7, 0.7);
+  transform: scale(0.7, 0.7);
+}
+
+/* line 52, ../sass/style.scss */
+.verticalCarouselGroup.vc_list > li {
+  margin-top: 0px;
+  border-width: 0px;
+  border-style: solid;
+  padding-top: 8px;
+  padding-bottom: 12px;
+  background-color: transparent;
+  display: block;
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  img {
+    margin: auto;
+    cursor: pointer;
+    @include respond-to(mobileMedium){
+      width: 298px;
+    }
+  }
+
+}
+/* line 57, ../sass/style.scss */
+.verticalCarouselGroup.vc_list > li h4 {
+  margin: 0px 0px 15px;
+}
+/* line 60, ../sass/style.scss */
+.verticalCarouselGroup.vc_list > li p {
+  margin: 0px 0px 0px;
+}
+
+
+/* line 14, ../sass/jQuery.verticalCarousel.scss */
+.vc_goUp, .vc_goDown {
+  display: block;
+}
+/* line 16, ../sass/jQuery.verticalCarousel.scss */
+.vc_goUp.isDisabled, .vc_goDown.isDisabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* line 21, ../sass/jQuery.verticalCarousel.scss */
+.vc_container {
+  overflow: hidden;
+  -moz-transition: height 0.2s ease-in;
+  -webkit-transition: height 0.2s ease-in;
+  transition: height 0.2s ease-in;
+  max-height: 427px;
+  @include respond-to(mobileMedium){
+    max-height: 618px;
+  }
+}
+
+/* line 25, ../sass/jQuery.verticalCarousel.scss */
+.vc_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  -moz-transition: -moz-transform 0.2s ease-in;
+  -webkit-transition: -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in;
+}

@@ -1,0 +1,297 @@
+.subskillsroom_page {
+  @include  background-img("subskillsroom_bg.jpg");
+  .link_block {
+    position: absolute;
+    width: 30%;
+    height: 27%;
+    top: 65%;
+    left: 39%;
+    .lesson_link, .quiz_link {
+      display: inline-block;
+      height: 100%;
+    }
+    .lesson_link {
+      width: 55%;
+    }
+    .quiz_link {
+      width: 44%;
+    }
+  }
+  @include respond-to(tabletPort){
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @include respond-to(mobileMedium){
+    @include background-img("subskillsroom_mobile_bg.jpg");
+  }
+  .frame {
+    @include background-cover("subskillsroom_frame.png");
+    height: 605px;
+    margin: auto;
+    width: 959px;
+    @include respond-to(tabletPort){
+      width: 100%;
+      height: 489px;
+      background-size: 100% 100%;
+    }
+    @include respond-to(mobileMedium){
+      background: none;
+    }
+    &.frams_table {
+      position: relative;
+      &:before {
+        @include background-cover("subskillsroom_table.png");
+        bottom: -48px;
+        content: '';
+        height: 283px;
+        left: -90px;
+        position: absolute;
+        width: 1084px;
+        z-index: 0;
+        @include respond-to(tabletPort){
+          width: 100%;
+          background-size: 100% 100%;
+        }
+        @include respond-to(mobileMedium){
+          width: 113%;
+          height: 130px;
+          left: -48px;
+        }
+      }
+    }
+    .panel, .panel-heading,.panel-footer{
+      background: transparent;
+      border: 0px;
+      padding: 0px;
+    }
+    .inner_cover {
+      height: 100%;
+      @include padding(54px 79px);
+      position: relative;
+      width: 100%;
+      z-index: 10;
+      @include respond-to(mobileMedium){
+        padding: 0px 15px;
+      }
+    }
+    .icon {
+      display: inline-block;
+    }
+    .panel-heading {
+      .prev, .next {
+        color: $rodeoDust;
+        display: block;
+        font-size: 16px;
+        font-family: $font-open-sans;
+        font-weight: $bold;
+        @include respond-to(mobileMedium){
+          display: none;
+        }
+      }
+      .icon {
+        @include respond-to(mobileMedium){
+          margin-top: 46px;
+        }
+        cursor: pointer;
+        &:hover {
+          @include animation(upword-arrow-animation 1s infinite);
+        }
+        &.video_book {
+          @include cssSprite($subskill_video_book);
+          @include respond-to(mobileMedium){
+            @include cssSprite($owl-prev-mb);
+          }
+        }
+        &.book {
+          @include cssSprite($subskill_book);
+          @include respond-to(mobileMedium){
+            @include cssSprite($owl-next-mb);
+          }
+        }
+        &.quiz_book {
+            @include cssSprite($subskill_quiz_book);
+            @include respond-to(mobileMedium){
+              @include cssSprite($owl-prev-mb);
+            }
+        }
+      }
+      .panel-title {
+        @include background-cover("subskillsroom_hd_bg.png");
+        background-size: 100% auto;
+        width: 409px;
+        @include padding(31px null 31px null);
+        margin: auto;
+        margin-top: 13px;
+        text-transform: uppercase;
+        @media screen and (min-width: $screen-tb-land){
+          min-height: 96px;
+        }
+        @include respond-to(tabletPort){
+          background-size: 100% 100%;
+          width: 100%;
+        }
+        span {
+          color: $vanCleef;
+          display: block;
+          font-family: $font-open-sans;
+          font-weight: $bold;
+          font-size: 16px;
+          text-align: center;
+          @include respond-to(mobileMedium){
+            font-size: 14px;
+          }
+          }
+       }
+    }
+    .panel-body {
+      padding: 0px;
+      padding-top: 48px;
+      @include respond-to(tabletPort){
+        padding-top: 30px;
+      }
+      .ques {
+        color: $rodeoDust;
+        font-family: $font-open-sans;
+        font-size: 18px;
+        text-transform: uppercase;
+        text-align: center;
+        @include respond-to(mobileMedium){
+          font-size: 14px;
+        }
+      }
+      .option {
+        margin: auto;
+        margin-top: 49px;
+        width: 450px;
+        @include respond-to(tabletPort){
+          margin-top: 26px;
+        }
+        @include respond-to(mobileMedium){
+          width: 100%;
+        }
+        li {
+          display: inline-block;
+          @include respond-to(mobileMedium){
+            display: block;
+            margin-bottom: 8px;
+          }
+          &:nth-child(1), &:nth-child(2){
+            margin-bottom: 28px;
+            @include respond-to(mobileMedium){
+              margin-bottom: 8px;
+            }
+          }
+          &:nth-child(2n-1){
+            width: 80.5%;
+
+          }
+          span {
+            color: $rodeoDust;
+            display: inline-block;
+            font-family: $font-open-sans;
+            font-weight: $bold;
+            font-size: 18px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            vertical-align: middle;
+            @include respond-to(mobileMedium){
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    .ques_no_indicator {
+      max-width: 411px;
+      margin: auto;
+      margin-top: 132px;
+      @include respond-to(tabletPort){
+        margin-top: 23px;
+      }
+      .owl-item {
+        &:last-child {
+          .item {
+            &:before {
+              display: none;
+            }
+          }
+        }
+      }
+      .item {
+        text-align: center;
+        &:before {
+          @include background-cover("subskillsroom-ques_indicators_before_bg.png");
+          content: '';
+          position: absolute;
+          height: 8px;
+          width: 104%;
+          left: 32px;
+          top: 23px;
+          z-index: -1;
+        }
+        .ques_no {
+          color: $rodeoDust;
+          display: inline-block;
+          font-family: $font-open-sans;
+          font-weight: $bold;
+          i {
+            font-style: normal;
+          }
+        }
+        .icon {
+          @include cssSprite($ques_no_indicator);
+        }
+        &.active {
+          &:before {
+            background: $black;
+          }
+          .icon {
+            @include cssSprite($ques_no_indicator_active);
+          }
+        }
+        &.inactive {
+          &:before {
+            background: $black;
+          }
+          .icon {
+            @include cssSprite($ques_no_indicator_inactive);
+          }
+        }
+      }
+    }
+    .owl_text_block_carousel {
+      .item {
+        color: $rodeoDust;
+        font-size: 18px;
+        font-weight: $semibold;
+        font-family: $font-open-sans;
+        width: 100%;
+        height: 300px;
+        .para {
+          margin-bottom: 15px;
+        }
+        h4 {
+          margin-bottom: 5px;
+        }
+      }
+      .owl-nav {
+        width: 100%;
+        text-align: center;
+        .owl-prev, .owl-next {
+          font-size: 35px;
+          color: $rodeoDust;
+          display: inline-block;
+          margin: 0px 15px;
+          &.disabled {
+              color: rgba($rodeoDust,0.7);
+          }
+        }
+      }
+    }
+    &.subskills_view_lesson_frame {
+      .panel-body {
+        padding-top: 20px;
+      }
+    }
+  }
+}

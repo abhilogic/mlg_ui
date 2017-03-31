@@ -58,7 +58,7 @@
 }
 
 /* .flex-col-* vertically aligns an individual .flex-col */
-.flex-col-top {
+.flex-col-top{
   @include align-self(flex-start);
 }
 .flex-col-bottom {
