@@ -63,34 +63,7 @@
 		<div class="page-content">
 
 			<!-- Main Sidebar -->
-			<aside class="sidebar sidebar-main">
-					<div class="sidebar-user">
-						<br><br>
-					</div>
-					<ul class="nav sidebar_nav sidebar_nav-main">
-						<li class="active">
-							<a href="teacher-dashboard.html"><i class="icon icon-my_class"></i><span class="link__text">My Class</span></a>
-						</li>
-						<li >
-							<a href="teacher-subscription.html"><i class="icon icon-my_subscriptions"></i><span class="link__text">My Subscription</span></a>
-						</li>
-						<li >
-							<a href="teacher-rewards.html"><i class="icon icon-my_rewards"></i><span class="link__text">My Rewards</span></a>
-						</li>
-						<li >
-							<a href="teacher-content.html"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
-						</li>
-						<li>
-							<a href="teacher-blueprint-tool.html"><i class="icon icon-my_blueprinting_tool"></i><span class="link__text">My Blueprint Tool</span></a>
-						</li>
-						<li>
-							<a href="teacher-setting.html"><i class="icon icon-my_settings"></i><span class="link__text">My Setting</span></a>
-						</li>
-						<li>
-							<a href="#"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
-						</li>
-					</ul>
-			</aside>
+			<aside class="sidebar sidebar-main" ng-include='"include/sidebar-teacher.html"'></aside>
 			<!-- /sidebar -->
 
 
@@ -118,7 +91,7 @@
 								<li class="student gifted">
 									<a href="student-profile.html">
 										<div class="student__img">
-										<img class="img-circle" src="../assets/img/student-img/stud_img_1.png" alt="Andrew Garfield"/>
+										<img class="img-circle" src="assets/img/student-img/stud_img_1.png" alt="Andrew Garfield"/>
 									</div>
 										<span class="student__name">Andrew Garfield</span>
 									</a>
@@ -127,7 +100,7 @@
 								<li class="student outstanding">
 									<a href="#">
 										<div class="student__img">
-										<img class="img-circle" src="../assets/img/student-img/stud_img_2.png" alt="Angelina Barnes"/>
+										<img class="img-circle" src="assets/img/student-img/stud_img_2.png" alt="Angelina Barnes"/>
 									</div>
 										<span class="student__name">Angelina Barnes</span>
 									</a>
@@ -136,7 +109,7 @@
 								<li class="student ontarget">
 									<a href="#">
 										<div class="student__img">
-											<img class="img-circle" src="../assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
+											<img class="img-circle" src="assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
 										</div>
 										<span class="student__name">Bobby Jackson</span>
 									</a>
@@ -145,7 +118,7 @@
 								<li class="student ontarget">
 									<a href="#">
 										<div class="student__img">
-										<img class="img-circle" src="../assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
+										<img class="img-circle" src="assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
 									</div>
 										<span class="student__name">Bobby Jackson</span>
 									</a>
@@ -154,7 +127,7 @@
 								<li class="student ontarget">
 									<a href="#">
 										<div class="student__img">
-											<img class="img-circle" src="../assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
+											<img class="img-circle" src="assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
 										</div>
 										  <span class="student__name">Bobby Jackson</span>
 									</a>
@@ -163,7 +136,7 @@
 								<li class="student struggling">
 									<a href="#">
 										<div class="student__img">
-											<img class="img-circle" src="../assets/img/student-img/stud_img_4.png" alt="Caly Miles"/>
+											<img class="img-circle" src="assets/img/student-img/stud_img_4.png" alt="Caly Miles"/>
 										</div>
 										<span class="student__name">Caly Miles</span>
 									</a>
@@ -172,7 +145,7 @@
 								<li class="student remedial">
 									<a href="#">
 										<div class="student__img">
-											<img class="img-circle" src="../assets/img/student-img/stud_img_5.png" alt="Jema Stones"/>
+											<img class="img-circle" src="assets/img/student-img/stud_img_5.png" alt="Jema Stones"/>
 										</div>
 										<span class="student__name">Jema Stones</span>
 									</a>
@@ -181,7 +154,7 @@
 								<li class="student struggling">
 									<a href="#">
 										<div class="student__img">
-											<img class="img-circle" src="../assets/img/student-img/stud_img_6.png" alt="Saul Millers"/>
+											<img class="img-circle" src="assets/img/student-img/stud_img_6.png" alt="Saul Millers"/>
 										</div>
 										<span class="student__name">Saul Millers</span>
 									</a>
@@ -190,7 +163,7 @@
 								<li class="student struggling">
 									<a href="#">
 										<div class="student__img">
-											<img class="img-circle" src="../assets/img/student-img/stud_img_7.png" alt="Peter Parker"/>
+											<img class="img-circle" src="assets/img/student-img/stud_img_7.png" alt="Peter Parker"/>
 										</div>
 										<span class="student__name">Peter Parker</span>
 									</a>
@@ -213,14 +186,14 @@
 							<ul class="row list-thumb group_list">
 								<li class="group">
 									<a class="add__group" href="#">
-										<img class="img-circle" src="../assets/img/group-img/add_group_img.png" alt="Group Default"/>
+										<img class="img-circle" src="assets/img/group-img/add_group_img.png" alt="Group Default"/>
 										<span class="group__name">Add Group</span>
 									</a>
 								</li>
 								<li class="group">
 									<a href="#">
 										<div class="group-thumb">
-										<img class="img-circle" src="../assets/img/group-img/group_img_placeholder.png" alt="Group Default"/>
+										<img class="img-circle" src="assets/img/group-img/group_img_placeholder.png" alt="Group Default"/>
 									</div>
 										<span class="group__name">Group Name with default Image</span>
 									</a>
@@ -228,7 +201,7 @@
 								<li class="group">
 									<a href="#">
 										<div class="group-thumb">
-										<img class="img-circle" src="../assets/img/group-img/group_img_1.png" alt="Andrew Garfield"/>
+										<img class="img-circle" src="assets/img/group-img/group_img_1.png" alt="Andrew Garfield"/>
 									</div>
 										<span class="group__name">Andrew Garfield</span>
 									</a>
@@ -236,7 +209,7 @@
 								<li class="group">
 									<a href="#">
 										<div class="group-thumb">
-										<img class="img-circle" src="../assets/img/group-img/group_img_2.png" alt="Andrew Garfield"/>
+										<img class="img-circle" src="assets/img/group-img/group_img_2.png" alt="Andrew Garfield"/>
 									</div>
 										<span class="group__name">Andrew Garfield</span>
 									</a>
@@ -244,7 +217,7 @@
 								<li class="group">
 									<a href="#">
 										<div class="group-thumb">
-										<img class="img-circle" src="../assets/img/group-img/group_img_3.png" alt="Andrew Garfield"/>
+										<img class="img-circle" src="assets/img/group-img/group_img_3.png" alt="Andrew Garfield"/>
 									</div>
 										<span class="group__name">Andrew Garfield</span>
 									</a>
@@ -252,7 +225,7 @@
 								<li class="group">
 									<a href="#">
 										<div class="group-thumb">
-											<img class="img-circle" src="../assets/img/group-img/group_img_4.png" alt="Andrew Garfield"/>
+											<img class="img-circle" src="assets/img/group-img/group_img_4.png" alt="Andrew Garfield"/>
 										</div>
 										<span class="group__name">Andrew Garfield</span>
 									</a>
@@ -260,7 +233,7 @@
 								<li class="group">
 									<a href="#">
 										<div class="group-thumb">
-										<img class="img-circle" src="../assets/img/group-img/group_img_2.png" alt="Andrew Garfield"/>
+										<img class="img-circle" src="assets/img/group-img/group_img_2.png" alt="Andrew Garfield"/>
 									</div>
 										<span class="group__name">Andrew Garfield</span>
 									</a>
@@ -268,7 +241,7 @@
 								<li class="group">
 									<a href="#">
 										<div class="group-thumb">
-										<img class="img-circle" src="../assets/img/group-img/group_img_3.png" alt="Andrew Garfield"/>
+										<img class="img-circle" src="assets/img/group-img/group_img_3.png" alt="Andrew Garfield"/>
 									</div>
 										<span class="group__name">Andrew Garfield</span>
 									</a>
@@ -276,7 +249,7 @@
 								<li class="group">
 									<a href="#">
 										<div class="group-thumb">
-											<img class="img-circle" src="../assets/img/group-img/group_img_4.png" alt="Andrew Garfield"/>
+											<img class="img-circle" src="assets/img/group-img/group_img_4.png" alt="Andrew Garfield"/>
 										</div>
 										<span class="group__name">Andrew Garfield</span>
 									</a>
@@ -289,7 +262,7 @@
 					<!-- Planner Panel  -->
 					<div class="panel panel-flat">
 						<div class="panel-body no-padding">
-							<img src="../assets/img/calendar.png" alt="" class="img-responsive" style="width:100%"/>
+							<img src="assets/img/calendar.png" alt="" class="img-responsive" style="width:100%"/>
 						</div>
 					</div>
 					<!-- /planner panel  -->
@@ -339,7 +312,7 @@
 							<div class="tab-content tab-content-right col-sm-6">
 								<div id="menu" class="tab-pane fade in active">
 									 <!-- remove below image in the case of using plugins -->
-										<img src="../assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
+										<img src="assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
 
 										<br>
 										<div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
@@ -347,7 +320,7 @@
 
 								<div id="menu1" class="tab-pane fade">
 									<!-- remove below image in the case of using plugins -->
-									 <img src="../assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
+									 <img src="assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
 
 									 <br>
 									 <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
@@ -355,7 +328,7 @@
 
 								<div id="menu2" class="tab-pane fade">
 									<!-- remove below image in the case of using plugins -->
-									 <img src="../assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
+									 <img src="assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
 
 									 <br>
 									 <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
@@ -363,7 +336,7 @@
 
 								<div id="menu3" class="tab-pane fade">
 									<!-- remove below image in the case of using plugins -->
-									 <img src="../assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
+									 <img src="assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
 
 									 <br>
 									 <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
