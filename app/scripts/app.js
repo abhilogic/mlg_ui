@@ -73,6 +73,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/teacher/login', {
 		templateUrl : 'views/login-teacher.html',
 		controller : 'loginCtrl',	
+	}).when('/student/login', {
+		templateUrl : 'views/login-student.html',
+		controller : 'loginCtrl',	
 	}).when('/teacher/signup',{
 		templateUrl : 'views/teacher_signup.html',
 		controller : 'teacherLoginCtrl',
