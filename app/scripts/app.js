@@ -155,7 +155,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 
 
 
-		 $rootScope.$on('$viewContentLoaded', function() {
+	$rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
    });
 
