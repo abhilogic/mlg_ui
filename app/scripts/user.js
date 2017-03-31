@@ -301,6 +301,10 @@ angular.module('mlg')
             $location.url('teacher/create_account');
             return true;
           }
+          if (user_type == 'student') {
+            window.location.href='/mlg_ui/sapp/journey';
+            return true;
+          }
             // To Redirect User on his account last step page.
              // call API to get last step track             
     		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
