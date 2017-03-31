@@ -883,13 +883,14 @@ if (typeof $routeParams.id != 'undefined') {
 			});
 	};
 }])
+/*
 .run(['$rootScope',function($rootScope){
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
       console.log(toState);
       $rootScope.home = (toState.name == 'parent/dashboard');
   });
 }])
-/*.run(['$location', '$rootScope', function($location, $rootScope) {
+.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         $rootScope.home = (toState.name == 'mlg.home');
     });
@@ -897,7 +898,9 @@ if (typeof $routeParams.id != 'undefined') {
 /**
  *Controller for Teacher 
  **/
-.controller('teacherDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','commonActions',function($rootScope,$scope,loginHttpService,$location,user_roles,commonActions) {
+.controller('teacherOnBoardingCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','commonActions',function($rootScope,$scope,loginHttpService,$location,user_roles,commonActions) {
+  
+/* Start-  Step-1 for Onboarding */
   $scope.tch = {};
   $scope.submitTeacherDetail = function(data){
     var teacherDetail = {};
@@ -921,5 +924,6 @@ if (typeof $routeParams.id != 'undefined') {
 		  $scope.msg= 'Some technical error occured.'
 	   }); 
   };
+  /* end-  Step-1 for Onboarding */
 
 }]);
