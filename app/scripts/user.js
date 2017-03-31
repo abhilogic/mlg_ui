@@ -930,4 +930,33 @@ if (typeof $routeParams.id != 'undefined') {
   };
   /* end-  Step-1 for Onboarding */
 
+
+  /* Start - step-2 for onBoarding */
+	// call API to get grades
+     loginHttpService.gradeList().success(function(response) {
+  		  $scope.grades = response.response.Grades;  
+  	});
+
+     //show courses on change on class/grade
+      //call API to getCourseList for a level on change of grade
+     $scope.changeCourseList = function(grade_id) {
+	   	loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
+	        if(!courseslistresult.response.courses){  // value is null, empty
+	    	    $scope.msg=courseslistresult.response.message; 
+	        	$scope.records=courseslistresult.response.course_list;        
+	        }else{
+	        	$scope.cousesListByGrade= courseslistresult.response.courses;
+	          	$scope.msg=courseslistresult.response.message;
+	          	$scope.courserecords=courseslistresult.response.course_list; 
+	        }         
+    	})
+    }
+
+  /* end- step-2 for onBoarding */
+
+
+
+
+  
+
 }]);
