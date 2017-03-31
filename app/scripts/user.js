@@ -214,6 +214,13 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.getStepNum+'/'+pid
 		});
 	}
+  loginHttpResponse.signUpTeacher=function(teacherdata){
+		return $http({
+			method:'POST',	
+			data : teacherdata,		
+			url  : urlParams.baseURL+urlParams.signUpTeacher
+		});
+	}
     
 	return loginHttpResponse;
 	
@@ -267,7 +274,8 @@ angular.module('mlg')
 		return commonActions;
 	}])
 
-.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles',function($rootScope,$scope, loginHttpService,$location,user_roles) {
+.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles',function($rootScope,$scope,
+   loginHttpService,$location,user_roles) {
     $scope.form={};	
     $scope.msg='';
     $scope.range = function(n) {
@@ -291,6 +299,7 @@ angular.module('mlg')
           // $location.url('select_children');
           if (user_type == 'teacher') {
             $location.url('teacher/create_account');
+            return true;
           }
             // To Redirect User on his account last step page.
              // call API to get last step track             
@@ -313,7 +322,11 @@ angular.module('mlg')
 					else if(stepNum.response.step.step_completed==4){
 					 $location.url('parent/dashboard');
 					 }				
-
+					if(stepNum.response.step.step_completed==0 ){ $location.url('select_children'); }
+					else if(stepNum.response.step.step_completed==1){ $location.url('add_child_account'); }
+					else if(stepNum.response.step.step_completed==2){ $location.url('parent_preferences'); }
+					else if(stepNum.response.step.step_completed==3){ $location.url('payment_page'); }
+					else if(stepNum.response.step.step_completed==4){ $location.url('parent/dashboard'); }				
 	   			}
 			});
 
@@ -869,13 +882,44 @@ if (typeof $routeParams.id != 'undefined') {
 				alert('registration fail');
 			});
 	};
-}]);
-
+}])
+.run(['$rootScope',function($rootScope){
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+      console.log(toState);
+      $rootScope.home = (toState.name == 'parent/dashboard');
+  });
+}])
 /*.run(['$location', '$rootScope', function($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         $rootScope.home = (toState.name == 'mlg.home');
     });
 }]);*/
+/**
+ *Controller for Teacher 
+ **/
+.controller('teacherDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','commonActions',function($rootScope,$scope,loginHttpService,$location,user_roles,commonActions) {
+  $scope.tch = {};
+  $scope.submitTeacherDetail = function(data){
+    var teacherDetail = {};
+    var get_uid=commonActions.getcookies(get_uid);
+    teacherDetail = {
+       user_id : get_uid,
+       school_name : data.school,
+       country : data.country,
+       state : data.state,
+       city : data.city,
+       district : data.district,
+    };
+    console.log(teacherDetail);
+    loginHttpService.signUpTeacher(teacherDetail).success(function(response) {
+      if(response.status == true) {
+        $location.url('#');
+      }else{
+        $scope.msg= response.message;
+      }     		
+		}).error(function(error) {
+		  $scope.msg= 'Some technical error occured.'
+	   }); 
+  };
 
-
-
+}]);
