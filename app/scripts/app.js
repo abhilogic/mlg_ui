@@ -118,6 +118,12 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/teacher/select_courses',{
 		templateUrl : 'views/teacher_select_courses.html',
 		controller : 'teacherOnBoardingCtrl',
+	}).when('/teacher/dashboard',{
+		templateUrl : 'views/dashboard/teacher-dashboard.html',
+		controller : 'parentDashboardCtrl',
+	}).when('/teacher/subscription',{
+		templateUrl : 'views/dashboard/teacher-subscription.html',
+		controller : 'parentDashboardCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});
@@ -189,9 +195,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
          return $location.path().replace('/', '');
     };
   });
-});
-
-
-/*app.controller('PageCtrl', function () {
+})
+.controller('parentOffers', function ($scope) {
 	
-});*/
+	$scope.$apply(function(){
+		$('.page-container').addClass('abc');
+		var availableHeight = $(window).height() - $('.page-container').offset().top - $('.footer').outerHeight();
+		//var footerHeight = $('.footer').outerHeight();
+		$('.page-container').attr('style', 'min-height:' + availableHeight + 'px');
+	});
+	
+	 
+});

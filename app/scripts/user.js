@@ -844,6 +844,7 @@ if (typeof $routeParams.id != 'undefined') {
         }
       });
     };
+
 }])
 
 
@@ -862,6 +863,9 @@ if (typeof $routeParams.id != 'undefined') {
      $scope.gohome=function(){
 		window.location.href='/mlg_ui/app';
   	}
+
+//}]);
+
 
 	 $scope.register = function(data,user_type){
 	 		var role_id=user_roles[user_type];
