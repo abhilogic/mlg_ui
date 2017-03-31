@@ -24,8 +24,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	getChildrenDetails :'/users/getChildrenDetails',
 	addChildRecord : '/users/addChildrenRecord',
 	addChild : '/users/addChildren',
-	offerRecords: '/users/getOffers',
-	getStepNum 	   :'/users/getStepNum', 
+	offerRecords : '/users/getOffers',
+	getStepNum :'/users/getStepNum',
+  signUpTeacher :'/teachers/setTeacherRecord',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -113,7 +114,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		controller : 'parentDashboardCtrl',
 	}).when('/teacher/create_account',{
 		templateUrl : 'views/account-teacher.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'teacherDashboardCtrl',
 	}).otherwise({
 		redirectTo : '/',
 	});
