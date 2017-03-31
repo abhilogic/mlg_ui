@@ -369,25 +369,39 @@ angular.module('mlg')
 
   //alert(commonActions.getcookies(get_uid));
   var get_uid=commonActions.getcookies(get_uid);
-  //alert(commonActions.chidrenNameFactory(get_uid));
-
-
+  
 	// To call dynamic step slider
 		loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
 			var childcount=chidrenName.response.length;
 			console.log(chidrenName);
-			if(childcount>0){
-				//$rootScope.childname 	= chidrenName.response;													
+			if(childcount>0){																
 					$scope.childname=chidrenName.response;
 			}else{
 				$scope.childname=0;;
-			}
-			
+			}			
 		});
 	// end to call dynamic step slider
 
 
   $rootScope.username=$location.search().uid;
+
+
+	// Call API to get child details for deshboard naming	
+		$scope.frm={};
+		//$scope.frm.abc="uyuy";
+	loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+
+		var childcount=chidrenName.response.length;
+		//console.log(chidrenName);
+		if(childcount>0){
+			$scope.frm.childnames = chidrenName.response;
+		}
+		else{
+		$scope.frm.childnames =null;
+		}
+	});
+
+
 
   $scope.setPreference = function(data) {
     /*if (typeof $rootScope.logged_user == 'undefined') {
@@ -614,9 +628,17 @@ if (typeof $routeParams.id != 'undefined') {
 
 
 /* *************************************************************************** */
-    $scope.submitChildDetails = function(data){   
+    $scope.submitChildDetails = function(data){  
+    		if(typeof data.emailchoice=='undefined' || data.emailchoice==null){
+    			data.emailchoice==1;
+    		}
 
-       
+
+    		if(typeof data.selectedplan=='undefined' || data.selectedplan==null){
+    			data.selectedplan==1;
+    		}
+
+
     //data.selectedcourses = JSON.parse(JSON.stringify(data.selectedcourse));
       data.selectedcourses = Object.assign({}, data.selectedcourse);
       $scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
@@ -644,7 +666,6 @@ if (typeof $routeParams.id != 'undefined') {
        	}; 
 
 
-
        //console.log(childdata); 
        //how many childeren has been added n
        	loginHttpService.getAddedChildren(get_uid).success(function(response) {
@@ -660,7 +681,7 @@ if (typeof $routeParams.id != 'undefined') {
 								//window.location.href=urlParams.siteRoot+'add_child_account';
 								window.location.reload();
 						}else{
-							response_childadd.response.message;
+							$scope.message=response_childadd.response.message;
 						}
 			}); 
        	}
@@ -668,9 +689,6 @@ if (typeof $routeParams.id != 'undefined') {
        		//alert('redirect on preference page');
        		window.location.href=urlParams.siteRoot+'parent_preferences'; 
        	}
-
-
-
 
 	}
 		});
@@ -682,7 +700,6 @@ if (typeof $routeParams.id != 'undefined') {
 		console.log(data);
 		console.log($scope.usr = "usr");
 
-
 		console.log($scope.selectedoption);              
         $scope.submitCalled = "submit called " + $scope.selectedoption;
 
@@ -692,8 +709,6 @@ if (typeof $routeParams.id != 'undefined') {
 
    
 }])
-
-/** ************************ */
 
 .controller('passwordCtrl',['$scope','loginHttpService','$location','$timeout',function($scope, loginHttpService,$location,$timeout) {
     $scope.form={};	
