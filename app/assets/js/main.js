@@ -4,6 +4,25 @@ $(window).on('load', function() {
     $('body').removeClass('no-transitions');
 });
 
+// Floating Input Fields animation
+var floatInput = function(){
+  $(".float-input").each(function(){
+     if(this.value!=''){
+      $(this).parent('.form-group').addClass('focus');
+     }
+  });
+
+  $('.float-input').on('focusin', function() {
+    $(this).parent('.form-group').addClass('focus');
+  });
+
+  $('.float-input').on('focusout', function() {
+    if (!this.value) {
+      $(this).parent('.form-group').removeClass('focus');
+    }
+  });
+}
+floatInput();
 
 $(document).ready(function(){
 
@@ -48,25 +67,4 @@ $(document).ready(function(){
             }
         }, 100);
     }).resize();
-
-
-    // Floating Input Fields animation
-    var floatInput = function(){
-      $(".float-input").each(function(){
-         if(this.value!=''){
-          $(this).parent('.form-group').addClass('focus');
-         }
-      });
-
-      $('.float-input').on('focusin', function() {
-        $(this).parent('.form-group').addClass('focus');
-      });
-      $('.float-input').on('focusout', function() {
-        if (!this.value) {
-          $(this).parent('.form-group').removeClass('focus');
-        }
-      });
-    }
-    floatInput();
-
 });

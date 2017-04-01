@@ -282,10 +282,25 @@ angular.module('mlg')
         return new Array(n);
     }; 
 
+    $scope.teacher_signup_page=function(){
+    	$("#modalFreeTrail").modal('hide');					
+    	$location.url('teacher/signup');
+    }
+
+     $scope.parent_signup_page=function(){
+     	$("#modalFreeTrail").modal('hide');					
+    	$location.url('parent_signup');
+    }
+
+
     function setCookie(key, value) {
 		var expires = new Date();
 		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
 		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+	}
+
+	$scope.openFreeModal=function(){
+		$("#modalFreeTrail").modal();					
 	}
 	 $scope.login = function(data, user_type) {
        var role_id = user_roles[user_type];

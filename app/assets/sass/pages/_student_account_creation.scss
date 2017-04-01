@@ -38,7 +38,7 @@
     color: $brand-primary;
     box-shadow: none;
     outline: 0;
-    
+
     &.disabled{
       border-color: darken($gray-lighter, 10%);
       color: darken($gray-lighter, 10%);
@@ -76,60 +76,6 @@
     @extend .package-box;
   }
 }
-
-
-/*
-// Subscription Plan
-----------------------*/
-/*.subscriptionPlan-group{
-  &.btn-group{
-    padding: 0;
-    display: block;
-    width: 100%;
-    text-align: center;
-    .btn.plan{
-      text-align: center;
-      border: 1px solid $gray-lighter;
-      border-radius: 6px !important;
-      color: $gray-light;
-      float: none;
-      min-height: 50px;
-      display: inline-block;
-      @include margin(15px 0 null 2%);
-      @include padding(10px);
-      text-transform: uppercase;
-      min-width: 90px;
-
-      .plan-title{
-        display: block;
-        margin-bottom: 5px;
-        font-size: $font-size-base - 2;
-      }
-      .plan-icon{
-          font-size: 40px;
-      }
-      &.active{
-        border-color: $brand-primary;
-        color: $brand-primary;
-        box-shadow: none;
-        outline: 0;
-        &:before{
-          //@extend .selected;
-        }
-      }
-      &:first-child{
-        margin-left: 0;
-      }
-      @media (max-width: $screen-xs){
-        display: block;
-        @include margin(15px 0 null 0);
-        .plan-title{
-          font-size: $font-size-base;
-        }
-      }
-    }
-  }
-}*/
 
 
 /*
