@@ -195,7 +195,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
   $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
     //$scope.atHome = ($location.path() === "/");
 	$scope.this_route = function(){
-         return $location.path().replace('/', '');
+		
+         return $location.path().replace('/', '')==''?'home':$location.path().replace('/', '')
     };
   });
 })
