@@ -26,6 +26,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	addChild : '/users/addChildren',
 	offerRecords : '/users/getOffers',
 	getStepNum :'/users/getStepNum',
+	promocode :'/users/promocode',
   signUpTeacher :'/teachers/setTeacherRecord',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',

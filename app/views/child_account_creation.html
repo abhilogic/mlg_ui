@@ -42,37 +42,41 @@
                         <div class="col-sm-6">
                           <div class="form-group float-label">
                             <label class="control-label">First Name</label>
-                            <input type="text" name="fname" class="form-control float-input" ng-model="frm.first_name" required/>
+                            <input type="text" name="fname" class="form-control float-input" ng-model="frm.first_name" />
+                            <span style="color:red">{{message[2]}}</span>                              
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group float-label">
                             <label class="control-label">Last Name</label>
-                            <input type="text" class="form-control float-input" ng-model="frm.last_name" required />
+                            <input type="text" class="form-control float-input" ng-model="frm.last_name"  />
+                            <span style="color:red">{{message[3]}}</span>
                           </div>
                         </div>
                       </div>
 
                       <div class="form-group float-label">
                         <label class="control-label">School</label>
-                        <input type="text" class="form-control float-input" ng-model="frm.school" required/>
+                        <input type="text" class="form-control float-input" ng-model="frm.school" />
+                        <span style="color:red">{{message[5]}}</span>
                       </div>
 
                       <div class="row">
                         <div class="col-sm-6">
                           <div class="form-group float-label">
                             <label class="control-label">Grade</label>
-                            <select name="gradename" class="form-control float-input" ng-options="grade.name for grade in grades"  ng-model="frm.levelchoice" ng-change="changeCourseList(frm.levelchoice)" required>
+                            <select name="gradename" class="form-control float-input" ng-options="grade.name for grade in grades"  ng-model="frm.levelchoice" ng-change="changeCourseList(frm.levelchoice)" required="Please select grade">
                               <option value="">Select Grade</option>
                               <!--<option ng-repeat="grade in grades" value="{{grade.id}}">{{grade.name}}</option> -->                                
                             </select>
-                            <span ng-show="childform.gradename.$error.required">Select service</span>
+                            <span ng-show="childform.gradename.$error.required"></span>
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group float-label">
                             <label class="control-label">Date of Birth</label>
                             <input type="date" class="form-control float-input" ng-model="frm.dob"/>
+                            <span style="color:red">{{message[6]}}</span>
                           </div>
                         </div>
                       </div>
@@ -87,11 +91,11 @@
                         </div>
                         <div class="col-md-4">
                           <div class="radio radio-primary radio-inline">
-                          <input type="radio" id="inlineRadio1" value="1" name="radioInline"  ng-model="frm.emailchoice" ng-click="myStyle={display:'block'}" ng-checked="true">
+                          <input type="radio" id="inlineRadio1" value="1" name="radioInline"  ng-model="frm.emailchoice" ng-click="myStyle={display:'block'}" required>
                               <label for="inlineRadio1">Yes</label>
                           </div>
                           <div class="radio radio-primary radio-inline">
-                              <input type="radio" id="inlineRadio2" value="0" name="radioInline" ng-model="frm.emailchoice" ng-click="myStyle={display:'none'}">
+                              <input type="radio" id="inlineRadio2" value="0" name="radioInline" ng-model="frm.emailchoice" ng-click="myStyle={display:'none'}" required>
                               <label for="inlineRadio2"> No</label>
                           </div>
                         </div>
@@ -100,14 +104,16 @@
 
                       <div class="form-group float-label has-success has-feedback" ng-style="myStyle">
                         <label class="control-label">EMAIL Id</label>
-                        <input type="text" class="form-control float-input" id="inputEmail" aria-describedby="inputEmailSuccessStatus" value="hello@mlg.com" ng-model="frm.childemail" required>
+                        <input type="text" class="form-control float-input" id="inputEmail" aria-describedby="inputEmailSuccessStatus" value="hello@mlg.com" ng-model="frm.childemail" >
                         <div class="form-control-feedback"><i class="icon icon-check"></i></div>
+                        <span style="color:red">{{message[1]}}</span>
                       </div>
 
                        <div class="form-group float-label has-success has-feedback">
                         <label class="control-label">UserName (Required to login to your child)</label>
-                        <input type="text" class="form-control float-input" id="inputEmail" value="" ng-model="frm.user_name" required>
+                        <input type="text" class="form-control float-input" id="inputEmail" value="" ng-model="frm.user_name" >
                         <div class="form-control-feedback"><i class="icon icon-check"></i></div>
+                        <span style="color:red">{{message[0]}}</span>
                       </div> 
 
 
@@ -119,6 +125,7 @@
                 </label>
               </div>
                   </div>
+                  <span style="color:red">{{message[7]}}</span>
           </div><!-- /.col-left-->
 
 
@@ -129,7 +136,7 @@
               <label class="control-label text-uppercase"><b>Choose a plan</b></label>
               <div id="subscriptionPlans" class="btn-group subscriptionPlan-group" data-toggle1="buttons">
                 <label class="btn plan" ng-repeat="plan in plans">
-                  <input type="radio" name="plan" id="planYearly" autocomplete="off" ng-value="plan.id" ng-change="onSelectplan(plan)" ng-model="$parent.frm.selectedplan">
+                  <input type="radio" name="plan" id="planYearly" autocomplete="off" ng-value="plan.id" ng-change="onSelectplan(plan)" ng-model="$parent.frm.selectedplan" required>
                   <span class="plan-title">{{plan.name}}</span>
                   <i class="icon icon-yearly plan-icon"></i>
                 </label>
@@ -154,6 +161,7 @@
                       <small class="package-type">monthly</small>
                     </label>
                   </div>
+                  <span style="color:red">{{message[9]}}</span>
                 </div>      
               </div>
 
@@ -179,9 +187,43 @@
                           <td><b>Total:</b></td>
                           <td><b>{{currency}} {{subtotal * num_months}} /{{num_months}}months</b></td>
                         </tr>
+                        <!-- start- promo code calculation -->
+                        <tr>
+                          <td>
+                            <b>Total after Promocode:</b>
+                            <span class="display-block text-muted">{{pcode.discount}} {{pcode.discount_type}} off</span>
+                          </td>
+                          <td>
+                          <div ng-if="pcode.discount_type=='percent' ">
+                          <b>{{currency}} {{( subtotal * num_months)-((subtotal * num_months)*(pcode.discount/100)) }} /{{num_months}}months</b>
+                          <input type="hidden" name="vcode" ng-model="frm.vcode" value="{{( subtotal * num_months)-((subtotal * num_months)*(pcode.discount/100)) }}" ng-init="frm.vcode=pcode.pcode_id" />
+                          </div>
+                          <div ng-if="pcode.discount_type=='fixed' ">
+                            <b>{{currency}} {{( subtotal * num_months)-(pcode.discount) }} /{{num_months}}months</b>
+                            <input type="hidden" name="vcode" ng-model="frm.vcode" value="{{( subtotal * num_months)-(pcode.discount) }}" ng-init="frm.vcode=pcode.pcode_id" />
+                          </div>
+
+                          </td>                         
+                        </tr>
+                        <!-- start- promo code calculation -->
+
+
                       </tbody>
                     </table>
                   </div>
+                  <!--start- Promo code -->
+                  <div class="form-group">
+                    <h4><a class="link">Have a promo code?</a></h4>
+                      <div class="form-inline promo-inputContainer">
+                      <form name="pform">
+                        <input type="text" name="promo" class="form-control" ng-init="" ng-model="prm.promocode"/>        
+                        <button class="btn btn-primary" ng-click="submitpromocode(prm)" >Apply</button>
+                        <span class="error" ng-mode="prequire" style="color:red">{{prequire}}</span>
+                        </form>
+                      </div>
+                  </div>
+                  <!-- end-  Promo code -->
+
                   <div class="form-group text-right">
                     <button type="submit" class="btn btn-primary" ng-click="submitChildDetails(frm)">Proceed</button>
                   </div>
@@ -189,7 +231,7 @@
 
               </div>
 
-              </form>
+              </form>              
             </div>
 
           </div>

@@ -221,6 +221,13 @@ angular.module('mlg')
 			url  : urlParams.baseURL+urlParams.signUpTeacher
 		});
 	}
+
+	loginHttpResponse.promocode=function(prcode){
+		return $http({
+			method:'GET',				
+			url  : urlParams.baseURL+urlParams.promocode +'/'+prcode
+		});
+	}
     
 	return loginHttpResponse;
 	
@@ -643,21 +650,39 @@ if (typeof $routeParams.id != 'undefined') {
        	
 
 
+       	// promo code implementation
+       $scope.pcode={};
+       //$scope.pcode.discount=0;
+        $scope.submitpromocode = function(dataprm){        	
+       		if(typeof dataprm=='undefined'){
+       			$scope.prequire="Add promocode if you have";
+      		}else{
+
+		    	loginHttpService.promocode(dataprm.promocode).success(function(promoresponse) {
+		    		if (promoresponse.response.status == "True") {
+		    			$scope.pcode= {
+		    				pcode_id:promoresponse.response.promocode[0].id,
+		    				discount:promoresponse.response.promocode[0].discount,
+		    				discount_type:promoresponse.response.promocode[0].discount_type,	    			
+		    			}	    			
+		    		}
+		    		else{
+		    			$scope.prequire=promoresponse.response.message;
+		    		}
+     			 	
+      			 }); 
+   			}
+
+    	}
+
+
 
 
 
 /* *************************************************************************** */
     $scope.submitChildDetails = function(data){  
-    		if(typeof data.emailchoice=='undefined' || data.emailchoice==null){
-    			data.emailchoice==1;
-    		}
-
-
-    		if(typeof data.selectedplan=='undefined' || data.selectedplan==null){
-    			data.selectedplan==1;
-    		}
-
-
+    		console.log(data);
+    
     //data.selectedcourses = JSON.parse(JSON.stringify(data.selectedcourse));
       data.selectedcourses = Object.assign({}, data.selectedcourse);
       $scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
@@ -687,16 +712,16 @@ if (typeof $routeParams.id != 'undefined') {
 
        //console.log(childdata); 
        //how many childeren has been added n
-       	loginHttpService.getAddedChildren(get_uid).success(function(response) {
-
+       	loginHttpService.getAddedChildren(get_uid).success(function(response) {       			
 			if (typeof response.response.added_children !='undefined') {
 					var added_children =	response.response.added_children;					
 					
 					if(added_children!=$rootScope.childrencount){       				       		       		
 		       		//call API to check the number of child has been added
 		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
-		       		
-						if (response_childadd.response.status == "True") {									
+		       				console.log(response_childadd);
+						if (response_childadd.response.status == "True") {
+								console.log(response_childadd);									
 								//window.location.href=urlParams.siteRoot+'add_child_account';
 								window.location.reload();
 						}else{
@@ -871,8 +896,7 @@ if (typeof $routeParams.id != 'undefined') {
 .controller('parentOffers',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
 //$scope.abc=function(){}
 	loginHttpService.offerRecords().success(function(response) {
-       console.log(response);
-	   $scope.offers = response.response;
+       $scope.offers = response.response;
 	   //$scope.img_root=siteRoot+'/views/offerimg';
       });
 	  
