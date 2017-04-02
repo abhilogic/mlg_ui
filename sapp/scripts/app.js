@@ -66,6 +66,12 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	}).when('/profile', {
 		templateUrl : 'views/my_profile.html',
 		controller : 'journeyCtrl',		
+	}).when('/help', {
+		templateUrl : 'views/help.html',
+		controller : 'helpCtrl',		
+	}).when('/challenges', {
+		templateUrl : 'views/challenges.html',
+		controller : 'journeyCtrl',		
 	}).otherwise({
 		redirectTo : '/journey',
 	});

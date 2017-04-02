@@ -19,6 +19,8 @@ angular.module('mlg_student')
 }])
 .controller('journeyCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
 	  
-}]);
+}]).controller('helpCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+	 //window.location.reload(); 
+}]);;
 
 
