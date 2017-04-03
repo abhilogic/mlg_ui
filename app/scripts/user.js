@@ -316,21 +316,24 @@ angular.module('mlg')
 	$scope.openFreeModal=function(){
 		$("#modalFreeTrail").modal();					
 	}
-	 $scope.login = function(data, user_type) {
-       var role_id = user_roles[user_type];
-       data.role_id= role_id;
+	 $scope.login = function(data) {
+       //var role_id = user_roles[user_type];
+       //data.role_id= role_id;
+       console.log(user_roles)
 	   loginHttpService.login(data).success(function(response) {
          if (response.status=='false') {
            $scope.msg = response.message;
          } else {
            $rootScope.logged_user = response.user;
            setCookie('uid', $rootScope.logged_user.id);
+           var role_id=response.role_id;
+           //var user_type=user_roles.indexOf(response.role_id);
           // $location.url('select_children');
-          if (user_type == 'teacher') {
+          if (role_id == '3') {
             $location.url('teacher/create_account');
             return true;
           }
-          if (user_type == 'student') {
+          if (role_id == '4') {
             window.location.href='/mlg_ui/sapp/journey';
             return true;
           }

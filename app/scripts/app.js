@@ -66,7 +66,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		templateUrl : 'views/landing.html',
 		controller : 'loginCtrl',		
 	}).when('/signin', {
-		templateUrl : 'views/user-selection.html',
+		templateUrl : 'views/login.html',
 		controller : 'loginCtrl',		
 	}).when('/parent_login', {
 		templateUrl : 'views/parent_login.html',
