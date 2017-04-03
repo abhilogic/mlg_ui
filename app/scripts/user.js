@@ -221,7 +221,21 @@ angular.module('mlg')
 			url  : urlParams.baseURL+urlParams.signUpTeacher
 		});
 	}
+
+	loginHttpResponse.promocode=function(prcode){
+		return $http({
+			method:'GET',				
+			url  : urlParams.baseURL+urlParams.promocode +'/'+prcode
+		});
+	}
     
+
+    loginHttpResponse.getUserPurchaseDetails=function(cid){		
+      return $http({
+        method:'GET',
+        url   : urlParams.baseURL+urlParams.getUserPurchaseDetails + '/' + cid
+	  });
+	}
 	return loginHttpResponse;
 	
 }])
@@ -388,15 +402,18 @@ angular.module('mlg')
 
   //alert(commonActions.getcookies(get_uid));
   var get_uid=commonActions.getcookies(get_uid);
-  
+
 	// To call dynamic step slider
-		loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+	// and Call API to get child details for deshboard naming
+    loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
 			var childcount=chidrenName.response.length;
 			console.log(chidrenName);
 			if(childcount>0){																
 					$scope.childname=chidrenName.response;
+                    $scope.frm.childnames = chidrenName.response;
 			}else{
-				$scope.childname=0;;
+				$scope.childname=0;
+                $scope.frm.childnames =null;
 			}			
 		});
 	// end to call dynamic step slider
@@ -404,23 +421,15 @@ angular.module('mlg')
 
   $rootScope.username=$location.search().uid;
 
-
-	// Call API to get child details for deshboard naming	
-		$scope.frm={};
-		//$scope.frm.abc="uyuy";
-	loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
-
-		var childcount=chidrenName.response.length;
-		//console.log(chidrenName);
-		if(childcount>0){
-			$scope.frm.childnames = chidrenName.response;
-		}
-		else{
-		$scope.frm.childnames =null;
-		}
-	});
-
-
+    $scope.child_info={}
+    $scope.purchase_detail={}
+    if (typeof $routeParams.child_id != 'undefined') {
+      loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
+        if (result.status == true) {
+          $scope.child_info = result.response;
+        }
+      });
+    }
 
   $scope.setPreference = function(data) {
     /*if (typeof $rootScope.logged_user == 'undefined') {
@@ -581,6 +590,17 @@ if (typeof $routeParams.id != 'undefined') {
     	//$scope.plan=dataplan.id;
     	}
 
+    	// validate on select of course with choosing pacakage
+    	$scope.onSelectCourse = function(cdata){
+    		if (!$("input[name='package']").is(':checked')) {
+   				alert('Select package first before choosing courses');
+   				$scope.frm.selectedcourse = [];
+			}
+				
+		}
+
+
+
     // On selection of package
 	$scope.onSelectedPackageDiscount = function(data){
 		$scope.frm.selectedcourse = [];
@@ -643,21 +663,39 @@ if (typeof $routeParams.id != 'undefined') {
        	
 
 
+       	// promo code implementation
+       $scope.pcode={};
+       //$scope.pcode.discount=0;
+        $scope.submitpromocode = function(dataprm){        	
+       		if(typeof dataprm=='undefined'){
+       			$scope.prequire="Add promocode if you have";
+      		}else{
+
+		    	loginHttpService.promocode(dataprm.promocode).success(function(promoresponse) {
+		    		if (promoresponse.response.status == "True") {
+		    			$scope.pcode= {
+		    				pcode_id:promoresponse.response.promocode[0].id,
+		    				discount:promoresponse.response.promocode[0].discount,
+		    				discount_type:promoresponse.response.promocode[0].discount_type,	    			
+		    			}	    			
+		    		}
+		    		else{
+		    			$scope.prequire=promoresponse.response.message;
+		    		}
+     			 	
+      			 }); 
+   			}
+
+    	}
+
+
 
 
 
 /* *************************************************************************** */
     $scope.submitChildDetails = function(data){  
-    		if(typeof data.emailchoice=='undefined' || data.emailchoice==null){
-    			data.emailchoice==1;
-    		}
-
-
-    		if(typeof data.selectedplan=='undefined' || data.selectedplan==null){
-    			data.selectedplan==1;
-    		}
-
-
+    		console.log(data);
+    
     //data.selectedcourses = JSON.parse(JSON.stringify(data.selectedcourse));
       data.selectedcourses = Object.assign({}, data.selectedcourse);
       $scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
@@ -680,23 +718,24 @@ if (typeof $routeParams.id != 'undefined') {
        			//package_id: $scope.selectedPackage,
        			plan_id		: data.selectedplan,
        			package_id	: data.selectedPackage,
-       			courses		: data.selectedcourses, 
+       			courses		: data.selectedcourses,
+       			vcode		: data.vcode,
 
        	}; 
 
 
        //console.log(childdata); 
        //how many childeren has been added n
-       	loginHttpService.getAddedChildren(get_uid).success(function(response) {
-
+       	loginHttpService.getAddedChildren(get_uid).success(function(response) {       			
 			if (typeof response.response.added_children !='undefined') {
 					var added_children =	response.response.added_children;					
 					
 					if(added_children!=$rootScope.childrencount){       				       		       		
 		       		//call API to check the number of child has been added
 		       		loginHttpService.addChildRecord(childdata).success(function(response_childadd) {
-		       		
-						if (response_childadd.response.status == "True") {									
+		       				console.log(response_childadd);
+						if (response_childadd.response.status == "True") {
+								console.log(response_childadd);									
 								//window.location.href=urlParams.siteRoot+'add_child_account';
 								window.location.reload();
 						}else{
@@ -871,8 +910,7 @@ if (typeof $routeParams.id != 'undefined') {
 .controller('parentOffers',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
 //$scope.abc=function(){}
 	loginHttpService.offerRecords().success(function(response) {
-       console.log(response);
-	   $scope.offers = response.response;
+       $scope.offers = response.response;
 	   //$scope.img_root=siteRoot+'/views/offerimg';
       });
 	  
@@ -936,7 +974,6 @@ if (typeof $routeParams.id != 'undefined') {
        city : data.city,
        district : data.district,
     };
-    console.log(teacherDetail);
     loginHttpService.signUpTeacher(teacherDetail).success(function(response) {
       if(response.status == true) {
         $location.url('#');
