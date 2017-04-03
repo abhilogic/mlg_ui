@@ -26,8 +26,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	addChild : '/users/addChildren',
 	offerRecords : '/users/getOffers',
 	getStepNum :'/users/getStepNum',
-	promocode :'/users/promocode',
-  signUpTeacher :'/teachers/setTeacherRecord',
+    promocode :'/users/promocode',
+    getUserPurchaseDetails :'/users/getUserPurchaseDetails',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -107,6 +107,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/payment_page', {
 		templateUrl : 'views/payment_page.html',
 		controller : 'paymentPageCtrl',
+	}).when('/parent/dashboard/subscription/:child_id', {
+		templateUrl : 'views/dashboard/parent-subscription.html',
+		controller : 'parentDashboardCtrl',
 	}).when('/test', {
 		templateUrl : 'views/test.html',
 		controller : 'addChild',

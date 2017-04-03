@@ -229,6 +229,13 @@ angular.module('mlg')
 		});
 	}
     
+
+    loginHttpResponse.getUserPurchaseDetails=function(cid){		
+      return $http({
+        method:'GET',
+        url   : urlParams.baseURL+urlParams.getUserPurchaseDetails + '/' + cid
+	  });
+	}
 	return loginHttpResponse;
 	
 }])
@@ -395,15 +402,18 @@ angular.module('mlg')
 
   //alert(commonActions.getcookies(get_uid));
   var get_uid=commonActions.getcookies(get_uid);
-  
+
 	// To call dynamic step slider
-		loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+	// and Call API to get child details for deshboard naming
+    loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
 			var childcount=chidrenName.response.length;
 			console.log(chidrenName);
 			if(childcount>0){																
 					$scope.childname=chidrenName.response;
+                    $scope.frm.childnames = chidrenName.response;
 			}else{
-				$scope.childname=0;;
+				$scope.childname=0;
+                $scope.frm.childnames =null;
 			}			
 		});
 	// end to call dynamic step slider
@@ -411,23 +421,15 @@ angular.module('mlg')
 
   $rootScope.username=$location.search().uid;
 
-
-	// Call API to get child details for deshboard naming	
-		$scope.frm={};
-		//$scope.frm.abc="uyuy";
-	loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
-
-		var childcount=chidrenName.response.length;
-		//console.log(chidrenName);
-		if(childcount>0){
-			$scope.frm.childnames = chidrenName.response;
-		}
-		else{
-		$scope.frm.childnames =null;
-		}
-	});
-
-
+    $scope.child_info={}
+    $scope.purchase_detail={}
+    if (typeof $routeParams.child_id != 'undefined') {
+      loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
+        if (result.status == true) {
+          $scope.child_info = result.response;
+        }
+      });
+    }
 
   $scope.setPreference = function(data) {
     /*if (typeof $rootScope.logged_user == 'undefined') {
@@ -960,7 +962,6 @@ if (typeof $routeParams.id != 'undefined') {
        city : data.city,
        district : data.district,
     };
-    console.log(teacherDetail);
     loginHttpService.signUpTeacher(teacherDetail).success(function(response) {
       if(response.status == true) {
         $location.url('#');
