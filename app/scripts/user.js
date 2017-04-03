@@ -590,6 +590,17 @@ if (typeof $routeParams.id != 'undefined') {
     	//$scope.plan=dataplan.id;
     	}
 
+    	// validate on select of course with choosing pacakage
+    	$scope.onSelectCourse = function(cdata){
+    		if (!$("input[name='package']").is(':checked')) {
+   				alert('Select package first before choosing courses');
+   				$scope.frm.selectedcourse = [];
+			}
+				
+		}
+
+
+
     // On selection of package
 	$scope.onSelectedPackageDiscount = function(data){
 		$scope.frm.selectedcourse = [];
@@ -707,7 +718,8 @@ if (typeof $routeParams.id != 'undefined') {
        			//package_id: $scope.selectedPackage,
        			plan_id		: data.selectedplan,
        			package_id	: data.selectedPackage,
-       			courses		: data.selectedcourses, 
+       			courses		: data.selectedcourses,
+       			vcode		: data.vcode,
 
        	}; 
 
