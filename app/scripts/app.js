@@ -26,8 +26,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	addChild : '/users/addChildren',
 	offerRecords : '/users/getOffers',
 	getStepNum :'/users/getStepNum',
-    promocode :'/users/promocode',
-    getUserPurchaseDetails :'/users/getUserPurchaseDetails',
+  promocode :'/users/promocode',
+  getUserPurchaseDetails :'/users/getUserPurchaseDetails',
+  signUpTeacher :'/teachers/setTeacherRecord',
+  teacherPayment :'/teachers/getTeacherSubject',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -132,6 +134,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		templateUrl : 'views/dashboard/teacher-subscription.html',
 		controller : 'parentDashboardCtrl',
 	}).otherwise({
+	}).when('/teacher/payment_page',{
+    templateUrl : 'views/payment_teacher.html',
+		controller : 'teacherOnBoardingCtrl',
+  }).otherwise({
 		redirectTo : '/',
 	});
 

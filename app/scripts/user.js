@@ -214,14 +214,7 @@ angular.module('mlg')
 			url   : urlParams.baseURL+urlParams.getStepNum+'/'+pid
 		});
 	}
-  loginHttpResponse.signUpTeacher=function(teacherdata){
-		return $http({
-			method:'POST',	
-			data : teacherdata,		
-			url  : urlParams.baseURL+urlParams.signUpTeacher
-		});
-	}
-
+  
 	loginHttpResponse.promocode=function(prcode){
 		return $http({
 			method:'GET',				
@@ -873,11 +866,7 @@ if (typeof $routeParams.id != 'undefined') {
 				}
 				
 			});
-		// end to call dynamic step slider
-
-
-
-    
+		// end to call dynamic step slider    
     //if (typeof $rootScope.logged_user != 'undefined') {
      // data = {user_id : $rootScope.logged_user.id};
      data = {user_id : get_uid};
@@ -888,7 +877,7 @@ if (typeof $routeParams.id != 'undefined') {
         }
       });
     //}
-
+   
     $scope.frm = {};
     $scope.card_months = card_months;
     $scope.card_years = card_years;
@@ -946,7 +935,7 @@ if (typeof $routeParams.id != 'undefined') {
 				alert('registration fail');
 			});
 	};
-}])
+}]);
 /*
 .run(['$rootScope',function($rootScope){
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
@@ -959,63 +948,4 @@ if (typeof $routeParams.id != 'undefined') {
         $rootScope.home = (toState.name == 'mlg.home');
     });
 }]);*/
-/**
- *Controller for Teacher 
- **/
-.controller('teacherOnBoardingCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','commonActions',function($rootScope,$scope,loginHttpService,$location,user_roles,commonActions) {
-  
-/* Start-  Step-1 for Onboarding */
-  $scope.tch = {};
-  $scope.submitTeacherDetail = function(data){
-    var teacherDetail = {};
-    var get_uid=commonActions.getcookies(get_uid);
-    teacherDetail = {
-       user_id : get_uid,
-       school_name : data.school,
-       country : data.country,
-       state : data.state,
-       city : data.city,
-       district : data.district,
-    };
-    loginHttpService.signUpTeacher(teacherDetail).success(function(response) {
-      if(response.status == true) {
-        $location.url('#');
-      }else{
-        $scope.msg= response.message;
-      }     		
-		}).error(function(error) {
-		  $scope.msg= 'Some technical error occured.'
-	   }); 
-  };
-  /* end-  Step-1 for Onboarding */
 
-
-  /* Start - step-2 for onBoarding */
-	// call API to get grades
-     loginHttpService.gradeList().success(function(response) {
-  		  $scope.grades = response.response.Grades;  
-  	});
-
-     //show courses on change on class/grade
-      //call API to getCourseList for a level on change of grade
-     $scope.changeCourseList = function(grade_id) {
-	   	loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
-	        if(!courseslistresult.response.courses){  // value is null, empty
-	    	    $scope.msg=courseslistresult.response.message; 
-	        	$scope.records=courseslistresult.response.course_list;        
-	        }else{
-	        	$scope.cousesListByGrade= courseslistresult.response.courses;
-	          	$scope.msg=courseslistresult.response.message;
-	          	$scope.courserecords=courseslistresult.response.course_list; 
-	        }         
-    	})
-    }
-
-  /* end- step-2 for onBoarding */
-
-
-
-
-  
-
-}]);
