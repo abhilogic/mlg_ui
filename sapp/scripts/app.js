@@ -6,7 +6,7 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	logout: '/users/logout',
 	siteRoot : '/mlg_ui/app/',
 	registerUser:'/users/registerUser',
-	parentPreference:'/users/setUserPreference',
+/*	parentPreference:'/users/setUserPreference',
 	baseURL : 'http://localhost/mlg',
 	gradeList : '/users/getGradeList',
 	setUserStatus : '/users/setUserStatus',
@@ -25,7 +25,9 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	addChildRecord : '/users/addChildrenRecord',
 	addChild : '/users/addChildren',
 	offerRecords: '/users/getOffers',
-	getStepNum 	   :'/users/getStepNum', 
+	getStepNum 	   :'/users/getStepNum', */
+
+
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -69,10 +71,17 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	}).when('/help', {
 		templateUrl : 'views/help.html',
 		controller : 'helpCtrl',		
+
 	}).when('/challenges', {
 		templateUrl : 'views/challenges.html',
 		controller : 'journeyCtrl',		
 	}).otherwise({
+
+	}).when('/quiz', {
+		templateUrl : 'views/quiz.html',
+		controller : 'quizCtrl',		
+	})
+	.otherwise({
 		redirectTo : '/journey',
 	});
 
@@ -97,7 +106,7 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 
 
 
-		 $rootScope.$on('$viewContentLoaded', function() {
+	$rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
    });
 

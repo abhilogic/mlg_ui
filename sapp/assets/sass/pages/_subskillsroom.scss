@@ -293,5 +293,66 @@
         padding-top: 20px;
       }
     }
+    &.subskills_view_video_frame {
+      &:before {
+        z-index: 1;
+      }
+      .panel-body {
+        padding-top: 0px;
+        @include respond-to(mobileMedium){
+          padding-top: 30px;
+        }
+      }
+      .video_cover {
+        max-width: 581px;
+        margin:auto;
+        @include respond-to(tabletPort){
+          max-width: 383px;
+        }
+        video {
+          width: 100%;
+        }
+        .play_btn_cover {
+          position: absolute;
+          top: 0%;
+          left: 0%;
+          width: 100%;
+          height: calc(100% - 46px);
+        }
+        .video_play_bt{
+            background: transparent;
+            border: 0px;
+            left: 44%;
+            position: absolute;
+            top: 47%;
+            z-index: 1000;
+            &:focus {
+              outline: 0px;
+            }
+            @include respond-to(mobileMedium){
+              left: 37%;
+              top: 35%;
+            }
+        }
+        .video_controller {
+          background: rgba($white,0.6);
+        }
+        .progress_bar {
+          width: 367px;
+          height: 9px;
+          @include respond-to(tabletPort){
+            width: 178px;
+          }
+          @include respond-to(mobileMedium){
+            width: 58px;
+          }
+          &.ui-slider {
+            .ui-slider-range {
+              background: $vanCleef;
+            }
+          }
+        }
+      }
+    }
   }
 }

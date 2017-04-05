@@ -124,4 +124,8 @@ rangeAndVolumeController();
         currentVideoTime();
       });
 
+      // js play button cover
+      var play_btn_cover_height = $("#tutorialVideo").height();
+      $(".play_btn_cover").height(play_btn_cover_height);
+
 });

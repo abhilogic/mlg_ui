@@ -57,17 +57,7 @@
       video {
         width: 100%;
       }
-      .video_play_btn{
-        background: transparent;
-        border: 0px;
-        left: 39%;
-        position: absolute;
-        top: 42%;
-        z-index: 1000;
-        &:focus {
-          outline: 0px;
-        }
-      }
+
       .video_controller .progress_bar {
         width: 400px;
         @include respond-to(tabletPort){

@@ -1,4 +1,21 @@
 .video_cover {
+    position: relative;
+    .play_btn_cover {
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: calc(100% - 46px);
+    }
+    .video_play_btn{
+      background: transparent;
+      border: 0px;
+      display: block;
+      margin: auto;
+      &:focus {
+        outline: 0px;
+      }
+    }
   .video_icon {
     display: inline-block;
     vertical-align: middle;
