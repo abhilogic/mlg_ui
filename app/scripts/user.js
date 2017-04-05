@@ -134,7 +134,7 @@ angular.module('mlg')
 		});
 	}
 
-	loginHttpResponse.getCourseByGrade=function(grade_id){		
+	loginHttpResponse.getCourseByGrade=function(grade_id){
 		return $http({
 			method:'GET',	
 			data : grade_id,		
@@ -419,15 +419,72 @@ angular.module('mlg')
 	// end to call dynamic step slider
 
 
-  $rootScope.username=$location.search().uid;
+//  $rootScope.username=$location.search().uid;
 
+    //Child Purchase history.
     $scope.child_info={}
-    $scope.purchase_detail={}
+    $scope.packages = {}
+    $scope.plans = {}
+    $scope.level_id = '';
+    $scope.price = 0;
+    $scope.discount = 0;
+    $scope.dis_amount = 0;
+    $scope.pageNumber = 0;
+    $scope.getTotalPrice = function(subject) {
+      loginHttpService.pricecalc(subject).success(function(courseprice) {
+        $scope.price = courseprice.response.amount;
+        $scope.dis_amount = $scope.price*$scope.discount*0.01;
+        $scope.subtotal=$scope.price-$scope.dis_amount;
+	  });
+    }
+    $scope.discount = function(disc_val) {
+     $scope.discount = disc_val;
+     $scope.dis_amount = $scope.price * $scope.discount * 0.01;
+     $scope.subtotal = $scope.price-$scope.dis_amount;
+    }
+
+    $scope.upgrade = function(frm) {
+      $location.url('/parent/dashboard');
+//     console.log(frm);
+//     no_of_subjects = frm.new_package.split(' ')[0];
+//     if (no_of_subjects == '') {
+//
+//     }
+    }
     if (typeof $routeParams.child_id != 'undefined') {
       loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
         if (result.status == true) {
           $scope.child_info = result.response;
+          $scope.level = {id : result.response.level_id};
+          loginHttpService.getCourseByGrade($scope.level).success(function(courseslistresult) {
+          if(!courseslistresult.response.courses){  // value is null, empty
+            $scope.msg=courseslistresult.response.message;
+            $scope.records=courseslistresult.response.course_list;
+            } else {
+              var purchased_detail = $scope.child_info.purchase_detail;
+              var all_courses = courseslistresult.response.courses;
+              angular.forEach(all_courses, function(course, index) {
+              angular.forEach(purchased_detail, function(purchased, key) {
+                 if (course.id == purchased.course_id) {
+                   course.purchased = true;
+                 }
+               });
+              });
+              $scope.coursesListByGrade = all_courses;
+              $scope.msg=courseslistresult.response.message;
+              $scope.courserecords=courseslistresult.response.course_list;
+            }
+          });
         }
+      });
+      // call API to get packages
+      loginHttpService.packageList().success(function(packrecords) {
+          $scope.packages = packrecords.response.package;
+      });
+
+      // call API to get plans
+      loginHttpService.planList().success(function(planrecord) {
+  		$scope.plans = planrecord.response.plans;
       });
     }
 
