@@ -7,7 +7,7 @@
 		 * before the bit shift pushes the accompanying integer out of the
 		 * memory footprint for an integer
 		 */
-		roles : [ 'public', 'user', 'cpcb', 'admin', 'spcb', 'zonal', 'vendor', 'slide-user' ],
+		roles : [ 'public', 'student', 'teacher', 'admin','parent' ],
 
 		/*
 		 * Build out all the access levels you want referencing the roles listed
@@ -21,19 +21,13 @@
 
 		accessLevels : {
 			'public' : "*",
-			'user' : [ 'user' ],
-			'cpcb' : [ 'cpcb' ],
-			'adminOnly' : [ 'admin' ],
-			'cpcbAdmin' : [ 'cpcb', 'admin' ],
-			'vendorOnly' : [ 'vendor' ],
-			'slideShow' : [ 'slide-user' ],
-			'allUsers' : [ 'admin', 'cpcb', 'spcb', 'zonal'],
-			'allUsersVendors' : [ 'admin', 'cpcb', 'spcb', 'zonal','vendor' ],
-			'nonSPCB' : [ 'admin', 'cpcb', 'zonal' ]
-		}
+			'student' : [ 'student' ],
+			'teacher' : [ 'teacher' ],
+			'parents' : [ 'parent' ]
+			
 
 	}
-
+}
 	exports.userRoles = buildRoles(config.roles);
 	exports.accessLevels = buildAccessLevels(config.accessLevels, exports.userRoles);
 
