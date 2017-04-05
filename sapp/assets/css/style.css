@@ -1184,6 +1184,25 @@ label span {
   }
 }
 
+.video_cover {
+  position: relative;
+}
+.video_cover .play_btn_cover {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: calc(100% - 46px);
+}
+.video_cover .video_play_btn {
+  background: transparent;
+  border: 0px;
+  display: block;
+  margin: auto;
+}
+.video_cover .video_play_btn:focus {
+  outline: 0px;
+}
 .video_cover .video_icon {
   display: inline-block;
   vertical-align: middle;
@@ -1407,32 +1426,32 @@ label span {
 .myjourney_page .castle.inactive .castle__text {
   color: rgba(0, 0, 0, 0.6);
 }
-.myjourney_page .castle.science {
+.myjourney_page .castle.castle_1 {
   height: 93px;
   left: 43%;
   top: 22%;
   width: 99px;
 }
 @media screen and (max-width: 1024px) {
-  .myjourney_page .castle.science {
+  .myjourney_page .castle.castle_1 {
     left: 43%;
     top: 18%;
   }
 }
 @media screen and (max-width: 1023px) {
-  .myjourney_page .castle.science {
+  .myjourney_page .castle.castle_1 {
     left: 41%;
     top: 20%;
   }
 }
 @media screen and (max-width: 767px) {
-  .myjourney_page .castle.science {
+  .myjourney_page .castle.castle_1 {
     right: 7%;
     top: 46%;
     left: inherit;
   }
 }
-.myjourney_page .castle.science .castle__img {
+.myjourney_page .castle.castle_1 .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
@@ -1440,14 +1459,14 @@ label span {
   background-position: -30px -21px;
   display: inline-block;
 }
-.myjourney_page .castle.science .castle__img:hover {
+.myjourney_page .castle.castle_1 .castle__img:hover {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -159px -21px;
 }
-.myjourney_page .castle.science .castle__icon {
+.myjourney_page .castle.castle_1 .castle__icon {
   width: 28px;
   height: 30px;
   background-repeat: no-repeat;
@@ -1456,46 +1475,46 @@ label span {
   left: 37%;
   top: -15px;
 }
-.myjourney_page .castle.science.active .castle__img {
+.myjourney_page .castle.castle_1.active .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -159px -21px;
 }
-.myjourney_page .castle.science.inactive .castle__img {
+.myjourney_page .castle.castle_1.inactive .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -279px -21px;
 }
-.myjourney_page .castle.science.inactive .castle__icon {
+.myjourney_page .castle.castle_1.inactive .castle__icon {
   width: 28px;
   height: 30px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite.png);
   background-position: -145px -134px;
 }
-.myjourney_page .castle.math {
+.myjourney_page .castle.castle_2 {
   height: 93px;
   left: 7.5%;
   top: 37%;
   width: 99px;
 }
 @media screen and (max-width: 1024px) {
-  .myjourney_page .castle.math {
+  .myjourney_page .castle.castle_2 {
     left: 3.5%;
     top: 37%;
   }
 }
 @media screen and (max-width: 1023px) {
-  .myjourney_page .castle.math {
+  .myjourney_page .castle.castle_2 {
     left: 4.5%;
     top: 37%;
   }
 }
-.myjourney_page .castle.math .castle__img {
+.myjourney_page .castle.castle_2 .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
@@ -1503,14 +1522,14 @@ label span {
   background-position: -30px -136px;
   display: inline-block;
 }
-.myjourney_page .castle.math .castle__img:hover {
+.myjourney_page .castle.castle_2 .castle__img:hover {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -159px -136px;
 }
-.myjourney_page .castle.math .castle__icon {
+.myjourney_page .castle.castle_2 .castle__icon {
   width: 28px;
   height: 30px;
   background-repeat: no-repeat;
@@ -1519,53 +1538,53 @@ label span {
   left: 30%;
   top: -19px;
 }
-.myjourney_page .castle.math.active .castle__img {
+.myjourney_page .castle.castle_2.active .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -159px -136px;
 }
-.myjourney_page .castle.math.inactive .castle__img {
+.myjourney_page .castle.castle_2.inactive .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -279px -136px;
 }
-.myjourney_page .castle.math.inactive .castle__icon {
+.myjourney_page .castle.castle_2.inactive .castle__icon {
   width: 28px;
   height: 30px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite.png);
   background-position: 0px -134px;
 }
-.myjourney_page .castle.english {
+.myjourney_page .castle.castle_3 {
   height: 93px;
   left: 36.499%;
   top: 60.5%;
   width: 99px;
 }
 @media screen and (max-width: 1024px) {
-  .myjourney_page .castle.english {
+  .myjourney_page .castle.castle_3 {
     left: 36.499%;
     top: 62.5%;
   }
 }
 @media screen and (max-width: 1023px) {
-  .myjourney_page .castle.english {
+  .myjourney_page .castle.castle_3 {
     left: 33.499%;
     top: 55.5%;
   }
 }
 @media screen and (max-width: 767px) {
-  .myjourney_page .castle.english {
+  .myjourney_page .castle.castle_3 {
     right: 9.499%;
     top: 75.5%;
     left: inherit;
   }
 }
-.myjourney_page .castle.english .castle__img {
+.myjourney_page .castle.castle_3 .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
@@ -1573,14 +1592,14 @@ label span {
   background-position: -30px -229px;
   display: inline-block;
 }
-.myjourney_page .castle.english .castle__img:hover {
+.myjourney_page .castle.castle_3 .castle__img:hover {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -159px -229px;
 }
-.myjourney_page .castle.english .castle__icon {
+.myjourney_page .castle.castle_3 .castle__icon {
   width: 28px;
   height: 30px;
   background-repeat: no-repeat;
@@ -1589,46 +1608,46 @@ label span {
   left: 37%;
   top: -15px;
 }
-.myjourney_page .castle.english.active .castle__img {
+.myjourney_page .castle.castle_3.active .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -159px -229px;
 }
-.myjourney_page .castle.english.inactive .castle__img {
+.myjourney_page .castle.castle_3.inactive .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -279px -229px;
 }
-.myjourney_page .castle.english.inactive .castle__icon {
+.myjourney_page .castle.castle_3.inactive .castle__icon {
   width: 28px;
   height: 30px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite.png);
   background-position: -72px -134px;
 }
-.myjourney_page .castle.social_science {
+.myjourney_page .castle.castle_4 {
   height: 93px;
   right: 20.5%;
   top: 31%;
   width: 99px;
 }
 @media screen and (max-width: 1024px) {
-  .myjourney_page .castle.social_science {
+  .myjourney_page .castle.castle_4 {
     right: 19.5%;
     top: 29%;
   }
 }
 @media screen and (max-width: 767px) {
-  .myjourney_page .castle.social_science {
+  .myjourney_page .castle.castle_4 {
     left: 4.5%;
     top: 70%;
   }
 }
-.myjourney_page .castle.social_science .castle__img {
+.myjourney_page .castle.castle_4 .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
@@ -1636,17 +1655,17 @@ label span {
   background-position: -30px -328px;
   display: inline-block;
 }
-.myjourney_page .castle.social_science .castle__img:hover {
+.myjourney_page .castle.castle_4 .castle__img:hover {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -159px -328px;
 }
-.myjourney_page .castle.social_science .castle__text {
+.myjourney_page .castle.castle_4 .castle__text {
   width: 143%;
 }
-.myjourney_page .castle.social_science .castle__icon {
+.myjourney_page .castle.castle_4 .castle__icon {
   width: 28px;
   height: 30px;
   background-repeat: no-repeat;
@@ -1655,21 +1674,21 @@ label span {
   left: 37%;
   top: -21px;
 }
-.myjourney_page .castle.social_science.active .castle__img {
+.myjourney_page .castle.castle_4.active .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -159px -328px;
 }
-.myjourney_page .castle.social_science.inactive .castle__img {
+.myjourney_page .castle.castle_4.inactive .castle__img {
   width: 99px;
   height: 93px;
   background-repeat: no-repeat;
   background-image: url(../img/sprite-castles.png);
   background-position: -279px -328px;
 }
-.myjourney_page .castle.social_science.inactive .castle__icon {
+.myjourney_page .castle.castle_4.inactive .castle__icon {
   width: 28px;
   height: 30px;
   background-repeat: no-repeat;
@@ -3030,17 +3049,6 @@ label span {
 }
 .help_page .content_cover .video video {
   width: 100%;
-}
-.help_page .content_cover .video .video_play_btn {
-  background: transparent;
-  border: 0px;
-  left: 39%;
-  position: absolute;
-  top: 42%;
-  z-index: 1000;
-}
-.help_page .content_cover .video .video_play_btn:focus {
-  outline: 0px;
 }
 .help_page .content_cover .video .video_controller .progress_bar {
   width: 400px;
@@ -4464,6 +4472,73 @@ label span {
 }
 .subskillsroom_page .frame.subskills_view_lesson_frame .panel-body {
   padding-top: 20px;
+}
+.subskillsroom_page .frame.subskills_view_video_frame:before {
+  z-index: 1;
+}
+.subskillsroom_page .frame.subskills_view_video_frame .panel-body {
+  padding-top: 0px;
+}
+@media only screen and (max-width: 767px) {
+  .subskillsroom_page .frame.subskills_view_video_frame .panel-body {
+    padding-top: 30px;
+  }
+}
+.subskillsroom_page .frame.subskills_view_video_frame .video_cover {
+  max-width: 581px;
+  margin: auto;
+}
+@media only screen and (max-width: 1023px) {
+  .subskillsroom_page .frame.subskills_view_video_frame .video_cover {
+    max-width: 383px;
+  }
+}
+.subskillsroom_page .frame.subskills_view_video_frame .video_cover video {
+  width: 100%;
+}
+.subskillsroom_page .frame.subskills_view_video_frame .video_cover .play_btn_cover {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: calc(100% - 46px);
+}
+.subskillsroom_page .frame.subskills_view_video_frame .video_cover .video_play_bt {
+  background: transparent;
+  border: 0px;
+  left: 44%;
+  position: absolute;
+  top: 47%;
+  z-index: 1000;
+}
+.subskillsroom_page .frame.subskills_view_video_frame .video_cover .video_play_bt:focus {
+  outline: 0px;
+}
+@media only screen and (max-width: 767px) {
+  .subskillsroom_page .frame.subskills_view_video_frame .video_cover .video_play_bt {
+    left: 37%;
+    top: 35%;
+  }
+}
+.subskillsroom_page .frame.subskills_view_video_frame .video_cover .video_controller {
+  background: rgba(255, 255, 255, 0.6);
+}
+.subskillsroom_page .frame.subskills_view_video_frame .video_cover .progress_bar {
+  width: 367px;
+  height: 9px;
+}
+@media only screen and (max-width: 1023px) {
+  .subskillsroom_page .frame.subskills_view_video_frame .video_cover .progress_bar {
+    width: 178px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .subskillsroom_page .frame.subskills_view_video_frame .video_cover .progress_bar {
+    width: 58px;
+  }
+}
+.subskillsroom_page .frame.subskills_view_video_frame .video_cover .progress_bar.ui-slider .ui-slider-range {
+  background: #49150c;
 }
 
 .first_time_login_test_page {

@@ -1,120 +1,88 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>S | 2017</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- Description / Keywords -->
-		<meta name="description" content="">
-		<meta name="keywords" content="">
-		<!-- Mobile web app capable -->
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-touch-fullscreen" content="yes">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-		<meta name="HandheldFriendly" content="true">
-
-		<!-- Facebook Open Graph -->
-		<meta property="og:title" content=""/>
-		<meta property="og:url" content=""/>
-		<meta property="og:image" content=""/>
-		<meta property="og:site_name" content=""/>
-		<meta property="og:description" content=""/>
-
-		<!-- Favicon & Touch Icons -->
-		<link rel="shortcut icon" href="assets/img/favicon/favicon.png">
-		<link rel="stylesheet" href="assets/font/font-awesome/css/font-awesome.min.css">
-    <!-- plugins -->
-		<link rel="stylesheet" href="assets/css/plugins/jquery.mCustomScrollbar.css">
-    <!-- plugins -->
-		<!-- Bootstrap and core app CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/css/style.css" >
     <style type="text/css">
       .modal-backdrop {
         display: none;
       }
     </style>
-	</head>
-	<body>
-		<div class="main_cover myjourney_page">
-			<div class="main_wrapper">
-				<nav class="navbar navbar-default">
-						<img src="assets/img/logo.png" alt="logo" class="main_logo"/>
-						<div class="student_growth">
-							<span class="growth_text">My Growth</span>
-							<span class="growth_value">45</span>
-						</div>
-						<ul class="nav navbar-nav">
-							<li>
-								<a href="profile">
-									<span class="nav_text">My Profile</span><span class="nav_icon ico_profile"></span>
-								</a>
-							</li>
-						</ul>
-						<form class="navbar-form navbar-right search_form">
+	
+	<div class="main_cover myjourney_page">
+		<div class="main_wrapper">
+			<nav class="navbar navbar-default">
+				<img src="assets/img/logo.png" alt="logo" class="main_logo"/>
+				<div class="student_growth">
+					<span class="growth_text">My Growth</span>
+					<span class="growth_value">45</span>
+				</div>
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="my_profile.html"><span class="nav_text">My Profile</span><span class="nav_icon ico_profile"></span></a>
+					</li>
+				</ul>
+				<form class="navbar-form navbar-right search_form">
 			        <input type="search" class="search__input" placeholder="Type here to search">
-			      </form>
+			    </form>
 
-				</nav><!-- /header -->
-				<div class="wooden_frame">
-					<div class="wooden_frame_content_cover">
-						<a href="#" data-castle-name="science">
-							<div class="castle_cover">
-							<div class="castle subject_castle science active">
+			</nav><!-- /header -->
+			<div class="wooden_frame">
+			<div class="wooden_frame_content_cover">
+					<div class="castle_cover">
+						<a href="quiz" data-castle-name="science">
+							<div class="castle subject_castle castle_1 active">
 								<span class="castle__img"></span>
 								<span class="castle__icon"></span>
 								<span class="castle__arrowUp"></span>
 								<span class="castle__text">Stupendous Science Nation</span>
 							</div>
-							<a href="math_subject_view.html" data-castle-name="math">
-								<div class="castle subject_castle math">
-									<span class="castle__img"></span>
-									<span class="castle__icon"></span>
-									<span class="castle__arrowUp"></span>
-									<span class="castle__text">Magical Mathland</span>
-								</div>
-							</a>
-							<a href="#" data-castle-name="science">
-								<div class="castle subject_castle english inactive">
-									<span class="castle__img"></span>
-									<span class="castle__icon"></span>
-									<span class="castle__arrowUp"></span>
-									<span class="castle__text">Enchanted English Empire</span>
-								</div>
-							</a>
-							<a href="#" data-castle-name="science">
-								<div class="castle subject_castle social_science inactive">
-									<span class="castle__img"></span>
-									<span class="castle__icon"></span>
-									<span class="castle__arrowUp"></span>
-									<span class="castle__text">Valorous Social Science Union</span>
-								</div>
-							</a>
-							<a href="help.html" data-castle-name="science">
-								<div class="castle help">
-									<span class="castle__img"></span>
-									<span class="castle__icon"></span>
-									<span class="castle__arrowUp"></span>
-									<span class="castle__text">Help</span>
-								</div>
-							</a>
-							<a href="challenges.html" data-castle-name="science">
-								<div class="castle challenge_mountain">
-									<span class="castle__img"></span>
-									<span class="castle__icon"></span>
-									<span class="castle__arrowUp"></span>
-									<span class="castle__text">Challenges</span>
-								</div>
-							<a href="#" data-castle-name="science">
-						</div>
 						</a>
+						<a href="quiz" data-castle-name="math">
+							<div class="castle subject_castle castle_2">
+								<span class="castle__img"></span>
+								<span class="castle__icon"></span>
+								<span class="castle__arrowUp"></span>
+								<span class="castle__text">Magical Mathland</span>
+							</div>
+						</a>
+						<a href="quiz" data-castle-name="science">
+							<div class="castle subject_castle castle_3 inactive">
+								<span class="castle__img"></span>
+								<span class="castle__icon"></span>
+								<span class="castle__arrowUp"></span>
+								<span class="castle__text">Enchanted English Empire</span>
+							</div>
+						</a>
+						<a href="#" data-castle-name="science">
+							<div class="castle subject_castle castle_4 inactive">
+								<span class="castle__img"></span>
+								<span class="castle__icon"></span>
+								<span class="castle__arrowUp"></span>
+								<span class="castle__text">Valorous Social Science Union</span>
+							</div>
+						</a>
+						<a href="/help" data-castle-name="science">
+							<div class="castle help">
+								<span class="castle__img"></span>
+								<span class="castle__icon"></span>
+								<span class="castle__arrowUp"></span>
+								<span class="castle__text">Help</span>
+							</div>
+						</a>
+						<a href="challenges.html" data-castle-name="science">
+							<div class="castle challenge_mountain">
+								<span class="castle__img"></span>
+								<span class="castle__icon"></span>
+								<span class="castle__arrowUp"></span>
+								<span class="castle__text">Challenges</span>
+							</div>
+							<a href="#" data-castle-name="science"></a>
+
 					</div>
-				</div>
 			</div>
+			</div>
+		</div>
 	</div>
+
+
+
+
 	<div class="chat_block">
 		<div class="user_list">
 			<span class="bg__chat"></span>
@@ -226,22 +194,23 @@
 				</div>
 			</div>
 		</div>
+<<<<<<< Updated upstream
 		<!-- Latest compiled and minified jQuery -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- plugins -->
-		<script src="assets/js/plugins/jquery.mCustomScrollbar.min.js"></script>
-    <!-- plugins -->
-		<!-- Compiled and minified Page Specific JavaScript -->
-		<script src="assets/js/plugins/jquery.transit.min.js"></script>
-    <script src="assets/js/plugins/bootstrap-tabcollapse.js"></script>
+		
+   	<audio id="mysoundclip" preload="auto" style="display:none;">
+     <source src="assets/sounds/click-sound.mp3"></source>
+    </audio>
+=======
+
+
+		
+    
 		<script src="assets/js/pages/journey.js"></script>
 		<script src="assets/js/main.js"></script>
 		<audio id="mysoundclip" preload="auto" style="display:none;">
-     <source src="assets/sounds/click-sound.mp3"></source>
-    </audio>
+     		<source src="assets/sounds/click-sound.mp3"></source>
+    	</audio>
+>>>>>>> Stashed changes
     <script type="text/javascript">
       $(document).ready(function(){
         $("#challenge").tabCollapse();
@@ -267,6 +236,4 @@
         $(".owl-nav .owl-next").html("<span>Next</span>");
       });
     </script>
-	</body>
-
-</html>
+	
