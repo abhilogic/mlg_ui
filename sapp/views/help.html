@@ -1,23 +1,5 @@
-<script src="assets/js/video.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var windowWidth = $(window).width();
-			if(windowWidth> 767){
-				$(".help_modal_section").remove();
-			}
-			else if (windowWidth<=767){
-				$(".help_page .video").remove();
-			}
-			$(".verticalCarousel").verticalCarousel({
-            currentItem: 1,
-            showItems: 3,
-        });
-				$(".help_modal_section .close").click(function(){
-						$("#tutorialVideo").get(0).pause();
-				});
-			});
-		</script>
-	<body>
+
+
 		<div class="main_cover help_page">
 			<div class="main_div_center" data-center="center">
 				<div class="frame">
@@ -65,7 +47,9 @@
 												<source src="assets/img/video/video_1.mp4" type="video/mp4">
 												Your browser does not support HTML5 video.
 											</video>
-											<button type="button" class="video_play_btn" id="video_play_btn"><img src="assets/img/video_play_btn_bg.png" alt=""></button>
+											<div class="play_btn_cover">
+	                      <button type="button" class="video_play_btn" id="video_play_btn" data-center="center"><img src="assets/img/video_play_btn_bg.png" alt=""></button>
+	                    </div>
 											<div class="video_controller ">
 												<ul>
 													<li>
@@ -167,12 +151,27 @@
     </div>
   </div>
 	</section>
-		<!-- Latest compiled and minified jQuery -->
-		
-		
-		<!-- plugins -->
-    
-		
-		
-	</body>
+				
+    <script src="assets/js/plugins/jquery-ui.js"></script>
+	<script src="assets/js/video.js"></script>
+	<script src="assets/js/main.js"></script>
 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var windowWidth = $(window).width();
+			if(windowWidth> 767){
+				$(".help_modal_section").remove();
+			}
+			else if (windowWidth<=767){
+				$(".help_page .video").remove();
+			}
+			$(".verticalCarousel").verticalCarousel({
+            currentItem: 1,
+            showItems: 3,
+        });
+				$(".help_modal_section .close").click(function(){
+						$("#tutorialVideo").get(0).pause();
+				});
+			});
+	</script>
+	
