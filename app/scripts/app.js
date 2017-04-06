@@ -93,9 +93,6 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	}).when('/email/confirmation/:id',{
 		templateUrl : 'views/parent_confirmation.html',
 		controller : 'emailConfirmationCtrl',
-	}).when('/parent_dashboard', {
-		templateUrl : 'views/parent_dashboard.html',
-		controller : 'parentDashboardCtrl',
 	}).when('/select_children', {
 		templateUrl : 'views/number_children.html',
 		controller : 'addChild',		
@@ -110,7 +107,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		templateUrl : 'views/term_condition.html',
 		controller : 'termsAndConditionsCtrl',
 		access : access.parents
-	}).when('/parent/dashboard', {
+	}).when('/parent/dashboard/:id', {
 		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
 		access : access.parents
@@ -119,7 +116,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		controller : 'paymentPageCtrl',
 	}).when('/parent/dashboard/subscription/:child_id', {
 		templateUrl : 'views/dashboard/parent-subscription.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'parentSubscriptionCtrl',
 	}).when('/test', {
 		templateUrl : 'views/test.html',
 		controller : 'addChild',
@@ -127,10 +124,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'parentOffers',
 		access : access.parents
-	}).when('/parent/dashboard/subscription', {
-		templateUrl : 'views/dashboard/parent-subscription.html',
-		controller : 'parentOffers',
-	}).when('/parent/dashboard/redeem',{
+	}).when('/parent/dashboard/redeem/:id',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
 		controller : 'parentDashboardCtrl',
 	}).when('/parent/dashboard/settings',{

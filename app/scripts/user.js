@@ -416,6 +416,8 @@ angular.module('mlg')
   $scope.frm = {}
   $scope.childname={};
 
+  console.log($routeParams.id);
+
   //alert(commonActions.getcookies(get_uid));
   var get_uid=commonActions.getcookies(get_uid);
 
@@ -427,11 +429,26 @@ angular.module('mlg')
 			if(childcount>0){																
 					$scope.childname=chidrenName.response;
                     $scope.frm.childnames = chidrenName.response;
+                    
+                    for(var i in $scope.frm.childnames){
+
+    			if($scope.frm.childnames[i].user_id==$routeParams.id){
+    				$scope.frm.selectedchild=$scope.frm.childnames[i];
+    				return false;
+    			}else{
+
+    			}
+    	}
+    	window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
 			}else{
 				$scope.childname=0;
-                $scope.frm.childnames =null;
+                $scope.frm.childnames =[];
 			}			
 		});
+
+    	
+
+
 	// end to call dynamic step slider
 
 
@@ -513,6 +530,193 @@ angular.module('mlg')
       loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
         if (result.status == true) {
           $scope.child_info = result.response;
+          $scope.level = {id : result.response.level_id};
+          loginHttpService.getCourseByGrade($scope.level).success(function(courseslistresult) {
+          if(!courseslistresult.response.courses){  // value is null, empty
+            $scope.msg=courseslistresult.response.message;
+            $scope.records=courseslistresult.response.course_list;
+            } else {
+              var purchased_detail = $scope.child_info.purchase_detail;
+              all_courses = courseslistresult.response.courses;
+              angular.forEach(all_courses, function(course, index) {
+              angular.forEach(purchased_detail, function(purchased, key) {
+                 if (course.id == purchased.course_id) {
+                   course.purchased = true;
+                 }
+               });
+              });
+              $scope.coursesListByGrade = all_courses;
+              $scope.msg=courseslistresult.response.message;
+              $scope.courserecords=courseslistresult.response.course_list;
+            }
+          });
+        }
+      });
+      // call API to get packages
+      loginHttpService.packageList().success(function(packrecords) {
+          $scope.packages = packrecords.response.package;
+      });
+
+      // call API to get plans
+      loginHttpService.planList().success(function(planrecord) {
+  		$scope.plans = planrecord.response.plans;
+      });
+    }
+
+  $scope.setPreference = function(data) {
+    /*if (typeof $rootScope.logged_user == 'undefined') {
+      alert('kindly login');
+      window.location.href='/mlg_ui/app';
+    }*/
+   // data.user_id = $rootScope.logged_user.id;
+   data.user_id = get_uid;
+    loginHttpService.setPreference(data).success(function(response) {
+      if (response.status == true) {
+        if ((typeof response.warning != 'undefined') && (response.warning == true)) {
+          alert(response.message);
+        }
+        $location.url('/terms_and_conditions');
+      } else {
+        $scope.msg = response.message;
+      }
+    }).error(function(error) {
+      $scope.msg = 'some error occured';
+    });
+  };
+}])
+.controller('parentSubscriptionCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
+  $scope.frm = {}
+  $scope.childname={};
+
+  console.log($routeParams.id);
+
+  //alert(commonActions.getcookies(get_uid));
+  var get_uid=commonActions.getcookies(get_uid);
+
+	// To call dynamic step slider
+	// and Call API to get child details for deshboard naming
+    loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+			var childcount=chidrenName.response.length;
+			console.log(chidrenName);
+			if(childcount>0){																
+					$scope.childname=chidrenName.response;
+                    $scope.frm.childnames = chidrenName.response;
+                    
+                    for(var i in $scope.frm.childnames){
+
+    			if($scope.frm.childnames[i].user_id==$routeParams.child_id){
+    				$scope.frm.selectedchild=$scope.frm.childnames[i];
+    				return false;
+    			}else{
+
+    			}
+    	}
+    	//window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
+			}else{
+				$scope.childname=0;
+                $scope.frm.childnames =[];
+			}			
+		});
+
+    	
+
+
+	// end to call dynamic step slider
+
+
+ //Child Purchase history.
+    $scope.child_info={}
+    $scope.days_left = '';
+    $scope.packages = {}
+    $scope.plans = {}
+    $scope.level_id = '';
+    $scope.price = 0;
+    $scope.dis_val = 0;
+    $scope.dis_amount = 0;
+    $scope.pageNumber = 0;
+    $scope.new_package_name = 'NaN';
+    $scope.errMsg = '';
+    var all_courses = '';
+    $scope.getTotalPrice = function(subject) {
+      loginHttpService.pricecalc(subject).success(function(courseprice) {
+        $scope.price = courseprice.response.amount;
+        $scope.dis_amount = $scope.price * $scope.dis_val * 0.01;
+        $scope.subtotal = $scope.price - $scope.dis_amount;
+	  });
+    }
+    $scope.discount = function(package) {
+     $scope.frm.updatedPackage = package;
+     $scope.dis_val = package.discount;
+     $scope.new_package_name = package.name;
+     $scope.dis_amount = $scope.price * $scope.dis_val * 0.01;
+     $scope.subtotal = $scope.price-$scope.dis_amount;
+    }
+
+    $scope.updatedPlan = function(plan) {
+      $scope.frm.updatedPlan = plan;
+    }
+
+    $scope.upgrade = function(frm) {
+     if (typeof frm.new_package == 'undefined') {
+       $scope.errMsg = 'Please choose Package';
+       return false;
+     }
+     if (typeof frm.new_plan == 'undefined' || frm.new_plan == '') {
+       $scope.errMsg = 'Please choose Plan';
+       return false;
+     }
+     if (typeof frm.selectedcourse == 'undefined' || selected_subjects == '') {
+       $scope.errMsg = 'Please choose Course';
+       return false;
+     }
+     var num_of_subjects_opted = frm.new_package;
+     var selected_subjects = 0;
+     angular.forEach(frm.selectedcourse, function(sub, sub_key){
+       if (sub != '') {
+         selected_subjects++;
+       }
+     });
+     var all_subjects = false;
+     angular.forEach($scope.packages , function(package_val , key) {
+       if (package_val.no_of_subjects == num_of_subjects_opted) {
+         if (package_val.name.toUpperCase() == "ALL SUBJECTS") {
+           selected_subjects = package_val.no_of_subjects;
+           all_subjects = true;
+         }
+       }
+     });
+     if (num_of_subjects_opted != selected_subjects) {
+       $scope.errMsg = 'Please choose the subjects equal to the subject packages';
+       return false;
+     }
+     frm.user_id = get_uid;
+     frm.child_id = $routeParams.child_id;
+     var course_chosen = [];
+     if (all_subjects == false) {
+      angular.forEach(all_courses, function(course, index) {
+        angular.forEach(frm.selectedcourse, function (subject, key) {
+          if (course.id == key && subject != '') {
+            course_chosen.push(course);
+          }
+        });
+      });
+     } else {
+       course_chosen = all_courses;
+     }
+     frm.updatedCourses = course_chosen;
+     loginHttpService.upgradePackage(frm).success(function(response){
+       if (response.status) {
+         $location.url('/parent/dashboard');
+       }
+     });
+    }
+    if (typeof $routeParams.child_id != 'undefined') {
+      loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
+        if (result.status == true) {
+          $scope.child_info = result.response;
+          $scope.child_info.end_date = moment($scope.child_info.order_date).add(60, 'days').calendar();
+          var end_date = moment($scope.child_info.end_date).format("YYYY-MM-DD");
+          $scope.days_left = moment(end_date).diff(moment(), 'days');
           $scope.level = {id : result.response.level_id};
           loginHttpService.getCourseByGrade($scope.level).success(function(courseslistresult) {
           if(!courseslistresult.response.courses){  // value is null, empty
@@ -1007,7 +1211,7 @@ if (typeof $routeParams.id != 'undefined') {
       data.amount = $scope.total_amount;
       loginHttpService.saveCardToPaypal(data).success(function(response) {
         if (response.status == true) {
-          $location.url('/parent/dashboard');
+          $location.url('/parent/dashboard/110');
         } else {
           $scope.msg = response.message;
         }
