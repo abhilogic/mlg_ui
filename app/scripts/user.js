@@ -1272,6 +1272,25 @@ if (typeof $routeParams.id != 'undefined') {
 .controller('parentPreferenceCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 
 var get_uid=commonActions.getcookies(get_uid);
+// To call dynamic step slider
+	// and Call API to get child details for deshboard naming
+    loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+			var childcount=chidrenName.response.length;
+			console.log(chidrenName);
+			if(childcount>0){																
+					$scope.childname=chidrenName.response;
+                    $scope.frm.childnames = chidrenName.response;
+                    
+			}else{
+				$scope.childname=0;
+                $scope.frm.childnames =[];
+			}			
+		});
+
+
+
+
+
 $scope.setPreference = function(data) {
     /*if (typeof $rootScope.logged_user == 'undefined') {
       alert('kindly login');
