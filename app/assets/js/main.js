@@ -34,9 +34,11 @@ $(document).ready(function(){
 
     // Calculate min height
     function containerHeight() {
+      if ($('.page-container').length) {
         var availableHeight = $(window).height() - $('.page-container').offset().top - $('.footer').outerHeight();
         //var footerHeight = $('.footer').outerHeight();
         $('.page-container').attr('style', 'min-height:' + availableHeight + 'px');
+      }
     }
     // Initialize
     containerHeight();
