@@ -1,0 +1,32 @@
+.edit-group {
+  .panel-body {
+    .student_list {
+      li {
+        position: relative;
+        .checkbox {
+          position: absolute;
+          right: 0px;
+          top: 0px;
+          &.cross {
+            input[type="radio"]:checked + label::before {
+              background: none;
+            }
+            label {
+              &:before {
+                border: 0px;
+                content: '\0049';
+                color: red;
+                font-family: 'Glyphter';
+              }
+              &:after {
+                content: '';
+                background: none;
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

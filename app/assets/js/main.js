@@ -104,4 +104,3 @@ $(function() {
     var switchery = new Switchery(info, { color: '#00BCD4'});
 
   });
->>>>>>> Stashed changes

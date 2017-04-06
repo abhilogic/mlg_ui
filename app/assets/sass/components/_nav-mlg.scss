@@ -1,0 +1,56 @@
+
+.nav-mlg {
+  border-bottom: 0px;
+  li {
+    display: block;
+    width: 100%;
+    a {
+      border-bottom: 1px solid $gray-lighter;
+      color: $gray-dark;
+      font-size: ceil($font-size-base*1.14);
+      @include padding($mgl-tab-link-padding);
+      text-transform: capitalize;
+      &:hover {
+        background: transparent;
+        color: $brand-primary;
+      }
+    }
+    &.active {
+      a {
+        background: transparent;
+        color: $brand-primary;
+        &:after {
+          content:'\0044';
+          color: $brand-primary;
+          display: inline-block;
+          font: normal  normal $font-size-base 'Glyphter';
+          float: right;
+          margin-top: 5px;
+          line-height: 1;
+        }
+      }
+    }
+    &:last-child {
+      a {
+        border-bottom-color: transparent;
+      }
+    }
+  }
+  &.horizontal {
+    li {
+      display: inline-block;
+      width: auto;
+      &.active {
+        a {
+          border-bottom-color: $brand-primary;
+          &:after {
+            content: '\0042';
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  // nav-tabs horizontal
+}
+  // nav-tabs

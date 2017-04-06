@@ -126,13 +126,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	}).when('/parent/dashboard/offers', {
 		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'parentOffers',
-<<<<<<< Updated upstream
 		access : access.parents
-	}).when('/parent/dashboard/redeem',{
-		templateUrl : 'views/dashboard/parent-redeem.html',
-		controller : 'parentDashboardCtrl',
-		access : access.parents
-=======
 	}).when('/parent/dashboard/subscription', {
 		templateUrl : 'views/dashboard/parent-subscription.html',
 		controller : 'parentOffers',
@@ -145,7 +139,6 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	}).when('/parent/dashboard/notifications', {
 		templateUrl : 'views/dashboard/parent-notifications.html',
 		controller : 'parentOffers',
->>>>>>> Stashed changes
 	}).when('/teacher/create_account',{
 		templateUrl : 'views/account-teacher.html',
 		controller : 'teacherOnBoardingCtrl',

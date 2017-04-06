@@ -16,6 +16,9 @@ h6, .h6 {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  &.link-gray{
+    color: $gray;
+  }
   &.link-gray-light{
     color: $gray-light;
   }
@@ -58,4 +61,7 @@ h6, .h6 {
 }
 .text-semibold{
   font-weight: $semibold;
+}
+.text-ultrabold {
+  font-weight: $ultrabold;
 }

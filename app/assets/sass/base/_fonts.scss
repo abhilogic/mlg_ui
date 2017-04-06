@@ -1,14 +1,15 @@
-/* --- FONTS --- */
+/* MLG: Fonts --- */
 
-// Example of Google Font include
-//@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+//Font primary
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+
+//Font Secondary
 @font-face {
     font-family: 'MyriadProBoldCondensed';
-    src: url('fonts/MyriadProBoldCondensed.eot');
-    src: url('fonts/MyriadProBoldCondensed.eot') format('embedded-opentype'),
-         url('fonts/MyriadProBoldCondensed.woff2') format('woff2'),
-         url('fonts/MyriadProBoldCondensed.woff') format('woff'),
-         url('fonts/MyriadProBoldCondensed.ttf') format('truetype'),
-         url('fonts/MyriadProBoldCondensed.svg#MyriadProBoldCondensed') format('svg');
+    src: url($font_dir+'MyriadProBoldCondensed.eot');
+    src: url($font_dir+'MyriadProBoldCondensed.eot') format('embedded-opentype'),
+         url($font_dir+'MyriadProBoldCondensed.woff2') format('woff2'),
+         url($font_dir+'MyriadProBoldCondensed.woff') format('woff'),
+         url($font_dir+'MyriadProBoldCondensed.ttf') format('truetype'),
+         url($font_dir+'MyriadProBoldCondensed.svg#MyriadProBoldCondensed') format('svg');
 }
