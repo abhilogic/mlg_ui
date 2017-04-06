@@ -126,11 +126,26 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	}).when('/parent/dashboard/offers', {
 		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'parentOffers',
+<<<<<<< Updated upstream
 		access : access.parents
 	}).when('/parent/dashboard/redeem',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
 		controller : 'parentDashboardCtrl',
 		access : access.parents
+=======
+	}).when('/parent/dashboard/subscription', {
+		templateUrl : 'views/dashboard/parent-subscription.html',
+		controller : 'parentOffers',
+	}).when('/parent/dashboard/redeem',{
+		templateUrl : 'views/dashboard/parent-redeem.html',
+		controller : 'parentDashboardCtrl',
+	}).when('/parent/dashboard/settings',{
+		templateUrl : 'views/dashboard/parent-settings.html',
+		controller : 'parentDashboardCtrl',
+	}).when('/parent/dashboard/notifications', {
+		templateUrl : 'views/dashboard/parent-notifications.html',
+		controller : 'parentOffers',
+>>>>>>> Stashed changes
 	}).when('/teacher/create_account',{
 		templateUrl : 'views/account-teacher.html',
 		controller : 'teacherOnBoardingCtrl',
@@ -238,4 +253,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	});
 	
 	 
+})
+
+.directive('banner', function() {
+    return function (scope, element, attrs) {
+        element.height($(window).height() - $('.navbar').outerHeight());
+    }
 });
