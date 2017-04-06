@@ -77,12 +77,12 @@ angular.module('mlg_student')
 		  		loginHttpService.getCourseByGrade(studentcoursesresult.response.student_class).success(function(courseslistresult) {
 		  		console.log(courseslistresult);
 		        if(!courseslistresult.response.courses){  // value is null, empty
-		    	    $scope.msg=courseslistresult.response.message; 
-		        	$scope.records=courseslistresult.response.course_list;        
+		    	    $scope.frm.msg=courseslistresult.response.message; 
+		        	        
 		        }else{
-		        	$scope.cousesListByGrade= courseslistresult.response.courses;
+		        	$scope.frm.cousesListByGrade= courseslistresult.response.courses;
 		          	$scope.msg=courseslistresult.response.message;
-		          	$scope.courserecords=courseslistresult.response.course_list; 
+		          	
 		        }         
 	    	});
 
