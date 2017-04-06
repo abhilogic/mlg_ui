@@ -98,26 +98,30 @@
 	
 	<!-- Latest compiled and minified JavaScript -->
   <!-- bootstrap modal  -->
+  
+  
+  
+  
     <section class="modal__section">
-      <div id="emailConfirmation" class="modal fade" role="dialog">
-        <div class="modal-dialog boot_popup">
-          <!-- Modal content-->
-          <div class="modal-content">
-           <!--  <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
-            </div> -->
-            <div class="modal-body">
-                  <span class="___status_icon">
-                    <i class="icon icon-check"></i>
-                  </span>
-                  <p class="___tag_line">Verification mail has been sent to your email please check</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="gohome();">OK</button>
-            </div>
-          </div>
-        </div>
-      </div>
+     <div id="emailConfirmation" class="modal fade modal-emailConfirmation" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+				</div>
+				<div class="modal-body">
+					<span class="icon icon-rounded float-lg icon-float icon-success">
+						<i class="icon-check"></i>
+					</span>
+					<p class="tag_line">Verification mail has been sent to your email please check</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="gohome();">Go</button>
+				</div>
+			</div>
+		</div>
+	</div>
     </section>
   <!-- bootstrap modal  -->
 	
