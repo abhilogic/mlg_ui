@@ -147,6 +147,18 @@
   max-width: 90%;
 }
 
+// flex-self
+.align-self {
+  &-start {
+    align-self:  flex-start;
+  }
+  &-end {
+    align-self:  flex-end;
+  }
+  &-center {
+    align-self:  center;
+  }
+}
 
 /* Responsive Grid Classes */
 /* Adding a class of responsive-X to a row */

@@ -1,0 +1,99 @@
+.teacher_setting_tabs {
+    @media screen and (min-width: $screen-sm-max){
+    .tab-nav {
+      padding-right: 0px;
+      border-right: 1px solid $gray-lighter;
+    }
+  }
+  .tab-pane {
+    >h5 {
+      font-size: 16px;
+      @include border-width(0px 0px 1px 0px);
+      @include border-color(null null $gray-lighter null);
+      @include border-style(solid);
+      @include padding(17px 15px);
+      @include margin(0px null 0px null);
+    }
+  }
+  .form-horizontal {
+    margin-bottom: 15px;
+  }
+  .edited-input {
+    h5 {
+      font-size: 16px;
+      @include border-width(0px 0px 1px 0px);
+      @include border-color(null null $gray-lighter null);
+      @include border-style(solid);
+      @include padding(17px 15px);
+      @include margin(0px null 0px null);
+      &:not(:first-child){
+        @include margin(39px null null null);
+      }
+    }
+    h6 {
+      font-size: 16px;
+      font-weight: $semibold;
+      @include padding(0px 15px);
+      @include margin(null null 0px null);
+      text-align: left;
+      &:after {
+        content:'';
+        display: table;
+        clear: both;
+      }
+      span {
+        color: $gray-light;
+      }
+      .icon {
+        color: $brand-primary;
+        float: right;
+      }
+      & + span {
+        color: $gray-light;
+        font-size: 12px;
+        margin-left: 15px;
+      }
+    }
+    p {
+      @include padding(0px 15px);
+    }
+    .package-group {
+      text-align: left;
+      display: block;
+      @include padding(null null null 15px);
+      @include margin(2px null 15px null);
+      .btn.package-plan, .btn.subject {
+        height: 82px;
+        @media screen and (min-width: $screen-sm){
+          min-width: 143px;
+          max-width: 143px;
+          @include padding(3.5% null null null);
+          @include margin(0% null null null);
+        }
+      }
+      .btn.subject {
+        padding-top: 6.5%;
+      }
+      @media screen and (min-width: $screen-sm){
+        @include margin(2px null 41px null);
+      }
+    }
+  }
+  .mgl-setting {
+    .form-block {
+      @include margin(15px null null  null);
+      padding-bottom: 15px;
+      h5 {
+        font-size: 16px;
+        @include border-width(0px 0px 0px 0px);
+        @include border-color(null null $gray-lighter null);
+        @include border-style(solid);
+        @include padding(17px 15px);
+        @include margin(0px null 0px null);
+      }
+      &:not(:last-child){
+        border-bottom: 1px solid $gray-lighter;
+      }
+    }
+  }
+}

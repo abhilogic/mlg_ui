@@ -4,7 +4,9 @@
   border-width: 0;
   @include padding(8px 15px);
   border-radius: 2px;
-
+  &.btn-background-none {
+    background: none;
+  }
   &.btn-outline{
     &:not(:hover){
       background-color: transparent;

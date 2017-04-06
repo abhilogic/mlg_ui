@@ -3,7 +3,7 @@
 // Setup child Account
 --------------------*/
 .selected_package{
-  content: '\0043';
+  content: '\0047';
   display: inline-block;
   font-family: 'Glyphter';
   font-style: normal;
@@ -77,6 +77,100 @@
   }
 }
 
+.grade-group{
+  padding: 0;
+  text-align: center;
+  @include margin(40px auto 15px auto);
+  .btn{
+    @include padding(0);
+    border-bottom: 1px solid $gray-light;
+    color: $gray-light;
+    margin: 0;
+    display: inline-block;
+    float: left;
+    &:hover{
+      color: $gray-dark;
+      border-color: $gray-dark;
+    }
+    &.active, &:focus, &:active{
+      box-shadow: none;
+      color: $brand-primary;
+      border-color: $brand-primary;
+      outline: 0;
+      .grade{
+        border-color: $brand-primary;
+      }
+    }
+  }
+  .grade{
+    font-weight: $semibold;
+    display: block;
+    position: relative;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    @include padding(10px 15px);
+    >span{
+      text-transform: uppercase;
+    }
+  }
+}
+
+.subject-group{
+  padding: 0;
+  text-align: center;
+  @include margin(15px auto 70px auto);
+  .btn{
+    @extend .package-box;
+    min-height: inherit;
+    @include padding(20px);
+    border-width: 2px;
+    border-color: $gray-light;
+    color: $gray-light;
+    font-weight: $semibold;
+    display: inline-block;
+    float: none;
+    text-transform: uppercase;
+  }
+  .btn + .btn{
+    margin-left: 10px;
+  }
+}
+
+.selected-grades-subjects{
+  >.form-group{
+    border-bottom: 1px solid $gray-lighter;
+    margin: 0;
+    @include padding(10px null);
+    font-size: 18px;
+  }
+  .label-grade{
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    font-weight: $semibold;
+    color: $gray-dark;
+  }
+  .subjects-list{
+    display: block;
+    overflow: hidden;
+    .label-subject{
+      color: $gray-dark;
+      border: 1px solid $gray-dark;
+      display: inline-block;
+      @include padding(8px null);
+      font-weight: $regular;
+    }
+    .label-subject + .label-subject{
+      margin-left: 10px;
+    }
+  }
+
+  .btn-remove{
+    float: right;
+    color: $gray-light;
+  }
+
+}
 
 /*
 // Total cost table
@@ -91,6 +185,40 @@
           text-align: right;
         }
       }
+  }
+}
+
+.payment-summery{
+  @include margin(30px null);
+  tbody{
+    >tr td{
+        border: 0;
+        vertical-align: middle;
+        &:last-child{
+          text-align: right;
+        }
+      }
+  }
+  tfoot{
+    >tr>td{
+        &:last-child{
+          text-align: right;
+        }
+      }
+  }
+  .amount-subtotal{
+
+  }
+  .subtotal-value{
+    font-weight: $bold;
+    color:$gray-light;
+    font-size: 18px;
+    small{
+      font-weight: $regular;
+    }
+  }
+  .subtotal-text{
+    text-transform: uppercase;
   }
 }
 

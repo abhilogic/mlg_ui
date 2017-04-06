@@ -5,27 +5,11 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	login: '/users/login',
 	logout: '/users/logout',
 	siteRoot : '/mlg_ui/app/',
-	registerUser:'/users/registerUser',
-/*	parentPreference:'/users/setUserPreference',
 	baseURL : 'http://localhost/mlg',
-	gradeList : '/users/getGradeList',
-	setUserStatus : '/users/setUserStatus',
-	getTermsAndConditions : '/users/getStaticContents',
-	getPaymentBrief : '/users/getPaymentBrief',
-	isUserLogin : '/users/isUserLoggedin',
-	saveCardToPaypal : '/users/saveCardToPaypal',
-	packageList : '/users/getPackageList',
-	planList : '/users/getPlanList',
+	registerUser:'/users/registerUser',
 	getCourseByGrade :'/courses/getCourseListForLevel',
-	setChildrenCount :'/users/setCountOfChildrenOfParent',
-	getChildrenCount :'/users/getCountOfChildrenOfParent',
-	getAddedChildren :'/users/getChildrenListOfParent',	
-	priceCalcOnSeclectedCourse :'/users/priceCalOnCourse',
-	getChildrenDetails :'/users/getChildrenDetails',
-	addChildRecord : '/users/addChildrenRecord',
-	addChild : '/users/addChildren',
-	offerRecords: '/users/getOffers',
-	getStepNum 	   :'/users/getStepNum', */
+	getStudentCourses :'/students/getStudentCourses', 
+
 
 
 }).value('REGEX', {
@@ -62,7 +46,8 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	2022  : '2022',
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	//var access = routingConfig.accessLevels;
-	$routeProvider.when('/journey', {
+	$routeProvider
+	.when('/journey', {
 		templateUrl : 'views/my_journey.html',
 		controller : 'journeyCtrl',		
 	}).when('/profile', {

@@ -21,6 +21,7 @@
   .content-wrapper {
       background-color: transparent;
       vertical-align: middle;
+      padding-top: 34px;
   }
 }
 
@@ -28,13 +29,19 @@
 //Onboarding login/register panel
 .panel-onboarding{
   width: 95%;
-  margin: 0 auto;
+  margin: 30px auto;
   margin-bottom: 15px;
   @media(min-width: $screen-md){
     max-width: 990px;
   }
-  .panel-heading::before{
-    display: none;
+  .panel-heading{
+    padding-top: 30px;
+    &::before{
+      display: none;
+    }
+    .panel-title{
+      color: $gray-light;
+    }
   }
 
   .panel-body{
@@ -91,11 +98,12 @@
   .content-header{
     text-align: center;
     margin-bottom: 20px;
-    @include padding(null 20%);
+    @include padding(null 15%);
     .content-title{
       font-weight: $light;
       color: $brand-primary;
       line-height: normal;
+      margin-top: 0;
     }
     .content-tagline{
       font-weight: $light;
@@ -110,4 +118,14 @@
        }
      }
    }
+}
+
+.panel-onboarding ~ .legal{
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 15px;
+  a{
+    color: white;
+    text-decoration: underline;
+  }
 }

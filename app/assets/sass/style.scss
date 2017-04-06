@@ -19,9 +19,29 @@
 @import "base/global";
 @import "base/typography";
 @import "base/helpers";
+@import "base/icons";
+@import "base/icons-fontawesome";
 
 // Sprite Style
 @import "sprites/sprite";
+
+// Components
+@import "components/gridflex";
+@import "components/buttons";
+@import "components/forms/forms";
+@import "components/forms/awesome-bootstrap-checkbox";
+@import "components/forms/switch";
+@import "components/forms/switchery";
+@import "components/forms/radioslider";
+@import "components/wells";
+@import "components/panels";
+@import "components/boot_popup";
+@import "components/toggle_button";
+@import "components/nav-mlg";
+@import "components/student_gap_analysis";
+@import "components/editable-block";
+@import "components/dropdown-menu";
+@import "components/modal";
 
 // Layout Style
 @import "layout/nav";
@@ -30,20 +50,6 @@
 @import "layout/header";
 @import "layout/sidebar";
 @import "layout/footer";
-
-// Components
-@import "components/gridflex";
-@import "components/buttons";
-@import "components/switch";
-@import "components/radio_checkbox_btn";
-@import "components/forms";
-@import "components/awesome-bootstrap-checkbox";
-@import "components/radioslider";
-@import "components/wells";
-@import "components/panels";
-@import "components/student_gap_analysis";
-@import "components/boot_popup";
-@import "components/toggle_button";
 
 // Pages Login/signup
 @import "pages/home";
@@ -60,3 +66,14 @@
 @import "pages/parent-redeem";
 @import "pages/parent-offers";
 @import "pages/parent-subscription";
+@import "pages/parent-settings";
+@import "pages/parent-notifications";
+@import "pages/teacher-setting";
+@import "pages/teacher-get-a-quote";
+@import "pages/teacher-group-member";
+@import "pages/teacher-gap-analysis";
+@import "pages/teacher-create-group";
+@import "pages/teacher-edit-group";
+@import "pages/teacher-scope-sequence";
+@import "pages/teacher-addQuestion";
+@import "pages/teacher-assignment";

@@ -1,0 +1,14 @@
+.create-group {
+  .panel-body {
+    .student_list {
+      li {
+        position: relative;
+        .checkbox {
+          position: absolute;
+          right: 0px;
+          top: 0px;
+        }
+      }
+    }
+  }
+}

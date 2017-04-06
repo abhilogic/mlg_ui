@@ -1,0 +1,43 @@
+.modal {
+  .close {
+    opacity: 1;
+    color: $gray-light;
+  }
+  .connected-li-list {
+      li {
+        display: block;
+        font-size: 14px;
+        color: darken($gray,10%);
+        position: relative;
+        &:before {
+          background: lighten($gray-light,20%);
+          @include border-radius(100%);
+          content: '';
+          height: 10px;
+          left: -18px;
+          position: absolute;
+          top: 6px;
+          width: 10px;
+          z-index: 100;
+        }
+        &:after {
+          background: lighten($gray-light,20%);
+          content: '';
+          height: 29px;
+          left: -14px;
+          position: absolute;
+          top: 6px;
+          width: 2px;
+          z-index: 100;
+        }
+        &:not(:last-child){
+          margin-bottom: 10px;
+        }
+        &:last-child {
+          &:after {
+            display: none;
+          }
+        }
+      }
+  }
+}

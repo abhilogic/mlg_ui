@@ -93,9 +93,6 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	}).when('/email/confirmation/:id',{
 		templateUrl : 'views/parent_confirmation.html',
 		controller : 'emailConfirmationCtrl',
-	}).when('/parent_dashboard', {
-		templateUrl : 'views/parent_dashboard.html',
-		controller : 'parentDashboardCtrl',
 	}).when('/select_children', {
 		templateUrl : 'views/number_children.html',
 		controller : 'addChild',		
@@ -110,7 +107,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		templateUrl : 'views/term_condition.html',
 		controller : 'termsAndConditionsCtrl',
 		access : access.parents
-	}).when('/parent/dashboard', {
+	}).when('/parent/dashboard/:id', {
 		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
 		access : access.parents
@@ -119,7 +116,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		controller : 'paymentPageCtrl',
 	}).when('/parent/dashboard/subscription/:child_id', {
 		templateUrl : 'views/dashboard/parent-subscription.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'parentSubscriptionCtrl',
 	}).when('/test', {
 		templateUrl : 'views/test.html',
 		controller : 'addChild',
@@ -127,10 +124,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'parentOffers',
 		access : access.parents
-	}).when('/parent/dashboard/redeem',{
+	}).when('/parent/dashboard/redeem/:id',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
 		controller : 'parentDashboardCtrl',
-		access : access.parents
+	}).when('/parent/dashboard/settings',{
+		templateUrl : 'views/dashboard/parent-settings.html',
+		controller : 'parentDashboardCtrl',
+	}).when('/parent/dashboard/notifications', {
+		templateUrl : 'views/dashboard/parent-notifications.html',
+		controller : 'parentOffers',
 	}).when('/teacher/create_account',{
 		templateUrl : 'views/account-teacher.html',
 		controller : 'teacherOnBoardingCtrl',
@@ -176,10 +178,23 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		  $rootScope.atHome = (toState.name == '/parent/dashboard');
 		});*/
 		  
+
+		   function setCookie(key, value) {
+		var expires = new Date();
+		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+';path=/';
+	}
+
 		
 	   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
+		   		 /*document.cookie = uid+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
+		   		setCookie('uid',null);
+		   		setCookie('userObj',null);
+
+
 	         window.location.href='/mlg_ui/app';
 		   }).error(function(error) {
 			  $rootScope.logged_user = '';
@@ -238,4 +253,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	});
 	
 	 
+})
+
+.directive('banner', function() {
+    return function (scope, element, attrs) {
+        element.height($(window).height() - $('.navbar').outerHeight());
+    }
 });

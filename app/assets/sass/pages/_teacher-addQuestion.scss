@@ -1,0 +1,71 @@
+.add-quetion-panel {
+  .panel-heading {
+    .panel-title {
+      @media screen and (min-width: $screen-sm-max){
+        font-size: 22px;
+        text-align: right;
+      }
+      @media screen and (max-width: $screen-xs-max){
+        margin-top: 8px;
+      }
+    }
+    .input-dropdown {
+        max-width: 180px;
+        float: right;
+    }
+  }
+  .panel-body {
+    .form {
+      .edited-input {
+        @include padding(0px null null null);
+      }
+      .radio {
+        margin-top: 6px;
+      }
+      label {
+        color: $gray-light;
+        font-weight: $semibold;
+        font-size: 13px;
+        @include margin(7px null null null);
+        text-transform: uppercase;
+      }
+      h5 {
+        color: $gray-light;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: $bold;
+        margin-top: 20px;
+        margin-bottom: 15px;
+      }
+      .normal-input {
+        @include border-radius(0px);
+        @include border-width(0px 0px null 0px);
+      }
+      .repeat-row {
+        @media screen and (min-width: $screen-sm-max){
+          &:not(:first-child){
+            margin-top: 10px;
+          }
+        }
+      }
+      .add-new-btn {
+        color: $brand-primary;
+        text-transform: uppercase;
+        padding-left: 0px;
+        background: none;
+        margin-top: 10px;
+      }
+      .answer-type-option {
+        li {
+          @media screen and (max-width: $screen-sm){
+            display: block;
+            text-align: center;
+            &:not(:last-child){
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

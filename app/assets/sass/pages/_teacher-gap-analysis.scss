@@ -1,0 +1,23 @@
+.gap-analysis {
+  .tabs-analysis{
+    @include box-shadow(none);
+    @include border-width(0px);
+    .form-control{
+      color: $gray-light;
+      display: inline-block;
+      width: auto;
+      font-size: 12px;
+      font-weight: $semibold;
+      text-transform: uppercase;
+    }
+    .nav-tabs-analysis {
+      @include box-shadow(none);
+      li.active {
+        a {
+        border-left-color: transparent;
+        @include box-shadow(none);
+        }
+      }
+    }
+  }
+}
