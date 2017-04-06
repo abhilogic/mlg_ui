@@ -184,10 +184,23 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		  $rootScope.atHome = (toState.name == '/parent/dashboard');
 		});*/
 		  
+
+		   function setCookie(key, value) {
+		var expires = new Date();
+		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+';path=/';
+	}
+
 		
 	   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
+		   		 /*document.cookie = uid+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
+		   		setCookie('uid',null);
+		   		setCookie('userObj',null);
+
+
 	         window.location.href='/mlg_ui/app';
 		   }).error(function(error) {
 			  $rootScope.logged_user = '';
