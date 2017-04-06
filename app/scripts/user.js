@@ -389,7 +389,7 @@ angular.module('mlg')
 		window.location.href='/mlg_ui/app';
 	}
 
-
+	
 	 $scope.register = function(data,user_type){
 	 		var role_id=user_roles[user_type];
 	 		if(typeof data=='undefined'){
