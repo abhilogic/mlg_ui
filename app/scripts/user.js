@@ -229,6 +229,14 @@ angular.module('mlg')
         url   : urlParams.baseURL+urlParams.getUserPurchaseDetails + '/' + cid
 	  });
 	}
+
+    loginHttpResponse.upgradePackage=function(frm) {
+      return $http({
+        method:'POST',
+        data: frm,
+        url   : urlParams.baseURL+urlParams.upgradePackage
+	  });
+	}
 	return loginHttpResponse;
 	
 }])
@@ -423,29 +431,71 @@ angular.module('mlg')
     $scope.plans = {}
     $scope.level_id = '';
     $scope.price = 0;
-    $scope.discount = 0;
+    $scope.dis_val = 0;
     $scope.dis_amount = 0;
     $scope.pageNumber = 0;
+    $scope.new_package_name = 'NaN';
+    $scope.errMsg = '';
+    var all_courses = '';
     $scope.getTotalPrice = function(subject) {
       loginHttpService.pricecalc(subject).success(function(courseprice) {
         $scope.price = courseprice.response.amount;
-        $scope.dis_amount = $scope.price*$scope.discount*0.01;
-        $scope.subtotal=$scope.price-$scope.dis_amount;
+        $scope.dis_amount = $scope.price * $scope.dis_val * 0.01;
+        $scope.subtotal = $scope.price - $scope.dis_amount;
 	  });
     }
-    $scope.discount = function(disc_val) {
-     $scope.discount = disc_val;
-     $scope.dis_amount = $scope.price * $scope.discount * 0.01;
+    $scope.discount = function(package) {
+     $scope.frm.updatedPackage = package;
+     $scope.dis_val = package.discount;
+     $scope.new_package_name = package.name;
+     $scope.dis_amount = $scope.price * $scope.dis_val * 0.01;
      $scope.subtotal = $scope.price-$scope.dis_amount;
     }
 
+    $scope.updatedPlan = function(plan) {
+      $scope.frm.updatedPlan = plan;
+    }
+
     $scope.upgrade = function(frm) {
-      $location.url('/parent/dashboard');
-//     console.log(frm);
-//     no_of_subjects = frm.new_package.split(' ')[0];
-//     if (no_of_subjects == '') {
-//
-//     }
+     if (typeof frm.new_package == 'undefined') {
+       $scope.errMsg = 'Please choose Package';
+       return false;
+     }
+     if (typeof frm.new_plan == 'undefined' || frm.new_plan == '') {
+       $scope.errMsg = 'Please choose Plan';
+       return false;
+     }
+     if (typeof frm.selectedcourse == 'undefined' || selected_subjects == '') {
+       $scope.errMsg = 'Please choose Course';
+       return false;
+     }
+     var num_of_subjects_opted = frm.new_package;
+     var selected_subjects = 0;
+     angular.forEach(frm.selectedcourse, function(sub, sub_key){
+       if (sub != '') {
+         selected_subjects++;
+       }
+     });
+     if (num_of_subjects_opted != selected_subjects) {
+       $scope.errMsg = 'Please choose the subjects equal to the subject packages';
+       return false;
+     }
+     frm.user_id = get_uid;
+     frm.child_id = $routeParams.child_id;
+     var course_chosen = [];
+     angular.forEach(all_courses, function(course, index) {
+       angular.forEach(frm.selectedcourse, function (subject, key) {
+         if (course.id == key && subject != '') {
+           course_chosen.push(course);
+         }
+       });
+     });
+     frm.updatedCourses = course_chosen;
+     loginHttpService.upgradePackage(frm).success(function(response){
+       if (response.status) {
+         $location.url('/parent/dashboard');
+       }
+     });
     }
     if (typeof $routeParams.child_id != 'undefined') {
       loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
@@ -458,7 +508,7 @@ angular.module('mlg')
             $scope.records=courseslistresult.response.course_list;
             } else {
               var purchased_detail = $scope.child_info.purchase_detail;
-              var all_courses = courseslistresult.response.courses;
+              all_courses = courseslistresult.response.courses;
               angular.forEach(all_courses, function(course, index) {
               angular.forEach(purchased_detail, function(purchased, key) {
                  if (course.id == purchased.course_id) {
