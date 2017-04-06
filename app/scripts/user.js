@@ -1263,7 +1263,7 @@ if (typeof $routeParams.id != 'undefined') {
 
 }])
 .controller('parentSettingCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
-alert('kkkkk');
+//alert('kkkkk');
 }])
 .controller('parentPreferenceCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 
