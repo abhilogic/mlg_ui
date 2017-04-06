@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUTH'])
 .value('urlParams', {
 	users : '/users',
 	login: '/users/login',
@@ -64,13 +64,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	2021  : '2021',
 	2022  : '2022',
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-	//var access = routingConfig.accessLevels;
+	var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {
 		templateUrl : 'views/landing.html',
-		controller : 'loginCtrl',		
+		controller : 'loginCtrl',
+		access : access.public		
 	}).when('/signin', {
 		templateUrl : 'views/login.html',
-		controller : 'loginCtrl',		
+		controller : 'loginCtrl',
+		access : access.public		
 	}).when('/parent_login', {
 		templateUrl : 'views/parent_login.html',
 		controller : 'loginCtrl',		
@@ -83,9 +85,11 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/teacher/signup',{
 		templateUrl : 'views/teacher_signup.html',
 		controller : 'teacherLoginCtrl',
+		access : access.public
 	}).when('/parent_signup', {
 		templateUrl : 'views/parent_signup.html',
 		controller : 'loginCtrl',
+		access : access.public
 	}).when('/email/confirmation/:id',{
 		templateUrl : 'views/parent_confirmation.html',
 		controller : 'emailConfirmationCtrl',
@@ -101,12 +105,15 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/parent_preferences', {
 		templateUrl : 'views/account_preferenceces.html',
 		controller : 'parentDashboardCtrl',
+		access : access.parents
 	}).when('/terms_and_conditions', {
 		templateUrl : 'views/term_condition.html',
 		controller : 'termsAndConditionsCtrl',
+		access : access.parents
 	}).when('/parent/dashboard', {
 		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
+		access : access.parents
 	}).when('/payment_page', {
 		templateUrl : 'views/payment_page.html',
 		controller : 'paymentPageCtrl',
@@ -119,9 +126,11 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	}).when('/parent/dashboard/offers', {
 		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'parentOffers',
+		access : access.parents
 	}).when('/parent/dashboard/redeem',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
 		controller : 'parentDashboardCtrl',
+		access : access.parents
 	}).when('/teacher/create_account',{
 		templateUrl : 'views/account-teacher.html',
 		controller : 'teacherOnBoardingCtrl',
@@ -147,7 +156,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
     loginHttpService.isUserlogin().success(function(response) {
@@ -182,6 +191,14 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
 	$rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
    });
+
+	    $rootScope.$on("$routeChangeStart", function (event, next, current) {
+        if (!Auth.authorize(next.access)) {
+            if(Auth.isLoggedIn()) $location.path('/');
+            else                  $location.path('/login');
+        }
+    });
+
 
 
 

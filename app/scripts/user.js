@@ -327,7 +327,19 @@ angular.module('mlg')
          } else {
            $rootScope.logged_user = response.user;
            setCookie('uid', $rootScope.logged_user.id);
+
            var role_id=response.role_id;
+           var role_name='';
+           if(role_id==1){
+           		role_name='admin';
+           }else if(role_id==2){
+           		role_name='parent';
+           }else if(role_id==3){
+           		role_name='teacher';
+           }else if(role_id==4){
+           		role_name='student';
+           }
+           setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',role='+role_name+'"');
            //var user_type=user_roles.indexOf(response.role_id);
           // $location.url('select_children');
           if (role_id == '3') {
