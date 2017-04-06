@@ -1,4 +1,8 @@
-angular.module('mlg')
+angular.module('mlg').filter('moment', function() {
+    return function(dateString, format) {
+        return moment(dateString).format(format);
+    };
+})
 .factory('loginHttpService',['$http','urlParams',function($http,urlParams){
 	
 	var loginHttpResponse={};	

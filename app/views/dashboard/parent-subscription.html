@@ -49,11 +49,11 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-4"><p class="text-muted">Start Date:</p></div>
-                  <div class="col-sm-4"><p class="text-uppercase">{{child_info.order_date}}</p></div>
+                  <div class="col-sm-4"><p class="text-uppercase">{{child_info.order_date | moment:"Do MMM YYYY"}}</p></div>
                 </div>
                 <div class="row">
                   <div class="col-sm-4"><p class="text-muted">End Date:</p></div>
-                  <div class="col-sm-4"><p class="text-uppercase">{{child_info.end_date}}</p></div>
+                  <div class="col-sm-4"><p class="text-uppercase">{{child_info.end_date | moment:"Do MMM YYYY"}}</p></div>
                 </div>
                 <div class="row">
                   <div class="col-sm-4"><p class="text-muted">Days Remaining:</p></div>
