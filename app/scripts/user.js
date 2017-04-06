@@ -750,11 +750,11 @@ angular.module('mlg')
       });
     }
 
-  $scope.setPreference = function(data) {
+  /*$scope.setPreference = function(data) {
     /*if (typeof $rootScope.logged_user == 'undefined') {
       alert('kindly login');
       window.location.href='/mlg_ui/app';
-    }*/
+    }
    // data.user_id = $rootScope.logged_user.id;
    data.user_id = get_uid;
     loginHttpService.setPreference(data).success(function(response) {
@@ -769,7 +769,7 @@ angular.module('mlg')
     }).error(function(error) {
       $scope.msg = 'some error occured';
     });
-  };
+  };*/
 }])
 .controller('emailConfirmationCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
 if (typeof $routeParams.id != 'undefined') {
@@ -1258,17 +1258,34 @@ if (typeof $routeParams.id != 'undefined') {
 				alert('registration fail');
 			});
 	};
-}]);
-/*
-.run(['$rootScope',function($rootScope){
-  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-      console.log(toState);
-      $rootScope.home = (toState.name == 'parent/dashboard');
-  });
 }])
-.run(['$location', '$rootScope', function($location, $rootScope) {
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.home = (toState.name == 'mlg.home');
-    });
-}]);*/
+.controller('parentRedeemCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
 
+}])
+.controller('parentSettingCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+alert('kkkkk');
+}])
+.controller('parentPreferenceCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
+
+var get_uid=commonActions.getcookies(get_uid);
+$scope.setPreference = function(data) {
+    /*if (typeof $rootScope.logged_user == 'undefined') {
+      alert('kindly login');
+      window.location.href='/mlg_ui/app';
+    }*/
+   // data.user_id = $rootScope.logged_user.id;
+   data.user_id = get_uid;
+    loginHttpService.setPreference(data).success(function(response) {
+      if (response.status == true) {
+        if ((typeof response.warning != 'undefined') && (response.warning == true)) {
+          alert(response.message);
+        }
+        $location.url('/terms_and_conditions');
+      } else {
+        $scope.msg = response.message;
+      }
+    }).error(function(error) {
+      $scope.msg = 'some error occured';
+    });
+  };
+}]);

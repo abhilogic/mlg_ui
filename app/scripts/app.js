@@ -101,15 +101,11 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		controller : 'addChild',		
 	}).when('/parent_preferences', {
 		templateUrl : 'views/account_preferenceces.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'parentPreferenceCtrl',
 		access : access.parents
 	}).when('/terms_and_conditions', {
 		templateUrl : 'views/term_condition.html',
 		controller : 'termsAndConditionsCtrl',
-		access : access.parents
-	}).when('/parent/dashboard/:id', {
-		templateUrl : 'views/dashboard/parent-dashboard.html',
-		controller : 'parentDashboardCtrl',
 		access : access.parents
 	}).when('/payment_page', {
 		templateUrl : 'views/payment_page.html',
@@ -126,10 +122,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		access : access.parents
 	}).when('/parent/dashboard/redeem/:id',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'parentRedeemCtrl',
 	}).when('/parent/dashboard/settings',{
 		templateUrl : 'views/dashboard/parent-settings.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'parentSettingCtrl',
 	}).when('/parent/dashboard/notifications', {
 		templateUrl : 'views/dashboard/parent-notifications.html',
 		controller : 'parentOffers',
@@ -141,11 +137,14 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		controller : 'teacherOnBoardingCtrl',
 	}).when('/teacher/dashboard',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
-		controller : 'parentDashboardCtrl',
+		controller : 'teacherDashboardCtrl',
 	}).when('/teacher/subscription',{
 		templateUrl : 'views/dashboard/teacher-subscription.html',
+		controller : 'teacherSubscriptionCtrl',
+	}).when('/parent/dashboard/:id', {
+		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
-	}).otherwise({
+		access : access.parents
 	}).when('/teacher/payment_page',{
     templateUrl : 'views/payment_teacher.html',
 		controller : 'teacherOnBoardingCtrl',
