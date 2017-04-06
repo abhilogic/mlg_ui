@@ -373,13 +373,9 @@ angular.module('mlg').filter('moment', function() {
 						$location.url('payment_page'); 
 					}
 					else if(stepNum.response.step.step_completed==4){
-					 $location.url('parent/dashboard');
+					 $location.url('parent/dashboard/110');
 					 }				
-					if(stepNum.response.step.step_completed==0 ){ $location.url('select_children'); }
-					else if(stepNum.response.step.step_completed==1){ $location.url('add_child_account'); }
-					else if(stepNum.response.step.step_completed==2){ $location.url('parent_preferences'); }
-					else if(stepNum.response.step.step_completed==3){ $location.url('payment_page'); }
-					else if(stepNum.response.step.step_completed==4){ $location.url('parent/dashboard'); }				
+					
 	   			}
 			});
 
@@ -526,7 +522,7 @@ angular.module('mlg').filter('moment', function() {
      frm.updatedCourses = course_chosen;
      loginHttpService.upgradePackage(frm).success(function(response){
        if (response.status) {
-         $location.url('/parent/dashboard');
+         $location.url('/parent/dashboard/110');
        }
      });
     }
@@ -710,7 +706,7 @@ angular.module('mlg').filter('moment', function() {
      frm.updatedCourses = course_chosen;
      loginHttpService.upgradePackage(frm).success(function(response){
        if (response.status) {
-         $location.url('/parent/dashboard');
+         $location.url('/parent/dashboard/110');
        }
      });
     }
