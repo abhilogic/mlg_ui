@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUTH'])
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUTH','tien.clndr'])
 .value('urlParams', {
 	users : '/users',
 	login: '/users/login',
@@ -26,11 +26,13 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	addChild : '/users/addChildren',
 	offerRecords : '/users/getOffers',
 	getStepNum :'/users/getStepNum',
-    promocode :'/users/promocode',
-    getUserPurchaseDetails :'/users/getUserPurchaseDetails',
-    signUpTeacher :'/teachers/setTeacherRecord',
-    teacherPayment :'/teachers/getTeacherSubject',
-    upgradePackage :'/users/upgrade',
+  promocode :'/users/promocode',
+  getUserPurchaseDetails :'/users/getUserPurchaseDetails',
+  signUpTeacher :'/teachers/setTeacherRecord',
+  teacherPayment :'/teachers/getTeacherSubject',
+  upgradePackage :'/users/upgrade',
+  getStudentDetail: '/teachers/getStudentDetail',
+  getTeacherGrades: '/teachers/getTeacherGradeSubject',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -137,7 +139,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 		controller : 'teacherOnBoardingCtrl',
 	}).when('/teacher/dashboard',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
-		controller : 'teacherDashboardCtrl',
+		controller : 'teacherOnBoardingCtrl',
 	}).when('/teacher/subscription',{
 		templateUrl : 'views/dashboard/teacher-subscription.html',
 		controller : 'teacherSubscriptionCtrl',

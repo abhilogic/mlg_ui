@@ -8,13 +8,24 @@ angular.module('mlg')
           url  : urlParams.baseURL+urlParams.signUpTeacher
         });  
       }
-
       teacherHttpResponse.teacherPayment=function(id){
         return $http({
           method:'POST',	
           data : id,		
           url  : urlParams.baseURL+urlParams.teacherPayment
         });  
+      }
+      teacherHttpResponse.getStudentDetail=function(grade,subject,type){
+        return $http({
+          method:'GET',			
+          url  : urlParams.baseURL+urlParams.getStudentDetail+'/'+grade+'/'+subject+'/'+type
+        });
+      }
+       teacherHttpResponse.getTeacherGrades=function(tid,type){
+        return $http({
+          method:'GET',			
+          url  : urlParams.baseURL+urlParams.getTeacherGrades+'/'+tid+'/'+type
+        });
       }
         return teacherHttpResponse;
 	
@@ -24,7 +35,6 @@ angular.module('mlg')
  **/
 .controller('teacherOnBoardingCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','card_months','card_years',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,card_months,card_years) {
-  
 /* Start-  Step-1 for Onboarding */
   $scope.tch = {};
   var get_uid=commonActions.getcookies(get_uid);
@@ -110,4 +120,57 @@ angular.module('mlg')
       $location.url('/teacher/dashboard');   
     };
     /* end- step-3 for onBoarding */
+  /* Start - step-4 for onBoarding teacher dasboard*/
+  var grade = '';
+  var subjectName = '';
+  var subjectCode = '';
+  // Get teacher class and subjects. 
+  teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
+    console.log(response.subject.course_name);
+    if (response.status == true) {
+      $scope.subject_grade = response.response;
+      $scope.level = (response.grade.level_id).split(',');
+      $scope.subject = (response.subject.course_name).split(',');
+      grade = response.urlData.level_id;
+      subjectName = response.urlData.course_Name;
+      subjectCode = response.urlData.course_id;
+      //this function call for show student for first class in teacher class.
+      teacherHttpService.getStudentDetail(grade,subjectCode,user_roles['student']).success(function(response) {
+      if(response.data.length >0) {
+        $scope.detail_student = response.data;
+      }else{
+        $scope.detail_student = 0;
+      }
+    });
+    }
+  });
+  var urlString = $location.url();
+  var splitString = urlString.split('#');
+  if (splitString[1] != undefined) {
+    var splitResult = splitString[1].split('%2F')
+    if(splitResult[0] != undefined && splitResult[1] != undefined 
+            && splitResult[2] != undefined ) {
+      grade = splitResult[0];
+      subjectName = splitResult[1];
+      subjectCode = splitResult[2];
+    }
+  }
+  // this function is called for getstudent detail for selected class and subject.
+  if (grade != '' && subjectName != '' && subjectCode != '') {
+    teacherHttpService.getStudentDetail(grade,subjectCode,user_roles['student']).success(function(response) {
+      if(response.data.length >0) {
+        $scope.detail_student = response.data;
+      }else{
+        $scope.detail_student = 0;
+      }
+    }); 
+  }
+  $scope.events = [
+          { date: moment('2017-04-8').add(0, 'days').format(), title: "Maths Test" }
+      ];
+  $scope.showEvents = function(events) {
+      alert(events.map(function(e) { return e.title }).join("\n"));
+  };
+/* end - step-4 for onBoarding teacher dasboard*/
+  
 }]);
