@@ -134,6 +134,17 @@ angular.module('mlg')
       grade = response.urlData.level_id;
       subjectName = response.urlData.course_Name;
       subjectCode = response.urlData.course_id;
+      var urlString = $location.url();
+      var splitString = urlString.split('#');
+      if (splitString[1] != undefined) {
+        var splitResult = splitString[1].split('%2F')
+        if(splitResult[0] != undefined && splitResult[1] != undefined 
+                && splitResult[2] != undefined ) {
+          grade = splitResult[0];
+          subjectName = splitResult[1];
+          subjectCode = splitResult[2];
+        }
+      }
       //this function call for show student for first class in teacher class.
       teacherHttpService.getStudentDetail(grade,subjectCode,user_roles['student']).success(function(response) {
       if(response.data.length >0) {
@@ -144,27 +155,6 @@ angular.module('mlg')
     });
     }
   });
-  var urlString = $location.url();
-  var splitString = urlString.split('#');
-  if (splitString[1] != undefined) {
-    var splitResult = splitString[1].split('%2F')
-    if(splitResult[0] != undefined && splitResult[1] != undefined 
-            && splitResult[2] != undefined ) {
-      grade = splitResult[0];
-      subjectName = splitResult[1];
-      subjectCode = splitResult[2];
-    }
-  }
-  // this function is called for getstudent detail for selected class and subject.
-  if (grade != '' && subjectName != '' && subjectCode != '') {
-    teacherHttpService.getStudentDetail(grade,subjectCode,user_roles['student']).success(function(response) {
-      if(response.data.length >0) {
-        $scope.detail_student = response.data;
-      }else{
-        $scope.detail_student = 0;
-      }
-    }); 
-  }
   $scope.events = [
           { date: moment('2017-04-8').add(0, 'days').format(), title: "Maths Test" }
       ];
