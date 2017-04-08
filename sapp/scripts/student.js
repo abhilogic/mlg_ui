@@ -25,6 +25,13 @@ angular.module('mlg_student')
 			url   : urlParams.baseURL+urlParams.getStudentCourses+'/'+uid
 		});
 	}
+  
+  loginHttpResponse.getAllCourseList=function(pid){		
+		return $http({
+			method:'GET',				
+			url   : urlParams.baseURL+urlParams.getAllCourseList+'/'+pid
+		});
+	}
 
 	
     
@@ -121,8 +128,18 @@ angular.module('mlg_student')
 	 };
 }])
 
-
-
+.controller('subjectViewCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
+  
+  var pid = $routeParams.id;
+  loginHttpService.getAllCourseList(pid).success(function(response) {
+    console.log(response.response);
+    if(response.response.length > 0){
+      $scope.subject_detail = response.response;
+    } else{
+      response.subject_detail = 0;
+    }                 
+  });
+}])
 ;
 
 
