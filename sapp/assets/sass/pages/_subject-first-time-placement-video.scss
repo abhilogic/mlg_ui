@@ -1,0 +1,27 @@
+.subject-first-time-placement-video {
+  .content {
+    margin: auto;
+    @media screen and (min-width: $screen-sm-max){
+      max-width: 80%;
+    }
+    @media screen and (max-width: $screen-sm){
+      max-width: 70%;
+      margin-top: 35px;
+    }
+    @media screen and (max-width: $screen-xs-max){
+      max-width: 100%;
+    }
+    video{
+      width: 100%;
+    }
+    .video_controller .progress_bar  {
+      width: 150px;
+      @media screen and (min-width: $screen-sm-max){
+        width: 340px;
+      }
+      @media screen and (min-width: $screen-sm){
+        width: 276px;
+      }
+    }
+  }
+}

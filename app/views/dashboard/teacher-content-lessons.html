@@ -1,0 +1,351 @@
+	<!-- Main navbar -->
+	<nav class="navbar navbar-default navbar-dashboard navbar-static-top">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle sidebar-mobile-main-toggle" aria-expanded="false">
+				<span class="sr-only">Menu</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="dashboard.html">MLG</a>
+		</div>
+		<div class="search_form">
+			<div class="form-group has-feedback has-feedback-left">
+				<input type="search" class="form-control" placeholder="Type here to search...">
+				<div class="form-control-feedback"><i class="fa fa-search"></i><span class="sr-only">Search</span></div>
+			</div>
+		</div>
+	</nav>
+	<!-- /main navbar -->
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main Sidebar -->
+			<aside class="sidebar sidebar-main" ng-include='"include/sidebar-teacher.html"'></aside>
+			<!-- /sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Content area -->
+				<div class="content">
+
+					<div class="panel panel-flat panel-teacher-content">
+						<div class="panel-heading">
+							<h5 class="panel-title text-uppercase">All Lessons
+								<div class="pull-right text-capitalize">
+									<span class="text-muted">Your Points:</span> <span class="text-primary text-semibold">600</span>
+								</div>
+						</h5>
+						</div>
+						<div class="panel-body">
+							<div class="panel-toolbar responsive-md">
+									<li class="toolbar-item">
+										<label class="label-toolbar">Filters:</label>
+									</li>
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+											<button type="button" class="btn btn-default">Status</button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Approved</a></li>
+												<li><a href="#">Not Approved</a></li>
+												<li><a href="#">Submitted</a></li>
+												<li><a href="#">Pending</a></li>
+												<li><a href="#">Under review</a></li>
+												<li><a href="#">Draft</a></li>
+											</ul>
+										</div>
+									</li>
+
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+										  <button type="button" class="btn btn-default">Class 5<sup>th</sup></button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Class 6<sup>th</sup></a></li>
+												<li><a href="#">Class 7<sup>th</sup></a></li>
+												<li><a href="#">Class 8<sup>th</sup></a></li>
+												<li><a href="#">Class 9<sup>th</sup></a></li>
+												<li><a href="#">Class 10<sup>th</sup></a></li>
+												<li><a href="#">Class 11<sup>th</sup></a></li>
+											</ul>
+										</div>
+									</li>
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+											<button type="button" class="btn btn-default">Standard</button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">A</a></li>
+												<li><a href="#">B</a></li>
+												<li><a href="#">C</a></li>
+											</ul>
+										</div>
+									</li>
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+										  <button type="button" class="btn btn-default">Subjetcs</button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Mathematics</a></li>
+												<li><a href="#">English</a></li>
+												<li><a href="#">Science</a></li>
+												<li><a href="#">Hindi</a></li>
+											</ul>
+										</div>
+									</li>
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+										  <button type="button" class="btn btn-default">Skills</button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Mathematics</a></li>
+												<li><a href="#">English</a></li>
+												<li><a href="#">Science</a></li>
+												<li><a href="#">Hindi</a></li>
+											</ul>
+										</div>
+									</li>
+
+									<li class="toolbar-item pull-right">
+										<a role="button" class="btn btn-primary" href="teacher/lesson"><i class="icon icon-plus-outline position-left"></i>Add Lession</a>
+									</li>
+							</div>
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons">
+								<thead>
+									<tr>
+										<th class="sr-no">#</th>
+										<th class="title">Title</th>
+										<th class="level">Level</th>
+										<th class="type">Type</th>
+										<th class="status">Status</th>
+										<th class="earned-points">Earned</th>
+										<th class="actions">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="approved">
+										<td class="sr-no">1</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Approved</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="pending">
+										<td class="sr-no">2</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Pending</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="disapproved">
+										<td class="sr-no">3</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Disapproved</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="submitted">
+										<td class="sr-no">4</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Submitted</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">5</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="submitted">
+										<td class="sr-no">4</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Submitted</td>
+										<td class="earned-points">---</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">5</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">---</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="submitted">
+										<td class="sr-no">4</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Submitted</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">5</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">---</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="draft">
+										<td class="sr-no">6</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">---</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Draft</td>
+										<td class="earned-points">---</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">7</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td class="table-pagination" colspan="7">
+											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<ul class="pagination pagination-sm">
+												<li class="disabled">
+													<a>
+														<span aria-hidden="true">Previous</span>
+													</a>
+												</li>
+												<li class="active">
+													<a>1</a>
+												</li>
+												<li>
+													<a>2</a>
+												</li>
+												<li>
+													<a>3</a>
+												</li>
+												<li>
+													<a aria-hidden="true">Next</a>
+												</li>
+											</ul>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+
+	<!-- Latest compiled and minified jQuery -->
+	<script>
+		var headertext = [],
+		headers = document.querySelectorAll(".table-teacherContent th"),
+		tablerows = document.querySelectorAll(".table-teacherContent th"),
+		tablebody = document.querySelector(".table-teacherContent tbody");
+
+		for(var i = 0; i < headers.length; i++) {
+		  var current = headers[i];
+		  headertext.push(current.textContent.replace(/\r?\n|\r/,""));
+		}
+		for (var i = 0, row; row = tablebody.rows[i]; i++) {
+		  for (var j = 0, col; col = row.cells[j]; j++) {
+		    col.setAttribute("data-th", headertext[j]);
+		  }
+		}
+	</script>
+</body>
+</html>

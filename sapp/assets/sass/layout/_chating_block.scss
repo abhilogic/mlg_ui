@@ -3,6 +3,12 @@
     position: fixed;
     z-index: 999;
     right: 18%;
+    @media screen and (max-width: $screen-tb-land){
+      right: 22%;
+    }
+    @media screen and (max-width: $screen-tb-port){
+      right: 30%;
+    }
     &:after {
       content: '';
       display: table;
@@ -15,6 +21,25 @@
    .mCSB_inside > .mCSB_container {
      margin-right: 10px;
    }
+  }
+  .chat_conversation_toggle_btn_bg {
+    @include cssSprite($chat_conversation_toggle_btn_bg);
+    background-size: 100% 100%;
+    @include padding(10px 13px);
+    &:after {
+      content:'';
+      display: table;
+      clear: both;
+    }
+    .reciverName {
+      color: $white;
+      float: left;
+      font-size: 20px;
+
+    }
+    .close {
+      opacity: 1;
+    }
   }
   .chat_container_cover {
       display: none;
@@ -42,7 +67,7 @@
         image: url(../img/chat_conversation_bg.png);
       }
       padding-top: 15px;
-      width: 209px;
+      width: 231px;
       min-height: 217px;
       @media screen and (max-width: $screen-mobile-md){
         width: 100vw;
@@ -84,15 +109,15 @@
     }
   }
   .conversation_block {
-    height: 194px;
+    height: 231px;
     overflow: hidden;
-    width: 91%;
+    width: 100%;
     margin: auto;
     @media screen and (max-width: $screen-mobile-md){
       height: 86%;
     }
     .mCustomScrollBox {
-      max-width: 91%;
+      max-width: 95%;
       margin: auto;
     }
     .conversation_repeat_block {
@@ -102,6 +127,7 @@
     }
     .date {
       text-align: center;
+      @include margin(5px null 5px null);
       span {
         @include border-radius(10px);
         background: rgba($maroon,.7);
@@ -181,9 +207,10 @@
        text-align: right;
        .message_content {
          float: right;
+         background: rgba($pizza,0.2);
          &:before {
-          border-left: 10px solid $white;
-          right: -8px;
+          border-left: 10px solid rgba($pizza,0.2);
+          right: -10px;
          }
        }
      }

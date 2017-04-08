@@ -37,8 +37,8 @@ $(document).ready(function() {
     $(".user_list").toggleClass("out");
     $(".chating_block").toggleClass("in");
   });
-  $(".chating_block .receiver_info .close").on("click", function(){
-      $(this).parent().parent().parent().parent().parent().css({"display":"none"});
+  $(".chating_block .close").on("click", function(){
+      $(this).parent().parent().css({"display":"none"});
       $(".chating_block").toggleClass("in");
       $(".user_list").toggleClass("out");
   });
@@ -82,3 +82,7 @@ $(".conversation_block, .user_list .user_list_ul").mCustomScrollbar({
  function goback(){
   window.history.back();
   };
+
+  $(".go-back-btn").click(function(){
+    goback();
+  })

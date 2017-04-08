@@ -50,6 +50,15 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	.when('/journey', {
 		templateUrl : 'views/my_journey.html',
 		controller : 'journeyCtrl',		
+	}).when('/subject-view/:id', {
+		templateUrl : 'views/math_subject_view.html',
+		controller : 'subjectCtrl',		
+	}).when('/skill-door/:id', {
+		templateUrl : 'views/skills_door.html',
+		controller : 'subjectCtrl',		
+	}).when('/sub-skill/:id', {
+		templateUrl : 'views/subskillsroom.html',
+		controller : 'subjectCtrl',		
 	}).when('/profile', {
 		templateUrl : 'views/my_profile.html',
 		controller : 'journeyCtrl',		

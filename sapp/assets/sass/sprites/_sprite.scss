@@ -31,6 +31,21 @@ $ques_no_indicator_active: 50px 50px "../img/subskillsroom-ques_indicators_img.p
 $ques_no_indicator_inactive: 50px 50px "../img/subskillsroom-ques_indicators_img.png" -114px 0px;
 // ques no indicator
 
+
+// arrows
+$left-arrow: 26px 26px "../img/sprite.png" -249px -107px;
+$right-arrow: 26px 26px "../img/sprite.png" -281px -107px;
+$top-arrow: 26px 26px "../img/sprite.png" -314px -107px;
+$bottom-arrow: 26px 26px "../img/sprite.png" -28px 0px;
+// arrows
+
+// video icons
+$icon-video : 18px 12px "../img/sprite.png" -274px -140px;
+$icon-document : 18px 22px "../img/sprite.png" -300px -136px;
+
+// exit door
+$icon-exit-door: 44px 100px "../img/sprite.png" -347px -71px;
+
 // books
 $subskill_video_book: 90px 82px "../img/subskills_book.png" 0px 0px;
 $subskill_book: 90px 82px "../img/subskills_book.png" -101px 0px;
@@ -44,12 +59,18 @@ $search_mobile:100% 42px '../img/mobile-search-bar.png' center center;
 
 /* ------ Navbar Icons----*/
 $ico_trophy:150px 78px '../img/sprite.png' -3px -358px;
-$ico_profile:43px 32px '../img/sprite.png' 0 -30px;
+$profile_bar : 188px 62px '../img/sprite.png' -347px 0px;
+$ico_profile : 43px 32px '../img/sprite.png' 0 -30px;
 $ico_dragon:43px 32px '../img/sprite.png' -43px -30px;
+$ico_coins : 133px 40px '../img/sprite.png' -133px -48px;
+$ico_avtar_creation: 21px 21px '../img/sprite.png' -219px -104px;
+$ico_profile: 23px 23px '../img/sprite.png' -219px -135px;
+$ico_logout: 20px 23px '../img/sprite.png' -249px -135px;
 
 /* chat bar */
 $chat_bar_desktop: 210px 40px '../img/sprite.png' 0 -306px;
 $open_chat_bg_desktop: 300px 40px '../img/open_chat_bg.png' 0px 0px;
+$chat_conversation_toggle_btn_bg: 300px 40px '../img/chat_conversation_toggle_btn-bg.png' 0px 0px;
 $chat_bar_mobile: 123px 40px '../img/sprite.png' -218px -306px;
 $get_more_points_bar: 168px 45px '../img/sprite.png' -93px 0px;
 $get_more_points_bar-sm: 39px 41px '../img/sprite.png' -93px -46px;

@@ -20,33 +20,56 @@
      }
     }
   .user_list_ul {
-    width: calc(100% - 45px);
-    height: 200px;
+    width: calc(100% - 30px);
+    height: 275px;
     overflow: hidden;
     margin: auto;
+    margin-right: 5px;
      @media screen and (max-width: $screen-mobile-md){
-         width: calc(100% - 80px);
+         width: calc(100% - 36px);
          height: 97%;
      }
     li {
       border-bottom: 1px solid rgba($vanCleef,0.15);
       display: block;
-      padding-bottom: 5px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      color: $vanCleef;
+      font-family: $font-open-sans;
+      font-size: 14px;
       .user_img {
         width: 21px;
         height: 21px;
         @include border-radius(100%);
       }
+      &:not(.categories_type){
+        &:hover {
+          background: rgba($brown,0.1);
+        }
+      }
+      &.categories_type {
+        padding-bottom: 5px;
+        text-transform: uppercase;
+      }
       .user_name {
-        color: $vanCleef;
-        font-family: $font-open-sans;
-        font-size: 14px;
         padding-left: 15px;
+        .no_msg {
+          color: $white;
+          float: right;
+          width: 20px;
+          height: 20px;
+          background: $maroon;
+          font-style:normal;
+          @include border-radius(100%);
+          text-align: center;
+          padding-top: 0px;
+          margin-right: 10px;
+        }
       }
     }
   }
    .mCSB_inside > .mCSB_container {
-     margin-right: 10px;
+     margin-right: 20px;
    }
    .chat_container {
      background: {
@@ -57,7 +80,7 @@
      display: none;
      padding-top: 15px;
      width: 209px;
-     min-height: 217px;
+     min-height: 287px;
      @media screen and (max-width: $screen-mobile-md){
        width: 100vw;
        height: 90vh;

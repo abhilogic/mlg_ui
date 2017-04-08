@@ -1,7 +1,7 @@
 /* --- Navbar Search FORM --- */
 .search_form{
   @include padding(0);
-  @include margin(25px null 0 null);
+  @include margin(0px null 0 0px);
   .search__input{
     background-color: transparent;
     border: 0;
@@ -9,11 +9,8 @@
     font-size: 16px;
     font-family: $font-primary-italic;
     @include padding(10px 15px 10px 50px);
-    @include cssSprite($search_desktop);
-    @media screen and (max-width: $screen-tb-port){
-      @include cssSprite($search_tablet);
-    }
-    @media screen and (max-width: $screen-mobile-md){
+    @include cssSprite($search_tablet);
+    @media screen and (max-width: $screen-sm){
       @include cssSprite($search_mobile);
       background-size: 100% 100%;
     }
