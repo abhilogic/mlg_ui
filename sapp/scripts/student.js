@@ -114,6 +114,15 @@ angular.module('mlg_student')
 	  //alert('kkkk');
 }])
 
+.controller('subSkillRoomCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+	 
+	 $scope.show_subskill = function(){
+		$('#modal-subskillsoverview').modal(); 
+	 };
+}])
+
+
+
 ;
 
 
