@@ -9,7 +9,7 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	registerUser:'/users/registerUser',
 	getCourseByGrade :'/courses/getCourseListForLevel',
 	getStudentCourses :'/students/getStudentCourses', 
-
+  getAllCourseList :'/courses/getAllCourseList',
 
 
 }).value('REGEX', {
@@ -52,10 +52,10 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 		controller : 'journeyCtrl',		
 	}).when('/subject-view/:id', {
 		templateUrl : 'views/math_subject_view.html',
-		controller : 'subjectCtrl',		
+		controller : 'subjectViewCtrl',		
 	}).when('/skill-door/:id', {
 		templateUrl : 'views/skills_door.html',
-		controller : 'subjectCtrl',		
+		controller : 'subjectViewCtrl',		
 	}).when('/sub-skill/:id', {
 		templateUrl : 'views/subskillsroom.html',
 		controller : 'subSkillRoomCtrl',		
@@ -71,7 +71,6 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	}).when('/help', {
 		templateUrl : 'views/help.html',
 		controller : 'helpCtrl',		
-
 	}).when('/challenges', {
 		templateUrl : 'views/challenges.html',
 		controller : 'journeyCtrl',		
