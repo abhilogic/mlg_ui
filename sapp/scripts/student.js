@@ -61,7 +61,8 @@ angular.module('mlg_student')
 		}
 
 			return commonActions;
-	}]).controller('journeyCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
+	}])
+.controller('journeyCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 	  //alert('kkk');
 	  var get_uid=commonActions.getcookies(get_uid);
 	  $scope.frm = {};

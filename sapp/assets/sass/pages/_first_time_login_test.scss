@@ -1,8 +1,29 @@
-
+.modal-firstTimePlacement {
+  padding: 0px !important;
+  .modal-dialog {
+    width: 100%;
+    margin: 0px;
+    .btn-close {
+      background: none;
+      border: 0px;
+      @include position(absolute, 20px 20px null null);
+      z-index: 100;
+    }
+    .modal-body {
+      padding: 0px;
+    }
+  }
+}
 
 .first_time_login_test_page {
+  width: 100%;
   background: {
     image: url("../img/first_login_test_bg.jpg");
+  }
+  @include respond-to(mobileMedium){
+    background: {
+      image: url("../img/subskill_mobile_bg.jpg");
+    }
   }
 // subskills-icons
   .subskill_icons {
@@ -75,11 +96,15 @@
     .wooden_frame_content_cover {
       background-image: url("../img/firt_time_login_test_ques_cover_bg.png");
       background-size: 100% 100%;
-      width: 906px;
+      width: 100%;
       height: 594px;
       padding-top: 40px;
       margin: auto;
       position: relative;
+      left: 0px;
+      @media screen and (min-width: $screen-sm-max){
+        width: 983px;
+      }
     @include respond-to(mobileMedium){
         background: none;
         width: auto;
@@ -338,6 +363,9 @@
       .subskills_quiz {
         .panel-heading {
           position: relative;
+          @media screen and (max-width: $screen-sm){
+            margin-top: 20px;
+          }
           .time {
             &:after {
               content:'';

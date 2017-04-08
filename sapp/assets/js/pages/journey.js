@@ -121,7 +121,7 @@ $(window).resize(function(){
 var audio = $("#mysoundclip")[0];
 // global VARIABLES
 
-	$(".wooden_frame_content_cover a").click(function(event){
+	$(".wooden_frame_content_cover a").not(".not_clickable").click(function(event){
       windowWidth = $(window).width();
       if(windowWidth>767){
         event.preventDefault();

@@ -60,12 +60,14 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	}).when('/challenges', {
 		templateUrl : 'views/challenges.html',
 		controller : 'journeyCtrl',		
-	}).otherwise({
-
+	}).when('/demo_video', {
+		templateUrl : 'views/demo_video.html',
+		controller : 'quizCtrl',		
 	}).when('/quiz', {
 		templateUrl : 'views/quiz.html',
 		controller : 'quizCtrl',		
 	})
+
 	.otherwise({
 		redirectTo : '/journey',
 	});

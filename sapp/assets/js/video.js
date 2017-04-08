@@ -125,7 +125,7 @@ rangeAndVolumeController();
       });
 
       // js play button cover
-      var play_btn_cover_height = $("#tutorialVideo").height();
+      var play_btn_cover_height = $("#tutorialVideo").outerHeight();
       $(".play_btn_cover").height(play_btn_cover_height);
 
 });
