@@ -59,6 +59,9 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	}).when('/sub-skill/:id', {
 		templateUrl : 'views/subskillsroom.html',
 		controller : 'subjectCtrl',		
+	}).when('/sub-skill-quiz/:id', {
+		templateUrl : 'views/subskill_quiz.html',
+		controller : 'subjectCtrl',		
 	}).when('/profile', {
 		templateUrl : 'views/my_profile.html',
 		controller : 'journeyCtrl',		
