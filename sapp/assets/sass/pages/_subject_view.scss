@@ -105,9 +105,9 @@
     }
 
     // topic castel
-    &.subskills_castle_1 { // algebra
-      left: 45px;
-      top: 265px;
+    &.subskills_castle_1 {  //Training Arena
+    left: 179px;
+    top: 135px;
       .castle__img {
           @include cssSprite($math_algebra_icon);
       }
@@ -115,9 +115,9 @@
 
       }
     }
-    &.subskills_castle_2 { //Training Arena
-      left: 179px;
-      top: 135px;
+    &.subskills_castle_2 {// algebra
+      left: 45px;
+      top: 265px;
       .castle__img {
         @include cssSprite($math_addition_icon);
       }
@@ -145,8 +145,8 @@
       }
     }
     &.subskills_castle_3 { //comparing
-      left: 7px;
-      top: 560px;
+      left: 158px;
+      top: 418px;
       .castle__img {
           @include cssSprite($compare_castle_icon);
       }
@@ -155,14 +155,14 @@
       }
     }
     &.subskills_castle_4 { //Calculus
-      left: 158px;
-      top: 418px;
-      .castle__img {
-          @include cssSprite($math_calculus_icon);
-      }
-      @media screen and (max-width: $screen-tb-port){
+    left: 7px;
+    top: 560px;
+    .castle__img {
+        @include cssSprite($math_calculus_icon);
+    }
+    @media screen and (max-width: $screen-tb-port){
 
-      }
+    }
     }
     &.subskills_castle_5 { // Counting
       left: 116px;
@@ -174,19 +174,9 @@
 
       }
     }
-    &.subskills_castle_6 { // Estimation
-      left: 269px;
-      top: 317px;
-      .castle__img {
-          @include cssSprite($math_estimation_icon);
-      }
-      @media screen and (max-width: $screen-tb-port){
-
-      }
-    }
-    &.subskills_castle_7 { // Decimals
-      left: 263px;
-      bottom: 147px;
+    &.subskills_castle_6 { // Decimals
+    left: 263px;
+    bottom: 147px;
       .castle__img {
           @include cssSprite($math_decimal_icon);
       }
@@ -194,30 +184,7 @@
 
       }
     }
-    &.subskills_castle_8 { // Fractions
-      left: 339px;
-      top: 128px;
-      .castle__img {
-          @include cssSprite($math_fractions_icon);
-      }
-      @media screen and (max-width: $screen-tb-port){
-
-      }
-    }
-    &.subskills_castle_9 { // Functions
-      left: 491px;
-      top: 210px;
-      .castle__img {
-          @include cssSprite($math_function_icon);
-      }
-      .castle__text {
-        left: -50px;
-      }
-      @media screen and (max-width: $screen-tb-port){
-
-      }
-    }
-    &.subskills_castle_10 {  // Division
+    &.subskills_castle_7 { // Division
       left: 472px;
       top: 420px;
       .castle__img {
@@ -227,19 +194,29 @@
 
       }
     }
-    &.subskills_castle_11 {  // Measurement
-      left: 560px;
-      bottom: 56px;
+    &.subskills_castle_8 { // Estimation
+      left: 269px;
+      top: 317px;
       .castle__img {
-          @include cssSprite($math_measurement_icon);
+          @include cssSprite($math_estimation_icon);
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
-    &.subskills_castle_12 { // Exponents
-      left: 747px;
-      top: 125px;
+    &.subskills_castle_9 { // Fractions
+      left: 339px;
+      top: 128px;
+      .castle__img {
+          @include cssSprite($math_fractions_icon);
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_10 {  // Functions
+      left: 491px;
+      top: 210px;
       .castle__img {
           @include cssSprite($math_exponent_icon);
       }
@@ -250,7 +227,20 @@
 
       }
     }
-    &.subskills_castle_13 {  //  Geometry
+    &.subskills_castle_11 {  // Exponents
+    left: 747px;
+    top: 125px;
+  .castle__img {
+      @include cssSprite($math_function_icon);
+  }
+  .castle__text {
+    left: -50px;
+  }
+  @media screen and (max-width: $screen-tb-port){
+
+  }
+    }
+    &.subskills_castle_12 {//  Geometry
       left: 698px;
       top: 269px;
       .castle__img {
@@ -260,9 +250,19 @@
 
       }
     }
+    &.subskills_castle_13 {  // Measurement
+    left: 711px;
+    top: 393px;
+        .castle__img {
+            @include cssSprite($math_measurement_icon);
+        }
+        @media screen and (max-width: $screen-tb-port){
+
+        }
+    }
     &.subskills_castle_14 { //  Graphs
-      left: 711px;
-      top: 393px;
+    left: 874px;
+    top: 477px;
       .castle__img {
           @include cssSprite($math_graphs_icon);
       }
@@ -284,8 +284,8 @@
       }
     }
     &.subskills_castle_16 { // Integers
-      left: 874px;
-      top: 477px;
+      left: 560px;
+      bottom: 56px;
       .castle__img {
           @include cssSprite($math_logic_icon);
       }

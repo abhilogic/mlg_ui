@@ -2183,8 +2183,8 @@ label span {
   position: absolute;
 }
 .subject_view_castles_block .castle.subskills_castle_1 {
-  left: 45px;
-  top: 265px;
+  left: 179px;
+  top: 135px;
 }
 .subject_view_castles_block .castle.subskills_castle_1 .castle__img {
   width: 60px;
@@ -2194,8 +2194,8 @@ label span {
   background-position: -60px 0px;
 }
 .subject_view_castles_block .castle.subskills_castle_2 {
-  left: 179px;
-  top: 135px;
+  left: 45px;
+  top: 265px;
 }
 .subject_view_castles_block .castle.subskills_castle_2 .castle__img {
   width: 60px;
@@ -2223,8 +2223,8 @@ label span {
   top: auto;
 }
 .subject_view_castles_block .castle.subskills_castle_3 {
-  left: 7px;
-  top: 560px;
+  left: 158px;
+  top: 418px;
 }
 .subject_view_castles_block .castle.subskills_castle_3 .castle__img {
   width: 60px;
@@ -2234,8 +2234,8 @@ label span {
   background-position: -480px -120px;
 }
 .subject_view_castles_block .castle.subskills_castle_4 {
-  left: 158px;
-  top: 418px;
+  left: 7px;
+  top: 560px;
 }
 .subject_view_castles_block .castle.subskills_castle_4 .castle__img {
   width: 60px;
@@ -2256,102 +2256,102 @@ label span {
   background-position: -420px -120px;
 }
 .subject_view_castles_block .castle.subskills_castle_6 {
-  left: 269px;
-  top: 317px;
+  left: 263px;
+  bottom: 147px;
 }
 .subject_view_castles_block .castle.subskills_castle_6 .castle__img {
   width: 60px;
   height: 60px;
   background-repeat: no-repeat;
   background-image: url(../img/castles-icon.png);
-  background-position: -240px -120px;
+  background-position: -360px -120px;
 }
 .subject_view_castles_block .castle.subskills_castle_7 {
-  left: 263px;
-  bottom: 147px;
+  left: 472px;
+  top: 420px;
 }
 .subject_view_castles_block .castle.subskills_castle_7 .castle__img {
   width: 60px;
   height: 60px;
   background-repeat: no-repeat;
   background-image: url(../img/castles-icon.png);
-  background-position: -360px -120px;
+  background-position: -300px -120px;
 }
 .subject_view_castles_block .castle.subskills_castle_8 {
-  left: 339px;
-  top: 128px;
+  left: 269px;
+  top: 317px;
 }
 .subject_view_castles_block .castle.subskills_castle_8 .castle__img {
   width: 60px;
   height: 60px;
   background-repeat: no-repeat;
   background-image: url(../img/castles-icon.png);
-  background-position: -180px -120px;
+  background-position: -240px -120px;
 }
 .subject_view_castles_block .castle.subskills_castle_9 {
-  left: 491px;
-  top: 210px;
+  left: 339px;
+  top: 128px;
 }
 .subject_view_castles_block .castle.subskills_castle_9 .castle__img {
   width: 60px;
   height: 60px;
   background-repeat: no-repeat;
   background-image: url(../img/castles-icon.png);
-  background-position: -120px -120px;
-}
-.subject_view_castles_block .castle.subskills_castle_9 .castle__text {
-  left: -50px;
+  background-position: -180px -120px;
 }
 .subject_view_castles_block .castle.subskills_castle_10 {
-  left: 472px;
-  top: 420px;
+  left: 491px;
+  top: 210px;
 }
 .subject_view_castles_block .castle.subskills_castle_10 .castle__img {
   width: 60px;
   height: 60px;
   background-repeat: no-repeat;
   background-image: url(../img/castles-icon.png);
-  background-position: -300px -120px;
+  background-position: -60px -120px;
+}
+.subject_view_castles_block .castle.subskills_castle_10 .castle__text {
+  left: -40px;
 }
 .subject_view_castles_block .castle.subskills_castle_11 {
-  left: 560px;
-  bottom: 56px;
+  left: 747px;
+  top: 125px;
 }
 .subject_view_castles_block .castle.subskills_castle_11 .castle__img {
   width: 60px;
   height: 60px;
   background-repeat: no-repeat;
   background-image: url(../img/castles-icon.png);
-  background-position: -360px -60px;
+  background-position: -120px -120px;
+}
+.subject_view_castles_block .castle.subskills_castle_11 .castle__text {
+  left: -50px;
 }
 .subject_view_castles_block .castle.subskills_castle_12 {
-  left: 747px;
-  top: 125px;
+  left: 698px;
+  top: 269px;
 }
 .subject_view_castles_block .castle.subskills_castle_12 .castle__img {
   width: 60px;
   height: 60px;
   background-repeat: no-repeat;
   background-image: url(../img/castles-icon.png);
-  background-position: -60px -120px;
-}
-.subject_view_castles_block .castle.subskills_castle_12 .castle__text {
-  left: -40px;
+  background-position: 0px -120px;
 }
 .subject_view_castles_block .castle.subskills_castle_13 {
-  left: 698px;
-  top: 269px;
+  left: 711px;
+  top: 393px;
 }
 .subject_view_castles_block .castle.subskills_castle_13 .castle__img {
   width: 60px;
   height: 60px;
   background-repeat: no-repeat;
   background-image: url(../img/castles-icon.png);
-  background-position: 0px -120px;
+  background-position: -360px -60px;
 }
 .subject_view_castles_block .castle.subskills_castle_14 {
-  left: 711px;
-  top: 393px;
+  left: 874px;
+  top: 477px;
 }
 .subject_view_castles_block .castle.subskills_castle_14 .castle__img {
   width: 60px;
@@ -2375,8 +2375,8 @@ label span {
   left: -40px;
 }
 .subject_view_castles_block .castle.subskills_castle_16 {
-  left: 874px;
-  top: 477px;
+  left: 560px;
+  bottom: 56px;
 }
 .subject_view_castles_block .castle.subskills_castle_16 .castle__img {
   width: 60px;

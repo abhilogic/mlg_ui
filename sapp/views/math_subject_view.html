@@ -1,50 +1,14 @@
 <div class="main_cover subject_view_page">
 			<div class="main_wrapper">
-				<nav class="navbar navbar-default">
-  				 <img src="assets/img/go_back_icon.png" alt="" class="go-back-btn"/>
-  				 <div class="navbar-header">
-  					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-  						 <span class="icon-bar"></span>
-  						 <span class="icon-bar"></span>
-  						 <span class="icon-bar"></span>
-  					 </button>
-  					 <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="logo" class="main_logo "/></a>
-  				 </div>
-  				 <div class="collapse navbar-collapse" id="myNavbar">
-  						 <ul class="nav navbar-nav">
-  							 <li>
-  								 <a href="#">
-  									 <div class="student_growth">
-  										 <span class="growth_text">My Growth</span>
-  										 <span class="growth_value">350pt</span>
-  									 </div>
-  								 </a>
-  							 </li>
-  							 <li>
-  								 <a href="#">
-  									 <form class="navbar-form search_form">
-  										 <input type="search" class="search__input" placeholder="Type here to search">
-  									 </form>
-  								 </a>
-  							 </li>
-  							 <li class="dropdown"><a href="#" data-toggle="dropdown"><span class="profile_bar"><span class='user_name'>James Gorden</span><i class="caret"></i></span></a>
-  								 <ul class="dropdown-menu">
-  									 <li><a href="my_profile.html"><i class="icon profile"></i> My Profile</a></li>
-  									 <li><a href="#"><i class="icon avtar_creation"></i> Avatar Creation</a></li>
-  									 <li><a href="#"><i class="icon logout"></i> Logout</a></li>
-  								 </ul>
-  							 </li>
-  						 </ul>
-  					 </div>
-  			 </nav>
+				<header></header>
 			</div>
 				<div class="subject_frame_center">
 					<div class="wooden_frame" data-center="center">
 						<div class="wooden_frame_content_cover">
 							<img src="assets/img/castles_map_web.jpg" alt="" class="castles_map_web_img"/>
 							<div class="subject_view_castles_block">
-                <a ng-repeat="subject in subject_detail " href="skill-door/{{subject.course_id}}">
-                  <div class="castle topic_castle subskills_castle_{{$index}} winned_castle">
+                <a ng-repeat="subject in subject_detail " href="skill-door/{{subject.id}}">
+                  <div class="castle topic_castle subskills_castle_{{$index+1}}">
 										<span class="castle__img "></span>
 										<span class="fire__img"></span>
 										<span class="flag__icon"></span>
@@ -56,7 +20,7 @@
 					</div>
 				</div>
 				<!-- subject_view_frame -->
-			<div class="subject_view_frame_mobile">
+			<!-- <div class="subject_view_frame_mobile">
 				<div class="castle_repeat_block">
 					<a href="#">
 						<div class="castle topic_castle subskills_castle_1 winned_castle">
@@ -328,7 +292,7 @@
 						</div>
 					</a>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<div class="chat_block">
@@ -453,21 +417,21 @@
 		<source src="assets/sounds/click-sound.mp3"></source>
 		<script src="assets/js/main.js"></script>
 		<script>
-		$(document).ready(function(){
-			$(".wooden_frame_content_cover, .conversation_block").mCustomScrollbar({
-					horizontalScroll: true,
-			});
-			$(".conversation_block").mCustomScrollbar({
-				theme:"dark-3"
-				});
-			$(".subject_view_page").fadeIn(2000);
-			var windowWidth = $(window).width();
-			if(windowWidth<=767){
-				$(".wooden_frame").remove();
-			}
-			if( windowWidth>767){
-				$(".subject_view_frame_mobile").remove();
-			}
-		});
+		// $(document).ready(function(){
+		// 	$(".wooden_frame_content_cover, .conversation_block").mCustomScrollbar({
+		// 			horizontalScroll: true,
+		// 	});
+		// 	$(".conversation_block").mCustomScrollbar({
+		// 		theme:"dark-3"
+		// 		});
+		// 	$(".subject_view_page").fadeIn(2000);
+		// 	var windowWidth = $(window).width();
+		// 	if(windowWidth<=767){
+		// 		$(".wooden_frame").remove();
+		// 	}
+		// 	if( windowWidth>767){
+		// 		$(".subject_view_frame_mobile").remove();
+		// 	}
+		// });
 	</script>
 </audio>

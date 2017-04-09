@@ -59,20 +59,16 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 		controller : 'subjectViewCtrl',		
 	}).when('/skill-door/:id', {
 		templateUrl : 'views/skills_door.html',
-		controller : 'subjectViewCtrl',		
+		controller : 'skillDoorCtrl',		
 	}).when('/sub-skill/:id', {
 		templateUrl : 'views/subskillsroom.html',
 		controller : 'subSkillRoomCtrl',		
 	}).when('/sub-skill-quiz/:id', {
 		templateUrl : 'views/subskill_quiz.html',
-<<<<<<< Updated upstream
-		controller : 'subjectCtrl',		
+		controller : 'subskillQuizCtrl',		
 	}).when('/sub-skill-video/:id', {
 		templateUrl : 'views/subkills_view_video.html',
-		controller : 'subjectCtrl',		
-=======
-		controller : 'subskillQuizCtrl',		
->>>>>>> Stashed changes
+		controller : 'subjectViewCtrl',	
 	}).when('/profile', {
 		templateUrl : 'views/my_profile.html',
 		controller : 'journeyCtrl',		
@@ -121,7 +117,26 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 
 
 
-} ])
+} ]).directive('header', function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'views/header.html',
+		controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+			var cookieString=$cookieStore.get("userObj");
+			var userInfo=parseUser(cookieString);
+			function parseUser(cookie){
+		var keyVals=cookie.split(',');
+		var obj={};
+		angular.forEach(keyVals,function(value,key){
+			var vals=value.split('=');
+			obj[vals[0]]=vals[1];
+		});
+		return obj;
+	}
+	$scope.userInfo=userInfo;
+		}]
+	};
+})
 .controller("TopController", function($rootScope, $scope, $location) {
   $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
     //$scope.atHome = ($location.path() === "/");
