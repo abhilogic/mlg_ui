@@ -11,6 +11,10 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 	getStudentCourses :'/students/getStudentCourses', 
   getAllCourseList :'/courses/getAllCourseList',
 
+	getSubskillQuizQuestions: 'http://35.185.43.146/standards?subject=Maths&grade=11th&standard=CCSS.MATH.CONTENT.8.EE.A.3&session_token=482694923ce92675025f48b3b12f3fd2bd6d98ce33119feccaab657bc1e1a941&page=10',
+
+
+
 
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -61,10 +65,14 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 		controller : 'subSkillRoomCtrl',		
 	}).when('/sub-skill-quiz/:id', {
 		templateUrl : 'views/subskill_quiz.html',
+<<<<<<< Updated upstream
 		controller : 'subjectCtrl',		
 	}).when('/sub-skill-video/:id', {
 		templateUrl : 'views/subkills_view_video.html',
 		controller : 'subjectCtrl',		
+=======
+		controller : 'subskillQuizCtrl',		
+>>>>>>> Stashed changes
 	}).when('/profile', {
 		templateUrl : 'views/my_profile.html',
 		controller : 'journeyCtrl',		

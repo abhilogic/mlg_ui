@@ -1,4 +1,4 @@
-    
+    <!-- {{qti.questions}} -->
 	<style type="text/css">
       .modal-backdrop {
         display: none;
@@ -47,6 +47,8 @@
 					<div class="inner_cover">
 						<div class="content_cover">
 							<div class="panel panel-default">
+								
+
 								<div class="panel-heading">
 									<div class="row">
 										<div class="col-sm-3 col-xs-1 text-left pd0">
@@ -65,15 +67,23 @@
 										</div>
 									</div>
 								</div>
-								<div class="panel-body">
-									<h4 class="ques">Q1 :  Pick the number that comes between 72,____, 74</h4>
-									<ul class="option pick_check_icon">
-										<li><input type="checkbox"><span>A. 72</span></li>
-										<li><input type="checkbox"><span>A. 73</span></li>
-										<li><input type="checkbox"><span>A. 74</span></li>
-										<li><input type="checkbox"><span>A. 75</span></li>
-									</ul>
+
+
+								<div class="panel-body" ng-repeat="question in qti.questions">
+									<h4 class="ques">{{question.questionName}}</h4> 
+									
+									
+										 <div class="option" ng-if="question.type=='fillin' ">
+											<input type="text"/>
+										</div>
+										<div class="option" ng-if="question.type=='yesNO' ">
+											<input type="radio" name="opt">Yes
+											<input type="radio" name="opt">No
+										</div>
+									
 								</div>
+
+								
 								<div class="panel-footer">
 									<div class="owl-carousel owl-theme ques_no_indicator">
 										<div class="item">
