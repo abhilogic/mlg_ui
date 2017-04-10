@@ -97,17 +97,26 @@ $locationProvider.html5Mode({
 } ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
 
 urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
-	  
-	
-   $rootScope.logout=function(){
-	   	loginHttpService.logout().success(function(response) {
-	   		$rootScope.logged_user = '';
-         window.location.href='/mlg_ui/app';
-	   }).error(function(error) {
-		  $rootScope.logged_user = '';
-	   });
+	    function setCookie(key, value) {
+		var expires = new Date();
+		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+';path=/';
 	}
+	
+  $rootScope.logout=function(){
+		   	loginHttpService.logout().success(function(response) {
+		   		$rootScope.logged_user = '';
+		   		 /*document.cookie = uid+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
+		   		setCookie('uid',null);
+		   		setCookie('userObj',null);
 
+
+	         window.location.href='/mlg_ui/app';
+		   }).error(function(error) {
+			  $rootScope.logged_user = '';
+		   });
+		}
 
 
 $rootScope.$on('$viewContentLoaded', function() {

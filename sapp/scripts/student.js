@@ -25,6 +25,13 @@ angular.module('mlg_student')
 			url   : urlParams.baseURL+urlParams.getStudentCourses+'/'+uid
 		});
 	}
+
+	loginHttpResponse.logout=function(){
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.logout
+		});
+	}
   
   loginHttpResponse.getAllCourseList=function(pid){		
 		return $http({
