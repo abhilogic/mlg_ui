@@ -136,69 +136,39 @@
               <button type="button" class="close" data-dismiss="modal"><img src="assets/img/cross-white.png" alt=""><i class="icon icon-exit-door"></i></button>
             <div class="modal-body">
               <div class="owl-carousel overview-owl-carousel">
-                <div class="item">
-                  <span class="topic_no">Topic 1</span>
-                  <span class="topic_name">Properties of Whole Numbers</span>
+                <div class="item" ng-repeat="topic in topic_detail">
+                  <span class="topic_no">Topic {{$index+1}}</span>
+                  <span class="topic_name">{{topic.name}}</span>
                   <p class="short_description">
-                    The smallest natural number is 1. The number 0 is the first and the smallest whole nos. There are infinitely many or uncountable number of whole-numbers.All natural numbers are The smallest natural number is 1. The number 0 is the first and the smallest whole nos. The smallest natural number is 1. The number 0 is the first and the smallest
-                    whole nos. There are infinitely many or uncountable number of whole-numbers.All natural numbers are MORE...
+                    {{topic.descriptions}}
                   </p>
                   <div class="video_section">
-                    <h5 class="hd"><i class="icon icon-video"></i> 4 Video</h5>
+                    <h5 class="hd"><i class="icon icon-video"></i> 1 Video</h5>
                     <div class="video-mcustomscroller">
                       <table class="table">
                         <tbody>
                           <tr>
                             <td><a href="sub-skill-video/1"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
-                            <td><a href="sub-skill-video/2"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
+                           <!--  <td><a href="sub-skill-video/2"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
                             <td><a href="sub-skill-video/3"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
                             <td><a href="sub-skill-video/4"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
-                            <td><a href="sub-skill-video/5"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
+                            <td><a href="sub-skill-video/5"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td> -->
                           </tr>
                         </tbody>
                       </table>
                     </div>
                   </div>
-                  <div class="doc_section">
+                 <!--  <div class="doc_section">
                     <h5 class="hd"><i class="icon icon-doc"></i> 2 Documents</h5>
                     <ul>
                       <li><a href="subskills_view_lesson.html"><i class="icon icon-doc"></i> 1. Overview - What are Whole Numeber</a></li>
                       <li><a href="subskills_view_lesson.html"><i class="icon icon-doc"></i> 2. Overview - What are Whole Numeber</a></li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
-								<div class="item">
-                  <span class="topic_no">Topic 1</span>
-                  <span class="topic_name">Properties of Whole Numbers</span>
-                  <p class="short_description">
-                    The smallest natural number is 1. The number 0 is the first and the smallest whole nos. There are infinitely many or uncountable number of whole-numbers.All natural numbers are The smallest natural number is 1. The number 0 is the first and the smallest whole nos. The smallest natural number is 1. The number 0 is the first and the smallest
-                    whole nos. There are infinitely many or uncountable number of whole-numbers.All natural numbers are MORE...
-                  </p>
-                  <div class="video_section">
-                    <h5 class="hd"><i class="icon icon-video"></i> 4 Video</h5>
-                    <div class="video-mcustomscroller">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td><a href="sub-skill-video/6"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
-                            <td><a href="sub-skill-video/7"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
-                            <td><a href="sub-skill-video/8"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
-                            <td><a href="sub-skill-video/9"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
-                            <td><a href="sub-skill-video/10"><img src="assets/img/help_video_img_2.jpg" alt="" class="img-responsive"></a></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="doc_section">
-                    <h5 class="hd"><i class="icon icon-doc"></i> 2 Documents</h5>
-                    <ul>
-                      <li><a href="subskills_view_lesson.html"><i class="icon icon-doc"></i> 1. Overview - What are Whole Numeber</a></li>
-                      <li><a href="subskills_view_lesson.html"><i class="icon icon-doc"></i> 2. Overview - What are Whole Numeber</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+
+
+			  </div>
             <div>
             </div>
           </div>

@@ -16,33 +16,33 @@
 								<div class="panel-heading">
 									<div class="row">
 										<div class="col-sm-3 col-xs-1 text-left pd0">
-											<span class="prev">Previous Lesson</span>
-											<i class="icon video_book"></i>
+											<!-- <span class="prev">Previous Lesson</span>
+											<i class="icon video_book"></i> -->
 										</div>
 										<div class="col-sm-6 col-xs-10 pd0">
 											<h4 class="panel-title">
-												<span>Quiz on WHole Numbers</span>
-												<span>3/5</span>
+												<span>Quiz on Number System</span>
+												<span>{{sequence+1}}/{{qti.questions.length}}</span>
 											</h4>
 										</div>
 										<div class="col-sm-3  col-xs-1 text-right pd0">
-											<span class="next">Next Lesson</span>
-											<i class="icon book"></i>
+											<span class="next">Next Question</span>
+											<i class="icon book" ng-click="nextQuestion();"></i>
 										</div>
 									</div>
 								</div>
 
 
-								<div class="panel-body" ng-repeat="question in qti.questions">
+								<div class="panel-body">
 									<h4 class="ques">{{question.questionName}}</h4> 
 									
 									
 										 <div class="option" ng-if="question.type=='fillin' ">
-											<input type="text"/>
+											<input type="text" class="form-control"/>
 										</div>
 										<div class="option" ng-if="question.type=='yesNO' ">
-											<input type="radio" name="opt">Yes
-											<input type="radio" name="opt">No
+											<h4><label class="radio-inline"><input type="radio" name="opt"><span style="color:#fff">Yes</span></label></h4>
+											<label class="radio-inline"><input type="radio" name="opt"><span style="color:#fff">No</span></label>
 										</div>
 									
 								</div>
@@ -50,6 +50,10 @@
 								
 								<div class="panel-footer">
 									<div class="owl-carousel owl-theme ques_no_indicator">
+										<!-- <div class="item" ng-repeat="q in qti.questions">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>{{$index+1}}</i></span>
+										</div> -->
 										<div class="item">
 											<i class="icon"></i>
 											<span class="ques_no">Ques <i>1</i></span>
@@ -72,15 +76,15 @@
 										</div>
 										<div class="item active">
 											<i class="icon"></i>
-											<span class="ques_no">Ques <i>5</i></span>
+											<span class="ques_no">Ques <i>6</i></span>
 										</div>
 										<div class="item inactive">
 											<i class="icon"></i>
-											<span class="ques_no">Ques <i>5</i></span>
+											<span class="ques_no">Ques <i>7</i></span>
 										</div>
 										<div class="item inactive">
 											<i class="icon"></i>
-											<span class="ques_no">Ques <i>5</i></span>
+											<span class="ques_no">Ques <i>8</i></span>
 										</div>
 									</div>
 								</div>
