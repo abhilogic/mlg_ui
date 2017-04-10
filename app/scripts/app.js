@@ -209,10 +209,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
    });
 
 	    $rootScope.$on("$routeChangeStart", function (event, next, current) {
-        if (!Auth.authorize(next.access)) {
-            if(Auth.isLoggedIn()) $location.path('/');
-            else                  $location.path('/login');
-        }
+        // if (!Auth.authorize(next.access)) {
+        //     if(Auth.isLoggedIn()) $location.path('/');
+        //     else                  $location.path('/login');
+        // }
     });
 
 
