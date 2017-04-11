@@ -150,6 +150,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	}).when('/teacher/payment_page',{
     templateUrl : 'views/payment_teacher.html',
 		controller : 'teacherOnBoardingCtrl',
+  }).when('/teacher/add_content',{
+    templateUrl : 'views/dashboard/teacher-content-add-lesson.html',
+		controller : 'teacherLessonCtrl',
   }).otherwise({
 		redirectTo : '/',
 	});

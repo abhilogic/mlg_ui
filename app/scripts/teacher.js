@@ -126,7 +126,6 @@ angular.module('mlg')
   var subjectCode = '';
   // Get teacher class and subjects. 
   teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
-    console.log(response.subject.course_name);
     if (response.status == true) {
       $scope.subject_grade = response.response;
       $scope.level = (response.grade.level_id).split(',');
@@ -163,4 +162,24 @@ angular.module('mlg')
   };
 /* end - step-4 for onBoarding teacher dasboard*/
   
-}]);
+}])
+.controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+    var get_uid=commonActions.getcookies(get_uid);
+//    var urlData = '';
+//    var grade_text = "---Select Text----";
+//    $scope.location = $location.absUrl();
+//    urlData =  ($location.hash()).split('/');
+//
+//    if (urlData[0] != '') {
+//       grade_text = grade;
+//    }
+//    $scope.grade_text = grade_text;
+    teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
+      if (response.status == true) {
+      $scope.subject_grade = response.response;
+      $scope.level = (response.grade.level_id).split(',');
+      $scope.subject = (response.subject.course_name).split(',');
+    }
+    });
+  }]);
