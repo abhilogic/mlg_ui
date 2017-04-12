@@ -77,10 +77,14 @@ $routeProvider
 }).when('/challenges', {
 	templateUrl : 'views/challenges.html',
 	controller : 'journeyCtrl',		
-}).when('/demo_video', {
-	templateUrl : 'views/demo_video.html',
+}).when('/demo_video/:id', {
+	templateUrl : 'views/firsttime_demo_video.html',
 	controller : 'quizCtrl',		
-}).when('/quiz', {
+}).when('/login_quiz/:id', {
+	templateUrl : 'views/firsttimelogintest.html',
+	controller : 'quizCtrl',		
+})
+.when('/quiz', {
 	templateUrl : 'views/quiz.html',
 	controller : 'quizCtrl',		
 })

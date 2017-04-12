@@ -18,7 +18,7 @@
 					<div ng-repeat="gradecourse in frm.cousesListByGrade" ng-init="pIndex = $index+1">
 						<div ng-repeat="childcourse in frm.childcourses">
 								<div ng-if="gradecourse.id==childcourse.id">
-										<a href="subject-view/{{childcourse.id}}" data-castle-name="science" >								 
+										<a href="demo_video/{{childcourse.id}}" data-castle-name="science" >							 
 											<div class="castle subject_castle castle_{{pIndex}} active">
 												<span class="castle__img"></span>
 												<span class="castle__icon"></span>
@@ -39,47 +39,6 @@
 							</div>
 						</div>
 
-
-						
-
-
-
-
-					<!--	
-					<a href="quiz" data-castle-name="science">
-							<div class="castle subject_castle castle_1 active">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Stupendous Science Nation</span>
-							</div>
-						</a>
-
-
-					<a href="quiz" data-castle-name="math">
-							<div class="castle subject_castle castle_2">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Magical Mathland</span>
-							</div>
-						</a>
-						<a href="quiz" data-castle-name="science">
-							<div class="castle subject_castle castle_3 inactive">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Enchanted English Empire</span>
-							</div>
-						</a>
-						<a href="#" data-castle-name="science">
-							<div class="castle subject_castle castle_4 inactive">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Valorous Social Science Union</span>
-							</div>
-						</a> -->
 						<a href="help" data-castle-name="science">
 							<div class="castle help">
 								<span class="castle__img"></span>
