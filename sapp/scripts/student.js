@@ -170,14 +170,21 @@ angular.module('mlg_student')
 		 			if(frm.selectedoption==correctoption){
 		 				console.log(frm.selectedoption);
 		 				var selectedAnswer=1; // select option is correct
-		 				alert('Correct');
+		 				$scope.answer_response="Correct";
+		 				//alert('Correct');
 		 				var score= $scope.currentquestion.valid_responses[0].score;
 		 			}
 		 			else{
 		 				selectedAnswer=0; // select option is wrong
 		 				score =0;
-		 				alert('wrong'); 
+		 				$scope.answer_response="Wrong";
+		 				//alert('wrong'); 
 		 			}
+					$(".masscourt-block").addClass("active");
+				    setTimeout(function(){
+				        $(".masscourt-block .masscourt-cover").addClass("in");
+				    }, 500);
+				  
 
 
 	 				//Step-2  Set required coulum values

@@ -28,6 +28,20 @@ $("*[data-center='center']").each(function(){
 
 // Main App JS
 
+$(document).ready(function(){
+  $("#hint").click(function(){
+    $(".masscourt-block").addClass("active");
+    setTimeout(function(){
+        $(".masscourt-block .masscourt-cover").addClass("in");
+    }, 500);
+  });
+  $("#gotIt").click(function(){
+    $(".masscourt-block .masscourt-cover").removeClass("in");
+    setTimeout(function(){
+      $(".masscourt-block").removeClass("active");
+    }, 500);
+  });
+});
 // chat js
 $(document).ready(function() {
   $(".user_list .bg__chat").click(function(){
