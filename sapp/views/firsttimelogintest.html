@@ -34,39 +34,46 @@
                           							<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
                           						</label>
                           					</span>
-                          					<span>{{option.value}}</span>
+                          					<span>{{option.label}}</span>
                        					 </li>
                     				</ul>
-                    				<span style="color:red">{{error_message}}</span>
+                    				<span style="color:red">{{error_message}}</span>                    				
+                    			</div>
 
-                    				
-                    			</div>
+                          <br>
                     			<div ng-if="currentquestion.type=='yesNO' ">
-                    				<label class="radio-inline">
-                    					<input type="radio" name="quiz_option" autocomplete="off" ng-value="1" ng-model="$parent.frm.selectedradiooption" required>             					
-                    					<span style="color:#fff">Yes</span>
+                    				<label class="radio-inline" ng-repeat="option in currentquestion.options">
+                    					
+                              <input type="radio" name="quiz_option" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required><span style="color:#fff">{{option.label}}</span>
                     				</label>
-									<label class="radio-inline">
-										<input type="radio" name="quiz_option" autocomplete="off" ng-value="2" ng-model="$parent.frm.selectedoption" required>								
-										<span style="color:#fff">No</span>
-									</label>
+                            <span style="color:red">{{error_message}}</span>									
                     				
                     			</div>
-                    			<div ng-if="currentquestion.type=='mcq' ">{{options}}
+                    			<div ng-if="currentquestion.type=='mcq' ">
                     				<ul class="option">
-                    					<li>
-                          					<span><label><input type="checkbox"></label></span>
-                          					<span>A. 72</span>
-                       					 </li>
-                    				</ul>                    				
+                              <li ng-repeat="option in currentquestion.options">                              
+                                    <span>
+                                      <label>
+                                        <input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+                                      </label>
+                                    </span>
+                                    <span>{{option.label}}</span>
+                                 </li>
+                            </ul> 
+                            <span style="color:red">{{error_message}}</span>              				
                     			</div>
                     			<div ng-if="currentquestion.type=='mrq' ">
-                    				<ul class="option">
-                    					<li>
-                          					<span><label><input type="checkbox"></label></span>
-                          					<span>A. 72</span>
-                       					 </li>
-                    				</ul>
+                    				  <ul class="option">
+                              <li ng-repeat="option in currentquestion.options">                              
+                                    <span>
+                                      <label>
+                                        <input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+                                      </label>
+                                    </span>
+                                    <span>{{option.label}}</span>
+                                 </li>
+                            </ul>
+                            <span style="color:red">{{error_message}}</span>
                     				
                     			</div>
 
