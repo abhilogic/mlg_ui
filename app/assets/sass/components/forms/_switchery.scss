@@ -24,6 +24,9 @@
     vertical-align: middle;
     position: relative;
     @include box-sizing(content-box);
+    input {
+      display: none;
+    }
 
     // Container
     .checkbox-switchery & {
@@ -41,6 +44,16 @@
         position: absolute;
         top: 0;
         @include box-shadow(0 1px 3px rgba(black, 0.4));
+        left: 20px;
+        transition: background-color 0.4s, left 0.2s;
+        background-color: rgb(255, 255, 255);
+    }
+    &.off {
+      background: $white;
+      @include box-shadow(none);
+      small {
+        left: 0px;
+      }
     }
 }
 
@@ -264,4 +277,11 @@
         margin-top: -5px;
         margin-bottom: -3px;
     }
+}
+
+.switchery-default {
+    background-color: #64bd63;
+    border-color: #64bd63;
+    box-shadow: #64bd63 0px 0px 0px 16px inset;
+    transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
 }

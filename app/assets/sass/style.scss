@@ -14,12 +14,16 @@
 @import "modules/variables";
 @import "modules/mixins";
 
+//Colors
+@import "colors/colors";
+
 // Base Style
 @import "base/fonts";
 @import "base/global";
 @import "base/typography";
 @import "base/helpers";
 @import "base/icons";
+@import "base/icomoon";
 @import "base/icons-fontawesome";
 
 // Sprite Style
@@ -28,11 +32,6 @@
 // Components
 @import "components/gridflex";
 @import "components/buttons";
-@import "components/forms/forms";
-@import "components/forms/awesome-bootstrap-checkbox";
-@import "components/forms/switch";
-@import "components/forms/switchery";
-@import "components/forms/radioslider";
 @import "components/wells";
 @import "components/panels";
 @import "components/boot_popup";
@@ -42,6 +41,30 @@
 @import "components/editable-block";
 @import "components/dropdown-menu";
 @import "components/modal";
+@import "components/data-table";
+@import "components/scope-sequence-listing";
+
+// Form Components
+@import "components/forms/forms";
+@import "components/forms/awesome-bootstrap-checkbox";
+@import "components/forms/switch";
+@import "components/forms/bootstrap-select";
+@import "components/forms/multiselect";
+@import "components/forms/switchery";
+@import "components/forms/radioslider";
+@import "components/forms/uniform";
+@import "components/editor/summernotes";
+
+// Charts
+@import "components/charts/c3";
+@import "components/charts/charts";
+@import "components/charts/d3";
+@import "components/charts/sparklines";
+
+// Uploaders
+@import "components/uploaders/dropzone";
+@import "components/uploaders/file-input";
+//@import "components/uploaders/plupload";
 
 // Layout Style
 @import "layout/nav";
@@ -77,3 +100,6 @@
 @import "pages/teacher-scope-sequence";
 @import "pages/teacher-addQuestion";
 @import "pages/teacher-assignment";
+@import "pages/teacher-content";
+@import "pages/teacher-content-add-lesson";
+@import "pages/teacher-create-class";

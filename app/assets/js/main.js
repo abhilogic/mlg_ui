@@ -4,6 +4,12 @@ $(window).on('load', function() {
     $('body').removeClass('no-transitions');
 });
 
+// function toggle custom plugins
+jQuery.fn.clickToggle = function(a,b) {
+  function cb(){ [b,a][this._tog^=1].call(this); }
+  return this.on("click", cb);
+};
+
 // Floating Input Fields animation
 var floatInput = function(){
   $(".float-input").each(function(){
@@ -34,11 +40,9 @@ $(document).ready(function(){
 
     // Calculate min height
     function containerHeight() {
-      if ($('.page-container').length) {
         var availableHeight = $(window).height() - $('.page-container').offset().top - $('.footer').outerHeight();
         //var footerHeight = $('.footer').outerHeight();
         $('.page-container').attr('style', 'min-height:' + availableHeight + 'px');
-      }
     }
     // Initialize
     containerHeight();
@@ -69,40 +73,29 @@ $(document).ready(function(){
             }
         }, 100);
     }).resize();
+     $('.mlg-selectpicker').selectpicker();
 
 });
 
 
-
-// Switchery
-// ------------------------------
-$(function() {
-
-    // Initialize multiple switches
-    if (Array.prototype.forEach) {
-        var elems = Array.prototype.slice.call(document.querySelectorAll('.switchery'));
-        elems.forEach(function(html) {
-            var switchery = new Switchery(html);
-        });
-    }
-    else {
-        var elems = document.querySelectorAll('.switchery');
-        for (var i = 0; i < elems.length; i++) {
-            var switchery = new Switchery(elems[i]);
-        }
-    }
-
-    // Colored switches
-    var primary = document.querySelector('.switchery-primary');
-    var switchery = new Switchery(primary, { color: '#2196F3' });
-
-    var danger = document.querySelector('.switchery-danger');
-    var switchery = new Switchery(danger, { color: '#EF5350' });
-
-    var warning = document.querySelector('.switchery-warning');
-    var switchery = new Switchery(warning, { color: '#FF7043' });
-
-    var info = document.querySelector('.switchery-info');
-    var switchery = new Switchery(info, { color: '#00BCD4'});
-
+var switcheryHtml = '<span class="off">OFF</span>' +
+                    '<span class="switchery switchery-default" >'+
+                      '<small></small>'+
+                    '</span>'+
+                    '<span class="off">ON</span>';
+$(document).ready(function(){
+  $(".js-switch").each(function(){
+    $(this).after(switcheryHtml);
   });
+
+  $("body").on('click','.switchery-default', function(){
+      var checked = $(this).siblings(".js-switch").attr("checked");
+      $(this).toggleClass("off");
+      if(checked == "checked"){
+        $(this).siblings(".js-switch").attr("checked", false);
+      }
+      else {
+        $(this).siblings(".js-switch").attr("checked", true);
+      }
+  });
+});

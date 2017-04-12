@@ -15,6 +15,21 @@
   }
 }
 
+// modal-importTemplate
+
+.modal-importTemplate {
+  .modal-header {
+    border-bottom: 0px;
+  }
+  .modal-body {
+      @include padding(50px 100px);
+      .form-control {
+        @include border-width(0px 0px null 0px);
+        @include border-radius(0px);
+      }
+  }
+}
+
 .modal-SequencePreview {
   .modal-header {
     border-bottom: 0px;

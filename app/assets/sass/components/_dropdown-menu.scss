@@ -1,126 +1,15 @@
-.input-dropdown {
-  .form-control {
-    @include border-color($gray-lighter);
-    @include border-radius(4px);
-  }
+.btn-group.bootstrap-select {
+  width: 100% !important;
   .dropdown-toggle {
-    @include border-radius(4px);
-    background: none;
-    border: 1px solid $gray-lighter;
-    border-left: 0px;
-    @include padding(8.5px 15px);
+    color: $gray-light;
   }
-  .dropdown-menu {
-    left: auto;
+  .bs-caret {
+    position: absolute;
     right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 33px;
+    border-left: 1px solid #ccc;
+    background: $white;
   }
 }
-
-/*
-.vDrop {
-  position: relative;
-  margin-bottom: 10px;
-  height: 30px;
-  color: #555;
-}
-.vDrop select {
-  visibility: hidden;
-}
-.vDrop a {
-  outline: none;
-  text-decoration: none;
-  color: #555;
-}
-.vDrop .vClicker {
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  @include padding(7px 6px);
-  width: 100%;
-  height: 37px;
-  line-height: 20px;
-  background: #fff;
-  border: 1px solid #ccc;
-  @include border-radius(4px);
-  @include user-select(none);
-}
-.vDrop .vClicker.open {
-  -webkit-border-top-right-radius: 3px;
-  -moz-border-radius-topright: 3px;
-  border-top-right-radius: 3px;
-  -webkit-border-bottom-right-radius: 0;
-  -moz-border-radius-bottomright: 0;
-  border-bottom-right-radius: 0;
-  -webkit-border-bottom-left-radius: 0;
-  -moz-border-radius-bottomleft: 0;
-  border-bottom-left-radius: 0;
-  -webkit-border-top-left-radius: 3px;
-  -moz-border-radius-topleft: 3px;
-  border-top-left-radius: 3px;
-}
-.vDrop .vClicker.open .vArrow,
-.vDrop .vClicker:hover .vArrow {
-  background-color: transparent;
-  border-color: #9be;
-}
-.vDrop .vClicker span {
-  white-space: nowrap;
-}
-.vDrop .vClicker .vArrow {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 33px;
-  height: 37px;
-  border: 1px solid $gray-lighter;
-  border-left: 1px solid $gray-lighter;
-  @include border-radius(0px 4px 4px 0px);
-  &:after {
-    @include position(absolute, 7px 7px null null);
-    content: '\0043';
-    font-family: 'Glyphter';
-  }
-}
-.vDrop .vClicker.open .vArrow {
-  &:after {
-    content:'\0046';
-  }
-}
-.vDrop ul {
-  overflow: hidden;
-  display: none;
-  z-index: 1;
-  position: absolute;
-  top: 29px;
-  left: 0;
-  min-width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border: 1px solid #ccc;
-  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-}
-.vDrop ul li.optgroup span {
-  display: block;
-  padding: 5px;
-  background: #e8e8e8;
-}
-.vDrop ul li.optgroup ~ .option a {
-  padding-left: 20px;
-}
-.vDrop ul li a {
-  display: block;
-  padding: 5px;
-  white-space: nowrap;
-  background: #fff;
-}
-.vDrop ul li a.selected,
-.vDrop ul li a:hover {
-  background: #06c;
-  color: #fff;
-}
-*/

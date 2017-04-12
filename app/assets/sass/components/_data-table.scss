@@ -1,0 +1,119 @@
+
+// Data Table for Content List
+
+.table-teacherContent{
+  font-size: 12px;
+  color: #66818d;
+  thead{
+    background-color: lighten($gray-lighter, 4%);
+    text-transform: uppercase;
+    tr>th{
+      border-width: 1px;
+    }
+  }
+  thead, tbody{
+    border: 1px solid transparent;
+  }
+  thead, tbody, td{
+    border-color: darken($gray-lighter, 5%);
+  }
+  .sr-no{
+    @media screen and (min-width: $screen-sm-max) {
+      width: 30px;
+    }
+  }
+  .actions{
+    @media screen and (min-width: $screen-sm-max) {
+      width: 90px;
+    }
+    .btn-link{
+      @include padding(0);
+      color: #66818d;
+      &:hover{
+        color: darken(#66818d, 20%);
+      }
+    }
+    .btn-link + .btn-link{
+      margin-left: 10px;
+    }
+  }
+
+  tfoot{
+    tr > td{
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .table-pagination{
+    text-align: right;
+    .pagination{
+      @include margin(0 null);
+      .active a{
+        color: $gray-light;
+        background-color: transparent;
+      }
+      >li>a, >li>span{
+        @include padding(2px 6px);
+      }
+    }
+  }
+}
+
+$color-content-approved: $brand-success;
+$color-content-disapproved: $brand-danger;
+$color-content-pending: $brand-warning;
+$color-content-submitted: #354a5d;
+$color-content-under-review: #9a5cb4;
+$color-content-draft: darken($gray-lighter, 5%);
+
+.table-questions, .table-lessons{
+  tr{
+    &.approved{
+      td.status{
+        color: $color-content-approved;
+      }
+    }
+    &.pending{
+      td.status{
+        color: $color-content-pending;
+      }
+    }
+    &.disapproved{
+      td.status{
+        color: $color-content-disapproved;
+      }
+    }
+    &.submitted{
+      td.status{
+        color: $color-content-submitted;
+      }
+    }
+    &.under-review{
+      td.status{
+        color: $color-content-under-review;
+      }
+    }
+    &.draft{
+      color: $color-content-draft;
+    }
+  }
+}
+
+// Table responsive
+@media screen and (max-width: $screen-sm-min) {
+  table.table-teacherContent thead { display: none; }
+  table.table-teacherContent tbody td {
+    display: block;
+    width: 100%;
+  }
+  table.table-teacherContent tbody tr td:first-child {
+    background: $gray-lighter;
+  }
+	table.table-teacherContent tbody td:before {
+    content: attr(data-th);
+    font-weight: bold;
+    display: inline-block;
+    width: 6rem;
+  }
+}

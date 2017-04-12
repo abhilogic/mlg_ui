@@ -1,8 +1,28 @@
+
 .modal {
   .close {
     opacity: 1;
     color: $gray-light;
   }
+
+.modal-body {
+   .form-group{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  .checkbox {
+    .checker {
+      left: -19px;
+      top: 0px;
+    }
+    label {
+      &:before {
+      display: none;
+     }
+    }
+  }
+}
+
   .connected-li-list {
       li {
         display: block;
