@@ -320,6 +320,7 @@ angular.module('mlg_student')
 		
 	 };
 
+
 	 
 }])
 .controller('subjectViewCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
@@ -345,7 +346,6 @@ angular.module('mlg_student')
       response.subject_detail = 0;
     }                 
   });
-}])
-;
+}]);
 
 
