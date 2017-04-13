@@ -1,0 +1,40 @@
+.panel-teacher-create-class {
+  .panel-heading {
+    .panel-title{
+      .btn-group {
+        .btn-default {
+          background: none;
+          border: 0px;
+          font-size: 20px;
+          &:focus {
+            @include box-shadow(none);
+          }
+        }
+      }
+    }
+    .heading-elements {
+      @media screen and (min-width: $screen-sm-max){
+        top: 70%;
+      }
+      @media screen and (max-width: 1024px){
+        position: relative;
+        margin-top: 0px;
+        right: auto;
+      }
+      .toolbar-item {
+        @media screen and (max-width: $screen-sm){
+          margin-bottom: 10px;
+        }
+      }
+    }
+    &:before {
+      display: none;
+    }
+    @include padding(30px null 0px null);
+  }
+  .table-teacherContent {
+    & + a {
+      color: $gray-light;
+    }
+  }
+}

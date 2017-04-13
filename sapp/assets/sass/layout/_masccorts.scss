@@ -1,0 +1,76 @@
+.masscourt-cover {
+  position: fixed;
+  left: -27px;
+  bottom: -88px;
+  z-index: 1000;
+  @include transition(0.5s all linear);
+  @include transform(translateX(-1000px));
+  .masccort-img{
+    max-width: 200px;
+    @media screen and (min-width: $screen-xs-max){
+      max-width: 235px;
+    }
+  }
+  .hint-block {
+    @include background-cover("mascourt-msg-bg-img.png");
+    background-size: 100% 100%;
+    width: 350px;
+    min-height: 100px;
+    position: absolute;
+    top: -52px;
+    right: -350px;
+    padding-bottom: 15px;
+    &:before {
+      content: '';
+      background: {
+        image: url("../img/messcort-hint-message-bottom-tip.png");
+        position: center center;
+        size: 100% auto;
+        repeat: no-repeat;
+      }
+      position: absolute;
+      bottom: -45px;
+      width: 57px;
+      left: 23px;
+      height: 71px;
+    }
+    .hint {
+      font-size: 20px;
+      color: $cola;
+      margin-top: 14px;
+      display: block;
+    }
+    .btn {
+      background: $cola;
+      color: $sweetCorn;
+      font-size: 14.5px;
+      @include margin(10px 10px null null);
+    }
+    @media screen and (max-width: $screen-xs-max){
+    width: 310px;
+    position: absolute;
+    top: -189px;
+    right: -141px;
+    }
+  }
+}
+
+
+.masscourt-block {
+  background: rgba($black,0.85);
+  width: 100vw;
+  position: fixed;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  z-index: 3000;
+  display: none;
+  &.active {
+    display: block;
+    .masscourt-cover {
+      &.in {
+        @include transform(translateX(0px));
+      }
+    }
+  }
+}

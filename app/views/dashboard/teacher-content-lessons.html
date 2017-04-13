@@ -1,3 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>MLG | All Lessions</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Description / Keywords -->
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+
+	<!-- Mobile web app capable -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="HandheldFriendly" content="true">
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:title" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+
+	<!-- Favicon & Touch Icons -->
+	<link rel="shortcut icon" href="../assets/img/favicon/favicon.png">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="../assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../assets/css/style.css" >
+
+	<!-- Latest compiled and minified jQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Page Specific JavaScript -->
+	<script src="assets/js/plugins/forms/bootstrap-select.min.js"></script>
+	<script src="assets/js/plugins/uploader/dropzone.min.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/pages/teacher-add-content-lesson.js"></script>
+</head>
+<body>
 	<!-- Main navbar -->
 	<nav class="navbar navbar-default navbar-dashboard navbar-static-top">
 		<div class="navbar-header">
@@ -128,7 +174,7 @@
 									</li>
 
 									<li class="toolbar-item pull-right">
-										<a role="button" class="btn btn-primary" href="teacher/lesson"><i class="icon icon-plus-outline position-left"></i>Add Lession</a>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-addContent"><i class="icon icon-plus-outline position-left"></i>Add Lessons</button>
 									</li>
 							</div>
 							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons">
@@ -330,8 +376,85 @@
 	</div>
 	<!-- page container -->
 
-	<!-- Latest compiled and minified jQuery -->
+	<section class="modal-section">
+		<div id="modal-addContent" class="modal fade modal-addContent" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+						<h4 class="modal-title">How would you like to Add Lessons?</h4>
+					</div>
+					<div class="modal-body">
+						<a href="teacher/add_content" class='btn btn-outline btn-danger btn-block'>Add Lessons Manually</a>
+						<button type="button" class='btn btn-outline btn-default btn-block border-radius-0' data-toggle="modal" data-target="#modal-uploadContent" data-dismiss="modal">Upload A file</button>
+					</div>
+				</div>
+			</div>
+				<!-- Modal content-->
+		</div>
+
+		<div id="modal-uploadContent" class="modal fade modal-uploadContent" role="dialog">
+			<div class="modal-dialog modal-lg">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+						<h4 class="modal-title">Upload A File</h4>
+					</div>
+					<div class="modal-body">
+					<form action="http://localhost/mlg/courses/readCSV" class="dropzone" id="dropzone_multiple"></form>
+						<div class="text-right">
+							<a href="../assets/documents/doc.pdf" download><u>Dowload a sample Version</u></a>
+							<div class="text-center">
+									<button class="btn btn-primary" id="upload">Upload</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				<!-- Modal content-->
+		</div>
+	</section>
+
+
 	<script>
+		Dropzone.options.dropzoneMultiple = {
+  		paramName: "csv", // The name that will be used to transfer the file
+  		maxFilesize: 2, // MB
+  		autoProcessQueue:false,
+  		maxFiles:1,
+  		addRemoveLinks:true,
+  		init: function() {
+    		var submitButton = document.querySelector("#upload")
+       			 myDropzone = this; // closure
+
+    	submitButton.addEventListener("click", function() {
+      			myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+    		});
+
+    // You might want to show the submit button only when 
+    // files are dropped here:
+    this.on("addedfile", function() {
+    	//$("#upload").show();
+      // Show submit button here and/or inform user to click it.
+    });
+
+    myDropzone.on("complete", function(file) {
+    	alert('file uploaded susccefully');
+    	//$("#modal-uploadContent").dismiss();
+  myDropzone.removeFile(file);
+});
+
+  }
+	  		
+  		};
+
+  		
+
+
 		var headertext = [],
 		headers = document.querySelectorAll(".table-teacherContent th"),
 		tablerows = document.querySelectorAll(".table-teacherContent th"),

@@ -1,0 +1,9 @@
+.panel-teacher-add-content {
+  .repeat-row {
+    @media screen and (min-width: $screen-sm-max){
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

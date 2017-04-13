@@ -52,12 +52,53 @@ $gama: 0.2;
 $font-primary: 'Open Sans', sans-serif;
 $font-secondary: 'MyriadProBoldCondensed', sans-serif;
 
+$icon-font-size: 						     16px;
+
 // Image dir path
 $imagedir: "../img/";
 
 
+//
+// Typography
+// ------------------------------
+//
+
+//** XLarge font size (v. 1.3)
+$font-size-xlarge:                           $font-size-h6;
+
+//** XLarge line height (v. 1.3)
+$line-height-xlarge:                         1.333334;
+
+//** Mini font size
+$font-size-mini: 						     ceil(($font-size-base * 0.8)); // ~11px
+
+//** Mini line height, for the smallest size
+$line-height-mini: 						     1.82;
+
+
+//** XLarge computed line height
+$line-height-computed-xlarge:    		     floor(($font-size-xlarge * $line-height-base)); // ~20px
+$line-height-computed-large: 			     floor(($font-size-large * $line-height-base));
+$line-height-computed-small: 			     floor(($font-size-small * $line-height-base));
+$line-height-computed-mini: 			     floor(($font-size-mini * $line-height-base));
+
+//** Adding negative letter spacing to headings
+$heading-letter-spacing:				     -0.015em;
+
+//** Vertical list padding, mainly used in navigation and dropdowns
+$list-spacing: 							     $padding-base-vertical;
+
+//** Font size used in icons. Icomoon icon set is based on 16px grid
+$icon-font-size: 						     16px;
+
+//** Additional element's horizontal spacing for inline elements
+$element-horizontal-spacing: 			     $padding-base-vertical;
+
+/*
 // Form Components
+---------------------*/
 $input-border-color: darken($gray-lighter, 10%);
+$input-height-mini : 40px;
 
 //** Checkbox and radio sizes
 $checkbox-size: 							18px;
