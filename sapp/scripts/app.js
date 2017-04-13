@@ -125,6 +125,8 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
 
 $rootScope.$on('$viewContentLoaded', function() {
   $templateCache.removeAll();
+  
+
 });
 
 
@@ -149,6 +151,7 @@ $scope.userInfo=userInfo;
 	}]
 };
 })
+
 .controller("TopController", function($rootScope, $scope, $location) {
 $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
 //$scope.atHome = ($location.path() === "/");

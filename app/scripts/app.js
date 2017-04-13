@@ -143,6 +143,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	}).when('/teacher/subscription',{
 		templateUrl : 'views/dashboard/teacher-subscription.html',
 		controller : 'teacherSubscriptionCtrl',
+	}).when('/teacher/settings',{
+		templateUrl : 'views/dashboard/teacher-setting.html',
+		controller : 'teacherSubscriptionCtrl',
 	}).when('/parent/dashboard/:id', {
 		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
@@ -263,4 +266,25 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
     return function (scope, element, attrs) {
         element.height($(window).height() - $('.navbar').outerHeight());
     }
-});
+})
+.directive('aside', function () {
+return {
+	restrict: 'E',
+	templateUrl: 'include/sidebar-teacher.html',
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+		var cookieString=$cookieStore.get("userObj");
+		var userInfo=parseUser(cookieString);
+		function parseUser(cookie){
+	var keyVals=cookie.split(',');
+	var obj={};
+	angular.forEach(keyVals,function(value,key){
+		var vals=value.split('=');
+		obj[vals[0]]=vals[1];
+	});
+	return obj;
+}
+$scope.userInfo=userInfo;
+	}]
+};
+})
+;
