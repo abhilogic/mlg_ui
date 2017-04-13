@@ -171,15 +171,16 @@ angular.module('mlg_student')
 		 			if(frm.selectedoption==correctoption){
 		 				console.log(frm.selectedoption);
 		 				var selectedAnswer=1; // select option is correct
-		 				$scope.answer_response="Correct";
+		 				$scope.answer_response="Awesome, you got this correct";
 		 				//alert('Correct');
 		 				var score= $scope.currentquestion.valid_responses[0].score;
 		 			}
 		 			else{
 		 				selectedAnswer=0; // select option is wrong
 		 				if(typeof $scope.currentquestion.penalty_score=='undefined'){ score=0}
-		 				else{ score =$scope.currentquestion.penalty_score; }		 				
-		 				alert('wrong'); 
+		 				else{ score =$scope.currentquestion.penalty_score; }
+		 				$scope.answer_response="Oops, This is not the correct answer";		 				
+		 				//alert('wrong'); 
 		 			}
 					$(".masscourt-block").addClass("active");
 				    setTimeout(function(){
