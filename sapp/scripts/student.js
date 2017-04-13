@@ -55,6 +55,13 @@ angular.module('mlg_student')
 		});
 	} 
 
+	loginHttpResponse.getUserQuizResponse=function(user_id,exam_id){		
+		return $http({
+			method:'GET',			
+			url  : urlParams.baseURL+urlParams.getUserQuizResponse+'?user_id='+user_id+'&exam_id='+exam_id
+		});
+	} 
+
 
 
     
@@ -218,8 +225,25 @@ angular.module('mlg_student')
 					 				$scope.frm={};
 					 			}
 					 			else{ 
-					 				alert('end quiz');
-					 				window.location.href='subject-view/'+$routeParams.id;
+					 				//alert('end quiz');
+					 				loginHttpService.getUserQuizResponse(get_uid,1).success(function(quizResultResponse) {
+					 					console.log(quizResultResponse);
+					 					if (quizResultResponse.response.status == "true") {
+					 						var correct_answer= quizResultResponse.response.correct_questions;
+					 						var wrong_answer= quizResultResponse.response.correct_questions;
+					 						var st_result="";
+					 						if(quizResultResponse.response.student_result< 60){
+					 							 st_result= "Your are Fail";
+					 							alert("Your score is less that 60%. Please Try Again");
+					 						}
+					 						else{
+					 							st_result= "Your are Pass";
+					 							alert("Your score is less that 60%. Please Try Again");
+					 						}
+											window.location.href='subject-view/'+$routeParams.id;
+					 					}
+					 				});
+					 				
 					 			 }
 		 					}
 		 					else{ $scope.data.message=apiresponse.response.message;	}
