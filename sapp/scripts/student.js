@@ -334,6 +334,33 @@ angular.module('mlg_student')
       response.subject_detail = 0;
     }                 
   });
+  
+  //naseem
+	/*$scope.studentResult = 0;
+    $scope.beDisabled=$scope.studentResult < 1;
+    $scope.studentResult=function() {
+        if ($scope.studentResult == 1) {
+			$scope.studentResult = 1;
+            //return true;
+        }
+        else {
+			$scope.studentResult = 0;
+            //return false;
+        }
+    }*/
+	
+	$scope.studentResult = 0;
+	$scope.$watch('studentResult',function(){
+		console.log($scope.studentResult);
+		if($scope.studentResult==1){
+			$scope.studentResult=1;
+		}
+		else{
+			$scope.studentResult=0;
+		}
+		$scope.beDisabled=$scope.studentResult < 1;
+	});
+  
 }])
 .controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
   
