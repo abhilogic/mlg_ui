@@ -33,6 +33,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
   upgradePackage :'/users/upgrade',
   getStudentDetail: '/teachers/getStudentDetail',
   getTeacherGrades: '/teachers/getTeacherGradeSubject',
+  guestLogin: '/users/guestLogin',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -159,9 +160,12 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
   }).when('/teacher/lessons',{
     templateUrl : 'views/dashboard/teacher-content-lessons.html',
 		controller : 'teacherLessonCtrl',
+  }).when('/guest', {
+	templateUrl : 'views/guest_login.html',
+	controller : 'guestCtrl',
   }).otherwise({
 		redirectTo : '/',
-	});
+  });
 
 	$locationProvider.html5Mode({
 		enabled : true,

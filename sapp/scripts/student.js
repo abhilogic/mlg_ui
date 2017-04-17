@@ -96,17 +96,37 @@ angular.module('mlg_student')
 				var get_uid=getCookie('uid');
 				return get_uid;
 		}
+        
+        commonActions.getguestcookies=function(key){
+          var value=getCookie(key);
+          return value;
+		}
+
 
 			return commonActions;
 	}])
 .controller('journeyCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 	  //alert('kkk');
+    if (document.cookie == '') {
+      alert('kindly login');
+      window.location.href='/mlg_ui/app/';
+    }
 	  var get_uid=commonActions.getcookies(get_uid);
 	  $scope.frm = {};
-	  
-
-	  loginHttpService.getStudentCourses(get_uid).success(function(studentcoursesresult) {
-
+      if (get_uid == 'guest') {
+        var grade_id = commonActions.getguestcookies('grade_id');
+        loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
+          if (!courseslistresult.response.courses){  // value is null, empty
+            $scope.frm.msg=courseslistresult.response.message;	        
+          } else {
+            $scope.frm.childcourses = courseslistresult.response.courses;
+            $scope.frm.childclass = '';
+            $scope.frm.cousesListByGrade= courseslistresult.response.courses;
+            $scope.msg=courseslistresult.response.message;
+          }
+    	})
+      } else {
+	    loginHttpService.getStudentCourses(get_uid).success(function(studentcoursesresult) {
 	  	if (studentcoursesresult.response.status == "TRUE") {
 	  			$scope.frm.childcourses=studentcoursesresult.response.student_courses;
 	  			$scope.frm.childclass=studentcoursesresult.response.student_class;
@@ -127,7 +147,9 @@ angular.module('mlg_student')
 	  	}
 	  	console.log(studentcoursesresult.response.student_class);
 	  });
-    	
+
+}
+
 }])
 
 
@@ -142,6 +164,18 @@ angular.module('mlg_student')
 	  $scope.data.param1 = $routeParams.id;
 
 	  var get_uid=commonActions.getcookies(get_uid);
+
+      if (document.cookie == '') {
+        alert('kindly login');
+        window.location.href='/mlg_ui/app/';
+      }
+      $scope.guest = false;
+      if (get_uid == 'guest') {
+        $scope.guest = true;
+      }
+      $scope.skipQuiz = function() {
+        $location.url('/subject-view/' + $routeParams.id);
+      }
 
 	  	$scope.data.questions=[
 
@@ -162,7 +196,7 @@ angular.module('mlg_student')
 	  	$scope.total_questions=$scope.data.questions.length-1;
 
 		
-
+     
 	 $scope.submitQuestion=function(frm){
 	 	console.log(frm);	
 	 	$scope.error_message=""; 	
@@ -325,6 +359,11 @@ angular.module('mlg_student')
 }])
 .controller('subjectViewCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
   
+  if (document.cookie == '') {
+    alert('kindly login');
+    window.location.href='/mlg_ui/app/';
+  }
+
   var pid = $routeParams.id;
   loginHttpService.getAllCourseList(pid).success(function(response) {
     console.log(response.response);

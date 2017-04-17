@@ -241,6 +241,14 @@ angular.module('mlg').filter('moment', function() {
         url   : urlParams.baseURL+urlParams.upgradePackage
 	  });
 	}
+    
+    loginHttpResponse.guestLogin=function(data){
+      return $http({
+          method:'POST',
+          data : data,
+          url   : urlParams.baseURL+urlParams.guestLogin
+      });
+	}
 	return loginHttpResponse;
 	
 }])
@@ -273,8 +281,8 @@ angular.module('mlg').filter('moment', function() {
 				return get_uid;
 		}
 
-		
 
+		
 		// To find number of children
 		commonActions.chidrenNameFactory = function (get_uid) {
 			
@@ -1264,6 +1272,35 @@ if (typeof $routeParams.id != 'undefined') {
 }])
 .controller('parentSettingCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
 //alert('kkkkk');
+}])
+.controller('guestCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http) {
+
+    function setCookie(key, value) {
+      var expires = new Date();
+      expires.setTime(expires.getTime() + (15 * 60 * 1000));
+      document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+';path=/';
+    }
+    // call API to get grades
+    loginHttpService.gradeList().success(function(response) {
+  		  $scope.grades = response.response.Grades;  
+  	});
+
+    $scope.guestlogin = function(data) {
+      $http.get("http://ipinfo.io").then(function(response){
+        data.user_ip = response.data.ip;
+        loginHttpService.guestLogin(data).success(function(response) {
+  		 if (response.status == '-1') {
+           alert('you have already taken your trial');
+           return false;
+         } else if (response.status == '1') {
+           setCookie('uid', 'guest');
+           setCookie('grade_id', data.levelchoice.id);
+           window.location.href='/mlg_ui/sapp/journey';
+           return true;
+         }
+        });
+      });
+    };
 }])
 .controller('parentPreferenceCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 
