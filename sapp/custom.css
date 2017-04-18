@@ -1,1 +1,12 @@
 .userProfileDropDown .dropdown-menu {display: block;}
+
+.myjourney_page .castle.active .castle__arrowUp {
+	display: inline-block;
+	opacity: 0;
+	transition: all ease-in-out 0.3s;
+}
+
+.myjourney_page .castle:hover .castle__arrowUp {
+	display: inline-block;
+	opacity: 1;
+}
