@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap',])
+angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ngStorage'])
 .value('urlParams', {
 users : '/users',
 login: '/users/login',
@@ -81,11 +81,10 @@ $routeProvider
 }).when('/demo_video/:id', {
 	templateUrl : 'views/firsttime_demo_video.html',
 	controller : 'quizCtrl',		
-}).when('/login_quiz/:id', {
+}).when('/pre-test/:id', {
 	templateUrl : 'views/firsttimelogintest.html',
 	controller : 'quizCtrl',		
-})
-.when('/quiz', {
+}).when('/quiz', {
 	templateUrl : 'views/quiz.html',
 	controller : 'quizCtrl',		
 })

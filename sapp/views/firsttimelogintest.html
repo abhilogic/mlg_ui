@@ -13,15 +13,15 @@
                           <span>{{sequence+1}}/{{data.questions.length}}</span>
                         </h4>
                       </div>
-                      <div class="col-sm-2 text-right ">
-                        <img src="assets/img/speaker_icon.png" alt="" class="speaker_icon">
+                      <div class="col-sm-2 text-right ">                        
+                        <img src="assets/img/speaker_icon.png" alt="" class="speaker_icon" ng-click="readQuestion()">
+                        <audio id="player1" src="" class="speech" hidden></audio>
                       </div>
                       <a ngif="guest" href="#" ng-click="skipQuiz()">Skip</a>
                     </div>
                   </div>
                   <div class="panel-body">
                     <div class="content" ng-init="frm={};">
-
                     			<h4 class="ques">
                     				<span>Q{{sequence+1}} :</span>  
                     				<span>{{currentquestion.questionName}}</span>
@@ -114,5 +114,10 @@
         $("input[type='checkbox']").checkbox_button();
 				$("#subskils_nav_tabs").tabCollapse();
 			});*/
+
+     
+
 		</script>
+
+
 	
