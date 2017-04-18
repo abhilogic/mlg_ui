@@ -118,11 +118,10 @@ angular.module('mlg_student')
 	  }else{
 	  	$scope.redirectURL='demo_video';
 	  }
-
-	if (document.cookie == '') {
-      alert('kindly login');
-      window.location.href='/mlg_ui/app/';
-    }
+      if (document.cookie == '' || get_uid == 'null') {
+        alert('kindly login');
+        window.location.href='/mlg_ui/app/';
+      }
       if (get_uid == 'guest') {
         var grade_id = commonActions.getguestcookies('grade_id');
         loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
@@ -177,7 +176,7 @@ angular.module('mlg_student')
 	  var get_uid=commonActions.getcookies(get_uid);
 
 
-      if (document.cookie == '') {
+      if (document.cookie == '' || get_uid == 'null') {
         alert('kindly login');
         window.location.href='/mlg_ui/app/';
       }
@@ -383,11 +382,12 @@ angular.module('mlg_student')
 	  
 }])
 
-.controller('subSkillRoomCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
-  if (document.cookie == '') {
-    alert('kindly login');
-    window.location.href='/mlg_ui/app/';
-  }
+.controller('subSkillRoomCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions) {
+      var get_uid=commonActions.getcookies(get_uid);
+      if (document.cookie == '' || get_uid == 'null') {
+        alert('kindly login');
+        window.location.href='/mlg_ui/app/';
+      }
 	 $scope.show_subskill = function(){
 	 	var pid = $routeParams.id;
   loginHttpService.getAllCourseList(pid).success(function(response) {
@@ -406,9 +406,10 @@ angular.module('mlg_student')
 
 	 
 }])
-.controller('subjectViewCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
+.controller('subjectViewCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions) {
   
-  if (document.cookie == '') {
+  var get_uid=commonActions.getcookies(get_uid);
+  if (document.cookie == '' || get_uid == 'null') {
     alert('kindly login');
     window.location.href='/mlg_ui/app/';
   }
@@ -450,8 +451,9 @@ angular.module('mlg_student')
 	});
   
 }])
-.controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
-  if (document.cookie == '') {
+.controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions) {
+  var get_uid=commonActions.getcookies(get_uid);
+  if (document.cookie == '' || get_uid == 'null') {
     alert('kindly login');
     window.location.href='/mlg_ui/app/';
   }
