@@ -18,7 +18,7 @@
 					<div ng-repeat="gradecourse in frm.cousesListByGrade" ng-init="pIndex = $index+1">
 						<div ng-repeat="childcourse in frm.childcourses">
 								<div ng-if="gradecourse.id==childcourse.id">
-										<a href="demo_video/{{childcourse.id}}" data-castle-name="science" >							 
+										<a href="{{redirectURL}}/{{childcourse.id}}" data-castle-name="science" >							 
 											<div class="castle subject_castle castle_{{pIndex}} active">
 												<span class="castle__img"></span>
 												<span class="castle__icon"></span>

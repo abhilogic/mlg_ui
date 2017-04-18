@@ -118,10 +118,12 @@ angular.module('mlg_student')
 	  }else{
 	  	$scope.redirectURL='demo_video';
 	  }
+
       if (document.cookie == '' || get_uid == 'null') {
         alert('kindly login');
         window.location.href='/mlg_ui/app/';
       }
+
       if (get_uid == 'guest') {
         var grade_id = commonActions.getguestcookies('grade_id');
         loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
@@ -190,7 +192,6 @@ angular.module('mlg_student')
 
 	  	
 	  var quizquestions=[
-
 	  				{"id":"response_id-7611","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110SW4723875","questionName":"Irrational numbers cannot be written as a/b (where a and b are integers and b is not zero).  When written as decimals, irrational numbers do not terminate or repeat.","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
 	  				{"id":"response_id-7603","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"","questionName":"Write 61/100 as a decimal number.","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"0.61","label":"0.61"},{"value":"0.32","label":"0.32"},{"value":"0.65","label":"0.65"},{"value":"0.77","label":"0.77"}],"valid_responses":[{"value":"0.61","score":1}],"penalty_score":-1},
 	  				{"id":"response_id-7604","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110SM4787496","questionName":"Sum of two Positive number is always?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"positive","label":"positive"},{"value":"negative","label":"negative"},{"value":"0","label":"0"},{"value":"1","label":"1"}],"valid_responses":[{"value":"positive","score":1}],"penalty_score":-1},
@@ -286,8 +287,7 @@ angular.module('mlg_student')
 
 
 		 			// Step - 3 Send data to API to store value in database (user_quiz_response)
-		 			loginHttpService.setUserQuizResponse(userExamResponse).success(function(apiresponse) {
-		 				
+		 			loginHttpService.setUserQuizResponse(userExamResponse).success(function(apiresponse) {		 				
 		 				if (apiresponse.response.status == "true") {		 						
 		 						//Step-4 -  Next Question
 		 						if( ($scope.sequence < $scope.total_questions) && ($scope.sequence!=4) && ($scope.sequence!=9) ){		 							
@@ -297,8 +297,12 @@ angular.module('mlg_student')
 					 			}
 					 			else if($scope.sequence==4 || $scope.sequence==9) {		
 					 				// check $scope.sequence with one less value because it has to initiallize with 0 for indexing of question.		 				
-					 				localStorage.setItem('userQuesSequence', $scope.sequence+1); 
-					 				window.location.href='demo_video/'+$routeParams.id;
+					 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
+					 				if(localStorage.getItem('preTestProcessStatus')==null ) {
+					 					window.location.href='demo_video/'+$routeParams.id;
+					 				}else{
+					 					$scope.sequence=$scope.sequence+1;
+					 				}
 					 				
 					 			}
 					 			else{ 
@@ -415,6 +419,7 @@ angular.module('mlg_student')
   }
 
   var pid = $routeParams.id;
+  $scope.cid=$routeParams.id;
   loginHttpService.getAllCourseList(pid).success(function(response) {
     console.log(response.response);
     if(response.response.length > 0){
