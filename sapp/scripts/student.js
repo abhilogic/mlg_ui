@@ -338,7 +338,10 @@ angular.module('mlg_student')
 }])
 
 .controller('subSkillRoomCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
-	 
+  if (document.cookie == '') {
+    alert('kindly login');
+    window.location.href='/mlg_ui/app/';
+  }
 	 $scope.show_subskill = function(){
 	 	var pid = $routeParams.id;
   loginHttpService.getAllCourseList(pid).success(function(response) {
@@ -402,7 +405,10 @@ angular.module('mlg_student')
   
 }])
 .controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams) {
-  
+  if (document.cookie == '') {
+    alert('kindly login');
+    window.location.href='/mlg_ui/app/';
+  }
   var pid = $routeParams.id;
   loginHttpService.getAllCourseList(pid).success(function(response) {
     console.log(response.response);
