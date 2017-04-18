@@ -7,15 +7,15 @@
 						<div class="wooden_frame_content_cover">
 							<img src="assets/img/castles_map_web.jpg" alt="" class="castles_map_web_img"/>
 							<div class="subject_view_castles_block" >
-								<a href="pre-test/{{cid}}" ng-disabled="studentResult == 0" ng-value="studentResult">
-									<div class="castle topic_castle subskills_castle_1 winned_castle">
+								<a href="pre-test/{{cid}}"  ng-value="studentResult">
+									<div ng-class="{'winned_castle': studentResult == 'pass' }" class="castle topic_castle subskills_castle_1">
 										<span class="castle__img "></span>
 										<span class="fire__img"></span>
 										<span class="flag__icon"></span>
 										<span class="castle__text">Training Arena</span>
 									</div>
 								</a>
-								<a ng-repeat="subject in subject_detail " href="skill-door/{{subject.id}}" ng-disabled="studentResult == 1">
+								<a ng-class="{'disabled-click': studentResult == 'fail' }"  ng-repeat="subject in subject_detail " href="skill-door/{{subject.id}}" ng-disabled="studentResult == 1">
 								  <div class="castle topic_castle subskills_castle_{{$index+2}}">
 										<span class="castle__img "></span>
 										<span class="fire__img"></span>

@@ -60,11 +60,15 @@ angular.module('mlg_student')
 			method:'GET',			
 			url  : urlParams.baseURL+urlParams.getUserQuizResponse+'?user_id='+user_id+'&exam_id='+exam_id
 		});
-	} 
+	}
 
+	loginHttpResponse.getUserScoreForQuiz=function(exam_id,uid){
+		return $http({
+			method:'GET',
+			url  : urlParams.baseURL+urlParams.getUserScoreForQuiz+'?exam_id='+exam_id+'&uid='+uid
+		});
+	}
 
-
-    
 	return loginHttpResponse;
 	
 }])
@@ -438,33 +442,13 @@ angular.module('mlg_student')
       response.subject_detail = 0;
     }                 
   });
-  
-  //naseem
-	/*$scope.studentResult = 0;
-    $scope.beDisabled=$scope.studentResult < 1;
-    $scope.studentResult=function() {
-        if ($scope.studentResult == 1) {
-			$scope.studentResult = 1;
-            //return true;
-        }
-        else {
-			$scope.studentResult = 0;
-            //return false;
-        }
-    }*/
-	
-	$scope.studentResult = 0;
-	$scope.$watch('studentResult',function(){
-		console.log($scope.studentResult);
-		if($scope.studentResult==1){
-			$scope.studentResult=1;
-		}
-		else{
-			$scope.studentResult=0;
-		}
-		$scope.beDisabled=$scope.studentResult < 1;
-	});
-  
+  $scope.studentResult = 'fail';
+  loginHttpService.getUserScoreForQuiz('',get_uid).success(function(response) {
+    if (response.data.status == 1) {
+      $scope.studentResult = 'pass';
+    }
+  });
+
 }])
 .controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions) {
   var get_uid=commonActions.getcookies(get_uid);

@@ -6177,3 +6177,4 @@ label span {
     margin-right: 0px;
   }
 }
+.disabled-click{ pointer-events: none;}
