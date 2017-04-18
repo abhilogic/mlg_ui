@@ -1293,10 +1293,14 @@ if (typeof $routeParams.id != 'undefined') {
            alert('you have already taken your trial');
            return false;
          } else if (response.status == '1') {
+           alert('Your Trial session will be for 15 mins only');
+           setCookie('userObj', '"userName='+response.user+',email='+ ' ' +',role='+ 'student'+'"');
            setCookie('uid', 'guest');
            setCookie('grade_id', data.levelchoice.id);
            window.location.href='/mlg_ui/sapp/journey';
            return true;
+         } else if (response.status == 0) {
+           alert('some error occured, kindly ask to administrator');
          }
         });
       });
