@@ -109,7 +109,6 @@ angular.module('mlg_student')
 	  //alert('kkk');
 	  var get_uid=commonActions.getcookies(get_uid);
 	  $scope.frm = {};
-
     
 	  
 	   // Check the condition to move either on pre-Test Page and On Sub Skill Page
@@ -257,6 +256,13 @@ angular.module('mlg_student')
 		 				$scope.answer_response="Oops, This is not the correct answer";		 				
 		 				//alert('wrong'); 
 		 			}
+		 			$("#gotIt").click(function(){
+   						 $(".masscourt-block .masscourt-cover").removeClass("in");
+  						  setTimeout(function(){
+    						  $(".masscourt-block").removeClass("active");
+   						 }, 500);
+ 					 });
+
 					$(".masscourt-block").addClass("active");
 				    setTimeout(function(){
 				        $(".masscourt-block .masscourt-cover").addClass("in");
@@ -290,9 +296,13 @@ angular.module('mlg_student')
 		 			loginHttpService.setUserQuizResponse(userExamResponse).success(function(apiresponse) {		 				
 		 				if (apiresponse.response.status == "true") {		 						
 		 						//Step-4 -  Next Question
-		 						if( ($scope.sequence < $scope.total_questions) && ($scope.sequence!=4) && ($scope.sequence!=9) ){		 							
+
+		 						if( ($scope.sequence < $scope.total_questions) && ($scope.sequence!=4) && ($scope.sequence!=9) ){
+
+					 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
 					 				$scope.sequence+=1;
 					 				$scope.currentquestion= $scope.data.questions[$scope.sequence];
+
 					 				$scope.frm={};
 					 			}
 					 			else if($scope.sequence==4 || $scope.sequence==9) {		
