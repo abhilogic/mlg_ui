@@ -126,8 +126,9 @@ angular.module('mlg_student')
         alert('kindly login');
         window.location.href='/mlg_ui/app/';
       }
-
+      $scope.guest = false;
       if (get_uid == 'guest') {
+        $scope.guest = true;
         var grade_id = commonActions.getguestcookies('grade_id');
         loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
           if (!courseslistresult.response.courses){  // value is null, empty
