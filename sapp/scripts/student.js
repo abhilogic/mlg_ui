@@ -327,8 +327,7 @@ angular.module('mlg_student')
 						localStorage.setItem('userQuesSequence', 0);
 						localStorage.setItem('preTestProcessStatus',1);
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
-						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {
-							console()
+						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
 							if (apiresponse.response.status == "true") {								
 		  						// Step -5 to Get the User Result
 		  						loginHttpService.getUserQuizResponse(get_uid,1).success(function(quizResultResponse) {
