@@ -20,6 +20,7 @@
 @import "base/global";
 @import "base/typography";
 @import "base/helpers";
+@import "base/icon";
 
 // Sprite Style
 @import "sprites/sprite";
@@ -55,3 +56,9 @@
 @import "pages/prelogin";
 @import "pages/subject-first-time-placement-video";
 @import "pages/subskillsoverview";
+@import "pages/sub-skills-room";
+@import "pages/subskills-content";
+// avtar creation page
+@import "pages/avtar-creation/avtar-creation";
+@import "pages/avtar-creation/avtar-gender-selection";
+@import "pages/avtar-creation/avtar-design";

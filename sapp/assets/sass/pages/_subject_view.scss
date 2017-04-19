@@ -1,3 +1,36 @@
+
+.cloud-cover {
+  display: none;
+  @media screen and (min-width: $screen-xs-max){
+    display: block;
+  }
+  .animated-cloud {
+    position: absolute;
+    z-index: 2000;
+    &:first-child {
+      top: $cloud_first_top_pos;
+      left: 50%;
+      @include animation(cloud-animation_1 300s  linear infinite );
+    }
+    &:nth-child(2) {
+      bottom: $cloud_second_bottom_pos;
+      left: 80%;
+      @include animation(cloud-animation_2 300s  linear infinite );
+    }
+    &:nth-child(3) {
+      top: $cloud_third_top_pos;
+      left: 80%;
+      @include animation(cloud-animation_3 300s  linear infinite );
+    }
+    &:nth-child(4) {
+      top: $cloud_fourth_top_pos;
+      left: 30%;
+      @include animation(cloud-animation_4 300s  linear infinite );
+    }
+  }
+}
+
+
 .subject_view_page {
   padding-bottom: 0px;
   @include background-img("subject_view_bg.jpg");

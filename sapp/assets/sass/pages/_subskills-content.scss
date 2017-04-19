@@ -1,0 +1,143 @@
+.sub-skills-room {
+  .board {
+    // table-of-content specification
+    .table-of-content {
+      // panel mobile specification
+        .panel-default {
+          background-color: rgba($white,0.85);
+          .panel-heading {
+            background: transparent;
+          }
+        }
+      h6 {
+        font-size: 16px;
+        color: #f4f9f7;
+        font-weight: bold;
+        @include margin(0px);
+        @include padding(10px);
+        text-align: center;
+        @include margin(null null 15px null);
+        background: {
+          image: url(../img/TOC-hd-bg.png);
+          size: auto 100%;
+          position: center center;
+          repeat: no-repeat;
+        }
+        @media screen and (min-width:$screen-sm){
+          background-position: left center;
+          text-align: left;
+          @include margin(null null 0px null);
+        }
+      }
+      // nav-tabs specification
+      .nav-tabs{
+        @include padding(null null null 30px);
+        @include border-width(null null 0px null);
+        li {
+          display: block;
+          float: none;
+          border-bottom: 1px solid #0e4e3d;
+          position: relative;
+          // li before specification
+          &:before {
+            content: '\0043';
+            position: absolute;
+            @include position(absolute, 10px null null -25px);
+            font-family: 'Glyphter';
+            font-size: 16px;
+            color: #839892;
+            z-index: 2;
+          }
+          &.done {
+            &:before {
+              content: '\0041';
+            }
+          }
+          &.active {
+            &:before {
+              content: '\0044';
+              color: $white;
+            }
+            .icon {
+              color: $white;
+            }
+            a {
+              color: $white;
+            }
+          }
+          // li before specification
+
+          // li after specification
+          &:not(:last-child) {
+            &:after {
+              content: '';
+              width: 1px;
+              height: 100%;
+              @include position(absolute, 17px null null -18px);
+              background: #839892;
+              z-index: 1;
+            }
+          }
+          .icon {
+            float: left;
+            width: 19px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 14px;
+            color: #839892;
+            display: inline-block;
+            vertical-align: middle;
+            @include padding(12px null null null);
+          }
+          a {
+            background: none;
+            color: rgba($white,0.85);
+            @include border-width(0px 0px 0px 0px);
+            @include border-color(null null #0e4e3d null);
+            @include padding(null null null 0px);
+            display: block;
+            overflow: hidden;
+          }
+        }
+      }
+      // nav-tabs
+    }
+      // tab-content specification
+      .tab-content {
+        .tab-pane {
+         color: $white;
+         font-size: 18px;
+         font-style: italic;
+         max-height: 450px;
+         overflow: hidden;
+         @include padding(24px null null null);
+         // iframe specification
+         .iframe {
+           width: 100%;
+           max-width: 100%;
+           height: 370px;
+         }
+      }
+      .btn-skip {
+        display: none;
+        background:{
+          image: url(../img/submit_btn.png);
+          position: center center;
+          size: 100% 100%;
+          color: transparent;
+        }
+        font-size: 18px;
+        color: $white;
+        font-family: $font-primary;
+        @include padding(10px 70px 10px 35px);
+        text-align: left;
+        &:focus, &:active {
+          outline: 0px !important;
+        }
+        @media screen and (min-width: $screen-sm){
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

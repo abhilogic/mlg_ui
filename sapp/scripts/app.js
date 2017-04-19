@@ -87,6 +87,9 @@ $routeProvider
 }).when('/quiz', {
 	templateUrl : 'views/quiz.html',
 	controller : 'quizCtrl',		
+}).when('/subskill_content', {
+	templateUrl : 'views/subskills-content.html',
+	controller : 'subskillContent',		
 })
 
 .otherwise({

@@ -29,10 +29,12 @@
                     			
                     			<div ng-if="currentquestion.type=='fillin' ">
                     				<ul class="option">
+										
                     					<li ng-repeat="option in currentquestion.options">                    					
                           					<span>
                           						<label>
-                          							<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+                          							<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" >
+													
                           						</label>
                           					</span>
                           					<span>{{option.label}}</span>

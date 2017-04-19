@@ -1,0 +1,94 @@
+// sub-skill-room specification
+.sub-skills-room {
+  background: {
+    image: url("../img/subskillsroom_bg.jpg");
+    size: auto 100%;
+    position: center center;
+  }
+  min-width: 100vw;
+  min-height: calc(100vh + 114px);
+  @media screen and (min-width: $screen-sm){
+    background-size: 100% 100%;
+  }
+  @media screen and (min-height: $screen-sm){
+    min-height: 101vh;
+  }
+
+  // main-content specification
+  .main-content {
+    position: relative;
+    .icon-exit-door {
+      @include cssSprite($icon-exit-door);
+      display: inline-block;
+      @include position(absolute, 2% 100px null null);
+      display: none;
+      @media screen and (min-width: $screen-sm){
+        display: block;
+      }
+    }
+    .google-speaker {
+        @include position(absolute, 115px 106px null null);
+        cursor: pointer;
+        display: none;
+        @media screen and (min-width: $screen-sm){
+          display: block;
+        }
+    }
+  } // main-content specification
+}
+
+// sub-skill-room board specification
+.board {
+  @include background-cover("board-bg.png");
+  height: auto;
+  margin: auto;
+  width: 959px;
+  @include padding(null 50px 50px 50px);
+  @media screen and (min-width: $screen-sm){
+    height: 625px;
+  }
+  @include respond-to(mobileMedium){
+    background: none;
+  }
+  &.table {
+    position: relative;
+    &:before {
+      @include background-cover("subskillsroom_table.png");
+      bottom: -48px;
+      content: '';
+      height: 283px;
+      left: -90px;
+      position: absolute;
+      width: 1084px;
+      z-index: 0;
+      display: none;
+      @media screen and (min-width: $screen-sm){
+        display: block;
+      }
+      @include respond-to(tabletPort){
+        width: 100%;
+        background-size: 100% 100%;
+      }
+      @include respond-to(mobileMedium){
+        width: 113%;
+        height: 130px;
+        left: -48px;
+      }
+
+    }
+  } // table
+  // baord heading
+  .hd {
+    text-transform: uppercase;
+    color: $white;
+    font-size: 16px;
+    text-align: center;
+    font-family: $font-secondary;
+    @include margin(null null 35px null);
+    @include padding(13px null null null);
+    span {
+      display: block;
+      font-size: 12px;
+    }
+  }
+}

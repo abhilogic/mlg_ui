@@ -22,3 +22,105 @@
     left: -76px;
   }
 }
+
+
+// clout first animation
+$cloud_first_top_pos: 170px;
+@include keyframes(cloud-animation_1){
+  0% {
+    top: $cloud_first_top_pos;
+    left: 50%;
+  }
+  25% {
+    top: $cloud_first_top_pos;
+    left: 120%;
+  }
+  26% {
+    top: -1000px;
+    left: -20%;
+  }
+  27% {
+    top: $cloud_first_top_pos;
+    left: -20%;
+  }
+  100% {
+    top: $cloud_first_top_pos;
+    left: 50%;
+  }
+}
+
+
+// cloud second animation
+$cloud_second_bottom_pos: 20px;
+@include keyframes(cloud-animation_2){
+  0% {
+    bottom: $cloud_second_bottom_pos;
+    left: 80%;
+  }
+  25% {
+    bottom: $cloud_second_bottom_pos;
+    left: 120%;
+  }
+  26% {
+    bottom: -1000px;
+    left: -20%;
+  }
+  27% {
+    bottom: $cloud_second_bottom_pos;
+    left: -20%;
+  }
+  100% {
+    bottom: $cloud_second_bottom_pos;
+    left: 80%;
+  }
+}
+
+// cloud third animation
+$cloud_third_top_pos: -90px;
+@include keyframes(cloud-animation_3){
+  0% {
+    top: $cloud_third_top_pos;
+    left: 80%;
+  }
+  25% {
+    top: $cloud_third_top_pos;
+    left: 120%;
+  }
+  26% {
+    top: -1000px;
+    left: -20%;
+  }
+  27% {
+    top: $cloud_third_top_pos;
+    left: -20%;
+  }
+  100% {
+    top: $cloud_third_top_pos;
+    left: 80%;
+  }
+}
+
+// cloud fourth animation
+$cloud_fourth_top_pos: -90px;
+@include keyframes(cloud-animation_4){
+  0% {
+    top: $cloud_fourth_top_pos;
+    left: 10%;
+  }
+  25% {
+    top: $cloud_fourth_top_pos;
+    left: 120%;
+  }
+  26% {
+    top: -1000px;
+    left: -20%;
+  }
+  27% {
+    top: $cloud_fourth_top_pos;
+    left: -20%;
+  }
+  100% {
+    top: $cloud_fourth_top_pos;
+    left: 30%;
+  }
+}

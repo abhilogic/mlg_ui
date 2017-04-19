@@ -345,11 +345,14 @@ angular.module('mlg_student')
 	 		
 	 }
 
-  		
-
+  	//naseem
+	
 
 
 }])
+
+
+
 .controller('subskillQuizCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
 	  $scope.qti={};
 	  $scope.sequence=0;			
