@@ -319,48 +319,48 @@ angular.module('mlg_student')
 			 					$scope.sequence=$scope.sequence+1;
 		 				}
 		 			}
-					else{ 
-						//alert('end quiz');						
+					else{ 									
 						
 						//Step- 4 send local Stoage Quiz attand Response to API
 						
-						//localStorage.setItem('userQuesSequence', 0);
-						//localStorage.setItem('preTestProcessStatus',1);
+						localStorage.setItem('userQuesSequence', 0);
+						localStorage.setItem('preTestProcessStatus',1);
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
 						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {
-							// a=[];
-	  						//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
-								 
+							console()
+							if (apiresponse.response.status == "true") {								
+		  						// Step -5 to Get the User Result
+		  						loginHttpService.getUserQuizResponse(get_uid,1).success(function(quizResultResponse) {
+						 			// a=[];
+		  							//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+						 			if (quizResultResponse.response.status == "true") {
+						 					var correct_answer= quizResultResponse.response.correct_questions;
+						 					var wrong_answer= quizResultResponse.response.correct_questions;
+						 					var st_result="";
+						 					if(quizResultResponse.response.student_result< 60){
+						 						 st_result= "Your are Fail";
+						 						alert("Your score is less that 60%. Please Try Again");
+						 					}
+						 					else{
+						 						st_result= "Your are Pass";
+						 						alert("Your score is less that 60%. Please Try Again");
+						 					}
+											window.location.href='subject-view/'+$routeParams.id;
+						 					}
+						 				});
 
-						});
-
-						loginHttpService.getUserQuizResponse(get_uid,1).success(function(quizResultResponse) {
-					 			console.log(quizResultResponse);
-					 					if (quizResultResponse.response.status == "true") {
-					 						var correct_answer= quizResultResponse.response.correct_questions;
-					 						var wrong_answer= quizResultResponse.response.correct_questions;
-					 						var st_result="";
-					 						if(quizResultResponse.response.student_result< 60){
-					 							 st_result= "Your are Fail";
-					 							alert("Your score is less that 60%. Please Try Again");
-					 						}
-					 						else{
-					 							st_result= "Your are Pass";
-					 							alert("Your score is less that 60%. Please Try Again");
-					 						}
-											//window.location.href='subject-view/'+$routeParams.id;
-					 					}
-					 				});
-					 				
-					 			 }
-		 					/*}
-		 					else{ $scope.data.message=apiresponse.response.message;	}
-					});	 	*/			 			
+	  					}else{
+	  						alert('Opps something is wrong to store your quiz result');
+	  					}
+							
+					});
+	 			 }
+		 						 			
 	 		}	 		 	
 	 		
 	 }
 
-  	//naseem
+  	
 	
 
 
@@ -458,7 +458,7 @@ angular.module('mlg_student')
   });
   $scope.studentResult = 'fail';
   loginHttpService.getUserScoreForQuiz('',get_uid).success(function(response) {
-    if (response.data.status == 1) {
+    if (response.data.status == "true") {
       $scope.studentResult = 'pass';
     }
   });
