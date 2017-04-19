@@ -7074,3 +7074,6 @@ label span {
 .panel-avtar-design .avtar .avtar-img-cover .hire-style_9 {
   background: #6b503f;
 }
+
+.disabled-click{ pointer-events: none;}
+
