@@ -290,41 +290,52 @@ angular.module('mlg_student')
 		 			
 
        				//2.1 Add the quiz response in local storage
+       				var b;
        				a = JSON.parse(localStorage.getItem('localQuizResponse'));    
     				a.push(userExamResponse); 
-    				localStorage.setItem('localQuizResponse', JSON.stringify(a));       				
+    				localStorage.setItem('localQuizResponse', JSON.stringify(a));  
+    				   				
 
 
 
 		 			// Step - 3 Send data to API to store value in database (user_quiz_response)
-		 			loginHttpService.setUserQuizResponse(userExamResponse).success(function(apiresponse) {		 				
-		 				if (apiresponse.response.status == "true") {		 						
+		 			/*loginHttpService.setUserQuizResponse(userExamResponse).success(function(apiresponse) {		 				
+		 				if (apiresponse.response.status == "true") {*/		 						
 		 						//Step-4 -  Next Question
 
-		 						if( ($scope.sequence < $scope.total_questions) && ($scope.sequence!=4) && ($scope.sequence!=9) ){
+		 			//Step-3 Procceed steps once value has been add in local storage
+		 			if( ($scope.sequence < $scope.total_questions) && ($scope.sequence!=4) && ($scope.sequence!=9) ){
+		 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
+		 				$scope.sequence+=1;
+		 				$scope.currentquestion= $scope.data.questions[$scope.sequence];
+		 				$scope.frm={};
+		 			}
+		 			else if($scope.sequence==4 || $scope.sequence==9) {		
+		 				// check $scope.sequence with one less value because it has to initiallize with 0 for indexing of question.		 				
+		 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
+		 				if(localStorage.getItem('preTestProcessStatus')==null ) {
+		 					window.location.href='demo_video/'+$routeParams.id;
+		 				}else{
+			 					$scope.sequence=$scope.sequence+1;
+		 				}
+		 			}
+					else{ 
+						//alert('end quiz');						
+						
+						//Step- 4 send local Stoage Quiz attand Response to API
+						
+						//localStorage.setItem('userQuesSequence', 0);
+						//localStorage.setItem('preTestProcessStatus',1);
+						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
+						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {
+							// a=[];
+	  						//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+								 
 
-					 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
-					 				$scope.sequence+=1;
-					 				$scope.currentquestion= $scope.data.questions[$scope.sequence];
+						});
 
-					 				$scope.frm={};
-					 			}
-					 			else if($scope.sequence==4 || $scope.sequence==9) {		
-					 				// check $scope.sequence with one less value because it has to initiallize with 0 for indexing of question.		 				
-					 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
-					 				if(localStorage.getItem('preTestProcessStatus')==null ) {
-					 					window.location.href='demo_video/'+$routeParams.id;
-					 				}else{
-					 					$scope.sequence=$scope.sequence+1;
-					 				}
-					 				
-					 			}
-					 			else{ 
-					 				//alert('end quiz');
-					 				localStorage.setItem('userQuesSequence', 0);
-					 				localStorage.setItem('preTestProcessStatus',1);
-					 				loginHttpService.getUserQuizResponse(get_uid,1).success(function(quizResultResponse) {
-					 					console.log(quizResultResponse);
+						loginHttpService.getUserQuizResponse(get_uid,1).success(function(quizResultResponse) {
+					 			console.log(quizResultResponse);
 					 					if (quizResultResponse.response.status == "true") {
 					 						var correct_answer= quizResultResponse.response.correct_questions;
 					 						var wrong_answer= quizResultResponse.response.correct_questions;
@@ -337,14 +348,14 @@ angular.module('mlg_student')
 					 							st_result= "Your are Pass";
 					 							alert("Your score is less that 60%. Please Try Again");
 					 						}
-											window.location.href='subject-view/'+$routeParams.id;
+											//window.location.href='subject-view/'+$routeParams.id;
 					 					}
 					 				});
 					 				
 					 			 }
-		 					}
+		 					/*}
 		 					else{ $scope.data.message=apiresponse.response.message;	}
-					});	 				 			
+					});	 	*/			 			
 	 		}	 		 	
 	 		
 	 }
