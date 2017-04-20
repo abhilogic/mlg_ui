@@ -55,10 +55,10 @@ angular.module('mlg_student')
 		});
 	} 
 
-	loginHttpResponse.getUserQuizResponse=function(user_id,exam_id){		
+	loginHttpResponse.getUserQuizResponse=function(user_id,exam_id,quiz_id){		
 		return $http({
 			method:'GET',			
-			url  : urlParams.baseURL+urlParams.getUserQuizResponse+'?user_id='+user_id+'&exam_id='+exam_id
+			url  : urlParams.baseURL+urlParams.getUserQuizResponse+'?user_id='+user_id+'&exam_id='+exam_id+'&quiz_id='+quiz_id
 		});
 	}
 
@@ -126,8 +126,9 @@ angular.module('mlg_student')
         alert('kindly login');
         window.location.href='/mlg_ui/app/';
       }
-
+      $scope.guest = false;
       if (get_uid == 'guest') {
+        $scope.guest = true;
         var grade_id = commonActions.getguestcookies('grade_id');
         loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
           if (!courseslistresult.response.courses){  // value is null, empty
@@ -195,6 +196,8 @@ angular.module('mlg_student')
 
 	  	
 	  var quizquestions=[
+	  				{"id":"response_id-7609","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110UA2098985","questionName":"Sqaure of 5 is 25?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
+	  				{"id":"response_id-7610","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PN6373960","questionName":"Is 7 an irrational number?","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"No","score":1}],"penalty_score":-1},
 	  				{"id":"response_id-7611","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110SW4723875","questionName":"Irrational numbers cannot be written as a/b (where a and b are integers and b is not zero).  When written as decimals, irrational numbers do not terminate or repeat.","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
 	  				{"id":"response_id-7603","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"","questionName":"Write 61/100 as a decimal number.","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"0.61","label":"0.61"},{"value":"0.32","label":"0.32"},{"value":"0.65","label":"0.65"},{"value":"0.77","label":"0.77"}],"valid_responses":[{"value":"0.61","score":1}],"penalty_score":-1},
 	  				{"id":"response_id-7604","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110SM4787496","questionName":"Sum of two Positive number is always?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"positive","label":"positive"},{"value":"negative","label":"negative"},{"value":"0","label":"0"},{"value":"1","label":"1"}],"valid_responses":[{"value":"positive","score":1}],"penalty_score":-1},
@@ -205,6 +208,8 @@ angular.module('mlg_student')
 	  				{"id":"response_id-7609","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110UA2098985","questionName":"Sqaure of 5 is 25?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
 	  				{"id":"response_id-7610","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PN6373960","questionName":"Is 7 an irrational number?","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"No","score":1}],"penalty_score":-1},
 	  				{"id":"response_id-7606","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PS8184364","questionName":"The pair of integers whose sum is -5.","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"1,-4","label":"1,-4"},{"value":"-1,6","label":"-1,6"},{"value":"-3,-2","label":"-3,-2"},{"value":"2,3","label":"2,3"}],"valid_responses":[{"value":"-3,-2","score":1}],"penalty_score":-1},
+	  				{"id":"response_id-7609","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110UA2098985","questionName":"Sqaure of 5 is 25?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
+	  				{"id":"response_id-7610","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PN6373960","questionName":"Is 7 an irrational number?","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"No","score":1}],"penalty_score":-1},
 	  				{"id":"response_id-7612","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110AK9743127","questionName":"Is 2/10 an irrational number?","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"No","score":1}],"penalty_score":-1}
 
 	  			];
@@ -290,66 +295,78 @@ angular.module('mlg_student')
 		 			
 
        				//2.1 Add the quiz response in local storage
+       				var b;
        				a = JSON.parse(localStorage.getItem('localQuizResponse'));    
     				a.push(userExamResponse); 
-    				localStorage.setItem('localQuizResponse', JSON.stringify(a));       				
+    				localStorage.setItem('localQuizResponse', JSON.stringify(a));  
+    				   				
 
 
 
 		 			// Step - 3 Send data to API to store value in database (user_quiz_response)
-		 			loginHttpService.setUserQuizResponse(userExamResponse).success(function(apiresponse) {		 				
-		 				if (apiresponse.response.status == "true") {		 						
+		 			/*loginHttpService.setUserQuizResponse(userExamResponse).success(function(apiresponse) {		 				
+		 				if (apiresponse.response.status == "true") {*/		 						
 		 						//Step-4 -  Next Question
 
-		 						if( ($scope.sequence < $scope.total_questions) && ($scope.sequence!=4) && ($scope.sequence!=9) ){
-
-					 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
-					 				$scope.sequence+=1;
-					 				$scope.currentquestion= $scope.data.questions[$scope.sequence];
-
-					 				$scope.frm={};
-					 			}
-					 			else if($scope.sequence==4 || $scope.sequence==9) {		
-					 				// check $scope.sequence with one less value because it has to initiallize with 0 for indexing of question.		 				
-					 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
-					 				if(localStorage.getItem('preTestProcessStatus')==null ) {
-					 					window.location.href='demo_video/'+$routeParams.id;
-					 				}else{
-					 					$scope.sequence=$scope.sequence+1;
-					 				}
-					 				
-					 			}
-					 			else{ 
-					 				//alert('end quiz');
-					 				localStorage.setItem('userQuesSequence', 0);
-					 				localStorage.setItem('preTestProcessStatus',1);
-					 				loginHttpService.getUserQuizResponse(get_uid,1).success(function(quizResultResponse) {
-					 					console.log(quizResultResponse);
-					 					if (quizResultResponse.response.status == "true") {
-					 						var correct_answer= quizResultResponse.response.correct_questions;
-					 						var wrong_answer= quizResultResponse.response.correct_questions;
-					 						var st_result="";
-					 						if(quizResultResponse.response.student_result< 60){
-					 							 st_result= "Your are Fail";
-					 							alert("Your score is less that 60%. Please Try Again");
-					 						}
-					 						else{
-					 							st_result= "Your are Pass";
-					 							alert("Your score is less that 60%. Please Try Again");
-					 						}
+		 			//Step-3 Procceed steps once value has been add in local storage
+		 			
+		 			if( ($scope.sequence < $scope.total_questions) && (($scope.sequence!=4) && ($scope.sequence!=9)) ){
+		 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
+		 				$scope.sequence+=1;
+		 				$scope.currentquestion= $scope.data.questions[$scope.sequence];
+		 				$scope.frm={};
+		 			}
+		 			else if($scope.sequence==4 || $scope.sequence==9) {		
+		 				// check $scope.sequence with one less value because it has to initiallize with 0 for indexing of question.		 				
+		 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
+		 				if(localStorage.getItem('preTestProcessStatus')==null ) {
+		 					window.location.href='demo_video/'+$routeParams.id;
+		 				}else{
+			 					$scope.sequence=$scope.sequence+1;
+		 				}
+		 			}
+					else{ 									
+						
+						//Step- 4 send local Stoage Quiz attand Response to API						
+						localStorage.setItem('userQuesSequence', 0);
+						localStorage.setItem('preTestProcessStatus',1);
+						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
+						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
+							if (apiresponse.response.status == "true") {
+								var quiz_id=apiresponse.response.quiz_attampt;
+								localStorage.setItem('quiz_id', quiz_id);				
+		  						// Step -5 to Get the User Result
+		  						loginHttpService.getUserQuizResponse(get_uid,1,quiz_id).success(function(quizResultResponse) {
+						 			 a=[];
+		  							localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+						 			if (quizResultResponse.response.status == "true") {
+						 					var correct_answer= quizResultResponse.response.correct_questions;
+						 					var wrong_answer= quizResultResponse.response.correct_questions;
+						 					var st_result="";
+						 					if(quizResultResponse.response.student_result< 60){
+						 						 st_result= "Your are Fail";
+						 						alert("Your are Fail");
+						 					}
+						 					else{
+						 						st_result= "Your are Pass";
+						 						alert("Your are Pass");
+						 					}
 											window.location.href='subject-view/'+$routeParams.id;
-					 					}
-					 				});
-					 				
-					 			 }
-		 					}
-		 					else{ $scope.data.message=apiresponse.response.message;	}
-					});	 				 			
+						 					}
+						 				});
+
+	  					}else{
+	  						alert('Opps something is wrong to store your quiz result');
+	  					}
+							
+					});
+	 			 }
+		 						 			
 	 		}	 		 	
 	 		
 	 }
 
-  	//naseem
+  	
 	
 
 
@@ -447,7 +464,7 @@ angular.module('mlg_student')
   });
   $scope.studentResult = 'fail';
   loginHttpService.getUserScoreForQuiz('',get_uid).success(function(response) {
-    if (response.data.status == 1) {
+    if (response.data.status == "true") {
       $scope.studentResult = 'pass';
     }
   });
