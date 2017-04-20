@@ -19,6 +19,7 @@ $video_fs_view: 16px 16px '../img/video_element/video_scrit_img.png' -49px -3px;
 $btn_bg: 140px 65px '../img/btn.png' 0px 0px;
 $subject_gate: 233px 277px "../img/subject_gate.png" 0px 0px;
 $challenge_gate: 256px 251px "../img/challenge_gate.png" 0px 0px;
+$challenge_gate_lock: 256px 251px "../img/challenge_gate_locked.png" 0px 0px;
 $subject_gate_open: 233px 277px "../img/subject_gate_open.png" 0px 0px;
 $subject_board: 141px 92px "../img/challeng_board.png" 0px 0px;
 
@@ -39,6 +40,8 @@ $top-arrow: 26px 26px "../img/sprite.png" -314px -107px;
 $bottom-arrow: 26px 26px "../img/sprite.png" -28px 0px;
 // arrows
 
+// chagllenge notifier
+$challenge-notifier: 36px 40px "../img/challenge-notifire.png" 0px 0px;
 // video icons
 $icon-video : 18px 12px "../img/sprite.png" -274px -140px;
 $icon-document : 18px 22px "../img/sprite.png" -300px -136px;
