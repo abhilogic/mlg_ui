@@ -463,8 +463,9 @@ angular.module('mlg_student')
     }                 
   });
   $scope.studentResult = 'fail';
-  loginHttpService.getUserScoreForQuiz('',get_uid).success(function(response) {
-    if (response.data.status == "true") {
+  var quiz_id=localStorage.getItem('quiz_id');
+  loginHttpService.getUserQuizResponse(get_uid,null,null).success(function(response) {
+    if (response.response.status == "true") {
       $scope.studentResult = 'pass';
     }
   });
