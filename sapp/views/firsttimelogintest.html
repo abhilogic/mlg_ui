@@ -29,12 +29,11 @@
                     			
                     			<div ng-if="currentquestion.type=='fillin' ">
                     				<ul class="option">
-										
                     					<li ng-repeat="option in currentquestion.options">                    					
                           					<span>
                           						<label>
-                          							<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" >
-													
+                          							<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" class="checkbox-proceed" >
+													<a class="checkbox-btn" ng-class="{checked: frm.selectedoption == option.value}"></a>
                           						</label>
                           					</span>
                           					<span>{{option.label}}</span>
@@ -43,47 +42,46 @@
                     				<span style="color:red">{{error_message}}</span>                    				
                     			</div>
 
-                          <br>
+								<br>
                     			<div ng-if="currentquestion.type=='yesNO' ">
                     				<label class="radio-inline" ng-repeat="option in currentquestion.options">
                     					
-                              <input type="radio" name="quiz_option" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required><span style="color:#fff">{{option.label}}</span>
+										<input type="radio" name="quiz_option" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required><span style="color:#fff">{{option.label}}</span>
                     				</label>
-                            <span style="color:red">{{error_message}}</span>									
+									<span style="color:red">{{error_message}}</span>									
                     				
                     			</div>
                     			<div ng-if="currentquestion.type=='mcq' ">
                     				<ul class="option">
-                              <li ng-repeat="option in currentquestion.options">                              
-                                    <span>
-                                      <label>
-                                        <input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
-                                      </label>
-                                    </span>
-                                    <span>{{option.label}}</span>
-                                 </li>
-                            </ul> 
-                            <span style="color:red">{{error_message}}</span>              				
+									  <li ng-repeat="option in currentquestion.options">                              
+											<span>
+											  <label>
+												<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+											  </label>
+											</span>
+											<span>{{option.label}}</span>
+										 </li>
+									</ul> 
+									<span style="color:red">{{error_message}}</span>              				
                     			</div>
                     			<div ng-if="currentquestion.type=='mrq' ">
-                    				  <ul class="option">
-                              <li ng-repeat="option in currentquestion.options">                              
-                                    <span>
-                                      <label>
-                                        <input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
-                                      </label>
-                                    </span>
-                                    <span>{{option.label}}</span>
-                                 </li>
-                            </ul>
-                            <span style="color:red">{{error_message}}</span>
-                    				
+									<ul class="option">
+									  <li ng-repeat="option in currentquestion.options">                              
+											<span>
+											  <label>
+												<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+											  </label>
+											</span>
+											<span>{{option.label}}</span>
+										 </li>
+									</ul>
+									<span style="color:red">{{error_message}}</span>
                     			</div>
 
 
-                      <div class="text-center btn_submit_cover">
-                        <button type="submit" class="btn btn-submit" ng-click="submitQuestion(frm);">Submit</button>
-                      </div>
+						  <div class="text-center btn_submit_cover">
+							<button type="submit" class="btn btn-submit" ng-click="submitQuestion(frm);">Submit</button>
+						  </div>
                     </div>
                   </div>
                 </div>
