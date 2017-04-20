@@ -60,6 +60,25 @@
             color: $white;
           }
         }
+        .profile_pick {
+          height: 60px;
+          width: 60px;
+          @include border-radius(100%);
+          display: block;
+          @include position(absolute, 16px null null 16px);
+          @include padding(4px);
+          background: {
+            image: url(../img/student_prof_img_bg.png);
+            size: 100% 100%;
+            repeat: no-repeat;
+            position: center center;
+          }
+          img {
+            width: 100%;
+            height: 100%;
+            @include border-radius(100%);
+          }
+        }
       .dropdown-menu {
         @include background-cover("navbar-dropdown-bg.png");
         background-color: transparent;

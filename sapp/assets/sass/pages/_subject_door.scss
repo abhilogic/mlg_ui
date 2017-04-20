@@ -69,12 +69,23 @@
         .subject_board {
           @include cssSprite($subject_board);
           color: $teak;
-          font-size: 20px;
-          font-family: $justanotherhand;
+          font-size: 16px;
+          font-family:  $font-secondary;
           margin:auto;
-          line-height: 25px;
-          @include padding(null 15px null 15px);
+          line-height: 17px;
+          @include padding(24px 15px null 15px);
           text-align: center;
+          .fa-check {
+            display:none;
+          }
+          &.done {
+            @include padding(13px null null null);
+            .fa-check {
+              display: block;
+              color: #f9dc5f;
+              @include text-shadow(0 0 4px rgba(249,220,95,0.5));
+            }
+          }
         }
         .subject_gate {
           @include cssSprite($subject_gate_open);
@@ -101,6 +112,12 @@
           @include cssSprite($challenge_gate);
           margin: auto;
           margin-top: 27px;
+        }
+
+        &.locked {
+          .challenge_gate {
+            @include cssSprite($challenge_gate_lock);
+         }
         }
        }
     }

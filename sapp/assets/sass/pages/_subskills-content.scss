@@ -39,6 +39,9 @@
           border-bottom: 1px solid #0e4e3d;
           position: relative;
           // li before specification
+          &:last-child {
+            border-bottom: 0px;
+          }
           &:before {
             content: '\0043';
             position: absolute;
@@ -50,12 +53,12 @@
           }
           &.done {
             &:before {
-              content: '\0041';
+              content: '\0042';
             }
           }
           &.active {
             &:before {
-              content: '\0044';
+              content: '\004a';
               color: $white;
             }
             .icon {

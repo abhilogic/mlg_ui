@@ -83,6 +83,7 @@
 
 
 .my_profile_cover {
+  @include background-cover("bg-wood.jpg");
   @media screen and (max-width: $screen-tb-land){
     background: {
       image: none;
@@ -102,9 +103,20 @@
   .student_progress_info {
     padding-left: 0px;
     text-decoration: none;
+    @media screen and (min-width: $screen-sm-max){
+      @include margin(null null null 100px);
+    }
     li {
       display: inline-block;
       vertical-align: middle;
+      &:not(:last-child){
+        @include margin(null 35px null null);
+      }
+      &:nth-child(3) {
+        span {
+          @include margin(null null 37px null);
+        }
+      }
       img, span {
         display: block;
         margin: auto;
@@ -114,20 +126,11 @@
         color: $white;
       }
       &.student_img {
-        margin-right: 57px;
         position: relative;
         text-align: center;
         @media screen and (max-width: $screen-mobile-md){
           margin-right: 7px;
         }
-      span {
-        &:first-child {
-          position: absolute;
-          top: -35px;
-          text-align: center;
-          width: 100%;
-        }
-      }
         .profile_img_cover {
           position: relative;
           background: {
@@ -137,11 +140,30 @@
           }
           height: 88px;
           width: 88px;
-          img {
-            position: absolute;
-            left: -14px;
-            top: -22px;
+          @include margin(null null 8px null);
+          @include padding(6px);
+          &:before {
+            content:'';
+            @include position(absolute, null null -10px 27px);
+            width: 30px;
+            height: 30px;
+            background: {
+              image: url("../img/profile_uploader_camera.png");
+              position: center center;
+              size: 100% 100%;
+            }
+            @include border-radius(100%);
+            z-index: 10;
           }
+          img {
+          width: 100%;
+          height: 100%;
+          }
+        }
+      }
+      .mascout-img {
+        &.off {
+          @include filter(grayscale(100%)) ;
         }
       }
     }
@@ -208,44 +230,87 @@
       }
     }
   }
-  .coupon_cover {
-    background: {
-      image:url(../img/redeem_coupon_bg.png);
-      repeat: no-repeat;
-      position: center center;
-    }
-    height: 180px;
+}
+
+
+// coupon_cover
+.coupon_cover {
+  background: {
+    image:url(../img/redeem_coupon_bg.png);
+    repeat: no-repeat;
+    position: center center;
+  }
+  height: 180px;
+  margin-bottom: 20px;
+  padding-top: 26px;
+  text-align: center;
+  width: 140px;
+  @media screen and (max-width: $screen-mobile-md){
+    margin: auto;
     margin-bottom: 20px;
-    padding-top: 26px;
-    text-align: center;
-    width: 140px;
-    @media screen and (max-width: $screen-mobile-md){
-      margin: auto;
-      margin-bottom: 20px;
-    }
-    .coupon_provider_logo {
-      max-width: 72px;
-    }
-    ul {
-      list-style: none;
-      margin-top: 13px;
-      padding-left: 0px;
-      li {
-        span {
-          color: $rosewood;
-          display: inline-block;
-          font-size: 16px;
-          vertical-align: text-bottom;
-          &.coin {
-            margin-right: 5px;
-          }
+  }
+  .coupon_provider_logo {
+    max-width: 72px;
+    display: inline-block !important;
+  }
+  ul {
+    list-style: none;
+    margin-top: 13px;
+    padding-left: 0px;
+    li {
+      span {
+        color: $rosewood;
+        display: inline-block;
+        font-size: 16px;
+        vertical-align: text-bottom;
+        &.coin {
+          margin-right: 5px;
         }
       }
     }
   }
+  .btn {
+    background: rgba($blackMarlin,0.8);
+    color: $pizza;
+    @include padding(3px 15px);
+    @include margin(15px null null null);
+    &.active {
+      @include box-shadow(inset 0px 0px 16px rgba(194, 147,22,0.5));
+    }
+  }
+
+
+  // locked
+  &.locked {
+    background-image: url("../img/redeem_coupon_bg_lock.png");
+    position: relative;
+    &:before {
+      content:'\0041';
+      @include position(absolute, 0px null null 0px);
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      color: $black;
+      font-family: 'Glyphter';
+      top:25%;
+      left: 25%;
+    }
+  }
+  // coupon_accquired
+  &.coupon_accquired {
+    text-align: center;
+    @include padding(null 8px null 8px);
+
+      li {
+        font-size: 21px;
+        color: $rosewood;
+        font-weight: $bold;
+      }
+  }
 }
 
 
+// unlocked_game
 .unlocked_game {
   background: none;
   border: 0px;
@@ -292,5 +357,40 @@
         padding: 3px 12px;
       }
     }
+  }
+}
+
+
+
+// modal-redeem
+.modal-redeem {
+  .modal-dialog, .modal-body,.modal-content,.modal-header, .modal-footer {
+    background: rgba($black,0.3);
+    @include border-width(0px);
+  }
+  .modal-header {
+    color: $pizza;
+    .close {
+      margin-top: -23px;
+      color: $white;
+      opacity: 1;
+      font-family: $font-secondary;
+      span {
+        display: block;
+        &:first-child {
+          font-size: 40px;
+        }
+      }
+    }
+    .modal-title {
+      text-align: center;
+    }
+  }
+  .modal-body {
+    .coupon_cover {
+      @include margin(null auto 40px auto);
+    }
+    max-height: 440px;
+    overflow: hidden;
   }
 }
