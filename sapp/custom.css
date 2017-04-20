@@ -10,3 +10,10 @@
 	display: inline-block;
 	opacity: 1;
 }
+
+.checkbox-proceed {
+	display: block !important;
+	opacity: 0;
+	position: absolute;
+	
+}
