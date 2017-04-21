@@ -19,4 +19,9 @@
 .payment_pageonboarding-cover .content-wrapper, .teacher\/signuponboarding-cover .content-wrapper,
  .student\/loginonboarding-cover .content-wrapper, .teacher\/select_coursesonboarding-cover .content-wrapper{background: transparent !important;}
  
- .ta-editor.form-control {height: auto;}
+.tab-content #text  .btn-group {margin-bottom: 5px;}
+ 
+ .ta-editor.form-control {height: auto;
+    min-height: 150px;
+    border: 1px solid #ddd;
+    margin-top: 10px;}
