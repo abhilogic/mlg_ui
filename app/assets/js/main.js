@@ -12,19 +12,22 @@ jQuery.fn.clickToggle = function(a,b) {
 
 // Floating Input Fields animation
 var floatInput = function(){
+
   $(".float-input").each(function(){
      if(this.value!=''){
-      $(this).parent('.form-group').addClass('focus');
+      $(this).parent().addClass('focus');
      }
   });
 
   $('.float-input').on('focusin', function() {
-    $(this).parent('.form-group').addClass('focus');
+    $(this).parent().addClass('focus');
+    console.log("hello");
   });
 
   $('.float-input').on('focusout', function() {
+      alert('zzz');
     if (!this.value) {
-      $(this).parent('.form-group').removeClass('focus');
+      $(this).parent().removeClass('focus');
     }
   });
 }
@@ -73,6 +76,7 @@ $(document).ready(function(){
             }
         }, 100);
     }).resize();
+
      $('.mlg-selectpicker').selectpicker();
 
 });
