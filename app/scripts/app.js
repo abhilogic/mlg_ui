@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUTH','tien.clndr'])
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr'])
 .value('urlParams', {
 	users : '/users',
 	login: '/users/login',
@@ -293,5 +293,11 @@ return {
 $scope.userInfo=userInfo;
 	}]
 };
+
+	
+	
 })
+
+
+
 ;

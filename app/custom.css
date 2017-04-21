@@ -18,3 +18,5 @@
 .add_child_accountonboarding-cover .content-wrapper, .parent_preferencesonboarding-cover .content-wrapper,
 .payment_pageonboarding-cover .content-wrapper, .teacher\/signuponboarding-cover .content-wrapper,
  .student\/loginonboarding-cover .content-wrapper, .teacher\/select_coursesonboarding-cover .content-wrapper{background: transparent !important;}
+ 
+ .ta-editor.form-control {height: auto;}
