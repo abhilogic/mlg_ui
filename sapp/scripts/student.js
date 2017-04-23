@@ -127,7 +127,7 @@ angular.module('mlg_student')
         window.location.href='/mlg_ui/app/';
       }
       $scope.guest = false;
-      if (get_uid == 'guest') {
+      if (get_uid == 'guest' || get_uid == 0) {
         $scope.guest = true;
         var grade_id = commonActions.getguestcookies('grade_id');
         loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
@@ -187,7 +187,7 @@ angular.module('mlg_student')
         window.location.href='/mlg_ui/app/';
       }
       $scope.guest = false;
-      if (get_uid == 'guest') {
+      if (get_uid == 'guest' || get_uid == 0) {
         $scope.guest = true;
       }
       $scope.skipQuiz = function() {
@@ -428,18 +428,8 @@ angular.module('mlg_student')
       }
 	 $scope.show_subskill = function(){
 	 	var pid = $routeParams.id;
-  loginHttpService.getAllCourseList(pid).success(function(response) {
-    console.log(response.response);
-    if(response.response.length > 0){
-      $scope.topic_detail = response.response;
-
-    } else{
-      response.topic_detail = [];
-    }  
-    $('#modal-subskillsoverview').modal();                
-  });
-		
-	 };
+        $location.url('/subskill_content/'+ pid);
+};
 
 
 	 
@@ -456,8 +446,8 @@ angular.module('mlg_student')
   $scope.cid=$routeParams.id;
   loginHttpService.getAllCourseList(pid).success(function(response) {
     console.log(response.response);
-    if(response.response.length > 0){
-      $scope.subject_detail = response.response;
+    if(response.response.course_details.length > 0){
+      $scope.subject_detail = response.response.course_details;
     } else{
       response.subject_detail = 0;
     }                 
@@ -479,13 +469,62 @@ angular.module('mlg_student')
   }
   var pid = $routeParams.id;
   loginHttpService.getAllCourseList(pid).success(function(response) {
-    console.log(response.response);
-    if(response.response.length > 0){
-      $scope.subject_detail = response.response;
+    if (response.response.course_details.length > 0){
+      $scope.subject_detail = response.response.course_details;
     } else{
       response.subject_detail = 0;
     }                 
   });
+}])
+.controller('subskillContent',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q) {
+    var get_uid=commonActions.getcookies(get_uid);
+    if (document.cookie == '' || get_uid == 'null') {
+      alert('kindly login');
+      window.location.href='/mlg_ui/app/';
+    }
+    $scope.getIframeSrc = function (videoId) {
+      return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + videoId);
+    };
+    var pid = $routeParams.pid;
+    loginHttpService.getAllCourseList(pid).success(function(response) {
+      if(response.response.course_details.length > 0){
+        $scope.topic_detail = response.response.course_details;
+        var khan_api_slugs = response.response.khan_api_slugs;
+        var khan_api_response_content = [];
+        if (khan_api_slugs != '') {
+          angular.forEach(khan_api_slugs, function(khan_api_slug, index) {
+            $http.get(urlParams.khanApiTopic + khan_api_slug).success(
+              function(contents) {
+                angular.forEach(contents.children, function(child, key) {
+                  if (child.kind.toUpperCase() == 'VIDEO') {
+                    $http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
+                      var youtube_id = video_response.data.translated_youtube_id;
+                      khan_api_response_content.push({
+                        name: child.title,
+                        descriptions: child.description,
+                        kind: child.kind,
+                        url: child.url,
+                        youtube_id: youtube_id
+                      });
+                    });
+                  } else {
+                    khan_api_response_content.push({
+                      name: child.title,
+                      descriptions: child.description,
+                      kind: child.kind,
+                      url: child.url,
+                    });  
+                  }
+                });
+              }
+            );
+          });
+        }
+        $scope.khan_api_content = khan_api_response_content;
+      } else {
+        response.topic_detail = [];
+      }
+    });
 }]);
 
 

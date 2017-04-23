@@ -1295,7 +1295,7 @@ if (typeof $routeParams.id != 'undefined') {
          } else if (response.status == '1') {
            alert('Your Trial session will be for 15 mins only');
            setCookie('userObj', '"userName='+response.user+',email='+ ' ' +',role='+ 'student'+'"');
-           setCookie('uid', 'guest');
+           setCookie('uid', 0);
            setCookie('grade_id', data.levelchoice.id);
            window.location.href='/mlg_ui/sapp/journey';
            return true;

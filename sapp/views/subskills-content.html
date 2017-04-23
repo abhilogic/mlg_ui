@@ -1,346 +1,203 @@
 <style type="text/css">
   .modal-backdrop {
-	display: none;
+      display: none;
   }
 </style>
-    <div class="sub-skills-room">
-			<div class="main_div_center">
-			 <nav class="navbar navbar-default">
- 				 <img src="assets/img/go_back_icon.png" alt="" class="go-back-btn"/>
- 				 <div class="navbar-header">
- 					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
- 						 <span class="icon-bar"></span>
- 						 <span class="icon-bar"></span>
- 						 <span class="icon-bar"></span>
- 					 </button>
- 					 <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="logo" class="main_logo "/></a>
- 				 </div>
- 				 <div class="collapse navbar-collapse" id="myNavbar">
- 						 <ul class="nav navbar-nav">
- 							 <li>
- 								 <a href="#">
- 									 <div class="student_growth">
- 										 <span class="growth_text">My Growth</span>
- 										 <span class="growth_value">350pt</span>
- 									 </div>
- 								 </a>
- 							 </li>
- 							 <li>
- 								 <a href="#">
- 									 <form class="navbar-form search_form">
- 										 <input type="search" class="search__input" placeholder="Type here to search">
- 									 </form>
- 								 </a>
- 							 </li>
- 							 <li class="dropdown"><a href="#" data-toggle="dropdown"><span class="profile_bar"><span class='user_name'>James Gorden</span><i class="caret"></i></span></a>
- 								 <ul class="dropdown-menu">
- 									 <li><a href="my_profile.html"><i class="icon profile"></i> My Profile</a></li>
- 									 <li><a href="#"><i class="icon avtar_creation"></i> Avatar Creation</a></li>
- 									 <li><a href="#"><i class="icon logout"></i> Logout</a></li>
- 								 </ul>
- 							 </li>
- 						 </ul>
- 					 </div>
- 			 </nav>
-    </div>
+<div class="sub-skills-room">
+  <header></header>
+  <!-- main-content -->
+  <div class="main-content">
+    <a href="subskillsroom.html"><i class="icon icon-exit-door"></i></a>
+    <span class="google-speaker"><img src="assets/img/speaker_icon_gray.png" alt=""/></div>
+  <div class="board table">
+    <h5 class="hd"><span>Subskills:</span> Whole Numbers</h5>
+    <div class="row">
+      <div class="col-md-4 table-of-content">
+        <h6>Table of Content</h6>
+        <ul class="nav nav-tabs" id="tableOfContent">
+            <li ng-repeat="topic in topic_detail" ><i class="icon icon-document"></i> <a data-toggle="tab" href="/subskill_content/#topic_{{$index+1}}">{{topic.name}}</a></li>
+            <li ng-if="khan_api_content"><i class="icon icon-document"></i> <a data-toggle="tab" href="/subskill_content/#khan_api">Khan API</a></li>
+        </ul>
+      </div>
+      <div class="col-md-8 tab-content">
+        <!-- MLG content -->
+        <div ng-repeat="topic in topic_detail"  id="topic_{{$index+1}}" class="tab-pane fade ">         
+          {{topic.descriptions}}
+        </div>
 
-    <!-- main-content -->
-    <div class="main-content">
-      <a href="subskillsroom.html"><i class="icon icon-exit-door"></i></a>
-      <span class="google-speaker"><img src="assets/img/speaker_icon_gray.png" alt=""/></div>
-      <div class="board table">
-          <h5 class="hd"><span>Subskills:</span> Whole Numbers</h5>
-          <div class="row">
-            <div class="col-md-4 table-of-content">
-              <h6>Table of Content</h6>
-              <ul class="nav nav-tabs" id="tableOfContent">
-                <li class="done"><i class="icon icon-document"></i> <a data-toggle="tab" href="#topic_1">What are whole numbers?</a></li>
-                <li><i class="icon icon-document"></i> <a data-toggle="tab" href="#topic_2">How much do you about the Whole Numbers?</a></li>
-                <li class="active"><i class="icon icon-video"></i> <a data-toggle="tab" href="#topic_3">What are Whole Numbers?</a></li>
-								<li><i class="icon icon-document"></i> <a data-toggle="tab" href="#topic_4">How much do you about the Whole Numbers?</a></li>
-								<li><i class="icon icon-document"></i> <a data-toggle="tab" href="#topic_5">What are whole numbers?</a></li>
-								<li><i class="icon icon-document"></i> <a data-toggle="tab" href="#topic_6">How much do you about the Whole Numbers?</a></li>
-								<li><i class="icon icon-video"></i> <a data-toggle="tab" href="#topic_7">What are whole numbers?</a></li>
-								<li><i class="icon icon-video"></i> <a data-toggle="tab" href="#topic_8">How much do you about the Whole Numbers?</a></li>
-              </ul>
+        <!-- KHAN Content -->
+        <div ng-if="khan_api_content" id="khan_api" class="tab-pane fade">
+          <div ng-repeat="topic in khan_api_content">
+            <strong>{{topic.name}}</strong>
+            <br>
+            <p>{{topic.descriptions}}</p>
+            <p>{{topic.kind}}</p>
+            <div ng-if="topic.kind.toUpperCase() == 'VIDEO'" class="tab-pane fade in active">
+              <iframe class="iframe" ng-src="{{getIframeSrc(topic.youtube_id)}}"  style="max-width: 100%;">
+              </iframe>
             </div>
-            <div class="col-md-8 tab-content">
-						  <div id="topic_1" class="tab-pane fade ">
-						    <p>The numbers 1,2,3,… are called natural numbers or counting numbers. Let us add one more number i.e. , zero(0), to the collection of natural numbers. Now the numbers are 0,1,2,… These numbers are called whole nos.  We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-								<p>Properties of Whole nos. :<p>
-									<ul>
-										<li>1) The smallest natural number is 1.</li>
-										<li>2) The number 0 is the first and the smallest whole nos.</li>
-										<li>3) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>4) The number 0 is the first and the smallest whole nos.</li>
-										<li>5) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>6) All natural numbers are</li
-									</ul>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-
-						  </div>
-						  <div id="topic_2" class="tab-pane fade">
-								<p>The numbers 1,2,3,… are called natural numbers or counting numbers. Let us add one more number i.e. , zero(0), to the collection of natural numbers. Now the numbers are 0,1,2,… These numbers are called whole nos.  We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-								<p>Properties of Whole nos. :<p>
-									<ul>
-										<li>1) The smallest natural number is 1.</li>
-										<li>2) The number 0 is the first and the smallest whole nos.</li>
-										<li>3) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>4) The number 0 is the first and the smallest whole nos.</li>
-										<li>5) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>6) All natural numbers are</li>
-									</ul>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-
-						  </div>
-						  <div id="topic_3" class="tab-pane fade in active">
-								<iframe class="iframe"
-								src="http://www.youtube.com/embed/W7qWa52k-nE" style="max-width: 100%;">
-								</iframe>
-						  </div>
-							<div id="topic_4" class="tab-pane fade">
-								<p>The numbers 1,2,3,… are called natural numbers or counting numbers. Let us add one more number i.e. , zero(0), to the collection of natural numbers. Now the numbers are 0,1,2,… These numbers are called whole nos.  We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-								<p>Properties of Whole nos. :<p>
-									<ul>
-										<li>1) The smallest natural number is 1.</li>
-										<li>2) The number 0 is the first and the smallest whole nos.</li>
-										<li>3) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>4) The number 0 is the first and the smallest whole nos.</li>
-										<li>5) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>6) All natural numbers are</li>
-									</ul>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-
-						  </div>
-							<div id="topic_5" class="tab-pane fade">
-								<p>The numbers 1,2,3,… are called natural numbers or counting numbers. Let us add one more number i.e. , zero(0), to the collection of natural numbers. Now the numbers are 0,1,2,… These numbers are called whole nos.  We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-								<p>Properties of Whole nos. :<p>
-									<ul>
-										<li>1) The smallest natural number is 1.</li>
-										<li>2) The number 0 is the first and the smallest whole nos.</li>
-										<li>3) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>4) The number 0 is the first and the smallest whole nos.</li>
-										<li>5) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>6) All natural numbers are</li>
-									</ul>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-
-						  </div>
-							<div id="topic_6" class="tab-pane fade">
-								<p>The numbers 1,2,3,… are called natural numbers or counting numbers. Let us add one more number i.e. , zero(0), to the collection of natural numbers. Now the numbers are 0,1,2,… These numbers are called whole nos.  We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-								<p>Properties of Whole nos. :<p>
-									<ul>
-										<li>1) The smallest natural number is 1.</li>
-										<li>2) The number 0 is the first and the smallest whole nos.</li>
-										<li>3) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>4) The number 0 is the first and the smallest whole nos.</li>
-										<li>5) There are infinitely many or uncountable number of whole-numbers.</li>
-										<li>6) All natural numbers are</li>
-									</ul>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-									<p>The numbers 1,2,3,… are called natural numbers or counting numbers.
-									Let us add one more number i.e. , zero(0), to the collection of natural numbers.
-									Now the numbers are 0,1,2,… These numbers are called whole nos.
-									We can say that whole nos. consist of zero and the natural numbers. Therefore,except zero all the whole nos. are natural numbers.</p>
-
-						  </div>
-							<div id="topic_7" class="tab-pane fade">
-								<iframe class="iframe"
-								src="http://www.youtube.com/embed/W7qWa52k-nE" style="max-width: 100%;">
-								</iframe>
-						  </div>
-							<div id="topic_8" class="tab-pane fade">
-								<iframe class="iframe"
-								src="http://www.youtube.com/embed/W7qWa52k-nE" style="max-width: 100%;">
-								</iframe>
-						  </div>
-							<div class="text-center">
-								<button type='button' class="btn btn-skip" id="skip">Skip</button>
-							</div>
-            </div>
+            <br>
           </div>
+        </div>
+<!--        <div id="topic_3" class="tab-pane fade in active">
+          <iframe class="iframe"
+                  src="http://www.youtube.com/embed/W7qWa52k-nE" style="max-width: 100%;">
+          </iframe>
+        </div>-->
+        <div class="text-center">
+          <button type='button' class="btn btn-skip" id="skip">Skip</button>
+        </div>
       </div>
     </div>
-    <!-- main-content -->
+  </div>
+</div>
+<!-- main-content -->
 
-		<!--chating-->
-		<div class="chat_block">
-			<div class="user_list">
-				<span class="bg__chat"></span>
-				<div class="chat_container ">
-					<ul class="user_list_ul">
-						<li class="categories_type">Teacher</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li class="categories_type">Parent</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Jema Stones</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Jema Stones</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles <i class="no_msg">3</i></span>
-						</li>
-						<li>
-							<img src="assets/img/receiver_img.png" alt="" class="user_img">
-							<span class="user_name">Caly Miles</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="chating_block">
-				<div class="chat_container_cover">
-					<div class="chat_conversation_toggle_btn_bg">
-						<span class="reciverName">Milessa</span>
-						<img src="assets/img/cross-white.png" alt="" class="close">
-					</div>
-					<div class="chat_container">
-						<div class="conversation_block">
-							<div class="conversation_repeat_block">
-								<div class="receiver_chat msg_continuation">
-									<div class="message_content">
-										<span class="receiver_name">Caly Miles</span>
-										<span class="receiver_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
-										<time class="sending_time">00:15</time>
-									</div>
-								</div>
-								<div class="receiver_chat">
-									<div class="message_content">ddfdfdfdf</div>
-								</div>
-								<div class="receiver_chat">
-									<div class="message_content">ddfdfdfdf</div>
-								</div>
-								<div class="receiver_chat">
-									<div class="message_content">ddfdfdfdf</div>
-								</div>
+<!--chating-->
+<div class="chat_block">
+  <div class="user_list">
+    <span class="bg__chat"></span>
+    <div class="chat_container ">
+      <ul class="user_list_ul">
+        <li class="categories_type">Teacher</li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li class="categories_type">Parent</li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Jema Stones</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Jema Stones</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles <i class="no_msg">3</i></span>
+        </li>
+        <li>
+          <img src="assets/img/receiver_img.png" alt="" class="user_img">
+          <span class="user_name">Caly Miles</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="chating_block">
+    <div class="chat_container_cover">
+      <div class="chat_conversation_toggle_btn_bg">
+        <span class="reciverName">Milessa</span>
+        <img src="assets/img/cross-white.png" alt="" class="close">
+      </div>
+      <div class="chat_container">
+        <div class="conversation_block">
+          <div class="conversation_repeat_block">
+            <div class="receiver_chat msg_continuation">
+              <div class="message_content">
+                <span class="receiver_name">Caly Miles</span>
+                <span class="receiver_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
+                <time class="sending_time">00:15</time>
+              </div>
+            </div>
+            <div class="receiver_chat">
+              <div class="message_content">ddfdfdfdf</div>
+            </div>
+            <div class="receiver_chat">
+              <div class="message_content">ddfdfdfdf</div>
+            </div>
+            <div class="receiver_chat">
+              <div class="message_content">ddfdfdfdf</div>
+            </div>
 
-								<h5 class="date"><span>17-feb</span></h5>
-								<div class="sender_chat msg_continuation">
-									<div class="message_content">
-										<span class="sender_name">Caly Miles</span>
-										<span class="sender_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
-										<time class="sending_time">00:15</time>
-									</div>
-								</div>
-								<h5 class="date"><span>17-march</span></h5>
-							</div>
-						</div>
-						<form class="form">
-							<div class="form-inline">
-								<div class="form-group">
-									<input type="text" class="chat_input" placeholder="Type your text"/>
-								</div>
-								<button type="submit" class="btn_send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--chating-->
-		<!-- page specific js  -->
-    <script type="text/javascript">
-      $(document).ready(function(){
-				$("#tableOfContent").tabCollapse();
-        if($(window).width()>767){
-					$(".tab-pane").mCustomScrollbar();
-				}
-				// skip function
-				$("#skip").click(function(){
-					// js for tableOfContent
-					var targetLiIndex = $("#tableOfContent li.active").index();
-					targetLiIndex = Math.abs(targetLiIndex);
-					var noOfLi = $("#tableOfContent li").length;
-					if (targetLiIndex==noOfLi-1){
-						$("#tableOfContent li").removeClass("active");
-						$("#tableOfContent li:first").addClass("active");
-					}
-					else if(targetLiIndex<noOfLi){
-						$("#tableOfContent li.active").removeClass("active").next("li").addClass("active");
-					}
+            <h5 class="date"><span>17-feb</span></h5>
+            <div class="sender_chat msg_continuation">
+              <div class="message_content">
+                <span class="sender_name">Caly Miles</span>
+                <span class="sender_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
+                <time class="sending_time">00:15</time>
+              </div>
+            </div>
+            <h5 class="date"><span>17-march</span></h5>
+          </div>
+        </div>
+        <form class="form">
+          <div class="form-inline">
+            <div class="form-group">
+              <input type="text" class="chat_input" placeholder="Type your text"/>
+            </div>
+            <button type="submit" class="btn_send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--chating-->
+<!-- page specific js  -->
+<script type="text/javascript">
+  $(document).ready(function () {
+//    $("#tableOfContent").tabCollapse();
+    if ($(window).width() > 767) {
+//      $(".tab-pane").mCustomScrollbar();
+    }
+    // skip function
+    $("#skip").click(function () {
+      // js for tableOfContent
+      var targetLiIndex = $("#tableOfContent li.active").index();
+      targetLiIndex = Math.abs(targetLiIndex);
+      var noOfLi = $("#tableOfContent li").length;
+      if (targetLiIndex == noOfLi - 1) {
+        $("#tableOfContent li").removeClass("active");
+        $("#tableOfContent li:first").addClass("active");
+      } else if (targetLiIndex < noOfLi) {
+        $("#tableOfContent li.active").removeClass("active").next("li").addClass("active");
+      }
 
-					// js for tab-content
-					var targetpaneIndex = $(".tab-content .tab-pane.in").index();
-					targetpaneIndex = Math.abs(targetpaneIndex);
-					var noOfpane = $(".tab-content .tab-pane").length;
-					if (targetLiIndex==noOfLi-1){
-						$(".tab-content .tab-pane").removeClass("in active");
-						$(".tab-content .tab-pane:first").addClass("in active");
-					}
-					else if(targetLiIndex<noOfLi){
-						 $(".tab-content .tab-pane.in").removeClass("in active").next(".tab-pane").addClass("in active");
-					}
+      // js for tab-content
+      var targetpaneIndex = $(".tab-content .tab-pane.in").index();
+      targetpaneIndex = Math.abs(targetpaneIndex);
+      var noOfpane = $(".tab-content .tab-pane").length;
+      if (targetLiIndex == noOfLi - 1) {
+        $(".tab-content .tab-pane").removeClass("in active");
+        $(".tab-content .tab-pane:first").addClass("in active");
+      } else if (targetLiIndex < noOfLi) {
+        $(".tab-content .tab-pane.in").removeClass("in active").next(".tab-pane").addClass("in active");
+      }
 
-				});
-      });
-    </script>
-		
+    });
+  });
+</script>
+

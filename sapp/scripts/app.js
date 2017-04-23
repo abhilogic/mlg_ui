@@ -13,7 +13,9 @@ getAllCourseList :'/courses/getAllCourseList',
 getSubskillQuizQuestions: 'http://35.185.43.146/standards?subject=Maths&grade=11th&standard=CCSS.MATH.CONTENT.8.EE.A.3&session_token=482694923ce92675025f48b3b12f3fd2bd6d98ce33119feccaab657bc1e1a941&page=10',
 setUserQuizResponse :'/exams/setUserQuizResponse',
 getUserQuizResponse :'/exams/getUserQuizResponse',
-getUserScoreForQuiz: '/exams/getUserScoreForQuiz'
+getUserScoreForQuiz: '/exams/getUserScoreForQuiz',
+khanApiTopic: 'http://www.khanacademy.org/api/v1/topic/',
+khanApiVideo: 'http://www.khanacademy.org/api/v1/videos/'
 
 
 }).value('REGEX', {
@@ -87,7 +89,7 @@ $routeProvider
 }).when('/quiz', {
 	templateUrl : 'views/quiz.html',
 	controller : 'quizCtrl',		
-}).when('/subskill_content', {
+}).when('/subskill_content/:pid', {
 	templateUrl : 'views/subskills-content.html',
 	controller : 'subskillContent',		
 })
