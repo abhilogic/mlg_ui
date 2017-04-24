@@ -25,7 +25,6 @@ var floatInput = function(){
   });
 
   $('.float-input').on('focusout', function() {
-      alert('zzz');
     if (!this.value) {
       $(this).parent().removeClass('focus');
     }
