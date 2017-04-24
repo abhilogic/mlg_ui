@@ -101,7 +101,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 		controller : 'addChild',		
 	}).when('/add_child_account', {
 		templateUrl : 'views/child_account_creation.html',
-		controller : 'addChild',		
+		controller : 'addChild',
 	}).when('/parent_preferences', {
 		templateUrl : 'views/account_preferenceces.html',
 		controller : 'parentPreferenceCtrl',
