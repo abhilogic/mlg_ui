@@ -1,0 +1,24 @@
+.avtar-creation-page {
+  .panel-gender-selection {
+    .content-cover {
+      text-align: center;
+      @media screen and (min-width: $screen-xs-max){
+        max-width: 400px;
+        @include padding(90px null null null);
+        @include margin(auto);
+      }
+      .avtar-img {
+        display: block;
+        @include margin(20px auto 15px auto);
+      }
+    }
+    .btn-pink {
+      background: #e73c7c;
+      color: $white;
+      border-color: transparent;
+      &:hover {
+        background: darken(#e73c7c, 10%);
+      }
+    }
+  }
+}

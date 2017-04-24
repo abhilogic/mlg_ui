@@ -1,0 +1,134 @@
+.panel-avtar-design {
+  .panel-body {
+    min-height: auto !important;
+  }
+  .options {
+    .nav-tabs {
+      border-bottom: 0px;
+      li {
+        @media screen and (min-width: $screen-sm-max){
+          width: 136px;
+          text-align: center;
+        }
+        &:not(:last-child){
+          border-right: 2px solid #dbdbdb;
+        }
+        a {
+          background: #f4f4f4;
+          color: darken(#dbdbdb,40%);
+          text-transform: uppercase;
+          @include border-radius(0px);
+          @include border-width(0px);
+          margin-right: 0px;
+          &:hover {
+            border-bottom-color: transparent;
+            background: #dbdbdb;
+            color: $black;
+          }
+        }
+
+        &.active {
+          a {
+            background: #dbdbdb;
+            color: $black;
+            @include border-radius(0px);
+          }
+        }
+      }
+    }
+    .panel {
+      border: 1px solid #dbdbdb;
+      @include border-radius(0px);
+      .panel-body {
+        @include padding(0px);
+        .tab-content {
+          @include padding(15px);
+          .tab-pane {
+            max-height: 350px;
+            overflow: hidden;
+          }
+        }
+        .mCSB_inside > .mCSB_container {
+          margin-right: -5px;
+        }
+      }
+
+      // body tone
+      .btn-group {
+        display: block;
+        .btn {
+          width: 30.5%;
+          height: 156px;
+          @include border-radius(0px);
+          position: relative;
+          margin-bottom: 8px;
+          &:focus, &:active , &.focus {
+            outline: 0px;
+            @include box-shadow(none);
+          }
+          &.active {
+            &:before {
+              content: "\f00c";
+              color: #ac998a;
+              display: block;
+              font: normal normal normal 36px/1 FontAwesome;
+              margin-top: 34%;
+              margin-left: 31%;
+              z-index: 10;
+              position: absolute;
+            }
+          }
+          &:first-child {
+            &.active {
+              &:after {
+                content: "Default";
+                font-family: $font-open-sans;
+                display: block;
+                z-index: 10;
+                position: absolute;
+                top: 60%;
+                left: 31%;
+              }
+            }
+          }
+          &.active {
+            @include box-shadow(none);
+          }
+        }
+      }
+
+
+      // here style
+      .hair-style {
+        .btn {
+
+          &:first-child {
+            &.active {
+              &:after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  // avtar
+  .avtar {
+    .avtar-img-cover {
+      max-width: 110px;
+      @include margin(null auto);
+        @include margin(43px null 25px null);
+        .hire-style {
+          display: none;
+        }
+        // hire style color
+        .hire-style_9 {
+          background: #6b503f;
+        }
+    }
+
+  }
+}

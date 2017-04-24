@@ -4,18 +4,19 @@
 				<header></header>
 			</div>
 			<div class="main_container">
-				<div class="owl-carousel owl-theme subject_gate_cover">
-					<div ng-repeat="subject in subject_detail" >
-					<div class="item">
-						<div class="subject_board"><span data-center="center">{{subject.name}}</span></div>
-						<a href="sub-skill/{{subject.id}}"><div class="subject_gate"></div></a>
-					</div></div>
+				
+					<ul class="subject_gate_cover">
+						<li class="item" ng-repeat="subject in subject_detail">
+							<div class="subject_board"><span data-center="center">{{subject.name}}</span></div>
+							<a href="sub-skill/{{subject.id}}"><div class="subject_gate"></div></a>
+						</li>
+					</ul>
 					<!-- <div class="item">
 						<div class="subject_board"><span data-center="center"></span></div>
 						<a href="quiz.html"><div class="challenge_gate"></div></a>
 					</div> -->
 
-				</div>
+				
 			</div>
 	</div>
 	<!--chating-->
@@ -161,7 +162,7 @@
 					horizontalScroll: true,
 				});
 
-				var owl = $('.subject_gate_cover');
+				/*var owl = $('.subject_gate_cover');
         owl.owlCarousel({
           margin: 0,
           loop: false,
@@ -177,7 +178,7 @@
               items: 10
             }
           }
-        });
+        });*/
 				$(".subject_gate").click(function(){
 					$(".subject_gate").removeClass("open");
 					$(this).addClass("open");

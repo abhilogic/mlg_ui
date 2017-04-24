@@ -1,3 +1,11 @@
+.first_time_login_test_page {
+  .icon-exit-door {
+    display: inline-block;
+    @include cssSprite($icon-exit-door);
+    @include position(absolute, 20px 100px null null);
+    z-index: 200;
+  }
+}
 .subject-first-time-placement-video {
   .content {
     margin: auto;

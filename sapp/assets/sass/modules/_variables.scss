@@ -42,18 +42,18 @@ $shamrock: #29C886;
 // Colors
 
 // Font family
-$font-primary: 'HighTowerText-Reg', 'Lato', sans-serif;
-$font-secondary: 'Wizzta', 'Lato', sans-serif;
-$font-primary-italic: 'HighTowerText-Italic', 'Lato', sans-serif;
-$font-tartiary: "MyriadPro-Regular", sans-serif;
-$font-times_bold: 'TimesNewRomanPS-BoldMT', sans-serif;
-$font-open-sans: 'Open Sans', sans-serif;
-$journey_castel_font: "AutographScriptEFBold",'Wizzta', sans-serif;
-$justanotherhand: 'Just Another Hand', cursive;
+$font-primary: 'Cormorant Garamond', serif;
+$font-secondary: 'Playfair Display', serif;
+$font-primary-italic: $font-primary;
+$font-tartiary: $font-secondary;
+$font-times_bold: $font-primary;
+$font-open-sans: $font-secondary;
+$journey_castel_font: $font-primary;
+$justanotherhand: $font-secondary;
 
 // Image dir path
 $imagedir: "../img/";
-
+$font-dir: "../font/";
 // media width
 $screen-large : 1489px;
 $screen-tb-land : 1024px;

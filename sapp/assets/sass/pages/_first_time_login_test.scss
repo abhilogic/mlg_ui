@@ -18,7 +18,7 @@
 .first_time_login_test_page {
   width: 100%;
   background: {
-    image: url("../img/first_login_test_bg.jpg");
+    image: url("../img/firstTimeLoginTestBgImg.jpg");
   }
   @include respond-to(mobileMedium){
     background: {

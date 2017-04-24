@@ -1,3 +1,24 @@
+<script src="assets/js/main.js"></script>
+	<!-- Main navbar -->
+	<nav class="navbar navbar-default navbar-dashboard navbar-static-top">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle sidebar-mobile-main-toggle" aria-expanded="false">
+				<span class="sr-only">Menu</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="dashboard-dashboard.html">MLG</a>
+		</div>
+		<div class="search_form">
+			<div class="form-group has-feedback has-feedback-left">
+				<input type="search" class="form-control" placeholder="Type here to search...">
+				<div class="form-control-feedback"><i class="fa fa-search"></i><span class="sr-only">Search</span></div>
+			</div>
+		</div>
+	</nav>
+	<!-- /main navbar -->
+
 	<!-- Page container -->
 	<div class="page-container">
 
@@ -49,15 +70,14 @@
 					<!-- Teacher Setting  Panel  -->
 					<div class="panel panel-flat add-content-panel">
 						<div class="panel-heading">
-							<h5 class="panel-title"><a href="teacher-content-lessons.html" class="fa fa-arrow-left pull-left"></a> Add Lessons</h5>
+							<h5 class="panel-title"><i class="icon icon-arrow-left"></i>  Add Lessons</h5>
 							<div class="heading-elements">
 								<select class="mlg-selectpicker form-control" title="Import Template" data-width="auto" data-size="auto">
-									 <option>Approved</option>
-									 <option>Not Approved</option>
-									 <option>Submitted</option>
-									 <option>Pending</option>
-									 <option>Under review</option>
-									 <option>Draft</option>
+									 <option>Template 1</option>
+									 <option>Template 2</option>
+									 <option>Template 3</option>
+									 <option>Template 4</option>
+									 <option>Template 5</option>
 								</select>
 							</div>
 						</div>
@@ -70,8 +90,13 @@
 												<label for="" class="col-xs-5 control-label">Grade :</label>
 	                      <div class="col-xs-7">
 													<select class="mlg-selectpicker form-control" title="Sixth Grade" data-size="auto">
-													 <option>---Select Grade---</option>
-													  <option  ng-repeat="grade in level " value="{{grade}}">Grade {{grade}}</option>
+													 <option>Sixth Grade</option>
+													 <option>Seventh Grade</option>
+													 <option>Eight Grade</option>
+													 <option>Nine Grade</option>
+													 <option>Ten Grade</option>
+													 <option>Eleventh Grade</option>
+													 <option>Twelfth Grade</option>
 													</select>
 	                      </div>
                       </div>
@@ -83,21 +108,24 @@
 												<label for="" class="col-xs-5 control-label">Subject :</label>
 												<div class="col-xs-7">
 														<select class="mlg-selectpicker form-control" title="Mathematics" data-size="auto">
-														 <option value="Subject">---Select Subject---</option>
-                             <option  ng-repeat="course in subject" value="{{course}}">{{course}}</option>
+														 <option>Mathematics</option>
+														 <option>Science</option>
+														 <option>Social Science</option>
+														 <option>History</option>
+														 <option>Geography</option>
 													</select>
 												</div>
 											</div>
 										</div>
                   </div>
                 </div>
-								<div class="row repeat-row">
+								<!-- <div class="row repeat-row">
                   <div class="col-lg-5">
                     <div class="row">
                       <div class="form-group">
 												<label for="" class="col-xs-5 control-label">Assessment Target :</label>
 	                      <div class="col-xs-7">
-													<input type="number" class="form-control normal-input" value="Target 1"/>
+													<input type="text" class="form-control normal-input" value="Target 1"/>
 	                      </div>
                       </div>
                     </div>
@@ -107,14 +135,14 @@
 											<div class="form-group">
 												<label for="" class="col-xs-5 control-label">Secondary target :</label>
 												<div class="col-xs-7">
-														<input type="number" class="form-control normal-input"/>
+														<input type="text" class="form-control normal-input"/>
 													</select>
 												</div>
 											</div>
 										</div>
                   </div>
-                </div>
-								<div class="row repeat-row">
+                </div> -->
+								<!-- <div class="row repeat-row">
                   <div class="col-lg-5">
                     <div class="row">
                       <div class="form-group">
@@ -139,33 +167,6 @@
 												<label for="" class="col-xs-5 control-label">Difficulty Level :</label>
 												<div class="col-xs-7">
 														<select class="mlg-selectpicker form-control" title="Moderate" data-size="auto">
-                             <option>---Select Difficulity Level---</option>
-														 <option value='easy'>Easy</option>
-														 <option value='medium'>Medium</option>
-                             <option value="difficult">Difficult</option>
-													</select>
-												</div>
-											</div>
-										</div>
-                  </div>
-                </div>
-								<div class="row repeat-row">
-                  <div class="col-lg-5">
-                    <div class="row">
-                      <div class="form-group">
-												<label for="" class="col-xs-5 control-label">Lesson Name :</label>
-	                      <div class="col-xs-7">
-													<input type="number" class="form-control normal-input" value=""/>
-	                      </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-5 col-lg-offset-2">
-										<div class="row">
-											<div class="form-group">
-												<label for="" class="col-xs-5 control-label">Depth of knowledge :</label>
-												<div class="col-xs-7">
-														<select class="mlg-selectpicker form-control" title="Select DOK" data-size="auto">
 														 <option>Mathematics</option>
 														 <option>Science</option>
 														 <option>Social Science</option>
@@ -176,7 +177,7 @@
 											</div>
 										</div>
                   </div>
-                </div>
+                </div> -->
 								<div class="row repeat-row">
                   <div class="col-lg-5">
                     <div class="row">
@@ -199,9 +200,9 @@
                   <div class="col-lg-5 col-lg-offset-2">
 										<div class="row">
 											<div class="form-group">
-												<label for="" class="col-xs-5 control-label">Skills :</label>
+												<label for="" class="col-xs-5 control-label">Standard Type :</label>
 												<div class="col-xs-7">
-														<select class="mlg-selectpicker form-control" title="Select skills" data-size="auto">
+														<select class="mlg-selectpicker form-control" multiple title="Standard Type" data-size="auto">
 														 <option>Mathematics</option>
 														 <option>Science</option>
 														 <option>Social Science</option>
@@ -213,26 +214,99 @@
 										</div>
                   </div>
                 </div>
-								<h5>Enter Question statement below :</h5>
+								<div class="row repeat-row">
+                  <div class="col-lg-5">
+                    <div class="row">
+                      <div class="form-group">
+												<label for="" class="col-xs-5 control-label">Lesson Name :</label>
+	                      <div class="col-xs-7">
+													<input type="text" class="form-control normal-input" value=""/>
+	                      </div>
+                      </div>
+                    </div>
+                  </div>
+									<div class="col-lg-5 col-lg-offset-2">
+										<div class="row">
+											<div class="form-group">
+												<label for="" class="col-xs-5 control-label">Skills :</label>
+												<div class="col-xs-7">
+														<div ng-dropdown-multiselect="" options="example2data" selected-model="example2mode2"></div>
+												</div>
+											</div>
+										</div>
+                  </div>
+                </div>
+								<div class="row repeat-row">
+                  <div class="col-lg-5">
+                    <div class="row">
+                      <div class="form-group">
+												<label for="" class="col-xs-5 control-label">Sub skills :</label>
+	                      <div class="col-xs-7">
+								<div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
+	                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+								<br/><br/>
+								<!-- <h5>Enter Question statement below :</h5> -->
 								<!-- summernotes  -->
-								<div class="summernote">
-									<h2>Apollo 11</h2>
-									<div class="pull-right" style="margin-left: 20px;"><img alt="Saturn V carrying Apollo 11" class="right" src="http://c.cksource.com/a/1/img/sample.jpg"></div>
+								<div class="row  table-of-content">
+									<div class="col-md-4">
+										<ul class="list-group">
+										  <li class="list-group-item">Template 1 <i class="icon icon-trash text-danger pull-right"></i> <i class="icon icon-pencil pull-right text-primary margin-right-10"></i> </li>
+										  <li class="list-group-item">Template 2 <i class="icon icon-trash text-danger pull-right"></i> <i class="icon icon-pencil pull-right text-primary margin-right-10"></i> </li>
+										  <li class="list-group-item">Template 3 <i class="icon icon-trash text-danger pull-right"></i> <i class="icon icon-pencil pull-right text-primary margin-right-10"></i> </li>
+										</ul>
+										<button type="button" class='btn btn-background-none text-primary margin-bottom-10 btn-add'><i class="icon icon-plus-outline"></i> Add New</button>
+									</div>
+									<div class="col-md-8 right-portion">
 
-									<p><strong>Apollo 11</strong> was the spaceflight that landed the first humans, Americans <a href="#">Neil Armstrong</a> and <a href="#">Buzz Aldrin</a>, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the lunar surface 6 hours later on July 21 at 02:56 UTC.</p>
-
-									<p class="mb-15">Armstrong spent about <s>three and a half</s> two and a half hours outside the spacecraft, Aldrin slightly less; and together they collected 47.5 pounds (21.5&nbsp;kg) of lunar material for return to Earth. A third member of the mission, <a href="#">Michael Collins</a>, piloted the <a href="#">command</a> spacecraft alone in lunar orbit until Armstrong and Aldrin returned to it for the trip back to Earth.</p>
-
-									<h5 class="text-semibold">Technical details</h5>
-
+											<h5 class="panel-title margin-top-0 margin-sm-10"><input type="text" class="form-control" placeholder="Enter Lesson Title"></h5>
+										<ul class="nav nav-tabs">
+										  <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
+										  <li><a data-toggle="tab" href="#doc">Document</a></li>
+										  <li><a data-toggle="tab" href="#img">Image</a></li>
+											<li><a data-toggle="tab" href="#video">Video</a></li>
+										</ul>
+										<div class="panel">
+											<div class="panel-heading">
+											</div>
+											<div class="panel-body">
+												<div class="tab-content">
+													<div id="text" class="tab-pane fade in active">
+														<div class="summernote" text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent"></div>
+													</div>
+													<div id="doc" class="tab-pane fade">
+														<form></form>
+														<form action="/upload" class="dropzone" drop-zone="" id="file-doc"></form>
+													</div>
+													<div id="img" class="tab-pane fade">
+														<form action="/upload" class="dropzone" drop-zone="" id="file-img"></form>
+													</div>
+													<div id="video" class=	"tab-pane fade">
+														<form action="/upload" class="dropzone" drop-zone="" id="file-video"></form>
+														<br/>
+														<br/>
+														<input type="text" class="form-control" placeholder="Enter Video Url"/>
+													</div>
+													<div class="text-right margin-top-15">
+														<button type="button" class="btn btn-primary">Save</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 								<!-- summernotes -->
 
               </form>
 						</div>
 						<div class="panel-footer text-center">
-              <button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
-              <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview">Preview</button>
+							<div class="text-center  margin-top-20">
+								<button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
+	              <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview">Preview</button>
+							</div>
 						</div>
             <!-- /panel-body -->
 					</div>
@@ -368,18 +442,4 @@
 		</div>
 </section>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		var owl = $(".img-ans-owl-carousel");
-			owl.owlCarousel({
-				margin: 20,
-				nav: false,
-				loop: false,
-				responsive: {
-					1000: {
-						items: 6
-					}
-				}
-			});
-	})
-</script>
+

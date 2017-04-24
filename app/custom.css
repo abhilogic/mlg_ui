@@ -1,3 +1,5 @@
+.onboarding-cover {background: transparent;}
+
 .signinonboarding-cover, .parent_signuponboarding-cover, .parent_loginonboarding-cover, .select_childrenonboarding-cover,
 
 .add_child_accountonboarding-cover, .parent_preferencesonboarding-cover, .payment_pageonboarding-cover , .teacher\/signuponboarding-cover,
@@ -16,3 +18,10 @@
 .add_child_accountonboarding-cover .content-wrapper, .parent_preferencesonboarding-cover .content-wrapper,
 .payment_pageonboarding-cover .content-wrapper, .teacher\/signuponboarding-cover .content-wrapper,
  .student\/loginonboarding-cover .content-wrapper, .teacher\/select_coursesonboarding-cover .content-wrapper{background: transparent !important;}
+ 
+.tab-content #text  .btn-group {margin-bottom: 5px;}
+ 
+ .ta-editor.form-control {height: auto;
+    min-height: 150px;
+    border: 1px solid #ddd;
+    margin-top: 10px;}

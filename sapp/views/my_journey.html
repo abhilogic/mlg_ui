@@ -16,9 +16,9 @@
 					<div class="castle_cover">			
 
 					<div ng-repeat="gradecourse in frm.cousesListByGrade" ng-init="pIndex = $index+1">
-						<div ng-repeat="childcourse in frm.childcourses">
+						<div ng-if="!guest" ng-repeat="childcourse in frm.childcourses">
 								<div ng-if="gradecourse.id==childcourse.id">
-										<a href="demo_video/{{childcourse.id}}" data-castle-name="science" >							 
+										<a href="{{redirectURL}}/{{childcourse.id}}" data-castle-name="science" >							 
 											<div class="castle subject_castle castle_{{pIndex}} active">
 												<span class="castle__img"></span>
 												<span class="castle__icon"></span>
@@ -26,7 +26,7 @@
 												<span class="castle__text">{{gradecourse.course_name}}</span>
 											</div>
 										</a>
-								</div>						
+								</div>
  
 								 <div ng-if="gradecourse.id!=childcourse.id">
 									<div class="castle subject_castle castle_{{pIndex}} inactive">
@@ -37,6 +37,19 @@
 									</div>
 								</div> 					
 							</div>
+                                                        <div ng-if="guest">
+                                                          <div>
+                                                              <a href="{{redirectURL}}/{{gradecourse.id}}" data-castle-name="science" >
+                                                                <div class="castle subject_castle castle_{{pIndex}} active">
+                                                                        <span class="castle__img"></span>
+                                                                        <span class="castle__icon"></span>
+                                                                        <span class="castle__arrowUp"></span>
+                                                                        <span class="castle__text">{{gradecourse.course_name}}</span>
+                                                                </div>
+                                                              </a>
+                                                          </div>
+                                                        </div>
+						  </div>
 						</div>
 
 						<a href="help" data-castle-name="science">

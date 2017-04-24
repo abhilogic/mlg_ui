@@ -37,14 +37,18 @@
     bottom: -40px;
   }
 }
-
+.challenge-notifier {
+  @include cssSprite($challenge-notifier);
+  display: inline-block;
+  vertical-align: middle;
+}
 
 .castle__text {
-  bottom: -21px;
+  bottom: -17px;
   color: $maroon;
-  font-size: 26px;
+  font-size: 17px;
   font-family: $font-secondary;
-  left: -20px;
+  left: -52px;
   position: absolute;
   text-align: center;
   width: 100%;
@@ -349,6 +353,10 @@
 // dummy close btn
 
 .myjourney_page {
+  min-height: 103vh;
+  @media screen and (min-width: $screen-sm-max){
+    min-height: 94vh;
+  }
   .navbar-default {
     max-width: 985px;
     margin: auto;
@@ -366,7 +374,7 @@
   .wooden_frame {
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     top: 0px;
     left: 0px;
     background: none;

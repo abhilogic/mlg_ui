@@ -1,0 +1,97 @@
+// avtar common assets
+
+.avtar-creation-page {
+  background-color: $gray-dark;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url('../img/avtar-creation-img/avtar-creation-bg-img.jpg');
+  min-height: 100vh;
+  .page-container{
+    display: table;
+    width: 100%;
+    .page-content{
+      display: table-row;
+      .content-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+        @include padding(15px);
+        .panel-avtar-creation {
+          margin-bottom: 0px;
+          font-family: $font-open-sans;
+          @media screen and (min-width: $screen-sm-max){
+            max-width: 990px;
+            margin: auto;
+          }
+          @media screen and (max-width: $screen-sm-max) and (min-width: $screen-sm){
+            max-width: 742px;
+            margin: auto;
+          }
+
+          .content-title, .content-tagline {
+            text-align: center;
+            font-weight: $light;
+          }
+          .content-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            @media screen and (max-width: $screen-xs){
+              font-size: 24px;
+              margin-bottom: 10px;
+            }
+          }
+          .content-tagline {
+            font-size: 14px;
+          }
+          .panel-heading {
+            @include padding(15px 30px 15px 30px);
+            @media screen and (min-width: $screen-sm-max){
+              @include padding(30px 30px 15px 30px);
+            }
+            .panel-title {
+              font-size: 16px;
+              @include margin(0px null 0px null);
+            }
+          }
+          .panel-body {
+            font-family: $font-open-sans;
+            @media screen and (min-width: $screen-xs-max){
+              min-height: 495px;
+            }
+            @media screen and (max-width: $screen-xs){
+              @include padding(0px null null null);
+            }
+          }
+          .panel-footer {
+            font-family: $font-open-sans;
+            background: transparent;
+            @include border-width(0px);
+          }
+        }
+      }
+    }
+  }
+  .panel-gender-selection {
+    .content-cover {
+      text-align: center;
+      @media screen and (min-width: $screen-xs-max){
+        max-width: 400px;
+        @include padding(90px null null null);
+        @include margin(auto);
+      }
+      .avtar-img {
+        display: block;
+        @include margin(20px auto 15px auto);
+      }
+    }
+    .btn-pink {
+      background: #e73c7c;
+      color: $white;
+      border-color: transparent;
+      &:hover {
+        background: darken(#e73c7c, 10%);
+      }
+    }
+  }
+}

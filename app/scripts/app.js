@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUTH','tien.clndr'])
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr'])
 .value('urlParams', {
 	users : '/users',
 	login: '/users/login',
@@ -33,6 +33,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
   upgradePackage :'/users/upgrade',
   getStudentDetail: '/teachers/getStudentDetail',
   getTeacherGrades: '/teachers/getTeacherGradeSubject',
+  guestLogin: '/users/guestLogin',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -143,6 +144,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
 	}).when('/teacher/subscription',{
 		templateUrl : 'views/dashboard/teacher-subscription.html',
 		controller : 'teacherSubscriptionCtrl',
+	}).when('/teacher/settings',{
+		templateUrl : 'views/dashboard/teacher-setting.html',
+		controller : 'teacherSubscriptionCtrl',
 	}).when('/parent/dashboard/:id', {
 		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
@@ -156,9 +160,12 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
   }).when('/teacher/lessons',{
     templateUrl : 'views/dashboard/teacher-content-lessons.html',
 		controller : 'teacherLessonCtrl',
+  }).when('/guest', {
+	templateUrl : 'views/guest_login.html',
+	controller : 'guestCtrl',
   }).otherwise({
 		redirectTo : '/',
-	});
+  });
 
 	$locationProvider.html5Mode({
 		enabled : true,
@@ -266,4 +273,31 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','AUT
     return function (scope, element, attrs) {
         element.height($(window).height() - $('.navbar').outerHeight());
     }
-});
+})
+.directive('aside', function () {
+return {
+	restrict: 'E',
+	templateUrl: 'include/sidebar-teacher.html',
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+		var cookieString=$cookieStore.get("userObj");
+		var userInfo=parseUser(cookieString);
+		function parseUser(cookie){
+	var keyVals=cookie.split(',');
+	var obj={};
+	angular.forEach(keyVals,function(value,key){
+		var vals=value.split('=');
+		obj[vals[0]]=vals[1];
+	});
+	return obj;
+}
+$scope.userInfo=userInfo;
+	}]
+};
+
+	
+	
+})
+
+
+
+;
