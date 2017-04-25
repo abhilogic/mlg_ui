@@ -32,10 +32,11 @@
   .main_container {
     background: {
       image: url(" ../img/challenge_grass.png"), url("../img/subject_door_bg.png") ;
-      size: 100% auto,100% auto;
-      repeat: no-repeat;
+      size: auto 186px,auto auto;
+      repeat: no-repeat, repeat;
       position: bottom left, top left;
      }
+     min-height: 100vh;
      @include respond-to(largeScreen){
        background-size: 100% auto ,  auto 123%;
      }
@@ -46,7 +47,14 @@
     .subject_gate_cover {
       padding-left: 20px;
       padding-right: 20px;
-      position: relative;
+      width: 100%;
+      position: absolute;
+      margin-bottom: 0px;
+      bottom: 180px;
+      text-align: center;
+      @media screen and (min-width: 1400px){
+        bottom: 170px;
+      }
       &:before {
         background: {
           image: url("../img/top_grass.png");

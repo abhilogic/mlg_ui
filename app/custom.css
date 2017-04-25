@@ -1,3 +1,7 @@
+.navbar-header .navbar-brand {
+	height: auto;
+}
+
 .onboarding-cover {background: transparent;}
 
 .signinonboarding-cover, .parent_signuponboarding-cover, .parent_loginonboarding-cover, .select_childrenonboarding-cover,
