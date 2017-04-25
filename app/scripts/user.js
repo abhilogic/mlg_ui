@@ -1284,10 +1284,22 @@ if (typeof $routeParams.id != 'undefined') {
     loginHttpService.gradeList().success(function(response) {
   		  $scope.grades = response.response.Grades;  
   	});
-
+    $scope.form = {};
+    $scope.form.email = '';
     $scope.guestlogin = function(data) {
-      $http.get("http://ipinfo.io").then(function(response){
-        data.user_ip = response.data.ip;
+      var email_pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (data.email != '') {
+        if (!email_pattern.test(data.email)) {
+          $scope.msg = 'Please enter valid email';
+          return false;
+        }
+      }
+      if (data.email == '') {
+        $scope.msg = 'Please enter email';
+        return false;
+      }
+      $http.get("http://ipinfo.io").success(function(response){
+        data.user_ip = response.ip;
         loginHttpService.guestLogin(data).success(function(response) {
   		 if (response.status == '-1') {
            alert('you have already taken your trial');
@@ -1300,9 +1312,15 @@ if (typeof $routeParams.id != 'undefined') {
            window.location.href='/mlg_ui/sapp/journey';
            return true;
          } else if (response.status == 0) {
-           alert('some error occured, kindly ask to administrator');
+           if (response.message == '') {
+             alert('some error occured, kindly ask to administrator');
+           } else {
+             alert(response.message);
+           }
          }
         });
+      }).error(function(err) {
+        alert('some error occured , Please check your internet connection');
       });
     };
 }])
