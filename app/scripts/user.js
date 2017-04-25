@@ -1347,17 +1347,12 @@ var get_uid=commonActions.getcookies(get_uid);
 
 
 $scope.setPreference = function(data) {
-    /*if (typeof $rootScope.logged_user == 'undefined') {
-      alert('kindly login');
-      window.location.href='/mlg_ui/app';
-    }*/
-   // data.user_id = $rootScope.logged_user.id;
    data.user_id = get_uid;
     loginHttpService.setPreference(data).success(function(response) {
       if (response.status == true) {
-        if ((typeof response.warning != 'undefined') && (response.warning == true)) {
-          alert(response.message);
-        }
+//        if ((typeof response.warning != 'undefined') && (response.warning == true)) {
+//          alert(response.message);
+//        }
         $location.url('/terms_and_conditions');
       } else {
         $scope.msg = response.message;
