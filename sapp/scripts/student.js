@@ -496,25 +496,38 @@ angular.module('mlg_student')
             $http.get(urlParams.khanApiTopic + khan_api_slug).success(
               function(contents) {
                 angular.forEach(contents.children, function(child, key) {
-                  if (child.kind.toUpperCase() == 'VIDEO') {
-                    $http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
-                      var youtube_id = video_response.data.translated_youtube_id;
+                  if (child.kind.toUpperCase() != 'EXERCISE') {
+                    if (child.kind.toUpperCase() == 'VIDEO') {
+                      $http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
+                        var youtube_id = video_response.data.translated_youtube_id;
+                        khan_api_response_content.push({
+                          name: child.title,
+                          descriptions: child.description,
+                          kind: child.kind,
+                          url: child.url,
+                          youtube_id: youtube_id
+                        });
+                      });
+                    } else if (child.kind.toUpperCase() == 'ARTICLE') {
+                      $http.get(urlParams.khanApiArticle + child.internal_id).then(function(article_response) {
+                        var article_content = JSON.parse(article_response.data.perseus_content);
+                        var article_description = article_content[0].content;
+                         khan_api_response_content.push({
+                          name: child.title,
+                          descriptions: article_description,
+                          kind: child.kind,
+                          url: child.url,
+                        });
+                      });
+                    } else {
                       khan_api_response_content.push({
                         name: child.title,
                         descriptions: child.description,
                         kind: child.kind,
                         url: child.url,
-                        youtube_id: youtube_id
                       });
-                    });
-                  } else {
-                    khan_api_response_content.push({
-                      name: child.title,
-                      descriptions: child.description,
-                      kind: child.kind,
-                      url: child.url,
-                    });  
-                  }
+                    }
+                }
                 });
               }
             );
@@ -526,5 +539,3 @@ angular.module('mlg_student')
       }
     });
 }]);
-
-
