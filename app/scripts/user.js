@@ -1239,7 +1239,7 @@ if (typeof $routeParams.id != 'undefined') {
       });
 	  
 }])
-.controller('teacherLoginCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+.controller('teacherLoginCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
      $scope.msg = '';
      $scope.gohome=function(){
 		window.location.href='/mlg_ui/app';
@@ -1255,6 +1255,7 @@ if (typeof $routeParams.id != 'undefined') {
 	 		}
 
 	 		data.role_id=role_id;
+            data.subscription_days = subscription_days[user_type];
             data.source_url = $location.protocol()+'://'+$location.host() + '/mlg_ui/app/';
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
