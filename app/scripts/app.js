@@ -66,6 +66,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	2020  : '2020',
 	2021  : '2021',
 	2022  : '2022',
+}).value('subscription_days', {
+parent  : 30,
+student  : 60,
+teacher  : 30,
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {

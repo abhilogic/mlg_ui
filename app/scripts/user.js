@@ -301,8 +301,8 @@ angular.module('mlg').filter('moment', function() {
 		return commonActions;
 	}])
 
-.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles',function($rootScope,$scope,
-   loginHttpService,$location,user_roles) {
+.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles', 'subscription_days',function($rootScope,$scope,
+   loginHttpService,$location,user_roles,subscription_days) {
     $scope.form={};	
     $scope.msg='';
     $scope.range = function(n) {
@@ -405,6 +405,7 @@ angular.module('mlg').filter('moment', function() {
 	 		}
 
 	 		data.role_id=role_id;
+            data.subscription_days = subscription_days[user_type];
             data.source_url = $location.protocol()+'://'+$location.host() + '/mlg_ui/app/';
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
@@ -791,7 +792,7 @@ if (typeof $routeParams.id != 'undefined') {
   }
 }])
 /* ****************************** */
-.controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+.controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
    //$rootScope.username=$location.search().uid;
 
   //  get children count
@@ -1047,7 +1048,7 @@ if (typeof $routeParams.id != 'undefined') {
        			package_id	: data.selectedPackage,
        			courses		: data.selectedcourses,
        			vcode		: data.vcode,
-
+                subscription_days : subscription_days['student'],
        	}; 
 
 
