@@ -64,6 +64,7 @@
 // Uploaders
 @import "components/uploaders/dropzone";
 @import "components/uploaders/file-input";
+@import "components/uploaders/profile-img-uploader";
 //@import "components/uploaders/plupload";
 
 // Layout Style
@@ -103,3 +104,6 @@
 @import "pages/teacher-content";
 @import "pages/teacher-content-add-lesson";
 @import "pages/teacher-create-class";
+@import "pages/teacher-rewards";
+@import "pages/teacher-notification";
+@import "pages/teacher-message";

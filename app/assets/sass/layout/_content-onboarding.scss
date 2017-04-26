@@ -41,6 +41,12 @@
     }
     .panel-title{
       color: $gray-light;
+      >img {
+        @media screen and (max-width: $screen-xs-max){
+          max-width: 100%;
+          width: 60px;
+        }
+      }
     }
   }
 

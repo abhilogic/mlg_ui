@@ -97,6 +97,9 @@ teacher  : 30,
 		templateUrl : 'views/parent_signup.html',
 		controller : 'loginCtrl',
 		access : access.public
+	}).when('/parent-login', {
+		templateUrl : 'views/login-parent.html',
+		controller : 'parentLoginCtrl',
 	}).when('/email/confirmation/:id',{
 		templateUrl : 'views/parent_confirmation.html',
 		controller : 'emailConfirmationCtrl',
@@ -117,12 +120,21 @@ teacher  : 30,
 	}).when('/payment_page', {
 		templateUrl : 'views/payment_page.html',
 		controller : 'paymentPageCtrl',
+	}).when('/preferences', {
+		templateUrl : 'views/preferences.html',
+		controller : 'preferences',
+	}).when('/select-children', {
+		templateUrl : 'views/select-children.html',
+		controller : 'selectChildren',
 	}).when('/parent/dashboard/subscription/:child_id', {
 		templateUrl : 'views/dashboard/parent-subscription.html',
 		controller : 'parentSubscriptionCtrl',
 	}).when('/test', {
 		templateUrl : 'views/test.html',
 		controller : 'addChild',
+	}).when('/children-account-setup', {
+		templateUrl : 'views/children-account-setup.html',
+		controller : 'childrenAccountSetup',
 	}).when('/parent/dashboard/offers', {
 		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'parentOffers',
@@ -151,19 +163,82 @@ teacher  : 30,
 	}).when('/teacher/settings',{
 		templateUrl : 'views/dashboard/teacher-setting.html',
 		controller : 'teacherSubscriptionCtrl',
+	}).when('/teacher/add-new-event-ptm',{
+		templateUrl : 'views/dashboard/teacher-AddNewEventPTM.html',
+		controller : 'teacherAddNewEventPTM',
+	}).when('/teacher/addNewEvent',{
+		templateUrl : 'views/dashboard/teacher-addNewEvent.html',
+		controller : 'teacherAddNewEvent',
+	}).when('/teacher/student-list',{
+		templateUrl : 'views/dashboard/teacher-all-student-list.html',
+		controller : 'teacherStudentList',
+	}).when('/teacher/student-profile',{
+		templateUrl : 'views/dashboard/teacher-student-profile.html',
+		controller : 'teacherStudentProfile',
+	}).when('/teacher/auto-generate-assignment',{
+		templateUrl : 'views/dashboard/teacher-autoGenerateAssignment.html',
+		controller : 'teacherAutoGenerateAssignment',
+	}).when('/teacher/custom-assignment',{
+		templateUrl : 'views/dashboard/teacher-createCustomAssignement.html',
+		controller : 'teacherCustomAssignment',
+	}).when('/teacher/add-new-assignment',{
+		templateUrl : 'views/dashboard/teacher-AddNewAssignment.html',
+		controller : 'teacherAddNewAssignment',
+	}).when('/teacher/add-new-todo',{
+		templateUrl : 'views/dashboard/teacher-addnewtodo.html',
+		controller : 'teacherAddNewTodo',
 	}).when('/parent/dashboard/:id', {
 		templateUrl : 'views/dashboard/parent-dashboard.html',
 		controller : 'parentDashboardCtrl',
 		access : access.parents
 	}).when('/teacher/payment_page',{
-    templateUrl : 'views/payment_teacher.html',
+		templateUrl : 'views/payment_teacher.html',
 		controller : 'teacherOnBoardingCtrl',
   }).when('/teacher/add_content',{
-    templateUrl : 'views/dashboard/teacher-content-add-lesson.html',
+		templateUrl : 'views/dashboard/teacher-content-add-lesson.html',
+		controller : 'teacherCreateClass',
+  }).when('/teacher/create-class',{
+		templateUrl : 'views/dashboard/teacher-create-class.html',
 		controller : 'teacherLessonCtrl',
+  }).when('/teacher/add-question',{
+		templateUrl : 'views/dashboard/teacher-content-add-question.html',
+		controller : 'teacherAddQuestion',
+  }).when('/teacher/questions',{
+		templateUrl : 'views/dashboard/teacher-content-questions.html',
+		controller : 'teacherQuestions',
   }).when('/teacher/lessons',{
-    templateUrl : 'views/dashboard/teacher-content-lessons.html',
+		templateUrl : 'views/dashboard/teacher-content-lessons.html',
 		controller : 'teacherLessonCtrl',
+  }).when('/teacher/create-group',{
+		templateUrl : 'views/dashboard/teacher-create-group.html',
+		controller : 'teacherCreateGroup',
+  }).when('/teacher/edit-group',{
+		templateUrl : 'views/dashboard/teacher-editGroup.html',
+		controller : 'teacherEditGroup',
+  }).when('/teacher/gap-analysis',{
+		templateUrl : 'views/dashboard/teacher-gapAnalysis.html',
+		controller : 'teacherGapAnalysis',
+  }).when('/teacher/get-a-quote',{
+		templateUrl : 'views/dashboard/teacher-getQuote.html',
+		controller : 'teacherGetQuote',
+  }).when('/teacher/group-member',{
+		templateUrl : 'views/dashboard/teacher-groupMember.html',
+		controller : 'teacherGroupMember',
+  }).when('/teacher/teacher-message',{
+		templateUrl : 'views/dashboard/teacher-message.html',
+		controller : 'teacherMessage',
+  }).when('/teacher/my-class',{
+		templateUrl : 'views/dashboard/teacher-myClass.html',
+		controller : 'teacherMyClass',
+  }).when('/teacher/notification',{
+		templateUrl : 'views/dashboard/teacher-notification.html',
+		controller : 'teacherNotification',
+  }).when('/teacher/rewards',{
+		templateUrl : 'views/dashboard/teacher-rewards.html',
+		controller : 'teacherRewards',
+  }).when('/teacher/scope-sequence',{
+		templateUrl : 'views/dashboard/teacher-scope-sequence.html',
+		controller : 'teacherScopeSequence',
   }).when('/guest', {
 	templateUrl : 'views/guest_login.html',
 	controller : 'guestCtrl',

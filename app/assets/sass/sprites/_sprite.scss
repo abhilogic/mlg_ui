@@ -9,5 +9,3 @@
 	background-image: url( #{ nth( $spriteVals, 3 ) } );
 	background-position: nth( $spriteVals, 4 ) nth( $spriteVals, 5 );
 }
-
-

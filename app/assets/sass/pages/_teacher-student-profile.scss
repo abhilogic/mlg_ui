@@ -133,3 +133,50 @@
     }
   }
 }
+
+// modal-viewSkills
+.modal-viewSkills{
+  .modal-header {
+    @include border-width(null null 0px null);
+    .modal-title {
+      text-align: center;
+      span {
+        color: $gray;
+        font-size: 12px;
+        display: block;
+        margin-bottom: 10px;
+      }
+      font-size: 30px;
+      color: #fdd75e;
+      text-transform: uppercase;
+    }
+  }
+  .modal-body {
+    table {
+      margin: auto;
+      width: 70%;
+      tr {
+        td{
+          color: $gray;
+          width: 70%;
+          @include padding(8px null);
+        }
+        th {
+          color: $gray-dark;
+          width: 30%;
+          @include padding(8px null);
+        }
+      }
+    }
+    h5 {
+      text-align: center;
+      color: $gray-dark;
+      margin-top: 20px;
+      font-size: 18px;
+      span {
+        color: $gray;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
