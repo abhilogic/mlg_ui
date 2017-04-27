@@ -1,5 +1,19 @@
 .create-group {
   .panel-body {
+    .group-name {
+      @include border-width(0px 0px 1px 0px);
+      background: none;
+      text-align: center;
+      font-family: $font-secondary;
+      font-weight: $light;
+      color: lighten($gray-light,20%);
+      font-size: 20px;
+      margin-bottom: 21px;
+      &:focus {
+        outline: 0px;
+        @include box-shadow(none);
+      }
+    }
     .student_list {
       li {
         position: relative;
@@ -7,6 +21,23 @@
           position: absolute;
           right: 0px;
           top: 0px;
+        }
+      }
+    }
+  }
+}
+
+.edit-group {
+  .panel-body {
+    .student_list {
+      li {
+        position: relative;
+        .btn-delete {
+          background: none;
+          border: 0px;
+          color: red;
+          @include position(absolute, 0px 0px null null);
+          z-index: 100;
         }
       }
     }

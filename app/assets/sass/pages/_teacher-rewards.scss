@@ -1,0 +1,15 @@
+.teacher-rewards {
+  .redeem-list {
+    li {
+      @include padding(30px 15px 30px null);
+      .points {
+        font-weight: $bold;
+        font-size: 18px;
+      }
+      .media-btns{
+        margin-top: 8px;
+        text-align: center;
+      }
+    }
+  }
+}

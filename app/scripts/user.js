@@ -301,8 +301,8 @@ angular.module('mlg').filter('moment', function() {
 		return commonActions;
 	}])
 
-.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles',function($rootScope,$scope,
-   loginHttpService,$location,user_roles) {
+.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles', 'subscription_days',function($rootScope,$scope,
+   loginHttpService,$location,user_roles,subscription_days) {
     $scope.form={};	
     $scope.msg='';
     $scope.range = function(n) {
@@ -405,6 +405,7 @@ angular.module('mlg').filter('moment', function() {
 	 		}
 
 	 		data.role_id=role_id;
+            data.subscription_days = subscription_days[user_type];
             data.source_url = $location.protocol()+'://'+$location.host() + '/mlg_ui/app/';
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
@@ -791,7 +792,7 @@ if (typeof $routeParams.id != 'undefined') {
   }
 }])
 /* ****************************** */
-.controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+.controller('addChild',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
    //$rootScope.username=$location.search().uid;
 
   //  get children count
@@ -1047,7 +1048,7 @@ if (typeof $routeParams.id != 'undefined') {
        			package_id	: data.selectedPackage,
        			courses		: data.selectedcourses,
        			vcode		: data.vcode,
-
+                subscription_days : subscription_days['student'],
        	}; 
 
 
@@ -1238,7 +1239,7 @@ if (typeof $routeParams.id != 'undefined') {
       });
 	  
 }])
-.controller('teacherLoginCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+.controller('teacherLoginCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
      $scope.msg = '';
      $scope.gohome=function(){
 		window.location.href='/mlg_ui/app';
@@ -1254,6 +1255,7 @@ if (typeof $routeParams.id != 'undefined') {
 	 		}
 
 	 		data.role_id=role_id;
+            data.subscription_days = subscription_days[user_type];
             data.source_url = $location.protocol()+'://'+$location.host() + '/mlg_ui/app/';
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
@@ -1284,10 +1286,22 @@ if (typeof $routeParams.id != 'undefined') {
     loginHttpService.gradeList().success(function(response) {
   		  $scope.grades = response.response.Grades;  
   	});
-
+    $scope.form = {};
+    $scope.form.email = '';
     $scope.guestlogin = function(data) {
-      $http.get("http://ipinfo.io").then(function(response){
-        data.user_ip = response.data.ip;
+      var email_pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (data.email != '') {
+        if (!email_pattern.test(data.email)) {
+          $scope.msg = 'Please enter valid email';
+          return false;
+        }
+      }
+      if (data.email == '') {
+        $scope.msg = 'Please enter email';
+        return false;
+      }
+      $http.get("http://ipinfo.io").success(function(response){
+        data.user_ip = response.ip;
         loginHttpService.guestLogin(data).success(function(response) {
   		 if (response.status == '-1') {
            alert('you have already taken your trial');
@@ -1300,9 +1314,15 @@ if (typeof $routeParams.id != 'undefined') {
            window.location.href='/mlg_ui/sapp/journey';
            return true;
          } else if (response.status == 0) {
-           alert('some error occured, kindly ask to administrator');
+           if (response.message == '') {
+             alert('some error occured, kindly ask to administrator');
+           } else {
+             alert(response.message);
+           }
          }
         });
+      }).error(function(err) {
+        alert('some error occured , Please check your internet connection');
       });
     };
 }])
@@ -1329,17 +1349,12 @@ var get_uid=commonActions.getcookies(get_uid);
 
 
 $scope.setPreference = function(data) {
-    /*if (typeof $rootScope.logged_user == 'undefined') {
-      alert('kindly login');
-      window.location.href='/mlg_ui/app';
-    }*/
-   // data.user_id = $rootScope.logged_user.id;
    data.user_id = get_uid;
     loginHttpService.setPreference(data).success(function(response) {
       if (response.status == true) {
-        if ((typeof response.warning != 'undefined') && (response.warning == true)) {
-          alert(response.message);
-        }
+//        if ((typeof response.warning != 'undefined') && (response.warning == true)) {
+//          alert(response.message);
+//        }
         $location.url('/terms_and_conditions');
       } else {
         $scope.msg = response.message;

@@ -18,10 +18,13 @@
       text-align: left;
     }
     .repeat-row {
-      @media screen and (min-width: $screen-sm-max){
-        @include margin(null 0px null 0px);
-        &:not(:last-child){
-          margin-bottom: 10px;
+      @include margin(null 0px null 0px);
+      &:not(:last-child){
+        margin-bottom: 10px;
+      }
+      .form-group {
+        @media screen and (max-width: $screen-xs-max){
+          @include margin(null 0px null 0px);
         }
       }
       @media screen and (max-width: 1024px){
@@ -48,10 +51,10 @@
       @include padding(20px 40px);
     }
     &:before {
-      content: '\0058';
+      font-family: 'Glyphter';
       position: absolute;
       left: 10px;
-      top: 51%;
+      top: 15%;
       @media screen and (max-width: $screen-sm){
         left: auto;
         right: 10px;

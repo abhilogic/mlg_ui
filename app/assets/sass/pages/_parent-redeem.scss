@@ -7,6 +7,9 @@
   .redeem-item{
     border: 1px solid darken($gray-lighter, 5%);;
     @include border-radius($border-radius-large);
+    &:hover {
+      background: rgba($gray-light,0.1);
+    }
     .media-left, .media-right, .media-body{
       border: 0;
     }
@@ -53,15 +56,19 @@
        margin-left: 15px;
       }
     }
-    @media(max-width: $screen-xs-max){
+    @media(max-width: $screen-sm){
       display: block;
       width: 100%;
-      .media-left, .media-body{
+      .media-left, .media-body, .media-right{
         display: block;
         width: 100%;
         margin: 0;
       }
       .media-left{
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      .media-right {
         margin-bottom: 15px;
         text-align: center;
       }

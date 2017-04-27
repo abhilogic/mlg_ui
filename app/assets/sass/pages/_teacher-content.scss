@@ -57,34 +57,7 @@
 
 
 
-// modal-addQuestion
 
-.modal-addContent {
-  .modal-content {
-    @include border-radius(0px);
-    .modal-header {
-      @include padding(20px null null null);
-      @include border-width(null null 0px null);
-      .modal-title {
-        text-align: center;
-      }
-    }
-    .modal-body {
-        @include padding(null null null 30px);
-      a {
-        text-decoration: none;
-         @include border-radius(0px);
-         @include margin(7px null 7px null);
-         &:not(:last-child) {
-           @include margin(null null 15px null);
-         }
-    }
-     @media screen and (min-width: $screen-sm) {
-       @include padding( null 100px 50px 100px);
-     }
-    }
-  }
-}
 
 // modal-uploadQuestion
 .modal-uploadContent {

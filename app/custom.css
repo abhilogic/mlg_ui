@@ -29,3 +29,5 @@
     min-height: 150px;
     border: 1px solid #ddd;
     margin-top: 10px;}
+	
+.col-xs-7 ul.dropdown-menu-form li:first-child, .col-xs-7 ul.dropdown-menu-form li:nth-child(2), .col-xs-7 ul.dropdown-menu-form li:nth-child(3){display:none;}

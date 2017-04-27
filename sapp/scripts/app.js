@@ -15,8 +15,8 @@ setUserQuizResponse :'/exams/setUserQuizResponse',
 getUserQuizResponse :'/exams/getUserQuizResponse',
 getUserScoreForQuiz: '/exams/getUserScoreForQuiz',
 khanApiTopic: 'http://www.khanacademy.org/api/v1/topic/',
-khanApiVideo: 'http://www.khanacademy.org/api/v1/videos/'
-
+khanApiVideo: 'http://www.khanacademy.org/api/v1/videos/',
+khanApiArticle: 'http://www.khanacademy.org/api/v1/articles/'
 
 }).value('REGEX', {
 LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -50,6 +50,10 @@ student : 4,
 2020  : '2020',
 2021  : '2021',
 2022  : '2022',
+}).value('subscription_days', {
+parent  : 30,
+student  : 60,
+teacher  : 30,
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 //var access = routingConfig.accessLevels;
 $routeProvider
