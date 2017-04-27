@@ -233,12 +233,158 @@ angular.module('mlg')
         }
         
       });
-     
-      
-     
-      
       
     }
-  });
+  })
+  
+  
+  
+  
+.controller("studentProgress", function ($scope) {
+	$scope.labels = ["Conquered", "Practiced", "Not Attacked"];
+	$scope.data = [5, 20, 75];
+	
+	$scope.colors = ['#f1c40f', '#2ecc71', '#e8e8e8'];
+	$scope.datasetOverride = [
+      {
+        label: 'Bar chart',
+        borderWidth: 1,
+        type: 'bar'
+      }
+    ];
+	$scope.options = {
+      animation: {
+        duration: 1000
+      },
+      legend: {
+        display: true,
+		position: 'right',
+		labels: {
+			fontColor: '#333',
+			fontSize: 14,
+			boxWidth: 15
+		},
+      },
+	
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					var allData = data.datasets[tooltipItem.datasetIndex].data;
+					var tooltipLabel = data.labels[tooltipItem.index];
+					var tooltipData = allData[tooltipItem.index];
+					var total = 0;
+					for (var i in allData) {
+						total += allData[i];
+					}
+					var tooltipPercentage = Math.round((tooltipData / total) * 100);
+					return tooltipLabel + ': ' + tooltipData + '%';
+					//return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+				}
+			}
+		}
+      
+    };
+
+	
+})
+
+.controller("GradeAnalysis", function ($scope) {
+  $scope.labels = ["Prime or composite", "Prime factorization", "Multiplicative inverses", "Divisibility rules", "Greatest common factor", "Least common factor", "GCF and LCM word problem", "Scientific nation"];
+  $scope.series = ['Recommended progress', 'Average score', 'Andrew score'];
+  $scope.data = [
+    [50, 62, 80, 60, 40, 55, 48, 48],
+    [60, 72, 90, 68, 60, 68, 58, 58],
+	[70, 88, 100, 90, 82, 89, 72, 70]
+  ];
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  $scope.colors = ['#b0baaf', '#f39c12', '#00a651'];
+  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+  
+  $scope.options = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left'
+        },
+      ],
+
+		labels: [
+			{
+			fontColor: '#fa4229'
+			}
+		]
+    },
+	
+	legend: {
+        display: true,
+		position: 'top',
+		labels: {
+			fontColor: '#333',
+			fontSize: 14,
+			boxWidth: 15
+		},
+    },
+	title: {
+		display: true,
+		text: 'SCORE POINTS',
+		fontColor: '#333',
+		position: 'left',
+		fontSize: 16
+	}
+  };
+})
+
+
+.controller("subjectPerformance", function ($scope) {
+	$scope.labels = ["Above Average", "Below Average"];
+	$scope.data = [30, 70];
+	$scope.colors = ['#15a38c', '#fa4229',];
+	
+	$scope.options = {
+      animation: {
+        duration: 1000
+      },
+      legend: {
+        display: true,
+		position: 'right',
+		labels: {
+			fontColor: '#333',
+			fontSize: 14,
+			boxWidth: 15
+		},
+      },
+		
+	
+
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					var allData = data.datasets[tooltipItem.datasetIndex].data;
+					var tooltipLabel = data.labels[tooltipItem.index];
+					var tooltipData = allData[tooltipItem.index];
+					var total = 0;
+					for (var i in allData) {
+						total += allData[i];
+					}
+					var tooltipPercentage = Math.round((tooltipData / total) * 100);
+					return tooltipLabel + ': ' + tooltipData + '%';
+					//return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+				}
+			}
+		}
+	
+    };
+	
+})
+  	
+//teacherStudentProfile  studentPerformance
+
+  
+
   
   ;

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr'])
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js'])
 .value('urlParams', {
 	users : '/users',
 	login: '/users/login',
@@ -174,7 +174,7 @@ teacher  : 30,
 		controller : 'teacherStudentList',
 	}).when('/teacher/student-profile',{
 		templateUrl : 'views/dashboard/teacher-student-profile.html',
-		controller : 'teacherStudentProfile',
+		//controller : 'teacherStudentProfile',
 	}).when('/teacher/auto-generate-assignment',{
 		templateUrl : 'views/dashboard/teacher-autoGenerateAssignment.html',
 		controller : 'teacherAutoGenerateAssignment',
