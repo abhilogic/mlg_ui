@@ -273,6 +273,13 @@ angular.module('mlg')
       alert(events.map(function(e) { return e.title }).join("\n"));
   };
 /* end - step-4 for onBoarding teacher dasboard*/
+
+	/*$scope.deleteCustomer = function (customer) {
+		var index = $scope.stcourses.indexOf(customer);
+		$scope.stcourses.splice(index, 1);
+		// $scope.stcourses.splice($index, 1);
+		$scope.$emit('customerDeleted', customer); 
+	};*/
   
 }])
 .controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
@@ -624,11 +631,37 @@ angular.module('mlg')
               } 
             }      
           });
+
         }      
-      });  
-    }
+      }); 
+} 
   })
   
+.controller("tableRow", function ($scope) {
+	$scope.people = [
+	//{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
+	];
+	
+  $scope.addPerson = function(){
+	var person = {
+		id: $scope.id,
+		Fname: $scope.Fname,
+		Lname: $scope.Lname,
+		email: $scope.email,
+		Uname: $scope.Uname,
+		pass: $scope.pass,
+	};
+	
+	$scope.people.push(person);
+  };
+	 $scope.removePerson = function(index){
+		$scope.people.splice(index, 1);
+   };
+	
+})
+  
+
+
 .controller("studentProgress", function ($scope) {
 	$scope.labels = ["Conquered", "Practiced", "Not Attacked"];
 	$scope.data = [5, 20, 75];
@@ -651,7 +684,8 @@ angular.module('mlg')
 		labels: {
 			fontColor: '#333',
 			fontSize: 14,
-			boxWidth: 15
+			boxWidth: 15,
+			
 		},
       },
 	

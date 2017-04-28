@@ -89,7 +89,7 @@
 							<div class="panel-toolbar responsive-md">
 
 							</div>
-							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons">
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons" ng-controller="tableRow">
 								<thead>
 									<tr>
 										<th class="sr-no">#</th>
@@ -114,50 +114,33 @@
 											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
 										</td>
 									</tr>
-									<tr>
-										<td class="sr-no">2</td>
-										<td class="last-name">Henston</td>
-										<td class="first-name">Andrew</td>
-										<td class="parent-student-email">andrew.henston@gmail.com</td>
-										<td class="user-name">andrew.henston</td>
-										<td class="pasword">andrew@123</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-floppy-o"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-										</td>
-									</tr>
-									<tr>
-										<td class="sr-no">3</td>
-										<td class="last-name">Henston</td>
-										<td class="first-name">Andrew</td>
-										<td class="parent-student-email">andrew.henston@gmail.com</td>
-										<td class="user-name">andrew.henston</td>
-										<td class="pasword">andrew@123</td>
+									<tr ng-repeat="person in people">
+										<td class="sr-no">{{person.id}}</td>
+										<td class="last-name">{{person.Lname}}</td>
+										<td class="first-name">{{person.Fname}}</td>
+										<td class="parent-student-email">{{person.email}}</td>
+										<td class="user-name">{{person.Uname}}</td>
+										<td class="pasword">{{person.pass}}</td>
 										<td class="actions">
 											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link" ng-click="removePerson($index)"><i class="fa fa-trash"></i></button>
 										</td>
+
+										<!--<td>
+											<button type="button" ng-click="removePerson($index)">Remove Person</button>
+										</td>-->
 									</tr>
+
 									<tr>
-										<td class="sr-no">4</td>
-										<td class="last-name">Henston</td>
-										<td class="first-name">Andrew</td>
-										<td class="parent-student-email">andrew.henston@gmail.com</td>
-										<td class="user-name">andrew.henston</td>
-										<td class="pasword">andrew@123</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-floppy-o"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-										</td>
-									</tr>
-									<tr>
-										<td class="sr-no"><i class="icon icon-plus"></i></td>
-										<td class="last-name">Add New</td>
-										<td class="first-name"></td>
-										<td class="parent-student-email"></td>
-										<td class="user-name"></td>
-										<td class="pasword"></td>
-										<td class="actions"></td>
+										<td><input type="text" ng-model="id" placeholder="ID" ></td>
+										<td><input type="text" ng-model="Fname" placeholder="First Name" ></td>
+										<td><input type="text" ng-model="Lname" placeholder="Last Name" ></td>
+										<td><input type="text" ng-model="email" placeholder="Email" ></td>
+										<td><input type="text" ng-model="Uname" placeholder="User Name" ></td>	
+										<td><input type="text" ng-model="pass" placeholder="Password" ></td>
+										<td><button type="button" ng-click="addPerson()">Save</button></td>
+										<td></td>
+										<td></td>
 									</tr>
 								</tbody>
 							</table>

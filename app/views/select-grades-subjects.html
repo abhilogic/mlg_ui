@@ -21,17 +21,17 @@
 
 								<div class="row">
 									<div class="col-sm-12 text-center">
-										<div class="btn-group grade-group" data-toggle1="buttons">
+										<div class="btn-group grade-group customCheckboxOuter" data-toggle1="buttons">
 											<!-- to show the selected or checked add class active to label as below-->
-											<label class="btn active1" ng-repeat="grade in grades" >
+											<label class="btn active1 customCheckbox" ng-repeat="grade in grades" >
 												<input type="checkbox" ng-change="changeCourseList(frm.selectedgrade)" ng-model="frm.selectedgrade" ng-true-value="'{{grade.id}}'" ng-false-value="''" > 
-												<span class="grade"><span class="hidden-xs">{{grade.name}}</span>
+												<span class="grade customLabel" ng-class="{checked: frm.selectedgrade == grade.id}"><span class="hidden-xs">{{grade.name}}</span>
 											</label>	
 										</div><br/>
 
-										<div class="btn-group subject-group" data-toggle1="buttons">
+										<div class="btn-group subject-group subjectCheckboxouter" data-toggle1="buttons">
 											<!-- to show the selected or checked add class active to label as below-->
-											<label class="btn active1" ng-repeat="course in cousesListByGrade">						
+											<label class="btn active1" ng-repeat="course in cousesListByGrade" ng-class="{checked: frm.selectedcourse[course.id]}">						
 											<input type="checkbox" ng-change="onchangeSelectedcourse(frm.selectedcourse)" ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}},{{course.level_id}}'" ng-false-value="''" > 
 												<span class="subject">{{course.course_name}}</span>
 											</label>
@@ -51,9 +51,10 @@
 										<div class="col-md-10 col-md-offset-1 selected-grades-subjects">
 											<div class="form-group" ng-repeat="grade in grades">
 												<label class="label-grade">{{grade.name}}</label>
+												
 												<!-- <button type="button" class="btn btn-sm btn-link btn-remove"><i class="fa fa-trash position-left"></i> Remove</button> -->
 												<div class="subjects-list">
-													<span class="label label-subject" ng-repeat="stcourse in stcourses" ng-if="grade.id==stcourse.level_id">{{stcourse.name}} <!-- <a class="link link-gray-light">X</a> --></span>											
+													<span class="label label-subject deleteBox" ng-repeat="stcourse in stcourses" ng-if="grade.id==stcourse.level_id">{{stcourse.name}} <!-- <a class="link link-gray-light">X</a> <i ng-click="deleteCustomer(customer)" class="fa fa-times"></i>--></span>											
 												</div>
 											</div>
 										</div>
