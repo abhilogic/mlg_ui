@@ -27,6 +27,34 @@ angular.module('mlg')
           url  : urlParams.baseURL+urlParams.getTeacherGrades+'/'+tid+'/'+type
         });
       }
+
+
+   teacherHttpResponse.gradeList=function(){
+      return $http({
+         method:'GET',     
+         url   : urlParams.baseURL+urlParams.gradeList
+      });
+    }
+
+   teacherHttpResponse.getCourseByGrade=function(gradeid){    
+        return $http({
+          method:'GET', 
+          data : gradeid,    
+          url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+gradeid
+        });
+  }
+
+  teacherHttpResponse.setTeacherSubjects=function(selected_courses){    
+        return $http({
+          method:'POST', 
+          data : selected_courses,    
+          url   : urlParams.baseURL+urlParams.setTeacherSubjects
+        });
+  }
+
+  
+
+
         return teacherHttpResponse;
 	
 }])
@@ -35,7 +63,7 @@ angular.module('mlg')
  **/
 .controller('teacherOnBoardingCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','card_months','card_years',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,card_months,card_years) {
-/* Start-  Step-1 for Onboarding */
+/* Start-  Step-1 Add School details-for Onboarding */
   $scope.tch = {};
   var get_uid=commonActions.getcookies(get_uid);
   $scope.submitTeacherDetail = function(data){
@@ -48,6 +76,7 @@ angular.module('mlg')
        state : data.state,
        city : data.city,
        district : data.district,
+       step_completed:1,
     };
     teacherHttpService.signUpTeacher(teacherDetail).success(function(response) {
       if(response.status == true) {
@@ -60,28 +89,79 @@ angular.module('mlg')
 	   }); 
   };
   /* end-  Step-1 for Onboarding */
-  /* Start - step-2 for onBoarding */
+
+
+  /* Start - step-2: Select Courses by teacher- on onBoarding */
 	// call API to get grades
-     loginHttpService.gradeList().success(function(response) {
-  		  $scope.grades = response.response.Grades;  
+     teacherHttpService.gradeList().success(function(response) {
+  		  $scope.grades = response.response.Grades;
+
   	});
 
-     //show courses on change on class/grade
-      //call API to getCourseList for a level on change of grade
+     
+      //show courses on change on class/grade--call API to getCourseList for a level on change of grade
      $scope.changeCourseList = function(grade_id) {
-	   	loginHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
-	        if(!courseslistresult.response.courses){  // value is null, empty
-	    	    $scope.msg=courseslistresult.response.message; 
-	        	$scope.records=courseslistresult.response.course_list;        
-	        }else{
-	        	$scope.cousesListByGrade= courseslistresult.response.courses;
-	          	$scope.msg=courseslistresult.response.message;
-	          	$scope.courserecords=courseslistresult.response.course_list; 
-	        }         
+        $scope.message=''; 
+	     	teacherHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {        
+  	        if(!courseslistresult.response.courses){  // value is null, empty
+  	    	    $scope.msg=courseslistresult.response.message; 
+  	        	$scope.records=courseslistresult.response.course_list;        
+  	        }else{
+  	        	$scope.cousesListByGrade= courseslistresult.response.courses;
+  	          	$scope.msg=courseslistresult.response.message;
+  	          	$scope.courserecords=courseslistresult.response.course_list; 
+  	        }         
     	})
     }
 
+
+    // selected course
+     $scope.onchangeSelectedcourse = function(selected_courses) { 
+        $scope.message='';      
+        var selected_cour=[];
+        angular.forEach(selected_courses, function(value, key) {           
+          if(value){
+            selected_cour.push({id:key,name:value.split(',')[0],level_id:value.split(',')[1] });
+          } 
+
+        });
+
+        $scope.stcourses=selected_cour;
+
+        /*var selectedcourses={
+              'user_id'     :get_uid,              
+              'selected_courses':selected_cour
+            };
+        
+        teacherHttpService.setTeacherSubjects(selectedcourses).success(function(response) {
+        })*/   
+     }
+
+
+
+     // Submit teacher selected courses
+     $scope.submitSelectedCourses = function(selectedcourses) {       
+        selectedcourses.user_id=get_uid;
+         teacherHttpService.setTeacherSubjects(selectedcourses).success(function(savedataResult) {
+            
+            if (savedataResult.response.status == "TRUE") {
+              $scope.message=savedataResult.response.message;
+              window.location.href='teacher/payment_page';
+
+            }else{
+              $scope.message=savedataResult.response.message;
+            }
+
+        }) 
+
+     }
+
+
+
+
   /* end- step-2 for onBoarding */ 
+
+
   /* Start - step-3 for onBoarding */
   //teacher payment page
     var user_id ={};

@@ -29,6 +29,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   promocode :'/users/promocode',
   getUserPurchaseDetails :'/users/getUserPurchaseDetails',
   signUpTeacher :'/teachers/setTeacherRecord',
+  setTeacherSubjects :'/teachers/setTeacherSubjects',
   teacherPayment :'/teachers/getTeacherSubject',
   upgradePackage :'/users/upgrade',
   getStudentDetail: '/teachers/getStudentDetail',
@@ -152,7 +153,8 @@ teacher  : 30,
 		templateUrl : 'views/account-teacher.html',
 		controller : 'teacherOnBoardingCtrl',
 	}).when('/teacher/select_courses',{
-		templateUrl : 'views/teacher_select_courses.html',
+		//templateUrl : 'views/teacher_select_courses.html',
+		templateUrl : 'views/select-grades-subjects.html',
 		controller : 'teacherOnBoardingCtrl',
 	}).when('/teacher/dashboard',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',

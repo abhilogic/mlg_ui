@@ -1,4 +1,4 @@
-	<!-- Page container -->
+<!-- Page container -->
 	<div class="page-container">
 
 		<!-- Page content -->
@@ -11,81 +11,69 @@
 
 					<div class="panel panel-flat panel-onboarding">
 						<div class="panel-heading">
-							<h4 class="panel-title"><b><img src="assets/img/logo.png" alt="" /></b></h4>
+							<h4 class="panel-title"><img src="assets/img/logo_1.png" alt=""></h4>
 						</div>
 
 						<div class="panel-body">
 							<h3 class="text-light text-gray-light text-center">Select your grades & subjects</h3>
 
-							<form action="terms-teacher.html" class="form-login">
+							<form class="form-login">
 
 								<div class="row">
 									<div class="col-sm-12 text-center">
-										<div class="btn-group grade-group" data-toggle="buttons">
+										<div class="btn-group grade-group" data-toggle1="buttons">
 											<!-- to show the selected or checked add class active to label as below-->
-											<label class="btn active">
-												<input type="checkbox" name="grade6" autocomplete="off" checked>
-												<span class="grade"><span class="hidden-xs">grade</span> 6<sup>th</sup></span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="grade7" autocomplete="off">
-												<span class="grade"><span class="hidden-xs">grade</span> 7<sup>th</sup></span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="grade8" autocomplete="off">
-												<span class="grade"><span class="hidden-xs">grade</span> 8<sup>th</sup></span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="grade9" autocomplete="off">
-												<span class="grade"><span class="hidden-xs">grade</span> 9<sup>th</sup></span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="grade10" autocomplete="off">
-												<span class="grade"><span class="hidden-xs">grade</span> 10<sup>th</sup></span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="grade12" autocomplete="off">
-												<span class="grade"><span class="hidden-xs">grade</span> 11<sup>th</sup></span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="grade12" autocomplete="off">
-												<span class="grade"><span class="hidden-xs">grade</span> 12<sup>th</sup></span>
+											<label class="btn active1" ng-repeat="grade in grades" >
+												<input type="checkbox" ng-change="changeCourseList(frm.selectedgrade)" ng-model="frm.selectedgrade" ng-true-value="'{{grade.id}}'" ng-false-value="''" > 
+												<span class="grade"><span class="hidden-xs">{{grade.name}}</span>
+											</label>	
+										</div><br/>
+
+										<div class="btn-group subject-group" data-toggle1="buttons">
+											<!-- to show the selected or checked add class active to label as below-->
+											<label class="btn active1" ng-repeat="course in cousesListByGrade">						
+											<input type="checkbox" ng-change="onchangeSelectedcourse(frm.selectedcourse)" ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}},{{course.level_id}}'" ng-false-value="''" > 
+												<span class="subject">{{course.course_name}}</span>
 											</label>
 										</div>
+										<div class="error" style="color:red;">{{message}}</div>
+									</div>
 
-										<div class="btn-group subject-group" data-toggle="buttons">
-											<!-- to show the selected or checked add class active to label as below-->
-											<label class="btn active">
-												<input type="checkbox" name="math" autocomplete="off" checked>
-												<span class="subject">Math</span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="english" autocomplete="off">
-												<span class="subject">English</span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="science" autocomplete="off">
-												<span class="subject">Science</span>
-											</label>
-											<label class="btn">
-												<input type="checkbox" name="socialScience" autocomplete="off">
-												<span class="subject">Social Science</span>
-											</label>
+								</div>
+
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-md-10 col-md-offset-1 selected-grades-subjects">
+											<h3 class="text-gray-light">Your choosen grades and subjects</h3>
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-8 col-sm-offset-2">
-										<div class="form-group float-label">
-											<label class="control-label">Comments for MLG (optional)</label>
-											<input type="text" class="form-control float-input"/>
+									<div class="row">
+										<div class="col-md-10 col-md-offset-1 selected-grades-subjects">
+											<div class="form-group" ng-repeat="grade in grades">
+												<label class="label-grade">{{grade.name}}</label>
+												<!-- <button type="button" class="btn btn-sm btn-link btn-remove"><i class="fa fa-trash position-left"></i> Remove</button> -->
+												<div class="subjects-list">
+													<span class="label label-subject" ng-repeat="stcourse in stcourses" ng-if="grade.id==stcourse.level_id">{{stcourse.name}} <!-- <a class="link link-gray-light">X</a> --></span>											
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<br>
+									<br>
+									<div class="row">
+										<div class="col-sm-8 col-sm-offset-2">
+											<div class="form-group float-label">
+												<label class="control-label">Comments for MLG (optional)</label>
+												<input type="text" class="form-control float-input"/>
+											</div>
 										</div>
 									</div>
 								</div>
 
 								<br>
 								<div class="form-group text-center">
-									<button type="submit" class="btn btn-primary">Proceed</button>
+									<button type="submit" class="btn btn-primary" ng-click="submitSelectedCourses(frm)">Proceed</button>
 								</div>
 							</form>
 						</div>
