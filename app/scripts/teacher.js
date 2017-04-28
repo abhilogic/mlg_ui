@@ -27,34 +27,66 @@ angular.module('mlg')
           url  : urlParams.baseURL+urlParams.getTeacherGrades+'/'+tid+'/'+type
         });
       }
+      teacherHttpResponse.gradeList=function(){
+         return $http({
+            method:'GET',     
+            url   : urlParams.baseURL+urlParams.gradeList
+         });
+       }
 
+      teacherHttpResponse.getCourseByGrade=function(gradeid){    
+           return $http({
+             method:'GET', 
+             data : gradeid,    
+             url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+gradeid
+           });
+     }
 
-   teacherHttpResponse.gradeList=function(){
-      return $http({
-         method:'GET',     
-         url   : urlParams.baseURL+urlParams.gradeList
-      });
-    }
-
-   teacherHttpResponse.getCourseByGrade=function(gradeid){    
+     teacherHttpResponse.setTeacherSubjects=function(selected_courses){    
+           return $http({
+             method:'POST', 
+             data : selected_courses,    
+             url   : urlParams.baseURL+urlParams.setTeacherSubjects
+           });
+     }
+      teacherHttpResponse.getTeacherDetailsForContent=function(tid,grade,subject,type){
         return $http({
-          method:'GET', 
-          data : gradeid,    
-          url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+gradeid
+          method:'GET',			
+          url  : urlParams.baseURL+urlParams.getTeacherDetailsForContent+'/'+tid+'/'+grade+'/'+subject+'/'+type
         });
-  }
-
-  teacherHttpResponse.setTeacherSubjects=function(selected_courses){    
+      }
+      teacherHttpResponse.getAllCourseList=function(parent_id,type){
         return $http({
-          method:'POST', 
-          data : selected_courses,    
-          url   : urlParams.baseURL+urlParams.setTeacherSubjects
+          method:'GET',			
+          url  : urlParams.baseURL+urlParams.getAllCourseList+'/'+parent_id+'/'+type
         });
-  }
-
-  
-
-
+      }
+      teacherHttpResponse.setContentForLesson=function(lessonDetail){
+        return $http({
+          method:'post',
+          data : lessonDetail,
+          url  : urlParams.baseURL+urlParams.setContentForLesson
+        });
+      }
+      teacherHttpResponse.setTemplateDetail=function(lessonDetail){
+        return $http({
+          method:'post',
+          data : lessonDetail,
+          url  : urlParams.baseURL+urlParams.setTemplateDetail
+        });
+      }
+      teacherHttpResponse.getTemplateDetail=function(uid){
+        return $http({
+          method:'GET',
+          url  : urlParams.baseURL+urlParams.getTemplateDetail+'/'+uid
+        });
+      }
+      teacherHttpResponse.delTemplate=function(id){
+        return $http({
+          method:'GET',
+          url  : urlParams.baseURL+urlParams.delTemplate+'/'+id
+        });
+      }
         return teacherHttpResponse;
 	
 }])
@@ -246,79 +278,356 @@ angular.module('mlg')
 .controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
     var get_uid=commonActions.getcookies(get_uid);
-//    var urlData = '';
-//    var grade_text = "---Select Text----";
-//    $scope.location = $location.absUrl();
-//    urlData =  ($location.hash()).split('/');
-//
-//    if (urlData[0] != '') {
-//       grade_text = grade;
-//    }
-//    $scope.grade_text = grade_text;
+    var grade = '';
+    var standard = [];
+    var standardType = [];
+    var course = '-1';
+    var skills = '';
+    var parentId = '';
+    var skillId = [];
+    var skillName = '';
+    var subSkills = [];
+    var tempStatus = 0;
+    $scope.frm = {};
+    $scope.doc = {};
+    $scope.temp = {};
+    $scope.skillmodel = [];
+    $scope.subSkillmodel = [];
+    $scope.skill = [];
+    $scope.subSkill = [];
+    $scope.selectedTemplateModel = [];
+    $scope.templateOptionModel = [];
+    $scope.template = [];
+    $scope.templateDetail = [];
+    // template detail show
+    teacherHttpService.getTemplateDetail(get_uid).success(function(response) {
+      if (response.status == true) {
+        var temp = response.data;
+        $scope.templateDetail = response.data;
+        $scope.template = temp;
+        $scope.template.splice(0,0,{'id' :'','template_name' :'---Select template---'});
+        $scope.selectedTemplateModel = $scope.template[0][0];
+      }else{
+        $scope.msg = 'unable to find template';
+      }
+    });
+    
     teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
       if (response.status == true) {
-      $scope.subject_grade = response.response;
-      $scope.level = (response.grade.level_id).split(',');
-      $scope.subject = (response.subject.course_name).split(',');
+        $scope.level = (response.grade.level_id).split(',');
+//        $scope.level.splice(0,0, '---Select Grade---');
+//        $scope.gradeSelected = $scope.level[0];
+      }else{
+        $scope.msg = 'unable to find class';
+      }
+    });	
+    // on the basis of grade fetch the coursr list.
+    $scope.getGradeVal = function(){
+      if($scope.gradeSelected != '---Select Grade---') {
+        grade = $scope.gradeSelected;
+        teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
+          $scope.subject = response.response;
+          $scope.subject.splice(0,0,{'level_id' :'','course_id' :'','course_name' :'---Select Course---'});
+          $scope.courseSelected = $scope.subject[0][0];          
+        }).error(function(error) {
+            $scope.msg= 'Some technical error occured.';
+        });
+      }  
     }
-    });
-	
-	$scope.example1model = [];
-	$scope.example1data = [
-	{id: 1, label: "David"},
-	{id: 2, label: "Jhon"},
-	{id: 3, label: "Danny"}];
-	
-	$scope.example2mode2 = [];
-	$scope.example2data = [
-	{id: 4, label: "David"},
-	{id: 5, label: "Jhon"},
-	{id: 6, label: "Danny"}];
-	
-	function wysiwygeditor($scope) {
-		//$scope.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p>';
-		$scope.htmlcontent = $scope.orightml;
-		$scope.disabled = false;
-	};
-
-	
+    // on the basis of courseid fetch skill
+    $scope.getCourseVal = function(){
+      if($scope.gradeSelected != '---Select Subject---') {
+       course = $scope.courseSelected;
+       teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
+          var data = response.response.course_details;
+          angular.forEach(data, function(value, key) {
+            console.log(data);
+              $scope.skill.push({
+              'id' : value['course_id'],
+              'label': value['name']
+             });
+          });
+          console.log($scope.skill);
+        }).error(function(error) {
+            $scope.msg= 'Some technical error occured.';
+        });
+      }  
+    }
+    $scope.skillEvents = {
+            onItemSelect: function(item) {
+//                var string = item['id'];
+//                skills = string.split('+');
+                parentId = item['id'];
+//                skillName = skills[1];
+                skillId.push(parentId);
+                  teacherHttpService.getAllCourseList(parentId,'lesson').success(function(response) {
+                  angular.forEach(response.response.course_details, function(value, key) {
+                    $scope.subSkill.push({
+                      'id' : value['course_id'],
+                      'label': value['name']
+                     });
+                  });
+                  }).error(function(error) {
+                     $scope.msg= 'Some technical error occured.';
+                  });  
+            },
+            onItemDeselect: function(item) {
+                var Id = item['id'];
+                angular.forEach(skillId,function(value, key) {
+                    if (value == Id) {
+                     skillId.splice(key);
+                     teacherHttpService.getAllCourseList(Id,'lesson').success(function(response) {
+                      angular.forEach(response.response.course_details, function(value, key) {
+                        angular.forEach($scope.subSkill, function(val, ki) {
+                          if(value['course_id'] == val['id']) {
+                            $scope.subSkill.splice(key,1); 
+                          } 
+                        });  
+                      });
+                      }).error(function(error) {
+                         $scope.msg= 'Some technical error occured.';
+                      });
+                    }
+                  });
+            }
+       };
+       $scope.subSkillEvents = {
+            onItemSelect: function(item) {   
+              if(item != '') {
+                  subSkills.push(item['id']);
+              }
+            },
+            onItemDeselect: function(item) {
+              angular.forEach(subSkills,function(value, key) {
+                console.log(value+','+item['id']);
+                    if (value == item['id']) {
+                     subSkills.splice(key);
+                    }
+                  });
+            }
+      };
+      $scope.standardmodel = [];
+      $scope.standard = [
+	            {id:"Alabama", label: "Alabama"},
+              {id:"Alaska", label: "Alaska"},
+              {id:"Arizona", label: "Arizona"},
+              {id:"Arkansas", label: "Arkansas"},
+              {id:"California", label: "California"},
+              {id:"Colorado", label: "Colorado"},
+              {id:"Connecticut", label: "Connecticut"},
+              {id:"D.C.", label: "D.C."},
+              {id:"Massachusetts", label: "Massachusetts"},
+	          ];
+     $scope.standardEvents = {
+            onItemSelect: function(item) {   
+              if(item != '') {
+                  standard.push(item['id']);
+              }
+            },
+            onItemDeselect: function(item) {
+                standard.splice(item['id'],1);
+            }
+      };
+      $scope.standardTypemodel = [];
+      $scope.standardType = [
+	            {id:"Alabama", label: "Alabama"},
+              {id:"Alaska", label: "Alaska"},
+              {id:"Arizona", label: "Arizona"},
+              {id:"Arkansas", label: "Arkansas"},
+              {id:"California", label: "California"},
+              {id:"Colorado", label: "Colorado"},
+              {id:"Connecticut", label: "Connecticut"},
+              {id:"D.C.", label: "D.C."},
+              {id:"Massachusetts", label: "Massachusetts"},
+	          ];
+     $scope.standardTypeEvents = {
+            onItemSelect: function(item) {   
+                  standardType.push(item['id']);
+            },
+            onItemDeselect: function(item) {
+                standardType.splice(item['id'],1);
+            }
+      };
+       
+    var lessonDetail = {};
+    var textDesc ='';
+    $scope.submitDocDetail = function(data) {
+      textDesc = data;
+    }
+    $scope.submitLessonDetail = function(data) {
+      lessonDetail = {
+        tid : get_uid,
+        grade : grade,
+        course : course,
+        lesson : data.lesson_name,
+        standard : standard,
+        standard_type : standardType,
+        skills : skillId,
+        sub_skill : subSkills,
+        text_description : textDesc,
+        text_title : data.text_title,
+        doc_file : $scope.doc,
+        image_url : $scope.img,
+        video_url : $scope.video,
+     };
+    teacherHttpService.setContentForLesson(lessonDetail).success(function(response) {
+      if(response.status == true){
+        angular.element('#modal-saveTemplate').show();
+      }
+    }).error(function(error) {
+     $scope.msg= 'Some technical error occured.';
+    }); 
+  }
+  $scope.submitTemplate = function(data) {
+    lessonDetail.temp_name=data.template_name;
+    teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
+      if(response.status == true){
+        window.location.reload();
+      }
+    }).error(function(error) {
+     $scope.msg= 'Some technical error occured.';
+    }); 
+  }
+  //set template
+  $scope.getTemplate = function(){
+    var tempId = $scope.selectedTemplateModel;
+    $scope.skill=[];
+    $scope.subSkill=[];
+    tempStatus = 1;
+    angular.forEach($scope.template , function(value, key) {
+      if(tempId == value['id']) {
+        //for grade
+        angular.forEach($scope.level , function(vall, kil) {
+          if(value['grade']== vall){
+             //grade in template
+            $scope.gradeSelected = $scope.level[kil];
+            grade = vall;
+            //for subject in template
+            teacherHttpService.getTeacherDetailsForContent(get_uid,grade,value['course_id'],user_roles['teacher']).success(function(response) {
+              $scope.subject = [];
+              angular.forEach(response.response  , function(val, ki) {
+              $scope.subject.push({
+                  'level_id' : val['level_id'],
+                  'course_id': val['course_id'],
+                  'course_name':val['name'].toUpperCase()
+                 });
+              });
+              $scope.subject.splice(0,0,{'level_id' :'','course_id' :'','course_name' :'---Select Course---'}); 
+              $scope.courseSelected = $scope.subject[0][0][2];
+            });
+            teacherHttpService.getAllCourseList(value['course_id'],'lesson').success(function(response) {
+              var data = response.response.course_details;   
+              angular.forEach(data, function(skil, key) {
+                  $scope.skill.push({
+                  'id' : skil['course_id'],
+                  'label': skil['name']
+                 });
+              });
+              //for selected skill.
+              angular.forEach($scope.skill , function(val, ki) { 
+                teacherHttpService.getAllCourseList(val['id'],'lesson').success(function(response) {
+                  angular.forEach(response.response.course_details, function(subskil, key) {
+                    $scope.subSkill.push({
+                      'id' : subskil['course_id'],
+                      'label': subskil['name']
+                     });
+                  });
+                  angular.forEach($scope.subSkill , function(subvalue, kisub) {
+                   angular.forEach(value['sub_skill'] , function(subSkillValue, kil) {
+                      if(subSkillValue == subvalue['id'] ) {
+                        $scope.subSkillmodel.push($scope.subSkill[kisub]); 
+                      }
+                    });
+                  });
+                  angular.forEach(value['skills'] , function(skillValue, kil) {
+                    if(skillValue == val['id'] ) {
+                      $scope.skillmodel.push($scope.skill[ki]); 
+                    }
+                  });
+                });     
+              });
+          });
+          }
+         });
+         skillId = value['skills'];
+         subSkills = value['sub_skill'];
+         standard = value['standard'];
+         angular.forEach(value['standard'] , function(val, ki) {
+           $scope.standardmodel.push({'id' : val,'label': val });
+         });
+         standardType = value['standard_type'];
+         angular.forEach(value['standard_type'] , function(val, ki) {
+           $scope.standardTypemodel.push({'id' : val, 'label': val });
+         });
+        }
+     });  
+    }
+    $scope.deleteTemplate = function(data){
+      teacherHttpService.delTemplate(data).success(function(response) {
+        if (response.status == true) {
+          alert(response.message);
+          return true;
+        }else{
+          alert(response.message);
+        }
+      });
+    }
   }])
   
   .directive('dropZone', function() {
-    
-    
-    return function(scope, element, attrs) {
-      
-      element.dropzone({ 
-        url: "/upload",
+    return function($scope, element, attrs) {    
+      return element.dropzone({
+        url: "/mlg/teachers/uploadfile",
         maxFilesize: 100,
         paramName: "uploadfile",
         maxThumbnailFilesize: 5,
+        accept:function(file,done) {
+          if (element.context.id == 'file-doc' && file.type == 'application/pdf') {
+            done();
+          }else if (element.context.id == 'file-img' && file.type == 'image/jpeg') {
+            done();
+          }else if (element.context.id == 'file-video' && file.type == 'video/*') {
+            done();
+          }else{
+             this.removeFile(file)
+           alert('please choose appropriate file');
+          }
+        },
         init: function() {
-          scope.files.push({file: 'added'}); // here works
-          this.on('success', function(file, json) {
+          var doc = '';
+          var images = '';
+          var videos = '';
+          this.on("success", function (file) {
+            if(file.type == 'application/pdf') {
+              if (doc != '') {
+                doc = doc +','+file.xhr.response;
+                $scope.doc = doc;
+              }else{
+                doc = file.xhr.response;
+                $scope.doc = doc;
+              } 
+            }else if(file.type == 'image/jpeg') {
+              if (images != '') {
+                images = images +','+file.xhr.response;
+                $scope.img = images;
+              }else{
+                images = file.xhr.response;
+                $scope.img = images;
+              } 
+            }else if(file.type == 'video/*') {
+              if (videos != '') {
+                videos = videos +','+file.xhr.response;
+                $scope.video = videos;
+              }else{
+                videos = file.xhr.response;
+                $scope.video = videos;
+              } 
+            }      
           });
-          
-          this.on('addedfile', function(file) {
-            scope.$apply(function(){
-              alert(file);
-              scope.files.push({file: 'added'});
-            });
-          });
-          
-          this.on('drop', function(file) {
-            alert('file');
-          });
-          
-        }
-        
-      });
-      
+        }      
+      });  
     }
   })
-  
-  
-  
   
 .controller("studentProgress", function ($scope) {
 	$scope.labels = ["Conquered", "Practiced", "Not Attacked"];
@@ -460,11 +769,7 @@ angular.module('mlg')
 	
     };
 	
-})
+});
   	
 //teacherStudentProfile  studentPerformance
 
-  
-
-  
-  ;

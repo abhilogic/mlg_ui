@@ -34,7 +34,13 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   upgradePackage :'/users/upgrade',
   getStudentDetail: '/teachers/getStudentDetail',
   getTeacherGrades: '/teachers/getTeacherGradeSubject',
+  getTeacherDetailsForContent: '/teachers/getTeacherDetailsForLesson',
+  getAllCourseList : '/courses/getAllCourseList',
+  setContentForLesson : '/teachers/setContentForLesson',
   guestLogin: '/users/guestLogin',
+  setTemplateDetail : '/teachers/saveTemplate',
+  getTemplateDetail : '/teachers/getTemplate',
+  delTemplate : '/teachers/deleteTemplate',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -198,7 +204,7 @@ teacher  : 30,
 		controller : 'teacherOnBoardingCtrl',
   }).when('/teacher/add_content',{
 		templateUrl : 'views/dashboard/teacher-content-add-lesson.html',
-		controller : 'teacherCreateClass',
+		controller : 'teacherLessonCtrl',
   }).when('/teacher/create-class',{
 		templateUrl : 'views/dashboard/teacher-create-class.html',
 		controller : 'teacherLessonCtrl',

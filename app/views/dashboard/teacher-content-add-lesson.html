@@ -1,25 +1,4 @@
-<script src="assets/js/main.js"></script>
-	<!-- Main navbar -->
-	<nav class="navbar navbar-default navbar-dashboard navbar-static-top">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle sidebar-mobile-main-toggle" aria-expanded="false">
-				<span class="sr-only">Menu</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="dashboard-dashboard.html"><img src="assets/img/logo.png" alt="" /></a>
-		</div>
-		<div class="search_form">
-			<div class="form-group has-feedback has-feedback-left">
-				<input type="search" class="form-control" placeholder="Type here to search...">
-				<div class="form-control-feedback"><i class="fa fa-search"></i><span class="sr-only">Search</span></div>
-			</div>
-		</div>
-	</nav>
-	<!-- /main navbar -->
-
-	<!-- Page container -->
+<!-- Page container -->
 	<div class="page-container">
 
 		<!-- Page content -->
@@ -66,18 +45,13 @@
 			<div class="content-wrapper">
 				<!-- Content area -->
 				<div class="content">
-
 					<!-- Teacher Setting  Panel  -->
 					<div class="panel panel-flat add-content-panel">
 						<div class="panel-heading">
 							<h5 class="panel-title"><i class="icon icon-arrow-left"></i>  Add Lessons</h5>
 							<div class="heading-elements">
-								<select class="mlg-selectpicker form-control" title="Import Template" data-width="auto" data-size="auto">
-									 <option>Template 1</option>
-									 <option>Template 2</option>
-									 <option>Template 3</option>
-									 <option>Template 4</option>
-									 <option>Template 5</option>
+								<select class="mlg-selectpicker form-control" title="Import Template" data-width="auto" data-size="auto"ng-model="selectedTemplateModel" ng-change="getTemplate(selectedTemplate)">
+									 <option  ng-repeat="temp in template" value="{{temp.id}}">{{temp.template_name}}</option>
 								</select>
 							</div>
 						</div>
@@ -89,14 +63,9 @@
                       <div class="form-group">
 												<label for="" class="col-xs-5 control-label">Grade :</label>
 	                      <div class="col-xs-7">
-													<select class="mlg-selectpicker form-control" title="Sixth Grade" data-size="auto">
-													 <option>Sixth Grade</option>
-													 <option>Seventh Grade</option>
-													 <option>Eight Grade</option>
-													 <option>Nine Grade</option>
-													 <option>Ten Grade</option>
-													 <option>Eleventh Grade</option>
-													 <option>Twelfth Grade</option>
+													<select class="mlg-selectpicker form-control "  data-size="auto" ng-model="gradeSelected" ng-change="getGradeVal(gradeSelected)">
+													 <option value="">---Select Grade---</option>
+                            <option  ng-repeat="grade in level track by $index"ng-if="$index>=0" value="{{grade}}">Grade {{grade}}</option>
 													</select>
 	                      </div>
                       </div>
@@ -106,93 +75,24 @@
 										<div class="row">
 											<div class="form-group">
 												<label for="" class="col-xs-5 control-label">Subject :</label>
-												<div class="col-xs-7">
-														<select class="mlg-selectpicker form-control" title="Mathematics" data-size="auto">
-														 <option>Mathematics</option>
-														 <option>Science</option>
-														 <option>Social Science</option>
-														 <option>History</option>
-														 <option>Geography</option>
+												<div class="col-xs-7" id="coursetemp">
+													<select class="mlg-selectpicker form-control" data-size="auto" ng-model="courseSelected" ng-change="getCourseVal(courseSelected)">
+                            <!--<option value="">---Select Course---</option>--> 
+                            <option  ng-repeat="course in subject track by $index"ng-if="$index>=0"value="{{course.course_id}}">{{course.course_name}}</option>
 													</select>
 												</div>
 											</div>
 										</div>
                   </div>
                 </div>
-								<!-- <div class="row repeat-row">
-                  <div class="col-lg-5">
-                    <div class="row">
-                      <div class="form-group">
-												<label for="" class="col-xs-5 control-label">Assessment Target :</label>
-	                      <div class="col-xs-7">
-													<input type="text" class="form-control normal-input" value="Target 1"/>
-	                      </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-5 col-lg-offset-2">
-										<div class="row">
-											<div class="form-group">
-												<label for="" class="col-xs-5 control-label">Secondary target :</label>
-												<div class="col-xs-7">
-														<input type="text" class="form-control normal-input"/>
-													</select>
-												</div>
-											</div>
-										</div>
-                  </div>
-                </div> -->
-								<!-- <div class="row repeat-row">
-                  <div class="col-lg-5">
-                    <div class="row">
-                      <div class="form-group">
-												<label for="" class="col-xs-5 control-label">Claim :</label>
-	                      <div class="col-xs-7">
-													<select class="mlg-selectpicker form-control" title="Student can read" data-size="auto">
-													 <option>Sixth Grade</option>
-													 <option>Seventh Grade</option>
-													 <option>Eight Grade</option>
-													 <option>Nine Grade</option>
-													 <option>Ten Grade</option>
-													 <option>Eleventh Grade</option>
-													 <option>Twelfth Grade</option>
-													</select>
-	                      </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-5 col-lg-offset-2">
-										<div class="row">
-											<div class="form-group">
-												<label for="" class="col-xs-5 control-label">Difficulty Level :</label>
-												<div class="col-xs-7">
-														<select class="mlg-selectpicker form-control" title="Moderate" data-size="auto">
-														 <option>Mathematics</option>
-														 <option>Science</option>
-														 <option>Social Science</option>
-														 <option>History</option>
-														 <option>Geography</option>
-													</select>
-												</div>
-											</div>
-										</div>
-                  </div>
-                </div> -->
 								<div class="row repeat-row">
                   <div class="col-lg-5">
                     <div class="row">
                       <div class="form-group">
 												<label for="" class="col-xs-5 control-label">Standards :</label>
 	                      <div class="col-xs-7">
-													<select class="mlg-selectpicker form-control" multiple title="select standards" data-size="auto">
-													 <option>Sixth Grade</option>
-													 <option>Seventh Grade</option>
-													 <option>Eight Grade</option>
-													 <option>Nine Grade</option>
-													 <option>Ten Grade</option>
-													 <option>Eleventh Grade</option>
-													 <option>Twelfth Grade</option>
-													</select>
+                          <div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"
+                               ng-selected="standardmodel == sel.value"></div>
 	                      </div>
                       </div>
                     </div>
@@ -202,13 +102,7 @@
 											<div class="form-group">
 												<label for="" class="col-xs-5 control-label">Standard Type :</label>
 												<div class="col-xs-7">
-														<select class="mlg-selectpicker form-control" multiple title="Standard Type" data-size="auto">
-														 <option>Mathematics</option>
-														 <option>Science</option>
-														 <option>Social Science</option>
-														 <option>History</option>
-														 <option>Geography</option>
-													</select>
+												  <div ng-dropdown-multiselect="" options="standard" selected-model="standardTypemodel" events="standardTypeEvents"></div>
 												</div>
 											</div>
 										</div>
@@ -220,7 +114,7 @@
                       <div class="form-group">
 												<label for="" class="col-xs-5 control-label">Lesson Name :</label>
 	                      <div class="col-xs-7">
-													<input type="text" class="form-control normal-input" value=""/>
+													<input type="text" class="form-control normal-input" ng-model="frm.lesson_name"/>
 	                      </div>
                       </div>
                     </div>
@@ -229,8 +123,9 @@
 										<div class="row">
 											<div class="form-group">
 												<label for="" class="col-xs-5 control-label">Skills :</label>
-												<div class="col-xs-7">
-														<div ng-dropdown-multiselect="" options="example2data" selected-model="example2mode2"></div>
+												<div class="col-xs-7"> 
+                          <div ng-dropdown-multiselect="" options="skill" selected-model="skillmodel" events="skillEvents">
+                          </div>
 												</div>
 											</div>
 										</div>
@@ -242,7 +137,8 @@
                       <div class="form-group">
 												<label for="" class="col-xs-5 control-label">Sub skills :</label>
 	                      <div class="col-xs-7">
-								<div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
+													<div ng-dropdown-multiselect="" options="subSkill" selected-model="subSkillmodel"events="subSkillEvents">
+                          </div>
 	                      </div>
                       </div>
                     </div>
@@ -254,15 +150,13 @@
 								<div class="row  table-of-content">
 									<div class="col-md-4">
 										<ul class="list-group">
-										  <li class="list-group-item">Template 1 <i class="icon icon-trash text-danger pull-right"></i> <i class="icon icon-pencil pull-right text-primary margin-right-10"></i> </li>
-										  <li class="list-group-item">Template 2 <i class="icon icon-trash text-danger pull-right"></i> <i class="icon icon-pencil pull-right text-primary margin-right-10"></i> </li>
-										  <li class="list-group-item">Template 3 <i class="icon icon-trash text-danger pull-right"></i> <i class="icon icon-pencil pull-right text-primary margin-right-10"></i> </li>
+                      <li class="list-group-item"ng-model="templateOptionModel" ng-repeat="templ in templateDetail track by $index" ng-if="$index>0">{{templ.template_name}}<a ng-click="deleteTemplate( templ.id )"><i class="icon icon-trash text-danger pull-right"></i></a> <a><i class="icon icon-pencil pull-right text-primary margin-right-10"></i></a> </li>
 										</ul>
 										<button type="button" class='btn btn-background-none text-primary margin-bottom-10 btn-add'><i class="icon icon-plus-outline"></i> Add New</button>
 									</div>
 									<div class="col-md-8 right-portion">
 
-											<h5 class="panel-title margin-top-0 margin-sm-10"><input type="text" class="form-control" placeholder="Enter Lesson Title"></h5>
+											<h5 class="panel-title margin-top-0 margin-sm-10"><input type="text" class="form-control" ng-model="frm.text_title" placeholder="Enter Lesson Title"></h5>
 										<ul class="nav nav-tabs">
 										  <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
 										  <li><a data-toggle="tab" href="#doc">Document</a></li>
@@ -279,19 +173,19 @@
 													</div>
 													<div id="doc" class="tab-pane fade">
 														<form></form>
-														<form action="/upload" class="dropzone" drop-zone="" id="file-doc"></form>
+														<form action="" class="dropzone" drop-zone="" id="file-doc"></form> 
 													</div>
 													<div id="img" class="tab-pane fade">
-														<form action="/upload" class="dropzone" drop-zone="" id="file-img"></form>
+														<form action=""class="dropzone" drop-zone="" id="file-img"></form>
 													</div>
 													<div id="video" class=	"tab-pane fade">
-														<form action="/upload" class="dropzone" drop-zone="" id="file-video"></form>
+														<form action="" class="dropzone" drop-zone="" id="file-video"></form>
 														<br/>
 														<br/>
-														<input type="text" class="form-control" placeholder="Enter Video Url"/>
+                            <input type="text" class="form-control" placeholder="Enter Video Url" ng-model="htmlcontent.video_url"/>
 													</div>
 													<div class="text-right margin-top-15">
-														<button type="button" class="btn btn-primary">Save</button>
+														<button type="submit" class="btn btn-primary"ng-click="submitDocDetail(htmlcontent)">Save</button>
 													</div>
 												</div>
 											</div>
@@ -304,9 +198,10 @@
 						</div>
 						<div class="panel-footer text-center">
 							<div class="text-center  margin-top-20">
-								<button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
+								<button type="submit" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10"data-toggle="modal" data-target="#modal-saveTemplate" ng-click="submitLessonDetail(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
 	              <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview">Preview</button>
-							</div>
+							
+              </div>
 						</div>
             <!-- /panel-body -->
 					</div>
@@ -338,7 +233,7 @@
 									<span>GRADE</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>Fifth Grade (5)</p>
+									<p>{{gradeSelected}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -346,15 +241,7 @@
 									<span>SUBJECT</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>English & Language Arts (ela)</p>
-								</div>
-							</div>
-							<div class="row table-repeat-row">
-								<div class="col-md-3 table-cell">
-									<span>LESSON NAME</span>
-								</div>
-								<div class="col-md-9 table-cell">
-									<p>Basic Grammer</p>
+									<p>{{courseSelected.name}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -371,75 +258,72 @@
 								</div>
 								<div class="col-md-9 table-cell">
 									<ul>
-										<li>College & Career Readiness Anchor Standards for Reading</li>
-										<li>Key Ideas & Details</li>
+                    <li ng-repeat="standard in standardmodel">{{standard.id}}</li>
 									</ul>
 								</div>
 							</div>
-							<div class="row table-repeat-row">
-								<div class="col-md-3 table-cell">
-									<span>Claim</span>
-								</div>
-								<div class="col-md-9 table-cell">
-									<p>Students can produce effective & well-grounded writing for a rnage
-									of purpose & audiences (produce effective and well ground writing)</p>
-								</div>
-							</div>
-							<div class="row table-repeat-row">
-								<div class="col-md-3 table-cell">
-									<span>DEPTH OF KNOWLEDGE</span>
-								</div>
-								<div class="col-md-9 table-cell">
-									<p>Level 1 requires or recite facts or to use simple skills or abilities. Oral
-									reading that does not include analysis of the text as well as basic
-									comprehension of a text is included. Items require only a shallow
-									understanding of text presented & often consist of verbatim recall from
-									text or simple understanding of a single word or phase (Level 1)</p>
-								</div>
-							</div>
-							<div class="row table-repeat-row">
-								<div class="col-md-3 table-cell">
-									<span>ASSESSMENT TARGET</span>
-								</div>
-								<div class="col-md-9 table-cell">
-									<span>This is lessson.</span>
-								</div>
-							</div>
-							<!-- <div class="question-block">
-								<div class="row">
-									<div class="col-md-12">
-										<h5 class="ques">Q1.  What comes in between 14 __ 15.</h5>
-									</div>
-								</div>
-								<div class="row option-block">
-									<div class="col-md-7 margin-sm-bottom-10">
-										<span class="ans"> A. 13 </span>
-									</div>
-									<div class="col-md-5 margin-sm-bottom-10">
-										<span> A. 16 </span>
-									</div>
-								</div>
-								<div class="row option-block margin-bottom-0 margin-sm-top-0">
-									<div class="col-md-7 margin-sm-bottom-10">
-										<span> C. 15 </span>
-									</div>
-									<div class="col-md-5 margin-sm-bottom-10">
-										<span> D. 14 </span>
-									</div>
-								</div>
-							</div> -->
 							<iframe src="http://www.youtube.com/embed/W7qWa52k-nE"
    width="100%" height="315" frameborder="0" allowfullscreen></iframe>
 						</div>
 		      </div>
 		      <div class="modal-footer border-top-0 padding-top-0">
 						<div class="text-center">
-		        	<button type="button" class="btn btn-primary" data-dismiss="modal">Submit Question</button>
+		        	<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 						</div>
 		      </div>
 		    </div>
 		  </div>
 		</div>
+      <!-- add template  -->
+  <div id="modal-saveTemplate" class="modal fade modal-saveTemplate" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form class="form">
+       <div class="form-group float-label">
+        <label class="control-label">Template Name</label>
+        <input type="text" class="form-control float-input" ng-model="temp.template_name"/>
+       </div>
+          </form>
+        </div>
+        <div class="modal-footer border-top-0">
+          <button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary" data-dismiss="modal"ng-click="submitTemplate(temp)">Save</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- add template -->
+
 </section>
 
-
+<script type="text/javascript">
+  $('.nav-tabs > li > a').each(function(index) {
+        var href = $(this).attr('href');
+        console.log(href);
+	       $(this).attr('href','/teacher/add_content'+href);
+   });
+  
+	$(document).ready(function(){
+    var owl = $(".img-ans-owl-carousel");
+			owl.owlCarousel({
+				margin: 20,
+				nav: false,
+				loop: false,
+				responsive: {
+					1000: {
+						items: 6
+					}
+				}
+			});
+	})
+  
+  
+  
+</script>
