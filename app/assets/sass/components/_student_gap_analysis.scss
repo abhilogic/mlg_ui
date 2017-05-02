@@ -100,7 +100,7 @@ $analysis-nav-border-color: $gray-lighter;
   .label{
     display: inline-block;
     margin-bottom: 8px;
-    @include padding(8px null);
+    @include padding(8px 15px);
     border-radius: 20px;
   }
 }

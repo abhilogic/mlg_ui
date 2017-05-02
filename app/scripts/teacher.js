@@ -803,7 +803,70 @@ angular.module('mlg')
 	
     };
 	
-});
+})
   	
-//teacherStudentProfile  studentPerformance
+//teacherStudentProfile  studentPerformance 
 
+
+.controller('teacherAutoGenerateAssignment', ['$scope', function($scope) {
+    
+        $scope.autoGenerateAssignmentModel = [];
+        $scope.autoGenerateAssignmentData = [
+            {id: 1, label: "All"},
+            {id: 2, label: "Sahil Sharma"},
+            {id: 3, label: "Aditya Parihar"},
+            {id: 4, label: "Narendra Modi"},
+            {id: 5, label: "Rahul Gandhi"},	
+			{id: 6, label: "Soniya Gandhi"}];
+        
+        /*$scope.autoGenerateAssignmentSetting = {
+            smartButtonMaxItems: 2,
+        };*/
+}])
+
+.controller('teacherCustomAssignment', ['$scope', function($scope) {
+    
+        $scope.autoAssignmentModel = [];
+        $scope.autoAssignmentData = [
+            {id: 1, label: "All"},
+            {id: 2, label: "Sahil Sharma"},
+            {id: 3, label: "Aditya Parihar"},
+            {id: 4, label: "Narendra Modi"},
+            {id: 5, label: "Rahul Gandhi"},	
+			{id: 6, label: "Soniya Gandhi"}];
+        
+        /*$scope.autoGenerateAssignmentSetting = {
+            smartButtonMaxItems: 2,
+        };*/
+}])
+
+.directive('owlcarousel', function() {
+
+    var linker = function(scope, element, attr) {
+        var loadCarousel = function() {
+
+            element.owlCarousel({
+                items: 1,
+				loop: true,
+				margin: 10,
+				autoplay: true,
+				autoplayTimeout: 2000,
+            });
+        }
+
+        scope.$watch("juego.Galerias.Videos", function(value) {
+            loadCarousel(element);
+        })
+    }
+
+    return {
+        restrict: "A",
+        link: linker
+    }
+
+})
+
+
+
+
+;

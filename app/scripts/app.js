@@ -382,9 +382,53 @@ $scope.userInfo=userInfo;
 };
 
 	
+})
+
+.directive('asideParent', function () {
+return {
+	restrict: 'E',
+	templateUrl: 'include/sidebar.html',
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+		var cookieString=$cookieStore.get("userObj");
+		var userInfo=parseUser(cookieString);
+		function parseUser(cookie){
+	var keyVals=cookie.split(',');
+	var obj={};
+	angular.forEach(keyVals,function(value,key){
+		var vals=value.split('=');
+		obj[vals[0]]=vals[1];
+	});
+	return obj;
+}
+$scope.userInfo=userInfo;
+	}]
+};
+
 	
 })
 
 
+.directive('topSearchBar', function () {
+return {
+	restrict: 'E',
+	templateUrl: 'include/search-bar.html',
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+		var cookieString=$cookieStore.get("userObj");
+		var userInfo=parseUser(cookieString);
+		function parseUser(cookie){
+	var keyVals=cookie.split(',');
+	var obj={};
+	angular.forEach(keyVals,function(value,key){
+		var vals=value.split('=');
+		obj[vals[0]]=vals[1];
+	});
+	return obj;
+}
+$scope.userInfo=userInfo;
+	}]
+};
+
+	
+})
 
 ;

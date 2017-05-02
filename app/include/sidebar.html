@@ -3,21 +3,21 @@
 
 
 <div class="sidebar-user">
-						<div class="category-content" >
-							<div class="media media-user" data-toggle="collapse" data-target="#collapseUserOptions" aria-expanded="true">
-									<div class="media-left"><!-- <img src="../assets/img/placeholder.jpg" class="img-circle img-lg" alt="Andrew Garfield"> --></div>
-									<div class="media-body media-middle">
-										<span class="media-heading text-semibold">{{frm.selectedchild.children_name}} <i class="fa fa-angle-down"></i></span>
-									</div>
-							</div>
-						</div>
-						<div class="collapse in" id="collapseUserOptions" aria-expanded="true">
-							<ul class="nav-child" >								
-								<li class="active" ng-repeat="u in frm.childnames"><a href="parent/dashboard/{{u.user_id}}">{{u.children_name}}</a></li>
-								
-							</ul>
-						</div>
-				</div>
+		<div class="category-content" >
+			<div class="media media-user" data-toggle="collapse" data-target="#collapseUserOptions" aria-expanded="true">
+					<div class="media-left"><!-- <img src="../assets/img/placeholder.jpg" class="img-circle img-lg" alt="Andrew Garfield"> --></div>
+					<div class="media-body media-middle">
+						<span class="media-heading text-semibold">{{frm.selectedchild.children_name}} <i class="fa fa-angle-down"></i></span>
+					</div>
+			</div>
+		</div>
+		<div class="collapse in" id="collapseUserOptions" aria-expanded="true">
+			<ul class="nav-child" >								
+				<li class="active" ng-repeat="u in frm.childnames"><a href="parent/dashboard/{{u.user_id}}">{{u.children_name}}</a></li>
+				
+			</ul>
+		</div>
+</div>
 
 
 

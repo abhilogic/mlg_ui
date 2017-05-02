@@ -43,6 +43,8 @@
 @import "components/modal";
 @import "components/data-table";
 @import "components/scope-sequence-listing";
+@import "components/award-achived";
+@import "components/carousel";
 
 // Form Components
 @import "components/forms/forms";
@@ -83,6 +85,7 @@
 @import "pages/payment";
 
 // Pages Dashboard
+@import "pages/teacher-account";
 @import "pages/teacher-dashboard";
 @import "pages/teacher-student-profile";
 @import "pages/subscriptions";
@@ -105,5 +108,7 @@
 @import "pages/teacher-content-add-lesson";
 @import "pages/teacher-create-class";
 @import "pages/teacher-rewards";
-@import "pages/teacher-notification";
-@import "pages/teacher-message";
+@import "pages/notification";
+@import "pages/chat";
+@import "pages/comingsoon";
+@import "pages/char-group-user-list";

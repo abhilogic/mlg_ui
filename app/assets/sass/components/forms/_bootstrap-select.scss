@@ -198,7 +198,7 @@ select.selectpicker {
 
   // The selectpicker dropdown
   .dropdown-menu {
-    min-width: 100%;
+    min-width: 100% !important;
     @include box-sizing(border-box);
 
     &.inner {

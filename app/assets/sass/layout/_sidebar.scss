@@ -108,6 +108,26 @@
             outline: 0;
         }
       }
+
+			// a tab has sub-menu
+			>[href*="#"]{
+				position: relative;
+				&:before {
+					content:'';
+					@include position(absolute, 21px 15px null null);
+					width: 0px;
+					height:0px;
+					@include border-style(solid);
+					@include border-width(0px 4px 4px 4px);
+					@include border-color(transparent transparent $white transparent);
+				}
+				&.collapsed {
+					&:before {
+						@include border-width(4px 4px 0px 4px);
+						@include border-color($white transparent transparent transparent);
+					}
+				}
+			}
     }
   }
 
@@ -115,8 +135,23 @@
 	.sub-menu{
 		margin: 0;
 		padding-left: 35px;
+		list-style: none;
 		>li{
 			padding: 0;
+			position: relative;
+			&:before {
+				content:'';
+				@include position(absolute, 11px null null -18px);
+				width: 5px;
+				height: 5px;
+				background: $sidebar-active-border-color;
+				@include border-radius(100%);
+			}
+			&.active {
+				&:before {
+					background: darken($sidebar-active-border-color,30%);
+				}
+			}
 			a{
 				text-transform: none;
 				border-width: 0;
@@ -124,6 +159,10 @@
 				@include padding(5px  null);
 				.link__text{
 					margin: 0;
+					.icon {
+						font-size: 12px;
+						@include margin(null 4px null null);
+					}
 				}
 			}
 		}

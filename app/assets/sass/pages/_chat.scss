@@ -1,0 +1,229 @@
+// page specific color variables
+$panel-hd-bg-color: #c9cfd5;
+
+.panel {
+  &.panel-chat {
+    .panel-heading {
+      background: $panel-hd-bg-color;
+      @include padding(7px null);
+      @include border-width(null null 0px null);
+      .panel-title {
+        .group-info {
+          list-style: none;
+          @include padding(null null null 0px);
+          @include margin(null null 0px null);
+          li {
+            display: inline-block;
+            vertical-align: middle;
+            .img-cover {
+              display: inline-block;
+              position: relative;
+              @include margin(null 10px null 10px);
+              &:before {
+                @include position(absolute, null -1px 6px null);
+                content: '';
+                border: 2px solid $white;
+                width: 10px;
+                height: 10px;
+                @include border-radius(100%);
+                z-index: 10;
+              }
+              &.online {
+                &:before {
+                  background: #3aa71f;
+                }
+              }
+              &.offline {
+                &:before {
+                  background: #dbde1e;
+                }
+              }
+            }
+            .group-img, .student-img {
+
+            }
+          }
+        }
+        span {
+          display: block;
+          color: black;
+          &.group-name, &.student-name {
+            font-size: 14px;
+            font-weight: $semibold;
+            @include margin(null null 5px nul);
+          }
+          &.no-of-users, &.status{
+            font-size: 12px;
+          }
+        }
+      }
+      .heading-elements{
+        text-align: right;
+        @include padding(null 5px null null);
+        @media screen and (max-width: $screen-xs-max){
+        @include position(absolute, 0px 15px null null);
+        }
+        .dropdown-menu {
+          right: 0px;
+          left: auto;
+          @include border-radius(0px);
+          @include padding(0px null);
+          li {
+            a {
+              @include padding(10px null);
+            }
+          }
+        }
+      }
+    }
+    // panel-heading
+
+    .panel-body {
+      height: 65vh;
+      @include padding(null 0px null null);
+      overflow: hidden;
+      @media screen and (min-height: 700px){
+        height: 70vh;
+      }
+    }
+    // panel-body
+    .panel-footer {
+      background: $panel-hd-bg-color;
+      .form-group {
+        @include margin(null null 0px null);
+      }
+      .form-control {
+        background: white;
+      }
+      .btn-send {
+        @include box-shadow(0 0 16px rgba(0,0,0,0.4));
+        color: $white;
+        width: 40px;
+        height: 40px;
+        border: 0px;
+        @include border-radius(100%);
+        background: $brand-primary;
+        font-size: 18px;
+        bottom: -30px;
+        right: -30px;
+        .fa {
+          font-size: 16px;
+          @include margin(null null null -3px);
+        }
+        &:focus {
+          outline: 0px;
+        }
+      }
+    }
+    // panel-footer
+  }
+}
+
+
+// msg-listing
+
+.msg-listing {
+  @include padding(null 11px null null);
+  .sending-day {
+    text-align: center;
+    position: relative;
+    &:before {
+      content:'';
+      @include position(absolute, null null 7px 0px);
+      width: 100%;
+      height: 1px;
+      background: rgba($gray,0.4);
+      z-index: 0;
+    }
+    span {
+      background: white;
+      @include padding(7px 20px);
+      color: $gray;
+      border: 1px solid rgba($gray,0.4);
+      @include border-radius(30px);
+      position: relative;
+      z-index: 2;
+    }
+  }
+  .msg {
+    max-width: 65%;
+    @include padding(12px 9px);
+    @include border-radius(5px);
+    display: inline-block;
+    position: relative;
+    @include margin(10px null null 10px);
+    display: table;
+    clear: both;
+    .name {
+      display: block;
+      font-weight: $bold;
+      @include margin(null null 5px null);
+    }
+    .msg-text {
+      display: block;
+    }
+    time {
+      display: block;
+      text-align: right;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  }
+  // msg
+  .receiver-conversation {
+    @include padding(10px null 10px null);
+    .msg {
+      background: rgba(0,0,0,.07);
+      time {
+        color: rgba($gray,0.5);
+      }
+      &.msg-seen {
+        time {
+          .icon {
+            color: $brand-primary;
+          }
+        }
+      }
+
+      // msg-tooltip
+        &:before {
+          content:'';
+          @include position(absolute, 32% null null -14px);
+          width: 0px;
+          height: 0px;
+          @include border-width(9px 11px 11px null);
+          @include border-style(solid);
+          @include border-color(transparent rgba(0,0,0,.07) transparent transparent  );
+        }
+    }
+  }
+  // receiver-contversation
+  .sender-conversation {
+    @include padding(10px null 10px null);
+    .msg {
+      float: right;
+      text-align: left;
+      max-width: 65%;
+      background: $brand-primary;
+      color: white;
+      &.msg-seen {
+        time {
+          .icon {
+            color: white;
+          }
+        }
+      }
+      // msg-tooltip
+      &:before {
+        content:'';
+        @include position(absolute, 32% -14px null null);
+        width: 0px;
+        height: 0px;
+        @include border-width(9px null 11px 11px);
+        @include border-style(solid);
+        @include border-color(transparent transparent transparent  $brand-primary);
+      }
+    }
+  }
+  // sender-conversation
+}

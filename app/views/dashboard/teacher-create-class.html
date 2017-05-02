@@ -1,6 +1,6 @@
 
 	<!-- Main navbar -->
-	<nav class="navbar navbar-default navbar-dashboard navbar-static-top">
+	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle sidebar-mobile-main-toggle" aria-expanded="false">
 				<span class="sr-only">Menu</span>
@@ -92,7 +92,7 @@
 							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons" ng-controller="tableRow">
 								<thead>
 									<tr>
-										<th class="sr-no">#</th>
+										<th class="sr-no" width="5%">#</th>
 										<th class="last-name">Last Name</th>
 										<th class="first-name">First Name</th>
 										<th class="parent-student-email">Parent or Student E-mail</th>
@@ -132,15 +132,13 @@
 									</tr>
 
 									<tr>
-										<td><input type="text" ng-model="id" placeholder="ID" ></td>
-										<td><input type="text" ng-model="Fname" placeholder="First Name" ></td>
+										<td class="classId"><input type="text" ng-model="id" placeholder="ID" ></td>
 										<td><input type="text" ng-model="Lname" placeholder="Last Name" ></td>
+										<td><input type="text" ng-model="Fname" placeholder="First Name" ></td>
 										<td><input type="text" ng-model="email" placeholder="Email" ></td>
 										<td><input type="text" ng-model="Uname" placeholder="User Name" ></td>	
 										<td><input type="text" ng-model="pass" placeholder="Password" ></td>
 										<td><button type="button" ng-click="addPerson()">Save</button></td>
-										<td></td>
-										<td></td>
 									</tr>
 								</tbody>
 							</table>

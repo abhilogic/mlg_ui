@@ -28,7 +28,8 @@
   padding: 3px 8px;
   color: $tooltip-color;
   text-align: center;
-  background-color: $tooltip-bg;
+  //background-color: $tooltip-bg;
+  background-color: #1e3755;
   border-radius: $border-radius-base;
 }
 
@@ -47,7 +48,8 @@
     left: 50%;
     margin-left: -$tooltip-arrow-width;
     border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
-    border-top-color: $tooltip-arrow-color;
+  //  border-top-color: $tooltip-arrow-color;
+    border-top-color: #1e3755;
   }
   &.top-left .tooltip-arrow {
     bottom: 0;
