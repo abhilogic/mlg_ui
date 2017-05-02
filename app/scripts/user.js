@@ -354,17 +354,18 @@ angular.module('mlg').filter('moment', function() {
            setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',role='+role_name+'"');
            //var user_type=user_roles.indexOf(response.role_id);
           // $location.url('select_children');
-          if (role_id == '3') {
+          /*if (role_id == '3') {
             $location.url('teacher/create_account');
             return true;
-          }
+          }*/
           if (role_id == '4') {
             window.location.href='/mlg_ui/sapp/journey';
             return true;
           }
             // To Redirect User on his account last step page.
-             // call API to get last step track             
-    		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
+             // call API to get last step track 
+             if (role_id == '2') {            
+    			loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
     			if(stepNum.response.step.step_completed!=null ){    				
     				//var step_page = stepNum.response.step.step_completed; 
 
@@ -386,6 +387,32 @@ angular.module('mlg').filter('moment', function() {
 					
 	   			}
 			});
+    	}
+
+
+    	if (role_id == '3') {    		
+			loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
+				if(stepNum.response.step.step_completed!=null ){    				
+					//var step_page = stepNum.response.step.step_completed; 
+					if(stepNum.response.step.step_completed==0 ){ 
+						$location.url('teacher/create_account'); 
+					}
+					else if(stepNum.response.step.step_completed==1){
+						 $location.url('teacher/select_courses');
+					}
+					else if(stepNum.response.step.step_completed==2){
+							 $location.url('teacher/payment_page');
+						}
+						else if(stepNum.response.step.step_completed==3){ 
+							$location.url('teacher/dashboard'); 
+						}								
+							
+				   	}
+				});
+
+    	}
+
+
 
          }
 	   }).error(function(error) {
