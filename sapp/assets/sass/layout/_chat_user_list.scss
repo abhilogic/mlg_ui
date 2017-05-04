@@ -17,6 +17,7 @@
     @include  cssSprite($chat_bar_desktop);
     @media screen and (max-width: $screen-mobile-md) {
       @include cssSprite($chat_bar_mobile);
+      right: 10px;
      }
      .chat-notification {
        @include position(absolute, -10px -10px null null);

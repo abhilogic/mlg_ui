@@ -1,4 +1,4 @@
-
+$animation_duration: 900s;
 .cloud-cover {
   display: none;
   @media screen and (min-width: $screen-xs-max){
@@ -10,22 +10,23 @@
     &:first-child {
       top: $cloud_first_top_pos;
       left: 50%;
-      @include animation(cloud-animation_1 300s  linear infinite );
+      @include animation(cloud-animation_1 $animation_duration  linear infinite );
     }
+
     &:nth-child(2) {
       bottom: $cloud_second_bottom_pos;
       left: 80%;
-      @include animation(cloud-animation_2 300s  linear infinite );
+      @include animation(cloud-animation_2 $animation_duration  linear infinite );
     }
     &:nth-child(3) {
       top: $cloud_third_top_pos;
       left: 80%;
-      @include animation(cloud-animation_3 300s  linear infinite );
+      @include animation(cloud-animation_3 $animation_duration  linear infinite );
     }
     &:nth-child(4) {
       top: $cloud_fourth_top_pos;
       left: 30%;
-      @include animation(cloud-animation_4 300s  linear infinite );
+      @include animation(cloud-animation_4 $animation_duration  linear infinite );
     }
   }
 }
@@ -70,6 +71,26 @@
         height: 100%;
         left: 0px;
         top: 0px;
+        .castles_map_web_img {
+          position: relative;
+          z-index: 10;
+        }
+        // large screen bg img
+        // .mCSB_container {
+        //   &:before {
+        //     content:'';
+        //     width: 100%;
+        //     height: 100vh;
+        //     z-index: 0;
+        //     background: {
+        //       image: url("../img/castles_map_web_bg.jpg");
+        //       size: auto auto;
+        //       position: top center;
+        //       repeat: no-repeat;
+        //     }
+        //     @include position(absolute, 0px null null 0px);
+        //   }
+        // }
       }
     }
 

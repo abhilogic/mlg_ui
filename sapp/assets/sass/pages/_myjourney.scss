@@ -1,5 +1,11 @@
 
 .myjourney_page {
+  @media screen and (max-width: $screen-xs-max){
+    background: {
+      image: url("../img/myjourney_mobile_bg.jpg");
+      size: 100% auto;
+    }
+  }
   .castle_cover {
     @include background-cover('map.png', center center);
     position: absolute;
@@ -16,9 +22,6 @@
     padding-right: 0px;
     overflow-x: hidden;
     height: auto;
-  }
-  @include respond-to(mobileMedium){
-
   }
 .castle {
   position: absolute;
@@ -353,7 +356,7 @@
 // dummy close btn
 
 .myjourney_page {
-  min-height: 103vh;
+  min-height: 100vh;
   @media screen and (min-width: $screen-sm-max){
     min-height: 94vh;
   }

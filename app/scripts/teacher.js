@@ -866,7 +866,4 @@ angular.module('mlg')
 
 })
 
-
-
-
 ;

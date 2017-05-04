@@ -3,6 +3,7 @@
     background: none !important;
     min-height: 100vh;
     position: relative;
+    // navigation
   .navigation {
       background: #162840;
     .navbar-default {
@@ -77,6 +78,7 @@
             float: none;
             margin: auto;
           }
+          // navbar-right
           &.navbar-right {
             @include margin(0px);
             li {
@@ -114,6 +116,37 @@
     }
   }
 
+
+
+//  navigation for the tablet version
+.navbar-default {
+  @media screen and (max-width: $screen-sm) and (min-width: $screen-xs-max){
+  .navbar-nav, .navbar-right{
+    float: none !important;
+    li {
+      display: block;
+      a {
+        text-align: left;
+      }
+     }
+    }
+    .navbar-toggle {
+      display: block;
+      float: right;
+      @include margin(17px null null null);
+      height: auto !important;
+    }
+    .navbar-header {
+      float: none !important;
+    }
+    .navbar-collapse {
+      display: none !important;
+      &.in {
+        display: block !important;
+      }
+    }
+  }
+}
   // carousel
   .carousel {
     .carousel-inner {
@@ -122,16 +155,16 @@
           min-width: 100%;
         }
         .img_info {
-          background: rgba($Comet,0.85);
+          background: rgba(22,40,64,0.85);
           color: $white;
           position: absolute;
           width: 100%;
           height: 140px;
           bottom: 0px;
           left: 0px;
-          @include padding(17px 198px 32px 198px);
+          @include padding(37px 198px 32px 198px);
           @include respond-to(tabletPort){
-            @include padding(22px 198px);
+            @include padding(22px 76px);
             height: 106px;
           }
           h4 {
@@ -152,7 +185,11 @@
             }
           }
           @include respond-to(mobileMedium){
-            display: none;
+            @include padding(15px);
+            height: 89px;
+            h4 {
+              font-size: 17px;
+            }
           }
         }
       }
@@ -176,6 +213,7 @@
       }
     }
   }
+  // main content section
   .main_content_section {
     @include respond-to(mobileMedium){
       padding-top: 50px;
@@ -184,15 +222,17 @@
       h1 {
         font-size: 36px;
         color: $mineShaft;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
         text-align: center;
+        margin-top: 90px;
         @include respond-to(mobileMedium){
+          margin-top: 60px;
           margin-bottom: 15px;
         }
       }
       p {
         color: $light-black;
-        font-size: 22px;
+        font-size: 16px;
         text-align: center;
         @include respond-to(mobileMedium){
           font-size: 16px;
@@ -239,17 +279,25 @@
         }
         &.teacher_feature {
           @include padding(null null 20px null);
+          @media  screen and (max-width: $screen-xs) {
+            margin-bottom: 50px;
+          }
         }
       h1 {
         font-size: 26px;
         color: $black;
         margin-top: 40px;
+        margin-bottom: 20px;
         font-weight: $bold;
       }
-      p {
+      p,span, em {
         font-size: 16px;
-        margin-top: 20px;
         color: $light-black;
+        font-style: normal;
+
+      }
+      p {
+        margin-bottom: 10px;
       }
       .learn_more {
         display:block;
@@ -458,6 +506,9 @@
               span {
                 color: $white;
                 margin-left: 20px;
+                &.address {
+                  margin-top: -23px;
+                }
               }
             }
           }
@@ -469,7 +520,10 @@
           }
           .social_icon {
             text-align: center;
-            @include margin(167px null null null);
+            @include margin(45px null null null);
+            @media screen and (min-width: $screen-sm){
+              @include margin(167px null null null);
+            }
             li {
               display: inline-block;
               &:not(:last-child){
@@ -499,6 +553,8 @@
       }
     }
   }
+
+  // footer section
   .footer {
     width: 100%;
     @include position(absolute,null null 0px 0px );
@@ -553,7 +609,7 @@
 
 .featuer-carousel {
   .owl-nav {
-    display: block !important;
+    display: none !important;
     text-align: center;
     .owl-prev, .owl-next {
       display: inline-block;
@@ -565,6 +621,21 @@
       @include margin(15px 5px);
     }
   }
+  .owl-dots {
+    text-align: center;
+    .owl-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      // @include box-shadow(inset 0px 0px 10px rgba(0,0,0,0.2));
+      background: #afaeae;
+      @include border-radius(100%);
+      @include margin(15px 5px);
+      &.active {
+        background: darken(#afaeae,30%);
+      }
+    }
+  }
 
 }
 
@@ -572,7 +643,7 @@
   display: block;
   @include margin(60px auto 30px auto);
   @media screen and (min-width: $screen-sm){
-    @include margin(150px auto 30px auto);
+    @include margin(104px auto 30px auto);
   }
   max-width: 181px;
   opacity: 0.4;
@@ -592,6 +663,49 @@
       vertical-align: middle;
       text-align: center;
       font-size: 30px;
+    }
+  }
+  .btn-send {
+    @include box-shadow(0 0 16px rgba(0,0,0,0.4));
+    color: $white;
+    width: 40px;
+    height: 40px;
+    border: 0px;
+    @include border-radius(100%);
+    background: #162840;
+    font-size: 18px;
+    bottom: -30px;
+    right: -30px;
+    &:focus {
+      outline: 0px;
+    }
+  }
+}
+
+
+// mgl_concern
+.prelogin {
+  .mgl_concern {
+    text-align: center;
+    h1 {
+      @media screen and (max-width: $screen-sm){
+        font-size: 26px;
+      }
+      @include margin(40px null 50px null);
+    }
+    p {
+      border-bottom: 1px solid rgba($black,0.2);
+      font-size: 16px;
+      color: rgba($black,0.6);
+      display: inline-block;
+      @include margin(10px null 13px null);
+      @include padding(null null 10px null);
+      @media screen and (min-width: $screen-sm-max){
+        width: 52%;
+      }
+      &:last-child {
+        border-bottom: 0px;
+      }
     }
   }
 }

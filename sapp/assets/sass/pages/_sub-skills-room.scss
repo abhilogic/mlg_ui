@@ -8,7 +8,7 @@
   min-width: 100vw;
   min-height: calc(100vh + 114px);
   @media screen and (min-width: $screen-sm){
-    background-size: 100% 100%;
+    background-size: auto 100%;
   }
   @media screen and (min-height: $screen-sm){
     min-height: 101vh;
@@ -27,13 +27,40 @@
       }
     }
     .google-speaker {
-        @include position(absolute, 115px 106px null null);
+        @include position(absolute, 137px 61px null null);
         cursor: pointer;
         display: none;
+        text-align: center;
+        @media screen and (max-width: $screen-sm){
+          @include position(absolute, 40px auto null 42px);
+        }
+        span {
+          display: block;
+          color: #999999;
+          font-family: $font-secondary;
+          i {
+            font-style: normal;
+          }
+          &:hover {
+            color: $white;
+          }
+        }
         @media screen and (min-width: $screen-sm){
           display: block;
         }
     }
+    .message {
+      @extend .google-speaker;
+        @include position(absolute, 200px 75px null null);
+        color: #999;
+        font-size: 18px;
+        .tooltip {
+          font-family: $font-secondary;
+        }
+        @media screen and (max-width: $screen-sm){
+            @include position(absolute, 40px 75px null null);
+        }
+    }  // message
   } // main-content specification
 }
 
@@ -47,11 +74,16 @@
   @media screen and (min-width: $screen-sm){
     height: 625px;
   }
-  @include respond-to(mobileMedium){
+  @media screen and (max-width: $screen-sm) {
     background: none;
+    @include margin(155px null null null);
+  }
+  @media screen and (max-width: $screen-xs-max) {
+    @include margin(20px null null null);
   }
   &.table {
     position: relative;
+
     &:before {
       @include background-cover("subskillsroom_table.png");
       bottom: -48px;
@@ -63,6 +95,35 @@
       z-index: 0;
       display: none;
       @media screen and (min-width: $screen-sm){
+        display: block;
+      }
+      @include respond-to(tabletPort){
+        width: 100%;
+        background-size: 100% 100%;
+      }
+      @include respond-to(mobileMedium){
+        width: 113%;
+        height: 130px;
+        left: -48px;
+      }
+      @media screen and (max-width: $screen-sm){
+        display: none;
+      }
+
+    }
+    .table-animated-img {
+      @include background-cover("subskillsroom_table.png");
+      background-position: -125px 95px;
+      background-size: auto auto;
+      bottom: -48px;
+      content: '';
+      height: 283px;
+      left: -90px;
+      position: absolute;
+      width: 1084px;
+      z-index: 0;
+      display: none;
+      @media screen and (min-width: $screen-sm-max){
         display: block;
       }
       @include respond-to(tabletPort){

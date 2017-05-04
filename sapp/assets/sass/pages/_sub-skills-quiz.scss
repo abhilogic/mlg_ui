@@ -12,13 +12,22 @@
     text-align: center;
     width: 80%;
     margin: auto;
+    @media screen and (max-width: $screen-xs-max){
+      width: 100%;
+    }
   }
   .option {
     @include margin(49px auto 50px auto);
     width: 450px;
+    @media screen and (max-width: $screen-xs-max){
+      width: auto;
+    }
     li{
     &:nth-child(2n-1) {
       width: 80.5%;
+      @media screen and (max-width: $screen-xs-max){
+        display: block;
+      }
     }
     @include margin(null null 25px null);
     span {
@@ -42,6 +51,12 @@
   @include margin(10px);
   &.focus , &:focus , &:active {
     outline: 0px;
+  }
+  &:hover {
+    color: $white;
+  }
+  &.btn-hint {
+    font-size: 12px;
   }
   &.btn-skip {
     background: {
@@ -67,11 +82,14 @@
 // question-no-indicator
 
 .ques_no_indicator {
-  max-width: 411px;
+  max-width: 555px;
   margin: auto;
   margin-top: 40px;
   @include respond-to(tabletPort){
     margin-top: 23px;
+  }
+  .owl-stage {
+    @include margin(auto);
   }
   .owl-item {
     &:last-child {
@@ -91,7 +109,7 @@
       height: 8px;
       width: 104%;
       left: 32px;
-      top: 23px;
+      top: 15px;
       z-index: -1;
     }
     .ques_no {
@@ -108,19 +126,23 @@
       display: block;
     }
     &.active {
-      &:before {
-        background: $black;
-      }
       .icon {
         @include cssSprite($ques_no_indicator_active);
       }
     }
-    &.inactive {
-      &:before {
-        background: $black;
-      }
+    &.minimize {
       .icon {
-        @include cssSprite($ques_no_indicator_inactive);
+        @include cssSprite($ques_no_indicator_minimize);
+      }
+    }
+    &.cancel {
+      .icon {
+        @include cssSprite($ques_no_indicator_cancel);
+      }
+    }
+    &.done {
+      .icon {
+        @include cssSprite($ques_no_indicator_done);
       }
     }
   }

@@ -31,7 +31,7 @@
 								<div class="col-sm-8 col-sm-offset-2 text-center">
 
 									<div class="select-child-rangeSlider">
-										<div id="selectChildren">
+										<div id="selectChildren" class="radios-to-slider medium">
 											<input id="option1" name="options" type="radio">
 											<label for="option1">1</label>
 											<input id="option2" name="options" type="radio">
@@ -70,8 +70,9 @@
 	<!-- page container -->
 
 	<!-- Latest compiled and minified jQuery -->
-	
-	<script type="text/javascript">
+	<script src="assets/js/plugins/jquery.radios-to-slider.min.js"></script>
+
+	<script>
 		  $(document).ready(function(){
 		     $("#selectChildren").radiosToSlider();
 		  });

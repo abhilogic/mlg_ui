@@ -9,7 +9,7 @@
   position: relative;
   z-index: 1000;
   @include padding(11px null 5px);
-  @media screen and (max-width: $screen-xs-max){
+  @media screen and (max-width: $screen-sm){
     .navbar-toggle {
       margin-top: 27px;
       background: transparent;
@@ -24,6 +24,9 @@
     .navbar-collapse {
       margin-top: 25px;
       border-top: 0px;
+      @media screen and (max-width: $screen-sm){
+        @include margin(0px null null null);
+      }
     }
   }
   .navbar-nav{
@@ -40,11 +43,14 @@
       @media screen and (max-width: $screen-mobile-md){
         display: block;
       }
-      a{
+      a {
         text-align: center;
         color: #fff ;
         @media screen and (max-width: $screen-mobile-md){
           text-align: left;
+        }
+        @media screen and (max-width: $screen-sm){
+          @include padding(null 11px);
         }
       }
       &.active {
@@ -59,77 +65,6 @@
             background: none;
             color: $white;
           }
-        }
-        .profile_pick {
-          height: 60px;
-          width: 60px;
-          @include border-radius(100%);
-          display: block;
-          @include position(absolute, 16px null null 16px);
-          @include padding(4px);
-          background: {
-            image: url(../img/student_prof_img_bg.png);
-            size: 100% 100%;
-            repeat: no-repeat;
-            position: center center;
-          }
-          img {
-            width: 100%;
-            height: 100%;
-            @include border-radius(100%);
-          }
-        }
-      .dropdown-menu {
-        @include background-cover("navbar-dropdown-bg.png");
-        background-color: transparent;
-        @include box-shadow(none);
-        @include border-radius(0px);
-        border: 0px;
-        padding-top: 20px;
-        top: 66%;
-        left: 34px;
-        z-index: -1;
-        min-height: 150px;
-        @include respond-to(mobileMedium) {
-          @include padding(null 15px null 15px);
-        }
-        li {
-          display: block;
-          @include padding(5px 10px);
-          a {
-            font-family: $font-open-sans;
-            text-align: left;
-            @include padding(3px 10px);
-            @include border-radius(5px);
-            color: $maroon;
-            position: relative;
-            &:hover {
-              background: rgba($black,0.07);
-            }
-              &:before {
-                content:'';
-                @include position(absolute, null null -6px 0px);
-                width: 100%;
-                height: 1px;
-                background: rgba($cola,0.1);
-                z-index: 100;
-              }
-          }
-
-        }
-        .icon {
-          display: inline-block;
-          vertical-align: middle;
-          &.profile {
-            @include cssSprite($ico_profile);
-          }
-          &.avtar_creation {
-            @include cssSprite($ico_avtar_creation);
-          }
-          &.logout {
-            @include cssSprite($ico_logout);
-          }
-         }
         }
       }
     }
@@ -190,8 +125,8 @@
   }
 }
 
-
-.student_growth{
+// student growth
+.student_growth {
   display: inline-block;
   position: relative;
   @include cssSprite($ico_coins);
