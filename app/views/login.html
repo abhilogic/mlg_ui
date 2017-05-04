@@ -38,13 +38,13 @@
                   </div>
 
                   <form  class="form-login">
-                    <div class="form-group float-label" ng-class="{'focus':focused===true}">
+                    <div class="form-group float-label" ng-class="{'focus':!form.username ==''}">
                       <label class="control-label">USERNAME</label>
-                      <input type="text" class="form-control float-input" ng-focus="focused=true" ng-blur="focused=false" ng-model="form.username"/ >
+                      <input type="text" class="form-control float-input" ng-focus="focused=false" ng-blur="focused=true" ng-model="form.username"/ >
                     </div>
-                    <div class="form-group float-label" ng-class="{'focus':focused===true}">
+                    <div class="form-group float-label" ng-class="{'focus':!form.password==''}">
                       <label class="control-label">PASSWORD</label>
-                      <input type="password" class="form-control float-input" ng-focus="focused=true" ng-blur="focused=false" ng-model="form.password" />
+                      <input type="password" class="form-control float-input" ng-model="form.password" />
                     </div>
                     <br>
                     <div class="text-center">

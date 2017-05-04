@@ -4,7 +4,10 @@
     width: 60px;
     @include border-radius(100%);
     display: block;
-    @include position(absolute, 16px null null 16px);
+    @include position(absolute, 16px null null 0px);
+    @media screen and (min-width: $screen-sm){
+      @include position(absolute, 16px null null 16px);
+    }
     @include padding(4px);
     background: {
       image: url(../img/student_prof_img_bg.png);

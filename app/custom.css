@@ -84,3 +84,5 @@
 .dropdown-multiselect, .dropdown-multiselect button {width: 100%; text-align: left;}
 
 .question-block-cover {display: block}
+
+.page-onboarding .page-container {min-height: 88vh;}

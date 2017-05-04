@@ -34,34 +34,34 @@
                 </div>
 
                 <form ng-submit="register(userObj, 'teacher')" class="form-login">
-                  <div class="form-group float-label">
+                  <div class="form-group float-label" ng-class="{focus: !userObj.first_name == ''}">
                     <label class="control-label">First Name</label>
                     <input ng-model="userObj.first_name" type="text" class="form-control float-input"/>
                   </div>
-                  <div class="form-group float-label has-success has-feedback">
+                  <div class="form-group float-label has-success has-feedback" ng-class="{focus: !userObj.last_name == ''}">
                     <label class="control-label">Last Name</label>
                     <input ng-model="userObj.last_name" type="text" class="form-control float-input" id="inputFullName" aria-describedby="inputFullNameSuccessStatus">
                     <!--<div class="form-control-feedback"><i class="fa fa-check"></i></div>-->
                   </div>
-                  <div class="form-group float-label  has-feedback">
+                  <div class="form-group float-label  has-feedback" ng-class="{focus: !userObj.email == ''}">
                     <label class="control-label">EMAIL ADDRESS</label>
                     <input ng-model="userObj.email" type="text" class="form-control float-input" id="inputEmail" aria-describedby="inputEmailErrorStatus">
                     <!--<div class="form-control-feedback"><i class="fa fa-close"></i></div>-->
                     <!--<span id="inputEmailErrorStatus" class="help-block">Email could not found</span>-->
                   </div>
-                  <div class="form-group float-label  has-feedback">
+                  <div class="form-group float-label  has-feedback" ng-class="{focus: !userObj.username == ''}">
                     <label class="control-label">USERNAME</label>
                     <input ng-model="userObj.username" type="text" class="form-control float-input" id="inputUsername" aria-describedby="inputUsernameErrorStatus">
 <!--                    <div class="form-control-feedback"><i class="fa fa-close"></i></div>
                     <span id="inputUsernameErrorStatus" class="help-block">Username could not found</span>-->
                   </div>
-                  <div class="form-group float-label has-feedback">
+                  <div class="form-group float-label has-feedback"ng-class="{focus: !userObj.password == ''}" >
                     <label class="control-label">PASSWORD</label>
                     <input ng-model="userObj.password" type="password" class="form-control float-input" id="inputPassword" aria-describedby="inputPasswordErrorStatus">
 <!--                    <div class="form-control-feedback"><i class="fa fa-close"></i></div>
                     <span id="inputPasswordStatus" class="help-block">Username could not found</span>-->
                   </div>
-                  <div class="form-group float-label  has-feedback">
+                  <div class="form-group float-label  has-feedback" ng-class="{focus: !userObj.repass == ''}">
                     <label class="control-label">RE-PASSWORD</label>
                     <input ng-model="userObj.repass" type="password" class="form-control float-input" id="inputRePassword" aria-describedby="inputRePasswordErrorStatus">
 <!--                    <div class="form-control-feedback"><i class="fa fa-close"></i></div>
@@ -69,12 +69,12 @@
                   </div>
                   <div class="form-group float-label">
                     <label class="control-label">Role</label>
-                    <select  type="text" class="form-control float-input">
-                      <option value=""></option>
-                      <option value="Priciple">Principle</option>
-		      <option value="Teacher">Teacher</option>
-		      <option value="Guest Teacher">Guest Teacher</option>
-                    </select>
+					<select  type="text" class="form-control float-input">
+						<option value=""></option>
+						<option value="Priciple">Principle</option>
+						<option value="Teacher">Teacher</option>
+						<option value="Guest Teacher">Guest Teacher</option>
+					</select>
                   </div>
                   <span class="has_error">{{msg}}</span>
                   <br>

@@ -866,4 +866,29 @@ angular.module('mlg')
 
 })
 
+
+/*.directive('radioSlider', function() {
+    return {
+        // Restrict it to be an attribute in this case
+        restrict: 'A',
+        // responsible for registering DOM listeners as well as updating the DOM
+        link: function(scope, element, attrs) {
+            $(element).radiosToSlider(scope.$eval(attrs.radioSlider));
+        }
+    };
+})*/
+
+
+
+
+
+.directive('heyhey', function () {
+  return {
+    restrict: 'A',
+    link: function ($scope, $elem, attrs) {
+        $elem.radiosToSlider();
+    }
+  }
+})
+
 ;

@@ -352,8 +352,6 @@ teacher  : 30,
 		//var footerHeight = $('.footer').outerHeight();
 		$('.page-container').attr('style', 'min-height:' + availableHeight + 'px');
 	});
-	
-	 
 })
 
 .directive('banner', function() {

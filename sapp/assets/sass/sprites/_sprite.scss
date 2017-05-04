@@ -138,10 +138,10 @@ $castle__icon_help_inactive: 28px 30px '../img/sprite.png'  -181px -134px;
 
 
 // flag icons
-$flag__icon: 60px 60px '../img/castles-icon.png' -480px -180px;
+$flag__icon: 47px 75px '../img/castles-icon.png' -1254px -488px;
 
 // caslte_fire img
-$fire__img: 60px 60px '../img/fire_on_castle.gif' 0px 0px;
+$fire__img: 100px 100px '../img/fire_on_castle.gif' 0px 0px;
 
 // book icon
 $book__icon:  60px 60px '../img/castles-icon.png' -540px -180px;
@@ -149,35 +149,38 @@ $book__icon:  60px 60px '../img/castles-icon.png' -540px -180px;
 // compare image
 
 // subject_view_castle_icons
-$math_addition_icon: 60px 60px '../img/castles-icon.png' -120px 0px;
-$math_algebra_icon : 60px 60px '../img/castles-icon.png' -60px 0px;
-$math_calculus_icon: 60px 60px '../img/castles-icon.png' 0px 0px;
-$compare_castle_icon: 60px 60px '../img/castles-icon.png' -480px -120px;
-$math_counter_icon: 60px 60px '../img/castles-icon.png' -420px -120px;
-$math_decimal_icon: 60px 60px '../img/castles-icon.png' -360px -120px;
-$math_division_icon: 60px 60px '../img/castles-icon.png' -300px -120px;
-$math_estimation_icon: 60px 60px '../img/castles-icon.png' -240px -120px;
-$math_fractions_icon: 60px 60px '../img/castles-icon.png' -180px -120px;
-$math_function_icon: 60px 60px '../img/castles-icon.png' -120px -120px;
-$math_exponent_icon: 60px 60px '../img/castles-icon.png' -60px -120px;
-$math_geometry_icon: 60px 60px '../img/castles-icon.png' 0px -120px;
-$math_graphs_icon: 60px 60px '../img/castles-icon.png' -540px -60px;
-$math_integers_icon: 60px 60px '../img/castles-icon.png' -480px -60px;
-$math_logic_icon: 60px 60px '../img/castles-icon.png' -420px -60px;
-$math_measurement_icon: 60px 60px '../img/castles-icon.png' -360px -60px;
-$math_mixed_operation_icon: 60px 60px '../img/castles-icon.png' -300px -60px;
-$math_money_icon: 60px 60px '../img/castles-icon.png' -240px -60px;
-$math_multiplication_icon: 60px 60px '../img/castles-icon.png' -180px -60px;
-$math_number_icon: 60px 60px '../img/castles-icon.png' -120px -60px;
-$math_pattern_icon: 60px 60px '../img/castles-icon.png' -60px -60px;
-$math_percent_icon: 60px 60px '../img/castles-icon.png' 0px -60px;
-$math_placevalue_icon: 60px 60px '../img/castles-icon.png' -540px 0px;
-$math_probability_icon: 60px 60px '../img/castles-icon.png' -480px 0px;
-$math_ratio_icon: 60px 60px '../img/castles-icon.png' -420px 0px;
-$math_subtraction_icon: 60px 60px '../img/castles-icon.png' -360px 0px;
-$math_time_icon: 60px 60px '../img/castles-icon.png' -300px 0px;
-$math_trigonometry_icon: 60px 60px '../img/castles-icon.png' 0px -60px;
-$math_word_problem_icon: 60px 60px '../img/castles-icon.png' -180px 0px;
+
+$math_addition_icon: 236px 152px '../img/castles-icon.png' -944px 456px;
+
+$math_training_arena: 161px 141px '../img/castles-icon.png' -928px -456px;
+$math_algebra_icon : 121px 107px '../img/castles-icon.png' -737px -472px;
+$math_calculus_icon: 121px 115px '../img/castles-icon.png' -509px -473px;
+$math_compare_icon: 95px 97px '../img/castles-icon.png' -294px -488px;
+$math_counter_icon: 117px 94px '../img/castles-icon.png' -59px -484px;
+$math_decimal_icon: 145px 105px '../img/castles-icon.png' -1644px -323px;
+$math_division_icon: 97px 95px '../img/castles-icon.png' -1444px -331px;
+$math_estimation_icon: 110px 84px '../img/castles-icon.png' -1205px -337px;
+$math_fractions_icon: 106px 90px '../img/castles-icon.png' -980px -330px;
+$math_function_icon: 109px 96px '../img/castles-icon.png' -746px -330px;
+$math_exponent_icon: 115px 104px '../img/castles-icon.png' -515px -326px;
+$math_geometry_icon: 95px 104px '../img/castles-icon.png' -294px -326px;
+$math_graphs_icon: 115px 94px '../img/castles-icon.png' -59px -332px;
+$math_integers_icon: 126px 100px '../img/castles-icon.png' -1654px -175px;
+$math_logic_icon: 109px 87px '../img/castles-icon.png' -1431px -183px;
+$math_measurement_icon: 110px 87px '../img/castles-icon.png' -1205px -183px;
+$math_mixed_operation_icon: 124px 97px '../img/castles-icon.png' -972px -178px;
+$math_money_icon: 135px 97px '../img/castles-icon.png' -724px -178px;
+$math_multiplication_icon: 108px 83px '../img/castles-icon.png' -522px -183px;
+$math_number_icon: 124px 98px '../img/castles-icon.png' -280px -176px;
+$math_pattern_icon: 106px 98px '../img/castles-icon.png' -54px -176px;
+$math_percent_icon: 107px 106px '../img/castles-icon.png' -1671px -17px;
+$math_placevalue_icon: 109px 89px '../img/castles-icon.png' -1431px -23px;
+$math_probability_icon: 110px 89px '../img/castles-icon.png' -1205px -23px;
+$math_ratio_icon: 124px 118px '../img/castles-icon.png' -972px -14px;
+$math_subtraction_icon: 124px 102px '../img/castles-icon.png' -733px -23px;
+$math_time_icon: 108px 102px '../img/castles-icon.png' -522px -27px;
+$math_trigonometry_icon: 132px 102px '../img/castles-icon.png' -280px -27px;
+$math_word_problem_icon: 137px 126px '../img/castles-icon.png' -51px -14px;
 
 
 // subject_view_castle_icon for moblie view
