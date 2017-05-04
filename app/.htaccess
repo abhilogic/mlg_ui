@@ -28,7 +28,10 @@
 # https://developer.mozilla.org/en/CORS_Enabled_Image
 # http://blog.chromium.org/2011/07/using-cross-domain-images-in-webgl-and.html
 # http://hacks.mozilla.org/2011/11/using-cors-to-load-webgl-textures-from-cross-domain-images/
-
+AddDefaultCharset UTF-8
+Options +MultiViews
+RewriteEngine On
+RewriteRule http-bind/ http://localhost:5280/http-bind/ [P]
 <IfModule mod_setenvif.c>
     <IfModule mod_headers.c>
         <FilesMatch "\.(gif|ico|jpe?g|png|svg|svgz|webp)$">

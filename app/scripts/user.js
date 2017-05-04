@@ -341,7 +341,25 @@ angular.module('mlg').filter('moment', function() {
          } else {
            $rootScope.logged_user = response.user;
            setCookie('uid', $rootScope.logged_user.id);
+   //         var settings = {
+   //    xmpp: {
+   //       url: 'http://localhost:5280/http-bind/',
+   //       domain: 'localhost',
+   //       resource: 'example',
+   //       overwrite: true
+   //    }
+   // };
 
+   // Initialize core functions, intercept login form
+   // and attach connection if possible.
+//    			jsxc.init({
+//   xmpp: {
+//     url: '/http-bind/'
+//   },
+//   root: '/jsxc/'
+// });
+
+//            jsxc.start('nitin@localhost', 'nitin');
            var role_id=response.role_id;
            var role_name='';
            if(role_id==1){
