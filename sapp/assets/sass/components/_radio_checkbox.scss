@@ -14,8 +14,8 @@ label{
 	display: none !Important;
 & + .radio-btn {
 	background: {
-		image: url(../img/btn-icons.png);
-		position: -125px -5px;
+		image: url(../img/subskills_sprit_img.png);
+		position: -441px -258px;
 	}
   &+ span {
     color: rgba($black,0.7);
@@ -23,18 +23,18 @@ label{
     text-transform: capitalize;
   }
 &.checked {
-	background-position: -155px -5px;
+	background-position: -309px -258px;
   & + span {
     color: $black;
   }
 }
   cursor: pointer;
 	display: inline-block;
-	height: 20px;
+	height: 14px;
     margin: 0px;
 	margin-right: 5px;
 	vertical-align: middle;
-    width: 20px;
+    width: 16px;
  }
 }
 /* custom radio button */

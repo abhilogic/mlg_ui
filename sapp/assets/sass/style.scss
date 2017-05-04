@@ -40,8 +40,9 @@
 @import "components/forms";
 @import "components/custom_icons";
 @import "components/radio_checkbox";
-@import "components/main_cover";
 @import "components/video_design";
+@import "components/navbar-dropdown";
+@import "components/loader";
 
 // Pages
 @import "pages/myjourney";
@@ -59,6 +60,7 @@
 @import "pages/sub-skills-room";
 @import "pages/subskills-content";
 @import "pages/sub-skills-quiz";
+@import "pages/comingsoon";
 // avtar creation page
 @import "pages/avtar-creation/avtar-creation";
 @import "pages/avtar-creation/avtar-gender-selection";

@@ -31,3 +31,58 @@
     margin-top: 10px;}
 	
 .col-xs-7 ul.dropdown-menu-form li:first-child, .col-xs-7 ul.dropdown-menu-form li:nth-child(2), .col-xs-7 ul.dropdown-menu-form li:nth-child(3){display:none;}
+
+.selected-grades-subjects .label-grade {float: none;  vertical-align: top;}
+.selected-grades-subjects .subjects-list {display: inline-block; overflow: inherit;}
+
+.customCheckboxOuter {border-bottom: 1px solid #ddd;}
+.customCheckbox {position: relative;}
+.customCheckbox:hover{border-color: #fff !important;}
+.customCheckbox  input {display: none;}
+.customCheckbox .customLabel {border: 1px solid #fff; border-bottom: 2px solid #fff; margin-bottom: -1px;}
+
+.customCheckbox .customLabel.checked, .customCheckbox .customLabel:hover {border-color: #2d94ed; color: #2d94ed}
+
+.subjectCheckboxouter input {display: none;}
+.subjectCheckboxouter .checked {border-color: #2d94ed; color: #2d94ed; position: relative;}
+
+.subjectCheckboxouter .checked:before {
+    content: '\0047';
+    display: inline-block;
+    font-family: 'Glyphter';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 16px;
+    font-size: 9px;
+    height: 16px;
+    width: 16px;
+    background-color: #2d94ed;
+    color: white;
+    border-radius: 100%;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+}
+
+.deleteBox {position: relative;}
+.deleteBox i {
+	position: absolute;
+	cursor: pointer;
+    right: -7px;
+    top: -7px;
+    width: 16px;
+    height: 16px;
+    color: #fff;
+    font-size: 11px;
+    padding-top: 2px;
+    border-radius: 50%;
+    background: #2d94ed;
+}
+
+.classId input {width: 30px;}
+
+.dropdown-multiselect, .dropdown-multiselect button {width: 100%; text-align: left;}
+
+.question-block-cover {display: block}
+
+.page-onboarding .page-container {min-height: 88vh;}

@@ -310,12 +310,14 @@ angular.module('mlg').filter('moment', function() {
     }; 
 
     $scope.teacher_signup_page=function(){
-    	$("#modalFreeTrail").modal('hide');					
+    	$("#modalFreeTrail").modal('hide');
+		$(".modal-backdrop").remove();		
     	$location.url('teacher/signup');
     }
 
      $scope.parent_signup_page=function(){
-     	$("#modalFreeTrail").modal('hide');					
+     	$("#modalFreeTrail").modal('hide');
+		$(".modal-backdrop").remove();
     	$location.url('parent_signup');
     }
 

@@ -70,3 +70,14 @@
 
   }
 }
+
+// amount-list
+
+.amount-list {
+  @extend .list-cartItems;
+}
+
+// form-promocode
+.form-promocode {
+  @include margin(0px null 20px null);
+}

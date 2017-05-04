@@ -20,62 +20,18 @@
   background: {
     image: url("../img/firstTimeLoginTestBgImg.jpg");
   }
+  min-width: 100vw;
+  min-height: 100vh;
   @include respond-to(mobileMedium){
     background: {
       image: url("../img/subskill_mobile_bg.jpg");
     }
   }
 // subskills-icons
-  .subskill_icons {
-    display: inline-block;
-    vertical-align: middle;
-      &.arrow_left {
-        @include cssSprite($subskill_left_arrow);
-        &.active {
-          @include cssSprite($subskill_left_arrow_active);
-        }
-      }
-      &.arrow_right {
-        @include cssSprite($subskill_right_arrow);
-        &.active {
-          @include cssSprite($subskill_right_arrow_active);
-        }
-      }
-      &.play {
-        @include cssSprite($subskill_play);
-        &.active {
-          @include cssSprite($subskill_play_active);
-        }
-        &.inactive {
-          @include cssSprite($subskill_play_inactive);
-        }
-      }
-      &.paper {
-        @include cssSprite($subskill_paper);
-        &.active {
-          @include cssSprite($subskill_paper_active);
-        }
-        &.inactive {
-          @include cssSprite($subskill_paper_inactive);
-        }
-      }
-      &.puzzle {
-        @include cssSprite($subskill_puzzle);
-        &.active {
-          @include cssSprite($subskill_puzzle_active);
-        }
-        &.inactive {
-          @include cssSprite($subskill_puzzle_inactive);
-        }
-      }
-  }
+
 // subskills icons
   .wooden_frame {
     background: none;
-    video {
-      max-width: 100%;
-      width: 400px;
-    }
     @media screen and (max-width: $screen-tb-land){
       width: 993px;
     }
@@ -103,7 +59,7 @@
       position: relative;
       left: 0px;
       @media screen and (min-width: $screen-sm-max){
-        width: 983px;
+        width: 855px;
       }
     @include respond-to(mobileMedium){
         background: none;
@@ -135,51 +91,6 @@
         color: $vanCleef;
         font-size: 14px ;
         font-family:$font-times_bold;
-      }
-      .nav-tabs {
-        border: 0px;
-        li {
-          display: block;
-          a {
-            background: none;
-            border:0px;
-          }
-          &.active {
-            a {
-              background: none;
-            }
-          }
-        }
-      }
-      .pager {
-        margin-top: 0px;
-        &:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
-        li {
-          &:first-child {
-            float: left;
-          }
-          &:last-child {
-            float: right;
-          }
-          .btn {
-            color: rgba($vanCleef,0.5);
-            font-family: $font-times_bold;
-            font-size: 18px;
-            &.active {
-              color: $vanCleef;
-            }
-          }
-          .btn-prev {
-            @include cssSprite($subskill_prev);
-          }
-          .btn-next {
-            @include cssSprite($subskill_next);
-          }
-        }
       }
       .btn {
         background-color: transparent !important;
@@ -247,7 +158,7 @@
           size: 100% 100%;
         }
         font-size: 18px;
-        color: $vanCleef;
+        color: $white;
         font-family: $font-times_bold;
         padding: 10px 70px 10px 23px;
         text-align: left;
@@ -257,19 +168,6 @@
           .panel-title {
             background: none;
             padding: 5px 0px;
-          }
-        }
-        .js-tabcollapse-panel-heading {
-          span {
-            display: inline-block;
-            width: calc(100% - 45px);
-            margin-left: 10px;
-          }
-        }
-        .js-tabcollapse-panel-body {
-          border: 0px;
-          .panel-body {
-            padding: 15px;
           }
         }
         .panel-body {
@@ -296,36 +194,7 @@
           }
           padding: 20px;
         }
-        .nav-tabs {
-          margin-top: 20px;
-          margin-bottom: 20px;
-          li {
-              width: 100%;
-            a {
-              display: block;
-              padding: 0px 15px;
-              span {
-                color: rgba($vanCleef,0.5);
-                border-bottom: 2px solid rgba($vanCleef,0.07);
-                padding-bottom: 5px;
-                display: inline-block;
-                vertical-align: middle;
-                margin-left: 14px;
-                font-size: 12px;
-                font-weight: $bold;
-                font-family: $font-open-sans;
-                width: calc(100% - 50px);
-              }
-            }
-            &.active {
-              a {
-                span {
-                  color: $vanCleef;
-                }
-              }
-            }
-          }
-        }
+
       }
       .questions {
         .panel-body {
@@ -336,25 +205,12 @@
           @include respond-to(mobileMedium){
               display: none;
           }
-          .btn-prev {
-            @include cssSprite($subskill_left_arrow);
-            &.active {
-              @include cssSprite($subskill_left_arrow_active);
-            }
-          }
-          .btn-next {
-              @include cssSprite($subskill_right_arrow);
-              &.active {
-                @include cssSprite($subskill_right_arrow_active);
-              }
-          }
           .panel-title {
             font-size: 16px;
             text-align: center;
           }
         }
         .panel {
-
           .panel-footer {
           }
         }
@@ -396,8 +252,9 @@
               image: url(../img/quiz_heading.png);
               repeat: no-repeat;
             }
-            padding: 11px 0px;
+            padding: 11px 0px 21px;
             font-size: 20px;
+            line-height: 17px;
           }
           .close {
             opacity: 1;

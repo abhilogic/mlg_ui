@@ -1,4 +1,19 @@
-
+.panel-redeem {
+  .redeem-score {
+    margin-left: 0px;
+    @media screen and (min-width: $screen-sm){
+      margin-left: 150px;
+    }
+    small {
+      @include margin(null null null 10px);
+    }
+  }
+   .switch-box  {
+     @media screen and (max-width: $screen-xs-max){
+       @include margin(0px null null null);
+     }
+   }
+}
 .parentRedeem-content{
 
 }
@@ -77,5 +92,60 @@
         margin-top: 15px;
       }
     }
+  }
+}
+
+
+
+
+// modal-couponAccept
+.modal-couponAccept {
+  .modal-content {
+    @include border-radius(0px);
+    min-height: 196px;
+    &.success {
+      .modal-body {
+        >p {
+          display: none;
+        }
+        .confirm-succes-msg {
+          display: block;
+          opacity: 1;
+        }
+      }
+      .modal-footer {
+        display: none;
+      }
+    }
+  }
+  // header
+  .modal-header {
+    @include border-width(0px);
+  }
+  // body
+  .modal-body {
+    text-align: center;
+    font-weight: $bold;
+
+    // confirm-success-msg
+    .confirm-succes-msg {
+      display: none;
+      opacity: 0;
+      @include transition(.5s all);
+      .icon {
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+        color: $white;
+        @include padding(20px null null null);
+        @include border-radius(100%);
+        background: $springGreen;
+      }
+    }
+  }
+  .modal-footer {
+    text-align: center;
+    @include border-width(0px);
   }
 }

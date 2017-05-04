@@ -10,27 +10,11 @@ jQuery.fn.clickToggle = function(a,b) {
   return this.on("click", cb);
 };
 
-// Floating Input Fields animation
-var floatInput = function(){
-
-  $(".float-input").each(function(){
-     if(this.value!=''){
-      $(this).parent().addClass('focus');
-     }
-  });
-
-  $('.float-input').on('focusin', function() {
-    $(this).parent().addClass('focus');
-    console.log("hello");
-  });
-
-  $('.float-input').on('focusout', function() {
-    if (!this.value) {
-      $(this).parent().removeClass('focus');
-    }
-  });
+// on click add desired class  in  target element
+function showTargetElement(elem, className){
+  var targetElement = $(elem);
+  targetElement.addClass(className);
 }
-floatInput();
 
 $(document).ready(function(){
 
@@ -76,10 +60,16 @@ $(document).ready(function(){
         }, 100);
     }).resize();
 
-     $('.mlg-selectpicker').selectpicker();
+    // $('.mlg-selectpicker').selectpicker();
 
 });
 
+
+// goBack function
+function goBack() {
+    window.history.back();
+    console.log("hello");
+}
 
 var switcheryHtml = '<span class="off">OFF</span>' +
                     '<span class="switchery switchery-default" >'+
@@ -100,5 +90,31 @@ $(document).ready(function(){
       else {
         $(this).siblings(".js-switch").attr("checked", true);
       }
+  });
+  // Floating Input Fields animation
+  var floatInput = function(){
+
+    $(".float-input").each(function(){
+       if(this.value!=''){
+        $(this).parent().addClass('focus');
+       }
+    });
+
+    $('.float-input').on('focusin', function() {
+      $(this).parent().addClass('focus');
+      console.log("hello");
+    });
+
+    $('.float-input').on('focusout', function() {
+      if (!this.value) {
+        $(this).parent().removeClass('focus');
+      }
+    });
+  }
+  floatInput();
+
+
+  $(".icon-arrow-left").click(function(){
+    goBack();
   });
 });

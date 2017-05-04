@@ -17,6 +17,9 @@
       .topic_name {
         font-weight: $semibold;
         font-size: 16px;
+        .icon {
+          cursor: move;
+        }
       }
     }
   }
