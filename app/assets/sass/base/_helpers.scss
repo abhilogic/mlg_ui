@@ -145,29 +145,8 @@
 
 }
 
-/*/ REMOVE LATER font property classes
-.font {
-  &-weight {
-    &-thin {
-      font-weight: $thin;
-    }
-    &-light {
-      font-weight: $light;
-    }
-    &-regular {
-      font-weight: $regular;
-    }
-    &-semibold {
-      font-weight: $semibold;
-    }
-    &-bold {
-      font-weight: $bold;
-    }
-    &-ultrabold {
-      font-weight: $ultrabold;
-    }
-  }
-}*/
+
+
 
 // text property classes
 .text {
@@ -874,7 +853,7 @@
   &-inline-display {
     display: inline-display;
   }
-  &-display {
+  &-block {
     display: block;
   }
 }

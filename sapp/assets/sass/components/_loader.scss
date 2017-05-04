@@ -1,0 +1,10 @@
+.loader {
+    @include position(fixed, 0px null null 0px);
+    min-width: 100vw;
+    min-height: 100vh;
+    z-index: 3000;
+    background: rgba($black,0.95);
+    div > div {
+      text-align: center;
+    }
+}

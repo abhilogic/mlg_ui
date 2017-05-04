@@ -163,8 +163,16 @@ angular.module('mlg_student')
 	  	}
 	  	console.log(studentcoursesresult.response.student_class);
 	  });
-
+	
 }
+
+	$scope.openmodelRedeem=function(){
+		$("#modal-redeem").modal();					
+	},
+	
+	$scope.openRedeemAll=function(){
+		$("#modal-allRedeem").modal();					
+	}
 
 }])
 
@@ -541,4 +549,14 @@ angular.module('mlg_student')
         response.topic_detail = [];
       }
     });
-}]);
+}])
+
+.controller('backHistoryPage', function($scope){
+	$scope.goBack = function() {
+	  window.history.back();
+	};
+})
+
+
+
+;

@@ -26,8 +26,14 @@ $("*[data-center='center']").each(function(){
 });
 // data-center
 
-// Main App JS
 
+// universal veriable
+
+var windowHeight = $(window).height();
+var windowWidth = $(window).width();
+
+// universal veriable
+// Main App JS
 
 // masscourt-animation
 $(document).ready(function(){
@@ -97,6 +103,8 @@ $(document).ready(function() {
 $(".conversation_block, .user_list .user_list_ul").mCustomScrollbar({
     theme:"dark"
   });
+
+
 // goback function
  function goback(){
   window.history.back();
@@ -104,4 +112,15 @@ $(".conversation_block, .user_list .user_list_ul").mCustomScrollbar({
 
   $(".go-back-btn").click(function(){
     goback();
-  })
+  });
+
+
+// goback function
+
+// loader js
+$(".loader").height(windowHeight);
+$(window).load(function(){
+  setTimeout(function(){
+      $(".loader").fadeOut();
+  },1000);
+});

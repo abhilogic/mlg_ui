@@ -20,6 +20,9 @@
         background-color: transparent;
         color: white;
       }
+      img {
+        max-width: 50px;
+      }
     }
   }
 
@@ -98,7 +101,18 @@
       }
 
       .navbar-brand{
+        @include padding(7px 9px);
         display: inline-block;
+        @media screen and (min-width: $screen-sm){
+          @include padding(15px);
+        }
+
+      }
+      .navbar-toggle {
+        @media screen and (max-width: $screen-xs-max){
+          float: left;
+          @include margin(7px 0px 0px 15px);
+        }
       }
     }
   }
@@ -117,5 +131,32 @@
     @include border-radius($border-radius-large);
     box-shadow: inset 0 0 10px rgba($gray-dark, $gama);
     background-color: lighten($gray-lighter, 5%);
+  }
+  .dropdown {
+    text-align: right;
+    .profile_img {
+        max-width: 38px;
+        @include border-radius(100%);
+    }
+    .btn {
+      font-size: 20px;
+      font-family: $font-secondary;
+      color: #adadad;
+      @include border-width(0x);
+      background: none;
+      @include padding(4px null);
+      &:focus, &:active {
+        outline: 0px;
+      }
+    }
+    .dropdown-menu {
+      left: auto;
+      right: 0px;
+      li {
+        .icon {
+          @include margin(null 10px null null);
+        }
+      }
+    }
   }
 }
