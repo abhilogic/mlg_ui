@@ -498,16 +498,19 @@ angular.module('mlg_student')
                 angular.forEach(contents.children, function(child, key) {
                   if (child.kind.toUpperCase() != 'EXERCISE') {
                     if (child.kind.toUpperCase() == 'VIDEO') {
-                      $http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
-                        var youtube_id = video_response.data.translated_youtube_id;
-                        khan_api_response_content.push({
-                          name: child.title,
-                          descriptions: child.description,
-                          kind: child.kind,
-                          url: child.url,
-                          youtube_id: youtube_id
+                      var content_title = response.response.khan_api_content_title;
+                      if (content_title.indexOf(child.id) !== -1) {
+                        $http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
+                          var youtube_id = video_response.data.translated_youtube_id;
+                          khan_api_response_content.push({
+                            name: child.title,
+                            descriptions: child.description,
+                            kind: child.kind,
+                            url: child.url,
+                            youtube_id: youtube_id
+                          });
                         });
-                      });
+                      }
                     } else if (child.kind.toUpperCase() == 'ARTICLE') {
                       $http.get(urlParams.khanApiArticle + child.internal_id).then(function(article_response) {
                         var article_content = JSON.parse(article_response.data.perseus_content);
