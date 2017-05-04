@@ -1,4 +1,4 @@
-
+$animation_duration: 900s;
 .cloud-cover {
   display: none;
   @media screen and (min-width: $screen-xs-max){
@@ -7,25 +7,30 @@
   .animated-cloud {
     position: absolute;
     z-index: 2000;
+    display: none;
+    @media screen and (min-width: $screen-sm){
+      display: block;
+    }
     &:first-child {
       top: $cloud_first_top_pos;
       left: 50%;
-      @include animation(cloud-animation_1 300s  linear infinite );
+      @include animation(cloud-animation_1 $animation_duration  linear infinite );
     }
+
     &:nth-child(2) {
       bottom: $cloud_second_bottom_pos;
       left: 80%;
-      @include animation(cloud-animation_2 300s  linear infinite );
+      @include animation(cloud-animation_2 $animation_duration  linear infinite );
     }
     &:nth-child(3) {
       top: $cloud_third_top_pos;
       left: 80%;
-      @include animation(cloud-animation_3 300s  linear infinite );
+      @include animation(cloud-animation_3 $animation_duration  linear infinite );
     }
     &:nth-child(4) {
       top: $cloud_fourth_top_pos;
       left: 30%;
-      @include animation(cloud-animation_4 300s  linear infinite );
+      @include animation(cloud-animation_4 $animation_duration  linear infinite );
     }
   }
 }
@@ -70,6 +75,10 @@
         height: 100%;
         left: 0px;
         top: 0px;
+        .castles_map_web_img {
+          position: relative;
+          z-index: 10;
+        }
       }
     }
 
@@ -93,29 +102,29 @@
   width: 100%;
   z-index: 200;
   .castle {
-    height: 60px;
     position: absolute;
-    width: 60px;
     z-index: 100;
 
     .flag__icon {
       @include cssSprite($flag__icon);
       display: none;
-      left: -13px;
       position: absolute;
-      top: -1px;
+      left: 32px;
+      top: 57px;
     }
     .fire__img {
       @include cssSprite($fire__img);
       background-size: 100% 100%;
       display: none;
-      left: 5px;
+      left: 8px;
       position: absolute;
-      top: 6px;
+      top: -9px;
     }
     .castle__text {
       color: $drover;
-      font-family: $journey_castel_font;
+      font-family: $font-primary;
+      font-weight: $semibold;
+      font-style: italic;
       font-size: 18px;
       left: 3px;
       position: absolute;
@@ -139,20 +148,35 @@
 
     // topic castel
     &.subskills_castle_1 {  //Training Arena
-    left: 179px;
-    top: 135px;
+      left: 73px;
+      top: 85px;
       .castle__img {
-          @include cssSprite($math_algebra_icon);
+          @include cssSprite($math_training_arena);
+      }
+      .castle__text {
+        top: -12px;
+        left: -36px;
+      }
+      .flag__icon {
+        left: 110px;
+        top: 54px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
-    &.subskills_castle_2 {// algebra
-      left: 45px;
+    &.subskills_castle_2 {  // algebra
+      left: -4px;
       top: 265px;
       .castle__img {
-        @include cssSprite($math_addition_icon);
+        @include cssSprite($math_algebra_icon);
+      }
+      .castle__text {
+        left: 37px;
+      }
+      .flag__icon {
+        left: 82px;
+        top: 6px;
       }
       @media screen and (max-width: $screen-tb-port){
         .castle__img {
@@ -160,68 +184,82 @@
         }
       }
     }
-    &.book {
-      left: 24px;
-      top: 367px;
+    &.subskills_castle_3 { //Calculus
+      left: 147px;
+      top: 402px;
       .castle__img {
-        @include cssSprite($book__icon);
+          @include cssSprite($math_calculus_icon);
       }
       .castle__text {
-        color: $anzac;
-        font-family: $font-primary;
-        left: -16px;
-        bottom: -19px;
-        top: auto;
+        left: 21px;
+        top: -11px;
+      }
+      .flag__icon {
+        left: -1px;
+        top: -9px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
-    &.subskills_castle_3 { //comparing
-      left: 158px;
-      top: 418px;
+    &.subskills_castle_4 { //comparing
+      left: 9px;
+      top: 542px;
       .castle__img {
-          @include cssSprite($compare_castle_icon);
+          @include cssSprite($math_compare_icon);
+      }
+      .flag__icon {
+        left: 55px;
+        top: 8px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
-    }
-    &.subskills_castle_4 { //Calculus
-    left: 7px;
-    top: 560px;
-    .castle__img {
-        @include cssSprite($math_calculus_icon);
-    }
-    @media screen and (max-width: $screen-tb-port){
-
-    }
     }
     &.subskills_castle_5 { // Counting
       left: 116px;
-      bottom: 25px;
+      bottom: 81px;
       .castle__img {
           @include cssSprite($math_counter_icon);
+      }
+
+      .castle__text {
+        left: 35px;
+      }
+      .flag__icon {
+        left: 24px;
+        top: -47px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_6 { // Decimals
-    left: 263px;
-    bottom: 147px;
+      left: 206px;
+      bottom: 183px;
       .castle__img {
           @include cssSprite($math_decimal_icon);
+      }
+      .castle__text {
+        left: 37px;
+      }
+      .flag__icon {
+        left: 100px;
+        top: 13px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_7 { // Division
-      left: 472px;
+      left: 447px;
       top: 420px;
       .castle__img {
           @include cssSprite($math_division_icon);
+      }
+      .flag__icon {
+        left: -19px;
+        top: -4px;
       }
       @media screen and (max-width: $screen-tb-port){
 
@@ -233,15 +271,30 @@
       .castle__img {
           @include cssSprite($math_estimation_icon);
       }
+      .castle__text {
+        left: 22px;
+      }
+      .flag__icon {
+        left: 94px;
+        top: -31px;
+      }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_9 { // Fractions
-      left: 339px;
+      left: 308px;
       top: 128px;
       .castle__img {
           @include cssSprite($math_fractions_icon);
+      }
+      .castle__text {
+        left: 28px;
+        top: -22px;
+      }
+      .flag__icon {
+        left: 80px;
+        top: -1px;
       }
       @media screen and (max-width: $screen-tb-port){
 
@@ -251,53 +304,85 @@
       left: 491px;
       top: 210px;
       .castle__img {
-          @include cssSprite($math_exponent_icon);
+          @include cssSprite($math_function_icon);
       }
       .castle__text {
-        left: -40px;
+        left: -20px;
+      }
+      .flag__icon {
+        top: -47px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_11 {  // Exponents
-    left: 747px;
-    top: 125px;
-  .castle__img {
-      @include cssSprite($math_function_icon);
-  }
-  .castle__text {
-    left: -50px;
-  }
-  @media screen and (max-width: $screen-tb-port){
-
-  }
-    }
-    &.subskills_castle_12 {//  Geometry
-      left: 698px;
-      top: 269px;
+        left: 747px;
+        top: 125px;
       .castle__img {
-          @include cssSprite($math_geometry_icon);
+          @include cssSprite($math_exponent_icon);
+      }
+      .castle__text {
+        left: 5px;
+        top: -25px;
+      }
+      .flag__icon {
+        left: 75px;
+        top: 16px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
-    &.subskills_castle_13 {  // Measurement
-    left: 711px;
-    top: 393px;
+    &.subskills_castle_12 { //  Geometry
+      left: 686px;
+      top: 255px;
+      .castle__img {
+          @include cssSprite($math_geometry_icon);
+      }
+      .castle__text {
+        top: -15px;
+        left: 20px;
+      }
+      .flag__icon {
+        left: 73px;
+        top: 6px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_13 {  // Graphs
+      left: 711px;
+      top: 375px;
         .castle__img {
-            @include cssSprite($math_measurement_icon);
+            @include cssSprite($math_graphs_icon);
+        }
+        .castle__text {
+          top: -24px;
+          left: 34px;
+        }
+        .flag__icon{
+          left: 14px;
+          top: 9px;
         }
         @media screen and (max-width: $screen-tb-port){
 
         }
     }
-    &.subskills_castle_14 { //  Graphs
-    left: 874px;
-    top: 477px;
+    &.subskills_castle_14 { //  Integer
+      left: 835px;
+      top: 466px;
       .castle__img {
-          @include cssSprite($math_graphs_icon);
+          @include cssSprite($math_integers_icon);
+      }
+      .castle__text {
+        left: 28px;
+        top: -28px;
+      }
+      .flag__icon {
+        left: 86px;
+        top: 10px;
       }
       @media screen and (max-width: $screen-tb-port){
 
@@ -310,17 +395,29 @@
           @include cssSprite($math_logic_icon);
       }
       .castle__text {
-        left: -40px;
+        left: -6px;
+        top: -25px;
+      }
+      .flag__icon {
+        left: 3px;
+        top: -42px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
-    &.subskills_castle_16 { // Integers
+    &.subskills_castle_16 { // Measurement
       left: 560px;
-      bottom: 56px;
+      bottom: 111px;
       .castle__img {
-          @include cssSprite($math_logic_icon);
+          @include cssSprite($math_measurement_icon);
+      }
+      .castle__text {
+        left: 18px;
+      }
+      .flag__icon {
+        left: 42px;
+        top: -62px;
       }
       @media screen and (max-width: $screen-tb-port){
 
@@ -328,45 +425,66 @@
     }
     &.subskills_castle_17 { // Mixed operations
       left: 821px;
-      bottom: 30px;
+      bottom: 108px;
       .castle__img {
           @include cssSprite($math_mixed_operation_icon);
       }
       .castle__text {
-        left: -40px;
+        left: 8px;
+        top: -32px;
+      }
+      .flag__icon {
+        left: 34px;
+        top: -51px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_18 {  // Money & consumer maths
-      left: 1082px;
-      bottom: 84px;
+      left: 1027px;
+      bottom: 147px;
       .castle__img {
           @include cssSprite($math_money_icon);
       }
       .castle__text {
-        left: -40px;
+        left: -26px;
+        top: -23px;
+      }
+      .flag__icon {
+        left: 94px;
+        top: 6px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_19 { // Multiplication
-      left: 1094px;
-      bottom: 249px;
+      left: 1103px;
+      bottom: 304px;
       .castle__img {
           @include cssSprite($math_multiplication_icon);
+      }
+      .flag__icon {
+        left: 32px;
+        top: -60px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_20 { // Number Theory
-      left: 1294px;
+      left: 1312px;
       bottom: 191px;
       .castle__img {
           @include cssSprite($math_number_icon);
+      }
+      .castle__text {
+        top: -26px;
+      }
+      .flag__icon {
+        left: 32px;
+        top: 12px;
       }
       @media screen and (max-width: $screen-tb-port){
 
@@ -374,42 +492,64 @@
     }
     &.subskills_castle_21 { // Patterns
       left: 1341px;
-      bottom: 29px;
+      bottom: 67px;
       .castle__img {
           @include cssSprite($math_pattern_icon);
+      }
+      .castle__text {
+        left: 24px;
+      }
+      .flag__icon {
+        left: 56px;
+        top: -48px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_22 { // Percents
-      left: 1477px;
-      bottom: 79px;
+      left: 1463px;
+      bottom: 155px;
       .castle__img {
           @include cssSprite($math_percent_icon);
+      }
+      .castle__text {
+        left: 16px;
+      }
+      .flag__icon {
+        left: 83px;
+        top: 2px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_23 { // Place values
-      left: 1507px;
-      bottom: 261px;
+      left: 1523px;
+      bottom: 283px;
       .castle__img {
           @include cssSprite($math_placevalue_icon);
+      }
+      .flag__icon {
+        left: 11px;
+        top: 0px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_24 { // Probability
-      left: 1454px;
-      top: 297px;
+      left: 1457px;
+      top: 259px;
       .castle__img {
           @include cssSprite($math_probability_icon);
       }
       .castle__text {
-        left: -50px;
+        left: -22px;
+      }
+      .flag__icon {
+        left: 89px;
+        top: 0px;
       }
       @media screen and (max-width: $screen-tb-port){
 
@@ -417,19 +557,34 @@
     }
     &.subskills_castle_25 { // Ratios & Proportions
       left: 1631px;
-      top: 174px;
+      top: 132px;
       .castle__img {
           @include cssSprite($math_ratio_icon);
+      }
+      .castle__text {
+        top: -26px;
+      }
+      .flag__icon {
+        left: 83px;
+        top: 14px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_26 { // Subtraction
-      left: 1744px;
-      top: 276px;
+      left: 1711px;
+      top: 310px;
       .castle__img {
           @include cssSprite($math_subtraction_icon);
+      }
+      .castle__text {
+        left: 19px;
+        top: -3px;
+      }
+      .flag__icon {
+        left: 107px;
+        top: -24px;
       }
       @media screen and (max-width: $screen-tb-port){
 
@@ -441,28 +596,44 @@
       .castle__img {
           @include cssSprite($math_time_icon);
       }
+      .castle__text {
+        left: 34px;
+        top: -17px;
+      }
+      .flag__icon {
+        left: -11px;
+        top: -6px;
+      }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_28 { // Trigonometry
-      left: 1675px;
-      top: 570px;
+      left: 1648px;
+      top: 516px;
       .castle__img {
           @include cssSprite($math_trigonometry_icon);
+      }
+      .castle__text {
+        left: 28px;
       }
       @media screen and (max-width: $screen-tb-port){
 
       }
     }
     &.subskills_castle_29 { // Word problems
-      left: 1840px;
-      bottom: 72px;
+      left: 1790px;
+      bottom: 113px;
       .castle__img {
           @include cssSprite($math_word_problem_icon);
       }
       .castle__text {
-        left: -50px;
+        left: 17px;
+        top: -30px;
+      }
+      .flag__icon {
+        left: 20px;
+        top: -24px;
       }
       @media screen and (max-width: $screen-tb-port){
 
@@ -529,153 +700,153 @@
       }
       &.subskills_castle_1 {
         .castle__img {
-          @include cssSprite($math_addition_icon_sm);
+          @include cssSprite($math_training_arena);
         }
 
       }
       &.subskills_castle_2 {
         .castle__img {
-            @include cssSprite($math_algebra_icon_sm);
+            @include cssSprite($math_algebra_icon);
         }
       }
       &.subskills_castle_3 {
         .castle__img {
-            @include cssSprite($math_calculus_icon_sm);
+            @include cssSprite($math_calculus_icon);
         }
       }
       &.subskills_castle_4 {
         .castle__img {
-            @include cssSprite($compare_castle_icon_sm);
+            @include cssSprite($math_compare_icon);
         }
       }
       &.subskills_castle_5 {
         .castle__img {
-            @include cssSprite($math_counter_icon_sm);
+            @include cssSprite($math_counter_icon);
         }
       }
       &.subskills_castle_6 {
         .castle__img {
-            @include cssSprite($math_decimal_icon_sm);
+            @include cssSprite($math_decimal_icon);
         }
       }
       &.subskills_castle_7 {
         .castle__img {
-            @include cssSprite($math_division_icon_sm);
+            @include cssSprite($math_division_icon);
         }
       }
       &.subskills_castle_8 {
         .castle__img {
-            @include cssSprite($math_estimation_icon_sm);
+            @include cssSprite($math_estimation_icon);
         }
       }
       &.subskills_castle_9 {
         .castle__img {
-            @include cssSprite($math_fractions_icon_sm);
+            @include cssSprite($math_fractions_icon);
         }
       }
       &.subskills_castle_10 {
         .castle__img {
-            @include cssSprite($math_function_icon_sm);
+            @include cssSprite($math_function_icon);
         }
       }
       &.subskills_castle_11 {
         .castle__img {
-            @include cssSprite($math_exponent_icon_sm);
+            @include cssSprite($math_exponent_icon);
         }
       }
       &.subskills_castle_12 {
         .castle__img {
-            @include cssSprite($math_geometry_icon_sm);
+            @include cssSprite($math_geometry_icon);
         }
       }
       &.subskills_castle_13 {
         .castle__img {
-            @include cssSprite($math_graphs_icon_sm);
+            @include cssSprite($math_graphs_icon);
         }
       }
       &.subskills_castle_14 {
         .castle__img {
-            @include cssSprite($math_integers_icon_sm);
+            @include cssSprite($math_integers_icon);
         }
       }
       &.subskills_castle_15 {
         .castle__img {
-            @include cssSprite($math_logic_icon_sm);
+            @include cssSprite($math_logic_icon);
         }
       }
       &.subskills_castle_16 {
         .castle__img {
-            @include cssSprite($math_measurement_icon_sm);
+            @include cssSprite($math_measurement_icon);
         }
       }
       &.subskills_castle_17 {
         .castle__img {
-            @include cssSprite($math_mixed_operation_icon_sm);
+            @include cssSprite($math_mixed_operation_icon);
         }
       }
       &.subskills_castle_18 {
         .castle__img {
-            @include cssSprite($math_money_icon_sm);
+            @include cssSprite($math_money_icon);
         }
       }
       &.subskills_castle_19 {
         .castle__img {
-            @include cssSprite($math_multiplication_icon_sm);
+            @include cssSprite($math_multiplication_icon);
         }
       }
       &.subskills_castle_20 {
         .castle__img {
-            @include cssSprite($math_number_icon_sm);
+            @include cssSprite($math_number_icon);
         }
       }
       &.subskills_castle_21 {
         .castle__img {
-            @include cssSprite($math_pattern_icon_sm);
+            @include cssSprite($math_pattern_icon);
         }
       }
       &.subskills_castle_22 {
         .castle__img {
-            @include cssSprite($math_percent_icon_sm);
+            @include cssSprite($math_percent_icon);
         }
       }
       &.subskills_castle_23 {
         .castle__img {
-            @include cssSprite($math_placevalue_icon_sm);
+            @include cssSprite($math_placevalue_icon);
         }
       }
       &.subskills_castle_24 {
         .castle__img {
-            @include cssSprite($math_probability_icon_sm);
+            @include cssSprite($math_probability_icon);
         }
       }
       &.subskills_castle_25 {
         .castle__img {
-            @include cssSprite($math_ratio_icon_sm);
+            @include cssSprite($math_ratio_icon);
         }
       }
       &.subskills_castle_26 {
         .castle__img {
-            @include cssSprite($math_subtraction_icon_sm);
+            @include cssSprite($math_subtraction_icon);
         }
       }
       &.subskills_castle_27 {
         .castle__img {
-            @include cssSprite($math_time_icon_sm);
+            @include cssSprite($math_time_icon);
         }
       }
       &.subskills_castle_28 {
         .castle__img {
-            @include cssSprite($math_trigonometry_icon_sm);
+            @include cssSprite($math_trigonometry_icon);
         }
       }
       &.subskills_castle_29 {
         .castle__img {
-            @include cssSprite($math_word_problem_icon_sm);
+            @include cssSprite($math_word_problem_icon);
         }
       }
       &.subskills_castle_30 {
         .castle__img {
-            @include cssSprite($math_ratio_icon_sm);
+            @include cssSprite($math_ratio_icon);
         }
       }
     }

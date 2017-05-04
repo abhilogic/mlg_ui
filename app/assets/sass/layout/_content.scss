@@ -61,6 +61,10 @@
       padding-right: 15px;
     }
 
+    @media screen and (max-width: $screen-sm){
+      min-height: calc(100vh - 50px);
+    }
+
     // Clear floats
     &:after {
         content: '';

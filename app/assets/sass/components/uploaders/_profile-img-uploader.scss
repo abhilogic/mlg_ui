@@ -11,6 +11,7 @@
       z-index: 1;
       width: 40px;
       height: 40px;
+      @include padding(10px null null null);
       background: $black;
     }
   .fileContainer {

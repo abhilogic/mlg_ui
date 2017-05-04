@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr'])
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js'])
 .value('urlParams', {
 	users : '/users',
 	login: '/users/login',
@@ -29,11 +29,18 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   promocode :'/users/promocode',
   getUserPurchaseDetails :'/users/getUserPurchaseDetails',
   signUpTeacher :'/teachers/setTeacherRecord',
+  setTeacherSubjects :'/teachers/setTeacherSubjects',
   teacherPayment :'/teachers/getTeacherSubject',
   upgradePackage :'/users/upgrade',
   getStudentDetail: '/teachers/getStudentDetail',
   getTeacherGrades: '/teachers/getTeacherGradeSubject',
+  getTeacherDetailsForContent: '/teachers/getTeacherDetailsForLesson',
+  getAllCourseList : '/courses/getAllCourseList',
+  setContentForLesson : '/teachers/setContentForLesson',
   guestLogin: '/users/guestLogin',
+  setTemplateDetail : '/teachers/saveTemplate',
+  getTemplateDetail : '/teachers/getTemplate',
+  delTemplate : '/teachers/deleteTemplate',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -152,7 +159,8 @@ teacher  : 30,
 		templateUrl : 'views/account-teacher.html',
 		controller : 'teacherOnBoardingCtrl',
 	}).when('/teacher/select_courses',{
-		templateUrl : 'views/teacher_select_courses.html',
+		//templateUrl : 'views/teacher_select_courses.html',
+		templateUrl : 'views/select-grades-subjects.html',
 		controller : 'teacherOnBoardingCtrl',
 	}).when('/teacher/dashboard',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
@@ -174,7 +182,7 @@ teacher  : 30,
 		controller : 'teacherStudentList',
 	}).when('/teacher/student-profile',{
 		templateUrl : 'views/dashboard/teacher-student-profile.html',
-		controller : 'teacherStudentProfile',
+		//controller : 'teacherStudentProfile',
 	}).when('/teacher/auto-generate-assignment',{
 		templateUrl : 'views/dashboard/teacher-autoGenerateAssignment.html',
 		controller : 'teacherAutoGenerateAssignment',
@@ -196,7 +204,7 @@ teacher  : 30,
 		controller : 'teacherOnBoardingCtrl',
   }).when('/teacher/add_content',{
 		templateUrl : 'views/dashboard/teacher-content-add-lesson.html',
-		controller : 'teacherCreateClass',
+		controller : 'teacherLessonCtrl',
   }).when('/teacher/create-class',{
 		templateUrl : 'views/dashboard/teacher-create-class.html',
 		controller : 'teacherLessonCtrl',
@@ -344,8 +352,6 @@ teacher  : 30,
 		//var footerHeight = $('.footer').outerHeight();
 		$('.page-container').attr('style', 'min-height:' + availableHeight + 'px');
 	});
-	
-	 
 })
 
 .directive('banner', function() {
@@ -374,9 +380,53 @@ $scope.userInfo=userInfo;
 };
 
 	
+})
+
+.directive('asideParent', function () {
+return {
+	restrict: 'E',
+	templateUrl: 'include/sidebar.html',
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+		var cookieString=$cookieStore.get("userObj");
+		var userInfo=parseUser(cookieString);
+		function parseUser(cookie){
+	var keyVals=cookie.split(',');
+	var obj={};
+	angular.forEach(keyVals,function(value,key){
+		var vals=value.split('=');
+		obj[vals[0]]=vals[1];
+	});
+	return obj;
+}
+$scope.userInfo=userInfo;
+	}]
+};
+
 	
 })
 
 
+.directive('topSearchBar', function () {
+return {
+	restrict: 'E',
+	templateUrl: 'include/search-bar.html',
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+		var cookieString=$cookieStore.get("userObj");
+		var userInfo=parseUser(cookieString);
+		function parseUser(cookie){
+	var keyVals=cookie.split(',');
+	var obj={};
+	angular.forEach(keyVals,function(value,key){
+		var vals=value.split('=');
+		obj[vals[0]]=vals[1];
+	});
+	return obj;
+}
+$scope.userInfo=userInfo;
+	}]
+};
+
+	
+})
 
 ;

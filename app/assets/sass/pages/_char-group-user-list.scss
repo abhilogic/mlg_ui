@@ -1,0 +1,27 @@
+.char-group-user-list {
+  .group_list {
+    border-bottom: 1px solid $gray-lighter;
+    @include padding(null null 20px null);
+  }
+  .student_list {
+    @include padding( 20px null null null);
+    .student {
+      &.online {
+        .student__img {
+          .img-circle {
+            border: 3px solid #79eeaa;
+          }
+        }
+      }
+      .student__img {
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+  .panel-body {
+    max-height: 550px;
+    overflow: hidden;
+  }
+}
