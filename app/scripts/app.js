@@ -54,6 +54,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	parent : 2,
 	teacher : 3,
 	student : 4,
+	guest_teacher : 5,
+	principal : 6
 }).value('card_months', {
 	1  : '1',
 	2  : '2',
@@ -77,6 +79,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 parent  : 30,
 student  : 60,
 teacher  : 30,
+guest_teacher  : 30,
+principal  : 30,
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {
@@ -98,7 +102,7 @@ teacher  : 30,
 		controller : 'loginCtrl',	
 	}).when('/teacher/signup',{
 		templateUrl : 'views/teacher_signup.html',
-		controller : 'teacherLoginCtrl',
+		controller : 'teacherSingnupCtrl',
 		access : access.public
 	}).when('/parent_signup', {
 		templateUrl : 'views/parent_signup.html',
