@@ -40,7 +40,11 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   guestLogin: '/users/guestLogin',
   setTemplateDetail : '/teachers/saveTemplate',
   getTemplateDetail : '/teachers/getTemplate',
-  delTemplate : '/teachers/deleteTemplate',
+  delContent : '/teachers/deleteContent',
+  getDifficultyLevel : '/teachers/getDifficulty',
+  questionType : '/teachers/getQuestionType',
+  getUserContent : '/teachers/getUserContent',
+  setUserContents : '/teachers/setUserContent',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -214,7 +218,7 @@ principal  : 30,
 		controller : 'teacherLessonCtrl',
   }).when('/teacher/add-question',{
 		templateUrl : 'views/dashboard/teacher-content-add-question.html',
-		controller : 'teacherAddQuestion',
+		controller : 'teacherAddQuestionCtrl',
   }).when('/teacher/questions',{
 		templateUrl : 'views/dashboard/teacher-content-questions.html',
 		controller : 'teacherQuestions',
