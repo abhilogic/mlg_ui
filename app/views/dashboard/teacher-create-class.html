@@ -70,11 +70,25 @@
 									</ul>
 								</div>
 						</div>
-						<div class="panel-body">
+						<div class="panel-body" ng-controller="tableRow">
 							<div class="panel-toolbar responsive-md">
 
 							</div>
-							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons" ng-controller="tableRow">
+							<div class="row">
+								<div class="col-sm-4 margin-bottom-10">
+									<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+								</div>
+								<div class="col-sm-4  margin-bottom-10">
+									<select ng-model="pageSize" id="pageSize" class="form-control">
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+									 </select>
+								</div>
+							</div>
+							
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons" >
 								<thead>
 									<tr>
 										<th class="sr-no" width="5%">#</th>
@@ -99,7 +113,7 @@
 											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
 										</td>
 									</tr>
-									<tr ng-repeat="person in people">
+									<tr ng-repeat="person in people | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
 										<td class="sr-no">{{person.id}}</td>
 										<td class="last-name">{{person.Lname}}</td>
 										<td class="first-name">{{person.Fname}}</td>
@@ -115,6 +129,8 @@
 											<button type="button" ng-click="removePerson($index)">Remove Person</button>
 										</td>-->
 									</tr>
+									
+									
 
 									<tr>
 										<td class="classId"><input type="text" ng-model="id" placeholder="ID" ></td>
@@ -127,6 +143,35 @@
 									</tr>
 								</tbody>
 							</table>
+							
+							<div class="BtnGroup">
+								<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+									<i class="fa fa-angle-left"></i>
+								</button>
+								{{currentPage+1}}/{{numberOfPages()}}
+								
+								<button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
+									<i class="fa fa-angle-right"></i>
+								</button>
+							</div>
+							
+							<!--<table datatable sAjaxSource="data.json" sAjaxDataProp="result" class="table table-striped table-bordered">
+							  <thead>
+									<tr>
+										<th data-mdata="id" data-sclass="highlight-red">ID</th>
+										<th data-mdata="name">Name</th>
+										<th data-mdata="about.text" data-bvisible="false">About me</th>
+										<th data-mdata="phone">Phone</th>
+										<th data-mdata="email">Email</th>
+										<th data-mdata="age">Age</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>-->
+							
+							
+
+							
 							<a href="quick-start-guide.html"><span>Have questions?</span> <b><u>Quick-start Guide</u></b></a>
 						</div>
 					</div>
@@ -142,7 +187,7 @@
 	</div>
 	<!-- page container -->
 
-
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script>
 		var headertext = [],

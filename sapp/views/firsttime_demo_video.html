@@ -62,13 +62,34 @@
 				</div>
 			</div>
 	</div>
-		
+	
+	<div class="loader" loading>
+		<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+	</div>
+	
     <script src="assets/js/video.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script>
 			$(document).ready(function(){
-        $("input[type='checkbox']").checkbox_button();
+				$("input[type='checkbox']").checkbox_button();
 				$("#subskils_nav_tabs").tabCollapse();
+				$(".masscourt-block").addClass("active");
+		    setTimeout(function(){
+		        $(".masscourt-block .masscourt-cover").addClass("in");
+		    }, 500);
+				function vidplay() {
+			        var video = $("#tutorialVideo").get(0);
+			        if (video.paused) {
+			         video.play();
+			      } else {
+			         video.pause();
+			      }
+			    };
+				$(window).load(function(){
+					vidplay();
+			    $(".video_cover").toggleClass("start");
+				})
+
 			});
 		</script>
 	

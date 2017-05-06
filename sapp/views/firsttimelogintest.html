@@ -46,7 +46,10 @@
                     			<div ng-if="currentquestion.type=='yesNO' ">
                     				<label class="radio-inline" ng-repeat="option in currentquestion.options">
                     					
-										<input type="radio" name="quiz_option" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required><span style="color:#fff">{{option.label}}</span>
+										<input type="radio" name="quiz_option" class="radio-proceed" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required>
+										<a class="radio-btn" ng-class="{checked: frm.selectedoption == option.value}"></a>
+										<span style="color:#fff">{{option.label}}</span>
+										
                     				</label>
 									<span style="color:red">{{error_message}}</span>									
                     				
@@ -93,7 +96,7 @@
 		<!-- masscourts block -->
     <div class="masscourt-block">
       <div class="masscourt-cover ">
-        <img src="assets/img/masscourts.png" class="masccort-img" alt=""/>
+        <img src="assets/img/happy-masscourts.png" class="masccort-img" alt=""/>
         <div class="hint-block">
           <!-- <div class="col-xs-2 padding-0">
             <img src="assets/img/hint-bulb-img.png" alt=""/>
@@ -107,6 +110,10 @@
         </div>
       </div>
     </div>
+	
+	<div class="loader" loading>
+		<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+	</div>
     <!-- masscourts block -->
 		<script src="assets/js/main.js"></script>
 		<script>

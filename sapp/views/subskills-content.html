@@ -9,7 +9,8 @@
   <div class="main-content">
     <a href="subskillsroom.html"><i class="icon icon-exit-door"></i></a>
     <span class="google-speaker"><img src="assets/img/speaker_icon_gray.png" alt=""/></div>
-  <div class="board table">
+  <div class="board table subskills-content">
+				<div class="table-animated-img"></div>
     <h5 class="hd"><span>Subskills:</span> Whole Numbers</h5>
     <div class="row">
       <div class="col-md-4 table-of-content">
@@ -163,39 +164,66 @@
     </div>
   </div>
 </div>
+
+<div class="loader" loading>
+	<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+</div>
 <!--chating-->
 <!-- page specific js  -->
-<script type="text/javascript">
-  $(document).ready(function () {
-//    $("#tableOfContent").tabCollapse();
-//    if ($(window).width() > 767) {
-//      $(".tab-pane").mCustomScrollbar();
-//    }
-    // skip function
-    $("#skip").click(function () {
-      // js for tableOfContent
-      var targetLiIndex = $("#tableOfContent li.active").index();
-      targetLiIndex = Math.abs(targetLiIndex);
-      var noOfLi = $("#tableOfContent li").length;
-      if (targetLiIndex == noOfLi - 1) {
-        $("#tableOfContent li").removeClass("active");
-        $("#tableOfContent li:first").addClass("active");
-      } else if (targetLiIndex < noOfLi) {
-        $("#tableOfContent li.active").removeClass("active").next("li").addClass("active");
-      }
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- Compiled and minified Page Specific JavaScript -->
+		<script src="assets/js/plugins/bootstrap-tabcollapse.js"></script>
+		<!-- page specific js  -->
+    <script type="text/javascript">
+      $(document).ready(function(){
+				$("#tableOfContent").tabCollapse({
+					tabsClass: 'hidden-sm hidden-xs',
+    			accordionClass: 'visible-sm visible-xs'
+				});
+        if($(window).width()>768){
+					$(".tab-pane, .table-of-content .nav-tabs").mCustomScrollbar();
+				}
+				// skip function
+				$("#skip").click(function(){
+					// js for tableOfContent
+					var targetLiIndex = $("#tableOfContent li.active").index();
+					targetLiIndex = Math.abs(targetLiIndex);
+					var noOfLi = $("#tableOfContent li").length;
+					if (targetLiIndex==noOfLi-1){
+						$("#tableOfContent li").removeClass("active");
+						$("#tableOfContent li:first").addClass("active");
+					}
+					else if(targetLiIndex<noOfLi){
+						$("#tableOfContent li.active").removeClass("active").next("li").addClass("active");
+					}
 
-      // js for tab-content
-      var targetpaneIndex = $(".tab-content .tab-pane.in").index();
-      targetpaneIndex = Math.abs(targetpaneIndex);
-      var noOfpane = $(".tab-content .tab-pane").length;
-      if (targetLiIndex == noOfLi - 1) {
-        $(".tab-content .tab-pane").removeClass("in active");
-        $(".tab-content .tab-pane:first").addClass("in active");
-      } else if (targetLiIndex < noOfLi) {
-        $(".tab-content .tab-pane.in").removeClass("in active").next(".tab-pane").addClass("in active");
-      }
+					// js for tab-content
+					var targetpaneIndex = $(".tab-content .tab-pane.in").index();
+					targetpaneIndex = Math.abs(targetpaneIndex);
+					var noOfpane = $(".tab-content .tab-pane").length;
+					if (targetLiIndex==noOfLi-1){
+						$(".tab-content .tab-pane").removeClass("in active");
+						$(".tab-content .tab-pane:first").addClass("in active");
+					}
+					else if(targetLiIndex<noOfLi){
+						 $(".tab-content .tab-pane.in").removeClass("in active").next(".tab-pane").addClass("in active");
+					}
 
-    });
-  });
-</script>
+				});
+				// tooltip bootstrap
+				$('[data-toggle="tooltip"]').tooltip();
+      });
+			if($(window).width()>768){
+				$(window).load(function(){
+					// table animation
+	          var currentIndex = 1;
+	          setInterval(function () {
+	              if (currentIndex == 45) {
+	                  currentIndex = 1;
+	              }
+	              $(".table-animated-img").css('background-image', 'url("assets/img/table-animation/' + currentIndex++ + '.png")');
+	          }, 110);
+				});
+			}
+    </script>
 
