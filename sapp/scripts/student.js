@@ -498,6 +498,7 @@ angular.module('mlg_student')
       if(response.response.course_details.length > 0){
         $scope.topic_detail = response.response.course_details;
         var khan_api_slugs = response.response.khan_api_slugs;
+        $scope.teacher_contents = response.response.teacher_contents;
         var khan_api_response_content = [];
         if (khan_api_slugs != '') {
           angular.forEach(khan_api_slugs, function(khan_api_slug, index) {
