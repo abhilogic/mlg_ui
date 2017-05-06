@@ -16,7 +16,7 @@
         <h6>Table of Content</h6>
         <ul class="nav nav-tabs" id="tableOfContent">
             <li ng-repeat="topic in topic_detail" ><i class="icon icon-document"></i> <a data-toggle="tab" href="/subskill_content/#topic_{{$index+1}}">{{topic.name}}</a></li>
-            <!--<li ng-if="khan_api_content"><i class="icon icon-document"></i> <a data-toggle="tab" href="/subskill_content/#khan_api">Khan API</a></li>-->
+            <li ng-repeat="teacher_content in teacher_contents" ><i class="icon icon-document"></i> <a data-toggle="tab" href="/subskill_content/#teacher_{{$index+1}}">{{teacher_content.name}}</a></li>
             <li ng-repeat="khan_content in khan_api_content">
               <i ng-if="khan_content.kind.toUpperCase() != 'VIDEO'" class="icon icon-document"></i>
               <i ng-if="khan_content.kind.toUpperCase() == 'VIDEO'" class="icon icon-video"></i>
@@ -27,6 +27,11 @@
         <!-- MLG content -->
         <div ng-repeat="topic in topic_detail"  id="topic_{{$index+1}}" class="tab-pane fade ">         
           {{topic.descriptions}}
+        </div>
+
+        <!--Teacher Contents-->
+        <div ng-repeat="teacher_content in teacher_contents"  id="teacher_{{$index+1}}" class="tab-pane fade ">
+          {{teacher_content.descriptions}}
         </div>
 
         <!-- KHAN Content -->
