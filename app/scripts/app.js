@@ -46,6 +46,13 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   questionType : '/teachers/getQuestionType',
   getUserContent : '/teachers/getUserContent',
   setUserContents : '/teachers/setUserContent',
+  delTemplate : '/teachers/deleteTemplate',
+  addStudent : '/teachers/addStudent',
+  getStudentsOfClass : '/teachers/getStudentsOfClass',
+  updateStudent : '/teachers/updateStudent',
+  deleteStudent : '/teachers/deleteStudent',
+  sendMeMail : '/teachers/sendEmailToTeacher',   
+
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -216,7 +223,7 @@ principal  : 30,
 		controller : 'teacherLessonCtrl',
   }).when('/teacher/create-class',{
 		templateUrl : 'views/dashboard/teacher-create-class.html',
-		controller : 'teacherLessonCtrl',
+		controller : 'teacherCreateClassCtrl',
   }).when('/teacher/add-question',{
 		templateUrl : 'views/dashboard/teacher-content-add-question.html',
 		controller : 'teacherAddQuestionCtrl',

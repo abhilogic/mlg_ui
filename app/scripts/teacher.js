@@ -111,6 +111,49 @@ angular.module('mlg')
           url  : urlParams.baseURL+urlParams.setUserContents+'/'+subSkill
         });
       }
+
+      teacherHttpResponse.addStudent=function(childdata){
+        return $http({
+          method:'POST',  
+          data : childdata,   
+          url  : urlParams.baseURL+urlParams.addStudent
+        });
+      }
+
+      teacherHttpResponse.getStudentsOfClass=function(tid,course_id){
+        return $http({
+          method:'GET',            
+          url  : urlParams.baseURL+urlParams.getStudentsOfClass+'?teacher_id='+tid+'&course_id='+course_id
+        });
+      }
+
+      teacherHttpResponse.updateStudent=function(stUpdate){
+        return $http({
+          method:'POST', 
+          data : stUpdate,           
+          url  : urlParams.baseURL+urlParams.updateStudent
+        });
+      }
+
+      teacherHttpResponse.deleteStudent=function(stdelete){
+        return $http({
+          method:'GET',                     
+          url  : urlParams.baseURL+urlParams.deleteStudent+'?id='+stdelete.id
+        });
+      }
+
+      teacherHttpResponse.sendMeMail=function(selectd_students, get_uid){
+        return $http({
+          method:'POST', 
+          data :  selectd_students,                  
+          url  : urlParams.baseURL+urlParams.sendMeMail+'?teacher_id='+get_uid
+        });
+      }
+
+
+
+
+
         return teacherHttpResponse;
 	
 }])
@@ -255,6 +298,7 @@ angular.module('mlg')
       $location.url('/teacher/dashboard');   
     };
     /* end- step-3 for onBoarding */
+
   /* Start - step-4 for onBoarding teacher dasboard*/
   var grade = '';
   var subjectName = '';
@@ -304,6 +348,181 @@ angular.module('mlg')
 		$scope.$emit('customerDeleted', customer); 
 	};*/
   
+}])
+.controller('teacherCreateClassCtrl',['$rootScope','$scope','$timeout', 'teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+  function($rootScope,$scope,$timeout,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+
+      var get_uid=commonActions.getcookies(get_uid);
+      $scope.students = [];
+   
+      // Get teacher class and subjects. 
+      teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {   
+           if (response.status == true) {
+              $scope.subject_grade = response.response;    
+        }
+      });
+
+
+
+    // Display the students in a class for a course
+    $scope.onChangeGetStudents = function(stcourse){     
+        var stcourseid=stcourse.split(',')[0];
+        teacherHttpService.getStudentsOfClass(get_uid,stcourseid).success(function(student_response) {
+            //console.log(student_response);
+            $scope.students=student_response.response.students;
+            
+            //to edit the data
+            $scope.selected={};
+            $scope.editStudent=function(sid){
+                $scope.selected.id=sid;
+            }
+
+       });
+    }
+   
+  
+  $scope.people = [
+  //{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
+  ];
+  
+  /*$scope.addPerson = function(){
+  var person = {
+    //id: $scope.id,
+    Fname: $scope.Fname,
+    Lname: $scope.Lname,
+    email: $scope.email,
+    Uname: $scope.Uname,
+    pass: $scope.pass,
+  };
+  
+  $scope.people.push(person);
+  };
+   $scope.removePerson = function(index){
+    $scope.people.splice(index, 1);
+   };*/
+  
+
+  // start:- To add the student in class
+ $scope.submitStudentDetails = function(frmdata){
+      if(typeof frmdata.selectedcourse !='undefined'){
+          console.log(frmdata.selectedcourse);
+          //$scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
+          var slct_courseid=frmdata.selectedcourse.split(',')[0];
+          var slct_courname=frmdata.selectedcourse.split(',')[1];
+          var select_course={[slct_courseid]:slct_courname};          
+          var d = new Date();
+          var sec = d.getSeconds();   
+          
+          var studentdata={};
+               studentdata={
+                  username    : frmdata.Fname+get_uid+sec,
+                  first_name  : frmdata.Fname,
+                  last_name   : frmdata.Lname,
+                  password    : frmdata.pass,
+                  level_id    : '',
+                  dob         : '',
+                  created     : $scope.today,
+                  emailchoice : '',
+                  email       : frmdata.email,
+                  school      : '',
+                  parent_id   : get_uid,
+                  role_id     : 3, 
+                  status      : 1,            
+                  plan_id     : '',
+                  package_id  : '',
+                  courses     : select_course,
+                  vcode       : '',
+                  subscription_days : '',
+               }
+
+            teacherHttpService.addStudent(studentdata).success(function(response_childadd) {
+                if (response_childadd.response.status == "True") {
+                        $scope.success_message="Student is added";                         
+              
+                  teacherHttpService.getStudentsOfClass(get_uid,slct_courseid).success(function(student_response) {
+                      $scope.students={};
+                      $scope.students=student_response.response.students;
+                      $scope.frm.Fname=$scope.frm.Lname=$scope.frm.email=$scope.frm.pass="";
+                });
+
+                    $scope.student_Errormessage="";
+                    $timeout(function () { $scope.success_message = ""; }, 3000); // to fadeup message
+                    //$timeout(function () { $scope.message = true; }, 3000);
+                }else{
+                       $scope.student_Errormessage=response_childadd.response.message;
+                   }
+            });
+      }
+      else{      
+        $scope.course_Errormessage="Please select course";
+    }
+
+ }
+// end- add student in class
+
+
+
+// Start- edit a student
+
+  // to show input box to edit
+  $scope.editStudent=function(stdata){
+    $scope.selected.id=stdata.id; 
+  }
+
+
+  // To update the record
+  $scope.updateStudent=function(upstdata){    
+       var upstudent={};
+               upstudent={
+                  id          : upstdata.id,
+                  username    : upstdata.username,
+                  first_name  : upstdata.first_name,
+                  last_name   : upstdata.last_name,
+                  password    : upstdata.open_key,                  
+                  email       : upstdata.email,                 
+                  parent_id   : get_uid,
+                  role_id     : 3, 
+                  
+               }
+
+            teacherHttpService.updateStudent(upstudent).success(function(response_upstudent) {
+                if (response_upstudent.response.status == "true") {
+                    $scope.success_message="Student is Updated";
+                    $scope.selected.id="";
+
+                }else{
+                       $scope.upstudent_Errormessage=response_upstudent.response.message;
+                        $timeout(function () { $scope.upstudent_Errormessage = ""; }, 4000); // to fadeup message
+                        $timeout(function () { $scope.success_message = ""; }, 3000);
+                   }
+            });
+  }
+//end- edit a student
+
+
+// Delete the records
+$scope.delete_Student=function(dtstudent,index){     
+    teacherHttpService.deleteStudent(dtstudent).success(function(response_dtstudent) {
+      if (response_dtstudent.response.status == "true") {
+           $scope.success_message="Student is deleted";            
+           $scope.students.splice(index, 1);
+      }else{
+        $scope.student_Errormessage=response_dtstudent.response.message;
+      }     
+       
+    });
+}
+
+
+// Send Me Mail functionlity
+$scope.sendEmailMe=function(selected_students){  
+  teacherHttpService.sendMeMail(selected_students, get_uid).success(function(response) { 
+    console.log(selectd_students);
+  });
+
+}
+
+
 }])
 .controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
@@ -849,6 +1068,7 @@ angular.module('mlg')
 } 
   })
   
+
 .controller("tableRow", ['$scope', '$filter', '$window', '$location', function ($scope, $filter, $window, $location) {
 	$scope.people = [
 	//{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
@@ -938,6 +1158,7 @@ angular.module('mlg')
     }*/
 	
 }])
+
   
 //.controller('MyCtrl', ['$scope', '$filter', function ($scope, $filter) {
     
