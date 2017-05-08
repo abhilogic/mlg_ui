@@ -515,7 +515,6 @@ $scope.delete_Student=function(dtstudent,index){
 
 
 // Send Me Mail functionlity
-// Send Me Mail functionlity
 $scope.sendEmailMe=function(selected_students){  
   teacherHttpService.sendMeMail(selected_students, get_uid).success(function(response) { 
     console.log(selectd_students);
@@ -1069,7 +1068,7 @@ $scope.sendEmailMe=function(selected_students){
 } 
   })
   
-<<<<<<< Updated upstream
+
 .controller("tableRow", ['$scope', '$filter', '$window', '$location', function ($scope, $filter, $window, $location) {
 	$scope.people = [
 	//{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
@@ -1159,9 +1158,7 @@ $scope.sendEmailMe=function(selected_students){
     }*/
 	
 }])
-=======
 
->>>>>>> Stashed changes
   
 //.controller('MyCtrl', ['$scope', '$filter', function ($scope, $filter) {
     

@@ -70,8 +70,8 @@
 							<div class="panel-toolbar responsive-md">
 
 							</div>
-<<<<<<< Updated upstream
-							<div class="row">
+
+						<!-- 	<div class="row">
 								<div class="col-sm-4 margin-bottom-10">
 									<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
 								</div>
@@ -83,54 +83,25 @@
 										<option value="20">20</option>
 									 </select>
 								</div>
-							</div>
+							</div> -->
 							
-							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons" >
-								<thead>
-									<tr>
-										<th class="sr-no" width="5%">#</th>
-										<th class="last-name">Last Name</th>
-=======
+							
+
 							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons">
 								<thead>
 									<tr>
 										<th class="sr-no">Serial Num #</th>
->>>>>>> Stashed changes
 										<th class="first-name">First Name</th>
-										<th class="last-name">Last Name</th>
-										
+										<th class="last-name">Last Name</th>										
 										<th class="parent-student-email">Parent or Student E-mail</th>
 										<th class="user-name">User Name</th>
 										<th class="pasword">Pasword</th>
 										<th class="actions">Actions</th>
 									</tr>
 								</thead>
-<<<<<<< Updated upstream
-								<tbody>
-									<tr>
-										<td class="sr-no">1</td>
-										<td class="last-name">Henston</td>
-										<td class="first-name">Andrew</td>
-										<td class="parent-student-email">andrew.henston@gmail.com</td>
-										<td class="user-name">andrew.henston</td>
-										<td class="pasword">andrew@123</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-										</td>
-									</tr>
-									<tr ng-repeat="person in people | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
-										<td class="sr-no">{{person.id}}</td>
-										<td class="last-name">{{person.Lname}}</td>
-										<td class="first-name">{{person.Fname}}</td>
-										<td class="parent-student-email">{{person.email}}</td>
-										<td class="user-name">{{person.Uname}}</td>
-										<td class="pasword">{{person.pass}}</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link" ng-click="removePerson($index)"><i class="fa fa-trash"></i></button>
-=======
-								<tbody>									
+
+								<tbody>				
+																
 									<tr ng-repeat="student in students">
 											<td class="sr-no">
 												{{$index+1}}
@@ -144,7 +115,7 @@
 												<div style="color:red">{{upstudent_Errormessage[2]}}</div>
 											</div>
 
->>>>>>> Stashed changes
+
 										</td>
 										<td class="last-name">
 											<div ng-if="student.id!=selected.id">{{student.last_name}}</div>
@@ -186,47 +157,6 @@
 									
 
 									<tr>
-<<<<<<< Updated upstream
-										<td class="classId"><input type="text" ng-model="id" placeholder="ID" ></td>
-										<td><input type="text" ng-model="Lname" placeholder="Last Name" ></td>
-										<td><input type="text" ng-model="Fname" placeholder="First Name" ></td>
-										<td><input type="text" ng-model="email" placeholder="Email" ></td>
-										<td><input type="text" ng-model="Uname" placeholder="User Name" ></td>	
-										<td><input type="text" ng-model="pass" placeholder="Password" ></td>
-										<td><button type="button" ng-click="addPerson()">Save</button></td>
-									</tr>
-								</tbody>
-							</table>
-							
-							<div class="BtnGroup">
-								<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-									<i class="fa fa-angle-left"></i>
-								</button>
-								{{currentPage+1}}/{{numberOfPages()}}
-								
-								<button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
-									<i class="fa fa-angle-right"></i>
-								</button>
-							</div>
-							
-							<!--<table datatable sAjaxSource="data.json" sAjaxDataProp="result" class="table table-striped table-bordered">
-							  <thead>
-									<tr>
-										<th data-mdata="id" data-sclass="highlight-red">ID</th>
-										<th data-mdata="name">Name</th>
-										<th data-mdata="about.text" data-bvisible="false">About me</th>
-										<th data-mdata="phone">Phone</th>
-										<th data-mdata="email">Email</th>
-										<th data-mdata="age">Age</th>
-									</tr>
-								</thead>
-								<tbody></tbody>
-							</table>-->
-							
-							
-
-							
-=======
 										<td></td>
 										<td>
 											<input type="text" ng-model="frm.Fname" placeholder="First Name">
@@ -255,7 +185,7 @@
 							 	{{student_Errormessage[5]}}
 							 	{{student_Errormessage[6]}}
 							 </span><br>
->>>>>>> Stashed changes
+
 							<a href="quick-start-guide.html"><span>Have questions?</span> <b><u>Quick-start Guide</u></b></a>
 						</div>
 					</div>
