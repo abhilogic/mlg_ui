@@ -1081,7 +1081,7 @@ if (typeof $routeParams.id != 'undefined') {
        	}; 
 
 
-       //console.log(childdata); 
+       console.log(childdata); 
        //how many childeren has been added n
        	loginHttpService.getAddedChildren(get_uid).success(function(response) {       			
 			if (typeof response.response.added_children !='undefined') {
