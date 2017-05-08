@@ -65,6 +65,7 @@
       }
       .text-answer-block, .img-answer-block {
         display: none;
+        @include margin(null 0px null 0px);
       }
       .owl-carousel {
         .owl-item {

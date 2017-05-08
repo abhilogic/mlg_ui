@@ -1,0 +1,181 @@
+//panel-report
+.panel.panel-report {
+  // panel-heading
+  .panel-heading {
+    @include padding(30px null 15px null);
+    @media screen and (min-width: $screen-sm){
+      @include padding(30px null 7px null);
+    }
+    .panel-title {
+      font-weight: $semibold;
+      text-align: center;
+      @media screen and (min-width: $screen-sm){
+        @include margin(10px null null null);
+        float: left;
+        display: inline-block;
+        text-align: left;
+      }
+    }
+    &:before,
+    &:after {
+      content: " "; // 1
+      display: table; // 2
+    }
+    &:before {
+      width: calc(100% - 60px);
+    }
+    &:after {
+      clear: both;
+    }
+  }
+  // heading-elements
+ .heading-elements {
+   position: relative;
+   display: block;
+   right: 0px;
+   height: auto;
+   @include margin(15px null null null);
+   @media screen and (min-width: $screen-sm){
+     display: inline-block;
+     float: right;
+     min-width: 300px;
+     @include margin(0px null null null);
+   }
+   >ul {
+     width: 100%;
+     @include margin(null 0px null 0px);
+     text-align: center;
+     @media screen and (min-width: $screen-sm){
+       text-align: right;
+     }
+     >li{
+       @include padding(0px);
+       &:first-child {
+         width: 50%;
+       }
+       @media screen and (max-width: $screen-xs-max){
+         @include margin(null 5px null 5px);
+       }
+     }
+   }
+ }
+
+ // panel-body
+ .panel-body {
+   @include padding(15px null null null);
+   @media screen and (min-width: $screen-sm){
+     @include padding(30px null null null);
+   }
+   .panel-toolbar {
+     @include margin(0px null 0px null);
+   }
+ }
+
+ // panel-report
+}
+
+//panel-area-of-gaps
+.panel-area-of-gaps {
+  // panel-heading
+  .panel-heading {
+    display: block;
+    @include padding(30px null 15px null);
+    @media screen and (min-width: $screen-sm){
+      @include padding(30px null 0px null);
+    }
+    &:before,
+    &:after {
+      display: none;
+    }
+    .panel-title {
+      font-weight: $semibold;
+      @include padding(null null 15px null);
+      text-align: center;
+      border-bottom: 1px solid #eeeeee;
+      @media screen and (min-width: $screen-sm){
+        text-align: left;
+      }
+    }
+    .heading-elements {
+      display: block;
+      height: auto;
+      text-align: left;
+      @include position(relative, 0px 0px 0px 0px);
+      @include margin(0px null null null);
+      @include padding(19px null 0px null);
+      @media screen and (min-width: $screen-sm-max){
+        text-align: right;
+      }
+      // filter-cover
+      .filter-cover {
+        display: inline-block;
+
+        @media screen and (min-width: $screen-lg){
+          min-width: 74%;
+        }
+        @media screen and (max-width: $screen-md-max){
+          min-width: 100%;
+        }
+        .radio.radio-inline {
+          @include margin(7px null null null);
+        }
+      }
+    }
+  }
+
+  // panel-body
+  .panel-body {
+    .panel-toolbar {
+      @include margin(0px);
+    }
+  }
+}
+
+table.table-teacherContent {
+  thead {
+    th {
+      span {
+        text-transform: none;
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
+  }
+  tbody td {
+    vertical-align: middle;
+    &:before {
+      white-space: nowrap;
+      @include margin(null 70px null null);
+    }
+    &.area_of_gaps {
+      color: red;
+    }
+    // td subskill
+    &.subskill {
+      vertical-align: top;
+      .subkills-cover {
+        vertical-align: inherit;
+        display: inline-block;
+        width: calc(100% - 135px);
+        .btn {
+          @include margin(null null 7px null);
+          @include padding(5px 10px);
+        }
+      }
+    }
+  }
+}
+
+
+// modal section
+.modal-areaOfGaps {
+  .modal-content {
+    @include border-radius(0px);
+    .modal-header, .modal-body, .modal-footer {
+      @include border-width(0px);
+    }
+    .modal-header {
+      text-align: center;
+    }
+  }
+}

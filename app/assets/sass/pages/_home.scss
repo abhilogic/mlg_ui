@@ -52,6 +52,9 @@ $white-65: rgba(#fff,0.65);
         }
         img {
           max-width: 75px;
+          @media screen and (max-width: $screen-sm-max){
+            max-width: 60px;
+          }
         }
       }
 
@@ -117,7 +120,7 @@ $white-65: rgba(#fff,0.65);
               &.active {
                 a {
                   background: transparent;
-                  @media screen and (min-width: $screen-sm-max){
+                  @media screen and (min-width: $screen-md){
                     background: $white;
                     color: #f75f18;
                   }
@@ -142,8 +145,8 @@ $white-65: rgba(#fff,0.65);
     z-index: 200;
     .navbar-toggle {
       border: 0px;
-      @media screen and (max-width: $screen-sm){
-        @include margin(12px null null null);
+      @media screen and (max-width: $screen-sm-max){
+        @include margin(5px null null null);
       }
       &:focus, &:hover {
         background: transparent;
@@ -154,7 +157,7 @@ $white-65: rgba(#fff,0.65);
         height: 2px;
         border-radius: 1px;
         &:not(:last-child){
-          margin-bottom: 10px;
+          margin-bottom: 8px;
         }
       }
     }
@@ -171,7 +174,7 @@ $white-65: rgba(#fff,0.65);
           right: 0px;
         }
         a {
-          @media screen and (max-width: $screen-sm){
+          @media screen and (max-width: $screen-sm-max){
             text-align: center;
             font-size: 19px;
             padding: 15px 18px !important;
@@ -179,10 +182,10 @@ $white-65: rgba(#fff,0.65);
         }
       }
     }
-    @media screen and (max-width: $screen-sm) and (min-width: $screen-xs-max){
+    @media screen and (max-width: $screen-sm-max) and (min-width: $screen-xs-max){
       display: none !important;
     }
-    @media screen and (max-width: $screen-sm){
+    @media screen and (max-width: $screen-sm-max){
       @include border-width(0px);
       @include position(fixed,0px null null 0px);
       width: 100vw;
@@ -203,7 +206,7 @@ $white-65: rgba(#fff,0.65);
       padding-top: 40%;
     }
   }
-  @media screen and (max-width: $screen-sm) and (min-width: $screen-xs-max){
+  @media screen and (max-width: $screen-sm-max) and (min-width: $screen-xs-max){
   .navbar-nav, .navbar-right{
     float: none !important;
     li {
@@ -321,13 +324,7 @@ $white-65: rgba(#fff,0.65);
             height: 377px;
           }
 
-          @media screen and (max-width: $screen-sm){
-            height: 428px;
-          }
 
-          @media screen and (max-width: $screen-xs){
-            height: 223px;
-          }
         // right side
         &.right {
           background: {
@@ -344,21 +341,29 @@ $white-65: rgba(#fff,0.65);
             height: 363px;
             margin-right: -52%;
           }
-          @media screen and (max-width: $screen-sm){
-            @include padding(17px null null 77px);
-          }
-          @media screen and (max-width: $screen-xs){
-            @include padding(10px null null 41px);
+          @media screen and (max-width: $screen-sm-max){
+            @include padding(0% null null 0%);
+            background: none;
+            height: auto;
+            width: auto;
+            .featuer-carousel {
+              overflow: inherit;
+              &:before {
+                content:'';
+                width: calc(100% + 80px);
+                height: 40px;
+                @include position(absolute, null null -49px -51px);
+                @include background-cover("prelogin_img/right-lap-screen-bottom.png");
+                background: {
+                  position: center top;
+                  size: 100% auto;
+                  repeat: no-repeat;
+                }
+                z-index: 100;
+              }
+            }
           }
 
-          @include respond-to(mobileSmall){
-            @include padding(10px null null 35px);
-              height: 203px;
-          }
-          @include respond-to(mobileExtraSmall){
-            @include padding(9px null null 30px);
-              height: 170px;
-          }
         }
 
 
@@ -388,23 +393,29 @@ $white-65: rgba(#fff,0.65);
             height: 386px;
             margin-left: -52%;
           }
-          @media screen and (max-width: $screen-sm){
-            @include padding(null null null 41px);
+          @media screen and (max-width: $screen-sm-max){
+            @include padding(0% null null 0%);
+            background: none;
+            height: auto;
+            width: auto;
             .featuer-carousel {
-              max-width: 89%;
+              overflow: inherit;
+              &:before {
+                content:'';
+                width: calc(100% + 80px);
+                height: 40px;
+                @include position(absolute, null -51px -49px null);
+                @include background-cover("prelogin_img/left-lap-screen-bottom.png");
+                background: {
+                  position: center top;
+                  size: 100% auto;
+                  repeat: no-repeat;
+                }
+                z-index: 100;
+              }
             }
           }
-          @media screen and (max-width: $screen-xs){
-            @include padding(10px null null 24px );
-          }
-          @include respond-to(mobileSmall){
-            height: 203px;
-            @include padding(10px null null 22px );
-          }
-          @include respond-to(mobileExtraSmall){
-            height: 170px;
-            @include padding(10px null null 17px );
-          }
+
         }
 
         // laptop
@@ -829,17 +840,15 @@ $white-65: rgba(#fff,0.65);
   @media screen and (max-width: $screen-md-max){
     max-width: 79%;
   }
-  @media screen and (max-width: $screen-sm){
-    max-width: 94%;
-  }
-  @media screen and (max-width: $screen-xs){
-    max-width: 319px;
-  }
-  @include respond-to(mobileSmall){
-    max-width: 289px;
-  }
-  @include respond-to(mobileExtraSmall){
-    max-width: 243px;
+
+  @media screen and (max-width: $screen-sm-max){
+    max-width: calc(100% - 80px);
+    @include margin(auto);
+    @include border-width(10px);
+    @include border-style(solid);
+    @include border-color(#b6b7b2);
+    @include border-radius(5px);
+    @include margin(null null 50px null);
   }
   .owl-nav {
     display: none !important;

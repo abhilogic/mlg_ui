@@ -158,6 +158,9 @@ principal  : 30,
 	}).when('/children-account-setup', {
 		templateUrl : 'views/children-account-setup.html',
 		controller : 'childrenAccountSetup',
+	}).when('/parent/offer', {
+		templateUrl : 'views/dashboard/parent-report.html',
+		controller : 'childrenAccountSetup',
 	}).when('/parent/dashboard/offers', {
 		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'parentOffers',
@@ -178,9 +181,18 @@ principal  : 30,
 		//templateUrl : 'views/teacher_select_courses.html',
 		templateUrl : 'views/select-grades-subjects.html',
 		controller : 'teacherOnBoardingCtrl',
+	}).when('/teacher/dashboard-empty',{
+		templateUrl : 'views/dashboard/teacher-dashboard-empty-view.html',
+		controller : 'teacherOnBoardingEmptyCtrl',
 	}).when('/teacher/dashboard',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
 		controller : 'teacherOnBoardingCtrl',
+	}).when('/teacher/report',{
+		templateUrl : 'views/dashboard/parent-report.html',
+		controller : 'teacherReportCtrl',
+	}).when('/teacher/message',{
+		templateUrl : 'views/dashboard/teacher-message.html',
+		controller : 'teacherMessageCtrl',
 	}).when('/teacher/subscription',{
 		templateUrl : 'views/dashboard/teacher-subscription.html',
 		controller : 'teacherSubscriptionCtrl',

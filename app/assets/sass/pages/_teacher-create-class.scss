@@ -1,40 +1,199 @@
 .panel-teacher-create-class {
+  background: none;
+  @include box-shadow(none);
   .panel-heading {
-    .panel-title{
-      .btn-group {
-        .btn-default {
-          background: none;
-          border: 0px;
-          font-size: 20px;
-          &:focus {
-            @include box-shadow(none);
-          }
+    @include padding(null null 0px null);
+    &:before {
+      display: none;
+    }
+    // panel-title
+    .panel-title {
+      .bootstrap-select {
+        @media screen and (min-width: $screen-sm-max){
+          max-width: 208px;
         }
       }
     }
     .heading-elements {
       @media screen and (min-width: $screen-sm-max){
-        top: 70%;
+          @include margin(-10px null null null);
       }
-      @media screen and (max-width: 1024px){
-        position: relative;
-        margin-top: 0px;
-        right: auto;
+      .btn {
+        @media screen and (max-width: $screen-xs-max){
+          @include margin(null null 10px null);
+        }
+        span {
+          display: none;
+          @media screen and (min-width: $screen-lg){
+            display: inline-block;
+          }
+        }
+        @media screen and (max-width: $screen-xs){
+          @include padding(null 11px);
+        }
       }
-      .toolbar-item {
-        @media screen and (max-width: $screen-sm){
-          margin-bottom: 10px;
+      ul {
+        text-align: center;
+        @media screen and (min-width: $screen-sm-max){
+          text-align: right;
+        }
+        .filter {
+          @media screen and (min-width: $screen-sm){
+            min-width: 136px;
+          }
+          .filter-option {
+            @media screen and (max-width: $screen-lg){
+              display: inline-block;
+            }
+          }
+          .dropdown-menu {
+            right: 0px;
+            left: auto;
+            text-align: left;
+          }
         }
       }
     }
-    &:before {
+  }
+  .panel-body {
+    .panel-toolbar {
       display: none;
     }
-    @include padding(30px null 0px null);
   }
-  .table-teacherContent {
-    & + a {
+  .table-create-class {
+    border-collapse: separate;
+    border-spacing: 0px 8px;
+    @include margin(null null 0px null);
+    .actions .btn-link + .btn-link {
+      @media screen and (min-width: $screen-md) and (max-width: $screen-lg){
+        @include margin(null null null 0px);
+      }
+    }
+    // table caption
+    & ~ a {
+      font-size: 12px;
+      color: #90a6b1;
+      u {
+        font-weight: $bold;
+      }
+    }
+
+    // add new row
+    & ~ .add-new-row {
+      background: $white;
       color: $gray-light;
+      text-align: left;
+      @include margin(null null 7px null);
+      @include padding(15px null);
+      &:hover {
+        background: #e3e8ef;
+      }
+      .icon {
+        font-size: 12px;
+      }
+    }
+
+
+    // checkbox design
+    .checkbox {
+      opacity: 0;
+      @include position(absolute,  null null null -9999px);
+        & + .checkbox-label {
+          @include margin(null null 0px null);
+          @include position(relative, null null null null);
+          &:after {
+            content: '';
+            @include position(relative, null null null null);
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid $gray-light;
+            @include border-radius(3px);
+            z-index: 11;
+          }
+          &:before {
+            @include position(absolute, 0px null null 0px);
+            z-index: 11;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            color: $gray-light;
+            font-family: 'Glyphter';
+            text-align: center;
+            padding-top: 2px;
+            opacity: 0;
+            @include transition(.5s all linear);
+          }
+        }
+        &:checked {
+          & + .checkbox-label {
+            &:before {
+              opacity: 1;
+            }
+          }
+        }
+    }
+    // checkbox design
+
+    // td th
+    tr {
+      td,th {
+        @include border-width(0px);
+        @include padding(15px null 15px null);
+        vertical-align: inherit;
+      }
+    }
+
+    // tabel-header
+    thead {
+      background: #e3e8ef;
+      .checkbox {
+        & + .checkbox-label {
+          &:before {
+            opacity: 1;
+          }
+        }
+        &:checked {
+          & + .checkbox-label {
+            &:before {
+              content: '\0061';
+            }
+          }
+        }
+      }
+    }
+
+    // tabel body
+    tbody {
+      tr {
+        background: $white;
+        td {
+          font-size: 14px;
+            &:before {
+              @include margin(null 49px null null);
+            }
+          &:first-child {
+            &:before {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    // tabel body
+  } // tabel
+}
+
+
+
+// modal section
+
+.modal-emailTeacherConfirmation {
+  .modal-content {
+    @include border-radius(0px);
+    .modal-header,.modal-body, .modal-footer {
+      text-align: center;
+      @include border-width(0px);
     }
   }
 }

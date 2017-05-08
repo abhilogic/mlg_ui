@@ -151,6 +151,9 @@
 				&:before {
 					background: darken($sidebar-active-border-color,30%);
 				}
+				a {
+					color: $sidebar-active-link-color;
+				}
 			}
 			a{
 				text-transform: none;
@@ -168,45 +171,3 @@
 		}
 	}
 }
-
-
-
-
-/* --- sidemenu (Prakash) ---
-
-.sidebar {
-    border-top: 1px solid rgba($white,.65);
-    background-color: $darkstateblue_1;
-    margin-top: 152px;
-.side_main_menu {
-  li {
-    display: block;
-    padding-left: 30px;
-    border-left: 4px solid transparent;
-    &.active {
-      border-left: 4px solid $cyan;
-    }
-    &:hover {
-        border-left: 4px solid $cyan;
-    }
-    a {
-      border-bottom: 1px solid $darkstateblue_border;
-      color: $bluies_white;
-      display: block;
-      font-family: $font-primary;
-      font-size: 12px;
-      font-weight: $semibold;
-      padding: 15px 0px;
-      text-transform: uppercase;
-      .icon {
-        font-size: 18px;
-        vertical-align: middle;
-              }
-      span {
-         margin-left: 17px;
-         vertical-align:text-bottom;
-      }
-    }
-  }
- }
-}*/
