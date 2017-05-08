@@ -78,3 +78,27 @@
     border-radius: 50%;
     background: #2d94ed;
 }
+
+.classId input {width: 30px;}
+
+.dropdown-multiselect, .dropdown-multiselect button {width: 100%; text-align: left;}
+
+.question-block-cover {display: block}
+
+.page-onboarding .page-container {min-height: 88vh;}
+
+.BtnGroup {
+	text-align: right;
+}
+
+.BtnGroup button{
+	background: #66c0ec;
+    border: 0;
+    color: #fff;
+    font-size: 20px;
+    padding: 2px 7px;
+    margin: 0 5px;
+	border-radius: 2px;
+	
+}
+

@@ -22,7 +22,6 @@
         }
       }
     }
-
     .panel-body{
       @include padding($content-padding-base $content-padding-large);
       @media(max-width: $screen-xs){
@@ -49,6 +48,34 @@
         }
       }
     }
+  }
+
+
+  &.panel-empty {
+    .heading-elements {
+      select[disabled] {
+        background: none;
+        color: #eee;
+        @media screen and (min-width: $screen-sm){
+          color: lighten($gray, 60%);
+        }
+
+      }
+    }
+    .panel-body
+      .hd {
+        text-align: center;
+        font-size: 24px;
+        font-weight: $thin;
+        span {
+          display: block;
+        }
+      }
+      .btn {
+        .icon {
+          @include margin(null 10px null null);
+        }
+      }
   }
 }
 
@@ -92,4 +119,24 @@
         }
       }
 
+    // search and edit box
+    .search-box {
+      .form-control {
+        @include border-color(transparent transparent null transparent);
+        @include border-radius(0px);
+        &:focus {
+          outline: 0px;
+          @include box-shadow(none);
+          @include border-color(transparent transparent $brand-primary transparent);
+        }
+      }
+      .input-group-addon {
+        background: transparent;
+        @include border-color(transparent);
+        &:hover, &:focus , &:active {
+          outline: 0px;
+          background: transparent;
+        }
+      }
+    }
 }

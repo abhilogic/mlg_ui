@@ -34,20 +34,20 @@
                   <form  class="form-login" ng-submit="register(userObj,'parent')">
                     <div class="row">
                       <div class="col-sm-6">
-                        <div class="form-group float-label">
+                        <div class="form-group float-label" ng-class="{focus: !userObj.first_name ==''}">
                           <label class="control-label">First Name</label>
                           <input type="text" class="form-control float-input" ng-model="userObj.first_name"/>
                         </div>
                       </div>
                       <div class="col-sm-6">
-                        <div class="form-group float-label">
+                        <div class="form-group float-label" ng-class="{focus: !userObj.last_name == ''}">
                           <label class="control-label">Last Name</label>
                           <input type="text" class="form-control float-input" ng-model="userObj.last_name"/>
                         </div>
                       </div>
                     </div>
 
-                    <div class="form-group float-label has-success has-feedback">
+                    <div class="form-group float-label has-success has-feedback" ng-class="{focus: !userObj.username == ''}">
                       <label class="control-label">User Name</label>
                       <input type="text" class="form-control float-input" id="inputUserName" ng-model="userObj.username">
                       <!-- <div class="form-control-feedback"><i class="fa fa-check"></i></div>
@@ -55,18 +55,18 @@
                        <!-- <span id="inputUserNameSuccessStatus" class="help-block">Username is available.</span> -->
                     </div>
 
-                    <div class="form-group float-label">
+                    <div class="form-group float-label" ng-class="{focus: !userObj.email == ''}">
                       <label class="control-label">EMAIL ADDRESS</label>
                       <input type="text" class="form-control float-input" id="inputEmail" ng-model="userObj.email">
                       <!-- <div class="form-control-feedback"><i class="fa fa-close"></i></div> -->
                       <!-- <span id="inputEmailErrorStatus" class="help-block">Enter valid email</span> -->
                     </div>
-                    <div class="form-group float-label">
+                    <div class="form-group float-label" ng-class="{focus: !userObj.password == ''}">
                       <label class="control-label">Create Password</label>
                       <input type="password" class="form-control float-input" ng-model="userObj.password"/>
                     </div>
                     <!-- Input with Validation Text -->
-                    <div class="form-group float-label">
+                    <div class="form-group float-label" ng-class="{focus: !userObj.repass == ''}">
                       <label class="control-label">Re-type Password</label>
                       <input type="password" class="form-control float-input" id="inputConfirmPassword" aria-describedby="inputConfirmPasswordStatus" ng-model="userObj.repass">
                       <!-- <div class="form-control-feedback"><i class="fa fa-close"></i></div> -->

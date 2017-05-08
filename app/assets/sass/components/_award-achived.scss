@@ -1,0 +1,103 @@
+.award-achived {
+  position: relative;
+  // item
+  .item {
+    @include margin(10px auto 10px auto);
+    @include border-radius(10px);
+    @include padding(15px null 15px null);
+    text-align: center;
+    position: relative;
+    min-height: 240px;
+    &:before {
+      content:'';
+      height: 4px;
+      width: 100%;
+      background: lighten($gray,10%);
+      @include position(absolute, 115px null null  0px);
+      z-index: 1;
+    }
+    &:after {
+      content:'';
+      height: 15px;
+      width: 15px;
+      background: #e1a515;
+      @include border-radius(100%);
+      @include position(absolute, 110px null null  45%);
+      z-index: 1;
+      @media screen and (max-width: $screen-sm) {
+        left: 48%;
+      }
+    }
+    &:hover {
+      .social-share {
+        display: inline-block;
+      }
+      @include box-shadow(0px 0px 32px rgba(0,0,0,0.1));
+      &:before {
+        top: 117px;
+      }
+      &:after {
+        top: 112px;
+      }
+    }
+    &.active {
+      @include box-shadow(0px 0px 32px rgba(0,0,0,0.1));
+        &:before {
+          top: 117px;
+        }
+        &:after {
+          top: 112px;
+        }
+    }
+  }
+
+  //btn share
+  .social-share {
+    display: none;
+    li {
+      vertical-align: middle;
+      color: $gray-light;
+      .fa {
+        font-size: 20px;
+      }
+    }
+  }
+
+  // award-achived-logo
+  .award-achived-logo {
+    max-width: 65px;
+    @include margin(null auto 25px auto);
+  }
+
+  // award-hd
+  .award-hd {
+    font-size: 16px;
+    color:  #e1a515;
+    font-family: $font-secondary;
+    font-weight: $thin;
+    @include margin(36px null null null);
+    @include padding(null 15px null 15px);
+  }
+
+  // owl-nav
+  .owl-nav  {
+    .owl-next, .owl-prev {
+      @include position(absolute, 44% null null null);
+      .fa {
+        font-size: 24px;
+        color: lighten($gray,10%);
+        font-weight: $semibold;
+      }
+      &.disabled {
+        opacity: 0.6;
+      }
+    }
+    .owl-next {
+      right: -13px;
+    }
+    .owl-prev {
+      left: -13px;
+    }
+  }
+  // award-achived
+}

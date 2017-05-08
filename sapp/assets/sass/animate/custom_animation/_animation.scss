@@ -65,9 +65,13 @@ $cloud_second_bottom_pos: 20px;
     bottom: -1000px;
     left: -20%;
   }
-  27% {
-    bottom: $cloud_second_bottom_pos;
+  29% {
+    bottom: -1000px;
     left: -20%;
+  }
+  30% {
+    bottom: $cloud_second_bottom_pos;
+    left: 0%;
   }
   100% {
     bottom: $cloud_second_bottom_pos;

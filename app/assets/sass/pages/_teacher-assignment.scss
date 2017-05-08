@@ -115,6 +115,8 @@
     }
   }
 
+
+// modal-done
 .modal-done {
   .modal-header {
     border-bottom: 0px;
@@ -134,5 +136,29 @@
         font-size: 30px;
       }
     }
+  }
+}
+
+// modal-calender
+.modal-calender {
+  .modal-header {
+    .modal-title {
+      font-size: 20px;
+    }
+  }
+  .modal-header, .modal-footer {
+    @include border-width(0px);
+  }
+  .form-horizontal {
+    @media screen and (min-width:$screen-sm){
+      max-width: 60%;
+      @include margin(auto);
+    }
+    label {
+      @include margin(7px null null null);
+    }
+  }
+  .modal-footer {
+    text-align: center;
   }
 }

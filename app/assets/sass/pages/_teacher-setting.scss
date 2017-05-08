@@ -1,23 +1,72 @@
 .teacher_setting_tabs {
-    @media screen and (min-width: $screen-sm-max){
-    .tab-nav {
-      padding-right: 0px;
-      border-right: 1px solid $gray-lighter;
+
+  // js-tabcollapse-panel-body
+  .panel-heading {
+    @media screen and (max-width: $screen-sm){
+      @include padding(0px);
+      .panel-title {
+        a {
+          @include padding(15px);
+          display: block;
+        }
+      }
+      .bootstrap-select {
+        @include margin(0px);
+      }
     }
   }
-  .tab-pane {
-    >h5 {
-      font-size: 16px;
-      @include border-width(0px 0px 1px 0px);
-      @include border-color(null null $gray-lighter null);
-      @include border-style(solid);
-      @include padding(17px 15px);
-      @include margin(0px null 0px null);
+  .js-tabcollapse-panel-body {
+    @include padding(null 8px);
+    .panel-heading {
+      @include padding(15px);
+      .panel-title {
+        @include padding(0px);
+      }
     }
   }
+    // form-block
+    .form-block {
+      .fa-question-circle {
+        color: $gray-light;
+        &:hover {
+          color: #1e3755;
+        }
+      }
+      @include margin(15px null null  null);
+      padding-bottom: 15px;
+      h5 {
+        font-size: 16px;
+        @include border-width(0px 0px 0px 0px);
+        @include border-color(null null $gray-lighter null);
+        @include border-style(solid);
+        @include padding(17px 0px);
+        @include margin(0px null 0px null);
+        @media screen and (max-width: $screen-sm){
+          @include margin(null null 0px null);
+          .checkbox-switchery.checkbox-inline  {
+            @include margin(10px null 10px null);
+          }
+        }
+      }
+      &:not(:last-child){
+        border-bottom: 1px solid $gray-lighter;
+      }
+    }
+
+    // checkbox-switchery
+    @media screen and (max-width: $screen-sm) {
+      .checkbox-switchery.checkbox-inline {
+        @include margin(0px null 0px null);
+        @include padding(0px null 0px null);
+      }
+    }
+
+  // form-horizontal
   .form-horizontal {
     margin-bottom: 15px;
   }
+
+  // edited-input
   .edited-input {
     h5 {
       font-size: 16px;
@@ -34,6 +83,9 @@
       font-size: 16px;
       font-weight: $semibold;
       @include padding(0px 15px);
+      @media screen and (max-width: $screen-sm){
+        @include padding(0px 0px);
+      }
       @include margin(null null 0px null);
       text-align: left;
       &:after {
@@ -56,6 +108,9 @@
     }
     p {
       @include padding(0px 15px);
+      @media screen and (max-width: $screen-sm){
+        @include padding(0px 0px);
+      }
     }
     .package-group {
       text-align: left;
@@ -79,20 +134,36 @@
       }
     }
   }
-  .mgl-setting {
-    .form-block {
-      @include margin(15px null null  null);
-      padding-bottom: 15px;
-      h5 {
-        font-size: 16px;
-        @include border-width(0px 0px 0px 0px);
-        @include border-color(null null $gray-lighter null);
-        @include border-style(solid);
-        @include padding(17px 15px);
-        @include margin(0px null 0px null);
-      }
-      &:not(:last-child){
-        border-bottom: 1px solid $gray-lighter;
+
+  // bootstrap-select
+  .bootstrap-select {
+    @media screen and (max-width: $screen-sm){
+      @include margin(10px);
+    }
+  }
+
+  // tab-nav
+  @media screen and (min-width: $screen-sm-max){
+    .tab-nav {
+      padding-right: 0px;
+      border-right: 1px solid $gray-lighter;
+    }
+  }
+
+  // tab-pane
+  .tab-pane {
+    >h5 {
+      font-size: 16px;
+      @include border-width(0px 0px 1px 0px);
+      @include border-color(null null $gray-lighter null);
+      @include border-style(solid);
+      @include padding(17px 15px);
+      @include margin(0px null 0px null);
+    }
+    .panel {
+      @include border-radius(0px);
+      .panel-body {
+        @include padding(null 14px);
       }
     }
   }

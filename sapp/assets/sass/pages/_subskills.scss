@@ -4,6 +4,8 @@
   background:{
     image: url("../img/subskills_bg.jpg");
   }
+  min-width: 100vw;
+  min-height: 100vh;
   &.in {
      background:{
        image: url("../img/subskills_bg_in.jpg"),url("../img/subskills_bg.jpg");
@@ -12,6 +14,8 @@
        overflow: hidden;
      }
   }
+
+  // scroll_animation
   .scroll_animation {
     display: none;
     position: absolute;
@@ -22,6 +26,9 @@
       display: block;
     }
   }
+
+
+  // subkils_paper_block
   .subkils_paper_block {
     background: transparent;
     position: absolute;
@@ -39,6 +46,8 @@
       z-index: 1;
     }
   }
+
+  // modal-dialog
   .modal-dialog {
     transition: transform 2s ease-out !important;
     transform: none !important;
@@ -51,6 +60,7 @@
       @include box-shadow(none);
     }
   }
+
 // subskills-icons
   .subskill_icons {
     display: inline-block;
@@ -267,7 +277,7 @@
           size: 100% 100%;
         }
         font-size: 18px;
-        color: $vanCleef;
+        color: $white;
         font-family: $font-times_bold;
         padding: 10px 70px 10px 23px;
         text-align: left;
@@ -413,8 +423,9 @@
               image: url(../img/quiz_heading.png);
               repeat: no-repeat;
             }
-            padding: 11px 0px;
+            padding: 11px 0px 21px;
             font-size: 20px;
+            line-height: 17px;
           }
           .close {
             opacity: 1;

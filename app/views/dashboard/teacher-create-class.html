@@ -1,22 +1,7 @@
-
+	
 	<!-- Main navbar -->
-	<nav class="navbar navbar-default navbar-dashboard navbar-static-top">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle sidebar-mobile-main-toggle" aria-expanded="false">
-				<span class="sr-only">Menu</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="dashboard-dashboard.html"><img src="assets/img/logo_1.png" alt="" class="img-responsive"></a>
-		</div>
-		<div class="search_form">
-			<div class="form-group has-feedback has-feedback-left">
-				<input type="search" class="form-control" placeholder="Type here to search...">
-				<div class="form-control-feedback"><i class="fa fa-search"></i><span class="sr-only">Search</span></div>
-			</div>
-		</div>
-	</nav>
+	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+		
 	<!-- /main navbar -->
 
 	<!-- Page container -->
@@ -85,14 +70,28 @@
 									</ul>
 								</div>
 						</div>
-						<div class="panel-body">
+						<div class="panel-body" ng-controller="tableRow">
 							<div class="panel-toolbar responsive-md">
 
 							</div>
-							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons" ng-controller="tableRow">
+							<div class="row">
+								<div class="col-sm-4 margin-bottom-10">
+									<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+								</div>
+								<div class="col-sm-4  margin-bottom-10">
+									<select ng-model="pageSize" id="pageSize" class="form-control">
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+									 </select>
+								</div>
+							</div>
+							
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons" >
 								<thead>
 									<tr>
-										<th class="sr-no">#</th>
+										<th class="sr-no" width="5%">#</th>
 										<th class="last-name">Last Name</th>
 										<th class="first-name">First Name</th>
 										<th class="parent-student-email">Parent or Student E-mail</th>
@@ -114,7 +113,7 @@
 											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
 										</td>
 									</tr>
-									<tr ng-repeat="person in people">
+									<tr ng-repeat="person in people | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
 										<td class="sr-no">{{person.id}}</td>
 										<td class="last-name">{{person.Lname}}</td>
 										<td class="first-name">{{person.Fname}}</td>
@@ -130,20 +129,49 @@
 											<button type="button" ng-click="removePerson($index)">Remove Person</button>
 										</td>-->
 									</tr>
+									
+									
 
 									<tr>
-										<td><input type="text" ng-model="id" placeholder="ID" ></td>
-										<td><input type="text" ng-model="Fname" placeholder="First Name" ></td>
+										<td class="classId"><input type="text" ng-model="id" placeholder="ID" ></td>
 										<td><input type="text" ng-model="Lname" placeholder="Last Name" ></td>
+										<td><input type="text" ng-model="Fname" placeholder="First Name" ></td>
 										<td><input type="text" ng-model="email" placeholder="Email" ></td>
 										<td><input type="text" ng-model="Uname" placeholder="User Name" ></td>	
 										<td><input type="text" ng-model="pass" placeholder="Password" ></td>
 										<td><button type="button" ng-click="addPerson()">Save</button></td>
-										<td></td>
-										<td></td>
 									</tr>
 								</tbody>
 							</table>
+							
+							<div class="BtnGroup">
+								<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+									<i class="fa fa-angle-left"></i>
+								</button>
+								{{currentPage+1}}/{{numberOfPages()}}
+								
+								<button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
+									<i class="fa fa-angle-right"></i>
+								</button>
+							</div>
+							
+							<!--<table datatable sAjaxSource="data.json" sAjaxDataProp="result" class="table table-striped table-bordered">
+							  <thead>
+									<tr>
+										<th data-mdata="id" data-sclass="highlight-red">ID</th>
+										<th data-mdata="name">Name</th>
+										<th data-mdata="about.text" data-bvisible="false">About me</th>
+										<th data-mdata="phone">Phone</th>
+										<th data-mdata="email">Email</th>
+										<th data-mdata="age">Age</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>-->
+							
+							
+
+							
 							<a href="quick-start-guide.html"><span>Have questions?</span> <b><u>Quick-start Guide</u></b></a>
 						</div>
 					</div>
@@ -159,8 +187,7 @@
 	</div>
 	<!-- page container -->
 
-
-
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script>
 		var headertext = [],

@@ -84,11 +84,8 @@
 
 .my_profile_cover {
   @include background-cover("bg-wood.jpg");
-  @media screen and (max-width: $screen-tb-land){
-    background: {
-      image: none;
-    }
-  }
+  @include padding(null null 20px null);
+  overflow-x: hidden;
 }
 @media screen and (max-width: $screen-tb-land){
   body {
@@ -200,7 +197,25 @@
       }
     }
     .progress_bar_img {
+        max-width: 685px;
+        @include margin(null auto null auto);
+        height: 57px;
+        position: relative;
+        background: {
+          image: url(../img/progress_barbg.png);
+          position: center center;
+          size: 100% 100%;
+          repeat: no-repeat;
+        }
+        @include padding(17px null null 29px);
+        @media screen and (max-width: $screen-xs-max){
+          height: 50px;
+        }
+      img {
+        @include position(absolute, 17px null null 21px);
+        clip: rect(0px, 100px, 57px, 0px);
         max-width: 100%;
+      }
     }
   }
 }
@@ -219,6 +234,7 @@
     .panel-title {
       span {
         color: $white;
+        cursor: pointer;
         &:first-child {
           float: left;
           font-size: 20px;
@@ -245,9 +261,15 @@
   padding-top: 26px;
   text-align: center;
   width: 140px;
+  @media screen and (max-width: $screen-sm){
+    margin-bottom: 50px;
+  }
   @media screen and (max-width: $screen-mobile-md){
     margin: auto;
     margin-bottom: 20px;
+  }
+  @media screen and (max-width: $screen-xs-max){
+    margin-bottom: 49px;
   }
   .coupon_provider_logo {
     max-width: 72px;
@@ -271,7 +293,7 @@
   }
   .btn {
     background: rgba($blackMarlin,0.8);
-    color: $pizza;
+    color: $white;
     @include padding(3px 15px);
     @include margin(15px null null null);
     &.active {
@@ -285,15 +307,12 @@
     background-image: url("../img/redeem_coupon_bg_lock.png");
     position: relative;
     &:before {
-      content:'\0041';
-      @include position(absolute, 0px null null 0px);
-      width: 100%;
-      height: 100%;
+      content:'\0047';
+      @include position(absolute, 34% null null 42%);
       z-index: 1;
       color: $black;
       font-family: 'Glyphter';
-      top:25%;
-      left: 25%;
+      font-size: 30px;
     }
   }
   // coupon_accquired
@@ -323,6 +342,7 @@
     border-bottom: 0px;
     .panel-title {
       span {
+        cursor: pointer;
         color: $white;
         &:first-child {
           float: left;
