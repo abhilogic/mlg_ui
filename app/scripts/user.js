@@ -332,9 +332,6 @@ angular.module('mlg').filter('moment', function() {
 		$("#modalFreeTrail").modal();					
 	}
 	 $scope.login = function(data) {
-       //var role_id = user_roles[user_type];
-       //data.role_id= role_id;
-       console.log(user_roles)
 	   loginHttpService.login(data).success(function(response) {
          if (response.status=='false') {
            $scope.msg = response.message;
@@ -353,9 +350,18 @@ angular.module('mlg').filter('moment', function() {
            }else if(role_id==4){
            		role_name='student';
            }
+           if (response.warning == 1) {
+             var children_name = [];
+             var child_info = response.child_info;
+             var user_id = child_info['0'].user_id;
+             angular.forEach(child_info, function(child, key){
+               children_name.push(child.children_name);
+             });
+             alert("Your following child has ended with their subcription.\n" + children_name.join("\n"));
+             $location.url('parent/dashboard/subscription/' + user_id);
+             return true;
+           }
            setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',role='+role_name+'"');
-           //var user_type=user_roles.indexOf(response.role_id);
-          // $location.url('select_children');
           if (role_id == '3') {
             $location.url('teacher/create_account');
             return true;
