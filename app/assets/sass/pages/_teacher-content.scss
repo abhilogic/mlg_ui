@@ -1,5 +1,6 @@
 .panel-toolbar{
   @include margin(null 0 15px 0);
+  @include padding(null null null 0px);
   width: 100%;
   text-align: left;
   @include clearfix();
@@ -42,8 +43,9 @@
       .toolbar-item{
         display: block;
         width: 100%;
-        >.btn-group, >.btn{
-          width: 100%;
+        text-align: center;
+        >.btn-group >.btn, >.btn{
+          width: 100% !important;
         }
       }
       .toolbar-item + .toolbar-item{

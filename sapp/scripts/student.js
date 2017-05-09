@@ -550,6 +550,8 @@ angular.module('mlg_student')
         response.topic_detail = [];
       }
     });
+	
+	
 }])
 
 .controller('backHistoryPage', function($scope){

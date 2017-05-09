@@ -12,4 +12,6 @@ $(function() {
 
     // Styled checkboxes and radios
     $(".styled, .multiselect-container input").uniform({ radioClass: 'choice'});
+    // mlg-selectpicker
+    $('.mlg-selectpicker').selectpicker();
 });

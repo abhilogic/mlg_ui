@@ -9,6 +9,7 @@
     text-transform: uppercase;
     tr>th{
       border-width: 1px;
+      position: relative;
     }
   }
   thead, tbody{
@@ -16,6 +17,7 @@
   }
   thead, tbody, td{
     border-color: darken($gray-lighter, 5%);
+    position: relative;
   }
   .sr-no{
     @media screen and (min-width: $screen-sm-max) {
@@ -55,6 +57,23 @@
       }
       >li>a, >li>span{
         @include padding(2px 6px);
+      }
+    }
+    @media screen and (max-width: $screen-xs-max){
+      span.pull-left {
+        display: block;
+        float: none;
+        margin-bottom: 10px;
+        text-align: center;
+        width: 100%;
+      }
+      .pagination {
+        display: block;
+        text-align: center;
+        width: 100%;
+        li {
+          display: inline-block;
+        }
       }
     }
   }

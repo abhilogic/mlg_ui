@@ -1011,6 +1011,19 @@ $scope.sendEmailMe=function(selected_students){
     }
   }])
   
+.controller('teacherScopeSequence',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+	  $scope.sequenceModel = [];
+	  $scope.sequenceData = [
+		{id: 1, label: "Sahil Sharma"},
+		{id: 2, label: "Aditya Parihar"},
+		{id: 3, label: "Narendra Modi"},
+		{id: 4, label: "Rahul Gandhi"},
+		{id: 5, label: "Soniya Gandhi"}
+	  ]
+     
+}])
+  
   .directive('dropZone', function() {
     return function($scope, element, attrs) {    
       return element.dropzone({
@@ -1318,6 +1331,7 @@ $scope.sendEmailMe=function(selected_students){
 })
 .controller('teacherAddQuestionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+	  
     var get_uid=commonActions.getcookies(get_uid);
     var grade = '';
     var standard = [];
@@ -1739,13 +1753,14 @@ $scope.sendEmailMe=function(selected_students){
     };
 })*/
 
+.controller('teacherRewards',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+	$scope.openRedeenModal=function(){
+		$('.modal-backdrop').hide();
+		$("#modal-redeemcheck").modal();					
+	}  
+}])
 
-.directive('heyhey', function () {
-  return {
-    restrict: 'A',
-    link: function ($scope, $elem, attrs) {
-        $elem.radiosToSlider();
-    }
-  }
-});
+
+;
 
