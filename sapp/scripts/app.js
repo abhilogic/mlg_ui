@@ -134,10 +134,47 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
 
 $rootScope.$on('$viewContentLoaded', function() {
   $templateCache.removeAll();
-  
 
+        // get cookies
+		function getCookie(cname) {
+          var name = cname + "=";
+          var decodedCookie = decodeURIComponent(document.cookie);
+          var ca = decodedCookie.split(';');
+          for(var i = 0; i <ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+              }
+          }
+          return "";
+		}
+
+        function parseUser(cookie){
+          var keyVals=cookie.split(',');
+          var obj={};
+          angular.forEach(keyVals,function(value,key){
+            var vals=value.split('=');
+            obj[vals[0]]=vals[1];
+          });
+          return obj;
+        }
+
+        redirectStudentOnSubscriptionOver();
+        function redirectStudentOnSubscriptionOver() {
+          var userObj = getCookie('userObj');
+          userObj = parseUser(userObj);
+          if ((userObj.userStatus == 2) && (userObj.role == 'student')) {
+            $location.url('/journey');
+            return true;
+          }
+        }
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+          redirectStudentOnSubscriptionOver();
+        });
 });
-
 
 
 } ]).directive('header', function () {

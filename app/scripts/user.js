@@ -333,13 +333,7 @@ angular.module('mlg').filter('moment', function() {
 	}
 	 $scope.login = function(data) {
 	   loginHttpService.login(data).success(function(response) {
-         if (response.status=='false') {
-           $scope.msg = response.message;
-         } else {
-           $rootScope.logged_user = response.user;
-           setCookie('uid', $rootScope.logged_user.id);
-
-           var role_id=response.role_id;
+           var role_id = response.role_id;
            var role_name='';
            if(role_id==1){
            		role_name='admin';
@@ -350,6 +344,18 @@ angular.module('mlg').filter('moment', function() {
            }else if(role_id==4){
            		role_name='student';
            }
+         if (response.status=='false') {
+           if ((response.warning == 1) && (response.role_id == user_roles['student'])) {
+            setCookie('userObj', '"userName='+response.user+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
+             $rootScope.logged_user = response.user;
+             setCookie('uid', $rootScope.logged_user.id);
+             window.location.href='/mlg_ui/sapp/journey';
+           }
+           $scope.msg = response.message;
+         } else {
+           $rootScope.logged_user = response.user;
+           setCookie('uid', $rootScope.logged_user.id);
+           setCookie('userObj', '"userName='+response.user+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
            if (response.warning == 1) {
              var children_name = [];
              var child_info = response.child_info;
@@ -361,15 +367,14 @@ angular.module('mlg').filter('moment', function() {
              $location.url('parent/dashboard/subscription/' + user_id);
              return true;
            }
-           setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',role='+role_name+'"');
           if (role_id == '4') {
             window.location.href='/mlg_ui/sapp/journey';
             return true;
           }
             // To Redirect User on his account last step page.
-             // call API to get last step track 
+             // call API to get last step track             
              if (role_id == '2') {            
-    			loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
+    		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
     			if(stepNum.response.step.step_completed!=null ){    				
     				//var step_page = stepNum.response.step.step_completed; 
 
@@ -400,7 +405,7 @@ angular.module('mlg').filter('moment', function() {
 					//var step_page = stepNum.response.step.step_completed; 
 					if(stepNum.response.step.step_completed==0 ){ 
 						$location.url('teacher/create_account'); 
-					}
+         }
 					else if(stepNum.response.step.step_completed==1){
 						 $location.url('teacher/select_courses');
 					}
@@ -1043,8 +1048,7 @@ if (typeof $routeParams.id != 'undefined') {
                 subscription_days : subscription_days['student'],
        	}; 
 
-
-       console.log(childdata); 
+ 
        //how many childeren has been added n
        	loginHttpService.getAddedChildren(get_uid).success(function(response) {       			
 			if (typeof response.response.added_children !='undefined') {
@@ -1077,7 +1081,7 @@ if (typeof $routeParams.id != 'undefined') {
         $scope.submitCalled = "submit called " + $scope.selectedoption;
 
         
-  	};
+       	};
 /* ********************************************************************** */
 
    
@@ -1195,6 +1199,11 @@ if (typeof $routeParams.id != 'undefined') {
     $scope.frm.expiry_year = card_years['2018'];
     $scope.submitCardDetail = function(data) {
       data.user_id = $rootScope.logged_user.id;
+//      var children_ids = [];
+//      angular.forEach($scope.children, function(value, key) { 
+//        children_ids.push(value.child_id);
+//      });
+//      data.children_ids = children_ids;
       data.amount = $scope.total_amount;
       loginHttpService.saveCardToPaypal(data).success(function(response) {
         if (response.status == true) {
@@ -1212,7 +1221,7 @@ if (typeof $routeParams.id != 'undefined') {
 .controller('parentOffers',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
 	loginHttpService.offerRecords().success(function(response) {
        $scope.offers = response.response;
-    });
+      });
 	  
 }])
 .controller('teacherSingnupCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
@@ -1320,7 +1329,7 @@ if (typeof $routeParams.id != 'undefined') {
            return false;
          } else if (response.status == '1') {
            alert('Your Trial session will be for 15 mins only');
-           setCookie('userObj', '"userName='+response.user+',email='+ ' ' +',role='+ 'student'+'"');
+           setCookie('userObj', '"userName='+response.user+',email='+ ' ' +',userStatus='+response.user.status+',role='+ 'student'+'"');
            setCookie('uid', 0);
            setCookie('grade_id', data.levelchoice.id);
            window.location.href='/mlg_ui/sapp/journey';
@@ -1345,7 +1354,6 @@ var get_uid=commonActions.getcookies(get_uid);
 	// and Call API to get child details for deshboard naming
     loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
 			var childcount=chidrenName.response.length;
-			console.log(chidrenName);
 			if(childcount>0){																
 					$scope.childname=chidrenName.response;
                     $scope.frm.childnames = chidrenName.response;
