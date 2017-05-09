@@ -60,3 +60,7 @@
     height: 30px;
     display: block !important;
     opacity: 0;}
+	
+.tabScroll {
+	    max-height: 415px;
+}

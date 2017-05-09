@@ -349,8 +349,8 @@ angular.module('mlg')
 	};*/
   
 }])
-.controller('teacherCreateClassCtrl',['$rootScope','$scope','$timeout', 'teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
-  function($rootScope,$scope,$timeout,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+.controller('teacherCreateClassCtrl',['$rootScope','$scope', '$filter','$timeout', 'teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+  function($rootScope,$scope, $filter, $timeout,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
 
       var get_uid=commonActions.getcookies(get_uid);
       $scope.students = [];
@@ -522,8 +522,31 @@ $scope.sendEmailMe=function(selected_students){
 
 }
 
+$scope.currentPage = 0;
+$scope.pageSize = 100;
+//$scope.data = [];
+$scope.q = '';
+
+$scope.getData = function () {
+  return $filter('filter')($scope.students, $scope.q)
+}
+
+$scope.numberOfPages=function(){
+	return Math.ceil($scope.getData().length/$scope.pageSize);                
+}
+
 
 }])
+
+
+ //let's make a startFrom filter
+.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+})
+
 .controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
     var get_uid=commonActions.getcookies(get_uid);
@@ -1082,109 +1105,6 @@ $scope.sendEmailMe=function(selected_students){
   })
   
 
-.controller("tableRow", ['$scope', '$filter', '$window', '$location', function ($scope, $filter, $window, $location) {
-	$scope.people = [
-	//{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
-	];
-	
-	
-  $scope.addPerson = function(){
-	var person = {
-		id: $scope.id,
-		Fname: $scope.Fname,
-		Lname: $scope.Lname,
-		email: $scope.email,
-		Uname: $scope.Uname,
-		pass: $scope.pass,
-	};
-	
-	$scope.people.push(person);
-  };
-	 $scope.removePerson = function(index){
-		$scope.people.splice(index, 1);
-   };
-   
-   
-   /*$scope.dtOptions = {
-		
-		iDisplayLength: 5,
-		// These 2 lines are for styling. Ignore!
-		sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-		sPaginationType: "bootstrap",
-		// End
-	}
-	// These are the options for the second DT. It's set in the element tags.
-	$scope.dtOptionsExample2 = {
-		sAjaxSource: 'data.json',
-		sAjaxDataProp: 'result',
-		bProcessing: false,
-		fnRowCallback: function(row, data, index, fullindex) {
-			if (data.id === 1) {
-				angular.element(row).addClass('blue');
-			}
-		}
-	}
-	// This is an example of column callback
-	$scope.idCB = function(data) {
-		if (data.id > 3) {
-			return '<span class="label label-info">'+data.id+'</span>'
-		} 
-		return '<span class="label label-important">'+data.id+'</span>'
-	}
-	// Anoter example
-	$scope.aboutCB = function(data) {
-		return data.about.text.substring(0, 50) + '...';
-	}*/
-	$scope.currentPage = 0;
-    $scope.pageSize = 10;
-    //$scope.data = [];
-    $scope.q = '';
-    
-    $scope.getData = function () {
-      // needed for the pagination calc
-      // https://docs.angularjs.org/api/ng/filter/filter
-      return $filter('filter')($scope.people, $scope.q)
-     /* 
-       // manual filter
-       // if u used this, remove the filter from html, remove above line and replace data with getData()
-       
-        var arr = [];
-        if($scope.q == '') {
-            arr = $scope.data;
-        } else {
-            for(var ea in $scope.data) {
-                if($scope.data[ea].indexOf($scope.q) > -1) {
-                    arr.push( $scope.data[ea] );
-                }
-            }
-        }
-        return arr;
-       */
-    }
-    
-    $scope.numberOfPages=function(){
-        return Math.ceil($scope.getData().length/$scope.pageSize);                
-    }
-    
-    /*for (var i=0; i< '$scope.numberOfPages'; i++) {
-        $scope.data.push(+i);
-    }*/
-	
-}])
-
-  
-//.controller('MyCtrl', ['$scope', '$filter', function ($scope, $filter) {
-    
-//}])
-
-//We already have a limitTo filter built-in to angular,
-//let's make a startFrom filter
-.filter('startFrom', function() {
-    return function(input, start) {
-        start = +start; //parse to int
-        return input.slice(start);
-    }
-})
 
 
 .controller("studentProgress", function ($scope) {
