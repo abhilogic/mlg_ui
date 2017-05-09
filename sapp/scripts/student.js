@@ -551,6 +551,11 @@ angular.module('mlg_student')
       }
     });
 	
+	$scope.apiTabs=function(){
+		$(".table-of-content .nav-tabs li").removeClass("active");
+		$(this).parent().addClass("active");
+		$(tabIdactivated).addClass("active in");				
+	}
 	
 }])
 

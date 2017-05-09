@@ -22,14 +22,7 @@
 
 					<div class="panel panel-flat panel-teacher-create-class ">
 						<div class="panel-heading">
-							<h5 class="panel-title text-uppercase">
-								<div class="btn-group" role="group" aria-label="...">
-									<select name="subjects" class="form-control float-input" ng-model="frm.selectedcourse" required="Please select grade" ng-change="onChangeGetStudents(frm.selectedcourse)">
-                             			<option value="">Select Course for class</option>
-                              			<option ng-repeat="list in subject_grade" value="{{list.course_id}},{{list.course_name}}">{{list.name}}- {{list.course_name}}</option>  
-                                    </select>
-                                    <span style="color:red">{{course_Errormessage}}</span>
-								</div></h5>
+							
 								<div class="heading-elements">
 									<ul class="padding-left-0 list-inline">
 										<li class="toolbar-item">
@@ -71,7 +64,15 @@
 
 							</div>
 
-						<div class="row">
+						<div class="row margin-top-20">
+								<div class="col-sm-3 panel-title text-uppercase">
+								<div class="btn-group" role="group" aria-label="...">
+									<select name="subjects" class="form-control" ng-model="frm.selectedcourse" required="Please select grade" ng-change="onChangeGetStudents(frm.selectedcourse)">
+                             			<option value="">Select Course for class</option>
+                              			<option ng-repeat="list in subject_grade" value="{{list.course_id}},{{list.course_name}}">{{list.name}}- {{list.course_name}}</option>  
+                                    </select>
+                                    <span style="color:red">{{course_Errormessage}}</span>
+								</div></div>
 								<div class="col-sm-4 margin-bottom-10">
 									<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
 								</div>

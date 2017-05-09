@@ -16,12 +16,12 @@
       <div class="col-md-4 table-of-content">
         <h6>Table of Content</h6>
         <ul class="nav nav-tabs" id="tableOfContent">
-            <li ng-repeat="topic in topic_detail" ><i class="icon icon-document"></i> <a data-toggle="tab" href="/subskill_content/#topic_{{$index+1}}">{{topic.name}}</a></li>
-            <li ng-repeat="teacher_content in teacher_contents" ><i class="icon icon-document"></i> <a data-toggle="tab" href="/subskill_content/#teacher_{{$index+1}}">{{teacher_content.name}}</a></li>
-            <li ng-repeat="khan_content in khan_api_content">
+            <li ng-repeat="topic in topic_detail"><i class="icon icon-document"></i> <a data-toggle="tab" ng-click="apiTabs();" href="#topic_{{$index+1}}">{{topic.name}}</a></li>
+            <li ng-repeat="teacher_content in teacher_contents"><i class="icon icon-document"></i> <a data-toggle="tab" ng-click="apiTabs();" href="/subskill_content/#teacher_{{$index+1}}">{{teacher_content.name}}</a></li>
+            <li ng-repeat="khan_content in khan_api_content" >
               <i ng-if="khan_content.kind.toUpperCase() != 'VIDEO'" class="icon icon-document"></i>
               <i ng-if="khan_content.kind.toUpperCase() == 'VIDEO'" class="icon icon-video"></i>
-              <a data-toggle="tab" href="/subskill_content/#khan_api_{{$index+1}}">{{khan_content.name}}</a></li>
+              <a data-toggle="tab" ng-click="apiTabs();" href="/subskill_content/#khan_api_{{$index+1}}">{{khan_content.name}}</a></li>
         </ul>
       </div>
       <div class="col-md-8 tab-content">
@@ -180,14 +180,20 @@
     <script type="text/javascript">
       $(document).ready(function(){
 		//$("#cssmenu .mega .tradeAnalyser").show();
-		
+				
 			
 				$("#tableOfContent").tabCollapse({
 					tabsClass: 'hidden-sm hidden-xs',
     			accordionClass: 'visible-sm visible-xs'
 				});
+				
+			
+				
+				
         if($(window).width()>768){
 					$(".tab-pane, .table-of-content .nav-tabs").mCustomScrollbar();
+					
+					
 				}
 				// skip function
 				$("#skip").click(function(){
@@ -214,10 +220,19 @@
 					else if(targetLiIndex<noOfLi){
 						 $(".tab-content .tab-pane.in").removeClass("in active").next(".tab-pane").addClass("in active");
 					}
-
+ 
 				});
 				// tooltip bootstrap
 				$('[data-toggle="tooltip"]').tooltip();
+				
+				$(".nav-tabs li a").click(function(event) {
+					event.preventDefault();
+					$('.nav-tabs li a').removeClass("current");
+					$(this).addClass("current");
+					var tab = $(this).attr("href");
+					$(".tabContent").not(tab).stop().css("display", "none");
+					$(tab).fadeIn(500);
+				});
 				
       });
 			if($(window).width()>768){
