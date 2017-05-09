@@ -498,6 +498,7 @@ angular.module('mlg_student')
       if(response.response.course_details.length > 0){
         $scope.topic_detail = response.response.course_details;
         var khan_api_slugs = response.response.khan_api_slugs;
+        $scope.teacher_contents = response.response.teacher_contents;
         var khan_api_response_content = [];
         if (khan_api_slugs != '') {
           angular.forEach(khan_api_slugs, function(khan_api_slug, index) {
@@ -506,16 +507,19 @@ angular.module('mlg_student')
                 angular.forEach(contents.children, function(child, key) {
                   if (child.kind.toUpperCase() != 'EXERCISE') {
                     if (child.kind.toUpperCase() == 'VIDEO') {
-                      $http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
-                        var youtube_id = video_response.data.translated_youtube_id;
-                        khan_api_response_content.push({
-                          name: child.title,
-                          descriptions: child.description,
-                          kind: child.kind,
-                          url: child.url,
-                          youtube_id: youtube_id
+                      var content_title = response.response.khan_api_content_title;
+                      if (content_title.indexOf(child.id) !== -1) {
+                        $http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
+                          var youtube_id = video_response.data.translated_youtube_id;
+                          khan_api_response_content.push({
+                            name: child.title,
+                            descriptions: child.description,
+                            kind: child.kind,
+                            url: child.url,
+                            youtube_id: youtube_id
+                          });
                         });
-                      });
+                      }
                     } else if (child.kind.toUpperCase() == 'ARTICLE') {
                       $http.get(urlParams.khanApiArticle + child.internal_id).then(function(article_response) {
                         var article_content = JSON.parse(article_response.data.perseus_content);
@@ -546,6 +550,8 @@ angular.module('mlg_student')
         response.topic_detail = [];
       }
     });
+	
+	
 }])
 
 .controller('backHistoryPage', function($scope){

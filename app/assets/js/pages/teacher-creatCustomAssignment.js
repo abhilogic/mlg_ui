@@ -18,4 +18,6 @@ $(document).ready(function(){
   $("#btnGenerate").click(function(){
     $(".question-block-cover").show();
   });
+  // mlg-selectpicker
+  $('.mlg-selectpicker').selectpicker();
 });

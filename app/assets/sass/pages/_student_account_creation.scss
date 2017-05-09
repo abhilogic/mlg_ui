@@ -83,6 +83,7 @@
   @include margin(40px auto 15px auto);
   .btn{
     @include padding(0);
+    border: 0px;
     border-bottom: 1px solid $gray-light;
     color: $gray-light;
     margin: 0;
@@ -118,7 +119,10 @@
 .subject-group{
   padding: 0;
   text-align: center;
-  @include margin(15px auto 70px auto);
+  @include margin(15px auto 15px auto);
+  @media screen and (min-width: $screen-sm){
+    @include margin(15px auto 75px auto);
+  }
   .btn{
     @extend .package-box;
     min-height: inherit;
@@ -159,10 +163,15 @@
       display: inline-block;
       @include padding(8px null);
       font-weight: $regular;
+      &:not(:first-child){
+        @include margin(null null null 10px);
+      }
+      @media screen and (max-width: $screen-xs-max){
+        @include margin(5px null 5px 10px );
+      }
+
     }
-    .label-subject + .label-subject{
-      margin-left: 10px;
-    }
+
   }
 
   .btn-remove{

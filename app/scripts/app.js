@@ -1,5 +1,6 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js'])
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives'
+])
 .value('urlParams', {
 	users : '/users',
 	login: '/users/login',
@@ -40,7 +41,18 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   guestLogin: '/users/guestLogin',
   setTemplateDetail : '/teachers/saveTemplate',
   getTemplateDetail : '/teachers/getTemplate',
+  delContent : '/teachers/deleteContent',
+  getDifficultyLevel : '/teachers/getDifficulty',
+  questionType : '/teachers/getQuestionType',
+  getUserContent : '/teachers/getUserContent',
+  setUserContents : '/teachers/setUserContent',
   delTemplate : '/teachers/deleteTemplate',
+  addStudent : '/teachers/addStudent',
+  getStudentsOfClass : '/teachers/getStudentsOfClass',
+  updateStudent : '/teachers/updateStudent',
+  deleteStudent : '/teachers/deleteStudent',
+  sendMeMail : '/teachers/sendEmailToTeacher',   
+
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -54,6 +66,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	parent : 2,
 	teacher : 3,
 	student : 4,
+	guest_teacher : 5,
+	principal : 6
 }).value('card_months', {
 	1  : '1',
 	2  : '2',
@@ -77,6 +91,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 parent  : 30,
 student  : 60,
 teacher  : 30,
+guest_teacher  : 30,
+principal  : 30,
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {
@@ -98,7 +114,7 @@ teacher  : 30,
 		controller : 'loginCtrl',	
 	}).when('/teacher/signup',{
 		templateUrl : 'views/teacher_signup.html',
-		controller : 'teacherLoginCtrl',
+		controller : 'teacherSingnupCtrl',
 		access : access.public
 	}).when('/parent_signup', {
 		templateUrl : 'views/parent_signup.html',
@@ -142,6 +158,9 @@ teacher  : 30,
 	}).when('/children-account-setup', {
 		templateUrl : 'views/children-account-setup.html',
 		controller : 'childrenAccountSetup',
+	}).when('/parent/offer', {
+		templateUrl : 'views/dashboard/parent-report.html',
+		controller : 'childrenAccountSetup',
 	}).when('/parent/dashboard/offers', {
 		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'parentOffers',
@@ -162,9 +181,18 @@ teacher  : 30,
 		//templateUrl : 'views/teacher_select_courses.html',
 		templateUrl : 'views/select-grades-subjects.html',
 		controller : 'teacherOnBoardingCtrl',
+	}).when('/teacher/dashboard-empty',{
+		templateUrl : 'views/dashboard/teacher-dashboard-empty-view.html',
+		controller : 'teacherOnBoardingEmptyCtrl',
 	}).when('/teacher/dashboard',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
 		controller : 'teacherOnBoardingCtrl',
+	}).when('/teacher/report',{
+		templateUrl : 'views/dashboard/parent-report.html',
+		controller : 'teacherReportCtrl',
+	}).when('/teacher/message',{
+		templateUrl : 'views/dashboard/teacher-message.html',
+		controller : 'teacherMessageCtrl',
 	}).when('/teacher/subscription',{
 		templateUrl : 'views/dashboard/teacher-subscription.html',
 		controller : 'teacherSubscriptionCtrl',
@@ -207,10 +235,10 @@ teacher  : 30,
 		controller : 'teacherLessonCtrl',
   }).when('/teacher/create-class',{
 		templateUrl : 'views/dashboard/teacher-create-class.html',
-		controller : 'teacherLessonCtrl',
+		controller : 'teacherCreateClassCtrl',
   }).when('/teacher/add-question',{
 		templateUrl : 'views/dashboard/teacher-content-add-question.html',
-		controller : 'teacherAddQuestion',
+		controller : 'teacherAddQuestionCtrl',
   }).when('/teacher/questions',{
 		templateUrl : 'views/dashboard/teacher-content-questions.html',
 		controller : 'teacherQuestions',

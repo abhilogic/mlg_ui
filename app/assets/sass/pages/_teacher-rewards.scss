@@ -1,4 +1,19 @@
 .teacher-rewards {
+  .panel-heading{
+    .panel-title {
+      text-align: center;
+      text-transform: uppercase;
+      @media screen and (min-width: $screen-sm){
+        text-align: left;
+      }
+    }
+    .heading-elements {
+      text-align: center;
+      @media screen and (min-width: $screen-sm){
+        text-align: left;
+      }
+    }
+  }
   .redeem-list {
     li {
       @include padding(30px 15px 30px null);

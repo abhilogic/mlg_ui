@@ -46,3 +46,17 @@
 	-webkit-transition: width 1.5s ease-in-out;
 	transition: width 1.5s ease-in-out;
 }
+	
+	
+.sub-skills-room .board .table-of-content .nav-tabs li {width: 100%; float: left;}
+.sub-skills-room .board .table-of-content .nav-tabs li .icon {float: left;}
+.sub-skills-room .board .table-of-content .nav-tabs li a {width: 100%; display: block;     margin-top: 9px;}
+
+.sub-skills-room {
+	min-height: calc(100vh + 140px);
+}
+
+.radio-proceed {    width: 50px;
+    height: 30px;
+    display: block !important;
+    opacity: 0;}

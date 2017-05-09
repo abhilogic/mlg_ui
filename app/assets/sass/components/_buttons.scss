@@ -8,6 +8,7 @@
     background: none;
   }
   &.btn-outline{
+    white-space: normal;
     &:not(:hover){
       background-color: transparent;
     }

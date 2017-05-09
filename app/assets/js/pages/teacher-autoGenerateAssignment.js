@@ -19,3 +19,9 @@ $(document).ready(function(){
     $(".question-block-cover").show();
   });
 });
+
+
+$(document).ready(function(){
+  // mlg-selectpicker
+  $('.mlg-selectpicker').selectpicker();
+});

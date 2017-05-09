@@ -332,9 +332,6 @@ angular.module('mlg').filter('moment', function() {
 		$("#modalFreeTrail").modal();					
 	}
 	 $scope.login = function(data) {
-       //var role_id = user_roles[user_type];
-       //data.role_id= role_id;
-       console.log(user_roles)
 	   loginHttpService.login(data).success(function(response) {
          if (response.status=='false') {
            $scope.msg = response.message;
@@ -353,20 +350,26 @@ angular.module('mlg').filter('moment', function() {
            }else if(role_id==4){
            		role_name='student';
            }
+           if (response.warning == 1) {
+             var children_name = [];
+             var child_info = response.child_info;
+             var user_id = child_info['0'].user_id;
+             angular.forEach(child_info, function(child, key){
+               children_name.push(child.children_name);
+             });
+             alert("Your following child has ended with their subcription.\n" + children_name.join("\n"));
+             $location.url('parent/dashboard/subscription/' + user_id);
+             return true;
+           }
            setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',role='+role_name+'"');
-           //var user_type=user_roles.indexOf(response.role_id);
-          // $location.url('select_children');
-          if (role_id == '3') {
-            $location.url('teacher/create_account');
-            return true;
-          }
           if (role_id == '4') {
             window.location.href='/mlg_ui/sapp/journey';
             return true;
           }
             // To Redirect User on his account last step page.
-             // call API to get last step track             
-    		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
+             // call API to get last step track 
+             if (role_id == '2') {            
+    			loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
     			if(stepNum.response.step.step_completed!=null ){    				
     				//var step_page = stepNum.response.step.step_completed; 
 
@@ -388,6 +391,32 @@ angular.module('mlg').filter('moment', function() {
 					
 	   			}
 			});
+    	}
+
+
+    	if (role_id == '3') {    		
+			loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
+				if(stepNum.response.step.step_completed!=null ){    				
+					//var step_page = stepNum.response.step.step_completed; 
+					if(stepNum.response.step.step_completed==0 ){ 
+						$location.url('teacher/create_account'); 
+					}
+					else if(stepNum.response.step.step_completed==1){
+						 $location.url('teacher/select_courses');
+					}
+					else if(stepNum.response.step.step_completed==2){
+							 $location.url('teacher/payment_page');
+						}
+						else if(stepNum.response.step.step_completed==3){ 
+							$location.url('teacher/dashboard'); 
+						}								
+							
+				   	}
+				});
+
+    	}
+
+
 
          }
 	   }).error(function(error) {
@@ -1054,7 +1083,7 @@ if (typeof $routeParams.id != 'undefined') {
        	}; 
 
 
-       //console.log(childdata); 
+       console.log(childdata); 
        //how many childeren has been added n
        	loginHttpService.getAddedChildren(get_uid).success(function(response) {       			
 			if (typeof response.response.added_children !='undefined') {
@@ -1185,13 +1214,11 @@ if (typeof $routeParams.id != 'undefined') {
   function($scope, $rootScope, loginHttpService,commonActions,$location, card_months, card_years) {
     $scope.children = {};
     $scope.total_amount = 0;
-    console.log($rootScope.logged_user);
 
 	// To call dynamic step slider
 		var get_uid=commonActions.getcookies(get_uid);
 		loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
 				var childcount=chidrenName.response.length;
-				console.log(chidrenName);
 				if(childcount>0){
 					//$rootScope.childname 	= chidrenName.response;													
 						$scope.childname=chidrenName.response;
@@ -1241,21 +1268,57 @@ if (typeof $routeParams.id != 'undefined') {
       });
 	  
 }])
-.controller('teacherLoginCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
+.controller('teacherSingnupCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
      $scope.msg = '';
      $scope.gohome=function(){
 		window.location.href='/mlg_ui/app';
   	}
-
-//}]);
-
-
-	 $scope.register = function(data,user_type){
-	 		var role_id=user_roles[user_type];
+    $scope.userObj ={};
+    $scope.userObj.first_name = '';
+    $scope.userObj.last_name = '';
+    $scope.userObj.email = '';
+    $scope.userObj.username = '';
+    $scope.userObj.password = '';
+    $scope.userObj.repass = '';
+    $scope.userObj.selected_faculty = '';
+    $scope.faculty_roles = {teacher : 'Teacher','guest_teacher' : 'Guest Teacher','principal': 'Principal'};
+	 $scope.register = function(data,user_type) {
+            if (data.first_name == '') {
+              $scope.msg = 'Kindly enter First name';
+              return false;
+            }
+            if (data.last_name == '') {
+              $scope.msg = 'Kindly enter Last name';
+              return false;
+            }
+            if (data.email == '') {
+              $scope.msg = 'Kindly enter Email';
+              return false;
+            }
+            if (data.username == '') {
+              $scope.msg = 'Kindly select Username';
+              return false;
+            }
+            if (data.password == '') {
+              $scope.msg = 'Kindly enter Password';
+              return false;
+            }
+            if (data.repass == '') {
+              $scope.msg = 'Kindly enter Re-password';
+              return false;
+            }
+            if (data.repass != data.password) {
+              $scope.msg = 'Password and Re-password did not match';
+              return false;
+            }
+            if  (data.selected_faculty == '') {
+              $scope.msg = 'Kindly select role';
+              return false;
+            }
+	 		var role_id=user_roles[data.selected_faculty];
 	 		if(typeof data=='undefined'){
 	 			data={};
 	 		}
-
 	 		data.role_id=role_id;
             data.subscription_days = subscription_days[user_type];
             data.source_url = $location.protocol()+'://'+$location.host() + '/mlg_ui/app/';

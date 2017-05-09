@@ -90,5 +90,6 @@ $(function() {
         maxFilesize: 0.1 // MB
     });
 
-
+    // mlg-selectpicker
+    $('.mlg-selectpicker').selectpicker();
 });

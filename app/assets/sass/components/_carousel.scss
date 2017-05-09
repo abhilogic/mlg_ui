@@ -24,7 +24,7 @@
             height: 100vh;
             @include margin(null null null -68vw);
           }
-          @media screen and (max-width: $screen-sm-max){
+          @media screen and (max-width: $screen-sm){
             width: auto;
             min-width: inherit;
             max-width: inherit;

@@ -33,7 +33,7 @@
                   <p class="content-tagline">Hello there! Sign in and start Monitoring your class</p>
                 </div>
 
-                <form ng-submit="register(userObj, 'teacher')" class="form-login">
+                <form ng-submit="register(userObj)" class="form-login">
                   <div class="form-group float-label" ng-class="{focus: !userObj.first_name == ''}">
                     <label class="control-label">First Name</label>
                     <input ng-model="userObj.first_name" type="text" class="form-control float-input"/>
@@ -69,12 +69,7 @@
                   </div>
                   <div class="form-group float-label">
                     <label class="control-label">Role</label>
-					<select  type="text" class="form-control float-input">
-						<option value=""></option>
-						<option value="Priciple">Principle</option>
-						<option value="Teacher">Teacher</option>
-						<option value="Guest Teacher">Guest Teacher</option>
-					</select>
+                    <select class="form-control float-input" ng-model="userObj.selected_faculty" ng-options="key as value for (key, value) in faculty_roles"></select>
                   </div>
                   <span class="has_error">{{msg}}</span>
                   <br>

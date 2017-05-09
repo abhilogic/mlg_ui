@@ -23,7 +23,7 @@
         >p {
           display: none;
         }
-        .confirm-succes-msg {
+        .confirm-success-msg {
           display: block;
           opacity: 1;
         }
@@ -58,6 +58,8 @@
         background: $springGreen;
       }
     }
+
+
   }
   .modal-footer {
     text-align: center;
