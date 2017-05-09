@@ -346,7 +346,7 @@ angular.module('mlg').filter('moment', function() {
            }
          if (response.status=='false') {
            if ((response.warning == 1) && (response.role_id == user_roles['student'])) {
-            setCookie('userObj', '"userName='+response.user+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
+            setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
              $rootScope.logged_user = response.user;
              setCookie('uid', $rootScope.logged_user.id);
              window.location.href='/mlg_ui/sapp/journey';
@@ -355,7 +355,7 @@ angular.module('mlg').filter('moment', function() {
          } else {
            $rootScope.logged_user = response.user;
            setCookie('uid', $rootScope.logged_user.id);
-           setCookie('userObj', '"userName='+response.user+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
+           setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
            if (response.warning == 1) {
              var children_name = [];
              var child_info = response.child_info;
@@ -1329,7 +1329,7 @@ if (typeof $routeParams.id != 'undefined') {
            return false;
          } else if (response.status == '1') {
            alert('Your Trial session will be for 15 mins only');
-           setCookie('userObj', '"userName='+response.user+',email='+ ' ' +',userStatus='+response.user.status+',role='+ 'student'+'"');
+           setCookie('userObj', '"userName='+response.user.first_name+',email='+ ' ' +',userStatus='+response.user.status+',role='+ 'student'+'"');
            setCookie('uid', 0);
            setCookie('grade_id', data.levelchoice.id);
            window.location.href='/mlg_ui/sapp/journey';
