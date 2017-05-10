@@ -1603,6 +1603,36 @@ $scope.numberOfPages=function(){
         }
       });
     }
+	
+	$scope.addTxtAns=function(){
+		$("#addTextAns").click(function(){
+			$(".text-answer-block").addClass("show");
+			$(this).hide();
+			$(this).parent().siblings("li").fadeOut();
+		});					
+	},
+	
+	$scope.addImgAns=function(){
+		
+		$("#addImgAns").click(function(){
+			$(".img-answer-block").addClass("show");
+			$(this).hide();
+			$(this).parent().siblings("li").fadeOut();
+			
+			var owl = $(".img-ans-owl-carousel");
+			owl.owlCarousel({
+				margin: 20,
+				nav: false,
+				loop: false,
+				responsive: {
+					1000: {
+						items: 6
+					}
+				}
+			});
+		});					
+	}
+	
   }]) 	
 //teacherStudentProfile  studentPerformance 
 .controller('teacherAutoGenerateAssignment', ['$scope', function($scope) {
@@ -1681,6 +1711,22 @@ $scope.numberOfPages=function(){
 	}  
 }])
 
+
+.directive('datetimez', function() {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+          element.datetimepicker({
+            dateFormat:'dd/MM/yyyy hh:mm:ss',
+            language: 'pt-BR'
+          }).on('changeDate', function(e) {
+            ngModelCtrl.$setViewValue(e.date);
+            scope.$apply();
+          });
+        }
+    };
+})
 
 ;
 

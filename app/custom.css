@@ -102,3 +102,25 @@
 	
 }
 
+.inputGroup input {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	display: inline-block;
+	vertical-align: top;
+    width: auto;
+	padding: 6px 5px;
+	
+}
+
+.inputGroup .btn {
+	padding: 9px 10px 9px;
+    margin-left: -22px;
+	border-radius: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    vertical-align: top;
+    vertical-align: top;
+    background: #ddd;
+}
+
