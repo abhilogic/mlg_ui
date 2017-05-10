@@ -1765,6 +1765,44 @@ $scope.numberOfPages=function(){
     }
 
 })
+
+
+.directive('awardCarousel', function() {
+
+    var linker = function(scope, element, attr) {
+        var loadCarousel = function() {
+
+            element.owlCarousel({
+                margin: 0,
+				loop: false,
+				nav: true,
+				responsive: {
+					0: {
+						items: 1
+					},
+					600: {
+						items: 4
+					},
+					1000: {
+						items: 6
+					}
+				}
+            });
+        }
+
+        scope.$watch("juego.Galerias.Videos", function(value) {
+            loadCarousel(element);
+        })
+    }
+
+    return {
+        restrict: "A",
+        link: linker
+    }
+
+})
+
+
 /*.directive('radioSlider', function() {
     return {
         // Restrict it to be an attribute in this case

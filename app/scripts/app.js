@@ -162,7 +162,7 @@ principal  : 30,
 		templateUrl : 'views/children-account-setup.html',
 		controller : 'childrenAccountSetup',
 	}).when('/parent/offer', {
-		templateUrl : 'views/dashboard/parent-report.html',
+		templateUrl : 'views/dashboard/parent-offers.html',
 		controller : 'childrenAccountSetup',
 	}).when('/parent/dashboard/offers', {
 		templateUrl : 'views/dashboard/parent-offers.html',
@@ -190,7 +190,7 @@ principal  : 30,
 	}).when('/teacher/dashboard',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
 		controller : 'teacherOnBoardingCtrl',
-	}).when('/teacher/report',{
+	}).when('/parent/report',{
 		templateUrl : 'views/dashboard/parent-report.html',
 		controller : 'teacherReportCtrl',
 	}).when('/teacher/message',{
