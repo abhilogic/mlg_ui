@@ -51,7 +51,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getStudentsOfClass : '/teachers/getStudentsOfClass',
   updateStudent : '/teachers/updateStudent',
   deleteStudent : '/teachers/deleteStudent',
-  sendMeMail : '/teachers/sendEmailToTeacher',   
+  sendMeMail : '/teachers/sendEmailToTeacher', 
+  getStudentOfTeacher : '/teachers/getStudentOfTeacher', 
+  createGroup : '/teachers/createGroup',
+  getGroups : '/teachers/getGroups', 
 
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -247,7 +250,7 @@ principal  : 30,
 		controller : 'teacherLessonCtrl',
   }).when('/teacher/create-group',{
 		templateUrl : 'views/dashboard/teacher-create-group.html',
-		controller : 'teacherCreateGroup',
+		controller : 'teacherCreateGroupCtrl',
   }).when('/teacher/edit-group',{
 		templateUrl : 'views/dashboard/teacher-editGroup.html',
 		controller : 'teacherEditGroup',

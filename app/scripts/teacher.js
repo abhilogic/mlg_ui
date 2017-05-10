@@ -150,8 +150,28 @@ angular.module('mlg')
         });
       }
 
+      teacherHttpResponse.getStudentOfTeacher=function(get_uid){
+        return $http({
+          method:'GET',                            
+          url  : urlParams.baseURL+urlParams.getStudentOfTeacher+'?teacher_id='+get_uid
+        });
+      }
+
+      teacherHttpResponse.createGroup=function(selected_students,get_uid){
+        return $http({
+          method:'POST', 
+          data :  selected_students,                           
+          url  : urlParams.baseURL+urlParams.createGroup+'?teacher_id='+get_uid
+        });
+      }
 
 
+      teacherHttpResponse.getGroups=function(get_uid){
+        return $http({
+          method:'GET',                                  
+          url  : urlParams.baseURL+urlParams.getGroups+'?teacher_id='+get_uid
+        });
+      }
 
 
         return teacherHttpResponse;
@@ -379,27 +399,6 @@ angular.module('mlg')
 
        });
     }
-   
-  
-  $scope.people = [
-  //{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
-  ];
-  
-  /*$scope.addPerson = function(){
-  var person = {
-    //id: $scope.id,
-    Fname: $scope.Fname,
-    Lname: $scope.Lname,
-    email: $scope.email,
-    Uname: $scope.Uname,
-    pass: $scope.pass,
-  };
-  
-  $scope.people.push(person);
-  };
-   $scope.removePerson = function(index){
-    $scope.people.splice(index, 1);
-   };*/
   
 
   // start:- To add the student in class
@@ -522,6 +521,7 @@ $scope.sendEmailMe=function(selected_students){
 
 }
 
+
 $scope.currentPage = 0;
 $scope.pageSize = 100;
 //$scope.data = [];
@@ -534,6 +534,79 @@ $scope.getData = function () {
 $scope.numberOfPages=function(){
 	return Math.ceil($scope.getData().length/$scope.pageSize);                
 }
+
+}])
+
+.controller('teacherCreateGroupCtrl',['$rootScope','$scope','$timeout', 'teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','urlParams',
+  function($rootScope,$scope,$timeout,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,urlParams) {
+
+    var get_uid=commonActions.getcookies(get_uid);
+    $scope.frm={};
+    
+    // Api to call all students of a teacher
+    teacherHttpService.getStudentOfTeacher(get_uid).success(function(response_students) { 
+        if (response_students.response.status == "true") {
+              $scope.baseURL= urlParams.baseURL;
+              $scope.students=response_students.response.students;
+        }else{
+            $scope.student_Errormessage=response_students.response.message;
+      } 
+    });
+
+
+    // API to show existing groups List
+     teacherHttpService.getGroups(get_uid).success(function(response_getgp) {
+          if (response_getgp.response.status == "true") {
+                $scope.groups = response_getgp.response.groups;
+          }
+          else{
+                $scope.errorMessage = response_getgp.response.message;
+          }
+      });
+
+
+      // API to show students list of a group
+     teacherHttpService.getGroupStudents(gp_id,get_uid).success(function(response_getgp) {
+
+
+      });
+
+
+
+    // To add the group in database
+    $scope.onSubmitCreateGroup= function(frms){ 
+      //console.log($scope.img); 
+        frms.group_image = $scope.img;
+        teacherHttpService.createGroup(frms,get_uid).success(function(response_addgp) {
+             if (response_addgp.response.status == "true") {
+                $scope.successMessage = response_addgp.response.message;
+                $scope.frm={};
+                //$scope.img ='';
+
+                // API to show all created group
+                teacherHttpService.getGroups(get_uid).success(function(response_getgp) {
+                    if (response_getgp.response.status == "true") {
+                      $scope.groups = response_getgp.response.groups;
+                    }
+                    else{
+                        $scope.errorMessage = response_getgp.response.message;
+                      }
+
+                });
+
+             }else{
+                $scope.errorMessage = response_addgp.response.message;
+             }
+
+              $timeout(function () { $scope.successMessage = ""; }, 4000);
+              $timeout(function () { $scope.errorMessage = ""; }, 4000);
+
+
+        });
+
+
+    }
+
 
 
 }])

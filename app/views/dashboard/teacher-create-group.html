@@ -23,135 +23,58 @@
 						<div class="panel-heading">
 							<h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i>  Create Group</h5>
 						</div>
-            <div class="panel-body">
-              <div class="text-center">
-                <input type="text" class="group-name" placeholder="Enter group name"/>
-              </div>
+            		<div class="panel-body">
+             			<div class="text-center">
+                			<input type="text" class="group-name" placeholder="Enter group name" ng-model="frm.groupname"/>
+             			</div>
+             			
+							<form action=""class="dropzone" drop-zone="" id="file-img"ng-model="frm.gpimg"></form>
+	       					 <div id="uploded-image"></div>
+ 	
 							<br>
 							<ul class="row list-thumb student_list">
-								<li class="student gifted">
+								
+								<li class="student gifted" ng-repeat="student in students">
 									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
+										<input type="checkbox" ng-model="frm.selectedstudent[student.id]" ng-true-value="'{{student.username}}'" ng-false-value="''" > 
 										<label></label>
 									</div>
 									<a href="#">
 										<div class="student__img">
-										<img class="img-circle" src="assets/img/student-img/stud_img_1.png" alt="Andrew Garfield"/>
+										<img class="img-circle" src="{{baseURL+'/'+student.profile_pic}}" alt="{{student.first_name}}"/>
 									</div>
-										<span class="student__name">Andrew Garfield</span>
+										<span class="student__name">{{student.first_name}}</span>
 									</a>
-								</li>
+								</li>					
 
-								<li class="student outstanding">
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
-										<label></label>
-									</div>
-									<a href="#">
-										<div class="student__img">
-										<img class="img-circle" src="assets/img/student-img/stud_img_2.png" alt="Angelina Barnes"/>
-									</div>
-										<span class="student__name">Angelina Barnes</span>
-									</a>
-								</li>
-
-								<li class="student ontarget">
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
-										<label></label>
-									</div>
-									<a href="#">
-										<div class="student__img">
-											<img class="img-circle" src="assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
-										</div>
-										<span class="student__name">Bobby Jackson</span>
-									</a>
-								</li>
-
-								<li class="student ontarget">
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
-										<label></label>
-									</div>
-									<a href="#">
-										<div class="student__img">
-										<img class="img-circle" src="assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
-									</div>
-										<span class="student__name">Bobby Jackson</span>
-									</a>
-								</li>
-
-								<li class="student ontarget">
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
-										<label></label>
-									</div>
-									<a href="#">
-										<div class="student__img">
-											<img class="img-circle" src="assets/img/student-img/stud_img_3.png" alt="Bobby Jackson"/>
-										</div>
-										  <span class="student__name">Bobby Jackson</span>
-									</a>
-								</li>
-
-								<li class="student struggling">
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
-										<label></label>
-									</div>
-									<a href="#">
-										<div class="student__img">
-											<img class="img-circle" src="assets/img/student-img/stud_img_4.png" alt="Caly Miles"/>
-										</div>
-										<span class="student__name">Caly Miles</span>
-									</a>
-								</li>
-
-								<li class="student remedial">
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
-										<label></label>
-									</div>
-									<a href="#">
-										<div class="student__img">
-											<img class="img-circle" src="assets/img/student-img/stud_img_5.png" alt="Jema Stones"/>
-										</div>
-										<span class="student__name">Jema Stones</span>
-									</a>
-								</li>
-
-								<li class="student struggling">
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
-										<label></label>
-									</div>
-									<a href="#">
-										<div class="student__img">
-											<img class="img-circle" src="assets/img/student-img/stud_img_6.png" alt="Saul Millers"/>
-										</div>
-										<span class="student__name">Saul Millers</span>
-									</a>
-								</li>
-
-								<li class="student struggling">
-									<div class="checkbox checkbox-primary">
-										<input type="checkbox">
-										<label></label>
-									</div>
-									<a href="#">
-										<div class="student__img">
-											<img class="img-circle" src="assets/img/student-img/stud_img_7.png" alt="Peter Parker"/>
-										</div>
-										<span class="student__name">Peter Parker</span>
-									</a>
-								</li>
 							</ul>
+
+							<div class="show-msg" style="color:orange">{{errorMessage + successMessage}}</div>
 						</div>
 						<div class="panel-footer text-center">
-                <div class="text-right">
-                  <button type="button" class="btn btn-background-none">Cancel</button>
-                  <button type="button" class="btn btn-primary">Create</button>
-                </div>
+			                <div class="text-right">
+			                  <button type="button" class="btn btn-background-none">Cancel</button>
+			                  <button type="button" class="btn btn-primary" ng-click="onSubmitCreateGroup(frm)">Create</button>
+			                </div>
+						</div>
+					</div>
+
+						<!-- To show added Group -->
+					<div class="panel panel-flat create-group">
+						<div class="panel-body">
+							<h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i>  Added Groups</h5>
+							<ul class="row list-thumb student_list">
+								<li class="student gifted" ng-repeat="group in groups">
+									
+									<a href="#">
+										<div class="student__img">
+										<img class="img-circle" src="{{baseURL+'/webroot/upload/'+group.group_icon}}" alt="{{group.title}}"/>
+									</div>
+										<span class="student__name">{{group.title}}</span>
+									</a>
+								</li>
+								<li ng-show="!groups.length">No Group is Added Yet</li>
+							</ul>
 						</div>
 					</div>
 				</div>
