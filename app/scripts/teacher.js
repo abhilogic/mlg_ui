@@ -75,10 +75,10 @@ angular.module('mlg')
           url  : urlParams.baseURL+urlParams.setTemplateDetail
         });
       }
-      teacherHttpResponse.getTemplateDetail=function(uid){
+      teacherHttpResponse.getTemplateDetail=function(uid,type){
         return $http({
           method:'GET',
-          url  : urlParams.baseURL+urlParams.getTemplateDetail+'/'+uid
+          url  : urlParams.baseURL+urlParams.getTemplateDetail+'/'+uid+'/'+type
         });
       }
       teacherHttpResponse.delContent=function(id){
@@ -170,6 +170,20 @@ angular.module('mlg')
         return $http({
           method:'GET',                                  
           url  : urlParams.baseURL+urlParams.getGroups+'?teacher_id='+get_uid
+        });
+      }
+      teacherHttpResponse.updateContent=function(lessonDetail){
+        return $http({
+          method:'POST',
+          data : lessonDetail,
+          url  : urlParams.baseURL+urlParams.updateContent
+        });
+      }
+      teacherHttpResponse.uploadQuestion=function(question){
+        return $http({
+          method:'POST',
+          data : question,
+          url  : urlParams.baseURL+urlParams.uploadQuestion
         });
       }
 
@@ -620,8 +634,8 @@ $scope.numberOfPages=function(){
     }
 })
 
-.controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+.controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile) {
     var get_uid=commonActions.getcookies(get_uid);
     var grade = '';
     var standard = [];
@@ -649,8 +663,13 @@ $scope.numberOfPages=function(){
     $scope.userContentModel = [];
     $scope.template = [];
     $scope.templateDetail = [];
+    $scope.type = 'ALL';
+    $scope.textClass = 'active';
+    $scope.docClass = '';
+    $scope.imgClass = '';
+    $scope.videoClass = '';
     // template detail show
-    teacherHttpService.getTemplateDetail(get_uid).success(function(response) {
+    teacherHttpService.getTemplateDetail(get_uid,'lesson').success(function(response) {
       if (response.status == true) {
         var temp = response.data;
         $scope.templateDetail = response.data;
@@ -683,15 +702,11 @@ $scope.numberOfPages=function(){
     // on the basis of grade fetch the coursr list.
     $scope.getGradeVal = function(){
       if($scope.gradeSelected != '---Select Grade---') {
-        if(subStatus == 0) {
-          angular.element('#coursetemp select option').hide();
-        }
         grade = $scope.gradeSelected;
         teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
           $scope.subject = response.response;
-          $scope.subject.splice(0,0,{'level_id' :'','course_id' :'','course_name' :'---Select Course---'});
+//          $scope.subject.splice(0,0,{'level_id' :'','course_id' :'','course_name' :'---Select Course---'});
           $scope.courseSelected = $scope.subject[0][0];
-          subStatus = 1;
         }).error(function(error) {
             $scope.msg= 'Some technical error occured.';
         });
@@ -701,17 +716,19 @@ $scope.numberOfPages=function(){
     $scope.getCourseVal = function(){
       if($scope.gradeSelected != '---Select Subject---') {
        course = $scope.courseSelected;
-       teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
-          var data = response.response.course_details;
-          angular.forEach(data, function(value, key) {
-              $scope.skill.push({
-              'id' : value['course_id'],
-              'label': value['name']
-             });
+        if(tempStatus == 0) {
+          teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
+            var data = response.response.course_details;
+            angular.forEach(data, function(value, key) {
+                $scope.skill.push({
+                'id' : value['course_id'],
+                'label': value['name']
+               });
+            });
+          }).error(function(error) {
+              $scope.msg= 'Some technical error occured.';
           });
-        }).error(function(error) {
-            $scope.msg= 'Some technical error occured.';
-        });
+        }
       }  
     }
     $scope.skillEvents = {
@@ -845,7 +862,7 @@ $scope.numberOfPages=function(){
         title : data.text_title,
         content : content,
         type : type,
-     };
+     }
      teacherHttpService.setContentForLesson(lessonDetail).success(function(response) {
       if(response.status == true){
         $scope.message = response.response;
@@ -858,16 +875,25 @@ $scope.numberOfPages=function(){
     }); 
   }
   // set user Content for edit or update
+  var addContCount = 0;
   $scope.setUserContent = function(data) {
+    $scope.updateId = data;
+    $scope.mesage = '';
     if(countImg == 0 && countDoc == 0 && countVideo ==0) {
       var mysave = angular.element(document.querySelector('#save-content button'));
       mysave.remove();
       var myupdate = angular.element(document.querySelector('#update-content'));
-      myupdate.append('<button type="submit" class="btn btn-primary"ng-click="updateDetail(frm)">Update</button>');
+      myupdate.append($compile('<button type="submit" class="btn btn-primary"ng-click="updateDetail(frm)">Update</button>')($scope));
       var mycourse = angular.element(document.querySelector('#coursetemp select'));
       mycourse.remove();
       var mynewcourse = angular.element(document.querySelector('#coursetemp'));
       mynewcourse.append('<select class="mlg-selectpicker form-control" data-size="auto" ng-model="courseSelected"></select>');
+      if(addContCount == 0){
+        var myAddContent = angular.element(document.querySelector('#add-new-content'));
+        myAddContent.append('<button type="submit" class="btn btn-background-none text-primary margin-bottom-10 btn-add"onClick="window.location.reload()" ><i class="icon icon-plus-outline"></i> Add New</button>');  
+        addContCount++;
+      }
+      
     }
     if(countImg > 0){
       for(var $i=0; $i<=countImg;$i++) {
@@ -945,6 +971,7 @@ $scope.numberOfPages=function(){
             }
             $scope.standardmodel = $scope.standard;
             $scope.standardType = [];
+            console.log(val['standard_type']);
             var standardType = val['standard_type'].split(',');
             for(var $i=0;$i<standardType.length;$i++){
               console.log(standardType[$i]);
@@ -953,27 +980,37 @@ $scope.numberOfPages=function(){
                   'label': standardType[$i]
               }); 
             }
+            console.log($scope.standardType);
             $scope.standardTypemodel = $scope.standardType;
+            console.log($scope.standardTypemodel);
           }
         }).error(function(error) {
          $scope.msg= 'Some technical error occured.';
         });
         if(val['type'] == 'text'){
-          $scope.frm.htmlcontent = val['content'];
+           $scope.type = 'text';
+           $scope.textClass = 'active';
+          $scope.frm.htmlcontent = val['content'];   
         }else if(val['type'] == 'doc'){
           $scope.frm.htmlcontent = '';
+          $scope.type = 'doc';
+          $scope.docClass = 'active';
           var myDoc = angular.element(document.querySelector('#uploded-doc'));
           var docContent = val['content'].split(',');
+          $scope.editValue = val['content'];
           angular.forEach(docContent,function(docValue,docKey){
             myDoc.append('<a href="'+mlg+'upload/'+docValue+'" target="_new">'+docValue+'</a>');
             countDoc++;
           });
         }else if(val['type'] == 'image'){
+          $scope.type = 'image';
+          $scope.imgClass = 'active';
           $scope.frm.htmlcontent = '';
           var myLabel = angular.element(document.querySelector('#uploded-image'));
           myLabel.append('<label>uploded Image :  </label> ');
           var myImg = angular.element(document.querySelector('#uploded-image'));
           var imgContent = val['content'].split(',');
+          $scope.editValue = val['content'];
           angular.forEach(imgContent,function(imgValue,imgKey){
             myImg.append('<img src="'+mlg+'upload/'
                     +imgValue+'" alt="'+imgValue+'"width="50px" height="50px"></img>');
@@ -981,8 +1018,11 @@ $scope.numberOfPages=function(){
           });
         }else if(val['type'] == 'video'){
           $scope.frm.htmlcontent = '';
+          $scope.type = 'video';
+          $scope.videoClass = 'active';
           var myVideo = angular.element(document.querySelector('#uploded-doc'));
           var videoContent = val['content'].split(',');
+          $scope.editValue = val['content'];
           angular.forEach(videoContent,function(videoValue,videoKey){
             myDoc.append('<a href="'+mlg+'upload/'+videoValue+'" target="_new">'+videoValue+'</a>');
             countVideo++;
@@ -992,10 +1032,25 @@ $scope.numberOfPages=function(){
     });
   }
   $scope.submitTemplate = function(data) {
-    lessonDetail.temp_name=data.template_name;
+//    lessonDetail.temp_name=data.template_name;
+    lessonDetail = {
+        tid : get_uid,
+        grade : grade,
+        course : course,
+        lesson : data.lesson_name,
+        standard : standard,
+        standard_type : standardType,
+        skills : skillId,
+        sub_skill : subSkills,
+        temp_name : data.template_name,
+        cont_type : 'lesson'
+     };
     teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
       if(response.status == true){
         window.$location.reload();
+      }else{
+        alert(response.message);
+        $scope.msg = response.message;
       }
     }).error(function(error) {
      $scope.msg= 'Some technical error occured.';
@@ -1005,6 +1060,7 @@ $scope.numberOfPages=function(){
   $scope.getTemplate = function(){
     var subTemp = [];
     var subTempCount = 0;
+    tempStatus = 1;
     var tempId = $scope.selectedTemplateModel;
     $scope.skill=[];
     $scope.subSkill=[];
@@ -1012,7 +1068,7 @@ $scope.numberOfPages=function(){
     $scope.subSkillmodel = [];
     $scope.standardmodel = [];
     $scope.standardTypemodel = [];
-    tempStatus = 1;
+    
     angular.forEach($scope.template , function(value, key) {
       if(tempId == value['id']) {
         //for grade
@@ -1092,7 +1148,7 @@ $scope.numberOfPages=function(){
            $scope.standardTypemodel.push({'id' : val, 'label': val });
          });
         }
-     });  
+     });
     }
     $scope.deleteContent = function(data){
       teacherHttpService.delContent(data).success(function(response) {
@@ -1105,9 +1161,66 @@ $scope.numberOfPages=function(){
         }
       });
     }
+    $scope.updateDetail = function(data){
+      doc = $scope.doc;
+      img = $scope.img;
+      video = $scope.video;
+      var content = '';
+      var type = '';
+      if(data.htmlcontent != ''){
+        content = data.htmlcontent;
+        type = 'text';
+      }else if(typeof(doc) === 'string'){
+        content = doc;
+        type = 'doc';
+      }else if(typeof(img) === 'string'){
+        content = img;
+        type = 'image';
+      }else if(typeof(video) === 'string'){
+        content = video;
+        type = 'video';
+      }
+      lessonDetail = {
+        id : $scope.updateId,
+        lesson : data.lesson_name,
+        title : data.text_title,
+        pre_content : $scope.editValue,
+        updated_content : content,
+        type : type
+     };
+     teacherHttpService.updateContent(lessonDetail).success(function(response) {
+        if(response.status == true){
+        $scope.mesage = response.message;
+        window.location.reload();
+      }else{
+        $scope.mesage = response.message;
+      }
+      }).error(function(error) {
+        $scope.msg= 'Some technical error occured.';
+      });
+    }
+    $scope.lessonPreview = function(data) {
+      $scope.previewImage = [];
+      var preImage = '';
+      $scope.preht = $location.protocol();
+      $scope.preHst = $location.host();
+      preImage = $scope.img;
+      var temp_data = preImage.split(',');
+      for(var i=0;i<temp_data.length;i++) {
+        var temp = temp_data[i].split(': "');
+        var temp_string = temp[1].split('"');
+        $scope.previewImage.push(temp_string[0]);  
+      }
+      angular.forEach($scope.subject,function(sub,key){
+        if(sub['course_id'] == $scope.courseSelected) {
+          $scope.subjectName = sub['course_name'];
+        }
+      });
+      $scope.previewLesson = (data.lesson_name).toUpperCase();
+      $scope.previewText = data.htmlcontent;
+    }
   }])
-  
-.controller('teacherScopeSequence',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+ .controller('teacherScopeSequence',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
 	  $scope.sequenceModel = [];
 	  $scope.sequenceData = [
@@ -1126,11 +1239,11 @@ $scope.numberOfPages=function(){
         url: "/mlg/teachers/uploadfile",
         maxFilesize: 100,
         paramName: "uploadfile",
-        maxThumbnailFilesize: 5,
+        maxThumbnailFilesize: 3,
         accept:function(file,done) {
           if (element.context.id == 'file-doc' && file.type == 'application/pdf') {
             done();
-          }else if (element.context.id == 'file-img' && file.type == 'image/jpeg') {
+          }else if (element.context.id == 'file-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
             done();
           }else if (element.context.id == 'file-video' && file.type == 'video/*') {
             done();
@@ -1176,9 +1289,28 @@ $scope.numberOfPages=function(){
       }); 
 } 
   })
-  
-
-
+.controller("tableRow", function ($scope) {
+	$scope.people = [
+	//{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
+	];
+	
+  $scope.addPerson = function(){
+	var person = {
+		id: $scope.id,
+		Fname: $scope.Fname,
+		Lname: $scope.Lname,
+		email: $scope.email,
+		Uname: $scope.Uname,
+		pass: $scope.pass,
+	};
+	
+	$scope.people.push(person);
+  };
+	 $scope.removePerson = function(index){
+		$scope.people.splice(index, 1);
+   };
+	
+})
 
 .controller("studentProgress", function ($scope) {
 	$scope.labels = ["Conquered", "Practiced", "Not Attacked"];
@@ -1324,7 +1456,6 @@ $scope.numberOfPages=function(){
 })
 .controller('teacherAddQuestionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
-	  
     var get_uid=commonActions.getcookies(get_uid);
     var grade = '';
     var standard = [];
@@ -1355,7 +1486,7 @@ $scope.numberOfPages=function(){
     $scope.questionTypeModel = [];
     $scope.questionType = [];
     // template detail show
-    teacherHttpService.getTemplateDetail(get_uid).success(function(response) {
+    teacherHttpService.getTemplateDetail(get_uid,'question').success(function(response) {
       if (response.status == true) {
         var temp = response.data;
         $scope.templateDetail = response.data;
@@ -1549,13 +1680,11 @@ $scope.numberOfPages=function(){
        onItemDeselect: function(item) {
               qType.splice(item['id'],1);
        }
-     };               
-      
-      
-      
-      
+    };               
     var question = {};
     $scope.submitQuestion = function(data) {
+      console.log(data);
+      console.log($scope.ansChecked);
       question = {
         tid : get_uid,
         grade : grade,
@@ -1572,34 +1701,45 @@ $scope.numberOfPages=function(){
         claim : claim,
         scope : data.rScope,
         dok : dok,
-     };
-     console.log(question);
-//    teacherHttpService.setContentForLesson(question).success(function(response) {
-//      if(response.status == true){
-//        angular.element('#modal-saveTemplate').show();
-//      }
-//    }).error(function(error) {
-//     $scope.msg= 'Some technical error occured.';
-//    }); 
-  }
-  $scope.submitTemplate = function(data) {
-    lessonDetail.temp_name=data.template_name;
-    teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
-      if(response.status == true){
-        window.location.reload();
-      }
-    }).error(function(error) {
-     $scope.msg= 'Some technical error occured.';
-    }); 
-  }
-  //set template
-  $scope.getTemplate = function(){
+        assignment : data.assignment,
+        question : data.questionStatement,
+      };
+//      console.log(question);
+     teacherHttpService.uploadQuestion(question).success(function(response){
+       console.log(response);
+     }).error(function(error){
+       
+     });
+    }
+    $scope.submitTemplate = function(data){
+      question.temp_name = data.template_name;
+      question.cont_type = 'question';
+      teacherHttpService.setTemplateDetail(question).success(function(response) {
+        if(response.status == true){
+          window.$location.reload();
+        }else{
+          alert(response.message);
+          $scope.msg = response.message;
+        }
+      }).error(function(error) {
+        $scope.msg= 'Some technical error occured.';
+      });
+    }
+    $scope.getTemplate = function(data) {
+      var subTemp = [];
+    var subTempCount = 0;
+    tempStatus = 1;
     var tempId = $scope.selectedTemplateModel;
     $scope.skill=[];
     $scope.subSkill=[];
-    tempStatus = 1;
+    $scope.skillmodel = [];
+    $scope.subSkillmodel = [];
+    $scope.standardmodel = [];
+    $scope.standardTypemodel = [];
+    
     angular.forEach($scope.template , function(value, key) {
       if(tempId == value['id']) {
+        console.log(value);
         //for grade
         angular.forEach($scope.level , function(vall, kil) {
           if(value['grade']== vall){
@@ -1616,7 +1756,7 @@ $scope.numberOfPages=function(){
                   'course_name':val['name'].toUpperCase()
                  });
               });
-              $scope.subject.splice(0,0,{'level_id' :'','course_id' :'','course_name' :'---Select Course---'}); 
+//              $scope.subject.splice(0,0,{'level_id' :'','course_id' :'','course_name' :'---Select Course---'}); 
               $scope.courseSelected = $scope.subject[0][0][2];
             });
             teacherHttpService.getAllCourseList(value['course_id'],'lesson').success(function(response) {
@@ -1638,9 +1778,22 @@ $scope.numberOfPages=function(){
                   });
                   angular.forEach($scope.subSkill , function(subvalue, kisub) {
                    angular.forEach(value['sub_skill'] , function(subSkillValue, kil) {
-                      if(subSkillValue == subvalue['id'] ) {
-                        $scope.subSkillmodel.push($scope.subSkill[kisub]); 
+                    if(subTempCount == 0) {
+                       if(subSkillValue == subvalue['id'] ) {
+                          subTemp.push(subSkillValue);
+                          $scope.subSkillmodel.push($scope.subSkill[kisub]);
+                          subTempCount++;
                       }
+                     }else{
+                      if(subSkillValue == subvalue['id']) {
+                        if(subTemp.indexOf(subSkillValue) <0){
+                          subTemp.push(subSkillValue);
+                          console.log(subSkillValue+','+subvalue['id']);
+                          console.log(subTemp);
+                          $scope.subSkillmodel.push($scope.subSkill[kisub]);
+                        }  
+                      }
+                     }
                     });
                   });
                   angular.forEach(value['skills'] , function(skillValue, kil) {
@@ -1648,33 +1801,37 @@ $scope.numberOfPages=function(){
                       $scope.skillmodel.push($scope.skill[ki]); 
                     }
                   });
-                });     
+                });
               });
           });
           }
-         });
-         skillId = value['skills'];
-         subSkills = value['sub_skill'];
-         standard = value['standard'];
-         angular.forEach(value['standard'] , function(val, ki) {
+        });
+        skillId = value['skills'];
+        subSkills = value['sub_skill'];
+        standard = value['standard'];
+        angular.forEach(value['standard'] , function(val, ki) {
            $scope.standardmodel.push({'id' : val,'label': val });
-         });
-         standardType = value['standard_type'];
-         angular.forEach(value['standard_type'] , function(val, ki) {
-           $scope.standardTypemodel.push({'id' : val, 'label': val });
-         });
-        }
-     });  
-    }
-    $scope.deleteTemplate = function(data){
-      teacherHttpService.delTemplate(data).success(function(response) {
-        if (response.status == true) {
-          alert(response.message);
-          return true;
-        }else{
-          alert(response.message);
-        }
-      });
+        });
+//      standardType = value['standard_type'];
+//      angular.forEach(value['standard_type'] , function(val, ki) {
+//      $scope.standardTypemodel.push({'id' : val, 'label': val });
+//      });
+        $scope.diffulityModel = value['ques_diff'];
+        $scope.claimModel = value['claim'];
+        $scope.frm.rScope = value['scope'];
+        $scope.frm.passage = value['ques_passage'];
+        $scope.frm.target = value['ques_target'];
+        $scope.frm.task = value['task'];
+        $scope.frm.complexity = value['ques_complexity'];
+        angular.forEach(value['ques_type'],function(type,key){
+          angular.forEach($scope.questionType,function(qlist,key){
+            if(type == qlist['id']){
+              $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['label']});
+            }
+          });
+        });
+      }
+     });
     }
 	
 	$scope.addTxtAns=function(){
@@ -1705,8 +1862,7 @@ $scope.numberOfPages=function(){
 			});
 		});					
 	}
-	
-  }]) 	
+  }])  	
 //teacherStudentProfile  studentPerformance 
 .controller('teacherAutoGenerateAssignment', ['$scope', function($scope) {
     

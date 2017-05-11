@@ -41,6 +41,7 @@
 													 <option value="">---Select Grade---</option>
                             <option  ng-repeat="grade in level track by $index"ng-if="$index>=0" value="{{grade}}">Grade {{grade}}</option>
 													</select>
+                           <span style="color:red">{{message[0]}}</span>
 	                      </div>
                       </div>
                     </div>
@@ -51,9 +52,10 @@
 												<label for="" class="col-xs-5 control-label">Subject :</label>
 												<div class="col-xs-7" id="coursetemp">
 													<select class="mlg-selectpicker form-control" data-size="auto" ng-model="courseSelected" ng-change="getCourseVal(courseSelected)">
-                            <!--<option value="">---Select Course---</option>--> 
+                            <option value="">---Select Course---</option> 
                             <option  ng-repeat="course in subject track by $index"ng-if="$index>=0"value="{{course.course_id}}">{{course.course_name}}</option>
 													</select>
+                           <span style="color:red">{{message[1]}}</span>
 												</div>
 											</div>
 										</div>
@@ -63,22 +65,24 @@
                   <div class="col-lg-5">
                     <div class="row">
                       <div class="form-group">
-												<label for="" class="col-xs-5 control-label">Standards :</label>
-	                      <div class="col-xs-7">
-                          <div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"
-                               ng-selected="standardmodel == sel.value"></div>
-	                      </div>
-                      </div>
+												<label for="" class="col-xs-5 control-label">Standard Type :</label>
+												<div class="col-xs-7">
+												  <div ng-dropdown-multiselect="" options="standardType" selected-model="standardTypemodel" events="standardTypeEvents"></div>
+												  <span style="color:red">{{message[3]}}</span>
+                        </div>
+											</div>
+                      
                     </div>
                   </div>
                   <div class="col-lg-5 col-lg-offset-2">
 										<div class="row">
 											<div class="form-group">
-												<label for="" class="col-xs-5 control-label">Standard Type :</label>
-												<div class="col-xs-7">
-												  <div ng-dropdown-multiselect="" options="standard" selected-model="standardTypemodel" events="standardTypeEvents"></div>
-												</div>
-											</div>
+												<label for="" class="col-xs-5 control-label">Standards :</label>
+	                      <div class="col-xs-7">
+                          <div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"></div>
+                          <span style="color:red">{{message[2]}}</span>
+	                      </div>
+                      </div>
 										</div>
                   </div>
                 </div>
@@ -89,6 +93,7 @@
 												<label for="" class="col-xs-5 control-label">Lesson Name :</label>
 	                      <div class="col-xs-7">
 													<input type="text" class="form-control normal-input" ng-model="frm.lesson_name"/>
+                          <span style="color:red">{{message[4]}}</span>
 	                      </div>
                       </div>
                     </div>
@@ -100,6 +105,7 @@
 												<div class="col-xs-7"> 
                           <div ng-dropdown-multiselect="" options="skill" selected-model="skillmodel" events="skillEvents">
                           </div>
+                          <span style="color:red">{{message[5]}}</span>
 												</div>
 											</div>
 										</div>
@@ -113,6 +119,7 @@
 	                      <div class="col-xs-7">
 													<div ng-dropdown-multiselect="" options="subSkill" selected-model="subSkillmodel"events="subSkillEvents">
                           </div>
+                          <span style="color:red">{{message[6]}}</span>
 	                      </div>
                       </div>
                     </div>
@@ -122,44 +129,54 @@
 								<!-- <h5>Enter Question statement below :</h5> -->
 								<!-- summernotes  -->
 								<div class="row  table-of-content">
-									<div class="col-md-4">
+									<div class="col-md-4" id="add-new-content">
 										<ul class="list-group">
-                      <li class="list-group-item"ng-model="templateOptionModel" ng-repeat="templ in templateDetail track by $index" ng-if="$index>0">{{templ.template_name}}<a ng-click="deleteTemplate( templ.id )"><i class="icon icon-trash text-danger pull-right"></i></a> <a><i class="icon icon-pencil pull-right text-primary margin-right-10"></i></a> </li>
+                      <li class="list-group-item"ng-model="userContentModel" ng-repeat="content in userContent track by $index">{{content.title}}<a ng-click="deleteContent(content.id )"><i class="icon icon-trash text-danger pull-right"></i></a> <a ng-click="setUserContent(content.id)"><i class="icon icon-pencil pull-right text-primary margin-right-10"></i></a> </li>
 										</ul>
-										<button type="button" class='btn btn-background-none text-primary margin-bottom-10 btn-add'><i class="icon icon-plus-outline"></i> Add New</button>
+										
 									</div>
 									<div class="col-md-8 right-portion">
-
-											<h5 class="panel-title margin-top-0 margin-sm-10"><input type="text" class="form-control" ng-model="frm.text_title" placeholder="Enter Lesson Title"></h5>
-										<ul class="nav nav-tabs">
-										  <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
-										  <li><a data-toggle="tab" href="#doc">Document</a></li>
-										  <li><a data-toggle="tab" href="#img">Image</a></li>
-											<li><a data-toggle="tab" href="#video">Video</a></li>
+                    <h5 class="panel-title margin-top-0 margin-sm-10"><input type="text" class="form-control" ng-model="frm.text_title" placeholder="Enter Lesson Title"></h5>
+										  <span style="color:red">{{message[8]}}{{message[9]}}</span>
+                      <ul class="nav nav-tabs">
+										  <li class="{{textClass}}" ng-show="type == 'ALL' || type=='text'"><a data-toggle="tab" href="#text">Text</a></li>
+										  <li class="{{docClass}}" ng-show="type == 'ALL' || type=='doc'"><a data-toggle="tab" href="#doc">Document</a></li>
+										  <li class="{{imgClass}}"ng-show="type == 'ALL' || type=='image'"><a data-toggle="tab" href="#img">Image</a></li>
+											<li class="{{videoClass}}"ng-show="type == 'ALL' || type=='video'"><a data-toggle="tab" href="#video">Video</a></li>
 										</ul>
 										<div class="panel">
 											<div class="panel-heading">
 											</div>
 											<div class="panel-body">
 												<div class="tab-content">
-													<div id="text" class="tab-pane fade in active">
-														<div class="summernote" text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent"></div>
+													<div id="text" class="tab-pane fade in {{textClass}}" ng-show="type == 'ALL' || type=='text'">
+														<div class="summernote" text-angular="text-angular" name="htmlcontent" ng-model="frm.htmlcontent"></div>
 													</div>
-													<div id="doc" class="tab-pane fade">
+													<div id="doc" class="tab-pane fade in {{docClass}}"ng-show="type == 'ALL' || type=='doc'">
 														<form></form>
-														<form action="" class="dropzone" drop-zone="" id="file-doc"></form> 
+														<form action="" class="dropzone" drop-zone="" id="file-doc"ng-model="fileDocModel"></form> 
+                            <div id="uploded-doc">
+                              </br>
+                            </div>
+                            <!--<embed src="assets-old/img/Calorie.pdf" width="100px" height="100px" />-->
 													</div>
-													<div id="img" class="tab-pane fade">
-														<form action=""class="dropzone" drop-zone="" id="file-img"></form>
+                          <div id="img" class="tab-pane fade in {{imgClass}}" ng-show="type == 'ALL' || type=='image'">
+														<form action=""class="dropzone" drop-zone="" id="file-img"ng-model="fileImgModel"></form>
+                            <div id="uploded-image">
+                            </div>
 													</div>
-													<div id="video" class=	"tab-pane fade">
-														<form action="" class="dropzone" drop-zone="" id="file-video"></form>
+													<div id="video" class="tab-pane fade in {{videoClass}}" ng-show="type == 'ALL' || type=='video'">
+														<form action="" class="dropzone" drop-zone="" id="file-video"ng-model="fileVideoModel"></form>
 														<br/>
+                            <div id="upload-video"></div>
 														<br/>
                             <input type="text" class="form-control" placeholder="Enter Video Url" ng-model="htmlcontent.video_url"/>
 													</div>
-													<div class="text-right margin-top-15">
-														<button type="submit" class="btn btn-primary"ng-click="submitDocDetail(htmlcontent)">Save</button>
+													<div class="text-right margin-top-15" id="save-content">
+														<button type="submit" class="btn btn-primary"ng-click="submitDocDetail(frm)">Save</button>
+                            <div id="update-content" class="text-right margin-top-15">
+                            </div>
+                            <span style="color:red">{{mesage}}{{message[10]}}</span>
 													</div>
 												</div>
 											</div>
@@ -172,9 +189,9 @@
 						</div>
 						<div class="panel-footer text-center">
 							<div class="text-center  margin-top-20">
-								<button type="submit" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10"data-toggle="modal" data-target="#modal-saveTemplate" ng-click="submitLessonDetail(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
-	              <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview">Preview</button>
-							
+								<button type="submit" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10"data-toggle="modal" data-target="#modal-saveTemplate"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
+	              <button type="submit" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click='lessonPreview(frm)' >Preview</button>
+							<span style="color:red">{{msg}}</span>
               </div>
 						</div>
             <!-- /panel-body -->
@@ -215,7 +232,7 @@
 									<span>SUBJECT</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>{{courseSelected.name}}</p>
+									<p>{{subjectName}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -223,7 +240,7 @@
 									<span>LESSON NAME</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>Basic Grammer</p>
+									<p>{{previewLesson}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -234,6 +251,22 @@
 									<ul>
                     <li ng-repeat="standard in standardmodel">{{standard.id}}</li>
 									</ul>
+								</div>
+							</div>
+              <div class="row table-repeat-row">
+								<div class="col-md-3 table-cell">
+									<span>TEXT</span>
+								</div>
+								<div class="col-md-9 table-cell">
+									<p>{{previewText}}</p>
+								</div>
+							</div>
+              <div class="row table-repeat-row">
+								<div class="col-md-3 table-cell">
+									<span>Image</span>
+								</div>
+								<div class="col-md-9 table-cell">
+									<img ng-repeat="pre in previewImage" src="{{preht}}://{{preHst}}/mlg/webroot/upload/{{pre}}" alt="{{pre}}"width="50px" height="50px"></img>
 								</div>
 							</div>
 							<iframe src="http://www.youtube.com/embed/W7qWa52k-nE"
@@ -261,13 +294,13 @@
           <form class="form">
        <div class="form-group float-label">
         <label class="control-label">Template Name</label>
-        <input type="text" class="form-control float-input" ng-model="temp.template_name"/>
+        <input type="text" class="form-control float-input" ng-model="frm.template_name"/>
        </div>
           </form>
         </div>
         <div class="modal-footer border-top-0">
           <button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-primary" data-dismiss="modal"ng-click="submitTemplate(temp)">Save</button>
+         <button type="button" class="btn btn-primary" data-dismiss="modal"ng-click="submitTemplate(frm)">Save</button>
         </div>
       </div>
 

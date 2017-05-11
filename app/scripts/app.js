@@ -54,7 +54,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   sendMeMail : '/teachers/sendEmailToTeacher', 
   getStudentOfTeacher : '/teachers/getStudentOfTeacher', 
   createGroup : '/teachers/createGroup',
-  getGroups : '/teachers/getGroups', 
+  getGroups : '/teachers/getGroups',
+  updateContent : '/teachers/updateUserContent',
+  uploadQuestion : '/teachers/saveQuestion',
 
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
