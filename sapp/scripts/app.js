@@ -66,7 +66,7 @@ $routeProvider
 }).when('/skill-door/:id', {
 	templateUrl : 'views/skills_door.html',
 	controller : 'skillDoorCtrl',		
-}).when('/sub-skill/:id', {
+}).when('/sub-skill/:id/:type/:course_id', {
 	templateUrl : 'views/subskillsroom.html',
 	controller : 'subSkillRoomCtrl',		
 }).when('/sub-skill-quiz/:id', {
@@ -93,7 +93,7 @@ $routeProvider
 }).when('/quiz', {
 	templateUrl : 'views/quiz.html',
 	controller : 'quizCtrl',		
-}).when('/subskill_content/:pid', {
+}).when('/subskill_content/:pid/:type/:course_id', {
 	templateUrl : 'views/subskills-content.html',
 	controller : 'subskillContent',		
 })

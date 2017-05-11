@@ -33,10 +33,14 @@ angular.module('mlg_student')
 		});
 	}
   
-  loginHttpResponse.getAllCourseList=function(pid){		
-		return $http({
+      loginHttpResponse.getAllCourseList=function(pid, type, course_id){
+        var url = urlParams.baseURL+urlParams.getAllCourseList+'/'+pid;
+        if (course_id != '') {
+          url = urlParams.baseURL+urlParams.getAllCourseList+'/'+ pid + '/' + type +'/' + course_id;
+        }
+        return $http({
 			method:'GET',				
-			url   : urlParams.baseURL+urlParams.getAllCourseList+'/'+pid
+			url   : url
 		});
 	}
 
@@ -435,9 +439,10 @@ angular.module('mlg_student')
         window.location.href='/mlg_ui/app/';
       }
       var pid = $routeParams.id;
+      var type = $routeParams.type;
       var course_id = $routeParams.course_id;
       $scope.subject_detail = {};
-      loginHttpService.getAllCourseList(pid).success(function(response) {
+      loginHttpService.getAllCourseList(pid, type, course_id).success(function(response) {
         if (response.response.course_details.length > 0){
           $scope.subject_detail = response.response.course_details;
         } else{
@@ -445,7 +450,7 @@ angular.module('mlg_student')
         }
       });
 	  $scope.show_subskill = function(){
-        $location.url('/subskill_content/'+ pid + '/-1/' + course_id);
+        $location.url('/subskill_content/'+ pid + '/type/' + course_id);
     };
 
 
@@ -503,7 +508,9 @@ angular.module('mlg_student')
       return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + videoId);
     };
     var pid = $routeParams.pid;
-    loginHttpService.getAllCourseList(pid).success(function(response) {
+    var type = $routeParams.type;
+    var course_id = $routeParams.course_id;
+    loginHttpService.getAllCourseList(pid, type, course_id).success(function(response) {
       if(response.response.course_details.length > 0){
         $scope.topic_detail = response.response.course_details;
         var khan_api_slugs = response.response.khan_api_slugs;
