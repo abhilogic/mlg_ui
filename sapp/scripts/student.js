@@ -35,7 +35,7 @@ angular.module('mlg_student')
   
       loginHttpResponse.getAllCourseList=function(pid, type, course_id){
         var url = urlParams.baseURL+urlParams.getAllCourseList+'/'+pid;
-        if (course_id != '') {
+        if ((typeof course_id != 'undefined') && (course_id != '')) {
           url = urlParams.baseURL+urlParams.getAllCourseList+'/'+ pid + '/' + type +'/' + course_id;
         }
         return $http({
