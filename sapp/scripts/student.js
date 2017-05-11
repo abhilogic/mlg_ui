@@ -434,10 +434,19 @@ angular.module('mlg_student')
         alert('kindly login');
         window.location.href='/mlg_ui/app/';
       }
-	 $scope.show_subskill = function(){
-	 	var pid = $routeParams.id;
-        $location.url('/subskill_content/'+ pid);
-};
+      var pid = $routeParams.id;
+      var course_id = $routeParams.course_id;
+      $scope.subject_detail = {};
+      loginHttpService.getAllCourseList(pid).success(function(response) {
+        if (response.response.course_details.length > 0){
+          $scope.subject_detail = response.response.course_details;
+        } else{
+          response.subject_detail = 0;
+        }
+      });
+	  $scope.show_subskill = function(){
+        $location.url('/subskill_content/'+ pid + '/-1/' + course_id);
+    };
 
 
 	 

@@ -22,7 +22,7 @@
 										<span class="castle__text">Training Arena</span>
 									</div>
 								</a>
-								<a ng-class="{'disabled-click': studentResult == 'fail' }"  ng-repeat="subject in subject_detail " href="skill-door/{{subject.id}}" ng-disabled="studentResult == 1">
+								<a ng-class="{'disabled-click': studentResult == 'fail' }"  ng-repeat="subject in subject_detail " href="skill-door/{{subject.course_id}}" ng-disabled="studentResult == 1">
 								  <div class="castle topic_castle subskills_castle_{{$index+2}}">
 										<span class="castle__img "></span>
 										<span class="fire__img"></span>
