@@ -167,6 +167,7 @@ $rootScope.$on('$viewContentLoaded', function() {
           var userObj = getCookie('userObj');
           userObj = parseUser(userObj);
           if ((userObj.userStatus == 2) && (userObj.role == 'student')) {
+            alert('Your subscription has been over, Please upgrade your subscription');
             $location.url('/journey');
             return true;
           }
