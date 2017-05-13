@@ -347,7 +347,7 @@ angular.module('mlg').filter('moment', function() {
            }
          if (response.status=='false') {
            if ((response.warning == 1) && (response.role_id == user_roles['student'])) {
-            setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
+             setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
              $rootScope.logged_user = response.user;
              setCookie('uid', $rootScope.logged_user.id);
              window.location.href='/mlg_ui/sapp/journey';
@@ -752,7 +752,7 @@ angular.module('mlg').filter('moment', function() {
       loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
         if (result.status == true) {
           $scope.child_info = result.response;
-          $scope.child_info.end_date = moment($scope.child_info.order_date).add(60, 'days').calendar();
+          $scope.child_info.end_date = moment($scope.child_info.order_date).add(30, 'days').calendar();
           var end_date = moment($scope.child_info.end_date).format("YYYY-MM-DD");
           $scope.days_left = moment(end_date).diff(moment(), 'days');
           $scope.level = {id : result.response.level_id};
@@ -1197,14 +1197,18 @@ if (typeof $routeParams.id != 'undefined') {
     $scope.card_months = card_months;
     $scope.card_years = card_years;
     $scope.frm.expiry_month = card_months['1'];
-    $scope.frm.expiry_year = card_years['2018'];
+    $scope.frm.expiry_year = card_years['2017'];
     $scope.submitCardDetail = function(data) {
       data.user_id = $rootScope.logged_user.id;
-//      var children_ids = [];
-//      angular.forEach($scope.children, function(value, key) { 
-//        children_ids.push(value.child_id);
-//      });
-//      data.children_ids = children_ids;
+      var children_ids = [];
+      angular.forEach($scope.children, function(value, key) {
+        children_ids.push(value.child_id);
+      });
+      if (children_ids.length <= 0) {
+        alert('please add atleast one child');
+        return false;
+      }
+      data.children_ids = children_ids;
       data.amount = $scope.total_amount;
       loginHttpService.saveCardToPaypal(data).success(function(response) {
         if (response.status == true) {

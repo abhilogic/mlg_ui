@@ -87,6 +87,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	11 : '11',
 	12 : '12',
 }).value('card_years', {
+	2017  : '2017',
 	2018  : '2018',
 	2019  : '2019',
 	2020  : '2020',
@@ -304,20 +305,20 @@ principal  : 30,
 	   }).error(function(error) {
 		  $rootScope.logged_user = '';
 	   });
-		
+
 		/*$rootScope.$on("$routeChangeSuccess", function(event, next, current) {
 			$scope.atHome = ($location.path() === "parent/dashboard/offers");
 		});*/
 		/*$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
 		  $rootScope.atHome = (toState.name == '/parent/dashboard');
 		});*/
-		  
+ 
 
-		   function setCookie(key, value) {
-		var expires = new Date();
-		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
-		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+';path=/';
-	}
+        function setCookie(key, value) {
+          var expires = new Date();
+          expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+          document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+';path=/';
+        }
 
 		
 	   $rootScope.logout=function(){
@@ -335,37 +336,9 @@ principal  : 30,
 		   });
 		}
 
-
-
 	$rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
    });
-
-	    $rootScope.$on("$routeChangeStart", function (event, next, current) {
-        // if (!Auth.authorize(next.access)) {
-        //     if(Auth.isLoggedIn()) $location.path('/');
-        //     else                  $location.path('/login');
-        // }
-    });
-
-
-
-
-	// $rootScope.logout = function() {
-	// 	// api call for logout
-	// 	$http({
-	// 		method : 'GET',
-	// 		url : urlParams.baseURL + urlParams.logout
-	// 	}).success(function(response) {
-	// 		$rootScope.userName = '';
-
-			
-	// 		$location.path('/');
-	// 	}).error(function(error) {
-
-	// 	});
-
-	// };
 
 } ])
 .controller("TopController", function($rootScope, $scope, $location) {
