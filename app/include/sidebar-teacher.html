@@ -5,7 +5,7 @@
 	<a href="teacher/dashboard-empty" data-toggle="collapse"  class="collapsed"><i class="icon icon-my_class"></i><span class="link__text">My Class</span></a>
 	<ul id="myClass" class="sub-menu collapse in">
 	  <li ng-repeat="list in subject_grade" class="active">
-		<a href="#{{list.level_id}}/{{list.course_name}}/{{list.course_id}}"><span class="link__text">Class {{list.level_id}} {{list.course_name}}</span></a>
+		<a href="#{{list.level_id}}/{{list.course_name}}/{{list.course_id}}"><span class="link__text">{{list.name}} {{list.course_name}}</span></a>
 	  </li>
 	</ul>
   </li>
