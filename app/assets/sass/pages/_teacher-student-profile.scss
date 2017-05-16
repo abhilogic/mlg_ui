@@ -38,7 +38,8 @@
     }
   }
   .time-spent{
-    @include margin(20px null);
+    @include margin(0px null 20px);
+    @include padding(0px null null);
     font-weight: $semibold;
     color: lighten($gray-light, 15%);
 
@@ -51,6 +52,14 @@
       i{
         color: $brand-danger;
       }
+    }
+  }
+
+  .activit-selector{
+    max-width:  209px;
+    @include margin(10px null null);
+    .dropdown-toggle {
+      @include padding(null null null 0px);
     }
   }
 }
@@ -136,15 +145,23 @@
 
 // modal-viewSkills
 .modal-viewSkills{
+  .modal-content {
+    @media screen and (min-width: $screen-sm){
+      max-width: 402px;
+    }
+  }
   .modal-header {
     @include border-width(null null 0px null);
+    @include padding(32px null null null);
+    .close {
+      @include margin(-20px null null null);
+    }
     .modal-title {
       text-align: center;
       span {
         color: $gray;
         font-size: 12px;
         display: block;
-        margin-bottom: 10px;
       }
       font-size: 30px;
       color: #fdd75e;
@@ -152,19 +169,21 @@
     }
   }
   .modal-body {
+    @include padding(null null 32px null);
     table {
       margin: auto;
       width: 70%;
       tr {
         td{
           color: $gray;
-          width: 70%;
+          width: 60%;
           @include padding(8px null);
         }
         th {
           color: $gray-dark;
           width: 30%;
           @include padding(8px null);
+          font-weight: normal;
         }
       }
     }
@@ -178,5 +197,166 @@
         text-transform: uppercase;
       }
     }
+  }
+}
+
+
+
+// panel-group-subskills-report
+.panel-group-subskills-report {
+  .panel {
+    @include border-radius(0px);
+    .panel-heading {
+      @include padding(0px);
+      .panel-title{
+        @include margin(0px null null null);
+        display: block;
+        float: none;
+        a {
+          text-decoration: none;
+          display: block;
+          @include padding(18px 30px);
+          position: relative;
+          &:before {
+            content: '\0042';
+            font-family: 'Glyphter';
+            @include position(absolute, 15px 30px null null);
+          }
+          &.collapsed {
+            &:before {
+              content: '\0046';
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //subskils-report-block
+  .subskils-report-block {
+    @include padding(15px);
+    border: 1px solid rgba($gray-light,0.3);
+    @include border-radius(4px);
+    &:not(:last-child){
+      @include margin(null null 25px null);
+    }
+    @media screen and (min-width: $screen-lg){
+      @include padding(30px);
+    }
+
+    // icon
+    .icon {
+      .fa {
+        font-size: 27px;
+        &.fa-check-circle {
+          color: #01bd76;
+        }
+        &.fa-play-circle-o {
+          color: #e1a515;
+        }
+        &.fa-minus {
+          color: $white;
+          background: rgba($gray-light,0.6);
+          width: 25px;
+          height: 25px;
+          @include border-radius(100%);
+          font-size: 18px;
+          @include padding(5px null null null);
+          text-align: center;
+        }
+      }
+    }
+
+    // subskills-name
+    .subskills-name {
+      text-align: center;
+      span {
+        color: $gray-light;
+        display: block;
+        &:first-child {
+          font-size: 12px;
+          font-weight: $semibold;
+        }
+        &:last-child {
+          font-size: 14px;
+          text-transform: uppercase;
+          font-weight: $bold;
+
+        }
+      }
+    }
+
+    // status
+    .status {
+      text-transform: uppercase;
+      color: #01bd76;
+      font-size: 14px;
+      font-weight: $bold;
+      @media screen and (min-width: $screen-sm){
+        @include padding(10px null null null);
+      }
+      @media screen and (max-width: $screen-sm){
+        text-align: right;
+      }
+    }
+
+    // skills-name, status
+    .subskills-name, .status {
+      @media screen and (max-width: $screen-sm){
+        @include margin(null null 10px null);
+      }
+    }
+
+    // rating
+    .rating {
+      @media screen and (min-width: $screen-sm){
+        @include padding(10px null null null);
+      }
+      p {
+        font-size: 14px;
+        font-weight: $bold;
+        color: rgba($gray-light,0.6);
+        text-transform: uppercase;
+      }
+    }
+
+    // view_info
+    .view_info {
+      color: #ff6565;
+      font-size: 14px;
+      display: block;
+      @media screen and (min-width: $screen-sm){
+        @include padding(10px null null null);
+      }
+      @media screen and (max-width: $screen-sm){
+        text-align: right;
+      }
+    }
+
+    // rating, view_info
+    .rating, .view_info {
+      @media screen and (max-width: $screen-sm){
+        @include margin(null null 10px null);
+      }
+    }
+
+
+  // progress-block
+  &.progress-block {
+    .progress {
+      @include border-radius(25px);
+      @include margin(10px null 0px null );
+      .progress-bar-warning {
+        background-color: #e1a515;
+      }
+    }
+   }
+
+  // not-attempted
+  &.not-attempted {
+    .status {
+      color: rgba($gray-light, 0.6);
+    }
+   }
   }
 }

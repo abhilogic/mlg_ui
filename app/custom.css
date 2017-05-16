@@ -123,4 +123,7 @@
     vertical-align: top;
     background: #ddd;
 }
+.navbar-default .navbar-brand img {    
+    margin-top: 7px;
+}
 

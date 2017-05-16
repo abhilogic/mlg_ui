@@ -1,0 +1,125 @@
+
+.search_form{
+  background: $sidebar-dark-bg;
+  float: right;
+  @include padding(11px 15px 10px 45px);
+  width: calc(100% - #{$sidebar-width-xs});
+
+  @media (min-width: $screen-sm){
+    background: $white;
+    @include padding(10px 15px 10px 45px);
+    width: calc(100% - #{$sidebar-base-width});
+  }
+  @media screen and (max-width: $screen-sm){
+    min-height: 59px;
+  }
+  .form-group{
+    margin: 0;
+  }
+
+  .form-control{
+    @include border-radius($border-radius-large);
+    box-shadow: inset 0 0 10px rgba($gray-dark, $gama);
+    background-color: lighten($gray-lighter, 5%);
+    @include border-width(0px);
+  }
+
+
+    // view for mobile
+  .has-feedback {
+    text-align: right;
+    .form-control {
+      @media screen and (max-width: $screen-xs-max){
+        background: $white;
+        @include border-radius(0px);
+        color: white;
+        opacity: 0;
+        z-index: -10;
+        display: inline-block;
+        @include position(fixed, -100px null null 0px);
+        @include placeholders(){
+          color: $gray-light;
+        }
+      }
+    }
+
+    .form-control-feedback {
+      .icon {
+        display: none;
+      }
+      @media screen and (max-width: $screen-xs-max){
+        background: transparent;
+        color: $white;
+        font-size: 18px;
+        left: auto;
+        right: 0px;
+        pointer-events: all;
+      }
+    }
+
+    &.search_open {
+      @media screen and (max-width: $screen-xs-max){
+        .form-control {
+          min-height: 59px;
+          @include position(fixed, 0px null null null);
+          background: $white;
+          z-index: 10;
+          opacity: 1;
+          color: $black;
+          width: 100vw;
+        }
+        .form-control-feedback {
+          z-index: 200;
+          @include position(fixed,8px 17px null null);
+          .fa {
+            display: none;
+          }
+          .icon {
+            display: inline-block;
+            color: $gray-dark;
+          }
+        }
+      }
+    }
+  }
+  .dropdown {
+    text-align: right;
+    .profile_img {
+        max-width: 38px;
+        @include border-radius(100%);
+    }
+    .btn {
+      font-size: 20px;
+      font-family: $font-secondary;
+      color: #adadad;
+      @include border-width(0x);
+      background: none;
+      @include padding(4px null);
+      &:focus, &:active {
+        outline: 0px;
+      }
+    }
+    .dropdown-menu {
+      left: auto;
+      right: 0px;
+      top: 126%;
+      @include padding(0px null 0px null);
+      @include border-radius(0px);
+      li {
+        .icon {
+          @include margin(null 10px null null);
+          font-size: 20px;
+        }
+        a {
+          @include padding(15px 15px);
+          color: $gray-light;
+        }
+        &:first-child {
+          .icon {
+            @include transform(rotate(90deg));
+          }
+        }
+      }
+    }
+  }
+}

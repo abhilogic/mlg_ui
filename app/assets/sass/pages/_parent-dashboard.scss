@@ -1,4 +1,28 @@
 
+
+.progress_content {
+  .left-side {
+    @media screen and (min-width: $screen-sm){
+      border-right: 1px solid $gray-lighter;
+    }
+    .progress-chart-img {
+      @media screen and (max-width: $screen-xs-max){
+        @include margin(20px null null null);
+      }
+    }
+  }
+  .right-side {
+    @include padding(30px null null null);
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(0px null null null);
+    }
+    .watch-img {
+      @media screen and (min-width: $screen-sm){
+        @include margin(45px null 20px null);
+      }
+    }
+  }
+}
 //Time spent Section Style
 
 .time-spent{
@@ -10,59 +34,12 @@
   .text-muted{
     color: lighten($gray, 15%);
   }
-}
-
-
-// modal-parentAssignment
-.modal-parentAssignment {
-  .modal-content {
-    @include border-radius(0px);
-    min-height: 196px;
-    &.success {
-      .modal-body {
-        >p {
-          display: none;
-        }
-        .confirm-success-msg {
-          display: block;
-          opacity: 1;
-        }
-      }
-      .modal-footer {
-        display: none;
-      }
-    }
+  border-bottom: 1px solid $gray-lighter;
+  @include padding(30px null 30px null);
+  &:first-child {
+    @include padding(0px);
   }
-  // header
-  .modal-header {
-    @include border-width(0px);
-  }
-  // body
-  .modal-body {
-    text-align: center;
-    font-weight: $bold;
-
-    // confirm-success-msg
-    .confirm-success-msg {
-      display: none;
-      opacity: 0;
-      @include transition(.5s all);
-      .icon {
-        display: inline-block;
-        width: 70px;
-        height: 70px;
-        font-size: 28px;
-        color: $white;
-        @include padding(20px null null null);
-        @include border-radius(100%);
-        background: $springGreen;
-      }
-    }
-
-
-  }
-  .modal-footer {
-    text-align: center;
+  &:last-child {
     @include border-width(0px);
   }
 }

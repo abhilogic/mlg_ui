@@ -4,19 +4,34 @@
       display: none;
     }
     .panel-title {
-      color: $gray-light;
-      text-align: center;
-      @media screen and (min-width: $screen-sm-max){
+      span {
+        color: $add-content-text-color;
+        text-transform: capitalize;
+        font-weight: $semibold;
         font-size: 22px;
+      }
+      @media screen and (min-width: $screen-sm-max){
+        min-width: calc(100% - 181px);
+        text-align: center;
+        .icon-arrow-left {
+          float: left;
+          color: $add-content-text-color;
+        }
+        span {
+          @include margin(null null null 90px);
+        }
       }
     }
   }
   .panel-body {
-    label {
-      text-transform: uppercase;
-      color: $gray-light;
-      text-align: left;
-    }
+      label {
+        color: $add-content-text-color;
+        font-weight: $semibold;
+        font-size: 13px;
+        @include margin(0px null null null);
+        text-transform: uppercase;
+        text-align: left !important;
+      }
     .repeat-row {
       @include margin(null 0px null 0px);
       &:not(:last-child){
@@ -34,12 +49,55 @@
         }
       }
     }
+    .bootstrap-select {
+      .dropdown-toggle {
+        white-space: nowrap;
+      }
+    }
+    .add-resources-block {
+      @include margin(20px null null null);
+      p {
+        text-transform: uppercase;
+        span {
+          color: $gray-light;
+          font-weight: $bold;
+          text-decoration: underline;
+          &:first-child {
+            font-size: 12px;
+          }
+          &:last-child {
+            font-size: 10px;
+          }
+        }
+      }
+      .btn-add {
+        color: $brand-primary;
+        text-transform: uppercase;
+        background: none;
+        @include padding(null null null 0px);
+        &:hover {
+          background: transparent;
+          color: $black;
+        }
+        .icon {
+          font-size: 10px;
+        }
+      }
+    }
+    @media screen and (max-width: $screen-xs-max){
+      @include padding(null 0px);
+    }
   }
+  // panel-body
+
 }
 
 // question-block-cover
   .question-block-cover {
     display: none;
+    @media screen and (max-width: $screen-xs-max){
+      @include padding(0px 15px);
+    }
   }
   .question-block {
     @include padding(15px 15px);

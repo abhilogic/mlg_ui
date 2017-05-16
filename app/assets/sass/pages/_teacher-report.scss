@@ -2,63 +2,14 @@
 .panel.panel-report {
   // panel-heading
   .panel-heading {
-    @include padding(30px null 15px null);
-    @media screen and (min-width: $screen-sm){
-      @include padding(30px null 7px null);
-    }
-    .panel-title {
-      font-weight: $semibold;
-      text-align: center;
-      @media screen and (min-width: $screen-sm){
-        @include margin(10px null null null);
-        float: left;
-        display: inline-block;
-        text-align: left;
+    @include padding(null null 9px null);
+    // heading-elements
+    .heading-elements {
+      .btn {
+        @include padding(5px null);
       }
     }
-    &:before,
-    &:after {
-      content: " "; // 1
-      display: table; // 2
-    }
-    &:before {
-      width: calc(100% - 60px);
-    }
-    &:after {
-      clear: both;
-    }
   }
-  // heading-elements
- .heading-elements {
-   position: relative;
-   display: block;
-   right: 0px;
-   height: auto;
-   @include margin(15px null null null);
-   @media screen and (min-width: $screen-sm){
-     display: inline-block;
-     float: right;
-     min-width: 300px;
-     @include margin(0px null null null);
-   }
-   >ul {
-     width: 100%;
-     @include margin(null 0px null 0px);
-     text-align: center;
-     @media screen and (min-width: $screen-sm){
-       text-align: right;
-     }
-     >li{
-       @include padding(0px);
-       &:first-child {
-         width: 50%;
-       }
-       @media screen and (max-width: $screen-xs-max){
-         @include margin(null 5px null 5px);
-       }
-     }
-   }
- }
 
  // panel-body
  .panel-body {
@@ -70,7 +21,6 @@
      @include margin(0px null 0px null);
    }
  }
-
  // panel-report
 }
 
@@ -88,18 +38,15 @@
       display: none;
     }
     .panel-title {
-      font-weight: $semibold;
-      @include padding(null null 15px null);
-      text-align: center;
       border-bottom: 1px solid #eeeeee;
-      @media screen and (min-width: $screen-sm){
-        text-align: left;
-      }
+      float: none;
+      display: block;
+      @include margin(0px null null null);
+      @include padding(null null 15px null);
     }
     .heading-elements {
       display: block;
-      height: auto;
-      text-align: left;
+      float: none;
       @include position(relative, 0px 0px 0px 0px);
       @include margin(0px null null null);
       @include padding(19px null 0px null);
@@ -111,7 +58,7 @@
         display: inline-block;
 
         @media screen and (min-width: $screen-lg){
-          min-width: 74%;
+          min-width: 80%;
         }
         @media screen and (max-width: $screen-md-max){
           min-width: 100%;
@@ -158,7 +105,19 @@ table.table-teacherContent {
         display: inline-block;
         width: calc(100% - 135px);
         .btn {
-          @include margin(null null 7px null);
+          &:not(:nth-last-child(-n+3)){
+            @include margin(null null 7px null);
+          }
+          @media screen and (max-width: $screen-xs-max){
+            &:not(:nth-last-child(-n+2)){
+              @include margin(null null 7px null);
+            }
+          }
+          @media screen and (max-width: $screen-mobile-sm){
+            &:not(:nth-last-child(-n+1)){
+              @include margin(null null 7px null);
+            }
+          }
           @include padding(5px 10px);
         }
       }

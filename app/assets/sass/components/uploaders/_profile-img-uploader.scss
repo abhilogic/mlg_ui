@@ -2,11 +2,12 @@
     text-align: center;
     font-family: 'Glyphter';
     position: relative;
+    cursor: pointer;
     &:before {
       color: $white;
       position: absolute;
       @include border-radius(100%);
-      left: 44%;
+      left: 41%;
       bottom: -20px;
       z-index: 1;
       width: 40px;

@@ -66,9 +66,10 @@
             <br>
             <ul ng-if="detail_student" class="row list-thumb student_list">
               <li ng-repeat="detail in detail_student" class="student gifted">
-                <a href="teacher-student-profile.html">
+                <a href="teacher/student-profile/{{detail.user_id}}">
                   <div class="student__img">
-                  <img class="img-circle" src="assets/img/student-img/{{detail.profile_pic}}" alt="Andrew Garfield"/>
+                  <img ng-if="detail.profile_pic!==null" class="img-circle" src="assets/img/student-img/{{detail.profile_pic}}" alt="{{detail.name}}"/>
+                  <img ng-if="detail.profile_pic==null" class="img-circle" src="assets/img/no-image.png" alt="{{detail.name}}"/>
                 </div>
                   <span class="student__name">{{detail.name}}</span>
                 </a>

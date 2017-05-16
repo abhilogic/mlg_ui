@@ -140,3 +140,17 @@ p {
 		cursor : pointer !important;
 	}
 }
+
+
+
+// element_center
+.element_center {
+	display: table;
+	>div {
+		display: table-row;
+		>div {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}

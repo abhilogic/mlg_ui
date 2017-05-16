@@ -17,6 +17,8 @@
           min-width: 100vw;
           max-width: inherit;
           height: auto;
+          width: auto;
+          min-height: 100vh;
           @media screen and (min-height: $screen-md) and (max-width: 1366px){
             width: auto;
             min-width: inherit;

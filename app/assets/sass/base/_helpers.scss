@@ -65,6 +65,10 @@
 .delay--19{@include delay(1.9s);}
 .delay--20{@include delay(2.0s);}
 
+.background-none {
+  background: none !important;
+}
+
 // ul properties class
 .ul {
   &-li {
@@ -165,6 +169,19 @@
   }
   @media screen and (max-width: $screen-sm){
     &-sm {
+      &-left {
+        text-align: left !important;
+      }
+      &-right {
+        text-align: right !important;
+      }
+      &-center {
+        text-align: center !important;
+      }
+    }
+  }
+  @media screen and (max-width: $screen-xs){
+    &-xs {
       &-left {
         text-align: left !important;
       }
@@ -541,6 +558,9 @@
     &-20 {
       margin-left: 20px !important;
     }
+    &-auto {
+      margin-left: auto !important;
+    }
   }
   &-right {
     &-0 {
@@ -557,6 +577,9 @@
     }
     &-20 {
       margin-right: 20px !important;
+    }
+    &-auto {
+      margin-right: auto !important;
     }
   }
   &-bottom {
@@ -614,6 +637,9 @@
         &-20 {
           margin-left: 20px !important;
         }
+        &-auto {
+          margin-left: auto !important;
+        }
       }
       &-right {
         &-0 {
@@ -630,6 +656,9 @@
         }
         &-20 {
           margin-right: 20px !important;
+        }
+        &-auto {
+          margin-right: auto !important;
         }
       }
       &-bottom {
@@ -689,6 +718,9 @@
         &-20 {
           margin-left: 20px !important;
         }
+        &-auto {
+          margin-left: auto !important;
+        }
       }
       &-right {
         &-0 {
@@ -705,6 +737,9 @@
         }
         &-20 {
           margin-right: 20px !important;
+        }
+        &-auto {
+          margin-right: auto !important;
         }
       }
       &-bottom {
@@ -764,6 +799,9 @@
         &-20 {
           margin-left: 20px !important;
         }
+        &-auto {
+          margin-left: auto !important;
+        }
       }
       &-right {
         &-0 {
@@ -780,6 +818,9 @@
         }
         &-20 {
           margin-right: 20px !important;
+        }
+        &-auto {
+          margin-right: auto !important;
         }
       }
       &-bottom {

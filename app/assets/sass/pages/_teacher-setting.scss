@@ -1,13 +1,30 @@
 .teacher_setting_tabs {
-
+  // img-uploader-cover
+.img-uploader-cover {
+  @media screen and (max-width: $screen-xs-max){
+    &:before {
+      left: 43%;
+    }
+  }
+}
   // js-tabcollapse-panel-body
   .panel-heading {
+    @include padding($content-padding-base/2 null);
+    .lable {
+      @include margin(8px null 0px null);
+      text-transform: uppercase;
+      display: block;
+      color: rgab($gray-light,0.6);
+    }
     @media screen and (max-width: $screen-sm){
       @include padding(0px);
       .panel-title {
+        @include margin(0px);
         a {
-          @include padding(15px);
+          @include padding(15px null);
           display: block;
+          width: 100%;
+          text-decoration: none;
         }
       }
       .bootstrap-select {
@@ -16,12 +33,9 @@
     }
   }
   .js-tabcollapse-panel-body {
-    @include padding(null 8px);
+    padding: 15px !important;
     .panel-heading {
-      @include padding(15px);
-      .panel-title {
-        @include padding(0px);
-      }
+      @include padding(10px 15px);
     }
   }
     // form-block
@@ -68,6 +82,7 @@
 
   // edited-input
   .edited-input {
+    @include padding(18px null 18px null);
     h5 {
       font-size: 16px;
       @include border-width(0px 0px 1px 0px);
@@ -139,6 +154,9 @@
   .bootstrap-select {
     @media screen and (max-width: $screen-sm){
       @include margin(10px);
+      &.btn-group .dropdown-menu {
+        @include margin(0px null null null);
+      }
     }
   }
 
@@ -164,6 +182,31 @@
       @include border-radius(0px);
       .panel-body {
         @include padding(null 14px);
+        .btn-deactive {
+          display: block;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+
+// panel-setting
+
+.panel-setting {
+  .panel-body {
+    .panel-body {
+      @include padding(0px null null null);
+    }
+    .btn-deactive {
+      display: block;
+      text-align: left;
+      width: 100%;
+    }
+    .edited-input-group {
+      .control-label {
+        @include margin(18px null null null);
       }
     }
   }

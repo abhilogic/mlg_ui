@@ -24,6 +24,11 @@ $(function() {
         dictDefaultMessage: 'Drop files to upload <span>or CLICK</span>',
         maxFilesize: 2 // MB
     });
+    $("#dropzone_doc_multiple1").dropzone({
+        paramName: "file", // The name that will be used to transfer the file
+        dictDefaultMessage: 'Drop files to upload <span>or CLICK</span>',
+        maxFilesize: 2 // MB
+    });
 
     $("#dropzone_img_multiple").dropzone({
         paramName: "file", // The name that will be used to transfer the file

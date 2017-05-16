@@ -4,28 +4,58 @@
 .table-teacherContent{
   font-size: 12px;
   color: #66818d;
-  thead{
-    background-color: lighten($gray-lighter, 4%);
-    text-transform: uppercase;
-    tr>th{
-      border-width: 1px;
-      position: relative;
-    }
-  }
   thead, tbody{
     border: 1px solid transparent;
   }
   thead, tbody, td{
     border-color: darken($gray-lighter, 5%);
     position: relative;
+    // icon-img
+    .icon-img {
+      width: 10px;
+      vertical-align: baseline;
+    }
+  }
+
+  thead{
+    background-color: lighten($gray-lighter, 4%);
+    text-transform: uppercase;
+    tr>th{
+      border-width: 1px;
+      position: relative;
+      @include padding(15px null);
+      @media screen and (min-width: $screen-sm){
+        &:first-child {
+          @include padding(null null null 20px);
+        }
+        &:last-child {
+          @include padding(null 20px null null );
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        @include padding(15px null);
+        @media screen and (min-width: $screen-sm){
+          &:first-child {
+            @include padding(null null null 20px);
+          }
+          &:last-child {
+            @include padding(null 20px null null );
+          }
+        }
+      }
+    }
   }
   .sr-no{
-    @media screen and (min-width: $screen-sm-max) {
+    @media screen and (min-width: $screen-md) {
       width: 30px;
     }
   }
   .actions{
-    @media screen and (min-width: $screen-sm-max) {
+    @media screen and (min-width: $screen-md) {
       width: 90px;
     }
     .btn-link{
@@ -36,7 +66,7 @@
       }
     }
     .btn-link + .btn-link{
-      margin-left: 10px;
+      margin-left: 3px;
     }
   }
 
@@ -59,7 +89,7 @@
         @include padding(2px 6px);
       }
     }
-    @media screen and (max-width: $screen-xs-max){
+    @media screen and (max-width: $screen-sm-max){
       span.pull-left {
         display: block;
         float: none;
@@ -120,7 +150,7 @@ $color-content-draft: darken($gray-lighter, 5%);
 }
 
 // Table responsive
-@media screen and (max-width: $screen-sm-min) {
+@media screen and (max-width: $screen-sm-max) {
   table.table-teacherContent thead { display: none; }
   table.table-teacherContent tbody td {
     display: block;

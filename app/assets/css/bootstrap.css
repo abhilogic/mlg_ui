@@ -3658,7 +3658,7 @@ select[multiple].input-lg,
   cursor: pointer;
   background-image: none;
   border: 1px solid transparent;
-  white-space: nowrap;
+  white-space: inherit;
   padding: 8px 12px;
   font-size: 14px;
   line-height: 1.42857;

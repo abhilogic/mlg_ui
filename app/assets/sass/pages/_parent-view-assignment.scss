@@ -1,4 +1,9 @@
 .panel-view-assignement {
+  .panel-heading {
+    &:before {
+      display: none;
+    }
+  }
   // assignment-img
   .assignment-img {
     max-width: 200px;
@@ -54,13 +59,14 @@
       .panel-title {
         font-size: 16px;
         font-weight: $bold;
+        text-transform: capitalize;
       }
     }
   }
   //assignment-block
   .assignment-block{
     @include padding(22px 30px);
-    border: 1px solid $gray-light;
+    border: 1px solid rgba($gray-light,0.35);
     position: relative;
     &:not(:last-child){
       @include margin(null null 20px null);
@@ -100,6 +106,14 @@
       color: red;
       display: block;
       @include margin(5px null null null);
+    }
+  }
+
+  // btn-submit
+  .btn-submit {
+    @include padding(null 30px);
+    @media screen and (min-width: $screen-sm){
+      @include margin(30px null null null);
     }
   }
 

@@ -59,6 +59,9 @@
 
 // Override BS checkbox styles
 .checkbox.checkbox-switchery {
+    position: relative;
+    opacity: 1;
+    left: auto;
     margin-bottom: ($switchery-base-size - ($line-height-computed / 2) + 2);
     padding-left: 0;
 
@@ -67,6 +70,11 @@
     }
     label::before{
       display: none;
+    }
+    .on, .off {
+      @media screen and (max-width: $screen-xs-max){
+        display: none;
+      }
     }
 }
 
@@ -280,8 +288,8 @@
 }
 
 .switchery-default {
-    background-color: #64bd63;
-    border-color: #64bd63;
-    box-shadow: #64bd63 0px 0px 0px 16px inset;
+    background-color: #2d94ed;
+    border-color: #2d94ed;
+    box-shadow: #2d94ed 0px 0px 0px 16px inset;
     transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
 }

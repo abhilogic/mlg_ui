@@ -9,8 +9,9 @@
 
     .offer-thumbnail{
       position: relative;
-      margin: 24px auto;
+      margin: 15px auto;
       max-width: 320px;
+      @include padding(13px);
       &.offer-subscription{
         @include background-cover('../img/offer-bg.png');
       }
@@ -74,12 +75,16 @@
       min-height: 60px;
       overflow: hidden;
       margin-top: 0;
+      font-size: 20px;
+      font-weight: $thin;
+      font-family: $font-secondary-condenced;
       //text-overflow: ellipsis;
       //white-space: nowrap;
     }
 
     .offer-time-remain{
       color: $gray-light;
+      font-family: $font-secondary-condenced;
       span{
         color: $gray-base;
       }

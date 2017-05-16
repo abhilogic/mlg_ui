@@ -1,4 +1,18 @@
 
+// on click toggle class in target element
+function toggleClassElement(elem, className){
+  var targetElement = $("." + elem);
+  targetElement.toggleClass(className);
+}
+
+// data-center
+$("*[data-center='center']").each(function(){
+  var element = $(this);
+  element.parent().addClass("element_center");
+  element.wrap("<div><div></div></div>");
+});
+// data-center
+
 
 $(document).ready(function(){
   // Floating Input Fields animation
@@ -22,4 +36,19 @@ $(document).ready(function(){
     });
   }
   floatInput();
+
+
+  // page-container
+  function heightPageContainer() {
+    var windowHeight = $(window).height();
+    $(".onboarding-cover .page-container").height(windowHeight);
+  }
+  if($(window).width()>=768){
+    heightPageContainer();
+  }
+  $(window).resize(function(){
+    if($(window).width()>=768){
+      heightPageContainer();
+    }
+  });
 });

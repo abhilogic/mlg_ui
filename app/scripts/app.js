@@ -214,7 +214,7 @@ principal  : 30,
 	}).when('/teacher/student-list',{
 		templateUrl : 'views/dashboard/teacher-all-student-list.html',
 		controller : 'teacherStudentList',
-	}).when('/teacher/student-profile',{
+	}).when('/teacher/student-profile/:id',{
 		templateUrl : 'views/dashboard/teacher-student-profile.html',
 		//controller : 'teacherStudentProfile',
 	}).when('/teacher/auto-generate-assignment',{
