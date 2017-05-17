@@ -670,6 +670,7 @@ $scope.numberOfPages=function(){
     $scope.docClass = '';
     $scope.imgClass = '';
     $scope.videoClass = '';
+    var mlg = '';
     // template detail show
     teacherHttpService.getTemplateDetail(get_uid,'lesson').success(function(response) {
       if (response.status == true) {
@@ -682,10 +683,11 @@ $scope.numberOfPages=function(){
         $scope.msg = 'unable to find template';
       }
     });
-    var mlg = '';
+    
     teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
       if (response.status == true) {          
           $scope.level = response.grade;
+          mlg = response.url;
 //        $scope.level.splice(0,0, '---Select Grade---');
 //        $scope.gradeSelected = $scope.level[0];
       }else{
@@ -1340,9 +1342,11 @@ $scope.numberOfPages=function(){
           }else if (element.context.id == 'file-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
             done();
           }else if (element.context.id == 'file-video' && file.type == 'video/*') {
+                done();
+          }else if (element.context.id == 'ans-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
             done();
           }else{
-             this.removeFile(file)
+             this.removeFile(file);
            alert('please choose appropriate file');
           }
         },
@@ -1350,8 +1354,15 @@ $scope.numberOfPages=function(){
           var doc = '';
           var images = '';
           var videos = '';
-//          myDropzone.emit("addedfile", file); 
-          this.on("success", function (file) {
+          var count = 0;
+          var extraImg = '';
+          this.on("addedfile",function(file){
+            if(element.context.id == 'ans-img' && $scope.ansCount == 4){
+              alert('you can upload 4 images');
+              this.removeFile(file);
+            }  
+          });
+          this.on("success", function (file) {  
             if(file.type == 'application/pdf') {
               if (doc != '') {
                 doc = doc +','+file.xhr.response;
@@ -1360,7 +1371,7 @@ $scope.numberOfPages=function(){
                 doc = file.xhr.response;
                 $scope.doc = doc;
               } 
-            }else if(file.type == 'image/jpeg') {
+            }else if(element.context.id == 'file-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
               if (images != '') {
                 images = images +','+file.xhr.response;
                 $scope.img = images;
@@ -1368,6 +1379,48 @@ $scope.numberOfPages=function(){
                 images = file.xhr.response;
                 $scope.img = images;
               } 
+            }else if(element.context.id == 'ans-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {;
+              if($scope.ansCount < 4) {
+                  var i = 0;
+                  $scope.img = [];
+                  if (images != '') {
+                  images = images +','+file.xhr.response;
+                  var temp = images.split(',');
+                  var myElem = angular.element(document.querySelector('#answer-img ul '));
+                  myElem.remove();
+                  var myEleme = angular.element(document.querySelector('#answer-img  '));
+                  myEleme.append('<ul></ul>');
+                  angular.forEach(temp,function(val,ki){
+                    var temp = val.split(': "');
+                    var ansImg = temp[1].split('"');
+                    if(ki == 0) {
+                      $scope.img = ansImg[0];
+                    }else{
+                      $scope.img = $scope.img+','+ansImg[0];
+                    }
+                    var myLabel = angular.element(document.querySelector('#answer-img ul'));
+                    myLabel.append('<li><input type="radio" id="inlineRadio1" value="'+i+'" name="IMAGESS" checked=""><img src="http://localhost/mlg/webroot/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
+                    i++;
+                  });
+                  count++;
+                  $scope.ansCount = count;
+                }else{
+                  images = file.xhr.response;
+                  var temp = images.split(': "');
+                  var ansImg = temp[1].split('"');
+                  $scope.img = ansImg[0];
+                  var myLabel = angular.element(document.querySelector('#answer-img ul'));
+                  myLabel.append('<li><input type="radio" id="inlineRadio1" value="0" name="IMAGESS" checked="" ><img src="http://localhost/mlg/webroot/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
+                  count++;
+                  $scope.ansCount = count;
+                } 
+              }else{
+                this.removeFile(file);
+                 var temp = (file.xhr.response).split(': "');
+                 count++;
+                alert('only 4 image can upload you.');
+              }
+               
             }else if(file.type == 'video/*') {
               if (videos != '') {
                 videos = videos +','+file.xhr.response;
@@ -1378,10 +1431,10 @@ $scope.numberOfPages=function(){
               } 
             }      
           });
-
+           
         }      
       }); 
-} 
+    }   
   })
 .controller("tableRow", function ($scope) {
 	$scope.people = [
@@ -1548,8 +1601,8 @@ $scope.numberOfPages=function(){
     };
 	
 })
-.controller('teacherAddQuestionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','uploadService',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,uploadService) {
+.controller('teacherAddQuestionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
     var get_uid=commonActions.getcookies(get_uid);
     var grade = '';
     var standard = [];
@@ -1579,6 +1632,7 @@ $scope.numberOfPages=function(){
     $scope.templateDetail = [];
     $scope.questionTypeModel = [];
     $scope.questionType = [];
+    $scope.ansCount = 0;
     // template detail show
     teacherHttpService.getTemplateDetail(get_uid,'question').success(function(response) {
       if (response.status == true) {
@@ -1749,7 +1803,6 @@ $scope.numberOfPages=function(){
       });
       $scope.getDifficulityVal = function(){
         difficulity = $scope.diffulityModel;
-        console.log(difficulity);
       };
     //Question type 
       teacherHttpService.questionType().success(function(response) {
@@ -1774,8 +1827,25 @@ $scope.numberOfPages=function(){
     };               
     var question = {};
     $scope.submitQuestion = function(data) {
-      var answerList = data.ans1+','+data.ans2+','+data.ans3+','+data.ans4;
-      var optionChecked = $scope.ansChecked;
+      var answerList = '';
+      var optionChecked = '';
+      var Qtyp = '';
+      if(typeof(data.ans1) == 'undefined'){
+        answerList = $scope.img;
+        Qtyp = 'image'
+        var radios = document.getElementsByName('IMAGESS');
+        for (var i = 0, length = radios.length; i < length; i++) {
+          if (radios[i].checked) {
+            var optionChecked = radios[i].value;
+            break;
+          }
+        }
+      }else{
+        answerList = data.ans1+','+data.ans2+','+data.ans3+','+data.ans4;
+        Qtyp = 'text';
+        optionChecked = $scope.ansChecked;
+      }
+    
       question = {
         tid : get_uid,
         grade : grade,
@@ -1796,9 +1866,15 @@ $scope.numberOfPages=function(){
         question : data.questionStatement,
         answer : answerList,
         correctanswer : optionChecked,
+        type : Qtyp,
       };
      teacherHttpService.uploadQuestion(question).success(function(response){
-       $scope.msg = response.message;
+       if(response.status == true){
+        $scope.msg = response.message; 
+       }else{
+         $scope.message = response.message;
+       }
+       
      }).error(function(error){
        
      });
@@ -1811,14 +1887,14 @@ $scope.numberOfPages=function(){
           window.$location.reload();
         }else{
           alert(response.message);
-          $scope.msg = response.message;
+          $scope.message = response.message;
         }
       }).error(function(error) {
         $scope.msg= 'Some technical error occured.';
       });
     }
     $scope.getTemplate = function(data) {
-      var subTemp = [];
+    var subTemp = [];
     var subTempCount = 0;
     tempStatus = 1;
     var tempId = $scope.selectedTemplateModel;
@@ -1828,28 +1904,25 @@ $scope.numberOfPages=function(){
     $scope.subSkillmodel = [];
     $scope.standardmodel = [];
     $scope.standardTypemodel = [];
-    
     angular.forEach($scope.template , function(value, key) {
       if(tempId == value['id']) {
-        console.log(value);
         //for grade
         angular.forEach($scope.level , function(vall, kil) {
-          if(value['grade']== vall){
+          if(value['grade']== vall['id']){
              //grade in template
-            $scope.gradeSelected = $scope.level[kil];
-            grade = vall;
+            $scope.gradeSelected = vall['id'];
+            grade = vall['id'];
             //for subject in template
             teacherHttpService.getTeacherDetailsForContent(get_uid,grade,value['course_id'],user_roles['teacher']).success(function(response) {
               $scope.subject = [];
               angular.forEach(response.response  , function(val, ki) {
               $scope.subject.push({
-                  'level_id' : val['level_id'],
-                  'course_id': val['course_id'],
-                  'course_name':val['name'].toUpperCase()
+                  'course_id': val['id'],
+                  'course_name':val['course_name'],
                  });
-              });
-//              $scope.subject.splice(0,0,{'level_id' :'','course_id' :'','course_name' :'---Select Course---'}); 
-              $scope.courseSelected = $scope.subject[0][0][2];
+              });   
+              $scope.courseSelected = $scope.subject[0]['course_id'];
+              course = $scope.subject[0]['course_id']
             });
             teacherHttpService.getAllCourseList(value['course_id'],'lesson').success(function(response) {
               var data = response.response.course_details;   
@@ -1907,14 +1980,19 @@ $scope.numberOfPages=function(){
 //      standardType = value['standard_type'];
 //      angular.forEach(value['standard_type'] , function(val, ki) {
 //      $scope.standardTypemodel.push({'id' : val, 'label': val });
-//      });
+//      })
         $scope.diffulityModel = value['ques_diff'];
+        difficulity = value['ques_diff'];
         $scope.claimModel = value['claim'];
+        claim = value['claim'];
         $scope.frm.rScope = value['scope'];
+        $scope.dOKModel = value['dok'];
+        dok = value['dok'];
         $scope.frm.passage = value['ques_passage'];
         $scope.frm.target = value['ques_target'];
         $scope.frm.task = value['task'];
         $scope.frm.complexity = value['ques_complexity'];
+        $scope.frm.assignment = value['assignment'];
         angular.forEach(value['ques_type'],function(type,key){
           angular.forEach($scope.questionType,function(qlist,key){
             if(type == qlist['id']){
@@ -1925,16 +2003,6 @@ $scope.numberOfPages=function(){
       }
      });
     }
-	$scope.$watch('file', function(newfile, oldfile) {
-       console.log(newfile);
-      if(angular.equals(newfile, oldfile) ){
-        return;
-      }
-      uploadService.upload(newfile).then(function(res){
-        // DO SOMETHING WITH THE RESULT!
-        console.log("result", res);
-      })
-    });
 	$scope.addTxtAns=function(){
 		$("#addTextAns").click(function(){
 			$(".text-answer-block").addClass("show");
@@ -2094,77 +2162,5 @@ $scope.numberOfPages=function(){
           });
         }
     };
-})
-
-.service("uploadService", function($http, $q) {
-
-    return ({
-      upload: upload
-    });
-
-    function upload(file) {
-      var upl = $http({
-        method: 'POST',
-        url: '/mlg/teachers/uploadfile', // /api/upload
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        data: {
-          upload: file
-        },
-        transformRequest: function(data, headersGetter) {
-          var formData = new FormData();
-          angular.forEach(data, function(value, key) {
-            formData.append(key, value);
-          });
-
-          var headers = headersGetter();
-          delete headers['Content-Type'];
-
-          return formData;
-        }
-      });
-      return upl.then(handleSuccess, handleError);
-
-    } // End upload function
-    // ---
-    // PRIVATE METHODS.
-    // ---
-  
-    function handleError(response, data) {
-      if (!angular.isObject(response.data) ||!response.data.message) {
-        return ($q.reject("An unknown error occurred."));
-      }
-
-      return ($q.reject(response.data.message));
-    }
-
-    function handleSuccess(response) {
-      return (response);
-    }
-
-  })
-    .directive("fileinput", [function() {
-    return {
-      scope: {
-        fileinput: "=",
-        filepreview: "="
-      },
-      link: function(scope, element, attributes) {
-        element.bind("change", function(changeEvent) {
-          scope.fileinput = changeEvent.target.files[0];
-          var reader = new FileReader();
-          reader.onload = function(loadEvent) {
-            scope.$apply(function() {
-              scope.filepreview = loadEvent.target.result;
-            });
-          }
-          reader.readAsDataURL(scope.fileinput);
-        });
-      }
-    }
-  }]);
-
-
-;
+});
 

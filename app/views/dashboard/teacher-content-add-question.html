@@ -1,4 +1,3 @@
-!-- Main navbar -->
 	<nav class="navbar navbar-default navbar-dashboard navbar-static-top">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle sidebar-mobile-main-toggle" aria-expanded="false">
@@ -313,16 +312,14 @@
 								<!-- answer_block -->
 								<!-- img-answer-block -->
 								<div class="row img-answer-block">
-									<div class="container">
-                    <div class="row">
-                      <div class="col-md-6">
-                          <input type="file" fileinput="file" filepreview="filepreview"/>
-                      </div>
-                      <div class="col-md-6">
-                         <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview"/>
-                      </div>
-                     </div>
-                  </div>
+                   <div class="container ">
+                     <form></form>
+                     <form action="" class="dropzone col-xs-9 " drop-zone="" id="ans-img" ></form>
+                   </div>
+                   <div class="container margin-top-10" id="answer-img">
+                     <ul> 
+                     </ul>
+                   </div>
 								</div>
 								<!-- img-answer-block -->
 
@@ -337,7 +334,8 @@
 						<div class="panel-footer text-center">
               <button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" data-target="#modal-saveTemplateAs"ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
               <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview">Preview</button>
-              <span style="color:green">{{msg}}</span>						
+              <span style="color:green">{{msg}}</span>
+              <span style="color:red">{{message}}</span>
             </div>
             <!-- /panel-body -->
 					</div>
