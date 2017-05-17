@@ -333,7 +333,7 @@
 						</div>
 						<div class="panel-footer text-center">
               <button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" data-target="#modal-saveTemplateAs"ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
-              <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview">Preview</button>
+              <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>
               <span style="color:green">{{msg}}</span>
               <span style="color:red">{{message}}</span>
             </div>
@@ -368,7 +368,7 @@
 									<span>GRADE</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>Fifth Grade (5)</p>
+									<p>{{pregrade}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -376,7 +376,7 @@
 									<span>SUBJECT</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>English & Language Arts (ela)</p>
+									<p>{{subjectName}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -384,15 +384,7 @@
 									<span>LESSON NAME</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>Basic Grammer</p>
-								</div>
-							</div>
-							<div class="row table-repeat-row">
-								<div class="col-md-3 table-cell">
-									<span>LESSON NAME</span>
-								</div>
-								<div class="col-md-9 table-cell">
-									<p>Basic Grammer</p>
+									<p>{{preskil}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -401,8 +393,7 @@
 								</div>
 								<div class="col-md-9 table-cell">
 									<ul>
-										<li>College & Career Readiness Anchor Standards for Reading</li>
-										<li>Key Ideas & Details</li>
+                    <li ng-repeat="standard in standardmodel">{{standard.id}}</li>
 									</ul>
 								</div>
 							</div>
@@ -411,8 +402,7 @@
 									<span>Claim</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>Students can produce effective & well-grounded writing for a rnage
-									of purpose & audiences (produce effective and well ground writing)</p>
+									<p></p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -420,11 +410,7 @@
 									<span>DEPTH OF KNOWLEDGE</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>Level 1 requires or recite facts or to use simple skills or abilities. Oral
-									reading that does not include analysis of the text as well as basic
-									comprehension of a text is included. Items require only a shallow
-									understanding of text presented & often consist of verbatim recall from
-									text or simple understanding of a single word or phase (Level 1)</p>
+									<p></p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -432,29 +418,29 @@
 									<span>ASSESSMENT TARGET</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<span>This is lessson.</span>
+									<span>{{frm.assignment}}</span>
 								</div>
 							</div>
 							<div class="question-block">
 								<div class="row">
 									<div class="col-md-12">
-										<h5 class="ques">Q1.  What comes in between 14 __ 15.</h5>
+										<h5 class="ques">{{frm.questionStatement}}</h5>
 									</div>
 								</div>
 								<div class="row option-block">
 									<div class="col-md-7 margin-sm-bottom-10">
-										<span class="ans"> A. 13 </span>
+										<span class="">{{frm.ans1}} </span>
 									</div>
 									<div class="col-md-5 margin-sm-bottom-10">
-										<span> A. 16 </span>
+										<span>{{frm.ans2}}</span>
 									</div>
 								</div>
 								<div class="row option-block margin-bottom-0 margin-sm-top-0">
 									<div class="col-md-7 margin-sm-bottom-10">
-										<span> C. 15 </span>
+										<span>{{frm.ans3}}</span>
 									</div>
 									<div class="col-md-5 margin-sm-bottom-10">
-										<span> D. 14 </span>
+										<span>{{frm.ans4}}</span>
 									</div>
 								</div>
 							</div>

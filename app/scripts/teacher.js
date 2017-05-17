@@ -748,6 +748,7 @@ $scope.numberOfPages=function(){
                         uid : get_uid,
                         subskills :subSkils,
                       }
+                      $scope.tempsubskil= subSkils;
                       teacherHttpService.getUserContent(subSkillDetail).success(function(response) {
                         if (response.status == true) {
                           $scope.userContent = response.data;
@@ -775,11 +776,11 @@ $scope.numberOfPages=function(){
                           if(value['course_id'] == val['id']) {
                             $scope.subSkill.splice(ki,1); 
                             subSkils.splice(ki,1);
+                            $scope.tempsubskil= subSkils;
                           count++;
                           console.log(count);
                           if(count >=(response.response.course_details).length) {
                             var subSkillDetail = {};
-                            console.log(subSkils);
                             subSkillDetail= {
                               uid : get_uid,
                               subskills :subSkils,
@@ -831,8 +832,15 @@ $scope.numberOfPages=function(){
               });
                var subSkillDetail = {};
                 subSkillDetail= {
-                  uid : get_uid,
+                  uid : get_uid,   
                   subskills :subSkills,
+                }
+                console.log(subSkills);
+                  if(subSkills == ''){
+                    subSkillDetail= {
+                    uid : get_uid,
+                    subskills :$scope.tempsubskil,
+                  }
                 }
                 teacherHttpService.getUserContent(subSkillDetail).success(function(response) {
                   if (response.status == true) {
@@ -1296,7 +1304,7 @@ $scope.numberOfPages=function(){
       });
     }
     $scope.lessonPreview = function(data) {
-      cangular.forEach($scope.subject,function(sub,key){
+      angular.forEach($scope.subject,function(sub,key){
         if(sub['course_id'] == $scope.courseSelected) {
           $scope.subjectName = sub['course_name'];
         }
@@ -1845,7 +1853,6 @@ $scope.numberOfPages=function(){
         Qtyp = 'text';
         optionChecked = $scope.ansChecked;
       }
-    
       question = {
         tid : get_uid,
         grade : grade,
@@ -2003,6 +2010,25 @@ $scope.numberOfPages=function(){
       }
      });
     }
+    $scope.lessonPreview = function(data) {
+      angular.forEach($scope.level,function(value,key){
+        if(value['id'] == $scope.gradeSelected){
+          $scope.pregrade = value['name'];
+        }
+      });
+      angular.forEach($scope.subject,function(sub,key){
+        if(sub['course_id'] == $scope.courseSelected) {
+          $scope.subjectName = sub['course_name'];
+        }
+      });
+      angular.forEach($scope.skill,function(sub,key){
+        if(sub['id'] == $scope.skillmodel[0]['id']) {
+          $scope.preskil = sub['label']
+        }
+      });
+      
+    }   
+    
 	$scope.addTxtAns=function(){
 		$("#addTextAns").click(function(){
 			$(".text-answer-block").addClass("show");
