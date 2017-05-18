@@ -338,7 +338,7 @@
                 <li><span>{{coupon.description}}</span></li>
                 <li><span class="icons coin"></span><span>{{coupon.conditional_value}}</span></li>
               </ul>
-              <button type="button" class='btn'>{{coupon.process_status}}</button>
+              <button type="button" ng-click="coupon_requested(coupon.id, coupon.visibility, coupon.process_status)" class='btn'>{{coupon.process_status}}</button>
             </div>
           </div>
         </div>

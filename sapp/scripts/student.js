@@ -646,6 +646,10 @@ angular.module('mlg_student')
       set_coupon_data.user_id = get_uid;
       set_coupon_data.coupon_id = coupon_id;
       var requested_coupon_status = 'Redeem';
+      if (coupon_process_status == '') {
+        alert('you can not redeem this coupon');
+        return false;
+      }
       if (coupon_process_status.toLowerCase() == 'redeem') {
         requested_coupon_status = 'Approval pending';
       }
