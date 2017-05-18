@@ -250,6 +250,22 @@ angular.module('mlg').filter('moment', function() {
           url   : urlParams.baseURL+urlParams.guestLogin
       });
 	}
+
+    loginHttpResponse.getUsedCoupon = function(data) {
+      return $http({
+          method:'POST',
+          data  : data,
+          url   : urlParams.baseURL+urlParams.getUsedCoupon
+      });
+	}
+
+    loginHttpResponse.setAvailableCoupon = function(data) {
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.setAvailableCoupon
+		});
+	}
 	return loginHttpResponse;
 	
 }])
@@ -281,19 +297,33 @@ angular.module('mlg').filter('moment', function() {
 				var get_uid=getCookie('uid');
 				return get_uid;
 		}
+        
+        //Need to be correct with upper value
+		commonActions.getCookieValues = function(cookie_name){
+          var result = getCookie(cookie_name);
+          return result;
+		}
 
+        commonActions.parseUser = function(cookie){
+          var keyVals=cookie.split(',');
+          var obj={};
+          angular.forEach(keyVals,function(value,key){
+              var vals=value.split('=');
+              obj[vals[0]]=vals[1];
+          });
+          return obj;
+        }
 
 		
 		// To find number of children
 		commonActions.chidrenNameFactory = function (get_uid) {
 			
 				var childname= loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
-					var childcount=chidrenName.response.length;
-						console.log(chidrenName);
-						if(childcount>0){
-								//$rootScope.childname 	= chidrenName.response;													
-								return  chidrenName.response;
-						}						
+                  var childcount=chidrenName.response.length;
+                    if(childcount>0){
+                      //$rootScope.childname 	= chidrenName.response;													
+                      return  chidrenName.response;
+                    }
 				});
 
 				return childname;
@@ -1300,9 +1330,73 @@ if (typeof $routeParams.id != 'undefined') {
 			});
 	};
 }])
-.controller('parentRedeemCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
+.controller('parentRedeemCtrl',['$rootScope','$scope','$filter','$routeParams','commonActions','loginHttpService','$location','urlParams','$http','user_roles',
+  function($rootScope, $scope, $filter, $routeParams, commonActions, loginHttpService, $location, urlParams, $http, user_roles) {
+    var get_uid = commonActions.getcookies(get_uid);
+    console.log($routeParams.id);
+    if (get_uid == '') {
+      alert('Kindly login');
+      return false;
+    }
+    $scope.avail_coupons = [];
+    var coupon_data = {user_id: $routeParams.id};
+    loginHttpService.getUsedCoupon(coupon_data).success(function (avail_coupons) {
+      $scope.avail_coupons = avail_coupons.result;
+    });
 
-}])
+    function setCoupon(coupon_id, updated_status) {
+      var param = {};
+      param.user_id = $routeParams.id;
+      param.coupon_id = coupon_id;
+      param.status = updated_status;
+      param.updated_by_user_id = get_uid;
+      loginHttpService.setAvailableCoupon(param).success(function (response) {
+       if (response.status == true) {
+         if (updated_status.toLowerCase() == 'acquired') {
+           $('#'+coupon_id).html('<a class="btn btn-background-none text-success text-uppercase">\n\
+              <i class="icon icon-tick"></i> Approved   </a>');
+         } else if (updated_status.toLowerCase() == 'rejected') {
+           $('#'+coupon_id).html('<a class="btn btn-background-none text-danger text-uppercase">\n\
+              <i class="icon icon-cross"></i> Rejected</a>');
+         }
+       }
+      });
+    }
+    $scope.coupon_accepted = function() {
+      if ($scope.coupon_prev_state.toLowerCase() == 'acquired') {
+        alert('coupon already acquired');
+        return false;
+      }
+      setCoupon($scope.accepted_coupon_id, 'Acquired');
+      $scope.accepted_coupon_id = '';
+      $scope.coupon_prev_state = '';
+    }
+    $scope.coupon_rejected = function() {
+      if ($scope.coupon_prev_state.toLowerCase() == 'acquired') {
+        alert('coupon already acquired');
+        return false;
+      }
+      setCoupon($scope.rejected_coupon_id, 'Rejected');
+      $scope.rejected_coupon_id = '';
+      $scope.coupon_prev_state = '';
+    }
+
+    $scope.accepted_coupon_id = '';
+    $scope.rejected_coupon_id = '';
+    $scope.coupon_prev_state = '';
+    $scope.modal_couponAccept = function(coupon_id, coupon_state) {
+      $("#modal-couponAccept").modal();
+      $scope.accepted_coupon_id = coupon_id;
+      $scope.coupon_prev_state = coupon_state;
+    }
+
+    $scope.modal_couponReject = function(coupon_id, coupon_state) {
+      $("#modal-couponReject").modal();
+      $scope.rejected_coupon_id = coupon_id;
+      $scope.coupon_prev_state = coupon_state;
+    }
+  }
+])
 .controller('parentSettingCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
 //alert('kkkkk');
 }])
@@ -1359,36 +1453,31 @@ if (typeof $routeParams.id != 'undefined') {
 }])
 .controller('parentPreferenceCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 
-var get_uid=commonActions.getcookies(get_uid);
-$scope.frm = {};
-// To call dynamic step slider
+    var get_uid=commonActions.getcookies(get_uid);
+    $scope.frm = {};
+    // To call dynamic step slider
 	// and Call API to get child details for deshboard naming
     loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
-			var childcount=chidrenName.response.length;
-			if(childcount>0){																
-					$scope.childname=chidrenName.response;
-                    $scope.frm.childnames = chidrenName.response;
-                    
-			}else{
-				$scope.childname=0;
-                $scope.frm.childnames =[];
-			}			
-		});
-
-
-
-
-
-$scope.setPreference = function(data) {
-   data.user_id = get_uid;
-    loginHttpService.setPreference(data).success(function(response) {
-      if (response.status == true) {
-        $location.url('/terms_and_conditions');
+      var childcount=chidrenName.response.length;
+      if (childcount > 0) {
+        $scope.childname=chidrenName.response;
+        $scope.frm.childnames = chidrenName.response;
       } else {
-        $scope.msg = response.message;
+        $scope.childname=0;
+        $scope.frm.childnames =[];
       }
-    }).error(function(error) {
-      $scope.msg = 'some error occured';
-    });
-  };
+	});
+
+    $scope.setPreference = function(data) {
+      data.user_id = get_uid;
+      loginHttpService.setPreference(data).success(function(response) {
+        if (response.status == true) {
+          $location.url('/terms_and_conditions');
+        } else {
+          $scope.msg = response.message;
+        }
+      }).error(function(error) {
+        $scope.msg = 'some error occured';
+      });
+    };
 }]);

@@ -27,6 +27,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	addChild : '/users/addChildren',
 	offerRecords : '/users/getOffers',
 	getStepNum :'/users/getStepNum',
+	getUsedCoupon: '/users/getUsedCoupon',
+    setAvailableCoupon: '/users/setAvailableCoupon',
   promocode :'/users/promocode',
   getUserPurchaseDetails :'/users/getUserPurchaseDetails',
   signUpTeacher :'/teachers/setTeacherRecord',
@@ -419,19 +421,17 @@ return {
 		var cookieString=$cookieStore.get("userObj");
 		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
-	var keyVals=cookie.split(',');
-	var obj={};
-	angular.forEach(keyVals,function(value,key){
-		var vals=value.split('=');
-		obj[vals[0]]=vals[1];
-	});
-	return obj;
-}
-$scope.userInfo=userInfo;
+          var keyVals=cookie.split(',');
+          var obj={};
+          angular.forEach(keyVals,function(value,key){
+              var vals=value.split('=');
+              obj[vals[0]]=vals[1];
+          });
+          return obj;
+        }
+        $scope.userInfo=userInfo;
 	}]
 };
 
 	
-})
-
-;
+});
