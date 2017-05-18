@@ -9,26 +9,54 @@ $(document).ready(function(){
     pageContainerHeight();
   });
 
-
+  // universal variable
+  var bodyTone;
+  var bgColor;
+  var hireStyle;
+  var clothStyle;
+  var capStyle;
+  var specStyle;
+  var stickStyle;
   // body tone js
   $("#body-tone .btn").each(function(){
-      var bgColor = $(this).children("input").attr("data-body-tone");
-      $(this).css("background",bgColor);
+    bgColor = $(this).children("input").attr("data-body-tone");
+    $(this).css("background",bgColor);
   });
   $("#body-tone .btn").click(function(){
-    var bodyTone = $(this).children("input").attr("data-body-tone");
-    $("#avtar .cls-1").css("fill", bodyTone);
+    bodyTone = $(this).children("input").attr("data-body-tone");
+    $("#avtar .body-part").css("fill", bodyTone);
   });
-  // $("#hair-style .btn").click(function(){
-  //     var hireStyle = $(this).children("input").attr("data-hire-style");
-  //     var hireStyleposition = $(this).children("input").attr("data-hire-transform");
-  //     var hireColor = $(this).children("input").attr("data-fill");
-  //     $("#hire-style").attr("d",hireStyle).attr("fill", hireColor).css({"display":"block", "transform": hireStyleposition});
-  // });
 
-
+  // HAIR STYLE
   $("#hair-style .btn").click(function(){
-      var hireStyle = $(this).children("input").attr("data-hire-style");
-      $("#hire-style-path").append(hireStyle);
+    hireStyle = $(this).children("input").attr("data-hire-style");
+    $("#hire-style-path").html(hireStyle);
   });
+
+
+  // CLOTHS
+  $("#cloth-style .btn").click(function(){
+    clothStyle = $(this).children("input").attr("data-cloth");
+    $("#cloths").html(clothStyle);
+    $("#avtar .body-part").css("fill", bodyTone);
+  });
+
+  // ACCESSORIES caps
+  $("#caps .btn").click(function(){
+    capStyle = $(this).children("input").attr("data-accessories");
+    $("#capStyle").html(capStyle);
+  });
+
+  // ACCESSORIES SPECS
+  $("#specs .btn").click(function(){
+    specStyle = $(this).children("input").attr("data-accessories");
+      $("#specStyle").html(specStyle);
+  });
+
+  // ACCESSOREIS magic-stick
+  $("#magic-stick .btn").click(function(){
+      stickStyle = $(this).children("input").attr("data-accessories");
+      $("#stickStyle").html(stickStyle);
+  });
+
 });

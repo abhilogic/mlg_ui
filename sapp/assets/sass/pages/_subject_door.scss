@@ -36,6 +36,7 @@
       repeat: no-repeat, repeat;
       position: bottom left, top left;
      }
+     position: relative;
      min-height: 100vh;
      @include respond-to(largeScreen){
        background-size: 100% 141px ,  auto 123%;
@@ -62,6 +63,8 @@
       }
       @media screen and (max-width: $screen-xs-max){
         bottom: 245px;
+        min-width: 100%;
+        @include padding(0px);
       }
       &:before {
         background: {
@@ -104,7 +107,8 @@
           }
         }
         .subject_gate {
-          @include cssSprite($subject_gate_open);
+          width: 233px;
+          height: 277px;
           margin: auto;
           position: relative;
           z-index: 1;
@@ -121,20 +125,41 @@
           &.open {
             &:before {
               opacity: 0;
+              display: none;
             }
+          }
+          .open-gate-animation {
+            @include position(absolute, 0px null null 0px);
           }
         }
         .challenge_gate {
-          @include cssSprite($challenge_gate);
+          width: 256px;
+          height: 251px;
           margin: auto;
           margin-top: 27px;
+          position: relative;
+          &:before {
+            @include cssSprite($challenge_gate);
+            content: '';
+            @include position(absolute, 0px null null 0px);
+            height: 100%;
+            width: 100%;
+          }
+          &.open {
+            @include cssSprite($challenge_animate_gate);
+            &:before {
+              display: none;
+            }
+          }
         }
 
         &.locked {
           .challenge_gate {
-            @include cssSprite($challenge_gate_lock);
+            &:before {
+                @include cssSprite($challenge_gate_lock);
+            }
+          }
          }
-        }
        }
     }
   }

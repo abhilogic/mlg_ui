@@ -93,6 +93,10 @@
           }
           &.active {
             @include box-shadow(none);
+            background: #ededed;
+          }
+          .img-responsive {
+            @include margin(null auto null auto);
           }
         }
       }
@@ -101,13 +105,28 @@
       // here style
       .hair-style {
         .btn {
-
           &:first-child {
             &.active {
               &:after {
                 display: none;
               }
             }
+          }
+        }
+      }
+
+      // cloths
+      .cloth {
+        .btn {
+          height: 178px;
+        }
+      }
+
+      // accessories
+      .accessories {
+        .btn {
+          input {
+            @include position(absolute, 0px null null -1000px);
           }
         }
       }

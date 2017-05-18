@@ -1,31 +1,38 @@
 $animation_duration: 900s;
 .cloud-cover {
   display: none;
-  @media screen and (min-width: $screen-xs-max){
+  @media screen and (min-width: $screen-sm-max){
     display: block;
   }
   .animated-cloud {
     position: absolute;
-    z-index: 2000;
+    z-index: 900;
     display: none;
-    @media screen and (min-width: $screen-sm){
+    @media screen and (min-width: $screen-lg){
       display: block;
     }
-    &:first-child {
+    &:nth-child(1) {
       top: $cloud_first_top_pos;
       left: 50%;
       @include animation(cloud-animation_1 $animation_duration  linear infinite );
+
     }
 
     &:nth-child(2) {
       bottom: $cloud_second_bottom_pos;
       left: 80%;
       @include animation(cloud-animation_2 $animation_duration  linear infinite );
+      @media screen and (max-width: $screen-lg){
+        left: 60%;
+      }
     }
     &:nth-child(3) {
       top: $cloud_third_top_pos;
       left: 80%;
       @include animation(cloud-animation_3 $animation_duration  linear infinite );
+      @media screen and (max-width: $screen-lg){
+        left: 60%;
+      }
     }
     &:nth-child(4) {
       top: $cloud_fourth_top_pos;
@@ -39,6 +46,10 @@ $animation_duration: 900s;
 .subject_view_page {
   padding-bottom: 0px;
   @include background-img("subject_view_bg.jpg");
+  @media screen and (max-width: $screen-sm){
+    @include background-img("subskill_mobile_bg.jpg");
+    background-size: auto 100%;
+  }
   .main_wrapper {
     position: absolute;
     width: 100vw;
@@ -61,13 +72,13 @@ $animation_duration: 900s;
   .subject_frame_center {
     height: 100vh;
     width: 100vw;
-    @include respond-to(mobileMedium){
-      height: 0px;
+    @media screen and (max-width: $screen-sm-max){
+      display: none !important;
     }
     .wooden_frame {
       @include margin(null auto null auto);
       background: none;
-      height: 800px;
+      height: 662px;
       width: 100vw;
       max-width: 1935px;
       .wooden_frame_content_cover {
@@ -644,11 +655,20 @@ $animation_duration: 900s;
 }
 .subject_view_frame_mobile {
   display: none;
-  @include respond-to(mobileMedium) {
+  @media screen and (max-width: $screen-sm) {
     display: block;
+    @include padding(null 20px);
   }
   .castle_repeat_block {
-    margin-top: 60px;
+    padding-top: 60px;
+
+    @media screen and (min-width: $screen-sm){
+      &:first-child {
+        @include padding( 120px null null null);
+      }
+      width: 90%;
+      @include margin(auto);
+    }
     &:nth-child(odd){
       text-align: left;
     }
@@ -851,4 +871,112 @@ $animation_duration: 900s;
       }
     }
   }
+}
+
+
+
+// modal result
+.modal-summary {
+  .modal-content {
+    background: {
+      image: url(../img/modal-summary-bg.png);
+      size: 134% 100%;
+      position: center center;
+      color: transparent;
+    }
+    @media screen and (min-width: $screen-sm){
+      background-size: 100% 100%;
+    }
+    @include box-shadow(none);
+    @include border-width(0px);
+    min-height: 706px;
+    @include padding(145px null null null);
+      @media screen and (min-width: $screen-sm){
+        min-width: 552px;
+      }
+    // modal header
+    .modal-header {
+      border-bottom: 0px;
+      text-align: center;
+      @include padding(null null 0px null);
+      .modal-title {
+        background: {
+          image: url(../img/quiz_heading.png);
+          size: 100% auto;
+          position: center center;
+          repeat: no-repeat;
+        }
+        display: inline-block;
+        text-align: center;
+        font-family: $font-secondary;
+        color: $maroon;
+        min-height: 62px;
+        min-width: 230px;
+        font-size: 35px;
+        font-family: $justanotherhand;
+        @include padding(4px null null null);
+        @media screen and (min-width: $screen-sm){
+          min-width: 273px;
+        }
+      }
+    }
+    // modal body
+    .modal-body {
+      @include padding(0px null null null);
+      text-align: center;
+      .icon {
+        @include cssSprite($coins);
+        display: inline-block;
+        vertical-align: -webkit-baseline-middle;
+      }
+      .summary-ul {
+        @include margin(null auto 0px auto);
+        width: 62%;
+        @media screen and (min-width: $screen-sm){
+          width: 40%;
+        }
+        li {
+          display: block;
+          &:not(:last-child){
+            border-bottom: 2px solid rgba($maroon,0.4);
+          }
+          &:first-child {
+            @include padding(10px null null null);
+          }
+          &:last-child {
+            @include padding(null null 15px null);
+          }
+          @include padding(23px null);
+          span {
+            font-family: $font-secondary;
+            color: $maroon;
+            display: block;
+            &:first-child {
+              font-size: 12px;
+              text-transform: uppercase;
+            }
+            &:last-child {
+              font-size: 24px;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+      .btn-submit {
+        background: {
+          image: url(../img/submit_btn.png);
+          position: center center;
+          size: 100% auto;
+          color: transparent;
+          repeat: no-repeat;
+        }
+        font-family: $font-secondary;
+        color: $maroon;
+        font-size: 18px;
+        @include padding(5px 36px);
+      }
+    }
+
+  }
+
 }

@@ -144,6 +144,9 @@
     left: 30%;
     top: -19px;
 }
+.castle__text {
+  bottom: -28px;
+}
 &.active {
   .castle__img {
     @include cssSprite($castle_math_focus);
