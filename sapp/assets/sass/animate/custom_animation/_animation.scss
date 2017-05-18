@@ -30,20 +30,30 @@ $cloud_first_top_pos: 170px;
   0% {
     top: $cloud_first_top_pos;
     left: 50%;
+    opacity: 1;
   }
-  25% {
+  50% {
     top: $cloud_first_top_pos;
     left: 120%;
+    opacity: 1;
   }
-  26% {
-    top: -1000px;
+  50.1% {
+    top: $cloud_first_top_pos;
+    opacity: 0;
+    left: 120%;
+  }
+  50.2% {
+    top: $cloud_first_top_pos;
+    opacity: 0;
     left: -20%;
   }
-  27% {
+  50.3% {
     top: $cloud_first_top_pos;
+    opacity: 1;
     left: -20%;
   }
   100% {
+    opacity: 1;
     top: $cloud_first_top_pos;
     left: 50%;
   }
@@ -55,27 +65,33 @@ $cloud_second_bottom_pos: 20px;
 @include keyframes(cloud-animation_2){
   0% {
     bottom: $cloud_second_bottom_pos;
-    left: 80%;
+    left: 50%;
+    opacity: 1;
   }
-  25% {
+  50% {
     bottom: $cloud_second_bottom_pos;
     left: 120%;
+    opacity: 1;
   }
-  26% {
-    bottom: -1000px;
-    left: -20%;
-  }
-  35% {
-    bottom: -1000px;
-    left: -20%;
-  }
-  40% {
+  50.1% {
     bottom: $cloud_second_bottom_pos;
-    left: 0%;
+    opacity: 0;
+    left: 120%;
+  }
+  50.2% {
+    bottom: $cloud_second_bottom_pos;
+    opacity: 0;
+    left: -20%;
+  }
+  50.3% {
+    bottom: $cloud_second_bottom_pos;
+    opacity: 1;
+    left: -20%;
   }
   100% {
+    opacity: 1;
     bottom: $cloud_second_bottom_pos;
-    left: 80%;
+    left: 50%;
   }
 }
 
@@ -85,20 +101,30 @@ $cloud_third_top_pos: -90px;
   0% {
     top: $cloud_third_top_pos;
     left: 80%;
+    opacity: 1;
   }
-  25% {
+  50% {
     top: $cloud_third_top_pos;
     left: 120%;
+    opacity: 1;
   }
-  26% {
-    top: -1000px;
+  50.1% {
+    top: $cloud_third_top_pos;
+    opacity: 0;
+    left: 120%;
+  }
+  50.2% {
+    top: $cloud_third_top_pos;
+    opacity: 0;
     left: -20%;
   }
-  40% {
+  50.3% {
     top: $cloud_third_top_pos;
+    opacity: 1;
     left: -20%;
   }
   100% {
+    opacity: 1;
     top: $cloud_third_top_pos;
     left: 80%;
   }
@@ -110,21 +136,31 @@ $cloud_fourth_top_pos: -90px;
   0% {
     top: $cloud_fourth_top_pos;
     left: 10%;
+    opacity: 1;
   }
-  25% {
+  50% {
     top: $cloud_fourth_top_pos;
     left: 120%;
+    opacity: 1;
   }
-  26% {
-    top: -1000px;
+  50.1% {
+    top: $cloud_fourth_top_pos;
+    opacity: 0;
+    left: 120%;
+  }
+  50.2% {
+    top: $cloud_fourth_top_pos;
+    opacity: 0;
     left: -20%;
   }
-  45% {
+  50.3% {
     top: $cloud_fourth_top_pos;
+    opacity: 1;
     left: -20%;
   }
   100% {
+    opacity: 1;
     top: $cloud_fourth_top_pos;
-    left: 30%;
+    left: 10%;
   }
 }

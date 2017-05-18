@@ -6,7 +6,8 @@
     position: center center;
   }
   min-width: 100vw;
-  min-height: calc(100vh + 114px);
+  min-height: 100vh;
+  @include padding(12px null null null);
   @media screen and (min-width: $screen-sm){
     background-size: auto 100%;
   }
@@ -20,14 +21,14 @@
     .icon-exit-door {
       @include cssSprite($icon-exit-door);
       display: inline-block;
-      @include position(absolute, 2% 100px null null);
+      @include position(absolute, 24px 100px null null);
       display: none;
       @media screen and (min-width: $screen-sm){
         display: block;
       }
     }
     .google-speaker {
-        @include position(absolute, 137px 61px null null);
+        @include position(absolute, 144px 61px null null);
         cursor: pointer;
         display: none;
         text-align: center;
@@ -51,7 +52,7 @@
     }
     .message {
       @extend .google-speaker;
-        @include position(absolute, 200px 75px null null);
+        @include position(absolute, 209px 75px null null);
         color: #999;
         font-size: 18px;
         .tooltip {
@@ -67,12 +68,13 @@
 // sub-skill-room board specification
 .board {
   @include background-cover("board-bg.png");
+  background-size: 100% auto;
   height: auto;
   margin: auto;
-  width: 959px;
+  width: 940px;
   @include padding(null 50px 50px 50px);
   @media screen and (min-width: $screen-sm){
-    height: 625px;
+    height: 601px;
   }
   @media screen and (max-width: $screen-sm) {
     background: none;

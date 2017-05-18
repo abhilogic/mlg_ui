@@ -1,17 +1,29 @@
 .panel-avtar-design {
   .panel-body {
     min-height: auto !important;
+    @media screen and (max-width: $screen-xs-max){
+      @include padding(0px null 0px null);
+    }
   }
   .options {
+    @media screen and (max-width: $screen-sm){
+      @include margin(25px null null null);
+    }
     .nav-tabs {
       border-bottom: 0px;
+      @media screen and (max-width: $screen-xs-max){
+        @include position(fixed, 15% null null 0px);
+        width: 50px;
+      }
       li {
-        @media screen and (min-width: $screen-sm-max){
-          width: 136px;
-          text-align: center;
-        }
+        text-align: center;
+          width: 25%;
         &:not(:last-child){
           border-right: 2px solid #dbdbdb;
+        }
+        @media screen and (max-width: $screen-xs-max){
+          width: 100%;
+          display: block;
         }
         a {
           background: #f4f4f4;
@@ -20,10 +32,28 @@
           @include border-radius(0px);
           @include border-width(0px);
           margin-right: 0px;
+          min-height: 46px;
+          @media screen and (max-width: $screen-xs-max){
+            @include padding(20px null);
+            min-width: 50px;
+          }
           &:hover {
             border-bottom-color: transparent;
             background: #dbdbdb;
             color: $black;
+          }
+          span {
+            display: none;
+            @media screen and (min-width: $screen-sm){
+              display: block;
+            }
+          }
+          img.icon {
+            width: 25px;
+            display: inline-block;
+            @media screen and (min-width: $screen-sm){
+              display: none;
+            }
           }
         }
 
@@ -44,8 +74,20 @@
         .tab-content {
           @include padding(15px);
           .tab-pane {
-            max-height: 350px;
+            max-height: 370px;
             overflow: hidden;
+            @media screen and (max-width: $screen-xs-max){
+              max-height: 200px;
+              max-width: 250px;
+              overflow: hidden;
+              @include margin(null auto null auto);
+              .accessories-cover {
+                display: inline-block;
+              }
+            }
+            @media screen and (max-width: $screen-mobile-xs){
+              max-width: 200px;
+            }
           }
         }
         .mCSB_inside > .mCSB_container {
@@ -56,9 +98,16 @@
       // body tone
       .btn-group {
         display: block;
+        @media screen and (min-width: $screen-sm){
+          min-width: inherit !important;
+        }
         .btn {
           width: 30.5%;
           height: 156px;
+          @media screen and (max-width: $screen-xs-max){
+            width: 70px;
+            height: 70px;
+          }
           @include border-radius(0px);
           position: relative;
           margin-bottom: 8px;
@@ -76,6 +125,12 @@
               margin-left: 31%;
               z-index: 10;
               position: absolute;
+              @media screen and (max-width: $screen-sm){
+                @include margin(25% null null 9%);
+              }
+              @media screen and (max-width: $screen-xs-max){
+                @include margin(7% null null 9%);
+              }
             }
           }
           &:first-child {
@@ -88,6 +143,9 @@
                 position: absolute;
                 top: 60%;
                 left: 31%;
+                @media screen and (max-width: $screen-xs-max){
+                  @include margin(null null null -10%);
+                }
               }
             }
           }
@@ -119,6 +177,12 @@
       .cloth {
         .btn {
           height: 178px;
+          @media screen and (max-width: $screen-xs-max){
+            height: 70px;
+            img {
+              max-height: 100%;
+            }
+          }
         }
       }
 
@@ -127,6 +191,12 @@
         .btn {
           input {
             @include position(absolute, 0px null null -1000px);
+          }
+          @media screen and (max-width: $screen-xs-max){
+            height: 70px;
+            img {
+              max-height: 100%;
+            }
           }
         }
       }
@@ -138,8 +208,15 @@
   .avtar {
     .avtar-img-cover {
       max-width: 110px;
+      svg:not(:root) {
+        width: 100%;
+      }
       @include margin(null auto);
         @include margin(43px null 25px null);
+        @media screen and (max-width: $screen-sm-max){
+          @include margin(0px null 0px null);
+          max-height: 316px;
+        }
         .hire-style {
           display: none;
         }
