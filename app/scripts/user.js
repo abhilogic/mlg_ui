@@ -404,7 +404,7 @@ angular.module('mlg').filter('moment', function() {
             }
           }
           if (role_id == '4') {
-            window.location.href='/mlg_ui/sapp/journey';
+            window.location.href='/mlg_ui/sapp/avtar1';
             return true;
           }
             // To Redirect User on his account last step page.

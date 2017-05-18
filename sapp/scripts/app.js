@@ -96,6 +96,12 @@ $routeProvider
 }).when('/quiz', {
 	templateUrl : 'views/quiz.html',
 	controller : 'quizCtrl',		
+}).when('/avtar1', {
+	templateUrl : 'views/avtar-gender-selection.html',
+	controller : 'profileCtrl',		
+}).when('/avtar2', {
+	templateUrl : 'views/avtar-boy-design.html',
+	controller : 'profileCtrl',		
 }).when('/subskill_content/:pid/:type/:course_id', {
 	templateUrl : 'views/subskills-content.html',
 	controller : 'subskillContent',		

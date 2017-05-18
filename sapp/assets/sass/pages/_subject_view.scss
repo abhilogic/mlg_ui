@@ -80,7 +80,7 @@ $animation_duration: 900s;
       background: none;
       height: 662px;
       width: 100vw;
-      max-width: 1935px;
+      max-width: 1721px;
       .wooden_frame_content_cover {
         width: 100%;
         height: 100%;
@@ -159,8 +159,8 @@ $animation_duration: 900s;
 
     // topic castel
     &.subskills_castle_1 {  //Training Arena
-      left: 73px;
-      top: 85px;
+      left: 88px;
+      top: 38px;
       .castle__img {
           @include cssSprite($math_training_arena);
       }
@@ -177,8 +177,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_2 {  // algebra
-      left: -4px;
-      top: 265px;
+      left: 19px;
+      top: 224px;
       .castle__img {
         @include cssSprite($math_algebra_icon);
       }
@@ -196,8 +196,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_3 { //Calculus
-      left: 147px;
-      top: 402px;
+      left: 175px;
+      top: 316px;
       .castle__img {
           @include cssSprite($math_calculus_icon);
       }
@@ -214,8 +214,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_4 { //comparing
-      left: 9px;
-      top: 542px;
+      left: 41px;
+      top: 460px;
       .castle__img {
           @include cssSprite($math_compare_icon);
       }
@@ -228,8 +228,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_5 { // Counting
-      left: 116px;
-      bottom: 81px;
+      left: 152px;
+      bottom: 76px;
       .castle__img {
           @include cssSprite($math_counter_icon);
       }
@@ -246,8 +246,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_6 { // Decimals
-      left: 206px;
-      bottom: 183px;
+      left: 222px;
+      bottom: 205px;
       .castle__img {
           @include cssSprite($math_decimal_icon);
       }
@@ -263,8 +263,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_7 { // Division
-      left: 447px;
-      top: 420px;
+      left: 427px;
+      top: 348px;
       .castle__img {
           @include cssSprite($math_division_icon);
       }
@@ -278,7 +278,7 @@ $animation_duration: 900s;
     }
     &.subskills_castle_8 { // Estimation
       left: 269px;
-      top: 317px;
+      top: 259px;
       .castle__img {
           @include cssSprite($math_estimation_icon);
       }
@@ -295,7 +295,7 @@ $animation_duration: 900s;
     }
     &.subskills_castle_9 { // Fractions
       left: 308px;
-      top: 128px;
+      top: 99px;
       .castle__img {
           @include cssSprite($math_fractions_icon);
       }
@@ -312,8 +312,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_10 {  // Functions
-      left: 491px;
-      top: 210px;
+      left: 442px;
+      top: 172px;
       .castle__img {
           @include cssSprite($math_function_icon);
       }
@@ -328,8 +328,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_11 {  // Exponents
-        left: 747px;
-        top: 125px;
+        left: 719px;
+        top: 93px;
       .castle__img {
           @include cssSprite($math_exponent_icon);
       }
@@ -346,8 +346,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_12 { //  Geometry
-      left: 686px;
-      top: 255px;
+      left: 646px;
+      top: 185px;
       .castle__img {
           @include cssSprite($math_geometry_icon);
       }
@@ -364,8 +364,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_13 {  // Graphs
-      left: 711px;
-      top: 375px;
+      left: 697px;
+      top: 288px;
         .castle__img {
             @include cssSprite($math_graphs_icon);
         }
@@ -382,8 +382,8 @@ $animation_duration: 900s;
         }
     }
     &.subskills_castle_14 { //  Integer
-      left: 835px;
-      top: 466px;
+      left: 747px;
+      top: 363px;
       .castle__img {
           @include cssSprite($math_integers_icon);
       }
@@ -400,8 +400,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_15 { // Logic
-      left: 654px;
-      top: 546px;
+      left: 588px;
+      top: 461px;
       .castle__img {
           @include cssSprite($math_logic_icon);
       }
@@ -418,8 +418,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_16 { // Measurement
-      left: 560px;
-      bottom: 111px;
+      left: 503px;
+      bottom: 89px;
       .castle__img {
           @include cssSprite($math_measurement_icon);
       }
@@ -435,8 +435,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_17 { // Mixed operations
-      left: 821px;
-      bottom: 108px;
+      left: 727px;
+      bottom: 85px;
       .castle__img {
           @include cssSprite($math_mixed_operation_icon);
       }
@@ -453,7 +453,7 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_18 {  // Money & consumer maths
-      left: 1027px;
+      left: 894px;
       bottom: 147px;
       .castle__img {
           @include cssSprite($math_money_icon);
@@ -471,8 +471,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_19 { // Multiplication
-      left: 1103px;
-      bottom: 304px;
+      left: 969px;
+      bottom: 255px;
       .castle__img {
           @include cssSprite($math_multiplication_icon);
       }
@@ -485,8 +485,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_20 { // Number Theory
-      left: 1312px;
-      bottom: 191px;
+      left: 1113px;
+      bottom: 247px;
       .castle__img {
           @include cssSprite($math_number_icon);
       }
@@ -502,8 +502,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_21 { // Patterns
-      left: 1341px;
-      bottom: 67px;
+      left: 1115px;
+      bottom: 81px;
       .castle__img {
           @include cssSprite($math_pattern_icon);
       }
@@ -519,8 +519,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_22 { // Percents
-      left: 1463px;
-      bottom: 155px;
+      left: 1253px;
+      bottom: 154px;
       .castle__img {
           @include cssSprite($math_percent_icon);
       }
@@ -536,7 +536,7 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_23 { // Place values
-      left: 1523px;
+      left: 1298px;
       bottom: 283px;
       .castle__img {
           @include cssSprite($math_placevalue_icon);
@@ -550,8 +550,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_24 { // Probability
-      left: 1457px;
-      top: 259px;
+      left: 1246px;
+      top: 211px;
       .castle__img {
           @include cssSprite($math_probability_icon);
       }
@@ -567,8 +567,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_25 { // Ratios & Proportions
-      left: 1631px;
-      top: 132px;
+      left: 1391px;
+      top: 94px;
       .castle__img {
           @include cssSprite($math_ratio_icon);
       }
@@ -584,8 +584,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_26 { // Subtraction
-      left: 1711px;
-      top: 310px;
+      left: 1447px;
+      top: 226px;
       .castle__img {
           @include cssSprite($math_subtraction_icon);
       }
@@ -602,8 +602,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_27 { // Time
-      left: 1824px;
-      top: 402px;
+      left: 1569px;
+      top: 317px;
       .castle__img {
           @include cssSprite($math_time_icon);
       }
@@ -620,8 +620,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_28 { // Trigonometry
-      left: 1648px;
-      top: 516px;
+      left: 1386px;
+      top: 473px;
       .castle__img {
           @include cssSprite($math_trigonometry_icon);
       }
@@ -633,8 +633,8 @@ $animation_duration: 900s;
       }
     }
     &.subskills_castle_29 { // Word problems
-      left: 1790px;
-      bottom: 113px;
+      left: 1543px;
+      bottom: 135px;
       .castle__img {
           @include cssSprite($math_word_problem_icon);
       }
