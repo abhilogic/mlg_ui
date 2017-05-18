@@ -97,14 +97,14 @@ angular.module('mlg_student')
 		});
 	}
 
-<<<<<<< Updated upstream
+
     loginHttpResponse.getUserDetails = function(uid){
       return $http({
           method:'GET',
           url   : urlParams.baseURL+urlParams.getUserDetails + '/' + uid
       });
 	}
-=======
+
 
 	loginHttpResponse.setpreTestStatus = function(test_status,user_id) {
 		return $http({
@@ -123,7 +123,7 @@ angular.module('mlg_student')
 
 	
 
->>>>>>> Stashed changes
+
 	return loginHttpResponse;
 	
 }])
