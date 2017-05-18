@@ -14,6 +14,9 @@ getSubskillQuizQuestions: 'http://35.185.43.146/standards?subject=Maths&grade=11
 setUserQuizResponse :'/exams/setUserQuizResponse',
 getUserQuizResponse :'/exams/getUserQuizResponse',
 getUserScoreForQuiz: '/exams/getUserScoreForQuiz',
+getCouponByUserType: '/users/getCouponByUserType',
+getUsedCoupon: '/users/getUsedCoupon',
+setAvailableCoupon: '/users/setAvailableCoupon',
 khanApiTopic: 'http://www.khanacademy.org/api/v1/topic/',
 khanApiVideo: 'http://www.khanacademy.org/api/v1/videos/',
 khanApiArticle: 'http://www.khanacademy.org/api/v1/articles/'
@@ -77,7 +80,7 @@ $routeProvider
 	controller : 'subjectViewCtrl',	
 }).when('/profile', {
 	templateUrl : 'views/my_profile.html',
-	controller : 'journeyCtrl',		
+	controller : 'profileCtrl',
 }).when('/help', {
 	templateUrl : 'views/help.html',
 	controller : 'helpCtrl',		
