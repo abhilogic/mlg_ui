@@ -4,6 +4,7 @@ angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstr
 users : '/users',
 login: '/users/login',
 logout: '/users/logout',
+getUserDetails: '/users/getUserDetails',
 siteRoot : '/mlg_ui/app/',
 baseURL : 'http://localhost/mlg',
 registerUser:'/users/registerUser',
@@ -113,12 +114,27 @@ $locationProvider.html5Mode({
 } ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
 
 urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
-	    function setCookie(key, value) {
-		var expires = new Date();
-		expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
-		document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+';path=/';
+	function setCookie(key, value) {
+      var expires = new Date();
+      expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+      document.cookie = key + '=' + value + ';expires=' + expires.toUTCString()+';path=/';
 	}
-	
+
+  var uid = getCookie('uid');
+  if (uid == '') {
+    alert('Kindly login');
+    window.location.href='/mlg_ui/app';
+  }
+
+  $rootScope.userPoints = 0;
+  loginHttpService.getUserDetails(uid).success(function(response) {
+    if (typeof (response.data.user_all_details) != 'undefined') {
+      var user = response.data.user_all_details;
+      $rootScope.userPoints = user[0].user_detail.points;
+    } else {
+      alert('Please sign up to continue');
+    }
+  });
   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
@@ -133,10 +149,6 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
 			  $rootScope.logged_user = '';
 		   });
 		}
-
-
-$rootScope.$on('$viewContentLoaded', function() {
-  $templateCache.removeAll();
 
         // get cookies
 		function getCookie(cname) {
@@ -155,7 +167,7 @@ $rootScope.$on('$viewContentLoaded', function() {
           return "";
 		}
 
-        function parseUser(cookie){
+        function parseUser(cookie) {
           var keyVals=cookie.split(',');
           var obj={};
           angular.forEach(keyVals,function(value,key){
@@ -164,6 +176,9 @@ $rootScope.$on('$viewContentLoaded', function() {
           });
           return obj;
         }
+
+$rootScope.$on('$viewContentLoaded', function() {
+  $templateCache.removeAll();
 
         redirectStudentOnSubscriptionOver();
         function redirectStudentOnSubscriptionOver() {

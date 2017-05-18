@@ -97,6 +97,12 @@ angular.module('mlg_student')
 		});
 	}
 
+    loginHttpResponse.getUserDetails = function(uid){
+      return $http({
+          method:'GET',
+          url   : urlParams.baseURL+urlParams.getUserDetails + '/' + uid
+      });
+	}
 	return loginHttpResponse;
 	
 }])
@@ -607,7 +613,7 @@ angular.module('mlg_student')
     var param = {};
     param.user_type = 'student';
     param.condition_key = 'points';
-    param.condition_value = 500;
+    param.condition_value = $rootScope.userPoints;
     loginHttpService.getCouponByUserType(param).success(function(response) {
     if (response.status == true) {
       $scope.coupons = response.result;

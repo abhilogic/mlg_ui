@@ -31,9 +31,9 @@
 
       </ul>
       <div class="progress_bar">
-        <div alt="" class="progress_bar_img">
+      <div alt="" class="progress_bar_img">
           <img src="assets/img/progress_bar_fillable.png" alt="" data-clip="40%" class="progress_range">
-        </div>
+            </div>
 
         <span>Profile Progress</span>
         <ul class="dragons">
@@ -43,7 +43,7 @@
           <li><img src="assets/img/dragon-img/dragon_img_3.png" alt="" class="dragon_img img-responsive"/></li>
           <li><img src="assets/img/dragon-img/dragon_img_4.png" alt="" class="dragon_img img-responsive"/></li>
         </ul>
-      </div>
+        </div>
     </div>
     <div class="panel panel-default redeem_coupon">
       <div class="panel-heading">
@@ -59,7 +59,7 @@
             <div class="coupon_cover coupon_accquired" data-toggle="modal" ng-click="openmodelRedeem();">
               <ul>
                 <li>your Accquired Coupons</li>
-                <li><span>(3)</span></li>
+                <li><span>({{acquired_coupon_count}})</span></li>
               </ul>
             </div>
           </div>
@@ -328,10 +328,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-          <h4 class="modal-title">All Magical Coupons({{total_coupons - display_front_cards}})</h4>
+          <h4 class="modal-title">All Magical Coupons({{total_coupons}})</h4>
         </div>
         <div class="modal-body">
-          <div ng-repeat="coupon in coupons" ng-show="($index+1) > display_front_cards" class="col-md-4 col-sm-6">
+          <div ng-repeat="coupon in coupons"  class="col-md-4 col-sm-6">
             <div class="coupon_cover" ng-class="{'locked': coupon.visibility == 'hidden', 'coupon-redeemed' : coupon.process_status.toLowerCase() == 'redeem'}">
               <img src="assets/img/provider_logo.png" alt="" class="coupon_provider_logo"/>
               <ul>
