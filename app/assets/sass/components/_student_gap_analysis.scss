@@ -1,19 +1,90 @@
 
 $analysis-nav-border-color: $gray-lighter;
 
+.panel-gap-analysis {
+  .panel-heading {
+    @include padding(0px 0px 0px 0px );
+    .panel-title {
+      @include padding(23px null 23px 17px);
+      @include margin(0px null null null);
+      @media screen and (min-width: $screen-sm-max){
+        min-width: 50%;
+        @include box-shadow(inset -9px 0px 17px rgba(105, 101, 101, 0.15));
+      }
+    }
+    &:before {
+      display: none;
+    }
+    .heading-elements {
+      @include margin(18px 18px null null);
+    }
+  }
+  .panel-body {
+    @media screen and (min-width: $screen-sm){
+      @include padding(0px);
+    }
+    .panel-body {
+      @include padding(15px);
+    }
+    .panel-heading {
+      .panel-title {
+        @include padding(1px 15px 1px 15px);
+      }
+    }
+  }
+}
 
 .tabs-analysis{
   padding-bottom: 0;
+  background: $white;
+  @include margin(null null 50px null);
   .tab-content{
     vertical-align: top;
     @media (min-width: $screen-sm){
-      display: table-cell;
-      float: none;
+      // display: table-cell;
+      // float: none;
+    }
+
+    @media screen and (max-width: $screen-xs-max){
+      @include padding(null 0px);
+    }
+    .category-content {
+      @include padding(11px null 26px null);
+      font-weight: $semibold;
+      color: lighten($gray, 0%);
     }
     &-right{
       //@include padding(20px null);
       .tab-pane{
         @include padding(20px);
+      }
+    }
+    // tab-content-left for mobile
+    &.tab-content-left {
+      @media screen and (max-width: $screen-mobile-xs){
+        .nav__text {
+          font-size: 12px;
+        }
+      }
+    }
+
+    // tooltip-arrow
+    .tooltip-inner {
+      @include padding(13px);
+      font-size: 13px;
+      font-family: $font-primary;
+      text-align: left;
+    }
+    // btn-purple
+    .btn-purple {
+      @include border-color($sidebar-dark-bg);
+      color: $sidebar-dark-bg;
+      &:hover {
+        background: $sidebar-dark-bg;
+        color: $white;
+      }
+      @media screen and (max-width: $screen-md-max){
+        @include margin(15px null null null);
       }
     }
   }

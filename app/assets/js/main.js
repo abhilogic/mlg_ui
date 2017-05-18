@@ -15,6 +15,11 @@ function showTargetElement(elem, className){
   var targetElement = $(elem);
   targetElement.addClass(className);
 }
+// on click toggle class in target element
+function toggleClassElement(elem, className){
+  var targetElement = $(elem);
+  targetElement.toggleClass(className);
+}
 
 $(document).ready(function(){
 
@@ -37,6 +42,11 @@ $(document).ready(function(){
 
     // Sidebars
     // ========================================
+
+    // search bar
+    $(".search_form .has-feedback .form-control-feedback").click(function(){
+      $(".search_form .has-feedback").toggleClass("search_open");
+    });
 
     // Toggle main sidebar
     $('.sidebar-mobile-main-toggle').on('click', function (e) {
@@ -75,7 +85,7 @@ var switcheryHtml = '<span class="off">OFF</span>' +
                     '<span class="switchery switchery-default" >'+
                       '<small></small>'+
                     '</span>'+
-                    '<span class="off">ON</span>';
+                    '<span class="on">ON</span>';
 $(document).ready(function(){
   $(".js-switch").each(function(){
     $(this).after(switcheryHtml);

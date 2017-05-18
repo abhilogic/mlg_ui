@@ -1,7 +1,7 @@
 /* Student List Grid */
 .student_status_legend{
   font-size: 12px;
-  margin-top: 10px;
+  @include margin(0px null 0px null);
   text-align: center;
   @media screen and (min-width: $screen-sm-max){
     text-align: right;
@@ -9,6 +9,14 @@
   .fa-circle{
     margin-right: 5px;
     font-size: 11px;
+  }
+  li {
+    @media screen and (min-width: $screen-sm){
+      @include padding(null $content-padding-base);
+    }
+    @media screen and (max-width: $screen-sm){
+      @include margin(null null 10px null);
+    }
   }
 }
 .gifted{
@@ -43,10 +51,13 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  @media screen and (max-width: $screen-mobile-xs){
+    text-align: center;
+  }
   li{
     display: inline-block;
     text-align: center;
-    @include padding(10px);
+    @include padding($content-padding-base);
     vertical-align: top;
     a{
       display: block;
@@ -61,23 +72,40 @@
 }
 
 .student_list{
+  @include margin(9px null null null);
   li{
-    max-width: 139px;
-    min-width: 139px;
+    max-width: 134px;
+    min-width: 134px;
     @media(max-width:$screen-sm-max ){
       min-width: 131px;
       min-width: 131px;
     }
     @media(max-width:$screen-xs-max ){
-      max-width: 105px;
-      min-width: 105px;
+      max-width: 130px;
+      min-width: 130px;
+    }
+
+    .student__img {
+      .img-circle {
+        border: 3px solid transparent;
+      }
+    }
+
+    &.online {
+      .student__img {
+        .img-circle {
+          border-color: $color-online;
+        }
+      }
     }
   }
   .student__name{
     display: block;
     @include padding(15px null null null);
     font-weight: $bold;
-    color: $gray-dark;
+    color: rgba($gray-dark,0.75);
+    font-family: $font-secondary;
+    font-size: 16px;
   }
   .message {
     color: $brand-primary;
@@ -125,17 +153,11 @@
 
 .group_list{
   .group{
-    max-width: 150px;
-    min-width: 150px;
+    max-width: 134px;
+    min-width: 134px;
     @media(max-width:$screen-sm-max){
       max-width: 130px;
       min-width: 130px;
-    }
-    @media(max-width:$screen-xs){
-      display: block;
-      text-align: center;
-      width: 100%;
-      min-width: 100%;
     }
     .group-thumb{
       width: 90px;
@@ -150,7 +172,9 @@
     .group__name{
       display: block;
       font-weight: $bold;
-      color: $gray-dark;
+      color: rgba($gray-dark,0.75);
+      font-family: $font-secondary;
+      font-size: 16px;
     }
   }
 }
@@ -166,26 +190,15 @@
       }
     }
   }
-  .list-filters {
-    text-align: center;
-    @media screen and (min-width: $screen-sm-max){
-      text-align: right;
-    }
-    .bootstrap-select {
-      @media screen and (min-width: $screen-lg){
-        width: 156px !important;
-      }
-      .btn {
-        background: transparent;
-        @include border-width(0px);
-        &:focus, &:active {
-          outline: 0px;
-        }
-        .bs-caret {
-          @include border-width(0px);
-          background: transparent;
-        }
-      }
+}
+
+
+
+// panel
+.panel {
+  &.panel-empty {
+    .panel-body {
+      @include padding(58px null);
     }
   }
 }

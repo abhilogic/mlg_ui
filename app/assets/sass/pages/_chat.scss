@@ -1,13 +1,26 @@
 // page specific color variables
 $panel-hd-bg-color: #c9cfd5;
 
+.chat-page-wrapper {
+  .content {
+    @media screen and (max-width: $screen-xs-max){
+      @include padding(0px);
+    }
+  }
+}
+
 .panel {
   &.panel-chat {
+    @media screen and (max-width: $screen-xs-max){
+      min-height: calc(100vh - 59px);
+    }
     .panel-heading {
       background: $panel-hd-bg-color;
-      @include padding(7px null);
+      @include padding(10px 10px);
       @include border-width(null null 0px null);
       .panel-title {
+        @include margin(0px null null null);
+        text-align: left;
         .group-info {
           list-style: none;
           @include padding(null null null 0px);
@@ -15,22 +28,26 @@ $panel-hd-bg-color: #c9cfd5;
           li {
             display: inline-block;
             vertical-align: middle;
+            .icon-arrow-left {
+              vertical-align: inherit;
+              float: none;
+            }
             .img-cover {
               display: inline-block;
               position: relative;
               @include margin(null 10px null 10px);
               &:before {
-                @include position(absolute, null -1px 6px null);
+                @include position(absolute, null -4px 6px null);
                 content: '';
                 border: 2px solid $white;
-                width: 10px;
-                height: 10px;
+                width: 12px;
+                height: 12px;
                 @include border-radius(100%);
                 z-index: 10;
               }
               &.online {
                 &:before {
-                  background: #3aa71f;
+                  background: $color-online;
                 }
               }
               &.offline {
@@ -50,10 +67,12 @@ $panel-hd-bg-color: #c9cfd5;
           &.group-name, &.student-name {
             font-size: 14px;
             font-weight: $semibold;
-            @include margin(null null 5px nul);
+            @include margin(null null 5px null);
+            text-transform: capitalize;
           }
           &.no-of-users, &.status{
             font-size: 12px;
+            text-transform: lowercase;
           }
         }
       }
@@ -85,10 +104,31 @@ $panel-hd-bg-color: #c9cfd5;
       @media screen and (min-height: 700px){
         height: 70vh;
       }
+      @media screen and (max-width: $screen-xs-max){
+        min-height: calc(100vh - 161px);
+      }
     }
     // panel-body
     .panel-footer {
       background: $panel-hd-bg-color;
+      @include padding(10px 10px);
+      @media screen and (max-width: $screen-xs-max){
+        @include position(fixed, null null 0px 0px);
+        width: 100vw;
+        z-index: 1000;
+      }
+      .left-side {
+        @include padding(null 0px null null);
+        @media screen and (min-width: $screen-lg){
+          width: 93%;
+        }
+      }
+      .right-side {
+        @include padding(null null null 0px);
+        @media screen and (min-width: $screen-lg){
+          width: 7%;
+        }
+      }
       .form-group {
         @include margin(null null 0px null);
       }
@@ -96,7 +136,7 @@ $panel-hd-bg-color: #c9cfd5;
         background: white;
       }
       .btn-send {
-        @include box-shadow(0 0 16px rgba(0,0,0,0.4));
+        // @include box-shadow(0 0 16px rgba(0,0,0,0.4));
         color: $white;
         width: 40px;
         height: 40px;
@@ -109,6 +149,13 @@ $panel-hd-bg-color: #c9cfd5;
         .fa {
           font-size: 16px;
           @include margin(null null null -3px);
+          @include transform(translate(0px , 0px));
+          @include transition(.3s all linear);
+        }
+        &:hover {
+          .fa {
+            @include transform(translate(10px , -10px));
+          }
         }
         &:focus {
           outline: 0px;
@@ -116,6 +163,11 @@ $panel-hd-bg-color: #c9cfd5;
       }
     }
     // panel-footer
+  }
+  &.panel-message-group {
+    .group_list {
+      border-bottom: 1px solid rgba($gray-light,0.6);
+    }
   }
 }
 
@@ -127,6 +179,7 @@ $panel-hd-bg-color: #c9cfd5;
   .sending-day {
     text-align: center;
     position: relative;
+    @include margin(20px null null null);
     &:before {
       content:'';
       @include position(absolute, null null 7px 0px);
@@ -151,9 +204,12 @@ $panel-hd-bg-color: #c9cfd5;
     @include border-radius(5px);
     display: inline-block;
     position: relative;
-    @include margin(10px null null 10px);
+    @include margin(10px null 10px 10px);
     display: table;
     clear: both;
+    @media screen and (min-width: $screen-sm){
+      @include padding(null 18px);
+    }
     .name {
       display: block;
       font-weight: $bold;
@@ -171,7 +227,7 @@ $panel-hd-bg-color: #c9cfd5;
   }
   // msg
   .receiver-conversation {
-    @include padding(10px null 10px null);
+    // @include padding(10px null 10px null);
     .msg {
       background: rgba(0,0,0,.07);
       time {
@@ -199,7 +255,7 @@ $panel-hd-bg-color: #c9cfd5;
   }
   // receiver-contversation
   .sender-conversation {
-    @include padding(10px null 10px null);
+    // @include padding(10px null 10px null);
     .msg {
       float: right;
       text-align: left;

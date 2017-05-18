@@ -165,14 +165,14 @@
 }
 
 
-@mixin placeholders($selector){
-#{$selector}:-webkit-input-placeholder {
+@mixin placeholders(){
+&::-webkit-input-placeholder {
    @content;
 }
-#{$selector}:-moz-placeholder {
+&:-moz-placeholder {
    @content;
 }
-#{$selector}:-ms-input-placeholder {
+&:-ms-input-placeholder {
    @content;
  }
 }

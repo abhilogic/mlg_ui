@@ -39,7 +39,7 @@
 	                      <div class="col-xs-7">
 													<select class="mlg-selectpicker form-control "  data-size="auto" ng-model="gradeSelected" ng-change="getGradeVal(gradeSelected)">
 													 <option value="">---Select Grade---</option>
-                            <option  ng-repeat="grade in level track by $index"ng-if="$index>=0" value="{{grade}}">Grade {{grade}}</option>
+                            <option  ng-repeat="grade in level track by $index"ng-if="$index>=0" value="{{grade.id}}">{{grade.name}}</option>
 													</select>
                            <span style="color:red">{{message[0]}}</span>
 	                      </div>
@@ -135,7 +135,7 @@
 										</ul>
 										
 									</div>
-									<div class="col-md-8 right-portion">
+									<div class="col-md-8 right-portion" id="content-id">
                     <h5 class="panel-title margin-top-0 margin-sm-10"><input type="text" class="form-control" ng-model="frm.text_title" placeholder="Enter Lesson Title"></h5>
 										  <span style="color:red">{{message[8]}}{{message[9]}}</span>
                       <ul class="nav nav-tabs">
@@ -176,7 +176,8 @@
 														<button type="submit" class="btn btn-primary"ng-click="submitDocDetail(frm)">Save</button>
                             <div id="update-content" class="text-right margin-top-15">
                             </div>
-                            <span style="color:red">{{mesage}}{{message[10]}}</span>
+                            <span style="color:red">{{mesage}}</span>
+                            <span style="color:green">{{message[10]}}</span>
 													</div>
 												</div>
 											</div>

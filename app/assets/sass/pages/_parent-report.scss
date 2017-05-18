@@ -1,13 +1,6 @@
 .panel.panel-parent-report {
   .heading-elements {
-    @media screen and (min-width: $screen-lg){
-      min-width: 392px !important;
-    }
-    .list-filters {
-      text-align: center;
-      @media screen and (min-width: $screen-sm-max){
-        text-align: right;
-      }
+    .list-filters
       li{
         &:first-child {
           width: auto;
@@ -15,19 +8,7 @@
       }
       .bootstrap-select {
         @media screen and (min-width: $screen-lg){
-          width: 127px !important;
-        }
-        .btn {
-          background: transparent;
-          @include border-width(0px);
-          &:focus, &:active {
-            outline: 0px;
-          }
-          .bs-caret {
-            @include border-width(0px);
-            background: transparent;
-          }
-        }
+          width: 130px !important;
       }
     }
   }

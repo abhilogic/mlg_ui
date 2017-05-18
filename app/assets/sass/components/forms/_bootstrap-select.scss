@@ -45,6 +45,7 @@ select.selectpicker {
     width: 100%;
     padding-right: 25px;
     z-index: 1;
+    box-shadow: none !important;
 
     &.bs-placeholder,
     &.bs-placeholder:hover,
@@ -88,9 +89,25 @@ select.selectpicker {
 
   .dropdown-toggle:focus {
     outline: thin dotted #333333 !important;
-    outline: 5px auto -webkit-focus-ring-color !important;
-    outline-offset: -2px;
+    outline: 0px auto -webkit-focus-ring-color !important;
+    outline-offset: 0px;
   }
+    &.background-none {
+      .btn {
+        background: transparent;
+        @include border-width(0px);
+        &:focus, &:active {
+          outline: 0px;
+        }
+        .bs-caret {
+          @include border-width(0px);
+          background: transparent;
+        }
+        &:focus {
+          background: transparent;
+        }
+      }
+    }
 }
 
 .bootstrap-select.form-control {
@@ -179,7 +196,6 @@ select.selectpicker {
     .filter-option {
       display: inline-block;
       overflow: hidden;
-      width: 100%;
       text-align: left;
     }
 
@@ -200,7 +216,6 @@ select.selectpicker {
   .dropdown-menu {
     min-width: 100% !important;
     @include box-sizing(border-box);
-
     &.inner {
       position: static;
       float: none;
@@ -210,10 +225,13 @@ select.selectpicker {
       border-radius: 0;
       box-shadow: none;
     }
+    &.open {
+      @include padding(0px null 0px null);
+      @include border-radius(0px);
+    }
 
     li {
       position: relative;
-
       &.active small {
         color: #fff;
       }
@@ -225,6 +243,12 @@ select.selectpicker {
       a {
         cursor: pointer;
         user-select: none;
+        @media screen and (min-width: $screen-sm){
+          @include padding(15px 15px);
+        }
+        @media screen and (max-width: $screen-xs-max){
+          @include padding(8px null);
+        }
 
         &.opt {
           position: relative;
@@ -242,6 +266,10 @@ select.selectpicker {
 
       small {
         padding-left: 0.5em;
+      }
+
+      &:not(:last-child){
+        border-bottom: 1px solid $gray-lighter;
       }
     }
 

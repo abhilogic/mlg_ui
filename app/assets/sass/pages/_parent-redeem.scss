@@ -14,88 +14,16 @@
      }
    }
 }
+
+// redeem-list
+.redeem-list {
+  .redeem-item {
+    
+  }
+}
 .parentRedeem-content{
 
 }
-.redeem-list{
-  border-collapse: collapse;
-  .redeem-item{
-    border: 1px solid darken($gray-lighter, 5%);;
-    @include border-radius($border-radius-large);
-    &:hover {
-      background: rgba($gray-light,0.1);
-    }
-    .media-left, .media-right, .media-body{
-      border: 0;
-    }
-    .media-left{
-      min-width: 200px;
-      text-align: left;
-      @include padding(15px 10px);
-    }
-    .media-body{
-      text-align: center;
-      @include padding(10px);
-    }
-    .media-object{
-      &.coupon-img{
-        max-width: 100px;
-        margin: 0 auto;
-      }
-    }
-    .coupon-text{
-      font-weight: $semibold;
-      color: darken($gray-light, 5%);
-      display: block;
-      @include margin(10px null null);
-    }
-    .media-heading{
-      color: lighten($gray-light, 10%);;
-      font-weight: $semibold;
-    }
-    .media-btns{
-      display: inline-block;
-      vertical-align: middle;
-      .btn{
-        min-width: 100px
-      }
-      .btn-default{
-        background-color: $gray-light;
-        color: white;
-        &:hover, &:focus, &:active{
-          background-color: $gray-dark;
-          color: white;
-        }
-      }
-      .btn + .btn{
-       margin-left: 15px;
-      }
-    }
-    @media(max-width: $screen-sm){
-      display: block;
-      width: 100%;
-      .media-left, .media-body, .media-right{
-        display: block;
-        width: 100%;
-        margin: 0;
-      }
-      .media-left{
-        margin-bottom: 15px;
-        text-align: center;
-      }
-      .media-right {
-        margin-bottom: 15px;
-        text-align: center;
-      }
-      .media-btns{
-        display: block;
-        margin-top: 15px;
-      }
-    }
-  }
-}
-
-
 
 
 // modal-couponAccept

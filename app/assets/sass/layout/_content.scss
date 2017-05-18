@@ -75,10 +75,34 @@
     // Add top padding if no header
     &:first-child {
         padding-top: $line-height-computed;
+        @media screen and (min-width: $screen-sm-max){
+          @include padding( 47px 47px null 47px);
+        }
     }
 
     // Change bottom spacing if footer is navbar
     body[class*=navbar-bottom] & {
         padding-bottom: $line-height-computed;
     }
+}
+
+
+// modal-emailConfirmation
+.modal-emailConfirmation {
+  .modal-content {
+    max-width: 501px;
+    .modal-body {
+      @include padding(44px null null null);
+      .tag_line {
+        @include margin(32px null null null);
+      }
+    }
+    .modal-footer {
+      .btn {
+        @media screen and (min-width: $screen-sm-max){
+          @include padding(null 125px);
+        }
+      }
+    }
+  }
 }

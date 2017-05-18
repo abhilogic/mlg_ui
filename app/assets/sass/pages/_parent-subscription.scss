@@ -1,3 +1,11 @@
+// well-parent-subscription
+.well-parent-subscription {
+  @media screen and (min-width: $screen-sm){
+    @include padding(null 50px);
+  }
+}
+
+
 .parent-subscription-table{
   border: 1px solid $gray-lighter;
   @media(min-width: $screen-md){
@@ -37,6 +45,66 @@
     color: $gray-light;
     &:first-child{
       border-top: 0;
+    }
+  }
+
+
+// your-subscription
+.your-subscriptions {
+  .current-package {
+    @include padding(16px null null null);
+  }
+}
+  // package-group
+  .package-group {
+    display: block;
+    .package-box {
+      @include margin(null 15px);
+      @media screen and (max-width: $screen-xs-max){
+        @include margin(15px 15px);
+      }
+    }
+  }
+
+  // subject-package
+  .subject-package, .choose-plan, .choose-subjects {
+    .package-box {
+      &:after {
+        content: 'OR';
+        @include position(absolute, 22% -28px null null);
+        z-index: 10;
+        color: darken($gray-lighter, 40%);
+        @media screen and (max-width: $screen-xs-max){
+          @include position(absolute, auto 36% -53% null);
+        }
+      }
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+
+
+  // .choose-plan
+  .choose-plan  {
+    &:after {
+      @media screen and (max-width: $screen-xs-max){
+        @include position(absolute, auto null -41% null);
+      }
+    }
+  }
+  // choose-plan
+  .choose-subjects {
+    .package-box {
+      &:after {
+        content: 'AND';
+        @include position(absolute, 35% -33px null null);
+        @media screen and (max-width: $screen-xs-max){
+          @include position(absolute, auto 36% -32% null);
+        }
+      }
     }
   }
 }
@@ -95,7 +163,6 @@
 }
 
 .expected-subscription{
-
   .col-table{
     @include padding(null null);
     @media(min-width: $screen-sm){
@@ -124,7 +191,7 @@
     border-top: 1px solid #d5d6d6;
   }
   .package-box{
-    margin-top: 10px;
+    margin-top: 23px;
     .package-price{
       font-size: 16px;
     }

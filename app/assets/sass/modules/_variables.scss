@@ -42,7 +42,9 @@ $color-ontarget: #2cd875;
 $color-struggling: #f39c12;
 $color-remedial: #c0392b;
 
-
+// online status
+$color-online: #2cd875;
+$color-offline: #f39c12;
 //opacities
 $alpha: 0.8;
 $beta: 0.6;
@@ -51,6 +53,7 @@ $gama: 0.2;
 // Font family
 $font-primary: 'Open Sans', sans-serif;
 $font-secondary: 'MyriadProBoldCondensed', sans-serif;
+$font-secondary-condenced: "MyriadProCondensed", sans-serif;
 $font-tertiary: 'Varela Round', sans-serif;
 
 $icon-font-size: 16px;
@@ -132,8 +135,9 @@ $footer-text-color: rgba(white, 0.65);
 
 //** Required additional padding options, integrated to other less files
 $content-padding-large: 				     30px;
-$content-padding-base: 					     15px;
+$content-padding-base: 					     18px;
 $content-padding-small: 				     10px;
+
 //** Additional element's horizontal spacing for inline elements
 $element-horizontal-spacing: 			     $padding-base-vertical;
 

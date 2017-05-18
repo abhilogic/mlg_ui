@@ -57,7 +57,6 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getGroups : '/teachers/getGroups',
   updateContent : '/teachers/updateUserContent',
   uploadQuestion : '/teachers/saveQuestion',
-
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -214,7 +213,7 @@ principal  : 30,
 	}).when('/teacher/student-list',{
 		templateUrl : 'views/dashboard/teacher-all-student-list.html',
 		controller : 'teacherStudentList',
-	}).when('/teacher/student-profile',{
+	}).when('/teacher/student-profile/:id',{
 		templateUrl : 'views/dashboard/teacher-student-profile.html',
 		//controller : 'teacherStudentProfile',
 	}).when('/teacher/auto-generate-assignment',{

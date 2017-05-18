@@ -1,6 +1,9 @@
 .panel-toolbar{
-  @include margin(null 0 15px 0);
+  @include margin(0px 0 30px 0);
   @include padding(null null null 0px);
+  @media screen and (min-width: $screen-sm){
+    @include margin(12px null null null);
+  }
   width: 100%;
   text-align: left;
   @include clearfix();
@@ -8,6 +11,9 @@
     .bootstrap-select{
       .dropdown-toggle {
         width: 136px;
+        @media screen and (min-width: $screen-lg) and (max-width: 1280px) {
+          width: 122px;
+        }
       }
     }
     display: inline-block;
@@ -74,7 +80,6 @@
     .modal-body {
       @include padding(null 100px null 100px);
     }
-
   }
 }
 
@@ -82,7 +87,7 @@
 
 
 
-  // modal-quesPreview
+// modal-quesPreview
 .modal-contentPreview  {
     iframe {
       margin-top: 15px;
@@ -122,6 +127,19 @@
             border-left: 1px solid $gray-lighter;
         }
       }
+    }
+  }
+}
+
+
+
+// bootstrap-select in teacher-content
+.panel-toolbar.responsive-md .toolbar-item{
+  .dropdown-menu.open{
+    @media screen and (max-width: $screen-xs-max){
+        position: relative;
+        @include margin(0px null null null);
+        @include box-shadow(none);
     }
   }
 }

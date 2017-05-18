@@ -1,45 +1,48 @@
-
 <ul class="nav sidebar_nav sidebar_nav-main">
-
-  <li class="active">
-	<a href="teacher/dashboard-empty" data-toggle="collapse"  class="collapsed"><i class="icon icon-my_class"></i><span class="link__text">My Class</span></a>
-	<ul id="myClass" class="sub-menu collapse in">
-	  <li ng-repeat="list in subject_grade" class="active">
-		<a href="#{{list.level_id}}/{{list.course_name}}/{{list.course_id}}"><span class="link__text">Class {{list.level_id}} {{list.course_name}}</span></a>
-	  </li>
-	</ul>
-  </li>
-	<li>
-		<a href="teacher/report"><i class="icon icon-report"></i><span class="link__text">Report</span></a>
-	</li>
-  <li>
-		<a href="teacher/subscription"><i class="icon icon-my_subscriptions"></i><span class="link__text">My Subscription</span></a>
-	</li>
-	<li >
-		<a href="teacher/rewards"><i class="icon icon-my_rewards"></i><span class="link__text">My Rewards</span></a>
-	</li>
-	<li >
-		<a href="#myContent" data-toggle="collapse" class="collapsed"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
-		<ul id="myContent" class="sub-menu collapse">
-		  <li>
-			<a href="teacher/questions"><span class="link__text">Questions</span></a>
-		  </li>
-		  <li>
-			<a href="teacher/lessons"><span class="link__text">Lessons</span></a>
-		  </li>
-		</ul>
-	</li>
-	
-	<li>
-		<a href="scope-sequence"><i class="icon icon-my_blueprinting_tool"></i><span class="link__text">scope and sequence</span></a>
-	</li>
-	<li>
-		<a href="teacher/settings"><i class="icon icon-my_settings"></i><span class="link__text">My Setting</span></a>
-	</li>
-	<li>
-		<a href="teacher/notification"><i class="icon icon-notification"></i><span class="link__text">Notification</span></a>
-	</li>
-	<li>
-		<a href="" ng-click="logout()"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
-	</li>
-</ul>
+						<li class="active">
+							<a href="#myClass" data-toggle="collapse" class="collapsed"><i class="icon icon-my_class"></i><span class="link__text">My Classes</span></a>
+							<ul id="myClass" class="sub-menu collapse">
+								<li class="active" ng-repeat="list in subject_grade">
+									<a href="#{{list.level_id}}/{{list.course_name}}/{{list.course_id}}"><span class="link__text">{{list.name}} {{list.course_name}}</span></a>
+								</li>								
+								<li>
+									<a href="teacher-add-class.html"><span class="link__text"><i class="icon icon-plus-outline"></i> Add class</span></a>
+								</li>
+							</ul>
+						</li>
+						<li >
+							<a href="teacher/report"><i class="icon icon-report"></i><span class="link__text">Report</span></a>
+						</li>
+						<li >
+							<a href="teacher/subscription"><i class="icon icon-my_subscriptions"></i><span class="link__text">My Subscription</span></a>
+						</li>
+						<li >
+							<a href="teacher/rewards"><i class="icon icon-my_rewards"></i><span class="link__text">My Rewards</span></a>
+						</li>
+						<li >
+							<a href="#myContent" data-toggle="collapse" class="collapsed"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
+							<ul id="myContent" class="sub-menu collapse">
+								<li class="active">
+									<a href="teacher/questions"><span class="link__text">Questions</span></a>
+								</li>
+								<li>
+									<a href="teacher/lessons"><span class="link__text">Lessons</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="teacher/message"><i class="icon icon-message"></i><span class="link__text">Messaging</span></a>
+						</li>
+						<li>
+							<a href="scope-sequence"><i class="icon icon-my_blueprinting_tool"></i><span class="link__text">scope and sequence</span></a>
+						</li>
+						<li>
+							<a href="teacher/notification"><i class="icon icon-notification"></i><span class="link__text">Notification</span></a>
+						</li>
+            <li class="hidden-sm hidden-md hidden-lg">
+							<a href="teacher-setting.html"><i class="icon icon-my_settings"></i><span class="link__text">Setting</span></a>
+						</li>
+            <li class="hidden-sm hidden-md hidden-lg">
+							<a href="#"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
+						</li>
+					</ul>

@@ -31,6 +31,24 @@
         font-size: 20px;
         margin-left: 21px;
       }
+      // img-uploader-cover
+      .img-uploader-cover {
+        &:before {
+          left: 0px;
+          bottom: 0px;
+          z-index: 1;
+          width: 100%;
+          height: 100%;
+          padding-top: 40%;
+          background: rgba($black,0.4);
+          opacity: 0;
+        }
+        &:hover {
+          &:before {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }

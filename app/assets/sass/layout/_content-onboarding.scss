@@ -29,8 +29,7 @@
 //Onboarding login/register panel
 .panel-onboarding{
   width: 95%;
-  margin: 30px auto;
-  margin-bottom: 15px;
+  @include margin(null auto 10px auto);
   @media(min-width: $screen-md){
     max-width: 990px;
   }
@@ -39,12 +38,21 @@
     &::before{
       display: none;
     }
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(null null 0px null);
+      @include border-width(null null 0px null);
+    }
     .panel-title{
       color: $gray-light;
+      @include margin(0px null null null);
+      min-width: 50%;
+      @media screen and (min-width: $screen-sm){
+        border-right: 1px solid $gray-lighter;
+      }
       >img {
         @media screen and (max-width: $screen-xs-max){
           max-width: 100%;
-          width: 60px;
+          width: 100px;
         }
       }
     }
@@ -52,7 +60,12 @@
 
   .panel-body{
 
-    @media(min-width: $screen-sm){
+    .float-label .control-label {
+      font-weight: $semibold;
+      text-transform: uppercase;
+    }
+    @media(min-width: $screen-sm-max){
+      @include padding(0px  null null null);
       .as-table{
         table-layout: fixed;
         display: table;
@@ -66,22 +79,40 @@
       }
     }
     .col-left, .col-right{
-      @include padding(null 24px);
+      @media screen and (min-width: $screen-sm-max){
+          @include padding(30px 24px 0px 24px);
+      }
       @media(max-width: $screen-xs-max){
         @include padding(null 15px);
       }
     }
     .col-left{
       margin-bottom: 30px;
+      .sign_in_left_hd{
+        text-align: center;
+        font-size: 20px;
+        font-weight: $thin;
+        color: rgba($gray,0.9);
+        line-height: 26px;
+        @media screen and (min-width: $screen-sm-max){
+          width: 69%;
+          @include margin(46px auto null auto);
+        }
+        span {
+          display: block;
+          text-align: center;
+          font-weight: $bold;
+        }
+      }
       @media(min-width: $screen-sm){
         margin-bottom: 0;
         border-bottom: 0;
         border-right: 1px solid $gray-lighter;
       }
       @media(max-width: $screen-xs-max){
-        border-bottom: 1px solid $gray-lighter;
         padding-bottom: 20px
       }
+      // content-header
       .content-header{
         @include margin(60px auto);
         .content-title{
@@ -94,6 +125,7 @@
           font-size: 20px;
         }
       }
+      // img-content
       .img-content{
         @include margin(60px auto null auto);
       }
@@ -105,6 +137,9 @@
     text-align: center;
     margin-bottom: 20px;
     @include padding(null 15%);
+    @media screen and (max-width: $screen-xs-max){
+      @include padding(null 0px);
+    }
     .content-title{
       font-weight: $light;
       color: $brand-primary;
@@ -120,7 +155,7 @@
    &.panel-flat{
      .panel-body{
        @media(min-width: $screen-sm){
-         @include padding(null 0) ;
+         @include padding(null null) ;
        }
      }
    }
@@ -133,5 +168,360 @@
   a{
     color: white;
     text-decoration: underline;
+  }
+}
+
+
+
+
+// panel-sign-in-up
+.panel {
+  &.panel-sign-in-up {
+    .heading-elements {
+      small {
+        font-weight: $semibold;
+      }
+    }
+    .panel-body {
+      .col-right {
+        @include padding(null 30px);
+        @media screen and (min-width: $screen-sm-max){
+          @include padding(null 40px null 74px);
+        }
+
+        .content-header {
+          @media screen and (min-width: $screen-sm){
+            @include margin(null null 57px null);
+          }
+         .content-title {
+           @media screen and (min-width: $screen-sm-max){
+             font-size: 60px;
+           }
+         }
+         .content-tagline {
+           font-size: 16px;
+           color: $gray-dark;
+           @media screen and (min-width: $screen-sm){
+             @include margin(null auto null auto);
+           }
+         }
+        } // content-header
+
+      }
+      @media screen and (max-width: $screen-xs-max){
+        @include padding(null null 60px null);
+      }
+
+      // sign-in-error
+      .sign-in-error {
+        font-size: 12px;
+        color: red;
+        display: block;
+        text-align: left;
+        font-weight: $semibold;
+      }
+    }
+    // btn-submit
+    .btn-submit {
+      @include padding(10px 30px);
+      @media screen and (min-width: $screen-sm-max){
+        @include margin(80px null null null);
+      }
+    } // btn-submit
+  }
+  // panel-signup
+  &.panel-signup {
+    .panel-body {
+      .col-right {
+        .content-header {
+          @media screen and (min-width: $screen-sm){
+            @include margin(null null 20px null);
+          }
+        }
+        .form-group {
+          .form-control {
+            @include padding(null 0px null 0px);
+          }
+        }
+      }
+    }
+  }
+
+  // panel-teacher-account
+  &.panel-teacher-account {
+    .panel-body {
+      .col-right {
+        @include padding(null 30px);
+        @media screen and (min-width: $screen-sm-max){
+          @include padding(0px 74px null 74px);
+          .confirm-success-msg{
+            @include margin(-60px null 40px null);
+          }
+        }
+        // form.form-login
+        .form-login {
+          @media screen and (min-width: $screen-sm-max){
+            @include margin(40px null null null);
+          }
+        }
+      }
+    }
+  }
+
+
+  // panel-subject-grade
+  &.panel-subject-grade {
+    .panel-heading {
+      .panel-title {
+        min-width: auto;
+        @include border-width(null 0px null null);
+        @media screen and (min-width: $screen-sm-max){
+          display: block;
+          float: none;
+        }
+      }
+      .heading-elements {
+        @media screen and (min-width: $screen-sm-max){
+          float: none;
+          display: block;
+          text-align: center;
+          margin-top: -53px;
+        }
+        font-size: 20px;
+        @media screen and (min-width: $screen-sm-max){
+          font-size: 24px;
+          color: rgba($gray-light,0.5);
+        }
+      }
+    }
+    .panel-body {
+      @media screen and (max-width: $screen-sm){
+        @include padding(null 30px);
+      }
+      .selected-grades-subjects {
+        @media screen and (max-width: $screen-xs-max){
+          .label-grade{
+            float: none;
+          }
+          .subjects-list {
+            .label-subject {
+              @include margin(null 5px null 0px);
+            }
+          }
+        }
+      }
+      .grade-group {
+        .grade {
+          @media screen and (min-width: $screen-sm){
+            @include padding(null 10px);
+          }
+        }
+        @media screen and (max-width: $screen-xs-max){
+          @include margin(0px null null null);
+        }
+      }
+      .btn-submit {
+        @include margin(40px null null null);
+      }
+    }
+  }
+
+
+  // term and condition
+  &.panel-term {
+    .panel-heading {
+      .panel-title {
+        min-width: auto;
+        @include border-width(null 0px null null);
+        @media screen and (min-width: $screen-sm-max){
+          display: block;
+          float: none;
+        }
+      }
+      .heading-elements {
+        @media screen and (min-width: $screen-sm-max){
+          float: none;
+          display: block;
+          text-align: center;
+          margin-top: -53px;
+        }
+        font-size: 20px;
+        @media screen and (min-width: $screen-sm-max) {
+          font-size: 24px;
+          color: rgba($gray-light,0.5);
+        }
+      }
+    }
+    .panel-body {
+      .tab-navs {
+        @media screen and (min-width: $screen-lg){
+          @include padding(null 46px null null);
+        }
+      }
+      @include padding(25px null null null);
+      @media screen and (max-width: $screen-sm){
+        @include padding(45px null null null);
+      }
+      @media screen and (max-width: $screen-xs-max){
+        .panel-heading {
+          @include padding(0px);
+          .panel-title {
+            @include margin(0px null null null);
+            a {
+              @include padding(10px 20px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // panel-payment
+  &.panel-payment {
+    .panel-heading {
+      .panel-title {
+        @include border-width(0px);
+      }
+    }
+    .panel-body {
+      .col-left ,.col-right {
+        @include padding(10px null null null);
+        >h2 {
+          @media screen and (max-width: $screen-xs-max){
+            font-size: 22px;
+          }
+        }
+      }
+      .total-cartValue {
+        h1 {
+          border-top: 1px solid $gray-lighter;
+          @include padding(15px null null null);
+        }
+      }
+    }
+  }
+
+  // panel-child-selection
+  &.panel-child-selection{
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(null null 60px null);
+    }
+    .panel-heading {
+      .panel-title {
+        @include border-width(0px);
+      }
+    }
+    // panel-body {
+    .category-item {
+     .icon-float  {
+      @include padding(14px);
+     }
+     .tab-line {
+       @include margin(30px auto null auto);
+       font-size: 16px;
+       @media screen and (min-width: $screen-sm-max){
+         width: 48%;
+       }
+       @media screen and (min-width: $screen-sm){
+         width: 55%;
+       }
+     }
+   }
+  }
+
+  // all parent-panel header styling
+  &.panel-child-account-setup, &.panel-preferences , &.panel-teacher-term, &.panel-payment {
+    .panel-heading {
+      .panel-title {
+        min-width: auto;
+        @include border-width(0px);
+      }
+      @media screen and (min-width: $screen-sm-max){
+        .heading-elements {
+          min-width: calc(100% - 100px);
+        }
+      }
+      .steps-container {
+        @include margin(0px null null null);
+      }
+    }
+  }
+  // panel-child-account-setup
+  &.panel-child-account-setup {
+
+    // panel-body
+    .panel-body {
+      .email-info {
+        @include margin(-16px null null null);
+        position: relative;
+        z-index: 10;
+        color: $gray-lighter;
+        cursor: pointer;
+        text-decoration: none;
+        &:hover {
+          color: $gray-light;
+        }
+        @media screen and (max-width: $screen-xs-max){
+          display: none;
+        }
+      }
+      .package-box, .package-group .btn, .subject-group .btn {
+        @include margin(null null null 10px);
+        min-width: 90px;
+      }
+
+      // col-right
+      .col-right {
+        .email-info {
+          @include margin(12px -23px null null);
+        }
+        // package-group-plan
+        .package-group-plan {
+          .package-plan {
+            @include margin(null null null 30px);
+            &:first-child {
+              @include margin(null null null 0px);
+            }
+            &:not(:last-child):after {
+              content: 'OR';
+              @include position(absolute, 34% -27px null null);
+              z-index: 10;
+              color: $gray-lighter;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // panel-preferences
+  &.panel-preferences {
+
+  }
+
+  &.panel-teacher-term {
+    .panel-body {
+      .tab-navs {
+        @media screen and (min-width: $screen-lg){
+          @include padding(null 30px null null);
+        }
+      }
+      @include padding(25px null null null);
+      @media screen and (max-width: $screen-sm){
+        @include padding(45px null null null);
+      }
+      @media screen and (max-width: $screen-xs-max){
+        .panel-heading {
+          @include padding(0px);
+          .panel-title {
+            @include margin(0px null null null);
+            a {
+              @include padding(10px 20px);
+              display: block;
+            }
+          }
+        }
+      }
+    }
   }
 }
