@@ -73,6 +73,30 @@ angular.module('mlg_student')
 		});
 	}
 
+    loginHttpResponse.getCouponByUserType = function(data) {
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.getCouponByUserType
+		});
+	}
+
+    loginHttpResponse.getUsedCoupon = function(data) {
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.getUsedCoupon
+		});
+	}
+
+    loginHttpResponse.setAvailableCoupon = function(data) {
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.setAvailableCoupon
+		});
+	}
+
 	return loginHttpResponse;
 	
 }])
@@ -169,15 +193,6 @@ angular.module('mlg_student')
 	  });
 	
 }
-
-	$scope.openmodelRedeem=function(){
-		$("#modal-redeem").modal();					
-	},
-	
-	$scope.openRedeemAll=function(){
-		$("#modal-allRedeem").modal();					
-	}
-
 }])
 
 
@@ -580,7 +595,74 @@ angular.module('mlg_student')
 	  window.history.back();
 	};
 })
+.controller('profileCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q) {
+	var get_uid = commonActions.getcookies(get_uid);
+    $scope.coupons = [];
+    $scope.coupons_acquired = [];
+    $scope.coupon_not_acquired = [];
+    $scope.display_front_cards = 5;
+    $scope.acquired_coupon_count = 0;
+    var param = {};
+    param.user_type = 'student';
+    param.condition_key = 'points';
+    param.condition_value = 500;
+    loginHttpService.getCouponByUserType(param).success(function(response) {
+    if (response.status == true) {
+      $scope.coupons = response.result;
+     var coupon_data = {user_id: get_uid};
+     loginHttpService.getUsedCoupon(coupon_data).success(function (avail_coupons) {
+       angular.forEach($scope.coupons, function(coupon, coupon_index) {
+        coupon.process_status = '';
+        angular.forEach(avail_coupons.result, function(avail_coupon, avail_coupon_index) {
+          if (avail_coupon.id == coupon.id) {
+             coupon.process_status = avail_coupon.status;
+            if (avail_coupon.status.toLowerCase() == 'acquired') {
+             $scope.coupons_acquired.push(coupon);
+             $scope.coupons.splice(coupon_index, 1);
+            }
+          }
+        });
+       });
+       $scope.acquired_coupon_count = $scope.coupons_acquired.length;
+       $scope.total_coupons = $scope.coupons.length;
+     });
+    }
+  });
 
+	$scope.openmodelRedeem=function(){
+		$("#modal-redeem").modal();
+	};
 
+	$scope.openRedeemAll=function(){
+      $("#modal-allRedeem").modal();
+	};
 
-;
+    $scope.coupon_requested = function (coupon_id, coupon_visibility, coupon_process_status) {
+      if (coupon_visibility == 'hidden') {
+        alert('You can not request for locked coupon');
+        return false;
+      }
+      var set_coupon_data = {};
+      set_coupon_data.user_id = get_uid;
+      set_coupon_data.coupon_id = coupon_id;
+      var requested_coupon_status = 'Redeem';
+      if (coupon_process_status.toLowerCase() == 'redeem') {
+        requested_coupon_status = 'Approval pending';
+      }
+      set_coupon_data.status = requested_coupon_status;
+      set_coupon_data.updated_by_user_id = get_uid;
+      loginHttpService.setAvailableCoupon(set_coupon_data).success(function (response) {
+        if (response.status == true) {
+          angular.forEach($scope.coupons, function(coupon, coupon_index) {
+            if (coupon.id == coupon_id) {
+              if (coupon.process_status.toLowerCase() == 'redeem') {
+                coupon.process_status = requested_coupon_status;
+              } else {
+                alert('coupon already in progress');
+              }
+            }
+          });
+        }
+      });
+    }
+}]);
