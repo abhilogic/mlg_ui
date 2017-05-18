@@ -357,17 +357,22 @@ angular.module('mlg').filter('moment', function() {
            $rootScope.logged_user = response.user;
            setCookie('uid', $rootScope.logged_user.id);
            setCookie('userObj', '"userName='+response.user.first_name+',email='+response.user.email+',userStatus='+response.user.status+',role='+role_name+',extra='+'extra'+'"');
-           if (response.warning == 1) {
-             var children_name = [];
-             var child_info = response.child_info;
-             var user_id = child_info['0'].user_id;
-             angular.forEach(child_info, function(child, key){
-               children_name.push(child.children_name);
-             });
-             alert("Your following child has ended with their subcription.\n" + children_name.join("\n"));
-             $location.url('parent/dashboard/subscription/' + user_id);
-             return true;
-           }
+           if (role_id == '2') {
+             if ((response.no_of_child == 0) && !(response.first_time_login)) {
+               alert('Please add child and subscribe');
+             }
+            if (response.warning == 1) {
+              var children_name = [];
+              var child_info = response.child_info;
+              var user_id = child_info['0'].user_id;
+              angular.forEach(child_info, function(child, key){
+                children_name.push(child.children_name);
+              });
+              alert("Your following child has ended with their subcription.\n" + children_name.join("\n"));
+              $location.url('parent/dashboard/subscription/' + user_id);
+              return true;
+            }
+          }
           if (role_id == '4') {
             window.location.href='/mlg_ui/sapp/journey';
             return true;
@@ -1355,6 +1360,7 @@ if (typeof $routeParams.id != 'undefined') {
 .controller('parentPreferenceCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 
 var get_uid=commonActions.getcookies(get_uid);
+$scope.frm = {};
 // To call dynamic step slider
 	// and Call API to get child details for deshboard naming
     loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
