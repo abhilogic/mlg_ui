@@ -3,6 +3,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 ])
 .value('urlParams', {
 	users : '/users',
+	contactus: '/users/contact_us',
 	login: '/users/login',
 	logout: '/users/logout',
 	siteRoot : '/mlg_ui/app/',
