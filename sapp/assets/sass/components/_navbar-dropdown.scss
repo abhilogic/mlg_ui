@@ -42,14 +42,14 @@
     display: block;
     @include padding(5px 10px);
     a {
-      font-family: $font-open-sans;
+      font-family: $font-primary;
       text-align: left;
       @include padding(3px 10px);
       @include border-radius(5px);
       color: $maroon !important;
       position: relative;
       &:hover {
-        background: rgba($black,0.07);
+        background: rgba($black,0.07) !important;
       }
       &:before {
         content:'';

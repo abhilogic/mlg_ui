@@ -100,19 +100,27 @@
   .student_progress_info {
     padding-left: 0px;
     text-decoration: none;
+    @media screen and (max-width: $screen-xs-max){
+      text-align: center;
+    }
     @media screen and (min-width: $screen-sm-max){
       @include margin(null null null 100px);
     }
     li {
       display: inline-block;
       vertical-align: middle;
+      cursor: pointer;
       &:not(:last-child){
-        @include margin(null 35px null null);
+        @include margin(null 35px 20px null);
       }
       &:nth-child(3) {
         span {
           @include margin(null null 37px null);
         }
+      }
+      &:last-child {
+        vertical-align: top;
+        margin-top: 11px;
       }
       img, span {
         display: block;
@@ -166,7 +174,7 @@
     }
   }
   .progress_bar {
-    margin-top: 50px;
+    margin-top: 100px;
     position: relative;
     text-align: center;
     @media screen and (max-width: $screen-mobile-xs){
@@ -181,23 +189,9 @@
         text-align: left;
       }
     }
-    .dragon_img {
-      bottom: 26px;
-      right: 200px;
-      position: absolute;
-      @media screen and (max-width: $screen-tb-port){
-        right: -12px;
-      }
-      @media screen and (max-width: $screen-mobile-md){
-        bottom: 17px;
-        width: 188px;
-      }
-      @media screen and (max-width: $screen-mobile-sm){
-        bottom: 12px;
-      }
-    }
+
     .progress_bar_img {
-        max-width: 685px;
+        max-width: 990px;
         @include margin(null auto null auto);
         height: 57px;
         position: relative;
@@ -212,9 +206,45 @@
           height: 50px;
         }
       img {
-        @include position(absolute, 17px null null 21px);
+        @include position(absolute, 17px null null 35px);
         clip: rect(0px, 100px, 57px, 0px);
         max-width: 100%;
+      }
+    }
+
+    //dragons
+    .dragons {
+      position: relative;
+      li {
+        position: absolute;
+        display: none;
+        &.active {
+          display: block;
+        }
+        &:nth-child(1){
+          bottom: 71px;
+          left: 129px;
+        }
+        &:nth-child(2){
+          left: 280px;
+          bottom: 57px;
+        }
+        &:nth-child(3){
+          left: 441px;
+          bottom: 64px;
+        }
+        &:nth-child(4){
+          left: 595px;
+          bottom: 60px;
+        }
+        &:nth-child(5){
+          bottom: 57px;
+          right: 3px;
+        }
+        @media screen and (max-width: $screen-xs-max){
+          left: 40% !important;
+          bottom: 57px !important;
+        }
       }
     }
   }
@@ -262,14 +292,14 @@
   text-align: center;
   width: 140px;
   @media screen and (max-width: $screen-sm){
-    margin-bottom: 50px;
+    margin-bottom: 80px;
   }
   @media screen and (max-width: $screen-mobile-md){
     margin: auto;
     margin-bottom: 20px;
   }
   @media screen and (max-width: $screen-xs-max){
-    margin-bottom: 49px;
+    margin-bottom: 70px;
   }
   .coupon_provider_logo {
     max-width: 72px;
@@ -293,12 +323,10 @@
   }
   .btn {
     background: rgba($blackMarlin,0.8);
-    color: $white;
+    color: $pizza;
     @include padding(3px 15px);
-    @include margin(15px null null null);
-    &.active {
-      @include box-shadow(inset 0px 0px 16px rgba(194, 147,22,0.5));
-    }
+    @include margin(32px null null null);
+
   }
 
 
@@ -318,6 +346,7 @@
   // coupon_accquired
   &.coupon_accquired {
     text-align: center;
+    cursor: pointer;
     @include padding(null 8px null 8px);
 
       li {
@@ -325,6 +354,19 @@
         color: $rosewood;
         font-weight: $bold;
       }
+  }
+
+  &.coupon-redeemed {
+    background-image:url("../img/redeemed_coupon_bg.png");
+    height: 211px;
+    width: 176px;
+    margin-top: -15px;
+    @include padding(38px 20px null 20px);
+    .btn {
+      margin-top: 34px;
+      @include box-shadow(inset 0px 0px 16px rgba(194, 147,22,0.5));
+      background-color: rgba(76, 75, 74, 0.8);
+    }
   }
 }
 
@@ -408,9 +450,293 @@
   }
   .modal-body {
     .coupon_cover {
-      @include margin(null auto 40px auto);
+      @include margin(null auto 50px auto);
+      .btn {
+        margin-top: 13px;
+      }
     }
     max-height: 440px;
     overflow: hidden;
+  }
+}
+
+
+
+// modal-view-report
+.modal-view-report {
+  .modal-content, .modal-body, .modal-footer, .modal-header {
+    background-color: transparent;
+    border:0px;
+    @include border-radius(0px);
+    @include box-shadow(none);
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(0px);
+    }
+  }
+  // modal-dialog
+  .modal-dialog {
+    background: {
+      image: url("../img/view-report-bg/center.jpg");
+      size: 100% 100%;
+      color: transparent;
+    }
+    @media screen and (min-width: $screen-sm){
+      min-width: 645px;
+      min-height: 762px;
+      @include margin(118px null null null);
+    }
+    position: relative;
+
+    &:before {
+      content: '';
+      @include position(absolute, -128px null null -120px);
+      width: calc(100% + 268px);
+      height: 128px;
+      background: {
+        image: url("../img/view-report-bg/top.png");
+        size: 100% 100%;
+        position: center center;
+      }
+    }
+    &:after {
+      content: '';
+      @include position(absolute, 0px null null -120px);
+      width: 120px;
+      height: 100%;
+      background: {
+        image: url("../img/view-report-bg/left.png");
+        size: 100% 100%;
+        position: center center;
+      }
+    }
+
+  }
+
+// modal-content
+  .modal-content {
+    position: relative;
+    &:before {
+      content: '';
+      @include position(absolute,  null null -113px -120px);
+      width: calc(100% + 268px);
+      height: 113px;
+      background: {
+        image: url("../img/view-report-bg/bottom.png");
+        size: 100% 100%;
+        position: center center;
+      }
+    }
+    &:after {
+      content: '';
+      @include position(absolute, 0px -148px null null );
+      width: 148px;
+      height: 100%;
+      background: {
+        image: url("../img/view-report-bg/right.png");
+        size: 100% 100%;
+        position: center center;
+      }
+    }
+  }
+
+  // modal-dialog , modal-content
+   .modal-dialog , .modal-content {
+     &:before, &:after {
+       @media screen and (max-width: $screen-sm){
+         display: none;
+       }
+     }
+   }
+  // modal-header
+  .modal-header {
+    .modal-title {
+      color: $maroon;
+      font-size: 20px;
+      text-align: center;
+      @media screen and (min-width: $screen-sm) {
+        font-size: 30px;
+      }
+    }
+    .close {
+      opacity: 1;
+      @include filter(inverte(100%));
+      @media screen and (min-width: $screen-sm-max){
+        @include position(absolute, -83px -92px null null);
+        @include filter(none);
+      }
+    }
+  }
+
+  // modal-body
+  .modal-body {
+    @media screen and (min-width:$screen-sm) {
+      @include padding(32px null null null);
+    }
+    .report-row {
+      @include padding(16px 22px);
+      @include border-radius(10px);
+      @include box-shadow(inset 0px 3px 16px rgba(0,0,0,0.1));
+      font-family: 'Open Sans', sans-serif;
+      &:not(:last-child){
+        @include margin(null null 20px null);
+      }
+      @media screen and (max-width: $screen-xs-max){
+        @include margin(null null 10px null);
+      }
+      ul {
+        display: block;
+        width: 100%;
+        @include margin(null null 0px null);
+        &:after{
+          content: '';
+          display: table;
+          clear:both;
+        }
+        li{
+          display: inline-block;
+          vertical-align: middle;
+          @include margin(null 19px null null);
+          &:last-child {
+              border-left: 1px solid #dccfa3;
+              @include margin(null 0px null null);
+              @include padding(null null null 21px);
+          }
+          @media screen and (min-width: $screen-sm-max){
+            @include margin(null 27px null null);
+          }
+          @media screen and (max-width: $screen-xs-max){
+            &:last-child {
+              @include border-width(0px);
+              @include padding(0px);
+            }
+            width: 49%;
+            @include margin(0px 0px 10px);
+            @include padding(0px 15px);
+            text-align: center;
+            &:nth-child(2n){
+              border-left: 1px solid #dccfa3;
+            }
+          }
+          @media screen and (max-width: $screen-mobile-md){
+            width: 100%;
+          }
+          // name
+          &.name {
+            min-width: 185px;
+            span {
+              color: #571d12;
+              font-family: $font-secondary;
+              display: block;
+              font-weight: $bold;
+              &:first-child {
+                font-size: 12px;
+                text-transform: uppercase;
+              }
+              &:last-child {
+                font-size: 14px;
+              }
+            }
+          }
+          // status
+          &.status {
+            .btn {
+              @include border-width(0px 0px 2px 0px);
+              @include border-color(rgba($black,0.4));
+              @include padding(8px 0px);
+              @include border-radius(10px);
+              position: relative;
+              text-align: center;
+              font-size: 12px;
+              background: #e9c497;
+              width: 128px;
+              font-weight: $bold;
+              &.complete {
+                color: #224f0e;
+              }
+              &.warrning {
+                color: #571d12;
+              }
+              .badge-icon {
+                @include position(absolute, -3px null null -16px);
+              }
+            }
+          }
+          // score and group score
+          &.score , &.group-score {
+            span {
+              display: block;
+              font-size: 11px;
+              text-align: center;
+              font-weight: $bold;
+            }
+          }
+          // score
+          &.score {
+            span {
+              color: #571d12;
+            }
+          }
+          // group-score
+          &.group-score {
+            span {
+              color: #2f4b4e;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // modal-footer
+  .modal-footer {
+    text-align: center;
+    @include padding(15px null null null);
+    @media screen and (min-width: $screen-sm){
+      @include padding(44px null null null);
+    }
+    .pagination {
+      li {
+        a {
+          background: #efe0a4;
+          color: #2f4b4e;
+          @include border-color(#e0d08f);
+          @include margin(null 2px null 2px);
+          font-weight: $bold;
+          @include border-radius(0px);
+          font-family: 'Open Sans', sans-serif;
+        }
+
+        @media screen and (max-width: $screen-xs-max){
+          display: none;
+        }
+        &:first-child, &:last-child, &:nth-child(2), &:nth-child(3), &:nth-last-child(2) {
+          @media screen and (max-width: $screen-xs-max){
+            display: inline-block;
+          }
+          span {
+            display: none;
+            @media screen and (min-width: $screen-sm){
+              display: inline-block;
+            }
+          }
+        }
+        &:first-child {
+          a {
+            @include margin(null 13px null null);
+          }
+          span {
+            margin-right: 5px;
+          }
+        }
+        &:last-child {
+          a {
+            @include margin(null null null 13px);
+          }
+          span {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
   }
 }

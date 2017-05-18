@@ -19,8 +19,9 @@ $video_fs_view: 16px 16px '../img/video_element/video_scrit_img.png' -49px -3px;
 $btn_bg: 140px 65px '../img/btn.png' 0px 0px;
 $subject_gate: 233px 277px "../img/subject_gate.png" 0px 0px;
 $challenge_gate: 256px 251px "../img/challenge_gate.png" 0px 0px;
+$challenge_animate_gate: 256px 251px "../img/challenge_animate_gate.gif" 0px 0px;
 $challenge_gate_lock: 256px 251px "../img/challenge_gate_locked.png" 0px 0px;
-$subject_gate_open: 233px 277px "../img/subject_gate_open.png" 0px 0px;
+$subject_gate_open: 233px 277px "../img/subject_animate_gate.gif" 0px 0px;
 $subject_board: 141px 92px "../img/challeng_board.png" 0px 0px;
 
 // mobile owl nav indicator
@@ -79,7 +80,7 @@ $chat_conversation_toggle_btn_bg: 300px 40px '../img/chat_conversation_toggle_bt
 $chat_bar_mobile: 123px 40px '../img/sprite.png' -218px -306px;
 $get_more_points_bar: 168px 45px '../img/sprite.png' -93px 0px;
 $get_more_points_bar-sm: 39px 41px '../img/sprite.png' -93px -46px;
-$coins: 67px 50px '../img/sprite.png' -261px 0px;
+$coins: 57px 50px '../img/sprite.png' -266px 0px;
 $coin: 12px 12px '../img/sprite.png' -328px 0px;
 /* chat bar */
 

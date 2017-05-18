@@ -284,12 +284,14 @@ angular.module('mlg_student')
 		 				$scope.answer_response="Awesome, you got this correct";
 		 				//alert('Correct');
 		 				var score= $scope.currentquestion.valid_responses[0].score;
+		 				$scope.answer_result=true;
 		 			}
 		 			else{
 		 				selectedAnswer=0; // select option is wrong
 		 				if(typeof $scope.currentquestion.penalty_score=='undefined'){ score=0}
 		 				else{ score =$scope.currentquestion.penalty_score; }
-		 				$scope.answer_response="Oops, This is not the correct answer";		 				
+		 				$scope.answer_response="Oops, This is not the correct answer";
+		 				$scope.answer_result=false;		 				
 		 				//alert('wrong'); 
 		 			}
 		 			$("#gotIt").click(function(){
