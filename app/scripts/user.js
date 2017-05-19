@@ -1353,11 +1353,17 @@ if (typeof $routeParams.id != 'undefined') {
       loginHttpService.setAvailableCoupon(param).success(function (response) {
        if (response.status == true) {
          if (updated_status.toLowerCase() == 'acquired') {
+           $('#modal-couponAccept .modal-content').addClass('success');
            $('#'+coupon_id).html('<a class="btn btn-background-none text-success text-uppercase">\n\
               <i class="icon icon-tick"></i> Approved   </a>');
+           $("#modal-couponAccept").fadeOut('slow');
+           $("#modal-couponAccept").modal('hide');
          } else if (updated_status.toLowerCase() == 'rejected') {
+           $('#modal-couponReject .modal-content').addClass('success');
            $('#'+coupon_id).html('<a class="btn btn-background-none text-danger text-uppercase">\n\
               <i class="icon icon-cross"></i> Rejected</a>');
+           $('#modal-couponReject').fadeOut('slow');
+           $("#modal-couponReject").modal('hide');
          }
        }
       });
