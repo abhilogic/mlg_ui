@@ -35,6 +35,7 @@
       color: $white;
       float: left;
       font-size: 20px;
+      @include margin(-5px null null null);
 
     }
     .close {

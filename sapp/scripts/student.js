@@ -201,6 +201,51 @@ angular.module('mlg_student')
 	 // alert('kkkk');
 	  var get_uid=commonActions.getcookies(get_uid);
 }])
+.controller('avtarCtrl',['$scope','$location','$anchorScroll',function($scope,$location,$anchorScroll) {
+	  
+	  var prev=undefined;
+	  var next=undefined;
+
+     $scope.Selection={
+	    	current:'skin',
+	    	prev:prev,
+	    	next:'hair'
+	    };
+
+	 $scope.scrollTo = function(id) {
+	 	var arr=['skin','hair','clothes','accessories'] ;
+	 	for(i in arr){
+	 		$('#'+arr[i]).removeClass('in active');
+	 		$('#li_'+arr[i]).removeClass('active');
+	 	}	   
+	    $('#'+id).addClass('in active');
+	    $('#li_'+id).addClass('active');
+	    var searchIndex=arr.indexOf(id);
+	    if(searchIndex==0){
+	    	$scope.Selection={
+	    	current:id,
+	    	prev:prev,
+	    	next:'hair'
+	    	};
+	    }else if(searchIndex==arr.length-1){
+	    	$scope.Selection={
+	    	current:id,
+	    	prev:arr[searchIndex-1],
+	    	next:next
+	    	};
+	    }else{
+	    	$scope.Selection={
+	    	current:id,
+	    	prev:arr[searchIndex-1],
+	    	next:arr[searchIndex+1]
+	    	};
+	    }
+	    
+
+	   
+};
+	  
+}])
 .controller('quizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 	 // alert(navigator.onLine);
 

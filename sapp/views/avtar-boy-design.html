@@ -40,7 +40,7 @@
       <div class="page-container">
         <div class="page-content">
           <div class="content-wrapper">
-            <div class="panel panel-flat panel-avtar-creation  panel-avtar-design">
+            <div class="panel panel-flat panel-avatar-creation   panel-avtar-design">
   						<div class="panel-heading">
   							<div class="row">
   							  <div class="col-md-1 col-sm-2 left-portion">
@@ -91,10 +91,9 @@
 													<path class="cls-8" d="M121.87,155.29c-2.42,6.16-10.17,6-12.59,0A9,9,0,0,0,121.87,155.29Z" transform="translate(-61.67 -77.14)"/>
 													<path class="cls-9" d="M134.18,162.55c-6.76,4.32-22.78,7-31.94,5.24A204.35,204.35,0,0,0,134.18,162.55Z" transform="translate(-61.67 -77.14)"/>
 													<path class="cls-8" d="M124.81,167.89c-2.42,4.06-11.64,4.91-15,1.47A22,22,0,0,0,124.81,167.89Z" transform="translate(-61.67 -77.14)"/>
-													<g id="eye-browse">
-
-														<path class="cls-10" d="M126.29,133.17c2.23-2.91,7.44-3,10.67-1.06,1.62,1,.61,1.39-0.44.88a8,8,0,0,0-9.17,1.52C126.07,135.67,125.05,134.79,126.29,133.17Z" transform="translate(-61.67 -77.14)" fill="#c47816"/>
-														<path class="cls-10" d="M103.55,133.17c-2.23-2.91-7.44-3-10.67-1.06-1.62,1-.61,1.39.44,0.88a8,8,0,0,1,9.17,1.52C103.77,135.67,104.79,134.79,103.55,133.17Z" transform="translate(-61.67 -77.14)" fill="#c47816"/>
+													<g id="eye-brow">
+														<path class="eye-brow" d="M126.29,133.17c2.23-2.91,7.44-3,10.67-1.06,1.62,1,.61,1.39-0.44.88a8,8,0,0,0-9.17,1.52C126.07,135.67,125.05,134.79,126.29,133.17Z" transform="translate(-61.67 -77.14)" fill="#c47816"/>
+														<path class="eye-brow" d="M103.55,133.17c-2.23-2.91-7.44-3-10.67-1.06-1.62,1-.61,1.39.44,0.88a8,8,0,0,1,9.17,1.52C103.77,135.67,104.79,134.79,103.55,133.17Z" transform="translate(-61.67 -77.14)" fill="#c47816"/>
 													</g>
 													<g id="hire-style-path" >
 														<path  class="cls-11" d="M158.44,124.78c0-.4-0.09-0.79-0.14-1.18,0-19.1-11.68-37-39.28-38.48-15.75-1.45-33,.4-38-6.84-4.41,7.17-4.83,14.59.75,19.53-6.57,7.33-9.44,17-9.2,26.93v0a23.66,23.66,0,0,0,1,8.42,0.12,0.12,0,0,0,0,.08,50.93,50.93,0,0,0,2.85,7.55c2.47,5.38,4.13,7.32,3.43.46-0.92-8.89,0-19.73,5.51-26.71,9-11.52,15.47-5.89,29.26-5.89s24-7.24,31.77,5.24c4.4,7.05,5.68,19,4.82,27.36-0.7,6.86,1,4.92,3.43-.46,0.81-1.78,1.57-3.56,2.19-5.33,0,0,0,0,0,0A24.68,24.68,0,0,0,158.44,124.78Z" transform="translate(-61.67 -78.28)" fill="#6b503f"/>
@@ -115,8 +114,10 @@
 											</div>
 											<!-- avtar-img-cover -->
 											<div class="text-center">
-												<button type="button" class="btn btn-primary" id="downloadAvtar">Get your Avtar</button>
-												<button type="button" class="btn bg_none" id="skip"><a href="journey">Skip for now</a></button>
+												<button type="button" ng-if="Selection.prev" class="btn btn-primary" ng-click="scrollTo(Selection.prev)">Previous</button>
+												<button type="button" ng-show="Selection.current=='accessories'" class="btn btn-primary" id="downloadAvtar">Get your Avatar</button>
+												<button type="button" ng-if="Selection.next" class="btn btn-primary" ng-click="scrollTo(Selection.next)">Next</button>
+												<button type="button" ng-if="!Selection.prev" class="btn bg_none" id="skip"><a href="journey">Skip for now</a></button>
 											</div>
 									</div>
 									<!-- avtar -->
@@ -124,10 +125,10 @@
 										<div class="panel panel-flat">
 											<div class="panel-body">
 												<ul class="nav nav-tabs" id="option_nav">
-												  <li class="active"><a href="#skin" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/skin.svg" alt="" class="icon"> <span>Skin</span></a></li>
-												  <li><a  href="#hair" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/hair.svg" alt="" class="icon"> <span>Hair</span></a></li>
-													<li><a href="#clothes" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/cloths.svg" alt="" class="icon"> <span>Clothes</span></a></li>
-													<li><a href="#accessories" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/accessories.svg" alt="" class="icon"> <span>Accessories</span></a></li>
+												  <li id="li_skin" class="active"><a href="" ng-click="scrollTo('skin')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/skin.svg" alt="" class="icon"> <span>Skin</span></a></li>
+												  <li id="li_hair"><a  href="" ng-click="scrollTo('hair')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/hair.svg" alt="" class="icon"> <span>Hair</span></a></li>
+													<li id="li_clothes"><a href="" ng-click="scrollTo('clothes')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/cloths.svg" alt="" class="icon"> <span>Clothes</span></a></li>
+													<li id="li_accessories"><a href="" ng-click="scrollTo('accessories')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/accessories.svg" alt="" class="icon"> <span>Accessories</span></a></li>
 												</ul>
 												<!-- nav-tabs -->
 												<div class="tab-content">
@@ -464,79 +465,15 @@
       <!-- page-container -->
     </div>
     <!-- avtar-creation-page -->
-		<canvas id="canvas" width=800 height=600 download style="display: none;">
-		</canvas>
+		<canvas id="canvas" width='230' height='600' download style="display: none;"></canvas>
 		<!-- Latest compiled and minified jQuery -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<!-- plugins -->
 		<script src="assets/js/plugins/bootstrap-tabcollapse.js"></script>
 		<script src="assets/js/plugins/jquery.mCustomScrollbar.min.js"></script>
 		<!-- plugins -->
-		<script type="text/javascript" src="assets/js/pages/avtar-creation.js"></script>
+		<script type="text/javascript" src="assets/js/pages/avatar-creation.js"></script>
 		<script type="text/javascript">
-			$(document).ready(function(){
-				var windowWidth = $(window).width();
-				if(windowWidth>= 768){
-					$("#option_nav").tabCollapse();
-					$(".tab-content .tab-pane").mCustomScrollbar();
-				}
-				else {
-					$(".tab-content .tab-pane").mCustomScrollbar({
-						horizontalScroll: true,
-						theme:"dark-3"
-					});
-				}
-			});
+
 		</script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		var btn = document.getElementById("downloadAvtar");
-		var svg = document.getElementById("avtar");
-		var canvas = document.getElementById("canvas");
-
-		function triggerDownload (imgURI) {
-		var evt = new MouseEvent('click', {
-			view: window,
-			bubbles: false,
-			cancelable: true
-		});
-
-		var a = document.createElement('a');
-		a.setAttribute('download', 'Avtar_profile_pick.png');
-		a.setAttribute('href', imgURI);
-		a.setAttribute('target', '_blank');
-
-		a.dispatchEvent(evt);
-		}
-
-		btn.addEventListener('click', function () {
-		var canvas = document.getElementById('canvas');
-		var ctx = canvas.getContext('2d');
-		var data = (new XMLSerializer()).serializeToString(svg);
-		var DOMURL = window.URL || window.webkitURL || window;
-
-		var img = new Image();
-		var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-		var url = DOMURL.createObjectURL(svgBlob);
-
-		img.onload = function () {
-			ctx.drawImage(img, 0, 0);
-			DOMURL.revokeObjectURL(url);
-
-			var imgURI = canvas
-					.toDataURL('image/png')
-					.replace('image/png', 'image/octet-stream');
-
-			triggerDownload(imgURI);
-		};
-
-		img.src = url;
-		console.log(url);
-		});
-	});
-</script>
 	</body>
 </html>

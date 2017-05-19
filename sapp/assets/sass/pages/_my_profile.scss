@@ -740,3 +740,13 @@
     }
   }
 }
+
+
+// modal-avatar-change
+.modal {
+  .panel-avatar-creation {
+    .close {
+      @include margin(10px 15px null null);
+    }
+  }
+}

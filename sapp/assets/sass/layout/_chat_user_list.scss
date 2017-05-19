@@ -23,19 +23,19 @@
        @include position(absolute, -10px -10px null null);
        width: 30px;
        height: 30px;
-       background: rgba($cola,0.6);
+       background: rgba(86,29,18,0.5);
        @include border-radius(100%);
        color: $white;
        text-align: center;
        @include padding(4px null null null);
        font-style: normal;
-       font-family: $font-secondary;
+       font-family: 'Open Sans', sans-serif;
 
      }
     }
   .user_list_ul {
     width: calc(100% - 30px);
-    height: 275px;
+    height: 378px;
     overflow: hidden;
     margin: auto;
     margin-right: 5px;
@@ -51,6 +51,7 @@
       color: $vanCleef;
       font-family: $font-open-sans;
       font-size: 14px;
+      cursor: pointer;
       .user_img {
         width: 21px;
         height: 21px;
@@ -95,10 +96,11 @@
      display: none;
      padding-top: 15px;
      width: 209px;
-     min-height: 287px;
+     min-height: 412px;
      @media screen and (max-width: $screen-mobile-md){
        width: 100vw;
        height: 90vh;
+       min-height: inherit;
      }
    }
 }
