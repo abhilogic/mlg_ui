@@ -97,6 +97,33 @@ angular.module('mlg_student')
 		});
 	}
 
+
+    loginHttpResponse.getUserDetails = function(uid){
+      return $http({
+          method:'GET',
+          url   : urlParams.baseURL+urlParams.getUserDetails + '/' + uid
+      });
+	}
+
+
+	loginHttpResponse.setpreTestStatus = function(test_status,user_id) {
+		return $http({
+			method:'POST',
+			data  : {pretestStatus: test_status,user_id:user_id},
+			url   : urlParams.baseURL+urlParams.setpreTestStatus
+		});
+	}
+
+	loginHttpResponse.getpreTestStatus = function(user_id) {
+		return $http({
+			method:'GET',			
+			url   : urlParams.baseURL+urlParams.getpreTestStatus+'?user_id='+user_id
+		});
+	}
+
+	
+
+
 	return loginHttpResponse;
 	
 }])
@@ -143,12 +170,25 @@ angular.module('mlg_student')
 	  $scope.frm = {};
     
 	  
-	   // Check the condition to move either on pre-Test Page and On Sub Skill Page
-	  if(localStorage.getItem('preTestProcessStatus')!=null && localStorage.getItem('preTestProcessStatus')!=0 ) {
+	   // Check the condition to move either on pre-Test Page or On Sub Skill Page
+	   loginHttpService.getpreTestStatus(get_uid).success(function(pretestResponse) {
+	   		if (pretestResponse.response.status == "True") { 
+	   				if(pretestResponse.response.preTestStatus==1){
+	   					$scope.redirectURL='subject-view';
+	   				}
+	   				else{
+	   					$scope.redirectURL='demo_video';
+	   				}
+	   		}
+	   });
+
+
+
+	  /*if(localStorage.getItem('preTestProcessStatus')!=null && localStorage.getItem('preTestProcessStatus')!=0 ) {
 	  		$scope.redirectURL='subject-view';
 	  }else{
 	  	$scope.redirectURL='demo_video';
-	  }
+	  }*/
 
       if (document.cookie == '' || get_uid == 'null') {
         alert('kindly login');
@@ -408,7 +448,12 @@ angular.module('mlg_student')
 						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
 							if (apiresponse.response.status == "true") {
 								var quiz_id=apiresponse.response.quiz_attampt;
-								localStorage.setItem('quiz_id', quiz_id);				
+								localStorage.setItem('quiz_id', quiz_id);
+
+								// set the pretest status in user details
+								loginHttpService.setpreTestStatus(1,get_uid).success(function(preTestResponse) {});
+
+
 		  						// Step -5 to Get the User Result
 		  						loginHttpService.getUserQuizResponse(get_uid,1,quiz_id).success(function(quizResultResponse) {
 						 			 a=[];
@@ -652,7 +697,7 @@ angular.module('mlg_student')
     var param = {};
     param.user_type = 'student';
     param.condition_key = 'points';
-    param.condition_value = 500;
+    param.condition_value = $rootScope.userPoints;
     loginHttpService.getCouponByUserType(param).success(function(response) {
     if (response.status == true) {
       $scope.coupons = response.result;

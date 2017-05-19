@@ -8,6 +8,14 @@ angular.module('mlg').filter('moment', function() {
 	
 	var loginHttpResponse={};	
 	
+	loginHttpResponse.contactus=function(data){
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.contactus
+		});
+	}
+
 	
 	loginHttpResponse.login=function(data){
 		return $http({
@@ -492,6 +500,22 @@ angular.module('mlg').filter('moment', function() {
 			});
 	};
 
+
+	// For subscription 
+
+
+	//$scope.cfrm={};
+	$scope.submitContactUs = function(cfrmdata){			
+		loginHttpService.contactus(cfrmdata).success(function(response) {				
+				console.log(response);
+				if(response.data.status = "True"){
+						$scope.msg=response.data.message;
+						$scope.cfrm={};
+				}else{
+					$scope.msg=response.data.message;	
+				}					
+			});
+	};
 }])
 .controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
   $scope.frm = {}
@@ -1353,11 +1377,17 @@ if (typeof $routeParams.id != 'undefined') {
       loginHttpService.setAvailableCoupon(param).success(function (response) {
        if (response.status == true) {
          if (updated_status.toLowerCase() == 'acquired') {
+           $('#modal-couponAccept .modal-content').addClass('success');
            $('#'+coupon_id).html('<a class="btn btn-background-none text-success text-uppercase">\n\
               <i class="icon icon-tick"></i> Approved   </a>');
+           $("#modal-couponAccept").fadeOut('slow');
+           $("#modal-couponAccept").modal('hide');
          } else if (updated_status.toLowerCase() == 'rejected') {
+           $('#modal-couponReject .modal-content').addClass('success');
            $('#'+coupon_id).html('<a class="btn btn-background-none text-danger text-uppercase">\n\
               <i class="icon icon-cross"></i> Rejected</a>');
+           $('#modal-couponReject').fadeOut('slow');
+           $("#modal-couponReject").modal('hide');
          }
        }
       });

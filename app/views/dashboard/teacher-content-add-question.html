@@ -134,11 +134,11 @@
 												<label for="" class="col-xs-5 control-label">Claim :</label>
 												<div class="col-xs-7">
 														<select class="mlg-selectpicker form-control" title="Select Lessons" data-size="auto"ng-model="claimModel"ng-change="getClaimVal(claimModel)">
-														 <option value="Mm">Mathematics</option>
-														 <option value="Sc">Science</option>
-														 <option value="So.Sc">Social Science</option>
-														 <option value="Hi">History</option>
-														 <option value="Ge">Geography</option>
+														 <option value="" disabled>--Select Claim--</option>
+                             <option value="1">1</option>
+														 <option value="2">2</option>
+														 <option value="3">3</option>
+                             <option value="4">4</option>
 													</select>
 												</div>
 										</div>
@@ -171,11 +171,11 @@
 											<div class="col-xs-7">
 													<select class="mlg-selectpicker form-control" title="Select DOK"
                                   data-size="auto"ng-model="dOKModel"ng-change="getDOKValue(dOKModel)">
-														 <option value="Mm">Mathematics</option>
-														 <option value="Sc">Science</option>
-														 <option value="So.Sc">Social Science</option>
-														 <option value="Hi">History</option>
-														 <option value="Ge">Geography</option>
+                            <option value="" disabled>--Select dok--</option>
+														 <option value="1">1</option>
+														 <option value="2">2</option>
+														 <option value="3">3</option>
+														 <option value="4">4</option>
 													</select>
 											</div>
 										</div>
@@ -332,7 +332,9 @@
               </form>
 						</div>
 						<div class="panel-footer text-center">
-              <button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" data-target="#modal-saveTemplateAs"ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
+              <div id="save-question">
+                <button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
+              </div>
               <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>
               <span style="color:green">{{msg}}</span>
               <span style="color:red">{{message}}</span>
@@ -457,7 +459,7 @@
 		<!-- modal-contentPreview -->
 
 		<!-- add template  -->
-		<div id="modal-saveTemplateAs" class="modal fade modal-saveTemplateAs" role="dialog">
+		<div id="modal-saveTemplateAs" class="modal fade modal-saveTemplateAs"role="dialog">
 		  <div class="modal-dialog">
 
 		    <!-- Modal content-->
