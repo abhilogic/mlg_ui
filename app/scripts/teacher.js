@@ -206,10 +206,12 @@ angular.module('mlg')
     teacherDetail = {
        user_id : get_uid,
        school_name : data.school,
+       school_address : data.school_address,
        country : data.country,
        state : data.state,
        city : data.city,
        district : data.district,
+       zip : data.zip,
        step_completed:1,
     };
     teacherHttpService.signUpTeacher(teacherDetail).success(function(response) {
@@ -1609,8 +1611,8 @@ $scope.numberOfPages=function(){
     };
 	
 })
-.controller('teacherAddQuestionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+.controller('teacherAddQuestionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile) {
     var get_uid=commonActions.getcookies(get_uid);
     var grade = '';
     var standard = [];
@@ -1627,6 +1629,8 @@ $scope.numberOfPages=function(){
     var qType = [];
     var claim = '';
     var dok = '';
+    var difficulityName = '';
+    var  templateId = '';
     $scope.frm = {};
     $scope.doc = {};
     $scope.temp = {};
@@ -1641,6 +1645,7 @@ $scope.numberOfPages=function(){
     $scope.questionTypeModel = [];
     $scope.questionType = [];
     $scope.ansCount = 0;
+    $scope.show = 'false';
     // template detail show
     teacherHttpService.getTemplateDetail(get_uid,'question').success(function(response) {
       if (response.status == true) {
@@ -1649,8 +1654,6 @@ $scope.numberOfPages=function(){
         $scope.template = temp;
         $scope.template.splice(0,0,{'id' :'','template_name' :'---Select template---'});
         $scope.selectedTemplateModel = $scope.template[0][0];
-      }else{
-        $scope.msg = 'unable to find template';
       }
     });
     
@@ -1811,6 +1814,11 @@ $scope.numberOfPages=function(){
       });
       $scope.getDifficulityVal = function(){
         difficulity = $scope.diffulityModel;
+        angular.forEach($scope.difficulty,function(diffValue,diffKey){
+          if(diffValue['id'] == $scope.diffulityModel){
+            difficulityName = diffValue['name'];
+          }
+        });
       };
     //Question type 
       teacherHttpService.questionType().success(function(response) {
@@ -1835,10 +1843,14 @@ $scope.numberOfPages=function(){
     };               
     var question = {};
     $scope.submitQuestion = function(data) {
+      console.log(templateId);
       var answerList = '';
       var optionChecked = '';
       var Qtyp = '';
+      var gradeName = '';
+      var courseName = '';
       if(typeof(data.ans1) == 'undefined'){
+        alert('1');
         answerList = $scope.img;
         Qtyp = 'image'
         var radios = document.getElementsByName('IMAGESS');
@@ -1853,14 +1865,30 @@ $scope.numberOfPages=function(){
         Qtyp = 'text';
         optionChecked = $scope.ansChecked;
       }
+      angular.forEach($scope.level,function(gradeValue,gradeKey){
+        if(gradeValue['id'] == grade){
+          
+          gradeName = gradeValue['name'];
+          alert('gradeName');
+        }
+      });
+      angular.forEach($scope.subject,function(courValue,courKey){
+        if(courValue['course_id'] == $scope.courseSelected) {
+          courseName = courValue['course_name'];
+          alert(courseName);
+        }
+      });
       question = {
         tid : get_uid,
         grade : grade,
+        grade_name : gradeName,
         course : course,
+        course_name : courseName,
         standard : standard,
         skills : skillId,
         sub_skill : subSkills,
         ques_diff : difficulity,
+        ques_diff_name : difficulityName,
         ques_type : qType,
         ques_complexity :data.complexity,
         ques_passage : data.passage,
@@ -1876,14 +1904,18 @@ $scope.numberOfPages=function(){
         type : Qtyp,
       };
      teacherHttpService.uploadQuestion(question).success(function(response){
+       $scope.msg = '';
+       $scope.message = '';
        if(response.status == true){
-        $scope.msg = response.message; 
+         if(templateId == ''){
+           $('#modal-saveTemplateAs').modal('show');
+         }
+        $scope.msg = response.message;
        }else{
          $scope.message = response.message;
-       }
-       
+       } 
      }).error(function(error){
-       
+       $scope.message = 'Some technical error occurred';
      });
     }
     $scope.submitTemplate = function(data){
@@ -1900,17 +1932,25 @@ $scope.numberOfPages=function(){
         $scope.msg= 'Some technical error occured.';
       });
     }
+    //set template value
     $scope.getTemplate = function(data) {
     var subTemp = [];
     var subTempCount = 0;
     tempStatus = 1;
     var tempId = $scope.selectedTemplateModel;
+    templateId = $scope.selectedTemplateModel;
+    console.log(templateId);
     $scope.skill=[];
     $scope.subSkill=[];
     $scope.skillmodel = [];
     $scope.subSkillmodel = [];
     $scope.standardmodel = [];
     $scope.standardTypemodel = [];
+    var myRem = angular.element(document.querySelector('#save-question button'));
+    myRem.remove(); 
+    var myEleme = angular.element(document.querySelector('#save-question'));
+    myEleme.append($compile('<button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE QUESTION</button>')($scope));  
+      //grade in template
     angular.forEach($scope.template , function(value, key) {
       if(tempId == value['id']) {
         //for grade
@@ -1989,17 +2029,24 @@ $scope.numberOfPages=function(){
 //      $scope.standardTypemodel.push({'id' : val, 'label': val });
 //      })
         $scope.diffulityModel = value['ques_diff'];
+        angular.forEach($scope.difficulty,function(diffValue,diffKey){
+          if(diffValue['id'] == $scope.diffulityModel){
+            difficulityName = diffValue['name'];
+          }
+        });
         difficulity = value['ques_diff'];
         $scope.claimModel = value['claim'];
         claim = value['claim'];
         $scope.frm.rScope = value['scope'];
         $scope.dOKModel = value['dok'];
         dok = value['dok'];
+        console.log(value['ques_passage']);
         $scope.frm.passage = value['ques_passage'];
         $scope.frm.target = value['ques_target'];
         $scope.frm.task = value['task'];
         $scope.frm.complexity = value['ques_complexity'];
         $scope.frm.assignment = value['assignment'];
+        qType = value['ques_type'];
         angular.forEach(value['ques_type'],function(type,key){
           angular.forEach($scope.questionType,function(qlist,key){
             if(type == qlist['id']){

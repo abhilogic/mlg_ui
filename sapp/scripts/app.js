@@ -20,7 +20,10 @@ getUsedCoupon: '/users/getUsedCoupon',
 setAvailableCoupon: '/users/setAvailableCoupon',
 khanApiTopic: 'http://www.khanacademy.org/api/v1/topic/',
 khanApiVideo: 'http://www.khanacademy.org/api/v1/videos/',
-khanApiArticle: 'http://www.khanacademy.org/api/v1/articles/'
+khanApiArticle: 'http://www.khanacademy.org/api/v1/articles/',
+setpreTestStatus: '/users/setpreTestStatus',
+getpreTestStatus: '/users/getpreTestStatus'
+
 
 }).value('REGEX', {
 LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',

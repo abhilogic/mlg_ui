@@ -247,33 +247,33 @@
               <div class="row margin-0">
                 <div class="col-md-8 col-sm-6 form_cover">
                   <h4>Send us a Message<span class="fa fa-envelope pull-right"></span></h4>
-                  <form class="form"  id="contact-submit" method="post" action="emailTemplate.php">
+                  <form class="form"  id="contact-submit">
                     <div class="row">
                     	<div class="col-sm-6">
-												<div class="form-group">
+							<div class="form-group">
 		                      <label for="">Your Name</label>
-		                      <input type="text" class="form-control" id="contact_name"/>
+		                      <input type="text" class="form-control" id="contact_name"  ng-model="cfrm.name"/>
 		                    </div>
                     	</div>
 											<div class="col-sm-6">
 		                    <div class="form-group">
 		                      <label for="">Phone Number</label>
-		                      <input type="text" class="form-control" id="contact_phone"/>
+		                      <input type="text" class="form-control" id="contact_phone" ng-model="cfrm.phone"/>
 		                    </div>
 											</div>
                     </div>
                     <div class="form-group">
                       <label for="">Email</label>
-                      <input type="email" class="form-control" id="contact_email" />
+                      <input type="email" class="form-control" id="contact_email" ng-model="cfrm.email"/>
                     </div>
                     <div class="form-group">
                       <label for="">message</label>
-                      <textarea type="" class="form-control" id="contact_text"></textarea>
+                      <textarea type="" class="form-control" id="contact_text" ng-model="cfrm.contact_text"></textarea>
                     </div>
-                     <button type="submit" class="btn-send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                     <button type="submit" class="btn-send" ng-click="submitContactUs(cfrm)"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                     <!-- <input type="submit" name="submit" value="submit"> -->
                   </form>
-                  <div id="contact_submit_result" style="color:green"></div>
+                  <div id="contact_submit_result" style="color:green">{{msg}}</div>
                 </div>
                 <div class="col-md-4 col-sm-6 detail_cover">
                   <h4>Contact Information</h4>
@@ -421,12 +421,12 @@
 	                     });
 
 	      /* Alerts the results */
-	      posting.done(function( data ) {
+	     /* posting.done(function( data ) {
 	        console.log(data);
 	         $('#contact-submit')[0].reset();
 	        $('#contact_submit_result').text(data);
 	        $('#contact_submit_result').fadeOut(3500);
-	      });
+	      });*/
 	    });
 
 

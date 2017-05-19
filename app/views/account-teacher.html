@@ -1,107 +1,112 @@
-<!-- Page container -->
-<div class="page-container">
+	<!-- Page container -->
+	<div class="page-container">
 
-  <!-- Page content -->
-  <div class="page-content">
+		<!-- Page content -->
+		<div class="page-content">
 
-    <!-- Main content -->
-    <div class="content-wrapper">
+			<!-- Main content -->
+			<div class="content-wrapper">
 
-      <!-- Onboarding: Login Teacher -->
+				<!-- Onboarding: Login Teacher -->
 
-        <div class="panel panel-flat panel-onboarding">
-          <div class="panel-heading">
-            <h4 class="spanel-title"><b><img src="assets/img/logo.png" alt="" /></b> <small class="pull-right"><a href="login.html" class="link link-gray-light">Already have an account?</a></small></h4>
-          </div>
+					<div class="panel panel-flat panel-onboarding panel-teacher-account">
+						<div class="panel-heading">
+							<h4 class="panel-title"><img src="assets/img/logo-onboarding.png" alt=""></h4>
+							<!-- change compare with the last one -->
+						</div>
 
-          <div class="panel-body">
-            <div class="row as-table">
-              <div class="col-sm-6 col-left">
-                <div class="content-header">
-                  <h5 class="content-tagline">Track your Class Progress with</h5>
-                  <h4 class="content-title">MY LEARNING GURU</h4>
-                </div>
-                <img src="assets/img/lense_img.png" class="img-responsive img-content">
-              </div>
+						<div class="panel-body">
+							<div class="row as-table">
+								<div class="col-sm-6 col-left">
+									<h4 class="sign_in_left_hd">
+				              Track your Class Progress with
+				              <span>‘’MyLearninGuru’’</span>
+				          </h4>
+				          <img src="assets/img/lense_img.png" class="img-responsive img-content">
+								</div>
+								<div class=" col-sm-6 col-right">
+									<div class="confirm-success-msg success">
+										<i class="icon icon-check"></i>
+										<p>Congratulation! you have successfully registered with us Now it's time to <b>Become a Member</b></p>
+									</div>
+									<h3 class="text-light text-gray-light text-center">Setup your account</h3>
+									<formclass="form-login">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="form-group float-label">
+													<label class="control-label">STATE / PROVINCE</label>
+													<select type="text" class="form-control float-input" ng-model="tch.state">
+														<option value="Delhi">Delhi</option>
+		                        <option value="Rajesthan">Rajasthan</option>
+		                        <option value="Kerla">Kerla</option>
+													</select>
+												</div>
+											</div>
 
-              <div class=" col-sm-6 col-right">
+											<div class="col-sm-6">
+												<div class="form-group float-label">
+													<label class="control-label">District</label>
+													<select type="text" class="form-control float-input" ng-model="tch.district">
+														<option value=""></option>
+														<option value="Delhi">Delhi</option>
+		                        <option value="Rajesthan">Rajasthan</option>
+		                        <option value="Kerla">Kerla</option>
+													</select>
+												</div>
+											</div>
+										</div>
 
-                <div class="content-header">
-                  <p class="content-tagline">Setup your account</p>
-                </div>
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="form-group float-label">
+													<label class="control-label">Country</label>
+													<select type="text" class="form-control float-input" ng-model="tch.country">
+														<option value=""></option>
+														<option value="india">India</option>
+														<option value="Bangla Desh">Bangla Desh</option>
+														<option value="Afganishtan">Afganishtan</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div class="form-group float-label">
+													<label class="control-label">Zip code</label>
+                          <input type="text" class="form-control float-input" ng-model="tch.zip"/>
+												</div>
+											</div>
+										</div>
 
-                <form name="teacher_form" class="form-login">
-                  <div class="form-group float-label">
-                    <label class="control-label">School Name</label>
-                    <input type="text" class="form-control float-input" ng-model="tch.school"/>
-                  </div>
+										<div class="form-group float-label">
+											<label class="control-label">School Name</label>
+											<input type="text" class="form-control float-input" ng-model="tch.school"/>
+										</div>
 
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="form-group float-label">
-                        <label class="control-label">Country</label>
-                        <select type="text" class="form-control float-input" ng-model="tch.country">
-                          <option value=""></option>
-                          <option value="india">India</option>
-                          <option value="Bangla Desh">Bangla Desh</option>
-                          <option value="Afganishtan">Afganishtan</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group float-label">
-                        <label class="control-label">STATE / PROVINCE</label>
-                        <select type="text" class="form-control float-input" ng-model="tch.state">
-                          <option value=""></option>
-                          <option value="Delhi">Delhi</option>
-                          <option value="Rajesthan">Rajesthan</option>
-                          <option value="Kerla">Kerla</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="form-group float-label">
-                        <label class="control-label">City</label>
-                        <select type="text" class="form-control float-input" ng-model="tch.city">
-                          <option value=""></option>
-                          <option value="india">India</option>
-                          <option value="Bangla Desh">Bangla Desh</option>
-                          <option value="Afganishtan">Afganishtan</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group float-label">
-                        <label class="control-label">District</label>
-                        <select type="text" class="form-control float-input" ng-model="tch.district">
-                          <option value=""></option>
-                          <option value="Delhi">Delhi</option>
-                          <option value="Rajesthan">Rajesthan</option>
-                          <option value="Kerla">Kerla</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary" ng-click="submitTeacherDetail(tch)">Proceed</button>
-                     <span class="has_error" ng-if="msg">{{msg}}</span>
-                  </div>
-                </form>
-              </div><!-- /.col-right-->
-            </div>
-          </div>
+										<div class="form-group float-label">
+											<label class="control-label">School Address</label>
+                      <input type="text" class="form-control float-input" ng-model="tch.school_address"/>
+										</div>
 
-        </div>
-        <!-- /.onboarding: login teacher-->
+										<br>
+										<div class="form-group text-center">
+											<button type="submit" class="btn btn-primary" ng-click="submitTeacherDetail(tch)">Proceed</button>
+                      <span class="has_error" ng-if="msg">{{msg}}</span>
+										</div>
+									</form>
 
-    </div>
-    <!-- /main content -->
+								</div><!-- /.col-right-->
+							</div>
+						</div>
 
-  </div>
-  <!-- /page content -->
+					</div>
+					<!-- /.onboarding: login teacher-->
+					<p class="legal"><a href="terms-parent.html">Terms & conditions</a></p>
 
-</div>
-<!-- page container -->
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+	<!--<script src="assets/js/pages/onboarding.js"></script>-->
