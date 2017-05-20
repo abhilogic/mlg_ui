@@ -274,6 +274,22 @@ angular.module('mlg').filter('moment', function() {
 			url   : urlParams.baseURL+urlParams.setAvailableCoupon
 		});
 	}
+
+    loginHttpResponse.getUserSetting = function(data) {
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.getUserSetting
+		});
+	}
+
+    loginHttpResponse.setUserSetting = function(data) {
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.setUserSetting
+		});
+	}
 	return loginHttpResponse;
 	
 }])
@@ -1357,10 +1373,33 @@ if (typeof $routeParams.id != 'undefined') {
 .controller('parentRedeemCtrl',['$rootScope','$scope','$filter','$routeParams','commonActions','loginHttpService','$location','urlParams','$http','user_roles',
   function($rootScope, $scope, $filter, $routeParams, commonActions, loginHttpService, $location, urlParams, $http, user_roles) {
     var get_uid = commonActions.getcookies(get_uid);
-    console.log($routeParams.id);
     if (get_uid == '') {
       alert('Kindly login');
+       window.location.href='/mlg_ui/app/signin';
       return false;
+    }
+    $scope.automatic_approval_status = false;
+    $scope.init = function() {
+      var setting_request = {'user_id': get_uid, 'setting_key': 'automatic_approval'};
+      loginHttpService.getUserSetting(setting_request).success(function (response) {
+        if (response.status == true) {
+          console.log(response.result);
+          if (response.result.setting_value == 1 || response.result.setting_value == true) {
+            $scope.automatic_approval_status = true;
+          } else {
+            $scope.automatic_approval_status = false;
+          }
+        }
+      });
+    }
+
+    $scope.changeStatus = function() {
+      var set_setting = {'user_id' : get_uid, 'setting_key' : 'automatic_approval', 'setting_value' : !$scope.automatic_approval_status};
+      loginHttpService.setUserSetting(set_setting).success(function (response) {
+        if (response.status == true) {
+          $scope.automatic_approval_status = !$scope.automatic_approval_status;
+        }
+      });
     }
     $scope.avail_coupons = [];
     var coupon_data = {user_id: $routeParams.id};

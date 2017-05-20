@@ -29,13 +29,10 @@
           <div class="panel-body parentRedeem-content">
             <ul class="list-inline heading-text text-right text-xs-center">
               <li>
-                <div class="switch-box label-left is-success margin-top-0">
-                  <div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
-                    <label>
-                      <input type="checkbox" class="js-switch">
-                    </label>
-                  </div>
-                  <label for="automaticApproval" class="switch-box-label">Automatic Approval</label>
+                <div class="switch-box label-left is-success margin-top-0" ng-init="init()">
+                  <label for="automaticApproval" class="switch-box-label margin-top-10">Automatic Approval</label>
+                  <i class="fa fa-toggle-on active" ng-if="automatic_approval_status == true" ng-click="changeStatus();"></i>
+                  <i class="fa fa-toggle-on fa-rotate-180 inactive" ng-if="automatic_approval_status == false" ng-click="changeStatus();"></i>
                 </div>
               </li>
             </ul>
@@ -143,5 +140,3 @@
   </div>
 </section>
 <!-- modal-section -->
-<script src="../assets/js/main.js"></script>
-

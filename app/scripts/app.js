@@ -29,6 +29,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	offerRecords : '/users/getOffers',
 	getStepNum :'/users/getStepNum',
 	getUsedCoupon: '/users/getUsedCoupon',
+	getUserSetting: '/users/getUserSetting',
+	setUserSetting: '/users/setUserSetting',
     setAvailableCoupon: '/users/setAvailableCoupon',
   promocode :'/users/promocode',
   getUserPurchaseDetails :'/users/getUserPurchaseDetails',
