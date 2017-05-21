@@ -712,7 +712,15 @@ angular.module('mlg_student')
       param.condition_value = $scope.userPoints;
       loginHttpService.getCouponByUserType(param).success(function(response) {
         if (response.status == true) {
-         $scope.coupons = response.result;
+          $scope.coupons = response.result;
+
+          //If coupon is visible, then coupon must be in redeem state.
+          angular.forEach($scope.coupons, function(coupon, coupon_index) {
+            if (coupon.visibility == 'visible') {
+              coupon.process_status = 'Redeem';
+            }
+          });
+
          var coupon_data = {user_id: get_uid};
          loginHttpService.getUsedCoupon(coupon_data).success(function (avail_coupons) {
            angular.forEach(avail_coupons.result, function(avail_coupon, avail_coupon_index) {
@@ -746,7 +754,7 @@ angular.module('mlg_student')
       $("#modal-allRedeem").modal();
 	};
 
-    $scope.coupon_requested = function (coupon_id, coupon_visibility, coupon_process_status) {
+    $scope.coupon_requested = function (coupon_id, coupon_visibility, coupon_process_status, coupon_value) {
       if (coupon_visibility == 'hidden') {
         alert('You can not request for locked coupon');
         return false;
@@ -770,11 +778,24 @@ angular.module('mlg_student')
             if (coupon.id == coupon_id) {
               if (coupon.process_status.toLowerCase() == 'redeem') {
                 coupon.process_status = response.coupon_status;
+                $scope.userPoints = $scope.userPoints - coupon_value;
               } else {
                 alert('coupon already in progress');
               }
             }
           });
+        } else if (response.status == false && response.error_code != ''){
+          switch(response.error_code) {
+            case 'ZERO_POINT':
+              alert('You have zero points');
+              break;
+            case 'LESS_POINT':
+              alert('You have Insufficient Points');
+              break;
+            case 'POINT_GET_ERROR':
+              alert('Unable to get your points');
+              break;
+          }
         }
       });
     }
