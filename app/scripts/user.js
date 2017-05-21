@@ -1383,7 +1383,6 @@ if (typeof $routeParams.id != 'undefined') {
       var setting_request = {'user_id': get_uid, 'setting_key': 'automatic_approval'};
       loginHttpService.getUserSetting(setting_request).success(function (response) {
         if (response.status == true) {
-          console.log(response.result);
           if (response.result.setting_value == 1 || response.result.setting_value == true) {
             $scope.automatic_approval_status = true;
           } else {

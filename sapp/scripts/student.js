@@ -649,32 +649,49 @@ angular.module('mlg_student')
     $scope.coupon_not_acquired = [];
     $scope.display_front_cards = 5;
     $scope.acquired_coupon_count = 0;
-    var param = {};
-    param.user_type = 'student';
-    param.condition_key = 'points';
-    param.condition_value = $rootScope.userPoints;
-    loginHttpService.getCouponByUserType(param).success(function(response) {
-    if (response.status == true) {
-      $scope.coupons = response.result;
-     var coupon_data = {user_id: get_uid};
-     loginHttpService.getUsedCoupon(coupon_data).success(function (avail_coupons) {
-       angular.forEach($scope.coupons, function(coupon, coupon_index) {
-        coupon.process_status = '';
-        angular.forEach(avail_coupons.result, function(avail_coupon, avail_coupon_index) {
-          if (avail_coupon.id == coupon.id) {
-             coupon.process_status = avail_coupon.status;
-            if (avail_coupon.status.toLowerCase() == 'acquired') {
-             $scope.coupons_acquired.push(coupon);
-             $scope.coupons.splice(coupon_index, 1);
-            }
-          }
-        });
-       });
-       $scope.acquired_coupon_count = $scope.coupons_acquired.length;
-       $scope.total_coupons = $scope.coupons.length;
-     });
+
+    loginHttpService.getUserDetails(get_uid).success(function(response) {
+      if (typeof (response.data.user_all_details) != 'undefined') {
+        var user = response.data.user_all_details;
+        $scope.userPoints = user[0].user_detail.points;
+        process_page();
+      } else {
+        alert('Please sign up to continue');
+      }
+    });
+
+    function process_page() {
+      var param = {};
+      param.user_type = 'student';
+      param.condition_key = 'points';
+      param.condition_value = $scope.userPoints;
+      loginHttpService.getCouponByUserType(param).success(function(response) {
+        if (response.status == true) {
+         $scope.coupons = response.result;
+         var coupon_data = {user_id: get_uid};
+         loginHttpService.getUsedCoupon(coupon_data).success(function (avail_coupons) {
+           angular.forEach(avail_coupons.result, function(avail_coupon, avail_coupon_index) {
+            angular.forEach($scope.coupons, function(coupon, coupon_index) {
+               if (avail_coupon.coupon_id == coupon.id) {
+                  coupon.process_status = avail_coupon.status;
+                 if (avail_coupon.status.toLowerCase() == 'acquired') {
+                   coupon.coupon_label = 'View';
+                   $scope.coupons_acquired.push(coupon);
+                   $scope.coupons.splice(coupon_index, 1);
+                 }
+               }
+             });
+            });
+            $scope.acquired_coupon_count = $scope.coupons_acquired.length;
+            $scope.total_coupons = $scope.coupons.length;
+         });
+        }
+      });
     }
-  });
+
+    $scope.showCoupon = function(obj) {
+      obj.coupon_label = obj.coupon_code;
+    }
 
 	$scope.openmodelRedeem=function(){
 		$("#modal-redeem").modal();
@@ -707,7 +724,7 @@ angular.module('mlg_student')
           angular.forEach($scope.coupons, function(coupon, coupon_index) {
             if (coupon.id == coupon_id) {
               if (coupon.process_status.toLowerCase() == 'redeem') {
-                coupon.process_status = requested_coupon_status;
+                coupon.process_status = response.coupon_status;
               } else {
                 alert('coupon already in progress');
               }

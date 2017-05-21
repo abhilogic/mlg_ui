@@ -65,7 +65,7 @@
           </div>
           <div  ng-repeat="coupon in coupons | limitTo: display_front_cards"  class="col-md-2 col-sm-3 col-xs-12">
             <div class="coupon_cover" ng-class="{'locked': coupon.visibility == 'hidden', 'coupon-redeemed' : coupon.process_status.toLowerCase() == 'redeem'}"> 
-            <img src="assets/img/provider_logo.png" alt="" class="coupon_provider_logo"/>
+            <img src="{{coupon.image}}" alt="" class="coupon_provider_logo"/>
               <ul>
                 <li><span>{{coupon.description}}</span></li>
                 <li><span class="icons coin"></span><span>{{coupon.conditional_value}}</span></li>
@@ -305,12 +305,12 @@
           <div class="owl-carousel owl-theme accquired-coupones">
             <div ng-repeat="coupon in coupons_acquired" class="item">
               <div class="coupon_cover locked">
-                <img src="assets/img/provider_logo.png" alt="" class="coupon_provider_logo"/>
+                <img src="{{coupon.image}}" alt="" class="coupon_provider_logo"/>
                 <ul>
                   <li><span>{{coupon.description}}</span></li>
                   <li><span class="icons coin"></span><span>{{coupon.conditional_value}}</span></li>
                 </ul>
-                <button type="button" class='btn'>View</button>
+                <button type="button" ng-click = "showCoupon(coupon)" class="btn">{{coupon.coupon_label}}</button>
               </div>
             </div>
             <!--  ITEMS ENDED HERE -->
@@ -333,7 +333,7 @@
         <div class="modal-body">
           <div ng-repeat="coupon in coupons"  class="col-md-4 col-sm-6">
             <div class="coupon_cover" ng-class="{'locked': coupon.visibility == 'hidden', 'coupon-redeemed' : coupon.process_status.toLowerCase() == 'redeem'}">
-              <img src="assets/img/provider_logo.png" alt="" class="coupon_provider_logo"/>
+              <img src="{{coupon.image}}" alt="" class="coupon_provider_logo"/>
               <ul>
                 <li><span>{{coupon.description}}</span></li>
                 <li><span class="icons coin"></span><span>{{coupon.conditional_value}}</span></li>
@@ -553,5 +553,5 @@
     var progress_range_width = (totalWidth * percentVal) / 100 + "px";
     console.log(progress_range_width);
     $(".progress_range").css("clip", "rect(0px," + progress_range_width + ", 57px, 0px)");
-  });
+});
 </script>
