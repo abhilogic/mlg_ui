@@ -1,6 +1,36 @@
 .panel-avtar-design {
+  .panel-heading {
+    @media screen and (max-width: $screen-xs-max){
+      display: none;
+    }
+    .left-portion {
+      @media screen and (max-width: $screen-xs-max){
+        text-align: center;
+        @include margin(null null 15px null);
+      }
+    }
+    .right-portion {
+      @media screen and (max-width: $screen-xs-max){
+        text-align: center;
+      }
+    }
+  }
+    margin-bottom: 0px;
+    font-family: 'Open Sans', sans-serif;
+    @media screen and (min-width: $screen-sm-max){
+      max-width: 990px;
+      margin: auto;
+    }
+    @media screen and (max-width: $screen-sm-max) and (min-width: $screen-sm){
+      max-width: 742px;
+      margin: auto;
+    }
+
+
+
   .panel-body {
     min-height: auto !important;
+    font-family: 'Opan Sans', sans-serif;
     @media screen and (max-width: $screen-xs-max){
       @include padding(0px null 0px null);
     }
@@ -32,9 +62,10 @@
           @include border-radius(0px);
           @include border-width(0px);
           margin-right: 0px;
-          min-height: 46px;
+          font-family: 'Open Sans', sans-serif;
           @media screen and (max-width: $screen-xs-max){
             @include padding(20px null);
+            min-height: 46px;
             min-width: 50px;
           }
           &:hover {
@@ -88,11 +119,16 @@
             @media screen and (max-width: $screen-mobile-xs){
               max-width: 200px;
             }
+            .mCS-dark-3.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+              width: 2px !important;
+            }
+            .mCSB_inside > .mCSB_container {
+              margin-right: -5px;
+            }
           }
         }
-        .mCSB_inside > .mCSB_container {
-          margin-right: -5px;
-        }
+
+
       }
 
       // body tone
@@ -118,7 +154,7 @@
           &.active {
             &:before {
               content: "\f00c";
-              color: #ac998a;
+              color: rgba(0,0,0,0.4);
               display: block;
               font: normal normal normal 36px/1 FontAwesome;
               margin-top: 34%;
@@ -133,22 +169,7 @@
               }
             }
           }
-          &:first-child {
-            &.active {
-              &:after {
-                content: "Default";
-                font-family: $font-open-sans;
-                display: block;
-                z-index: 10;
-                position: absolute;
-                top: 60%;
-                left: 31%;
-                @media screen and (max-width: $screen-xs-max){
-                  @include margin(null null null -10%);
-                }
-              }
-            }
-          }
+
           &.active {
             @include box-shadow(none);
             background: #ededed;
@@ -163,11 +184,17 @@
       // here style
       .hair-style {
         .btn {
+          height: 137px;
           &:first-child {
             &.active {
               &:after {
                 display: none;
               }
+            }
+          }
+          img {
+            @media screen and (min-width: $screen-sm){
+              max-width: 90%;
             }
           }
         }
@@ -176,7 +203,7 @@
       // cloths
       .cloth {
         .btn {
-          height: 178px;
+          height: 167px;
           @media screen and (max-width: $screen-xs-max){
             height: 70px;
             img {
