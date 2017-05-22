@@ -124,48 +124,49 @@ $(document).ready(function(){
 });
 
 // canvas for avatar creation
-$(document).ready(function(){
-  var btn = document.getElementById("downloadAvtar");
-  var svg = document.getElementById("avtar");
-  var canvas = document.getElementById("canvas");
+// $(document).ready(function(){
+//   var btn = document.getElementById("downloadAvtar");
+//   var svg = document.getElementById("avtar");
+//   var canvas = document.getElementById("canvas");
 
-  function triggerDownload (imgURI) {
-  var evt = new MouseEvent('click', {
-    view: window,
-    bubbles: false,
-    cancelable: true
-  });
+//   function triggerDownload (imgURI) {
+//   var evt = new MouseEvent('click', {
+//     view: window,
+//     bubbles: false,
+//     cancelable: true
+//   });
 
-  var a = document.createElement('a');
-  a.setAttribute('download', 'Avtar_profile_pick.png');
-  a.setAttribute('href', imgURI);
-  a.setAttribute('target', '_blank');
+//   var a = document.createElement('a');
+//   a.setAttribute('download', 'Avtar_profile_pick.png');
+//   a.setAttribute('href', imgURI);
+//   a.setAttribute('target', '_blank');
 
-  a.dispatchEvent(evt);
-  }
+//   a.dispatchEvent(evt);
+//   }
 
-  btn.addEventListener('click', function () {
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
-  var data = (new XMLSerializer()).serializeToString(svg);
-  var DOMURL = window.URL || window.webkitURL || window;
+//   btn.addEventListener('click', function () {
+//   var canvas = document.getElementById('canvas');
+//   var ctx = canvas.getContext('2d');
+//   var data = (new XMLSerializer()).serializeToString(svg);
+//   var DOMURL = window.URL || window.webkitURL || window;
 
-  var img = new Image();
-  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-  var url = DOMURL.createObjectURL(svgBlob);
+//   var img = new Image();
+//   var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+//   var url = DOMURL.createObjectURL(svgBlob);
 
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0);
-    DOMURL.revokeObjectURL(url);
+//   img.onload = function () {
+//     ctx.drawImage(img, 0, 0);
+//     DOMURL.revokeObjectURL(url);
 
-    var imgURI = canvas
-        .toDataURL('image/png')
-        .replace('image/png', 'image/octet-stream');
+//     var imgURI = canvas
+//         .toDataURL('image/png')
+//         .replace('image/png', 'image/octet-stream');
 
-    triggerDownload(imgURI);
-  };
+//     triggerDownload(imgURI);
+//   };
 
-  img.src = url;
-  console.log(url);
-  });
-});
+//   img.src = url;
+//   console.log(url);
+//   });
+// });
+

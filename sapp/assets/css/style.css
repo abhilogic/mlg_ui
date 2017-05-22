@@ -1977,6 +1977,7 @@ label span {
   position: absolute;
   top: 16px;
   left: 0px;
+  overflow: hidden;
   padding: 4px;
   background-image: url(../img/student_prof_img_bg.png);
   background-size: 100% 100%;
@@ -1990,12 +1991,23 @@ label span {
     left: 16px;
   }
 }
-.navbar-default .profile_pick img {
-  width: 100%;
-  height: 100%;
+.navbar-default .profile_pick .cover {
+  height: 52px;
+  width: 52px;
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   border-radius: 100%;
+  overflow: hidden;
+}
+.navbar-default .profile_pick .cover img {
+  width: 100%;
+  height: auto;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  margin-top: -10px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .navbar-default .dropdown-menu {
   background-image: url(../img/navbar-dropdown-bg.png);
@@ -3935,13 +3947,36 @@ label span {
   border-radius: 100%;
   z-index: 10;
 }
-.profile_block .student_progress_info li.student_img .profile_img_cover img {
+.profile_block .student_progress_info li.student_img .profile_img_cover .profile_img {
+  width: 77px;
+  height: 70px;
+  overflow: hidden;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+.profile_block .student_progress_info li.student_img .profile_img_cover .profile_img img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  margin-top: -10px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .profile_block .student_progress_info li .mascout-img.off {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+}
+.profile_block .student_progress_info li.view-report .img_1 {
+  display: block;
+}
+.profile_block .student_progress_info li.view-report .img_2 {
+  display: none;
+}
+.profile_block .student_progress_info li.view-report:hover .img_1 {
+  display: none !important;
+}
+.profile_block .student_progress_info li.view-report:hover .img_2 {
+  display: block !important;
 }
 .profile_block .progress_bar {
   margin-top: 100px;
@@ -4107,6 +4142,9 @@ label span {
   background-image: url("../img/redeem_coupon_bg_lock.png");
   position: relative;
 }
+.coupon_cover.locked ul li span.coin {
+  opacity: 0.4;
+}
 .coupon_cover.locked:before {
   content: '\0047';
   position: absolute;
@@ -4197,15 +4235,22 @@ label span {
   padding: 3px 12px;
 }
 
+@media screen and (min-width: 991px) {
+  .modal-redeem .modal-dialog {
+    min-width: 829px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
 .modal-redeem .modal-dialog, .modal-redeem .modal-body, .modal-redeem .modal-content, .modal-redeem .modal-header, .modal-redeem .modal-footer {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(26, 26, 26, 0.75);
   border-width: 0;
 }
 .modal-redeem .modal-header {
   color: #c29316;
 }
 .modal-redeem .modal-header .close {
-  margin-top: -23px;
+  margin-top: -7px;
   color: white;
   opacity: 1;
   font-family: "Playfair Display", serif;
@@ -4222,6 +4267,7 @@ label span {
 .modal-redeem .modal-body {
   max-height: 440px;
   overflow: hidden;
+  padding-bottom: 30px;
 }
 .modal-redeem .modal-body .coupon_cover {
   margin-right: auto;
@@ -7269,9 +7315,6 @@ label span {
   .panel-avtar-design .options .panel .panel-body .tab-content .tab-pane {
     max-width: 200px;
   }
-}
-.panel-avtar-design .options .panel .panel-body .tab-content .tab-pane .mCS-dark-3.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-  width: 2px !important;
 }
 .panel-avtar-design .options .panel .panel-body .tab-content .tab-pane .mCSB_inside > .mCSB_container {
   margin-right: -5px;
