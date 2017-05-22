@@ -294,7 +294,7 @@ angular.module('mlg_student')
 	    }   
 };
 //    if($location.path() == '/avtar2') {
-      alert('hi');
+      //alert('hi');
       //avtar download js prakash
       //var btn = document.getElementById("downloadAvtar");
       var svg = document.getElementById("avtar");
