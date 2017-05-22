@@ -3,11 +3,12 @@
 							<a href="#myClass" data-toggle="collapse" class="collapsed"><i class="icon icon-my_class"></i><span class="link__text">My Classes</span></a>
 							<ul id="myClass" class="sub-menu collapse">
 								<li class="active" ng-repeat="list in subject_grade">
-									<a href="#{{list.level_id}}/{{list.course_name}}/{{list.course_id}}"><span class="link__text">{{list.name}} {{list.course_name}}</span></a>
+									<a href="teacher/dashboard/class/{{list.level_id}}/{{list.course_name}}/{{list.course_id}}"><span class="link__text">{{list.name}} {{list.course_name}}</span></a>
 								</li>								
 								<li>
-									<a href="teacher-add-class.html"><span class="link__text"><i class="icon icon-plus-outline"></i> Add class</span></a>
-								</li>
+									<a href="teacher/create-class"><span class="link__text"><i class="icon icon-plus-outline"></i> Add Students In Class</span></a>
+								</li> 
+								
 							</ul>
 						</li>
 						<li >
