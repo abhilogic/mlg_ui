@@ -1337,7 +1337,11 @@ $scope.numberOfPages=function(){
 		{id: 5, label: "Soniya Gandhi"}
 	  ]
      
+}]).controller('teacherSubscriptionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+     
 }])
+
   
   .directive('dropZone', function() {
     return function($scope, element, attrs) {    
