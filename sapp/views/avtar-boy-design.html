@@ -473,7 +473,17 @@
 		<!-- plugins -->
 		<script type="text/javascript" src="assets/js/pages/avatar-creation.js"></script>
 		<script type="text/javascript">
-
+      var windowWidth = $(window).width();
+      if(windowWidth>= 768){
+        $("#option_nav").tabCollapse();
+        $(".tab-content .tab-pane").mCustomScrollbar();
+      }
+      else {
+        $(".tab-content .tab-pane").mCustomScrollbar({
+          horizontalScroll: true,
+          theme:"dark-3"
+        });
+      }
 		</script>
 	</body>
 </html>

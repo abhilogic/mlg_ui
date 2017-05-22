@@ -824,7 +824,7 @@ $scope.numberOfPages=function(){
                   }else{
                     $scope.msg = 'unable to find content.';
                   }
-                });     
+                });    
             },
             onItemDeselect: function(item) {
               angular.forEach(subSkills,function(value, key) {
@@ -974,6 +974,19 @@ $scope.numberOfPages=function(){
         $scope.video = '';
         content = '';
         type = '';
+        var subSkillDetail = {};
+        subSkillDetail= {
+          uid : get_uid,
+          subskills :subSkills,
+        }
+        teacherHttpService.getUserContent(subSkillDetail).success(function(response) {
+          if (response.status == true) {
+            $scope.userContent = response.data;
+            mlg = response.url;
+          }else{
+            $scope.msg = 'unable to find content.';
+          }
+        });
            
       }else{
         $scope.message = response.response;
