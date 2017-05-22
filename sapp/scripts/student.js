@@ -837,7 +837,9 @@ angular.module('mlg_student')
           angular.forEach($scope.coupons, function(coupon, coupon_index) {
             if (coupon.id == coupon_id) {
               if (coupon.process_status.toLowerCase() == 'redeem') {
-                coupon.process_status = response.coupon_status;
+                if (coupon.process_status.toLowerCase() == 'acquired') {
+                  coupon.process_status = response.coupon_status;
+                }
                 $scope.userPoints = $scope.userPoints - coupon_value;
               } else {
                 alert('coupon already in progress');
