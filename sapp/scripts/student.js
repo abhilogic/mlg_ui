@@ -120,7 +120,19 @@ angular.module('mlg_student')
 			url   : urlParams.baseURL+urlParams.getpreTestStatus+'?user_id='+user_id
 		});
 	}
-
+  loginHttpResponse.uploadAvtarImage = function(avtarImage) {
+		return $http({
+			method:'post',
+      data : avtarImage,
+			url   : urlParams.baseURL+urlParams.uploadAvtarImage
+		});
+	}
+  loginHttpResponse.getAvatarImage = function(uid){
+      return $http({
+          method:'GET',
+          url   : urlParams.baseURL+urlParams.getAvatarImage + '/' + uid
+      });
+	}
 	
 
 
@@ -241,8 +253,8 @@ angular.module('mlg_student')
 	 // alert('kkkk');
 	  var get_uid=commonActions.getcookies(get_uid);
 }])
-.controller('avtarCtrl',['$scope','$location','$anchorScroll',function($scope,$location,$anchorScroll) {
-	  
+.controller('avtarCtrl',['$scope','$location','$anchorScroll','loginHttpService','commonActions','$http',function($scope,$location,$anchorScroll,loginHttpService,commonActions,$http) {
+	 var get_uid=commonActions.getcookies(get_uid); 
 	  var prev=undefined;
 	  var next=undefined;
 
@@ -279,11 +291,59 @@ angular.module('mlg_student')
 	    	prev:arr[searchIndex-1],
 	    	next:arr[searchIndex+1]
 	    	};
-	    }
-	    
-
-	   
+	    }   
 };
+//    if($location.path() == '/avtar2') {
+      alert('hi');
+      //avtar download js prakash
+      //var btn = document.getElementById("downloadAvtar");
+      var svg = document.getElementById("avtar");
+      var canvas = document.getElementById("canvas");
+
+      function triggerDownload (imgURI) {
+        var evt = new MouseEvent('click', {
+          view: window,
+          bubbles: false,
+          cancelable: true
+        });
+
+        var a = document.createElement('a');
+        a.setAttribute('download', 'Avtar_profile_pick.png');
+        a.setAttribute('href', imgURI);
+        a.setAttribute('target', '_blank');
+        a.dispatchEvent(evt);
+      } 
+        document.getElementById("downloadAvtar").addEventListener('click', function () {
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var data = (new XMLSerializer()).serializeToString(svg);
+        var DOMURL = window.URL || window.webkitURL || window;
+
+        var img = new Image();
+        var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+        var url = DOMURL.createObjectURL(svgBlob);
+
+        img.onload = function () {
+          ctx.drawImage(img, 0, 0);
+          DOMURL.revokeObjectURL(url);
+
+          var imgURI = canvas
+              .toDataURL('image/png');
+    //					.replace('image/png', 'image/octet-stream');
+          var avtarImage ={};
+           avtarImage = {
+             uid : get_uid,
+             image : imgURI,
+           };
+          loginHttpService.uploadAvtarImage(avtarImage).success(function (response) {
+              $location.url('/journey');
+              $scope.AvtarImage = response.response
+          });  
+        };
+        img.src = url;
+      });
+//    }
+
 	  
 }])
 .controller('quizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
@@ -777,7 +837,9 @@ angular.module('mlg_student')
           angular.forEach($scope.coupons, function(coupon, coupon_index) {
             if (coupon.id == coupon_id) {
               if (coupon.process_status.toLowerCase() == 'redeem') {
-                coupon.process_status = response.coupon_status;
+                if (coupon.process_status.toLowerCase() == 'acquired') {
+                  coupon.process_status = response.coupon_status;
+                }
                 $scope.userPoints = $scope.userPoints - coupon_value;
               } else {
                 alert('coupon already in progress');
@@ -799,4 +861,11 @@ angular.module('mlg_student')
         }
       });
     }
+    // Avatar profile
+    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+       if(response.message == '') {
+         $scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+       }
+    });
 }]);
