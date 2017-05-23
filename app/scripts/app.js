@@ -62,6 +62,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getGroupsOfSubjectForTeacher : '/teachers/getGroupsOfSubjectForTeacher',
   updateContent : '/teachers/updateUserContent',
   uploadQuestion : '/teachers/saveQuestion',
+  getStaticContent : '/users/getStaticContents',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -284,7 +285,10 @@ principal  : 30,
   }).when('/guest', {
 	templateUrl : 'views/guest_login.html',
 	controller : 'guestCtrl',
-  }).otherwise({
+  }).when('/static/:slug',{
+		templateUrl : 'views/comingsoon.html',
+		controller : 'staticCtrl',
+	}).otherwise({
 		redirectTo : '/',
   });
 

@@ -4023,6 +4023,19 @@ label span {
   left: 35px;
   clip: rect(0px, 100px, 57px, 0px);
   max-width: 100%;
+  width: 93%;
+  height: 26px;
+}
+@media screen and (max-width: 768px) {
+  .profile_block .progress_bar .progress_bar_img img {
+    left: 27px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .profile_block .progress_bar .progress_bar_img img {
+    top: 13px;
+    left: 13px;
+  }
 }
 .profile_block .progress_bar .dragons {
   position: relative;
@@ -4123,11 +4136,17 @@ label span {
   margin-top: 13px;
   padding-left: 0px;
 }
+.coupon_cover ul li {
+  display: block;
+}
 .coupon_cover ul li span {
   color: #550000;
   display: inline-block;
   font-size: 16px;
   vertical-align: text-bottom;
+  max-width: 110px;
+  height: 22px;
+  overflow: hidden;
 }
 .coupon_cover ul li span.coin {
   margin-right: 5px;
@@ -4187,6 +4206,33 @@ label span {
   background: none;
   border: 0px;
   margin-top: 84px;
+  position: relative;
+}
+.unlocked_game:before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+.unlocked_game:after {
+  content: 'Coming Soon';
+  position: absolute;
+  top: 41%;
+  left: 40%;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  color: white;
+  z-index: 10;
+}
+@media screen and (max-width: 767px) {
+  .unlocked_game:after {
+    left: 28%;
+    top: 50%;
+  }
 }
 @media screen and (max-width: 413px) {
   .unlocked_game {
@@ -4695,6 +4741,7 @@ label span {
 
 .subskills_page {
   background-image: url("../img/subskills_bg.jpg");
+  background-size: auto 100%;
   min-width: 100vw;
   min-height: 100vh;
 }
@@ -4709,8 +4756,8 @@ label span {
 .subskills_page .scroll_animation {
   display: none;
   position: absolute;
-  top: 13.4%;
-  left: 18%;
+  top: 6.4%;
+  left: 10%;
   z-index: 100;
 }
 .subskills_page .scroll_animation.show {
@@ -4721,7 +4768,7 @@ label span {
   position: absolute;
   height: 40%;
   width: 38%;
-  left: 35%;
+  left: 27.5%;
   top: 36%;
   cursor: pointer;
   text-align: center;
@@ -4736,7 +4783,7 @@ label span {
   background-repeat: no-repeat;
   background-image: url(../img/sprite.png);
   background-position: -2px 1px;
-  margin-top: 26%;
+  margin-top: 19%;
   z-index: 1;
 }
 .subskills_page .modal-dialog {
@@ -5979,6 +6026,7 @@ label span {
 @media only screen and (max-width: 767px) {
   .first_time_login_test_page {
     background-image: url("../img/subskill_mobile_bg.jpg");
+    background-size: auto 100%;
   }
 }
 .first_time_login_test_page .wooden_frame {
@@ -6032,13 +6080,13 @@ label span {
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .content-cover {
   max-height: calc(100% - 28px);
   margin: auto;
-  padding-top: 37px;
+  padding-top: 76px;
   width: 80%;
 }
 @media only screen and (max-width: 1023px) {
   .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .content-cover {
     width: 100%;
-    padding-top: 20px;
+    padding-top: 65px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -6075,6 +6123,16 @@ label span {
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .option li {
   display: block;
 }
+@media screen and (min-width: 768px) {
+  .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .option li {
+    width: 49%;
+    display: inline-block;
+    margin-bottom: 30px;
+  }
+  .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .option li:nth-last-child(-n+2) {
+    margin-bottom: 0;
+  }
+}
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .option li span {
   color: #49150c;
   display: inline-block;
@@ -6088,7 +6146,7 @@ label span {
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .ques span {
   color: #49150c;
   display: inline-block;
-  font-family: "Playfair Display", serif;
+  font-family: 'Open Sans', sans-serif;
   vertical-align: text-top;
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .ques span:last-child {
@@ -6120,7 +6178,7 @@ label span {
   background-position: center center;
   background-size: 100% 100%;
   font-size: 18px;
-  color: white;
+  color: #46110f;
   font-family: "Cormorant Garamond", serif;
   padding: 10px 70px 10px 23px;
   text-align: left;
@@ -6167,7 +6225,7 @@ label span {
 }
 @media screen and (max-width: 768px) {
   .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-heading {
-    margin-top: 20px;
+    padding-top: 20px;
   }
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-heading .time:after {
@@ -6216,8 +6274,7 @@ label span {
   }
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .ques {
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
+  font-weight: normal;
 }
 @media only screen and (max-width: 767px) {
   .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .ques {
@@ -6226,10 +6283,15 @@ label span {
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .content {
   max-width: 471px;
-  min-height: 368px;
+  min-height: 243px;
   margin: auto;
-  padding: 50px;
+  padding: 12px;
   position: relative;
+}
+@media screen and (max-width: 768px) {
+  .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .content {
+    max-width: 443px;
+  }
 }
 @media only screen and (max-width: 767px) {
   .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .content {
@@ -6256,7 +6318,7 @@ label span {
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .content .btn_submit_cover {
   position: absolute;
-  bottom: 80px;
+  bottom: 0px;
   width: 90%;
   text-align: center;
 }
@@ -6621,6 +6683,15 @@ label span {
     position: absolute;
     top: 40px;
     right: 75px;
+  }
+}
+
+.board-center {
+  width: 100vw;
+}
+@media screen and (max-width: 1370px) {
+  .board-center {
+    height: auto !important;
   }
 }
 
