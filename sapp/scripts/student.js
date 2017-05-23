@@ -862,6 +862,14 @@ angular.module('mlg_student')
 		$("#modal-redeem").modal();
 	};
 
+	$scope.open_avatar=function(){
+		$("#modal-changeAvatar").modal();
+	}
+
+	$scope.open_report=function(){
+		$("#modal-view-report").modal();
+	}
+
 	$scope.openRedeemAll=function(){
       $("#modal-allRedeem").modal();
 	};

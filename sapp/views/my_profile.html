@@ -5,7 +5,7 @@
 					<ul class="student_progress_info">
 						<li class="student_img">
 							<span class="profile_img_cover">
-									<a href="#" data-toggle="modal" data-target="#modal-changeAvatar"><div class="profile_img"><img src="{{avtar}}" alt=""></div></a>
+									<a href="" ng-click="open_avatar();" data-toggle="modal"><div class="profile_img"><img src="{{avtar}}" alt=""></div></a>
 							</span>
 							<span>Change Avatar</span>
 						</li>
@@ -23,7 +23,7 @@
 							<span>Guidance(Off)</span>
 							<img src="assets/img/mascot-img.png" alt="" class="mascout-img off">
 						</li>
-        <li data-toggle="modal" data-target="#modal-view-report">
+        <li data-toggle="modal" ng-click="open_report();">
 							<span>View</span>
 							<span>Reports</span>
           <img src="assets/img/view-report-icon.png" alt="" >
