@@ -212,16 +212,16 @@ return {
 	restrict: 'E',
 	templateUrl: 'views/header.html',
 	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {  
-    $scope.header_menu=false;
-     $scope.show_header_menu=function(){
-      $scope.header_menu=!$scope.header_menu;
-      if($scope.header_menu){
+    
+     $('html').click(function (e) {
+      console.log($(e.target).parents('#h_menu'))
+    if ($(e.target).parents('#h_menu').length==1) {
         $('#h_menu').addClass('open')
-      }else{
+    } else {
         $('#h_menu').removeClass('open')
-      }
-      
-     }                      	
+    }
+}); 
+
 		var cookieString=$cookieStore.get("userObj");
 		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
