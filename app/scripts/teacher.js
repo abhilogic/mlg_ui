@@ -188,7 +188,13 @@ angular.module('mlg')
         });
       }
 
-
+      teacherHttpResponse.saveCardToPaypalForTeacher=function(data){
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.saveCardToPaypalForTeacher
+        });
+      }
         return teacherHttpResponse;
 	
 }])
@@ -301,7 +307,7 @@ angular.module('mlg')
   //teacher payment page
     var user_id ={};
     var get_uid=commonActions.getcookies(get_uid);
-    user_id = { uid : get_uid }; 
+    user_id = { uid : get_uid };
     teacherHttpService.teacherPayment(user_id).success(function(response) {
       if(response.data.length > 0) {
          $scope.student = response.data;
@@ -323,7 +329,7 @@ angular.module('mlg')
     $scope.submitCardDetail = function(data) {
       data.user_id = get_uid;
       data.amount = $scope.totalAmount;
-      loginHttpService.saveCardToPaypal(data).success(function(response) {
+      teacherHttpService.saveCardToPaypalForTeacher(data).success(function(response) {
         if (response.status == true) {
           $location.url('/teacher/dashboard');
         } else {
