@@ -61,9 +61,13 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getStudentOfTeacher : '/teachers/getStudentOfTeacher', 
   createGroupInSubjectByTeacher : '/teachers/createGroupInSubjectByTeacher',
   getGroupsOfSubjectForTeacher : '/teachers/getGroupsOfSubjectForTeacher',
+  editGroupOfSubject : '/teachers/editGroupOfSubject', 
+  getStudentsOfGroup : '/teachers/getStudentsOfGroup',
   updateContent : '/teachers/updateUserContent',
   uploadQuestion : '/teachers/saveQuestion',
   getStaticContent : '/users/getStaticContents',
+  getCourseSkillSubskills : '/courses/getCourseSkillSubskills',
+
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -222,7 +226,7 @@ principal  : 30,
 	}).when('/teacher/auto-generate-assignment',{
 		templateUrl : 'views/dashboard/teacher-autoGenerateAssignment.html',
 		controller : 'teacherAutoGenerateAssignment',
-	}).when('/teacher/custom-assignment',{
+	}).when('/teacher/custom-assignment/:gradeid/:subject_name/:courseid',{
 		templateUrl : 'views/dashboard/teacher-createCustomAssignement.html',
 		controller : 'teacherCustomAssignment',
 	}).when('/teacher/add-new-assignment',{
@@ -253,12 +257,12 @@ principal  : 30,
   }).when('/teacher/lessons',{
 		templateUrl : 'views/dashboard/teacher-content-lessons.html',
 		controller : 'teacherLessonCtrl',
-  }).when('/teacher/create-group/:subject_name/:course_id',{
+  }).when('/teacher/create-group/class/:grade_id/:subject_name/:course_id',{
 		templateUrl : 'views/dashboard/teacher-create-group.html',
-		controller : 'teacherCreateGroupCtrl',
-  }).when('/teacher/edit-group',{
+		controller : 'teacherGroupCtrl',
+  }).when('/teacher/view-group/:group_title_inURL/:group_id',{
 		templateUrl : 'views/dashboard/teacher-editGroup.html',
-		controller : 'teacherEditGroup',
+		controller : 'teacherGroupCtrl',
   }).when('/teacher/gap-analysis',{
 		templateUrl : 'views/dashboard/teacher-gapAnalysis.html',
 		controller : 'teacherGapAnalysis',
@@ -493,6 +497,33 @@ return {
         $scope.userInfo=userInfo;
 	}]
 };
-
 	
-});
+})
+.service('sharedSkill', function () {
+        var skill;
+
+        return {
+            getProperty: function () {
+                return skill;
+            },
+            setProperty: function(value) {
+                skill = value;
+            }
+        };
+
+  })
+.service('sharedSubskill', function () {
+        var subskill;
+
+        return {
+            getProperty: function () {
+                return subskill;
+            },
+            setProperty: function(value) {
+                subskill = value;
+            }
+        };
+        
+    });
+
+

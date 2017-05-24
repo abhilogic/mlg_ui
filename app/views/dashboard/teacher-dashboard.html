@@ -9,7 +9,6 @@
   <div class="page-content">
 
     <!-- Main Sidebar -->
-
   <aside class="sidebar sidebar-main"></aside>
     <!-- /sidebar -->
 
@@ -156,7 +155,8 @@
                     <div class="text-center col-sm-8 col-sm-offset-2">
                       <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                       <br>
-                      <button type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</button>
+                      
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                     </div>
                   </div>
               </div>
@@ -170,7 +170,8 @@
                    <div class="text-center col-sm-8 col-sm-offset-2">
                      <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                      <br>
-                     <button type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</button>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                    </div>
                  </div>
               </div>
@@ -184,7 +185,8 @@
                    <div class="text-center col-sm-8 col-sm-offset-2">
                      <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                      <br>
-                     <button type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</button>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a></button>
                    </div>
                  </div>
               </div>
@@ -199,7 +201,8 @@
                    <div class="text-center col-sm-8 col-sm-offset-2">
                      <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                      <br>
-                     <button type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</button>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                    </div>
                  </div>
               </div>
@@ -217,7 +220,7 @@
           <div class="panel-body">
             <ul class="row list-thumb group_list">
              <li class="group">
-                <a class="add__group" href="teacher/create-group/{{subject_name}}/{{course_id}}">
+                <a class="add__group" href="teacher/create-group/class/{{grade_id}}/{{subject_name}}/{{course_id}}">
                   <img class="img-circle" src="assets/img/group-img/add_group_img.png" alt="Group Default"/>
                   <span class="group__name">Add Group</span>
                 </a>
@@ -316,7 +319,7 @@
             <div class="panel-body">
                 <h5 class="hd"><span>Oh oh!</span><span>Your class is empty bring in some Students</span></h5>
                 <div class="text-center">
-                  <button type="button" class="btn btn-background-none text-primary"><i class="icon icon-plus-outline"></i> Add Students</button>
+                  <span class="btn btn-background-none text-primary"><a href="teacher/create-class"><i class="icon icon-plus-outline"></i> Add Students</a></span>
                 </div>
             </div>
           </div>
@@ -405,9 +408,12 @@
                   </div>
                     <div class="row">
                       <div class="text-center col-sm-8 col-sm-offset-2">
+                       
                         <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
                         <br>
-                        <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                       
+
+                        <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                       </div>
                     </div>
                 </div>
@@ -421,7 +427,7 @@
                      <div class="text-center col-sm-8 col-sm-offset-2">
                        <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
                       <br>
-                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                      </div>
                    </div>
                 </div>
@@ -435,7 +441,7 @@
                      <div class="text-center col-sm-8 col-sm-offset-2">
                        <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
                       <br>
-                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                      </div>
                    </div>
                 </div>
@@ -450,7 +456,7 @@
                      <div class="text-center col-sm-8 col-sm-offset-2">
                        <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
                        <br>
-                       <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                       <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                      </div>
                    </div>
                 </div>
