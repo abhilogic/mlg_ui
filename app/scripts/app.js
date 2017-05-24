@@ -16,6 +16,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	getPaymentBrief : '/users/getPaymentBrief',
 	isUserLogin : '/users/isUserLoggedin',
 	saveCardToPaypal : '/users/saveCardToPaypal',
+	saveCardToPaypalForTeacher : '/teachers/saveCardToPaypal',
 	packageList : '/users/getPackageList',
 	planList : '/users/getPlanList',
 	getCourseByGrade :'/courses/getCourseListForLevel',
