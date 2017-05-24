@@ -1977,6 +1977,7 @@ label span {
   position: absolute;
   top: 16px;
   left: 0px;
+  overflow: hidden;
   padding: 4px;
   background-image: url(../img/student_prof_img_bg.png);
   background-size: 100% 100%;
@@ -1990,12 +1991,23 @@ label span {
     left: 16px;
   }
 }
-.navbar-default .profile_pick img {
-  width: 100%;
-  height: 100%;
+.navbar-default .profile_pick .cover {
+  height: 52px;
+  width: 52px;
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   border-radius: 100%;
+  overflow: hidden;
+}
+.navbar-default .profile_pick .cover img {
+  width: 100%;
+  height: auto;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  margin-top: -10px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .navbar-default .dropdown-menu {
   background-image: url(../img/navbar-dropdown-bg.png);
@@ -3935,13 +3947,36 @@ label span {
   border-radius: 100%;
   z-index: 10;
 }
-.profile_block .student_progress_info li.student_img .profile_img_cover img {
+.profile_block .student_progress_info li.student_img .profile_img_cover .profile_img {
+  width: 77px;
+  height: 70px;
+  overflow: hidden;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+.profile_block .student_progress_info li.student_img .profile_img_cover .profile_img img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  margin-top: -10px;
+  margin-right: auto;
+  margin-left: auto;
 }
 .profile_block .student_progress_info li .mascout-img.off {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+}
+.profile_block .student_progress_info li.view-report .img_1 {
+  display: block;
+}
+.profile_block .student_progress_info li.view-report .img_2 {
+  display: none;
+}
+.profile_block .student_progress_info li.view-report:hover .img_1 {
+  display: none !important;
+}
+.profile_block .student_progress_info li.view-report:hover .img_2 {
+  display: block !important;
 }
 .profile_block .progress_bar {
   margin-top: 100px;
@@ -3988,6 +4023,19 @@ label span {
   left: 35px;
   clip: rect(0px, 100px, 57px, 0px);
   max-width: 100%;
+  width: 93%;
+  height: 26px;
+}
+@media screen and (max-width: 768px) {
+  .profile_block .progress_bar .progress_bar_img img {
+    left: 27px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .profile_block .progress_bar .progress_bar_img img {
+    top: 13px;
+    left: 13px;
+  }
 }
 .profile_block .progress_bar .dragons {
   position: relative;
@@ -4088,11 +4136,17 @@ label span {
   margin-top: 13px;
   padding-left: 0px;
 }
+.coupon_cover ul li {
+  display: block;
+}
 .coupon_cover ul li span {
   color: #550000;
   display: inline-block;
   font-size: 16px;
   vertical-align: text-bottom;
+  max-width: 110px;
+  height: 22px;
+  overflow: hidden;
 }
 .coupon_cover ul li span.coin {
   margin-right: 5px;
@@ -4106,6 +4160,9 @@ label span {
 .coupon_cover.locked {
   background-image: url("../img/redeem_coupon_bg_lock.png");
   position: relative;
+}
+.coupon_cover.locked ul li span.coin {
+  opacity: 0.4;
 }
 .coupon_cover.locked:before {
   content: '\0047';
@@ -4149,6 +4206,33 @@ label span {
   background: none;
   border: 0px;
   margin-top: 84px;
+  position: relative;
+}
+.unlocked_game:before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+.unlocked_game:after {
+  content: 'Coming Soon';
+  position: absolute;
+  top: 41%;
+  left: 40%;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  color: white;
+  z-index: 10;
+}
+@media screen and (max-width: 767px) {
+  .unlocked_game:after {
+    left: 28%;
+    top: 50%;
+  }
 }
 @media screen and (max-width: 413px) {
   .unlocked_game {
@@ -4197,15 +4281,22 @@ label span {
   padding: 3px 12px;
 }
 
+@media screen and (min-width: 991px) {
+  .modal-redeem .modal-dialog {
+    min-width: 829px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
 .modal-redeem .modal-dialog, .modal-redeem .modal-body, .modal-redeem .modal-content, .modal-redeem .modal-header, .modal-redeem .modal-footer {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(26, 26, 26, 0.75);
   border-width: 0;
 }
 .modal-redeem .modal-header {
   color: #c29316;
 }
 .modal-redeem .modal-header .close {
-  margin-top: -23px;
+  margin-top: -7px;
   color: white;
   opacity: 1;
   font-family: "Playfair Display", serif;
@@ -4222,6 +4313,7 @@ label span {
 .modal-redeem .modal-body {
   max-height: 440px;
   overflow: hidden;
+  padding-bottom: 30px;
 }
 .modal-redeem .modal-body .coupon_cover {
   margin-right: auto;
@@ -4649,6 +4741,7 @@ label span {
 
 .subskills_page {
   background-image: url("../img/subskills_bg.jpg");
+  background-size: auto 100%;
   min-width: 100vw;
   min-height: 100vh;
 }
@@ -4663,8 +4756,8 @@ label span {
 .subskills_page .scroll_animation {
   display: none;
   position: absolute;
-  top: 13.4%;
-  left: 18%;
+  top: 6.4%;
+  left: 10%;
   z-index: 100;
 }
 .subskills_page .scroll_animation.show {
@@ -4675,7 +4768,7 @@ label span {
   position: absolute;
   height: 40%;
   width: 38%;
-  left: 35%;
+  left: 27.5%;
   top: 36%;
   cursor: pointer;
   text-align: center;
@@ -4690,7 +4783,7 @@ label span {
   background-repeat: no-repeat;
   background-image: url(../img/sprite.png);
   background-position: -2px 1px;
-  margin-top: 26%;
+  margin-top: 19%;
   z-index: 1;
 }
 .subskills_page .modal-dialog {
@@ -5933,6 +6026,7 @@ label span {
 @media only screen and (max-width: 767px) {
   .first_time_login_test_page {
     background-image: url("../img/subskill_mobile_bg.jpg");
+    background-size: auto 100%;
   }
 }
 .first_time_login_test_page .wooden_frame {
@@ -5986,13 +6080,13 @@ label span {
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .content-cover {
   max-height: calc(100% - 28px);
   margin: auto;
-  padding-top: 37px;
+  padding-top: 76px;
   width: 80%;
 }
 @media only screen and (max-width: 1023px) {
   .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .content-cover {
     width: 100%;
-    padding-top: 20px;
+    padding-top: 65px;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -6029,6 +6123,16 @@ label span {
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .option li {
   display: block;
 }
+@media screen and (min-width: 768px) {
+  .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .option li {
+    width: 49%;
+    display: inline-block;
+    margin-bottom: 30px;
+  }
+  .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .option li:nth-last-child(-n+2) {
+    margin-bottom: 0;
+  }
+}
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .option li span {
   color: #49150c;
   display: inline-block;
@@ -6042,7 +6146,7 @@ label span {
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .ques span {
   color: #49150c;
   display: inline-block;
-  font-family: "Playfair Display", serif;
+  font-family: 'Open Sans', sans-serif;
   vertical-align: text-top;
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .ques span:last-child {
@@ -6074,7 +6178,7 @@ label span {
   background-position: center center;
   background-size: 100% 100%;
   font-size: 18px;
-  color: white;
+  color: #46110f;
   font-family: "Cormorant Garamond", serif;
   padding: 10px 70px 10px 23px;
   text-align: left;
@@ -6121,7 +6225,7 @@ label span {
 }
 @media screen and (max-width: 768px) {
   .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-heading {
-    margin-top: 20px;
+    padding-top: 20px;
   }
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-heading .time:after {
@@ -6170,8 +6274,7 @@ label span {
   }
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .ques {
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
+  font-weight: normal;
 }
 @media only screen and (max-width: 767px) {
   .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .ques {
@@ -6180,10 +6283,15 @@ label span {
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .content {
   max-width: 471px;
-  min-height: 368px;
+  min-height: 243px;
   margin: auto;
-  padding: 50px;
+  padding: 12px;
   position: relative;
+}
+@media screen and (max-width: 768px) {
+  .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .content {
+    max-width: 443px;
+  }
 }
 @media only screen and (max-width: 767px) {
   .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .content {
@@ -6210,7 +6318,7 @@ label span {
 }
 .first_time_login_test_page .wooden_frame .wooden_frame_content_cover .subskills_quiz .panel-body .content .btn_submit_cover {
   position: absolute;
-  bottom: 80px;
+  bottom: 0px;
   width: 90%;
   text-align: center;
 }
@@ -6575,6 +6683,15 @@ label span {
     position: absolute;
     top: 40px;
     right: 75px;
+  }
+}
+
+.board-center {
+  width: 100vw;
+}
+@media screen and (max-width: 1370px) {
+  .board-center {
+    height: auto !important;
   }
 }
 
@@ -7269,9 +7386,6 @@ label span {
   .panel-avtar-design .options .panel .panel-body .tab-content .tab-pane {
     max-width: 200px;
   }
-}
-.panel-avtar-design .options .panel .panel-body .tab-content .tab-pane .mCS-dark-3.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-  width: 2px !important;
 }
 .panel-avtar-design .options .panel .panel-body .tab-content .tab-pane .mCSB_inside > .mCSB_container {
   margin-right: -5px;

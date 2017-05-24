@@ -54,15 +54,16 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   setUserContents : '/teachers/setUserContent',
   delTemplate : '/teachers/deleteTemplate',
   addStudent : '/teachers/addStudent',
-  getStudentsOfClass : '/teachers/getStudentsOfClass',
+  getStudentsOfSubjectForTeacher : '/teachers/getStudentsOfSubjectForTeacher',
   updateStudent : '/teachers/updateStudent',
   deleteStudent : '/teachers/deleteStudent',
   sendMeMail : '/teachers/sendEmailToTeacher', 
   getStudentOfTeacher : '/teachers/getStudentOfTeacher', 
-  createGroup : '/teachers/createGroup',
-  getGroups : '/teachers/getGroups',
+  createGroupInSubjectByTeacher : '/teachers/createGroupInSubjectByTeacher',
+  getGroupsOfSubjectForTeacher : '/teachers/getGroupsOfSubjectForTeacher',
   updateContent : '/teachers/updateUserContent',
   uploadQuestion : '/teachers/saveQuestion',
+  getStaticContent : '/users/getStaticContents',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -188,16 +189,12 @@ principal  : 30,
 	}).when('/teacher/create_account',{
 		templateUrl : 'views/account-teacher.html',
 		controller : 'teacherOnBoardingCtrl',
-	}).when('/teacher/select_courses',{
-		//templateUrl : 'views/teacher_select_courses.html',
+	}).when('/teacher/select_courses',{		
 		templateUrl : 'views/select-grades-subjects.html',
 		controller : 'teacherOnBoardingCtrl',
-	}).when('/teacher/dashboard-empty',{
-		templateUrl : 'views/dashboard/teacher-dashboard-empty-view.html',
-		controller : 'teacherOnBoardingEmptyCtrl',
-	}).when('/teacher/dashboard',{
+	}).when('/teacher/dashboard/class/:gradeid/:subject_name/:courseid',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
-		controller : 'teacherOnBoardingCtrl',
+		controller : 'teacherDashboardViewCtrl',
 	}).when('/parent/report',{
 		templateUrl : 'views/dashboard/parent-report.html',
 		controller : 'teacherReportCtrl',
@@ -244,7 +241,7 @@ principal  : 30,
   }).when('/teacher/add_content',{
 		templateUrl : 'views/dashboard/teacher-content-add-lesson.html',
 		controller : 'teacherLessonCtrl',
-  }).when('/teacher/create-class',{
+  }).when('/teacher/create-class',{  	
 		templateUrl : 'views/dashboard/teacher-create-class.html',
 		controller : 'teacherCreateClassCtrl',
   }).when('/teacher/add-question',{
@@ -256,7 +253,7 @@ principal  : 30,
   }).when('/teacher/lessons',{
 		templateUrl : 'views/dashboard/teacher-content-lessons.html',
 		controller : 'teacherLessonCtrl',
-  }).when('/teacher/create-group',{
+  }).when('/teacher/create-group/:subject_name/:course_id',{
 		templateUrl : 'views/dashboard/teacher-create-group.html',
 		controller : 'teacherCreateGroupCtrl',
   }).when('/teacher/edit-group',{
@@ -289,7 +286,10 @@ principal  : 30,
   }).when('/guest', {
 	templateUrl : 'views/guest_login.html',
 	controller : 'guestCtrl',
-  }).otherwise({
+  }).when('/static/:slug',{
+		templateUrl : 'views/comingsoon.html',
+		controller : 'staticCtrl',
+	}).otherwise({
 		redirectTo : '/',
   });
 
@@ -374,20 +374,77 @@ principal  : 30,
 return {
 	restrict: 'E',
 	templateUrl: 'include/sidebar-teacher.html',
-	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+	controller: ['$scope','$cookieStore','teacherHttpService','user_roles', function ($scope,$cookieStore,teacherHttpService,user_roles) {                         	
+		$scope.isCollapsedmyClass = true;
+		$scope.isCollapsedmyContent = true;
+		$scope.open_menu=function(menu_class,menu_item){
+			if(menu_item=='myClass'){
+				$scope.isCollapsedmyClass = !$scope.isCollapsedmyClass;
+				if(!$scope.isCollapsedmyClass){
+					$('#'+menu_item).addClass('in');
+					$('#'+menu_class).removeClass('collapsed');
+				}
+				else{
+					$('#'+menu_item).removeClass('in');
+					$('#'+menu_class).addClass('collapsed');
+				}
+			}
+			else{
+				$scope.isCollapsedmyContent = !$scope.isCollapsedmyContent;
+				if(!$scope.isCollapsedmyContent){
+					$('#'+menu_item).addClass('in');
+					$('#'+menu_class).removeClass('collapsed');
+				}else{
+					$('#'+menu_item).removeClass('in');
+					$('#'+menu_class).addClass('collapsed');
+			}
+
+			}
+			
+		   
+		}
 		var cookieString=$cookieStore.get("userObj");
 		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
-	var keyVals=cookie.split(',');
-	var obj={};
-	angular.forEach(keyVals,function(value,key){
-		var vals=value.split('=');
-		obj[vals[0]]=vals[1];
-	});
-	return obj;
-}
+			var keyVals=cookie.split(',');
+			var obj={};
+			angular.forEach(keyVals,function(value,key){
+				var vals=value.split('=');
+				obj[vals[0]]=vals[1];
+			});
+			return obj;
+		}
 $scope.userInfo=userInfo;
-	}]
+
+	// Get Teacher selected class and subjects
+	var get_uid= cookieString=$cookieStore.get("uid");
+	
+	  teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
+    if (response.status == true) {
+      $scope.subject_grade = response.response;
+      $scope.level = response.grade;
+      $scope.subject = (response.subject.course_name).split(',');
+    /*  grade = response.urlData.level_id;
+      subjectName = response.urlData.course_Name;
+      subjectCode = response.urlData.course_id;
+      var urlString = $location.url();
+      var splitString = urlString.split('#');
+      if (splitString[1] != undefined) {
+        var splitResult = splitString[1].split('%2F')
+        if(splitResult[0] != undefined && splitResult[1] != undefined 
+                && splitResult[2] != undefined ) {
+          grade = splitResult[0];
+          subjectName = splitResult[1];
+          subjectCode = splitResult[2];
+        }
+      }*/
+   
+
+
+    }
+  });
+
+}]
 };
 
 	

@@ -98,6 +98,23 @@ $(document).ready(function() {
 
   });
 
+  // .student_growth .growth_value
+  $(".student_growth .growth_value").each(function(){
+    var text = $(this).text();
+    if(text.length>10){
+      text = text.slice(0,3) + "+" + ' pts';
+      $(this).text(text);
+    }
+  });
+  // .navbar-default .profile_bar .user_name
+  $(".navbar-default .profile_bar .user_name").each(function(){
+    var text = $(this).text();
+    if(text.length>12){
+      text = text.slice(0,9) + "...";
+      $(this).text(text);
+    }
+  });
+
 });
 
 $(".conversation_block, .user_list .user_list_ul").mCustomScrollbar({

@@ -3,6 +3,7 @@
 .subskills_page {
   background:{
     image: url("../img/subskills_bg.jpg");
+    size: auto 100%;
   }
   min-width: 100vw;
   min-height: 100vh;
@@ -19,8 +20,8 @@
   .scroll_animation {
     display: none;
     position: absolute;
-    top: 13.4%;
-    left: 18%;
+    top: 6.4%;
+    left: 10%;
     z-index: 100;
     &.show {
       display: block;
@@ -34,7 +35,7 @@
     position: absolute;
     height: 40%;
     width: 38%;
-    left: 35%;
+    left: 27.5%;
     top: 36%;
     cursor: pointer;
     text-align: center;
@@ -42,7 +43,7 @@
       display: inline-block;
       @include animation(upword-arrow-animation 1.0s infinite);
       @include cssSprite($castle__arrowUp);
-      margin-top: 26%;
+      margin-top: 19%;
       z-index: 1;
     }
   }

@@ -16,6 +16,16 @@ angular.module('mlg').filter('moment', function() {
 		});
 	}
 
+	loginHttpResponse.getStaticContent=function(data){
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.getStaticContent
+		});
+	}
+
+	
+
 	
 	loginHttpResponse.login=function(data){
 		return $http({
@@ -871,6 +881,15 @@ if (typeof $routeParams.id != 'undefined') {
       }
     }).error(function() {
       alert('Unable to activate account, contact to the administrator');
+    });
+  }
+}]).controller('staticCtrl',['$rootScope','$scope','loginHttpService','$location','$routeParams',function($rootScope,$scope, loginHttpService, $location,  $routeParams) {
+if (typeof $routeParams.slug != 'undefined') {
+	var data={title:$routeParams.slug}
+    loginHttpService.getStaticContent(data).success(function(response) {
+      $scope.html_value=response.content.description;
+    }).error(function() {
+     // alert('Unable to activate account, contact to the administrator');
     });
   }
 }])

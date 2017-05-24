@@ -2,7 +2,7 @@
   &.my_profile {
     .main_logo {
       margin-right: 30px;
-        @media screen and (max-width: $screen-mobile-sm){
+        @media screen and (max-width: $screen-mobile-sm) {
           margin-right: 8px;
         }
     }
@@ -160,15 +160,38 @@
             @include border-radius(100%);
             z-index: 10;
           }
-          img {
-          width: 100%;
-          height: 100%;
+          .profile_img {
+            width: 77px;
+            height: 70px;
+            overflow: hidden;
+            @include border-radius(100%);
+            img {
+            width: 100%;
+            height: auto;
+            @include margin(-10px auto null auto);
+            }
           }
         }
       }
       .mascout-img {
         &.off {
           @include filter(grayscale(100%)) ;
+        }
+      }
+      &.view-report {
+        .img_1 {
+          display:block;
+        }
+        .img_2 {
+          display: none;
+        }
+        &:hover {
+          .img_1 {
+            display: none !important;
+          }
+          .img_2 {
+            display: block !important;
+          }
         }
       }
     }
@@ -209,6 +232,15 @@
         @include position(absolute, 17px null null 35px);
         clip: rect(0px, 100px, 57px, 0px);
         max-width: 100%;
+        width: 93%;
+        height: 26px;
+        @media screen and (max-width: $screen-sm){
+          left: 27px;
+        }
+        @media screen and (max-width: $screen-xs-max){
+          top: 13px;
+          left: 13px;
+        }
       }
     }
 
@@ -310,11 +342,15 @@
     margin-top: 13px;
     padding-left: 0px;
     li {
+      display: block;
       span {
         color: $rosewood;
         display: inline-block;
         font-size: 16px;
         vertical-align: text-bottom;
+        max-width: 110px;
+        height: 22px;
+        overflow: hidden;
         &.coin {
           margin-right: 5px;
         }
@@ -334,6 +370,9 @@
   &.locked {
     background-image: url("../img/redeem_coupon_bg_lock.png");
     position: relative;
+    ul li span.coin {
+      opacity: 0.4;
+    }
     &:before {
       content:'\0047';
       @include position(absolute, 34% null null 42%);
@@ -342,6 +381,7 @@
       font-family: 'Glyphter';
       font-size: 30px;
     }
+
   }
   // coupon_accquired
   &.coupon_accquired {
@@ -376,6 +416,28 @@
   background: none;
   border: 0px;
   margin-top: 84px;
+  position: relative;
+  &:before {
+    content:'';
+    @include position(absolute, 0px null null 0px);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 10;
+  }
+  &:after {
+    content:'Coming Soon';
+    @include position(absolute, 41% null null 40%);
+    font-family: $font-primary;
+    font-size: 30px;
+    color: $white;
+    z-index: 10;
+    @media screen and (max-width: $screen-xs-max){
+      left: 28%;
+      top: 50%;
+    }
+
+  }
   @media screen and (max-width: $screen-mobile-sm){
     margin-top: 11px;
   }
@@ -426,14 +488,20 @@
 
 // modal-redeem
 .modal-redeem {
+  .modal-dialog {
+    @media screen and (min-width: $screen-sm-max){
+      min-width: 829px;
+      @include margin(null auto null auto);
+    }
+  }
   .modal-dialog, .modal-body,.modal-content,.modal-header, .modal-footer {
-    background: rgba($black,0.3);
+    background: rgba(26, 26, 26, 0.75);
     @include border-width(0px);
   }
   .modal-header {
     color: $pizza;
     .close {
-      margin-top: -23px;
+      margin-top: -7px;
       color: $white;
       opacity: 1;
       font-family: $font-secondary;
@@ -457,7 +525,9 @@
     }
     max-height: 440px;
     overflow: hidden;
+    @include padding(null null 30px null);
   }
+
 }
 
 

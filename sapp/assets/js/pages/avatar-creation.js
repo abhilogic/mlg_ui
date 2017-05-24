@@ -124,7 +124,7 @@ $(document).ready(function(){
 });
 
 // canvas for avatar creation
-$(document).ready(function(){
+/* $(document).ready(function(){
   var btn = document.getElementById("downloadAvtar");
   var svg = document.getElementById("avtar");
   var canvas = document.getElementById("canvas");
@@ -168,4 +168,4 @@ $(document).ready(function(){
   img.src = url;
   console.log(url);
   });
-});
+}); */

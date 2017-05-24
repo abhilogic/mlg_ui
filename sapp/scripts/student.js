@@ -120,7 +120,19 @@ angular.module('mlg_student')
 			url   : urlParams.baseURL+urlParams.getpreTestStatus+'?user_id='+user_id
 		});
 	}
-
+  loginHttpResponse.uploadAvtarImage = function(avtarImage) {
+		return $http({
+			method:'post',
+      data : avtarImage,
+			url   : urlParams.baseURL+urlParams.uploadAvtarImage
+		});
+	}
+  loginHttpResponse.getAvatarImage = function(uid){
+      return $http({
+          method:'GET',
+          url   : urlParams.baseURL+urlParams.getAvatarImage + '/' + uid
+      });
+	}
 	
 
 
@@ -233,6 +245,15 @@ angular.module('mlg_student')
 	  });
 	
 }
+// Avatar profile
+    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+       if(response.message == '') {
+         if(response.response[0]['profile_pic'] != '') {
+         $scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+    }
+       }
+    });
 }])
 
 
@@ -241,8 +262,8 @@ angular.module('mlg_student')
 	 // alert('kkkk');
 	  var get_uid=commonActions.getcookies(get_uid);
 }])
-.controller('avtarCtrl',['$scope','$location','$anchorScroll',function($scope,$location,$anchorScroll) {
-	  
+.controller('avtarCtrl',['$scope','$location','$anchorScroll','loginHttpService','commonActions','$http',function($scope,$location,$anchorScroll,loginHttpService,commonActions,$http) {
+	 var get_uid=commonActions.getcookies(get_uid); 
 	  var prev=undefined;
 	  var next=undefined;
 
@@ -279,11 +300,58 @@ angular.module('mlg_student')
 	    	prev:arr[searchIndex-1],
 	    	next:arr[searchIndex+1]
 	    	};
-	    }
-	    
-
-	   
+	    }   
 };
+//    if($location.path() == '/avtar2') {
+      //avtar download js prakash
+      //var btn = document.getElementById("downloadAvtar");
+      var svg = document.getElementById("avtar");
+      var canvas = document.getElementById("canvas");
+
+      function triggerDownload (imgURI) {
+        var evt = new MouseEvent('click', {
+          view: window,
+          bubbles: false,
+          cancelable: true
+        });
+
+        var a = document.createElement('a');
+        a.setAttribute('download', 'Avtar_profile_pick.png');
+        a.setAttribute('href', imgURI);
+        a.setAttribute('target', '_blank');
+        a.dispatchEvent(evt);
+      } 
+        document.getElementById("downloadAvtar").addEventListener('click', function () {
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var data = (new XMLSerializer()).serializeToString(svg);
+        var DOMURL = window.URL || window.webkitURL || window;
+
+        var img = new Image();
+        var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+        var url = DOMURL.createObjectURL(svgBlob);
+
+        img.onload = function () {
+          ctx.drawImage(img, 0, 0);
+          DOMURL.revokeObjectURL(url);
+
+          var imgURI = canvas
+              .toDataURL('image/png');
+    //					.replace('image/png', 'image/octet-stream');
+          var avtarImage ={};
+           avtarImage = {
+             uid : get_uid,
+             image : imgURI,
+           };
+          loginHttpService.uploadAvtarImage(avtarImage).success(function (response) {
+              $location.url('/journey');
+              $scope.AvtarImage = response.response
+          });  
+        };
+        img.src = url;
+      });
+//    }
+
 	  
 }])
 .controller('quizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
@@ -493,8 +561,18 @@ angular.module('mlg_student')
 
 
 
-.controller('subskillQuizCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
-	  $scope.qti={};
+.controller('subskillQuizCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','commonActions','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,commonActions,urlParams,$http,user_roles) {
+	  var get_uid=commonActions.getcookies(get_uid);
+    // Avatar profile
+    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+       if(response.message == '') {
+         if(response.response[0]['profile_pic'] != '') {
+         $scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+    }
+       }
+    });
+    $scope.qti={};
 	  $scope.sequence=0;			
 	  $scope.qti.questions=[
 	  				{"id":"response_id-7603","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"","questionName":"Q1.Write 61/100 as a decimal number.","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"0.61","label":"0.61"}],"valid_responses":[{"value":"0.61","score":1}],"penalty_score":-1},
@@ -559,7 +637,15 @@ angular.module('mlg_student')
 	  $scope.show_subskill = function(){
         $location.url('/subskill_content/'+ pid + '/type/' + course_id);
     };
-
+ // Avatar profile
+    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+       if(response.message == '') {
+         if(response.response[0]['profile_pic'] != '') {
+         $scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+    }
+       }
+    });
 
 	 
 }])
@@ -588,7 +674,15 @@ angular.module('mlg_student')
       $scope.studentResult = 'pass';
     }
   });
-
+// Avatar profile
+    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+       if(response.message == '') {
+         if(response.response[0]['profile_pic'] != '') {
+         $scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+    }
+       }
+    });
 }])
 .controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions) {
   var get_uid=commonActions.getcookies(get_uid);
@@ -604,6 +698,15 @@ angular.module('mlg_student')
       response.subject_detail = 0;
     }                 
   });
+  // Avatar profile
+    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+       if(response.message == '') {
+         if(response.response[0]['profile_pic'] != '') {
+         $scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+    }
+       }
+    });
 }])
 .controller('subskillContent',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q) {
     var get_uid=commonActions.getcookies(get_uid);
@@ -679,6 +782,15 @@ angular.module('mlg_student')
 		$(this).parent().addClass("active");
 		$(tabIdactivated).addClass("active in");				
 	}
+  // Avatar profile
+    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+       if(response.message == '') {
+         if(response.response[0]['profile_pic'] != '') {
+         $scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+    }
+       }
+    });
 	
 }])
 
@@ -760,6 +872,14 @@ angular.module('mlg_student')
 		$("#modal-redeem").modal();
 	};
 
+	$scope.open_avatar=function(){
+		$("#modal-changeAvatar").modal();
+	}
+
+	$scope.open_report=function(){
+		$("#modal-view-report").modal();
+	}
+
 	$scope.openRedeemAll=function(){
       $("#modal-allRedeem").modal();
 	};
@@ -806,7 +926,7 @@ angular.module('mlg_student')
         }
       });
     }
-    
+
     /** function used to show error based on error code **/
     function generate_error_reason(error_code) {
       switch(error_code) {
@@ -821,4 +941,14 @@ angular.module('mlg_student')
           break;
       }
     }
+
+    // Avatar profile
+  $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+       if (response.message == '') {
+         if (response.response[0]['profile_pic'] != '') {
+           $scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+         }
+       }
+  });
 }]);

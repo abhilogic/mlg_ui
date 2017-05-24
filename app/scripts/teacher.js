@@ -121,10 +121,10 @@ angular.module('mlg')
         });
       }
 
-      teacherHttpResponse.getStudentsOfClass=function(tid,course_id){
+      teacherHttpResponse.getStudentsOfSubjectForTeacher=function(tid,course_id){
         return $http({
           method:'GET',            
-          url  : urlParams.baseURL+urlParams.getStudentsOfClass+'?teacher_id='+tid+'&course_id='+course_id
+          url  : urlParams.baseURL+urlParams.getStudentsOfSubjectForTeacher+'?teacher_id='+tid+'&course_id='+course_id
         });
       }
 
@@ -158,19 +158,19 @@ angular.module('mlg')
         });
       }
 
-      teacherHttpResponse.createGroup=function(selected_students,get_uid){
+      teacherHttpResponse.createGroup=function(selected_students,get_uid,course_id){
         return $http({
           method:'POST', 
           data :  selected_students,                           
-          url  : urlParams.baseURL+urlParams.createGroup+'?teacher_id='+get_uid
+          url  : urlParams.baseURL+urlParams.createGroupInSubjectByTeacher+'?teacher_id='+get_uid+'&course_id='+course_id
         });
       }
 
 
-      teacherHttpResponse.getGroups=function(get_uid){
+      teacherHttpResponse.getGroupsOfSubjectForTeacher=function(get_uid, course_id){
         return $http({
           method:'GET',                                  
-          url  : urlParams.baseURL+urlParams.getGroups+'?teacher_id='+get_uid
+          url  : urlParams.baseURL+urlParams.getGroupsOfSubjectForTeacher+'?teacher_id='+get_uid+'&course_id='+course_id
         });
       }
       teacherHttpResponse.updateContent=function(lessonDetail){
@@ -331,7 +331,8 @@ angular.module('mlg')
       data.amount = $scope.totalAmount;
       teacherHttpService.saveCardToPaypalForTeacher(data).success(function(response) {
         if (response.status == true) {
-          $location.url('/teacher/dashboard');
+         // $location.url('/teacher/dashboard'); 
+         $location.url('/teacher/dashboard/class/1/English/4');
         } else {
           $scope.msg = response.message;
         }
@@ -392,6 +393,49 @@ angular.module('mlg')
 	};*/
   
 }])
+
+.controller('teacherDashboardViewCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','$routeParams','user_roles','commonActions','card_months','card_years',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,$routeParams,user_roles,commonActions,card_months,card_years) {
+      //Step- 1 check students of teacher to show empty / non-empty dashboard
+       
+       // Api to call all students of a teacher
+       var get_uid=commonActions.getcookies(get_uid);
+       $scope.baseURL= urlParams.baseURL;
+       $scope.course_id = $routeParams.courseid ;
+       $scope.subject_name = $routeParams.subject_name ; 
+
+        teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,$scope.course_id).success(function(response_students) { 
+           if (response_students.response.status == "true") {               
+               $scope.students=response_students.response.students;
+               $scope.students_count=  $scope.students.length;
+           }else{
+             $scope.student_Errormessage=response_students.response.message;
+             $scope.students_count =null;
+          } 
+     });
+
+      // API to call all groups of a teacher
+       teacherHttpService.getGroupsOfSubjectForTeacher(get_uid,$scope.course_id).success(function(respGroup) {
+         console.log(respGroup);
+          if (respGroup.response.status == "true") {
+            $scope.groups= respGroup.response.groups;
+          }
+
+
+       });
+
+
+
+
+
+
+
+
+      
+
+}])
+
+
 .controller('teacherCreateClassCtrl',['$rootScope','$scope', '$filter','$timeout', 'teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
   function($rootScope,$scope, $filter, $timeout,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
 
@@ -405,21 +449,24 @@ angular.module('mlg')
         }
       });
 
-
-
     // Display the students in a class for a course
     $scope.onChangeGetStudents = function(stcourse){     
         var stcourseid=stcourse.split(',')[0];
-        teacherHttpService.getStudentsOfClass(get_uid,stcourseid).success(function(student_response) {
+        teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,stcourseid).success(function(student_response) {
             //console.log(student_response);
-            $scope.students=student_response.response.students;
+            if(student_response.response.status=="true"){
+                $scope.students=student_response.response.students;
+            }else{
+              $scope.students=[];
+              $scope.err_message = "No Record Found. Please add student for this class";
+              $timeout(function () { $scope.err_message = ""; }, 3000);
+            }            
             
             //to edit the data
             $scope.selected={};
             $scope.editStudent=function(sid){
                 $scope.selected.id=sid;
             }
-
        });
     }
   
@@ -447,8 +494,8 @@ angular.module('mlg')
                   emailchoice : '',
                   email       : frmdata.email,
                   school      : '',
-                  parent_id   : get_uid,
-                  role_id     : 3, 
+                  teacher_id   : get_uid,
+                  role_id     : 4, 
                   status      : 1,            
                   plan_id     : '',
                   package_id  : '',
@@ -461,12 +508,11 @@ angular.module('mlg')
                 if (response_childadd.response.status == "True") {
                         $scope.success_message="Student is added";                         
               
-                  teacherHttpService.getStudentsOfClass(get_uid,slct_courseid).success(function(student_response) {
+                  teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,slct_courseid).success(function(student_response) {
                       $scope.students={};
                       $scope.students=student_response.response.students;
                       $scope.frm.Fname=$scope.frm.Lname=$scope.frm.email=$scope.frm.pass="";
                 });
-
                     $scope.student_Errormessage="";
                     $timeout(function () { $scope.success_message = ""; }, 3000); // to fadeup message
                     //$timeout(function () { $scope.message = true; }, 3000);
@@ -478,7 +524,6 @@ angular.module('mlg')
       else{      
         $scope.course_Errormessage="Please select course";
     }
-
  }
 // end- add student in class
 
@@ -560,14 +605,17 @@ $scope.numberOfPages=function(){
 
 }])
 
-.controller('teacherCreateGroupCtrl',['$rootScope','$scope','$timeout', 'teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','urlParams',
-  function($rootScope,$scope,$timeout,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,urlParams) {
+.controller('teacherCreateGroupCtrl',['$rootScope','$scope','$timeout', 'teacherHttpService','loginHttpService','$routeParams','$location','user_roles','commonActions','$routeParams','urlParams',
+  function($rootScope,$scope,$timeout,teacherHttpService,loginHttpService,$routeParams,$location,user_roles,commonActions,$routeParams,urlParams) {
 
     var get_uid=commonActions.getcookies(get_uid);
+    $scope.subject_id = $routeParams.course_id ;
+    $scope.subject_name = $routeParams.subject_name ;
+
     $scope.frm={};
     
     // Api to call all students of a teacher
-    teacherHttpService.getStudentOfTeacher(get_uid).success(function(response_students) { 
+    teacherHttpService.getStudentsOfSubjectForTeacher(get_uid, $scope.subject_id).success(function(response_students) { 
         if (response_students.response.status == "true") {
               $scope.baseURL= urlParams.baseURL;
               $scope.students=response_students.response.students;
@@ -578,7 +626,7 @@ $scope.numberOfPages=function(){
 
 
     // API to show existing groups List
-     teacherHttpService.getGroups(get_uid).success(function(response_getgp) {
+     teacherHttpService.getGroupsOfSubjectForTeacher(get_uid, $scope.subject_id).success(function(response_getgp) {
           if (response_getgp.response.status == "true") {
                 $scope.groups = response_getgp.response.groups;
           }
@@ -588,33 +636,25 @@ $scope.numberOfPages=function(){
       });
 
 
-      // API to show students list of a group
-     teacherHttpService.getGroupStudents(gp_id,get_uid).success(function(response_getgp) {
-
-
-      });
-
-
 
     // To add the group in database
     $scope.onSubmitCreateGroup= function(frms){ 
       //console.log($scope.img); 
         frms.group_image = $scope.img;
-        teacherHttpService.createGroup(frms,get_uid).success(function(response_addgp) {
+        teacherHttpService.createGroup(frms,get_uid,$scope.subject_id).success(function(response_addgp) {
              if (response_addgp.response.status == "true") {
                 $scope.successMessage = response_addgp.response.message;
                 $scope.frm={};
                 //$scope.img ='';
 
                 // API to show all created group
-                teacherHttpService.getGroups(get_uid).success(function(response_getgp) {
+                teacherHttpService.getGroupsOfSubjectForTeacher(get_uid,$scope.subject_id).success(function(response_getgp) {
                     if (response_getgp.response.status == "true") {
                       $scope.groups = response_getgp.response.groups;
                     }
-                    else{
+                    else{ 
                         $scope.errorMessage = response_getgp.response.message;
                       }
-
                 });
 
              }else{
@@ -624,14 +664,8 @@ $scope.numberOfPages=function(){
               $timeout(function () { $scope.successMessage = ""; }, 4000);
               $timeout(function () { $scope.errorMessage = ""; }, 4000);
 
-
         });
-
-
     }
-
-
-
 }])
 
 
@@ -830,7 +864,7 @@ $scope.numberOfPages=function(){
                   }else{
                     $scope.msg = 'unable to find content.';
                   }
-                });     
+                });    
             },
             onItemDeselect: function(item) {
               angular.forEach(subSkills,function(value, key) {
@@ -980,6 +1014,19 @@ $scope.numberOfPages=function(){
         $scope.video = '';
         content = '';
         type = '';
+        var subSkillDetail = {};
+        subSkillDetail= {
+          uid : get_uid,
+          subskills :subSkills,
+        }
+        teacherHttpService.getUserContent(subSkillDetail).success(function(response) {
+          if (response.status == true) {
+            $scope.userContent = response.data;
+            mlg = response.url;
+          }else{
+            $scope.msg = 'unable to find content.';
+          }
+        });
            
       }else{
         $scope.message = response.response;
@@ -1343,7 +1390,11 @@ $scope.numberOfPages=function(){
 		{id: 5, label: "Soniya Gandhi"}
 	  ]
      
+}]).controller('teacherSubscriptionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+     
 }])
+
   
   .directive('dropZone', function() {
     return function($scope, element, attrs) {    

@@ -22,7 +22,9 @@ khanApiTopic: 'http://www.khanacademy.org/api/v1/topic/',
 khanApiVideo: 'http://www.khanacademy.org/api/v1/videos/',
 khanApiArticle: 'http://www.khanacademy.org/api/v1/articles/',
 setpreTestStatus: '/users/setpreTestStatus',
-getpreTestStatus: '/users/getpreTestStatus'
+getpreTestStatus: '/users/getpreTestStatus',
+uploadAvtarImage : '/users/uploadAvatarImage',
+getAvatarImage : '/users/getAvatarImage',
 
 
 }).value('REGEX', {
@@ -209,7 +211,17 @@ $rootScope.$on('$viewContentLoaded', function() {
 return {
 	restrict: 'E',
 	templateUrl: 'views/header.html',
-	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {  
+    
+     $('html').click(function (e) {
+      console.log($(e.target).parents('#h_menu'))
+    if ($(e.target).parents('#h_menu').length==1) {
+        $('#h_menu').addClass('open')
+    } else {
+        $('#h_menu').removeClass('open')
+    }
+}); 
+
 		var cookieString=$cookieStore.get("userObj");
 		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){

@@ -65,6 +65,14 @@
   } // main-content specification
 }
 
+// board-center
+.board-center {
+  width: 100vw;
+  @media screen and (max-width: 1370px){
+    height: auto !important;
+  }
+}
+
 // sub-skill-room board specification
 .board {
   @include background-cover("board-bg.png");
