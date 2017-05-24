@@ -211,7 +211,17 @@ $rootScope.$on('$viewContentLoaded', function() {
 return {
 	restrict: 'E',
 	templateUrl: 'views/header.html',
-	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {  
+    $scope.header_menu=false;
+     $scope.show_header_menu=function(){
+      $scope.header_menu=!$scope.header_menu;
+      if($scope.header_menu){
+        $('#h_menu').addClass('open')
+      }else{
+        $('#h_menu').removeClass('open')
+      }
+      
+     }                      	
 		var cookieString=$cookieStore.get("userObj");
 		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
