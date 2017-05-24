@@ -1,6 +1,6 @@
 <ul class="nav sidebar_nav sidebar_nav-main">
 						<li class="active">
-							<a href="#myClass" data-toggle="collapse" class="collapsed"><i class="icon icon-my_class"></i><span class="link__text">My Classes</span></a>
+							<a id="m_class" href="#" data-toggle="collapse"   ng-click="open_menu('m_class','myClass');"><i class="icon icon-my_class"></i><span class="link__text">My Classes</span></a>
 							<ul id="myClass" class="sub-menu collapse">
 								<li class="active" ng-repeat="list in subject_grade">
 									<a href="teacher/dashboard/class/{{list.level_id}}/{{list.course_name}}/{{list.course_id}}"><span class="link__text">{{list.name}} {{list.course_name}}</span></a>
@@ -21,7 +21,7 @@
 							<a href="teacher/rewards"><i class="icon icon-my_rewards"></i><span class="link__text">My Rewards</span></a>
 						</li>
 						<li >
-							<a href="#myContent" data-toggle="collapse" class="collapsed"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
+							<a id="m_content" href="#" data-toggle="collapse" class="collapsed" ng-click="open_menu('m_content','myContent');"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
 							<ul id="myContent" class="sub-menu collapse">
 								<li class="active">
 									<a href="teacher/questions"><span class="link__text">Questions</span></a>

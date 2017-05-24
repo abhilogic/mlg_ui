@@ -374,6 +374,34 @@ return {
 	restrict: 'E',
 	templateUrl: 'include/sidebar-teacher.html',
 	controller: ['$scope','$cookieStore','teacherHttpService','user_roles', function ($scope,$cookieStore,teacherHttpService,user_roles) {                         	
+		$scope.isCollapsedmyClass = true;
+		$scope.isCollapsedmyContent = true;
+		$scope.open_menu=function(menu_class,menu_item){
+			if(menu_item=='myClass'){
+				$scope.isCollapsedmyClass = !$scope.isCollapsedmyClass;
+				if(!$scope.isCollapsedmyClass){
+					$('#'+menu_item).addClass('in');
+					$('#'+menu_class).removeClass('collapsed');
+				}
+				else{
+					$('#'+menu_item).removeClass('in');
+					$('#'+menu_class).addClass('collapsed');
+				}
+			}
+			else{
+				$scope.isCollapsedmyContent = !$scope.isCollapsedmyContent;
+				if(!$scope.isCollapsedmyContent){
+					$('#'+menu_item).addClass('in');
+					$('#'+menu_class).removeClass('collapsed');
+				}else{
+					$('#'+menu_item).removeClass('in');
+					$('#'+menu_class).addClass('collapsed');
+			}
+
+			}
+			
+		   
+		}
 		var cookieString=$cookieStore.get("userObj");
 		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
