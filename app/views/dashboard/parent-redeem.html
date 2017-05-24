@@ -51,8 +51,8 @@
                     <div class="col-sm-4">
                       <div id="{{avail_coupon.coupon_id}}"> 
                       <div class="media-btns " ng-if="avail_coupon.status.toLowerCase() == 'approval pending'">
-                        <button class="btn btn-primary btn-accept" data-toggle="modal" ng-click = "modal_couponAccept(avail_coupon.coupons.id, avail_coupon.status)">Accept</button>
-                        <button class="btn background-none btn-reject" data-toggle="modal" ng-click = "modal_couponReject(avail_coupon.coupons.id, avail_coupon.status)">Reject</button>
+                        <button class="btn btn-primary btn-accept" data-toggle="modal" ng-click = "modal_couponAccept(avail_coupon)">Accept</button>
+                        <button class="btn background-none btn-reject" data-toggle="modal" ng-click = "modal_couponReject(avail_coupon)">Reject</button>
                       </div>
                         
                       <div class="media-btns disabled" ng-if="avail_coupon.status.toLowerCase() == 'acquired'">
