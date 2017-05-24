@@ -732,6 +732,11 @@ angular.module('mlg_student')
                    $scope.coupons_acquired.push(coupon);
                    $scope.coupons.splice(coupon_index, 1);
                  }
+                 if (avail_coupon.status.toLowerCase() == 'mlg approval pending') {
+                   coupon.coupon_label = 'Mlg approval pending';
+                   $scope.coupons_acquired.push(coupon);
+                   $scope.coupons.splice(coupon_index, 1);
+                 }
                }
              });
             });
@@ -743,7 +748,12 @@ angular.module('mlg_student')
     }
 
     $scope.showCoupon = function(obj) {
-      obj.coupon_label = obj.coupon_code;
+      if (obj.coupon_code == '' && obj.coupon_label.toLowerCase() == 'view') {
+        alert('Approved by Parent, Waiting for MLG approval');
+        setCoupon(obj, 'Mlg approval pending');
+      } else if (obj.coupon_code != '') {
+        obj.coupon_label = obj.coupon_code;
+      }
     }
 
 	$scope.openmodelRedeem=function(){
@@ -754,51 +764,61 @@ angular.module('mlg_student')
       $("#modal-allRedeem").modal();
 	};
 
-    $scope.coupon_requested = function (coupon_id, coupon_visibility, coupon_process_status, coupon_value) {
-      if (coupon_visibility == 'hidden') {
+    $scope.coupon_requested = function (coupon) {
+      if (coupon.visibility == 'hidden') {
         alert('You can not request for locked coupon');
         return false;
       }
-      var set_coupon_data = {};
-      set_coupon_data.user_id = get_uid;
-      set_coupon_data.coupon_id = coupon_id;
       var requested_coupon_status = 'Redeem';
-      if (coupon_process_status == '') {
+      if (coupon.process_status == '') {
         alert('you can not redeem this coupon');
         return false;
       }
-      if (coupon_process_status.toLowerCase() == 'redeem') {
+      if (coupon.process_status.toLowerCase() == 'redeem') {
         requested_coupon_status = 'Approval pending';
       }
-      set_coupon_data.status = requested_coupon_status;
+      if (coupon.process_status.toLowerCase() == 'acquired' && coupon.code == '') {
+        requested_coupon_status = 'Mlg approval pending';
+      }
+      var new_user_points = (parseInt($scope.userPoints) - parseInt(coupon.conditional_value));
+      if (new_user_points > 0) {
+        $scope.userPoints = new_user_points;
+      } else {
+        generate_error_reason('LESS_POINT');
+        return false;
+      }
+      setCoupon(coupon, requested_coupon_status);
+    }
+
+    /**function used to update coupon with their valuees**/
+    function setCoupon (coupon, coupon_new_status) {
+      var set_coupon_data = {}
+      set_coupon_data.user_id = get_uid;
+      set_coupon_data.coupon_id = coupon.id;
+      set_coupon_data.status = coupon_new_status;
       set_coupon_data.updated_by_user_id = get_uid;
+      set_coupon_data.condition_value = coupon.condition_value;
       loginHttpService.setAvailableCoupon(set_coupon_data).success(function (response) {
         if (response.status == true) {
-          angular.forEach($scope.coupons, function(coupon, coupon_index) {
-            if (coupon.id == coupon_id) {
-              if (coupon.process_status.toLowerCase() == 'redeem') {
-                if (coupon.process_status.toLowerCase() == 'acquired') {
-                  coupon.process_status = response.coupon_status;
-                }
-                $scope.userPoints = $scope.userPoints - coupon_value;
-              } else {
-                alert('coupon already in progress');
-              }
-            }
-          });
+          coupon.coupon_label = coupon.process_status = response.coupon_status;
         } else if (response.status == false && response.error_code != ''){
-          switch(response.error_code) {
-            case 'ZERO_POINT':
-              alert('You have zero points');
-              break;
-            case 'LESS_POINT':
-              alert('You have Insufficient Points');
-              break;
-            case 'POINT_GET_ERROR':
-              alert('Unable to get your points');
-              break;
-          }
+          generate_error_reason(response.error_code);
         }
       });
+    }
+    
+    /** function used to show error based on error code **/
+    function generate_error_reason(error_code) {
+      switch(error_code) {
+        case 'ZERO_POINT':
+          alert('You have zero points');
+          break;
+        case 'LESS_POINT':
+          alert('You have Insufficient Points');
+          break;
+        case 'POINT_GET_ERROR':
+          alert('Unable to get your points');
+          break;
+      }
     }
 }]);
