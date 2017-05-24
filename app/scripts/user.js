@@ -1406,12 +1406,13 @@ if (typeof $routeParams.id != 'undefined') {
       $scope.avail_coupons = avail_coupons.result;
     });
 
-    function setCoupon(coupon_id, updated_status) {
+    function setCoupon(coupon_id, updated_status, coupon_value) {
       var param = {};
       param.user_id = $routeParams.id;
       param.coupon_id = coupon_id;
       param.status = updated_status;
       param.updated_by_user_id = get_uid;
+      param.conditional_value = coupon_value;
       loginHttpService.setAvailableCoupon(param).success(function (response) {
        if (response.status == true) {
          if (updated_status.toLowerCase() == 'acquired') {
@@ -1435,33 +1436,39 @@ if (typeof $routeParams.id != 'undefined') {
         alert('coupon already acquired');
         return false;
       }
-      setCoupon($scope.accepted_coupon_id, 'Acquired');
+      setCoupon($scope.accepted_coupon_id, 'Acquired', $scope.conditional_value);
       $scope.accepted_coupon_id = '';
       $scope.coupon_prev_state = '';
+      $scope.conditional_value = '';
     }
     $scope.coupon_rejected = function() {
       if ($scope.coupon_prev_state.toLowerCase() == 'acquired') {
         alert('coupon already acquired');
         return false;
       }
-      setCoupon($scope.rejected_coupon_id, 'Rejected');
+      setCoupon($scope.rejected_coupon_id, 'Rejected', $scope.conditional_value);
       $scope.rejected_coupon_id = '';
       $scope.coupon_prev_state = '';
+      $scope.conditional_value = '';
     }
 
     $scope.accepted_coupon_id = '';
     $scope.rejected_coupon_id = '';
     $scope.coupon_prev_state = '';
-    $scope.modal_couponAccept = function(coupon_id, coupon_state) {
+    $scope.conditional_value = '';
+    $scope.modal_couponAccept = function(coupon) {
       $("#modal-couponAccept").modal();
-      $scope.accepted_coupon_id = coupon_id;
-      $scope.coupon_prev_state = coupon_state;
+      $scope.accepted_coupon_id = coupon.coupon_id;
+      $scope.coupon_prev_state = coupon.status;
+      $scope.conditional_value = coupon.coupon_conditions.condition_value;
     }
 
-    $scope.modal_couponReject = function(coupon_id, coupon_state) {
+    $scope.modal_couponReject = function(coupon) {
+      console.log(coupon);
       $("#modal-couponReject").modal();
-      $scope.rejected_coupon_id = coupon_id;
-      $scope.coupon_prev_state = coupon_state;
+      $scope.rejected_coupon_id = coupon.coupon_id;
+      $scope.coupon_prev_state = coupon.status;
+      $scope.conditional_value = coupon.coupon_conditions.condition_value;
     }
   }
 ])
