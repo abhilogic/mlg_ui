@@ -34,19 +34,62 @@
               </div>
 
               <div class="col-sm-6 col-right">
-                <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
+               <br>
+                **DEFAULT CARD TYPE IS VISA**
+                <h3 class="text-light text-gray-dark text-center">Address details</h3>
                 <br>
-                <form  class="form-payment">
+                <form class="form-payment">
                   <div class="form-group float-label">
-                    <label class="control-label">Card number</label>
-                    <input ng-model="frm.card_number" type="text" class="form-control float-input" required/>
+                    <label class="control-label">Address Line 1</label>
+                    <input ng-model="frm.line1" type="text" class="form-control float-input"/>
                   </div>
-
+                  <div class="form-group float-label">
+                    <label class="control-label">Address Line 2</label>
+                    <input ng-model="frm.line2" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">City</label>
+                        <input ng-model="frm.city" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">State</label>
+                        <input ng-model="frm.state" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Postal Code</label>
+                        <input ng-model="frm.postal_code" type="number" class="form-control float-input"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Country Code</label>
+                        <input ng-model="frm.country_code" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Phone</label>
+                    <input ng-model="frm.phone" type="text" class="form-control float-input"/>
+                  </div>
+                  <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
+                  <br>
+                  
                   <div class="form-group float-label">
                     <label class="control-label">Name on the card</label>
                     <input ng-model="frm.name" type="text" class="form-control float-input"/>
                   </div>
-
+                  <div class="form-group float-label">
+                    <label class="control-label">Card number</label>
+                    <input ng-model="frm.card_number" type="text" class="form-control float-input" required/>
+                  </div>
                   <div class="form-group form-group-inline form-group-cardDetails">
                     <label class="control-label">Card Expiry Date</label>
                     <select  ng-model="frm.expiry_month" class="form-control input-mm">
