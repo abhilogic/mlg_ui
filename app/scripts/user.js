@@ -237,6 +237,13 @@ angular.module('mlg').filter('moment', function() {
 			url   : urlParams.baseURL+urlParams.getStepNum+'/'+pid
 		});
 	}
+
+	loginHttpResponse.setStepNum=function(uid,step_num){
+		return $http({
+			method:'GET',
+			url   : urlParams.baseURL+urlParams.setStepNum+'?user_id='+uid+'&step_num='+step_num
+		});
+	}	
   
 	loginHttpResponse.promocode=function(prcode){
 		return $http({
@@ -300,6 +307,15 @@ angular.module('mlg').filter('moment', function() {
 			url   : urlParams.baseURL+urlParams.setUserSetting
 		});
 	}
+
+	loginHttpResponse.getTeacherGrades=function(tid,type){
+        return $http({
+          method:'GET',			
+          url  : urlParams.baseURL+urlParams.getTeacherGrades+'/'+tid+'/'+type
+        });
+      }
+
+      
 	return loginHttpResponse;
 	
 }])
@@ -366,10 +382,13 @@ angular.module('mlg').filter('moment', function() {
 		return commonActions;
 	}])
 
-.controller('loginCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles', 'subscription_days',function($rootScope,$scope,
-   loginHttpService,$location,user_roles,subscription_days) {
+.controller('loginCtrl',['$rootScope','$scope','loginHttpService','urlParams','$location','user_roles', 'subscription_days',function($rootScope,$scope,
+   loginHttpService,urlParams,$location,user_roles,subscription_days) {
     $scope.form={};	
     $scope.msg='';
+    $scope.baseURL= urlParams.baseURL;
+    $scope.baseStudentURL= urlParams.studentsiteRoot;
+
     $scope.range = function(n) {
         return new Array(n);
     }; 
@@ -437,12 +456,9 @@ angular.module('mlg').filter('moment', function() {
               return true;
             }
           }
-          if (role_id == '4') {
-            window.location.href='/mlg_ui/sapp/avtar1';
-            return true;
-          }
+          
             // To Redirect User on his account last step page.
-             // call API to get last step track             
+             // call API to get last step track for Parent            
              if (role_id == '2') {            
     		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
     			if(stepNum.response.step.step_completed!=null ){    				
@@ -468,28 +484,60 @@ angular.module('mlg').filter('moment', function() {
 			});
     	}
 
-
+    	// call API to get last step track for Teacher
     	if (role_id == '3') {    		
 			loginHttpService.getStepNum(response.user.id).success(function(stepNum) {    			
 				if(stepNum.response.step.step_completed!=null ){    				
 					//var step_page = stepNum.response.step.step_completed; 
 					if(stepNum.response.step.step_completed==0 ){ 
 						$location.url('teacher/create_account'); 
-         }
+         			}
 					else if(stepNum.response.step.step_completed==1){
 						 $location.url('teacher/select_courses');
 					}
 					else if(stepNum.response.step.step_completed==2){
 							 $location.url('teacher/payment_page');
 						}
-						else if(stepNum.response.step.step_completed==3){ 
-							$location.url('teacher/dashboard'); 
+						else if(stepNum.response.step.step_completed==3){
+
+							loginHttpService.getTeacherGrades(response.user.id,user_roles['teacher']).success(function(response) {
+                                    if (response.status == true) {
+                                        $scope.subject_grade = response.response;
+                                        $scope.level = response.grade;
+                                        $scope.subject = (response.subject.course_name).split(',');
+                                        var grade = response.urlData.level_id;
+                                        var subjectName = response.urlData.course_name;
+                                        var subjectCode = response.urlData.course_id;
+                                        $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+                                    }else{
+                                        $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+                                    }
+                                });
+
+
+							$location.url('teacher/dashboard');
 						}								
 							
 				   	}
 				});
 
     	}
+
+    	// Track for Students
+    	if (role_id == '4') {
+    		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {         
+        		if(stepNum.response.step.step_completed!=null ){            
+          			//var step_page = stepNum.response.step.step_completed; 
+          			if(stepNum.response.step.step_completed==0 ){             				 
+            				window.location.href=$scope.baseStudentURL+'avtar1';
+             		 }
+          			else if(stepNum.response.step.step_completed==1){            			 
+            			 window.location.href=$scope.baseStudentURL+'journey';
+          			}                  
+              
+       			 }
+        	});
+          }
 
 
 
@@ -1312,6 +1360,20 @@ if (typeof $routeParams.slug != 'undefined') {
         }
       });
     };
+
+
+      var step_num =1;
+	$scope.onSkipClick=function(){		
+			loginHttpService.setStepNum(get_uid,step_num).success(function(resp) { 
+            if (resp.response.status == "True") {                 
+                  $location.url('journey');
+            }else{
+                $location.url('journey');
+          } 
+    });
+
+	};
+
 
 }])
 

@@ -117,7 +117,10 @@
 												<button type="button" ng-if="Selection.prev" class="btn btn-primary" ng-click="scrollTo(Selection.prev)">Previous</button>
 												<button type="button" ng-show="Selection.current=='accessories'" class="btn btn-primary" id="downloadAvtar">Get your Avatar</button>
 												<button type="button" ng-if="Selection.next" class="btn btn-primary" ng-click="scrollTo(Selection.next)">Next</button>
-												<button type="button" ng-if="!Selection.prev" class="btn bg_none" id="skip"><a href="journey">Skip for now</a></button>
+												<!-- <button type="button" ng-if="!Selection.prev" class="btn bg_none" id="skip"><a href="journey">Skip for now</a></button> -->
+
+												<button type="button" ng-if="!Selection.prev" class="btn bg_none" id="skip" ng-click="onSkipClick()">Skip for now</button>
+
 											</div>
 									</div>
 									<!-- avtar -->

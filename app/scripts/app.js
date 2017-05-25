@@ -7,6 +7,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	login: '/users/login',
 	logout: '/users/logout',
 	siteRoot : '/mlg_ui/app/',
+	studentsiteRoot : '/mlg_ui/sapp/',
 	registerUser:'/users/registerUser',
 	parentPreference:'/users/setUserPreference',
 	baseURL : 'http://localhost/mlg',
@@ -28,6 +29,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	addChildRecord : '/users/addChildrenRecord',
 	addChild : '/users/addChildren',
 	offerRecords : '/users/getOffers',
+	setStepNum :'/users/setStepNum',
 	getStepNum :'/users/getStepNum',
 	getUsedCoupon: '/users/getUsedCoupon',
 	getUserSetting: '/users/getUserSetting',
@@ -260,7 +262,7 @@ principal  : 30,
   }).when('/teacher/create-group/class/:grade_id/:subject_name/:course_id',{
 		templateUrl : 'views/dashboard/teacher-create-group.html',
 		controller : 'teacherGroupCtrl',
-  }).when('/teacher/view-group/:group_title_inURL/:group_id',{
+  }).when('/teacher/edit-group/:group_title_inURL/:group_id',{
 		templateUrl : 'views/dashboard/teacher-editGroup.html',
 		controller : 'teacherGroupCtrl',
   }).when('/teacher/gap-analysis',{
@@ -427,22 +429,7 @@ $scope.userInfo=userInfo;
     if (response.status == true) {
       $scope.subject_grade = response.response;
       $scope.level = response.grade;
-      $scope.subject = (response.subject.course_name).split(',');
-    /*  grade = response.urlData.level_id;
-      subjectName = response.urlData.course_Name;
-      subjectCode = response.urlData.course_id;
-      var urlString = $location.url();
-      var splitString = urlString.split('#');
-      if (splitString[1] != undefined) {
-        var splitResult = splitString[1].split('%2F')
-        if(splitResult[0] != undefined && splitResult[1] != undefined 
-                && splitResult[2] != undefined ) {
-          grade = splitResult[0];
-          subjectName = splitResult[1];
-          subjectCode = splitResult[2];
-        }
-      }*/
-   
+      $scope.subject = (response.subject.course_name).split(',');  
 
 
     }

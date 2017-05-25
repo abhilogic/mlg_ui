@@ -6,6 +6,7 @@ login: '/users/login',
 logout: '/users/logout',
 getUserDetails: '/users/getUserDetails',
 siteRoot : '/mlg_ui/app/',
+studentsiteRoot : '/mlg_ui/sapp/',
 baseURL : 'http://localhost/mlg',
 registerUser:'/users/registerUser',
 getCourseByGrade :'/courses/getCourseListForLevel',
@@ -25,6 +26,8 @@ setpreTestStatus: '/users/setpreTestStatus',
 getpreTestStatus: '/users/getpreTestStatus',
 uploadAvtarImage : '/users/uploadAvatarImage',
 getAvatarImage : '/users/getAvatarImage',
+setStepNum :'/users/setStepNum',
+getStepNum :'/users/getStepNum',
 
 
 }).value('REGEX', {
@@ -135,6 +138,22 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
   if (uid == '') {
     alert('Kindly login');
     window.location.href='/mlg_ui/app';
+  }else{
+
+    loginHttpService.getStepNum(uid).success(function(stepNum) {         
+        if(stepNum.response.step.step_completed!=null ){            
+          //var step_page = stepNum.response.step.step_completed; 
+          if(stepNum.response.step.step_completed==0 ){ 
+            $location.url('avtar1'); 
+              }
+          else if(stepNum.response.step.step_completed==1){
+             $location.url('journey');
+          }                  
+              
+        }
+        });
+
+
   }
 
   $rootScope.userPoints = 0;
