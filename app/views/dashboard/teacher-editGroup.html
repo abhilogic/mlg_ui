@@ -9,44 +9,9 @@
 		<div class="page-content">
 
 			<!-- Main Sidebar -->
-			<aside class="sidebar sidebar-main">
-					<ul class="nav sidebar_nav sidebar_nav-main">
-						<li class="active">
-							<a href="#myClass" data-toggle="collapse"><i class="icon icon-my_class"></i><span class="link__text">My Class</span></a>
-							<ul id="myClass" class="sub-menu collapse in">
-								<li class="active">
-									<a href="teacher-dashboard.html"><span class="link__text">Class 7th A Math</span></a>
-								</li>
-								<li>
-									<a href="#"><span class="link__text">Class 7th A Math</span></a>
-								</li>
-								<li>
-									<a href="#"><span class="link__text">Class 7th A Math</span></a>
-								</li>
-							</ul>
-						</li>
-						<li >
-							<a href="teacher-subscription.html"><i class="icon icon-my_subscriptions"></i><span class="link__text">My Subscription</span></a>
-						</li>
-						<li >
-							<a href="teacher-rewards.html"><i class="icon icon-my_rewards"></i><span class="link__text">My Rewards</span></a>
-						</li>
-						<li >
-							<a href="teacher-content.html"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
-						</li>
-						<li>
-							<a href="teacher-scope-sequence.html"><i class="icon icon-my_blueprinting_tool"></i><span class="link__text">scope and sequence</span></a>
-						</li>
-						<li>
-							<a href="teacher-setting.html"><i class="icon icon-my_settings"></i><span class="link__text">My Setting</span></a>
-						</li>
-						<li>
-							<a href="#"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
-						</li>
-					</ul>
-			</aside>
-			<!-- /sidebar -->
-
+			
+	  	<aside class="sidebar sidebar-main"></aside>
+	    <!-- /sidebar -->
 
 			<!-- Main content -->
 			<div class="content-wrapper">
@@ -58,15 +23,12 @@
 					<div class="panel panel-flat edit-group">
 					   <div class="edited-block">
 			              <i class="fa fa-arrow-left"></i>
-			              <ul class="student_list">
+			              <ul>
 			                <li>
-			                	<img src="{{baseURL}}/{{group_icon}}" alt="" class=" img-circle">
+			                	<img src="{{baseURL}}/{{group_icon}}" alt="" class=" img-circle" style="max-width:134px" >
 			                </li>
-			                <li>
-			                	
-			                <input type="text" class="group-name"  ng-model="group_title"/>
-			                	<!-- <input type="text" disabled="" value="Struggling Students" class="group-name"> -->
-			                	
+			                <li>			                	
+			                	<input type="text" class="group-name"  ng-model="frm.group_title"/>       	
 			                </li>
 			                <li>
 			                	<i class="icon icon-pencil"></i>
@@ -83,14 +45,19 @@
 
 
 									<input type="hidden" name="name" ng-model="gp_student.id" />
-	 								<button class="btn btn-delete" ng-click="removeStInGp(gp_student.id)"> <i class="icon icon-cross"></i> </button>
+
+
+	 								<button class="btn btn-delete" ng-click="removeStInGp($index)">
+	 								 <i class="icon icon-cross"></i> </button>
+
+	 								 <!-- <button class="btn btn-link" ng-click="delete_Student(student,$index)"><i class="fa fa-trash"></i></button> -->
+
+
 
 
 									<a href="teacher-student-profile.html">{{gp_student.id}}
 										<div class="student__img">
-											<img class="img-circle" src="{{baseURL}}{{gp_student.profile_pic}}" alt="{{gp_student.first_name}}"/>
-									}
-									}
+											<img class="img-circle" src="{{baseURL}}{{gp_student.profile_pic}}" alt="{{gp_student.first_name}}"/>									
 									</div>
 										<span class="student__name">{{gp_student.first_name+ ' ' + gp_student.last_name}}</span>
 									</a>
@@ -109,6 +76,8 @@
 						<ul class="row list-thumb student_list">
 							<li class="student gifted" ng-repeat="remain_student in remain_CLstudents">
 								<div class="checkbox checkbox-primary">
+
+
 									<input type="checkbox" ng-model="frm.selectedst[remain_student.id]"  ng-true-value="'{{remain_student.username}}'" ng-false-value="''" > 
 
 									<!-- <input type="checkbox" ng-change="OnSelectStInGp(frm.selectedcourse)" ng-model="frm.selectedst[remain_student.id]"  ng-true-value="'{{remain_student}}'" ng-false-value="''" >  -->
@@ -128,7 +97,7 @@
 								<a class="link link-gray-dark" href="#">Show All</a>
                 <div class="text-right">
                   <button type="button" class="btn btn-background-none">Cancel</button>
-                  <button type="button" class="btn btn-primary" ng-click = "submitEditGroup(group_title, frm)">Apply</button>
+                  <button type="button" class="btn btn-primary" ng-click = "submitEditGroup(frm)">Apply</button>
                 </div>
 						</div>
 					</div>

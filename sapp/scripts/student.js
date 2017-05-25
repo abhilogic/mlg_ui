@@ -11,6 +11,20 @@ angular.module('mlg_student')
 			url   : urlParams.baseURL+urlParams.login
 		});
 	}
+	loginHttpResponse.setStepNum=function(uid,step_num){
+		return $http({
+			method:'GET',
+			url   : urlParams.baseURL+urlParams.setStepNum+'?user_id='+uid+'&step_num='+step_num
+		});
+	}
+
+	loginHttpResponse.getStepNum=function(pid){
+		return $http({
+			method:'GET',
+			url   : urlParams.baseURL+urlParams.getStepNum+'/'+pid
+		});
+	}
+
 
 	loginHttpResponse.getCourseByGrade=function(grade_id){		
 		return $http({
@@ -263,11 +277,25 @@ angular.module('mlg_student')
 	  var get_uid=commonActions.getcookies(get_uid);
 }])
 .controller('avtarCtrl',['$scope','$location','$anchorScroll','loginHttpService','commonActions','$http',function($scope,$location,$anchorScroll,loginHttpService,commonActions,$http) {
+	
 	 var get_uid=commonActions.getcookies(get_uid); 
 	  var prev=undefined;
 	  var next=undefined;
 
-     $scope.SelectionBoy={
+      var step_num =1;
+	$scope.onSkipClick=function(){		
+			loginHttpService.setStepNum(get_uid,step_num).success(function(resp) { 
+            if (resp.response.status == "True") {                 
+                  $location.url('journey');
+            }else{
+                $location.url('journey');
+          } 
+    });
+
+	};
+
+
+     $scope.SelectionBoy={	
 	    	current:'skin',
 	    	prev:prev,
 	    	next:'hair'
@@ -393,6 +421,7 @@ angular.module('mlg_student')
       });
    }
 
+
     $scope.download_avtar=function(){
     	$(".modal-backdrop").remove();
     	var canvas = document.getElementById('canvas');
@@ -428,6 +457,7 @@ angular.module('mlg_student')
     }
 
      
+
 }])
 .controller('quizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 	 // alert(navigator.onLine);

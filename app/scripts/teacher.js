@@ -355,15 +355,31 @@ angular.module('mlg')
       teacherHttpService.saveCardToPaypalForTeacher(data).success(function(response) {
         if (response.status == true) {
          // $location.url('/teacher/dashboard'); 
-         $location.url('/teacher/dashboard/class/1/English/4');
+         //$location.url('/teacher/dashboard/class/1/English/4');
+
+         teacherHttpService.getTeacherGrades(response.user.id,user_roles['teacher']).success(function(response) {
+            if (response.status == true) {
+              $scope.subject_grade = response.response;
+              $scope.level = response.grade;
+              $scope.subject = (response.subject.course_name).split(',');
+              var grade = response.urlData.level_id;
+              var subjectName = response.urlData.course_name;
+              var subjectCode = response.urlData.course_id;
+              
+              $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+              }else{
+                  $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+              }
+         });
+
+
         } else {
           $scope.msg = response.message;
         }
       });
     };
-    $scope.submitSkip = function(data) {
-      $location.url('/teacher/dashboard/class/1/English/4');   
-    };
+
+    
     /* end- step-3 for onBoarding */
 
   /* Start - step-4 for onBoarding teacher dasboard*/
@@ -377,11 +393,11 @@ angular.module('mlg')
       $scope.level = response.grade;
       $scope.subject = (response.subject.course_name).split(',');
       grade = response.urlData.level_id;
-      subjectName = response.urlData.course_Name;
+      subjectName = response.urlData.course_name;
       subjectCode = response.urlData.course_id;
       var urlString = $location.url();
       var splitString = urlString.split('#');
-      if (splitString[1] != undefined) {
+     /* if (splitString[1] != undefined) {
         var splitResult = splitString[1].split('%2F')
         if(splitResult[0] != undefined && splitResult[1] != undefined 
                 && splitResult[2] != undefined ) {
@@ -389,7 +405,7 @@ angular.module('mlg')
           subjectName = splitResult[1];
           subjectCode = splitResult[2];
         }
-      }
+      }*/
       //this function call for show student for first class in teacher class.
       teacherHttpService.getStudentDetail(grade,subjectCode,user_roles['student']).success(function(response) {
       if(response.data.length >0) {
@@ -400,6 +416,22 @@ angular.module('mlg')
     });
     }
   });
+
+  //API on click on skip
+  $scope.submitSkip = function() {      
+
+          var step_num =3;    
+          loginHttpService.setStepNum(get_uid,step_num).success(function(resp) { 
+                if (resp.response.status == "True") {                 
+                      $location.url('/teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+                }else{
+                    $location.url('/teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+              } 
+        });
+
+
+    };
+
   $scope.events = [
           { date: moment('2017-04-8').add(0, 'days').format(), title: "Maths Test" }
       ];
@@ -697,15 +729,15 @@ $scope.numberOfPages=function(){
 
     // Step 2 - Edit group
     if( $routeParams.group_title_inURL){
-        $group_id = $routeParams.group_id ;
+        var group_id = $routeParams.group_id ;
 
         // Get students of group
-        teacherHttpService.getStudentsOfGroup( $group_id).success(function(resp) {         
+        teacherHttpService.getStudentsOfGroup( group_id).success(function(resp) {         
             if (resp.response.status == "True") {
                   $scope.gp_students = resp.response.students ; 
                   var gp_studnts = resp.response.students ;
                   $scope.group_icon =  resp.response.group_icon ;
-                  $scope.group_title =  resp.response.group_title ;
+                  $scope.frm.group_title =  resp.response.group_title ;
                    $scope.gp_course_id =  resp.response.course_id ;
 
                   // Get Student of Class/Subject  
@@ -731,31 +763,47 @@ $scope.numberOfPages=function(){
 
 
 
-        // remove existing students from group
-        
-        $scope.removeStInGp = function(rmStudent) { 
-           //$scope.gp_students;
-           //console.log(rmStudent);
-           var index = $scope.gp_students.indexOf(rmStudent);
+        // remove existing students from group        
+        $scope.removeStInGp = function(index) {           
             $scope.gp_students.splice(index, 1);
-
-            
-
-
         }
 
-        // Add students from remaining students of
-        /*$scope.OnSelectStInGp = function(selectd_student) { 
-          //alert(selectd_student);
-        }  */
+       
+         $scope.submitEditGroup = function(frmdata) {          
+           var frm_record = {};
+           angular.forEach(frmdata.selectedst, function(value, key) {               
+              frm_record[key] = value;           
+            });
 
-         $scope.submitEditGroup = function(group_title, selectdstudent) {
-           console.log(selectdstudent);
+           angular.forEach($scope.gp_students, function(value, key) {
+              var st_id = value['id'];
+              var st_username= value['username'];               
+              frm_record[st_id] = st_username;           
+            });
 
-            var record = {
-                groupname : group_title,
-                selectedstudent : selectdstudent,
-            };
+
+           var editgprecords={
+                groupname : frmdata.group_title,
+                group_id  : group_id,
+                students  : frm_record 
+           }
+
+           // Call API to update the records of group
+           teacherHttpService.editGroupOfSubject(editgprecords,group_id).success(function(resp) {
+           console.log(resp); 
+                     if (resp.response.status == "True") {
+
+                      console.log(resp);
+                     }
+             });
+
+
+
+
+
+           
+
+            
             
           }         
         
