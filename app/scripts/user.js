@@ -515,7 +515,7 @@ angular.module('mlg').filter('moment', function() {
                                 });
 
 
-							$location.url('teacher/dashboard');
+							//$location.url('teacher/dashboard');
 						}								
 							
 				   	}

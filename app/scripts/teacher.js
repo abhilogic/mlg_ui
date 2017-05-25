@@ -355,7 +355,24 @@ angular.module('mlg')
       teacherHttpService.saveCardToPaypalForTeacher(data).success(function(response) {
         if (response.status == true) {
          // $location.url('/teacher/dashboard'); 
-         $location.url('/teacher/dashboard/class/1/English/4');
+         //$location.url('/teacher/dashboard/class/1/English/4');
+
+         teacherHttpService.getTeacherGrades(response.user.id,user_roles['teacher']).success(function(response) {
+            if (response.status == true) {
+              $scope.subject_grade = response.response;
+              $scope.level = response.grade;
+              $scope.subject = (response.subject.course_name).split(',');
+              var grade = response.urlData.level_id;
+              var subjectName = response.urlData.course_name;
+              var subjectCode = response.urlData.course_id;
+              
+              $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+              }else{
+                  $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+              }
+         });
+
+
         } else {
           $scope.msg = response.message;
         }
@@ -712,10 +729,10 @@ $scope.numberOfPages=function(){
 
     // Step 2 - Edit group
     if( $routeParams.group_title_inURL){
-        $group_id = $routeParams.group_id ;
+        var group_id = $routeParams.group_id ;
 
         // Get students of group
-        teacherHttpService.getStudentsOfGroup( $group_id).success(function(resp) {         
+        teacherHttpService.getStudentsOfGroup( group_id).success(function(resp) {         
             if (resp.response.status == "True") {
                   $scope.gp_students = resp.response.students ; 
                   var gp_studnts = resp.response.students ;
@@ -746,18 +763,13 @@ $scope.numberOfPages=function(){
 
 
 
-        // remove existing students from group
-        
+        // remove existing students from group        
         $scope.removeStInGp = function(index) {           
             $scope.gp_students.splice(index, 1);
         }
 
        
-         $scope.submitEditGroup = function(frmdata) {
-           console.log(frmdata.selectedst);
-           console.log($scope.gp_students);
-
-           
+         $scope.submitEditGroup = function(frmdata) {          
            var frm_record = {};
            angular.forEach(frmdata.selectedst, function(value, key) {               
               frm_record[key] = value;           
@@ -768,6 +780,24 @@ $scope.numberOfPages=function(){
               var st_username= value['username'];               
               frm_record[st_id] = st_username;           
             });
+
+
+           var editgprecords={
+                groupname : frmdata.group_title,
+                group_id  : group_id,
+                students  : frm_record 
+           }
+
+           // Call API to update the records of group
+           teacherHttpService.editGroupOfSubject(editgprecords,group_id).success(function(resp) {
+           console.log(resp); 
+                     if (resp.response.status == "True") {
+
+                      console.log(resp);
+                     }
+             });
+
+
 
 
 

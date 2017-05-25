@@ -307,6 +307,7 @@ principal  : 30,
 } ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
+    var top ="";
     loginHttpService.isUserlogin().success(function(response) {
          if (response.status=='false') {
            $rootScope.logged_user = '';
