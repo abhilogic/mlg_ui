@@ -267,12 +267,19 @@ angular.module('mlg_student')
 	  var prev=undefined;
 	  var next=undefined;
 
-     $scope.Selection={
+     $scope.SelectionBoy={
 	    	current:'skin',
 	    	prev:prev,
 	    	next:'hair'
 	    };
 
+	 $scope.SelectionGirl={
+	    	current:'girl_skin',
+	    	prev:prev,
+	    	next:'girl_hair'
+	    };
+   
+	    //for boy
 	 $scope.scrollTo = function(id) {
 	 	var arr=['skin','hair','clothes','accessories'] ;
 	 	for(i in arr){
@@ -283,22 +290,52 @@ angular.module('mlg_student')
 	    $('#li_'+id).addClass('active');
 	    var searchIndex=arr.indexOf(id);
 	    if(searchIndex==0){
-	    	$scope.Selection={
+	    	$scope.SelectionBoy={
 	    	current:id,
 	    	prev:prev,
 	    	next:'hair'
 	    	};
 	    }else if(searchIndex==arr.length-1){
-	    	$scope.Selection={
+	    	$scope.SelectionBoy={
 	    	current:id,
 	    	prev:arr[searchIndex-1],
 	    	next:next
 	    	};
 	    }else{
-	    	$scope.Selection={
+	    	$scope.SelectionBoy={
 	    	current:id,
 	    	prev:arr[searchIndex-1],
 	    	next:arr[searchIndex+1]
+	    	};
+	    }   
+};
+
+ $scope.scrollToGirl = function(id) {
+	 	var arr1=['girl_skin','girl_hair','girl_clothes','girl_accessories'] ;
+	 	for(i in arr1){
+	 		$('#'+arr1[i]).removeClass('in active');
+	 		$('#li_'+arr1[i]).removeClass('active');
+	 	}	   
+	    $('#'+id).addClass('in active');
+	    $('#li_'+id).addClass('active');
+	    var searchIndex=arr1.indexOf(id);
+	    if(searchIndex==0){
+	    	$scope.SelectionGirl={
+	    	current:id,
+	    	prev:prev,
+	    	next:'girl_hair'
+	    	};
+	    }else if(searchIndex==arr1.length-1){
+	    	$scope.SelectionGirl={
+	    	current:id,
+	    	prev:arr1[searchIndex-1],
+	    	next:next
+	    	};
+	    }else{
+	    	$scope.SelectionGirl={
+	    	current:id,
+	    	prev:arr1[searchIndex-1],
+	    	next:arr1[searchIndex+1]
 	    	};
 	    }   
 };
@@ -306,7 +343,9 @@ angular.module('mlg_student')
       //avtar download js prakash
       //var btn = document.getElementById("downloadAvtar");
       var svg = document.getElementById("avtar");
+      //var svgGirl = document.getElementById("avtarGirl");
       var canvas = document.getElementById("canvas");
+      //var canvas_girl = document.getElementById("canvas_girl");
 
       function triggerDownload (imgURI) {
         var evt = new MouseEvent('click', {
@@ -321,7 +360,9 @@ angular.module('mlg_student')
         a.setAttribute('target', '_blank');
         a.dispatchEvent(evt);
       } 
+        if(document.getElementById("downloadAvtar")){ 
         document.getElementById("downloadAvtar").addEventListener('click', function () {
+        	$(".modal-backdrop").remove();
         var canvas = document.getElementById('canvas');
         var ctx = canvas.getContext('2d');
         var data = (new XMLSerializer()).serializeToString(svg);
@@ -350,9 +391,43 @@ angular.module('mlg_student')
         };
         img.src = url;
       });
-//    }
+   }
 
-	  
+    $scope.download_avtar=function(){
+    	$(".modal-backdrop").remove();
+    	var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var svg = document.getElementById("avtar_girl");
+        var data = (new XMLSerializer()).serializeToString(svg);
+        var DOMURL = window.URL || window.webkitURL || window;
+
+        var img = new Image();
+        var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+        var url = DOMURL.createObjectURL(svgBlob);
+
+        img.onload = function () {
+          ctx.drawImage(img, 0, 0);
+          DOMURL.revokeObjectURL(url);
+
+          var imgURI = canvas
+              .toDataURL('image/png');
+    //					.replace('image/png', 'image/octet-stream');
+          var avtarImage ={};
+           avtarImage = {
+             uid : get_uid,
+             image : imgURI,
+           };
+          loginHttpService.uploadAvtarImage(avtarImage).success(function (response) {
+              $location.url('/journey');
+              $scope.AvtarImage = response.response
+          });  
+        };
+        img.src = url;
+     // });
+
+    }
+
+     
 }])
 .controller('quizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
 	 // alert(navigator.onLine);
@@ -872,9 +947,25 @@ angular.module('mlg_student')
 		$("#modal-redeem").modal();
 	};
 
+
+
 	$scope.open_avatar=function(){
-		$("#modal-changeAvatar").modal();
+		$("#modal-selectAvatar").modal();
 	}
+
+	$scope.show_boy_avatar=function(){
+		$("#modal-selectAvatar").modal('hide');
+
+		$("#modal-changeBoyAvatar").modal();
+		$("#modal-changeGirlAvatar").remove();
+	}
+
+	$scope.show_girl_avatar=function(){
+		$("#modal-selectAvatar").modal('hide');
+		$("#modal-changeBoyAvatar").remove();
+		$("#modal-changeGirlAvatar").modal();
+	}
+
 
 	$scope.open_report=function(){
 		$("#modal-view-report").modal();
