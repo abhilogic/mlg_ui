@@ -147,7 +147,12 @@ angular.module('mlg_student')
           url   : urlParams.baseURL+urlParams.getAvatarImage + '/' + uid
       });
 	}
-	
+	loginHttpResponse.getTodayEvents = function(uid){
+      return $http({
+          method:'GET',
+          url   : urlParams.baseURL+urlParams.getTodayEvents + '/' + uid
+      });
+	}
 
 
 	return loginHttpResponse;
@@ -190,12 +195,11 @@ angular.module('mlg_student')
 
 			return commonActions;
 	}])
-.controller('journeyCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
+.controller('journeyCtrl',['$rootScope','$scope','$filter','loginHttpService','commonActions','$location','urlParams','$http','user_roles','$localStorage',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles,$localStorage) {
 	  //alert('kkk');
 	  var get_uid=commonActions.getcookies(get_uid);
 	  $scope.frm = {};
-    
-	  
+   
 	   // Check the condition to move either on pre-Test Page or On Sub Skill Page
 	   loginHttpService.getpreTestStatus(get_uid).success(function(pretestResponse) {
 	   		if (pretestResponse.response.status == "True") { 
@@ -268,6 +272,19 @@ angular.module('mlg_student')
     }
        }
     });
+    //event alert.
+     if($localStorage.messageCount != '1') {
+      loginHttpService.getTodayEvents(get_uid).success(function(response) {
+        var html = '';
+        var count = 1;
+        angular.forEach(response.response,function(val,key){
+          html +=  count+'. '+val+'\n';
+          count++;
+        });
+        alert(html);
+        $localStorage.messageCount = '1';
+	    });
+    }
 }])
 
 
