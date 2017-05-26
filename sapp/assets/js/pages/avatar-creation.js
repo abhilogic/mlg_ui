@@ -35,8 +35,14 @@ $(document).ready(function(){
 
 
   // universal variable
-  var bodyTone;
   var bgColor;
+  // color tone combination block
+  var bodyTone;
+  var faceColor;
+  var mouthColor;
+  var thyroidColor;
+  // color tone combination block
+
   var hireStyle;
   var clothStyle;
   var capStyle;
@@ -50,7 +56,15 @@ $(document).ready(function(){
   });
   $("#body-tone .btn").click(function(){
     bodyTone = $(this).children("input").attr("data-body-tone");
+    faceColor = $(this).children("input").attr("data-face-color");
+    mouthColor = $(this).children("input").attr("data-mounth-color");
+    thyroidColor = $(this).children("input").attr("data-thyroid-color");
+    eyeColor = $(this).children("input").attr("data-eye-color");
     $("#avtar .body-part").css("fill", bodyTone);
+    $("#avtar .face-component").css("fill", faceColor);
+    $("#avtar .mounth").css("fill", mouthColor);
+    $("#avtar .thyroid").css("fill", thyroidColor);
+    $("#avtar .eye").css("fill", eyeColor);
   });
 
   // HAIR STYLE
@@ -68,6 +82,7 @@ $(document).ready(function(){
     clothStyle = $(this).children("input").attr("data-cloth");
     $("#cloths").html(clothStyle);
     $("#avtar .body-part").css("fill", bodyTone);
+    $("#shoes-style").html('');
   });
 
   // ACCESSORIES caps
@@ -76,9 +91,6 @@ $(document).ready(function(){
     var capHireStyle = $(this).children("input").attr("data-hire-style");
     $("#capStyle").html(capStyle);
     $("#hire-style-path").html(capHireStyle);
-    setTimeout(function(){
-      $("#hire-style-path path").css("fill", hireColor);
-    },100);
   });
 
   // ACCESSORIES SPECS
@@ -124,48 +136,48 @@ $(document).ready(function(){
 });
 
 // canvas for avatar creation
-/* $(document).ready(function(){
-  var btn = document.getElementById("downloadAvtar");
-  var svg = document.getElementById("avtar");
-  var canvas = document.getElementById("canvas");
-
-  function triggerDownload (imgURI) {
-  var evt = new MouseEvent('click', {
-    view: window,
-    bubbles: false,
-    cancelable: true
-  });
-
-  var a = document.createElement('a');
-  a.setAttribute('download', 'Avtar_profile_pick.png');
-  a.setAttribute('href', imgURI);
-  a.setAttribute('target', '_blank');
-
-  a.dispatchEvent(evt);
-  }
-
-  btn.addEventListener('click', function () {
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
-  var data = (new XMLSerializer()).serializeToString(svg);
-  var DOMURL = window.URL || window.webkitURL || window;
-
-  var img = new Image();
-  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-  var url = DOMURL.createObjectURL(svgBlob);
-
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0);
-    DOMURL.revokeObjectURL(url);
-
-    var imgURI = canvas
-        .toDataURL('image/png')
-        .replace('image/png', 'image/octet-stream');
-
-    triggerDownload(imgURI);
-  };
-
-  img.src = url;
-  console.log(url);
-  });
-}); */
+// $(document).ready(function(){
+//   var btn = document.getElementById("downloadAvtar");
+//   var svg = document.getElementById("avtar");
+//   var canvas = document.getElementById("canvas");
+//
+//   function triggerDownload (imgURI) {
+//   var evt = new MouseEvent('click', {
+//     view: window,
+//     bubbles: false,
+//     cancelable: true
+//   });
+//
+//   var a = document.createElement('a');
+//   a.setAttribute('download', 'Avtar_profile_pick.png');
+//   a.setAttribute('href', imgURI);
+//   a.setAttribute('target', '_blank');
+//
+//   a.dispatchEvent(evt);
+//   }
+//
+//   btn.addEventListener('click', function () {
+//   var canvas = document.getElementById('canvas');
+//   var ctx = canvas.getContext('2d');
+//   var data = (new XMLSerializer()).serializeToString(svg);
+//   var DOMURL = window.URL || window.webkitURL || window;
+//
+//   var img = new Image();
+//   var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+//   var url = DOMURL.createObjectURL(svgBlob);
+//
+//   img.onload = function () {
+//     ctx.drawImage(img, 0, 0);
+//     DOMURL.revokeObjectURL(url);
+//
+//     var imgURI = canvas
+//         .toDataURL('image/png')
+//         .replace('image/png', 'image/octet-stream');
+//
+//     triggerDownload(imgURI);
+//   };
+//
+//   img.src = url;
+//   console.log(url);
+//   });
+// });

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives'
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives','ngStorage'
 ])
 .value('urlParams', {
 	users : '/users',
@@ -34,7 +34,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	getUsedCoupon: '/users/getUsedCoupon',
 	getUserSetting: '/users/getUserSetting',
 	setUserSetting: '/users/setUserSetting',
-    setAvailableCoupon: '/users/setAvailableCoupon',
+  setAvailableCoupon: '/users/setAvailableCoupon',
   promocode :'/users/promocode',
   getUserPurchaseDetails :'/users/getUserPurchaseDetails',
   signUpTeacher :'/teachers/setTeacherRecord',
@@ -69,7 +69,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   uploadQuestion : '/teachers/saveQuestion',
   getStaticContent : '/users/getStaticContents',
   getCourseSkillSubskills : '/courses/getCourseSkillSubskills',
-
+  uploadEvent : '/teachers/setEvent',
+  getEvent : '/teachers/getEvent',
+  getTodayEvents : '/teachers/getTodayEvents',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -304,7 +306,7 @@ principal  : 30,
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth','$localStorage', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth,$localStorage) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
     var top ="";
@@ -336,6 +338,7 @@ principal  : 30,
 	   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
+          $localStorage.$reset();
 		   		 /*document.cookie = uid+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
 		   		setCookie('uid',null);

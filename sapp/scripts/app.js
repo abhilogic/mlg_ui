@@ -28,7 +28,7 @@ uploadAvtarImage : '/users/uploadAvatarImage',
 getAvatarImage : '/users/getAvatarImage',
 setStepNum :'/users/setStepNum',
 getStepNum :'/users/getStepNum',
-
+getTodayEvents : '/teachers/getTodayEvents',
 
 }).value('REGEX', {
 LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -111,6 +111,9 @@ $routeProvider
 }).when('/avtar2', {
 	templateUrl : 'views/avtar-boy-design.html',
 	controller : 'avtarCtrl',		
+}).when('/avtar3', {
+  templateUrl : 'views/avatar-girl-design.html',
+  controller : 'avtarCtrl',   
 }).when('/subskill_content/:pid/:type/:course_id', {
 	templateUrl : 'views/subskills-content.html',
 	controller : 'subskillContent',		
@@ -125,7 +128,7 @@ $locationProvider.html5Mode({
 	requireBase : false
 });
 
-} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','$localStorage', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,$localStorage) {
 
 urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
 	function setCookie(key, value) {
@@ -168,6 +171,8 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
+          var question = $localStorage.localquestions;
+          $localStorage.$reset();
 		   		 /*document.cookie = uid+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
 		   		setCookie('uid',null);
