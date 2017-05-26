@@ -52,9 +52,6 @@
 
 	 								 <!-- <button class="btn btn-link" ng-click="delete_Student(student,$index)"><i class="fa fa-trash"></i></button> -->
 
-
-
-
 									<a href="teacher-student-profile.html">{{gp_student.id}}
 										<div class="student__img">
 											<img class="img-circle" src="{{baseURL}}{{gp_student.profile_pic}}" alt="{{gp_student.first_name}}"/>									
@@ -94,11 +91,13 @@
 							</ul>
 						</div>
 						<div class="panel-footer text-center">
-								<a class="link link-gray-dark" href="#">Show All</a>
+								<!-- <a class="link link-gray-dark" href="#">Show All</a> -->
                 <div class="text-right">
-                  <button type="button" class="btn btn-background-none">Cancel</button>
+                  <button type="button" class="btn btn-background-none" ng-click="onSkipClick(rm)">Cancel</button>
                   <button type="button" class="btn btn-primary" ng-click = "submitEditGroup(frm)">Apply</button>
                 </div>
+
+                
 						</div>
 					</div>
 					<!-- /student list panel  -->

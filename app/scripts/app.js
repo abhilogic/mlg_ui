@@ -230,7 +230,7 @@ principal  : 30,
 		controller : 'teacherAutoGenerateAssignment',
 	}).when('/teacher/custom-assignment/:gradeid/:subject_name/:courseid',{
 		templateUrl : 'views/dashboard/teacher-createCustomAssignement.html',
-		controller : 'teacherCustomAssignment',
+		controller : 'teacherCustomAssignmentCtrl',
 	}).when('/teacher/add-new-assignment',{
 		templateUrl : 'views/dashboard/teacher-AddNewAssignment.html',
 		controller : 'teacherAddNewAssignment',

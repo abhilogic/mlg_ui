@@ -38,31 +38,31 @@
                   					<div class="col-lg-6 col-md-6">
 					                    <div class="form-group">
 											<label for="" class="col-md-5 control-label text-left padding-top-0">
-												<div class="radio radio-primary radio-inline">
+												<div class="radio radio-primary radio-inline" id="divCLass">
 													
 
 
-													<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="" ng-model="frm.classradio">
-													<label for="inlineRadio1" class="text-uppercase margin-top-0"> All Class</label>
+		<input type="radio" name="assignTo" value="cl"  ng-model="frm.stsRadio" id="clRadio" ng-click="onChangeCL(frm.stsRadio)">
+
+											<label for="inlineRadio1" class="text-uppercase margin-top-0"> All Class</label>
 												</div>
 											</label>
                     						<div class="col-md-7">
-												<div class="row">
+												<div class="row" id="divGroup">
                           							<div class="col-xs-2">
-                            							<div class="radio radio-primary radio-inline">
-                              						
+                            							<div class="radio radio-primary radio-inline">     						
+       <input type="radio" name="assignTo" value="gp"  ng-model="frm.stsRadio" id="gpRadio" ng-click="onChangeCL(frm)">
 
-
-                              								<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="" ng-model="frm.groupradio">
-                              								<label></label>
+                                                <label></label>
                             							</div>
                           							</div>
 		                          					<div class="col-xs-10 ">
 													
 
 
-														<select class="mlg-selectpicker form-control" title="Group" data-width="auto" data-size="auto" ng-model="frm.selectedGroup" ng-init="frm.selectedGroup='-1'" >
-														     <option value="-1">Select Group</option>
+							<select class="mlg-selectpicker form-control" id="gpSelect" title="Group" data-width="auto" data-size="auto"  ng-init="frm.selectedGroup='NA'"  ng-model="frm.selectedGroup" ng-change="onChangeGP(frm)" >
+
+														     <option value="NA">Select Group</option>
 														     <option ng-repeat="group in groups" value="{{group.id}}">{{group.title}}</option>							     
 												   		</select>
 		                          					</div>
@@ -71,25 +71,20 @@
                    						</div>
                   					</div>
                   					<div class="col-lg-4 col-md-6">
-										<div class="form-group">
+										<div class="form-group" id="divStudent">
 											<div class="col-xs-2">
-												<div class="radio radio-primary radio-inline">
-													
+												<div class="radio radio-primary radio-inline">										
 
-													<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+		
+		<input type="radio" name="assignTo" value="pr" ng-model="frm.stsRadio" id="stRadio">
+
 													<label></label>
 												</div>
 											</div>
 											<div class="col-xs-10">
-												<div class="multi-select-full">
-													<!-- <select class="mlg-selectpicker form-control" title="students" data-width="auto" data-size="auto" ng-model="selectedStudent" ng-init="selectedStudent='-1'" >
-														<option value="-1">Select Student</option>
-														<option ng-repeat="student in students" value="{{student.id}}">{{student.first_name+' '+student.last_name}}</option>		     
-												   	</select>
- -->
-												   	
-												   	 <div ng-dropdown-multiselect="" options="students" selected-model="frm.studentModel" events="stEvent">
-
+												<div class="multi-select-full" >
+																								   	
+												   <div id="slectST" ng-dropdown-multiselect="" options="students" selected-model="frm.studentModel" events="stEvents">			
 
 												</div>
 											</div>
@@ -100,24 +95,25 @@
                   					<div class="col-lg-5">
                     					<div class="form-group">
 											<label for="" class="col-xs-5 control-label text-left">Select A skills :</label>
-                      						<div class="col-xs-7">
-												
+                      						<div class="col-xs-7">												
 
-												<select class="mlg-selectpicker form-control" title="skills" data-width="auto" data-size="auto" ng-model="frm.selectedSkill" ng-init="frm.selectedSkill='-1'" ng-change="onChangeSkill(frm.selectedSkill)">
-													<option value="-1">Select Skill</option>
+												<select class="mlg-selectpicker form-control" title="skills" data-width="auto" data-size="auto" ng-model="frm.selectedSkill" ng-init="frm.selectedSkill='NA'" ng-change="onChangeSkill(frm.selectedSkill)" >
+													<option value="NA">Select Skill</option>
 													<option ng-repeat="skill in skills" value="{{skill.course_id}}">{{skill.course_name}}</option>		     
 												   	</select>
+												<div class="err_msg" style="color:red;">{{err_msg[3]}}</div>
                       						</div>
                     					</div>
                   					</div>
                   					<div class="col-lg-5 col-lg-offset-2">
 										<div class="form-group">
 											<label for="" class="col-xs-5 control-label">Select a subskills :</label>
-											<div class="col-xs-7">
-												
+											<div class="col-xs-7">											
 
-												<select class="mlg-selectpicker form-control" title="subSkills" data-width="auto" data-size="auto" ng-model="frm.selectedSubskill" ng-init="frm.selectedSubskill='-1'">
-													<option value="-1">Select SubSkill</option>
+												<select class="mlg-selectpicker form-control"  id="slcsubskill" title="subSkills" data-width="auto" data-size="auto" ng-model="frm.selectedSubskill" ng-init="frm.selectedSubskill='NA'" ng-disabled="frm.selectedSkill == 'NA' ">
+
+
+													<option value="NA">Select SubSkill</option>
 													<option ng-repeat="subskill in subskills" value="{{subskill.course_id}}">{{subskill.course_name}}</option>	   
 												   	</select>
 											</div>
@@ -125,13 +121,12 @@
                   					</div>
                 				</div>
 								<div class="row repeat-row">
-                  					<div class="col-lg-5">
-                    					<div class="form-group">
+                  			<div class="col-lg-5">
+                    				<div class="form-group">
 											<label for="" class="col-xs-5 control-label text-left">Numbers of Questions :</label>
                       						<div class="col-xs-7">
 												<div class="btn-group btn-block">
 												
-
 													<input type="text" class="btn btn-default width-50" min="1" max="20">
 													<button type="button" class="btn btn-default width-50">20</button>
 												</div>
@@ -143,14 +138,12 @@
 											<label for="" class="col-xs-5 control-label">Skill Level :</label>
 											<div class="col-xs-7">
 	
-						                      <div ng-dropdown-multiselect="" options="difficulties" selected-model="frm.difficultModel" events="diffEvents">
- 
+						                      <div ng-dropdown-multiselect="" options="difficulties" selected-model="frm.difficultModel" events="diffEvents"> 
 											</div>
 										</div>
                   					</div>
                 				</div>
-                				<div class="text-center margin-top-10">
-                  					
+                				<div class="text-center margin-top-10">                  					
 
 
                   					<button type="button" id="btnGenerate" class="btn btn-primary" ng-click="generateQuestion(frm)">Generate</button>
@@ -308,3 +301,27 @@
 		</div>
 
 	</section>
+
+
+	<script type="text/javascript">
+
+	
+	/*$('#divCLass').click(function(){        
+			$( "#clRadio" ).prop( "checked", true );
+			$('select#gpSelect option').removeAttr("selected");
+	});
+
+
+	$('#divGroup').click(function(){        
+			$( "#gpRadio" ).prop( "checked", true );
+			$('select#slectST option').removeAttr("selected");
+	});
+
+	$('#divStudent').click(function(){        
+			$( "#stRadio" ).prop( "checked", true );
+			$('select#slectST option').removeAttr("selected");
+	});*/
+
+		
+
+	</script>
