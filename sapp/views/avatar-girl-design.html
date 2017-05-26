@@ -148,10 +148,10 @@
 											</div>
 											<!-- avtar-img-cover -->
 											<div class="text-center">
-												<button type="button" ng-if="Selection.prev" class="btn btn-primary" ng-click="scrollTo(Selection.prev)">Previous</button>
-												<button type="button" ng-show="Selection.current=='accessories'" class="btn btn-primary" id="downloadAvtar">Get your Avatar</button>
-												<button type="button" ng-if="Selection.next" class="btn btn-primary" ng-click="scrollTo(Selection.next)">Next</button>
-												<button type="button" ng-if="!Selection.prev" class="btn bg_none" id="skip"><a href="journey">Skip for now</a></button>
+												<button type="button" ng-if="SelectionGirl.prev" class="btn btn-primary" ng-click="scrollToGirl(SelectionGirl.prev)">Previous</button>
+												<button type="button" ng-show="SelectionGirl.current=='girl_accessories'" class="btn btn-primary" id="downloadAvtar">Get your Avatar</button>
+												<button type="button" ng-if="SelectionGirl.next" class="btn btn-primary" ng-click="scrollToGirl(SelectionGirl.next)">Next</button>
+												<button type="button" ng-if="!SelectionGirl.prev" class="btn bg_none" id="skip"><a href="journey">Skip for now</a></button>
 											</div>
 									</div>
 									<!-- avtar -->
@@ -159,15 +159,15 @@
 										<div class="panel panel-flat">
 											<div class="panel-body">
 												<ul class="nav nav-tabs" id="option_nav">
-												  <li id="li_skin" class="active"><a href="" ng-click="scrollTo('skin')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/skin.svg" alt="" class="icon"> <span>Skin</span></a></li>
-												  <li id="li_hair"><a  href="" ng-click="scrollTo('hair')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/hair.svg" alt="" class="icon"> <span>Hair</span></a></li>
-													<li id="li_clothes"><a href="" ng-click="scrollTo('clothes')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/cloths.svg" alt="" class="icon"> <span>Clothes</span></a></li>
-													<li id="li_accessories"><a href="" ng-click="scrollTo('accessories')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/accessories.svg" alt="" class="icon"> <span>Accessories</span></a></li>
+												  <li id="li_girl_skin" class="active"><a href="" ng-click="scrollToGirl('girl_skin')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/skin.svg" alt="" class="icon"> <span>Skin</span></a></li>
+												  <li id="li_girl_hair"><a  href="" ng-click="scrollToGirl('girl_hair')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/hair.svg" alt="" class="icon"> <span>Hair</span></a></li>
+													<li id="li_girl_clothes"><a href="" ng-click="scrollToGirl('girl_clothes')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/cloths.svg" alt="" class="icon"> <span>Clothes</span></a></li>
+													<li id="li_girl_accessories"><a href="" ng-click="scrollToGirl('girl_accessories')" data-toggle="tab" ><img src="assets/img/avtar-creation-img/icons/accessories.svg" alt="" class="icon"> <span>Accessories</span></a></li>
 												</ul>
 												
 												<!-- nav-tabs -->
 												<div class="tab-content">
-												  <div id="skin" class="tab-pane fade in active">
+												  <div id="girl_skin" class="tab-pane fade in active">
 														<div class="btn-group body-tone" data-toggle="buttons" id="body-tone">
 														  <label class="btn active">
 														    <input type="radio" autocomplete="off" data-body-tone="#ebc9ac" data-face-color="#BE9470" data-mounth-color="#BE9470" data-thyroid-color="#DFC0A9" data-eye-color="#435257" checked>
@@ -199,7 +199,7 @@
 														</div>
 												  </div>
 													<!-- skins -->
-												  <div id="hair" class="tab-pane fade">
+												  <div id="girl_hair" class="tab-pane fade">
 														<div class="btn-group hair-style" data-toggle="buttons" id="hair-style">
 
  														 <label class="btn active ">
@@ -261,7 +261,7 @@
 														</div>
 												  </div>
 													<!-- hair -->
-												  <div id="clothes" class="tab-pane fade">
+												  <div id="girl_clothes" class="tab-pane fade">
 														<div class="btn-group cloth" data-toggle="buttons" id="cloth-style">
 														  <label class="btn active">
 																<img src="assets/img/avtar-creation-img/cloths/girl-cloth-1.png" alt="" class="img-responsive">
@@ -639,7 +639,7 @@
 														</div>
 												  </div>
 													<!-- cloths -->
-													<div id="accessories" class="tab-pane fade">
+													<div id="girl_accessories" class="tab-pane fade">
 														<div class="btn-group accessories" data-toggle="buttons" id="accessories-goods">
 															<div id="magic-stick" class="accessories-cover">
 																<label class="btn">
