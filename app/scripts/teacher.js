@@ -13,7 +13,7 @@ angular.module('mlg')
           method:'POST',	
           data : id,		
           url  : urlParams.baseURL+urlParams.teacherPayment
-        });  
+        });
       }
       teacherHttpResponse.getStudentDetail=function(grade,subject,type){
         return $http({
