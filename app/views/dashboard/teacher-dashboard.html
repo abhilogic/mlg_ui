@@ -9,7 +9,6 @@
   <div class="page-content">
 
     <!-- Main Sidebar -->
-
   <aside class="sidebar sidebar-main"></aside>
     <!-- /sidebar -->
 
@@ -34,7 +33,7 @@
                   <li>
                     <select class="form-control input-sm no-border">
                       <option value="Subject">Subject</option>
-                      <option  ng-repeat="course in subject" value="{{course}}">{{course}}</option>
+                      <!--<option  ng-repeat="course in subject" value="{{course}}">{{course}}</option>-->
                     </select>
                   </li>
                   <li>
@@ -131,13 +130,13 @@
                   <li>
                     <select class="form-control input-sm no-border">
                       <option value="Standard">Standard</option>
-                      <option  ng-repeat="grade in level " value="{{grade}}">{{grade}}</option>
+                      <!--<option  ng-repeat="grade in level " value="{{grade}}">{{grade}}</option>-->
                     </select>
                   </li>
                   <li>
                     <select class="form-control input-sm no-border">
                       <option value="Subject">Subject</option>
-                      <option  ng-repeat="course in subject" value="{{course}}">{{course}}</option>
+                      <!--<option  ng-repeat="course in subject" value="{{course}}">{{course}}</option>-->
                     </select>
                   </li>
                   <li>
@@ -156,7 +155,8 @@
                     <div class="text-center col-sm-8 col-sm-offset-2">
                       <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                       <br>
-                      <button type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</button>
+                      
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                     </div>
                   </div>
               </div>
@@ -170,7 +170,8 @@
                    <div class="text-center col-sm-8 col-sm-offset-2">
                      <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                      <br>
-                     <button type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</button>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                    </div>
                  </div>
               </div>
@@ -184,7 +185,8 @@
                    <div class="text-center col-sm-8 col-sm-offset-2">
                      <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                      <br>
-                     <button type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</button>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a></button>
                    </div>
                  </div>
               </div>
@@ -199,7 +201,8 @@
                    <div class="text-center col-sm-8 col-sm-offset-2">
                      <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                      <br>
-                     <button type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</button>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                    </div>
                  </div>
               </div>
@@ -217,14 +220,14 @@
           <div class="panel-body">
             <ul class="row list-thumb group_list">
              <li class="group">
-                <a class="add__group" href="teacher/create-group/{{subject_name}}/{{course_id}}">
+                <a class="add__group" href="teacher/create-group/class/{{grade_id}}/{{subject_name}}/{{course_id}}">
                   <img class="img-circle" src="assets/img/group-img/add_group_img.png" alt="Group Default"/>
                   <span class="group__name">Add Group</span>
                 </a>
               </li>              
              
               <li class="group" ng-repeat="group in groups">
-                <a href="#">
+                <a href="teacher/edit-group/{{group.URL_title}}/{{group.id}}">
                   <div class="group-thumb">
                   <img class="img-circle" src="{{baseURL}}/upload/{{group.group_icon}}" alt="Group Default"/>
                 </div>
@@ -240,6 +243,7 @@
         <!-- Planner Panel  -->
         <div class="panel panel-flat">
           <div class="panel-body no-padding">
+            <div class='col-xs-6'>
               <tien-clndr class="clndr" tien-clndr-object="clndr" tien-clndr-events="events">
                 <div class="clndr-controls">
                   <div class="clndr-previous-button" ng-click="clndr.back()">
@@ -259,13 +263,39 @@
                     </div>
                   </div>
                   <div class="days">
-                    <div class="{{day.classes}}" ng-repeat="day in days">
+                    <div class="{{day.classes}}" ng-repeat="day in days" ng-click="getUserSelectedDate(day)">
                       <div class="event-indicator" ng-show="day.events.length" ng-click="showEvents(day.events)">{{day.events.length}}</div>
                       {{day.day}}
                     </div>
                   </div>
                 </div>
             </tien-clndr>
+            </div>
+            <div class='col-xs-6'>
+                <label>{{userDate}}</label></br>
+                <input type="radio" name="ptm" ng-model="calender.checkedType" value="all" checked='' >
+                <label>All</label>
+                <input type="radio" name="ptm" ng-model="calender.checkedType" value="group" checked='' >
+                <select ng-model="calender.selectedGroupModel" ng-change="getGroup(calender.selectedGroupModel)">
+                  <option ng-repeat="group in groups" value="{{group.id}}">{{group.title}}</option>
+                </select>
+                <input type="radio" name="ptm" ng-model="calender.checkedType" value="people" checked='' >
+                <select ng-model="calender.selectedPeopleModel">
+                <option ng-repeat="student in students" value="{{student.id}}"> {{student.first_name}}</option>
+                </select>
+                <select ng-model="calender.selectedTimeModel">
+                <option value="10:00-12:00">10:00 am - 12:00 pm </option>
+                <option value="13:00-15:00">01:00 pm - 03:00 pm </option>
+                <option value="16:00-17:00">04:00 pm - 05:00 pm </option>
+                </select>
+                <input type="submit" ng-click="EventUpload(calender)"></br>
+                <span>{{message}}{{msg}}</span></br>
+                <label>Next EVENT</label></br>
+                <label>TO DO</label><input type="text" name="todo" ng-model="calndr.todo">
+                <input type="submit" ng-click="CreateTodo(calndr)">
+              
+            </div>
+              
           </div>
         </div>
         <!-- /planner panel  -->
@@ -316,7 +346,7 @@
             <div class="panel-body">
                 <h5 class="hd"><span>Oh oh!</span><span>Your class is empty bring in some Students</span></h5>
                 <div class="text-center">
-                  <button type="button" class="btn btn-background-none text-primary"><i class="icon icon-plus-outline"></i> Add Students</button>
+                  <span class="btn btn-background-none text-primary"><a href="teacher/create-class"><i class="icon icon-plus-outline"></i> Add Students</a></span>
                 </div>
             </div>
           </div>
@@ -405,9 +435,12 @@
                   </div>
                     <div class="row">
                       <div class="text-center col-sm-8 col-sm-offset-2">
+                       
                         <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
                         <br>
-                        <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                       
+
+                        <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                       </div>
                     </div>
                 </div>
@@ -421,7 +454,7 @@
                      <div class="text-center col-sm-8 col-sm-offset-2">
                        <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
                       <br>
-                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                      </div>
                    </div>
                 </div>
@@ -435,7 +468,7 @@
                      <div class="text-center col-sm-8 col-sm-offset-2">
                        <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
                       <br>
-                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                      </div>
                    </div>
                 </div>
@@ -450,7 +483,7 @@
                      <div class="text-center col-sm-8 col-sm-offset-2">
                        <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
                        <br>
-                       <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                       <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                      </div>
                    </div>
                 </div>

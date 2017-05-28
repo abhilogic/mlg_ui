@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives'
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives','ngStorage'
 ])
 .value('urlParams', {
   users : '/users',
@@ -61,6 +61,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getStudentOfTeacher : '/teachers/getStudentOfTeacher', 
   createGroupInSubjectByTeacher : '/teachers/createGroupInSubjectByTeacher',
   getGroupsOfSubjectForTeacher : '/teachers/getGroupsOfSubjectForTeacher',
+  editGroupOfSubject : '/teachers/editGroupOfSubject', 
+  getStudentsOfGroup : '/teachers/getStudentsOfGroup',
   updateContent : '/teachers/updateUserContent',
   uploadQuestion : '/teachers/saveQuestion',
   getStaticContent : '/users/getStaticContents',
@@ -68,6 +70,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getUserPreferences : '/users/getUserPreferences',
   setUserPassword : '/users/setUserPassword',
   updateMyAccount : '/users/updateMyAccount',
+  getCourseSkillSubskills : '/courses/getCourseSkillSubskills',
+  uploadEvent : '/teachers/setEvent',
+  getEvent : '/teachers/getEvent',
+  getTodayEvents : '/teachers/getTodayEvents',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -226,9 +232,9 @@ principal  : 30,
 	}).when('/teacher/auto-generate-assignment',{
 		templateUrl : 'views/dashboard/teacher-autoGenerateAssignment.html',
 		controller : 'teacherAutoGenerateAssignment',
-	}).when('/teacher/custom-assignment',{
+	}).when('/teacher/custom-assignment/:gradeid/:subject_name/:courseid',{
 		templateUrl : 'views/dashboard/teacher-createCustomAssignement.html',
-		controller : 'teacherCustomAssignment',
+		controller : 'teacherCustomAssignmentCtrl',
 	}).when('/teacher/add-new-assignment',{
 		templateUrl : 'views/dashboard/teacher-AddNewAssignment.html',
 		controller : 'teacherAddNewAssignment',
@@ -257,12 +263,12 @@ principal  : 30,
   }).when('/teacher/lessons',{
 		templateUrl : 'views/dashboard/teacher-content-lessons.html',
 		controller : 'teacherLessonCtrl',
-  }).when('/teacher/create-group/:subject_name/:course_id',{
+  }).when('/teacher/create-group/class/:grade_id/:subject_name/:course_id',{
 		templateUrl : 'views/dashboard/teacher-create-group.html',
-		controller : 'teacherCreateGroupCtrl',
-  }).when('/teacher/edit-group',{
+		controller : 'teacherGroupCtrl',
+  }).when('/teacher/edit-group/:group_title_inURL/:group_id',{
 		templateUrl : 'views/dashboard/teacher-editGroup.html',
-		controller : 'teacherEditGroup',
+		controller : 'teacherGroupCtrl',
   }).when('/teacher/gap-analysis',{
 		templateUrl : 'views/dashboard/teacher-gapAnalysis.html',
 		controller : 'teacherGapAnalysis',
@@ -302,9 +308,10 @@ principal  : 30,
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth','$localStorage', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth,$localStorage) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
+    var top ="";
     loginHttpService.isUserlogin().success(function(response) {
          if (response.status=='false') {
            $rootScope.logged_user = '';
@@ -333,6 +340,7 @@ principal  : 30,
 	   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
+          $localStorage.$reset();
 		   		 /*document.cookie = uid+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
 		   		setCookie('uid',null);
@@ -427,22 +435,7 @@ $scope.userInfo=userInfo;
     if (response.status == true) {
       $scope.subject_grade = response.response;
       $scope.level = response.grade;
-      $scope.subject = (response.subject.course_name).split(',');
-    /*  grade = response.urlData.level_id;
-      subjectName = response.urlData.course_Name;
-      subjectCode = response.urlData.course_id;
-      var urlString = $location.url();
-      var splitString = urlString.split('#');
-      if (splitString[1] != undefined) {
-        var splitResult = splitString[1].split('%2F')
-        if(splitResult[0] != undefined && splitResult[1] != undefined 
-                && splitResult[2] != undefined ) {
-          grade = splitResult[0];
-          subjectName = splitResult[1];
-          subjectCode = splitResult[2];
-        }
-      }*/
-   
+      $scope.subject = (response.subject.course_name).split(',');  
 
 
     }
@@ -497,6 +490,33 @@ return {
         $scope.userInfo=userInfo;
 	}]
 };
-
 	
-});
+})
+.service('sharedSkill', function () {
+        var skill;
+
+        return {
+            getProperty: function () {
+                return skill;
+            },
+            setProperty: function(value) {
+                skill = value;
+            }
+        };
+
+  })
+.service('sharedSubskill', function () {
+        var subskill;
+
+        return {
+            getProperty: function () {
+                return subskill;
+            },
+            setProperty: function(value) {
+                subskill = value;
+            }
+        };
+        
+    });
+
+

@@ -7465,6 +7465,9 @@ label span {
 .panel-avtar-design .options .panel .cloth .btn {
   height: 167px;
 }
+.panel-avtar-design .options .panel .cloth .btn img {
+  max-height: 100%;
+}
 @media screen and (max-width: 767px) {
   .panel-avtar-design .options .panel .cloth .btn {
     height: 70px;

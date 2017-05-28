@@ -119,7 +119,7 @@
             @media screen and (max-width: $screen-mobile-xs){
               max-width: 200px;
             }
-            
+
             .mCSB_inside > .mCSB_container {
               margin-right: -5px;
             }
@@ -202,10 +202,14 @@
       .cloth {
         .btn {
           height: 167px;
+          img{
+            max-height: 100%;
+          }
           @media screen and (max-width: $screen-xs-max){
             height: 70px;
             img {
               max-height: 100%;
+
             }
           }
         }

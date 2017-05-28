@@ -34,8 +34,8 @@
 							<br>
 							<ul class="row list-thumb student_list">
 								
-								<li class="student gifted" ng-repeat="student in students">
-									<div class="checkbox checkbox-primary">
+								<li class="student gifted" ng-repeat="student in students">{{student.id}}
+									<div class="checkbox checkbox-primary"> 
 										<input type="checkbox" ng-model="frm.selectedstudent[student.id]" ng-true-value="'{{student.username}}'" ng-false-value="''" > 
 										<label></label>
 									</div>
@@ -66,7 +66,7 @@
 							<ul class="row list-thumb student_list">
 								<li class="student gifted" ng-repeat="group in groups">
 									
-									<a href="#">
+									<a href="teacher/edit-group/{{group.URL_title}}/{{group.id}}">
 										<div class="student__img">
 										<img class="img-circle" src="{{baseURL+'/webroot/upload/'+group.group_icon}}" alt="{{group.title}}"/>
 									</div>
