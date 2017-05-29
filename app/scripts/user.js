@@ -24,8 +24,35 @@ angular.module('mlg').filter('moment', function() {
 		});
 	}
 
-	
+	loginHttpResponse.getUserDetails=function(uid){
+		return $http({
+			method:'GET',
+			url   : urlParams.baseURL+urlParams.getUserDetails + '/' + uid
+		});
+	}
 
+	loginHttpResponse.getUserPreferences = function(uid){
+		return $http({
+			method:'GET',
+			url   : urlParams.baseURL+urlParams.getUserPreferences + '/' + uid
+		});
+	}
+
+    loginHttpResponse.setUserPassword = function(uid, data){
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.setUserPassword + '/' + uid
+		});
+	}
+
+    loginHttpResponse.updateMyAccount = function(data){
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.updateMyAccount
+		});
+	}
 	
 	loginHttpResponse.login=function(data){
 		return $http({
@@ -1461,20 +1488,19 @@ if (typeof $routeParams.slug != 'undefined') {
     }
     $scope.automatic_approval_status = false;
     $scope.init = function() {
-      var setting_request = {'user_id': get_uid, 'setting_key': 'automatic_approval'};
+      var setting_request = {'user_id': get_uid};
       loginHttpService.getUserSetting(setting_request).success(function (response) {
         if (response.status == true) {
-          if (response.result.setting_value == 1 || response.result.setting_value == true) {
+          var user_settings = JSON.parse(response.result.settings);
+          if (user_settings.automatic_approval === 'true') {
             $scope.automatic_approval_status = true;
-          } else {
-            $scope.automatic_approval_status = false;
           }
         }
       });
     }
 
     $scope.changeStatus = function() {
-      var set_setting = {'user_id' : get_uid, 'setting_key' : 'automatic_approval', 'setting_value' : !$scope.automatic_approval_status};
+      var set_setting = {user_id : get_uid, settings : {automatic_approval: !$scope.automatic_approval_status} };
       loginHttpService.setUserSetting(set_setting).success(function (response) {
         if (response.status == true) {
           $scope.automatic_approval_status = !$scope.automatic_approval_status;
@@ -1553,8 +1579,108 @@ if (typeof $routeParams.slug != 'undefined') {
     }
   }
 ])
-.controller('parentSettingCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
-//alert('kkkkk');
+.controller('parentSettingCtrl',['$rootScope','$scope','$filter','loginHttpService', 'commonActions', '$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
+  var get_uid = commonActions.getcookies(get_uid);
+  $scope.frm = {};
+   $scope.pfrm = {};
+  $scope.user = {};
+  $scope.global_automatic_approval_status = false;
+  $scope.full_name = '';
+  $scope.email = '';
+  $scope.frm.deactivate = false;
+  loginHttpService.getUserDetails(get_uid).success(function (response) {
+    if (response.data.user_all_details != '') {
+      var user = response.data.user_all_details[0];
+     $scope.full_name = user.first_name + ' ' + user.last_name;
+     $scope.email = user.email;
+     $scope.frm.address_line_1 = user.user_detail.address_line_1;
+     $scope.frm.address_line_2 = user.user_detail.address_line_2;
+     $scope.frm.district = user.user_detail.district;
+     $scope.frm.city = user.user_detail.city;
+     $scope.frm.state = user.user_detail.state;
+     $scope.frm.country = user.user_detail.country;
+    }
+    loginHttpService.getUserPreferences(get_uid).success(function (resp) {
+      if (resp.status == true) {
+        $scope.frm.phone = resp.data.mobile;
+        $scope.frm.sms_subscription = (resp.data.sms_subscription == 0) ? false : true;
+      } else {
+        $scope.frm.phone = '';
+        $scope.frm.sms_subscription = false;
+      }
+    });
+  });
+
+  $scope.updateMyAccount = function(frm) {
+    if ($scope.frm.deactivate == true) {
+      var deactivate = confirm('Do you really want to deactivate your account');
+      if (deactivate == false) {
+        return false;
+      }
+    }
+    frm.user_id = get_uid;
+    frm.sms_subscription = (frm.sms_subscription == true) ? 1 : 0;
+    loginHttpService.updateMyAccount(frm).success(function (resp) {
+      if (resp.status == true) {
+        $scope.frm.sms_subscription = (frm.sms_subscription == 1) ? true : false;
+        alert('your Details saved successfully');
+      } else {
+        alert(resp.message);
+      }
+    });
+  }
+
+  $scope.changePassword = function(user) {
+    loginHttpService.setUserPassword(get_uid, user).success(function (resp) {
+      if (resp.response == true) {
+        alert('Your Password changed sucessfully');
+      } else {
+        alert(resp.response);
+      }
+    });
+  }
+
+  $scope.initPrivacySettingsPage = function() {
+    loginHttpService.getUserSetting({user_id : get_uid}).success(function (resp) {
+      if (resp.status = true) {
+        var result = JSON.parse(resp.result.settings);
+        if (typeof result.text_notification != 'undefined') {
+          $scope.pfrm.text_notification = result.text_notification;
+        }
+        if (typeof result.email_notification != 'undefined') {
+          $scope.pfrm.email_notification = result.email_notification;
+        }
+        if (typeof result.mlg_offers != 'undefined') {
+          $scope.pfrm.mlg_offers = result.mlg_offers;
+        }
+        if (typeof result.global_automatic_approval != 'undefined') {
+            $scope.global_automatic_approval_status = result.global_automatic_approval;
+        }
+      }
+    });
+  }
+
+  $scope.updatePrivacySettings = function(pfrm) {
+    var data = {};
+    data.user_id = get_uid;
+    data.settings ={
+      text_notification : pfrm.text_notification,
+      email_notification : pfrm.email_notification,
+      mlg_offers : pfrm.mlg_offers,
+      global_automatic_approval: $scope.global_automatic_approval_status,
+    }
+    loginHttpService.setUserSetting(data).success(function (resp) {
+      if (resp.status == true) {
+        alert('Your settings saved successfuly');
+      } else {
+        alert(resp.message);
+      }
+    });
+  }
+
+  $scope.changeStatus = function() {
+    $scope.global_automatic_approval_status = !$scope.global_automatic_approval_status;
+  }
 }])
 .controller('guestCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http) {
 

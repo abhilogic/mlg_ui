@@ -13,7 +13,7 @@ angular.module('mlg')
           method:'POST',	
           data : id,		
           url  : urlParams.baseURL+urlParams.teacherPayment
-        });  
+        });
       }
       teacherHttpResponse.getStudentDetail=function(grade,subject,type){
         return $http({
@@ -862,10 +862,7 @@ $scope.numberOfPages=function(){
 
                   $timeout(function () { $scope.successMessage = ""; }, 4000);
                   $timeout(function () { $scope.errorMessage = ""; }, 4000);
-
-                  //$route.reload();
-                  
-
+                  //$route.reload(); 
              });
           }
       }
@@ -898,11 +895,9 @@ $scope.numberOfPages=function(){
                               }
                             }
                         }
-
                         $scope.remain_CLstudents = respstudents.response.students; 
                      }
-               }); 
-
+               });
             }
         });
         // remove existing students from group        
@@ -931,14 +926,21 @@ $scope.numberOfPages=function(){
            }
 
            // Call API to update the records of group
+            // Call API to update the records of group
            teacherHttpService.editGroupOfSubject(editgprecords,group_id).success(function(resp) {
-           console.log(resp); 
-                     if (resp.response.status == "True") {
+              if (resp.response.status == "True") {
+                  $scope.succ_message = resp.response.message;
+                  window.location.href='teacher/edit-group/naughty-kids/'+group_id;
+              }else{
+                  $scope.err_message = resp.response.message;
+                }
+             });
 
-                      console.log(resp);
-                     }
-             });  
-            
+            $scope.onSkipClick=function(){     
+                window.location.href='teacher/edit-group/naughty-kids/'+group_id;
+          };
+
+     
           } 
        
     }
@@ -2433,22 +2435,41 @@ $scope.numberOfPages=function(){
 	}
   
   }])
-.controller('teacherCustomAssignment',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','user_roles','commonActions','$routeParams','$compile',
+.controller('teacherCustomAssignmentCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','user_roles','commonActions','$routeParams','$compile',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,user_roles,commonActions,$routeParams,$compile) {
         var get_uid=commonActions.getcookies(get_uid);
        $scope.baseURL= urlParams.baseURL;
        $scope.grade_id = $routeParams.gradeid ;
        $scope.course_id = $routeParams.courseid ;
        $scope.subject_name = $routeParams.subject_name ;
-       $scope.frm ={};
+       $scope.frm ={};       
+       $scope.frm.stsRadio = 'cl';
+       $scope.frm.selectedStd =[];
+
+       //On change drop down
+    $scope.onChangeGP=function(dt){       
+        $scope.frm.stsRadio = "gp";
+        $scope.frm.studentModel = [];        
+    }
+
+
+    // Action trigger on select of People/Students from drop down    
+    $scope.onChangeCL=function(slctCL){       
+        $scope.frm.stsRadio = "cl";
+        $scope.frm.selectedGroup = "NA"; 
+        $scope.frm.studentModel = [];       
+    }
+    
+       
+      
 
         
       // Api to call all students of a teacher
+         $scope.frm.studentModel = [];
+         $scope.students =[]; 
         teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,$scope.course_id).success(function(respStd) { 
            if (respStd.response.status == "true") {               
-               //$scope.students=respStd.response.students;
-               $scope.frm.studentModel = [];
-               $scope.students =[];               
+               //$scope.students=respStd.response.students;                            
                angular.forEach(respStd.response.students,function(type,key){
                   $scope.students.push({
                     'id' : type['id'],
@@ -2457,16 +2478,20 @@ $scope.numberOfPages=function(){
               });               
            }
      });
-
       var stType= [] ;
-      $scope.stEvent = {
-       onItemSelect: function(item) {   
+      $scope.stEvents = {
+       onItemSelect: function(item) {        
           stType.push(item['id']);
+          $scope.frm.stsRadio = "pr";    
+
        },
        onItemDeselect: function(item) {
           stType.splice(item['id'],1);
        }
-    };   
+    }; 
+
+
+
 
 
       // API to call all groups of a teacher
@@ -2526,10 +2551,13 @@ $scope.numberOfPages=function(){
     };
 
 
+
+
     //Click on generate button and get question as per field values
     $scope.generateQuestion = function(frmdata){
-
       console.log(frmdata);
+
+
 
 
     }

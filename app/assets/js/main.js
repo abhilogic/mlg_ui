@@ -22,7 +22,7 @@ function toggleClassElement(elem, className){
 }
 
 $(document).ready(function(){
-  
+
     // Disable CSS transitions on page load
     $('body').addClass('no-transitions');
 
@@ -32,7 +32,7 @@ $(document).ready(function(){
     // Calculate min height
     function containerHeight() {
         var availableHeight = $(window).height() - $('.page-container').offset().top - $('.footer').outerHeight();
-      //var footerHeight = $('.footer').outerHeight();
+        //var footerHeight = $('.footer').outerHeight();
         $('.page-container').attr('style', 'min-height:' + availableHeight + 'px');
     }
     // Initialize
@@ -80,3 +80,54 @@ function goBack() {
     window.history.back();
     console.log("hello");
 }
+// switchery
+var switcheryHtml = '<span class="off">OFF</span>' +
+                    '<span class="switchery switchery-default" >'+
+                      '<small></small>'+
+                    '</span>'+
+                    '<span class="on">ON</span>';
+$(document).ready(function(){
+  $(".js-switch").each(function(){
+    $(this).after(switcheryHtml);
+  });
+
+  $("body").on('click','.switchery-default', function(){
+      var checked = $(this).siblings(".js-switch").attr("checked");
+      $(this).toggleClass("off");
+      if(checked == "checked"){
+        $(this).siblings(".js-switch").attr("checked", false);
+      }
+      else {
+        $(this).siblings(".js-switch").attr("checked", true);
+      }
+  });
+
+  // swithcery
+
+  // Floating Input Fields animation
+  var floatInput = function(){
+
+    $(".float-input").each(function(){
+       if(this.value!=''){
+        $(this).parent().addClass('focus');
+       }
+    });
+
+    $('.float-input').on('focusin', function() {
+      $(this).parent().addClass('focus');
+      console.log("hello");
+    });
+
+    $('.float-input').on('focusout', function() {
+      if (!this.value) {
+        $(this).parent().removeClass('focus');
+      }
+    });
+  }
+  floatInput();
+
+
+  $(".icon-arrow-left").click(function(){
+    goBack();
+  });
+});
