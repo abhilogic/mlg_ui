@@ -1642,7 +1642,7 @@ if (typeof $routeParams.slug != 'undefined') {
 
   $scope.initPrivacySettingsPage = function() {
     loginHttpService.getUserSetting({user_id : get_uid}).success(function (resp) {
-      if (resp.status = true) {
+      if (resp.status == true) {
         var result = JSON.parse(resp.result.settings);
         if (typeof result.text_notification != 'undefined') {
           $scope.pfrm.text_notification = result.text_notification;
