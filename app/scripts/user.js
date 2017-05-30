@@ -3,6 +3,11 @@ angular.module('mlg').filter('moment', function() {
     return function(dateString, format) {
         return moment(dateString).format(format);
     };
+}).filter('daysLeft', function() {
+    return function(timestamp) {
+      var validity = moment.unix(timestamp).format("YYYY-MM-DD");
+      return moment(validity).diff(moment(), 'days');
+    };
 })
 .factory('loginHttpService',['$http','urlParams',function($http,urlParams){
 	
@@ -106,7 +111,7 @@ angular.module('mlg').filter('moment', function() {
 		});
 	}
 
-	loginHttpResponse.setStatusActive=function(data){
+	loginHttpResponse.setUserStatus=function(data){
 		return $http({
 			method:'POST',
             data  : data,
@@ -334,6 +339,25 @@ angular.module('mlg').filter('moment', function() {
 			url   : urlParams.baseURL+urlParams.setUserSetting
 		});
 	}
+
+    loginHttpResponse.getCouponByUserType = function(data) {
+		return $http({
+			method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.getCouponByUserType
+		});
+	}
+
+    loginHttpResponse.updateProfilePic = function(data) {
+		return $http({
+          withCredentials: true,
+          transformRequest: angular.identity,
+          headers: {'Content-Type': undefined },
+          method:'POST',
+			data  : data,
+			url   : urlParams.baseURL+urlParams.updateProfilePic
+		});
+	};
 
 	loginHttpResponse.getTeacherGrades=function(tid,type){
         return $http({
@@ -950,7 +974,7 @@ angular.module('mlg').filter('moment', function() {
 }])
 .controller('emailConfirmationCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
 if (typeof $routeParams.id != 'undefined') {
-    loginHttpService.setStatusActive($routeParams).success(function(response) {
+    loginHttpService.setUserStatus($routeParams).success(function(response) {
       if (response.status == false) {
         alert('Some error occured, kindly refresh the page');
       }
@@ -1404,19 +1428,25 @@ if (typeof $routeParams.slug != 'undefined') {
 
 }])
 
-
 /* *************************************************************** */
-.controller('parentOffers',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles) {
-	loginHttpService.offerRecords().success(function(response) {
-       $scope.offers = response.response;
-      });
-	  
+.controller('parentOffers',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','commonActions',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,commonActions) {
+  var get_uid = commonActions.getcookies(get_uid);
+  $scope.offers = {};
+  loginHttpService.getCouponByUserType({user_type : 'PARENT', applied_for: 'OFFER'})
+    .success(
+    function(response) {
+      if (response.status) {
+        $scope.offers = response.result;
+      }
+    }
+  );
+
 }])
 .controller('teacherSingnupCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
      $scope.msg = '';
-     $scope.gohome=function(){
+     $scope.gohome=function() {
 		window.location.href='/mlg_ui/app';
-  	}
+  	};
     $scope.userObj ={};
     $scope.userObj.first_name = '';
     $scope.userObj.last_name = '';
@@ -1581,41 +1611,80 @@ if (typeof $routeParams.slug != 'undefined') {
 ])
 .controller('parentSettingCtrl',['$rootScope','$scope','$filter','loginHttpService', 'commonActions', '$location','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
   var get_uid = commonActions.getcookies(get_uid);
+  $scope.page_url = $location.path();
   $scope.frm = {};
-   $scope.pfrm = {};
+  $scope.pfrm = {};
   $scope.user = {};
   $scope.global_automatic_approval_status = false;
   $scope.full_name = '';
   $scope.email = '';
+  $scope.profile_image = '';
+  $scope.frm.profile_picture = '';
   $scope.frm.deactivate = false;
   loginHttpService.getUserDetails(get_uid).success(function (response) {
     if (response.data.user_all_details != '') {
       var user = response.data.user_all_details[0];
-     $scope.full_name = user.first_name + ' ' + user.last_name;
-     $scope.email = user.email;
-     $scope.frm.address_line_1 = user.user_detail.address_line_1;
-     $scope.frm.address_line_2 = user.user_detail.address_line_2;
-     $scope.frm.district = user.user_detail.district;
-     $scope.frm.city = user.user_detail.city;
-     $scope.frm.state = user.user_detail.state;
-     $scope.frm.country = user.user_detail.country;
+      $scope.full_name = user.first_name + ' ' + user.last_name;
+      $scope.email = user.email;
+      $scope.profile_image = response.data.image_directory + '/' + user.user_detail.profile_pic;
+      $scope.frm.address_line_1 = user.user_detail.address_line_1;
+      $scope.frm.address_line_2 = user.user_detail.address_line_2;
+      $scope.frm.district = user.user_detail.district;
+      $scope.frm.city = user.user_detail.city;
+      $scope.frm.state = user.user_detail.state;
+      $scope.frm.country = user.user_detail.country;
     }
     loginHttpService.getUserPreferences(get_uid).success(function (resp) {
       if (resp.status == true) {
-        $scope.frm.phone = resp.data.mobile;
+        $scope.frm.mobile = resp.data.mobile;
         $scope.frm.sms_subscription = (resp.data.sms_subscription == 0) ? false : true;
       } else {
-        $scope.frm.phone = '';
+        $scope.frm.mobile = '';
         $scope.frm.sms_subscription = false;
       }
     });
+  }).error(function(err) {
+    alert('Some Error occured while getting your data');
   });
 
+  $("#imgInp").on('change', function() {
+      readURL(this);
+  });
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#ImgShw').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+
   $scope.updateMyAccount = function(frm) {
+    if ((typeof frm.profile_picture != 'undefined') && frm.profile_picture != '') {
+      var fd = new FormData();
+      fd.append('file', frm.profile_picture);
+      fd.append('user_id', get_uid);
+      loginHttpService.updateProfilePic(fd).success(function (resp) {
+        if (resp.status == false) {
+          alert('unable to update profile picture');
+        }
+      });
+    }
     if ($scope.frm.deactivate == true) {
       var deactivate = confirm('Do you really want to deactivate your account');
       if (deactivate == false) {
         return false;
+      } else {
+        loginHttpService.setUserStatus({id: get_uid, status: 0}).success(function(response) {
+          if (response.status) {
+            alert('Your account deactivated successfully');
+          } else {
+            alert('Unable to deactivate your account, Some Error occured');
+          }
+        }).error(function(err) {
+          alert('Some error occured');
+        });
       }
     }
     frm.user_id = get_uid;
@@ -1625,8 +1694,14 @@ if (typeof $routeParams.slug != 'undefined') {
         $scope.frm.sms_subscription = (frm.sms_subscription == 1) ? true : false;
         alert('your Details saved successfully');
       } else {
-        alert(resp.message);
+        if (resp.message != '') {
+          alert(resp.message);
+        } else {
+          alert('Some Error occured while saving data');
+        }
       }
+    }).error(function(x) {
+      alert('Some Error occured while saving data');
     });
   }
 
@@ -1639,8 +1714,13 @@ if (typeof $routeParams.slug != 'undefined') {
       }
     });
   }
-
-  $scope.initPrivacySettingsPage = function() {
+  $scope.privacy_init = false;
+  $scope.initPrivacySettingsPage = function(privacy_init) {
+    //initialize only once
+    if ($scope.privacy_init) {
+      return false;
+    }
+    $scope.privacy_init = privacy_init;
     loginHttpService.getUserSetting({user_id : get_uid}).success(function (resp) {
       if (resp.status == true) {
         var result = JSON.parse(resp.result.settings);
@@ -1657,8 +1737,10 @@ if (typeof $routeParams.slug != 'undefined') {
             $scope.global_automatic_approval_status = result.global_automatic_approval;
         }
       }
+    }).error(function(err) {
+      alert('Some Error occured while getting your data');
     });
-  }
+  };
 
   $scope.updatePrivacySettings = function(pfrm) {
     var data = {};
@@ -1673,8 +1755,14 @@ if (typeof $routeParams.slug != 'undefined') {
       if (resp.status == true) {
         alert('Your settings saved successfuly');
       } else {
-        alert(resp.message);
+        if (resp.message != '') {
+          alert(resp.message);
+        } else {
+          alert('Some Error occured while saving data');
+        }
       }
+    }).error(function(err) {
+      alert('Some Error occured while saving data');
     });
   }
 

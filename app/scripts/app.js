@@ -67,6 +67,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   uploadQuestion : '/teachers/saveQuestion',
   getStaticContent : '/users/getStaticContents',
   getUserDetails : '/users/getUserDetails',
+  getCouponByUserType : '/users/getCouponByUserType',
+  updateProfilePic : '/users/updateProfilePic',
   getUserPreferences : '/users/getUserPreferences',
   setUserPassword : '/users/setUserPassword',
   updateMyAccount : '/users/updateMyAccount',
@@ -491,7 +493,21 @@ return {
 	}]
 };
 	
-})
+}).directive('fileModel', ['$parse', function ($parse) {
+  return {
+     restrict: 'A',
+     link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+
+        element.bind('change', function(){
+           scope.$apply(function(){
+              modelSetter(scope, element[0].files[0]);
+           });
+        });
+     }
+  };
+}])
 .service('sharedSkill', function () {
         var skill;
 

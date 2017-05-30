@@ -1,120 +1,57 @@
-	
-	<div ng-controller="parentOffers">
-	
-	<!-- Main navbar -->
-	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
-		
-	</top-search-bar>
-	<!-- /main navbar -->
+<div ng-controller="parentOffers">
 
-	<!-- Page container -->
-	<div class="page-container">
+  <!-- Main navbar -->
+  <top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
 
-		<!-- Page content -->
-		<div class="page-content" banner="250">
+  </top-search-bar>
+  <!-- /main navbar -->
 
-			<!-- Main Sidebar -->
-			<aside-parent class="sidebar sidebar-main"></aside-parent>
-			<!--<aside class="sidebar sidebar-main">
-					<div class="sidebar-user">
-						<br><br>
-					</div>
-					<ul class="nav sidebar_nav sidebar_nav-main">
-						<li>
-							<a href="teacher-dashboard.html"><i class="icon icon-my_class"></i><span class="link__text">Analytics</span></a>
-						</li>
-						<li class="active">
-							<a href="parent-offers.html"><i class="icon icon-my_subscriptions"></i><span class="link__text">Offers</span></a>
-						</li>
-						<li >
-							<a href="parent-subscription.html"><i class="icon icon-my_rewards"></i><span class="link__text">Subscription</span></a>
-						</li>
-						<li>
-							<a href="parent-redeem.html"><i class="icon icon-my_data"></i><span class="link__text">Redeem</span></a>
-						</li>
-						<li>
-							<a href="parent-settings.html"><i class="icon icon-my_settings"></i><span class="link__text">Settings</span></a>
-						</li>
-						<li>
-							<a href="#"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
-						</li>
-					</ul>
-			</aside>-->
-			<!-- /sidebar -->
+  <!-- Page container -->
+  <div class="page-container">
 
+    <!-- Page content -->
+    <div class="page-content" banner="250">
 
-			<!-- Main content -->
-			<div class="content-wrapper">
-				<!-- Content area -->
-				<div class="content">
+      <!-- Main Sidebar -->
+      <aside-parent class="sidebar sidebar-main"></aside-parent>
+      <!-- Main content -->
+      <div class="content-wrapper">
+        <!-- Content area -->
+        <div class="content">
 
-					<!-- Areas of Focus Panel  -->
-					<div class="row offers-list">
-										
-						<div class="col-sm-6 col-md-4 offer-item" ng-repeat="offer in offers | filter:search | orderBy:'-name'">
-							<div class="thumbnail offer-thumbnail">
-								<span class="new-offer">New</span>
-								<div class="thumb-img">
-									<img class="img-responsive offer-img" ng-src="views/offerimg/{{offer.image}}" alt="Get coupen worth $12 for 200points">
-								</div>
-								<div class="caption">
-									<h4 class="offer-text">{{offer.description}}</h4>
-									<p class="offer-time-remain">Time Remaining: <span>{{offer.validity}}</span></p>
-								</div>
-							</div>
-						</div>
-						<!--<div class="col-sm-6 col-md-4 offer-item">
-							<div class="thumbnail offer-thumbnail">
-									<div class="offer-price">
-										<h4 class="old-price"><sup>$</sup><b>120</b><small>/qu</small></h4>
-										<h1 class="new-price"><sup>$</sup><b>99</b><small>/qu</small></h1>
-									</div>
-									<div class="caption">
-										<h4 class="offer-text">Get 50% extra points on completeting 7 challanges.</h4>
-										<p class="offer-time-remain">Time Remaining: <span>1 day 23 hrs</span></p>
-									</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-md-4 offer-item">
-							<div class="thumbnail offer-thumbnail">
-									<div class="thumb-img">
-										<img class="img-responsive offer-img" src="assets/img/amazon-logo.png" alt="Get coupen worth $12 for 200points">
-									</div>
-									<div class="caption">
-										<h4 class="offer-text">Get 50% extra points on completeting 7 challanges.</h4>
-										<p class="offer-time-remain">Time Remaining: <span>1 day 23 hrs</span></p>
-									</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-md-4 offer-item">
-							<div class="thumbnail offer-thumbnail">
-									<div class="thumb-img">
-										<img class="img-responsive offer-img" src="assets/img/amazon-logo.png" alt="Get coupen worth $12 for 200points">
-									</div>
-									<div class="caption">
-										<h4 class="offer-text">Get 50% extra points on completeting 7 challanges.</h4>
-										<p class="offer-time-remain">Time Remaining: <span>1 day 23 hrs</span></p>
-									</div>
-							</div>
-						</div>
-					</div>-->
-					<!-- /student gap analysis panel  -->
+          <!-- Areas of Focus Panel  -->
+          <div class="row offers-list">
 
-				</div>
-				<!-- /content area -->
+            <div class="col-sm-6 col-md-4 offer-item" ng-repeat="offer in offers">
+              <div class="thumbnail offer-thumbnail">
+                <span class="new-offer">New</span>
+                <div class="thumb-img">
+                  <img class="img-responsive offer-img" ng-src="views/offerimg/{{offer.image}}" alt="Get coupen worth $12 for 200points">
+                </div>
+                <div class="caption">
+                  <h4 class="offer-text">{{offer.description}}</h4>
+                  <p class="offer-time-remain">Time Remaining: <span>{{ offer.validity | daysLeft}} Days</span></p>
+                </div>
+                <center><button class="btn btn-primary btn-accept">SHOW OFFER</button></center>
+              </div>
+            </div>
+            <!-- /student gap analysis panel  -->
 
-			</div>
-			<!-- /main content -->
+          </div>
+          <!-- /content area -->
 
-		</div>
-		<!-- /page content -->
+        </div>
+        <!-- /main content -->
 
-	</div>
-	<!-- page container -->
-	
-	</div><!--End of parentOffers--->
+      </div>
+      <!-- /page content -->
 
-	<!-- Latest compiled and minified jQuery -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </div>
+    <!-- page container -->
 
-	<!-- Page Specific JavaScript -->
+  </div><!--End of parentOffers--->
+</div>
+  <!-- Latest compiled and minified jQuery -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Page Specific JavaScript -->
