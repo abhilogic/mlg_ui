@@ -199,7 +199,17 @@ angular.module('mlg_student')
 	  //alert('kkk');
 	  var get_uid=commonActions.getcookies(get_uid);
 	  $scope.frm = {};
-   
+
+	  $scope.select_course=function(course_name){
+	  	$localStorage.selected_course=course_name;
+	  }
+   		$("#gotIt").click(function(){
+   						 $(".masscourt-block .masscourt-cover").removeClass("in");
+  						  setTimeout(function(){
+    						  $(".masscourt-block").removeClass("active");
+   						 }, 500);
+ 					 });
+		 			
 	   // Check the condition to move either on pre-Test Page or On Sub Skill Page
 	   loginHttpService.getpreTestStatus(get_uid).success(function(pretestResponse) {
 	   		if (pretestResponse.response.status == "True") { 
@@ -477,13 +487,42 @@ angular.module('mlg_student')
      
 
 }])
-.controller('quizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles) {
+.controller('quizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles','$cookieStore',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles,$cookieStore) {
 	 // alert(navigator.onLine);
 
 	  $scope.data={};
 	  $scope.data.param1 = $routeParams.id;
 	  var get_uid=commonActions.getcookies(get_uid);
+	  var cookieString=$cookieStore.get("userObj");
+		var userInfo=parseUser(cookieString);
+		function parseUser(cookie){
+	var keyVals=cookie.split(',');
+	var obj={};
+	angular.forEach(keyVals,function(value,key){
+		var vals=value.split('=');
+		obj[vals[0]]=vals[1];
+	});
+	return obj;
+}
+$scope.userInfo=userInfo;
 
+	  var selected_course=$localStorage.selected_course;
+	  $scope.selected_course=selected_course;
+  if(selected_course=='Math'){
+  	$scope.mascot_img='math_normal.png';
+  }
+  else if(selected_course=='English'){
+  	$scope.mascot_img='english_normal.png';
+  }
+  else if(selected_course=='Science'){
+  	$scope.mascot_img='science_normal.png';
+  }
+  else if(selected_course=='Social Science'){
+  	$scope.mascot_img='social_studies_normal.png';
+  }else{
+  	$scope.mascot_img='mascot.png';
+  }
+  
 
       if (document.cookie == '' || get_uid == 'null') {
         alert('kindly login');
@@ -576,8 +615,30 @@ angular.module('mlg_student')
     						  $(".masscourt-block").removeClass("active");
    						 }, 500);
  					 });
+		 			$("#gotIt1").click(function(){
+   						 $(".masscourt-block .masscourt-cover").removeClass("in");
+  						  setTimeout(function(){
+    						  $(".masscourt-block").removeClass("active");
+   						 }, 500);
+ 					 });
+		 			$("#gotIt_pass").click(function(){
+   						 $(".masscourt-block .masscourt-cover").removeClass("in");
+  						  setTimeout(function(){
+    						  $(".masscourt-block").removeClass("active");
+   						 }, 500);
+  						  window.location.href='subject-view/'+$routeParams.id;
 
-					$(".masscourt-block").addClass("active");
+ 					 });
+		 			$("#gotIt_fail").click(function(){
+   						 $(".masscourt-block .masscourt-cover").removeClass("in");
+  						  setTimeout(function(){
+    						  $(".masscourt-block").removeClass("active");
+   						 }, 500);
+  						  window.location.href='subject-view/'+$routeParams.id;
+ 					 });
+
+					$("#mascot_quiz").addClass("active");
+					$("#mascot").removeClass("active");
 				    setTimeout(function(){
 				        $(".masscourt-block .masscourt-cover").addClass("in");
 				    }, 500);
@@ -636,7 +697,8 @@ angular.module('mlg_student')
 						localStorage.setItem('userQuesSequence', 0);
 						localStorage.setItem('preTestProcessStatus',1);
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
-						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
+						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {
+						//alert('final')							
 							if (apiresponse.response.status == "true") {
 								var quiz_id=apiresponse.response.quiz_attampt;
 								localStorage.setItem('quiz_id', quiz_id);
@@ -655,13 +717,23 @@ angular.module('mlg_student')
 						 					var st_result="";
 						 					if(quizResultResponse.response.student_result< 60){
 						 						 st_result= "Your are Fail";
-						 						alert("Your are Fail");
+						 						//alert("Your are Fail");
+						 						$("#mascot_quiz").removeClass("active");
+						 						$("#mascot_fail").addClass("active");
+						 						//alert('You are Fail.')
+						 						//return false;
 						 					}
 						 					else{
 						 						st_result= "Your are Pass";
-						 						alert("Your are Pass");
+						 						//alert("Your are Pass");
+						 						$("#mascot_quiz").removeClass("active");
+						 						$("#mascot_pass").addClass("active");
+						 						//alert('You are Pass.')
 						 					}
-											window.location.href='subject-view/'+$routeParams.id;
+						 					//alert('inn')
+						 					//$("#mascot_quiz").removeClass("active");
+						 					//	$("#mascot_pass").addClass("active");
+										//	window.location.href='subject-view/'+$routeParams.id;
 						 					}
 						 				});
 
@@ -780,6 +852,8 @@ angular.module('mlg_student')
     window.location.href='/mlg_ui/app/';
   }
 
+
+
   var pid = $routeParams.id;
   $scope.cid=$routeParams.id;
   loginHttpService.getAllCourseList(pid).success(function(response) {
@@ -807,7 +881,7 @@ angular.module('mlg_student')
        }
     });
 }])
-.controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions) {
+.controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$localStorage',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$localStorage) {
   var get_uid=commonActions.getcookies(get_uid);
   if (document.cookie == '' || get_uid == 'null') {
     alert('kindly login');
@@ -821,6 +895,21 @@ angular.module('mlg_student')
       response.subject_detail = 0;
     }                 
   });
+  var selected_course=$localStorage.selected_course;
+  if(selected_course=='Math'){
+  	$scope.mascot_img='math_normal.png';
+  }
+  else if(selected_course=='English'){
+  	$scope.mascot_img='english_normal.png';
+  }
+  else if(selected_course=='Science'){
+  	$scope.mascot_img='science_normal.png';
+  }
+  else if(selected_course=='Social Science'){
+  	$scope.mascot_img='social_studies_normal.png';
+  }else{
+  	$scope.mascot_img='mascot.png';
+  }
   // Avatar profile
     $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
     loginHttpService.getAvatarImage(get_uid).success(function(response) {

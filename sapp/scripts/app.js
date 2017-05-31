@@ -150,7 +150,7 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
             $location.url('avtar1'); 
               }
           else if(stepNum.response.step.step_completed==1){
-             $location.url('journey');
+            // $location.url('journey');
           }                  
               
         }
@@ -237,8 +237,7 @@ return {
 	templateUrl: 'views/header.html',
 	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {  
     
-     $('html').click(function (e) {
-      console.log($(e.target).parents('#h_menu'))
+     $('html').click(function (e) {      
     if ($(e.target).parents('#h_menu').length==1) {
         $('#h_menu').addClass('open')
     } else {
@@ -260,8 +259,15 @@ return {
 $scope.userInfo=userInfo;
 	}]
 };
+}).directive('mascot', function () {
+return {
+  restrict: 'EA',
+  templateUrl: 'views/mascot.html',
+  controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {     
+   
+  }]
+}
 })
-
 .controller("TopController", function($rootScope, $scope, $location) {
 $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
 //$scope.atHome = ($location.path() === "/");
@@ -270,8 +276,6 @@ $scope.this_route = function(){
 };
 });
 })
-
-
 .directive('loading',   ['$http' ,function ($http)
     {
         return {

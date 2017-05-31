@@ -18,7 +18,7 @@
 					<div ng-repeat="gradecourse in frm.cousesListByGrade" ng-init="pIndex = $index+1">
 						<div ng-if="!guest" ng-repeat="childcourse in frm.childcourses">
 								<div ng-if="gradecourse.id==childcourse.id">
-										<a href="{{redirectURL}}/{{childcourse.id}}" data-castle-name="science" >							 
+										<a ng-click="select_course(gradecourse.course_name)" href="{{redirectURL}}/{{childcourse.id}}" data-castle-name="science" >							 
 											<div class="castle subject_castle castle_{{pIndex}} active">
 												<span class="castle__img"></span>
 												<span class="castle__icon"></span>
@@ -39,7 +39,7 @@
 							</div>
                                                         <div ng-if="guest">
                                                           <div>
-                                                              <a href="{{redirectURL}}/{{gradecourse.id}}" data-castle-name="science" >
+                                                              <a ng-click="select_course(gradecourse.course_name)" href="{{redirectURL}}/{{gradecourse.id}}" data-castle-name="science" >
                                                                 <div class="castle subject_castle castle_{{pIndex}} active">
                                                                         <span class="castle__img"></span>
                                                                         <span class="castle__icon"></span>
@@ -190,10 +190,35 @@
 			</div>
 		</div>
 
+		<!-- masscourts block -->
+		<div class="masscourt-block active">
+			<div class="masscourt-cover in">
+				<img src="assets/img/mascort-img/mascot.png" class="masccort-img" alt=""/>
+				<div class="hint-block">
+					<div class="col-xs-2 padding-0">
+						<!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
+					</div>
+					<div class="col-xs-10">
+						<span class="hint">
+							<p>&nbsp;</p>
+							<p>Hello young wizard, Welcome to the magical world of learning.</p>
+							<p>Click on a subject to see what’s waiting for you inside.</p>
+							<p>You can chat with your teachers and parents too - click the chat button on the right side.</p>
+							<p>If you find anything confusing you can always seek help from help section.</p>
+						</span>
+						<div class="text-right">
+							<button type="button" class="btn" id="gotIt">Got it!</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- masscourts block -->
+
 		<div class="loader" loading>
 			<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
 		</div>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 		<!-- plugins -->
 
 		<!-- Compiled and minified Page Specific JavaScript -->
