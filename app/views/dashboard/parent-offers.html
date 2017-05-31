@@ -32,7 +32,9 @@
                   <h4 class="offer-text">{{offer.description}}</h4>
                   <p class="offer-time-remain">Time Remaining: <span>{{ offer.validity | daysLeft}} Days</span></p>
                 </div>
-                <center><button class="btn btn-primary btn-accept">SHOW OFFER</button></center>
+                <center><span style ="border: 2px solid #1688eb; border-radius: 5px;" class="btn" ng-if="offer.status !='' && offer.coupon_code !=''">{{offer.coupon_code}}</span></center>
+                <center><span style ="border: 2px solid #1688eb; border-radius: 5px;" class="btn" ng-if="offer.status !='' && offer.coupon_code ==''">{{offer.status}}</span></center>
+                <center ng-if="offer.status == '' " id="showOffer{{offer.id}}"><button  ng-click="requestOffer(offer)" class="btn btn-primary btn-accept">SHOW OFFER</button></center>
               </div>
             </div>
             <!-- /student gap analysis panel  -->
