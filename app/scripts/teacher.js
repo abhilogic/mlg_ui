@@ -232,6 +232,35 @@ angular.module('mlg')
             url   : urlParams.baseURL+urlParams.saveCardToPaypalForTeacher
         });
       }
+
+       teacherHttpResponse.generateAssignQuestions=function(data){
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.generateAssignQuestions
+        });
+      }
+
+      teacherHttpResponse.getQuestionsListForAssg=function(data){
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.getQuestionsListForAssg
+        });
+      }
+
+      teacherHttpResponse.setCustomAssignmentByTeacher=function(data,teacher_id){
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.setCustomAssignmentByTeacher
+        });
+      }
+
+
+
+
+      
         return teacherHttpResponse;
 	
 }])
@@ -392,6 +421,18 @@ angular.module('mlg')
         }
       });
     };
+
+    $scope.submitSkip = function(){
+          teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
+            if (response.status == true) {              
+              var grade = response.urlData.level_id;
+              var subjectName = response.urlData.course_name;
+              var subjectCode = response.urlData.course_id;
+              $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+            }
+        });
+
+    }
 
     
     /* end- step-3 for onBoarding */
@@ -672,6 +713,7 @@ angular.module('mlg')
           //$scope.today = $filter('date')(new Date(), 'yyyy-mm-dd HH:mm:ss');
           var slct_courseid=frmdata.selectedcourse.split(',')[0];
           var slct_courname=frmdata.selectedcourse.split(',')[1];
+          var slct_level_id=frmdata.selectedcourse.split(',')[2];
           var select_course={[slct_courseid]:slct_courname};          
           var d = new Date();
           var sec = d.getSeconds();   
@@ -682,7 +724,9 @@ angular.module('mlg')
                   first_name  : frmdata.Fname,
                   last_name   : frmdata.Lname,
                   password    : frmdata.pass,
-                  level_id    : '',
+                  level_id    : slct_level_id,
+                  grade_id    : slct_level_id,
+                  course_id    : slct_courseid,
                   dob         : '',
                   created     : $scope.today,
                   emailchoice : '',
@@ -849,7 +893,9 @@ $scope.numberOfPages=function(){
                     teacherHttpService.getGroupsOfSubjectForTeacher(get_uid,$scope.subject_id).success(function(response_getgp) {
                         if (response_getgp.response.status == "true") {
                           $scope.groups = response_getgp.response.groups;
-                          $scope.img ={};                     
+                          $scope.img ={};
+                         window.location.href='teacher/create-group/class/'+$routeParams.grade_id+'/'+$routeParams.subject_name+'/'+$routeParams.course_id;
+
                         }
                         else{ 
                             $scope.errorMessage = response_getgp.response.message;
@@ -858,6 +904,7 @@ $scope.numberOfPages=function(){
 
                  }else{
                     $scope.errorMessage = response_addgp.response.message;
+
                  }
 
                   $timeout(function () { $scope.successMessage = ""; }, 4000);
@@ -930,16 +977,15 @@ $scope.numberOfPages=function(){
            teacherHttpService.editGroupOfSubject(editgprecords,group_id).success(function(resp) {
               if (resp.response.status == "True") {
                   $scope.succ_message = resp.response.message;
-                  window.location.href='teacher/edit-group/naughty-kids/'+group_id;
+                  window.location.href='teacher/edit-group/'+$routeParams.group_title_inURL+'/'+group_id;
               }else{
                   $scope.err_message = resp.response.message;
                 }
              });
 
             $scope.onSkipClick=function(){     
-                window.location.href='teacher/edit-group/naughty-kids/'+group_id;
+                window.location.href='teacher/edit-group/'+$routeParams.group_title_inURL+'/'+group_id;
           };
-
      
           } 
        
@@ -1688,7 +1734,12 @@ $scope.numberOfPages=function(){
                 done();
           }else if (element.context.id == 'ans-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
             done();
-          }else{
+          }
+          else if( (element.context.id == 'file-all') && (file.type == 'application/pdf' || file.type == 'image/jpeg' || file.type == 'video/*' || file.type == 'image/png') ){
+            done();
+          }
+
+          else{
              this.removeFile(file);
            alert('please choose appropriate file');
           }
@@ -1713,15 +1764,20 @@ $scope.numberOfPages=function(){
               }else{
                 doc = file.xhr.response;
                 $scope.doc = doc;
+
               } 
-            }else if(element.context.id == 'file-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
+
+              $scope.$emit('UploadedDocument', $scope.doc);              
+            }else if( (element.context.id == 'file-img' || element.context.id == 'file-all')&& (file.type == 'image/jpeg' || file.type == 'image/png')) {
               if (images != '') {
                 images = images +','+file.xhr.response;
                 $scope.img = images;
               }else{
                 images = file.xhr.response;
                 $scope.img = images;
-              } 
+              }
+
+              $scope.$emit('UploadedImage', $scope.img);             
             }else if(element.context.id == 'ans-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {;
               if($scope.ansCount < 4) {
                   var i = 0;
@@ -2442,28 +2498,30 @@ $scope.numberOfPages=function(){
        $scope.grade_id = $routeParams.gradeid ;
        $scope.course_id = $routeParams.courseid ;
        $scope.subject_name = $routeParams.subject_name ;
-       $scope.frm ={};       
-       $scope.frm.stsRadio = 'cl';
+       $scope.frm ={}; 
+       $scope.frm.questions_limit =5;      
+       $scope.frm.assignmentFor = 'class';
        $scope.frm.selectedStd =[];
-
-       //On change drop down
-    $scope.onChangeGP=function(dt){       
-        $scope.frm.stsRadio = "gp";
-        $scope.frm.studentModel = [];        
-    }
+       $scope.frm.Asscomments =""; 
+       //frm.group_image = $scope.img;
 
 
-    // Action trigger on select of People/Students from drop down    
-    $scope.onChangeCL=function(slctCL){       
-        $scope.frm.stsRadio = "cl";
-        $scope.frm.selectedGroup = "NA"; 
-        $scope.frm.studentModel = [];       
-    }
-    
-       
-      
+      /* $scope.$watch('img', function (newValue, oldValue, scope) {
+        alert(newValue);
+});*/
 
-        
+ $scope.$on('UploadedDocument', function(event, mass) { 
+        console.log(mass);
+
+  });
+
+ $scope.$on('UploadedImage', function(event, mass) { 
+        console.log(mass);
+  });
+
+  
+
+   // Step 1 - To populate the dynamic value in fields of Assignment     
       // Api to call all students of a teacher
          $scope.frm.studentModel = [];
          $scope.students =[]; 
@@ -2482,7 +2540,8 @@ $scope.numberOfPages=function(){
       $scope.stEvents = {
        onItemSelect: function(item) {        
           stType.push(item['id']);
-          $scope.frm.stsRadio = "pr";    
+          $scope.frm.assignmentFor = "students"; 
+          $scope.frm.selectedGroup = "";   
 
        },
        onItemDeselect: function(item) {
@@ -2491,8 +2550,20 @@ $scope.numberOfPages=function(){
     }; 
 
 
+     //On change drop down
+    $scope.onChangeGP=function(dt){       
+        $scope.frm.assignmentFor = "group";
+        $scope.frm.studentModel = [];        
+    }
 
 
+    // Action trigger on select of People/Students from drop down    
+    $scope.onChangeCL=function(slctCL){       
+        $scope.frm.assignmentFor = "class";
+        $scope.frm.selectedGroup = ""; 
+        $scope.frm.studentModel = [];       
+    }
+    
 
       // API to call all groups of a teacher
        teacherHttpService.getGroupsOfSubjectForTeacher(get_uid,$scope.course_id).success(function(respGroup) {
@@ -2552,16 +2623,173 @@ $scope.numberOfPages=function(){
 
 
 
+// Step 2 - To generate the questions and change questions
 
     //Click on generate button and get question as per field values
     $scope.generateQuestion = function(frmdata){
-      console.log(frmdata);
+          $scope.err_message =[];
+        if(frmdata.selectedSkill == ""){
+            $scope.err_message[1] = "Please select Skill.";
+        }
+        else if(frmdata.selectedSubskill == ""){
+            $scope.err_message[2] = "Please select SubSkill.";
+        } 
+        else if( (1 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
+            $scope.err_message[3] = "Please enter question less than 20 but greater than 5.";
+        }
+        else{
+
+            var slcFields = {
+            teacher_id      : get_uid,
+            grade_id        : $scope.grade_id,
+            main_course_id  : $scope.course_id, 
+            subject_name    : $scope.subject_name, 
+            group_id        : frmdata.selectedGroup,
+            students        : frmdata.studentModel,
+            difficulty_level: frmdata.difficultModel,
+            skill_id        : frmdata.selectedSkill,
+            subskill_id     : frmdata.selectedSubskill,
+            questions_limit : frmdata.questions_limit,
+            assignmentFor   : frmdata.assignmentFor
+        } 
+          $scope.questions =[];
+
+        teacherHttpService.generateAssignQuestions(slcFields).success(function(respQues) {
+          if(respQues.response.status == "True"){ 
+            $scope.questions = respQues.response.questions;            
+           }else{
+            $scope.err_message[3] = respQues.response.message;
+           }
+
+      });
+
+         // to alter question name
+          /*$scope.stripQues = function(quesName) {
+             return quesName.replace();    
+          };*/ 
+
+        
+        // To make option numbering as alphabet
+        $scope.numToAlpha =function(idx) {
+            var getAlpha = ['A','B','C','D','E','F','G'];
+            return getAlpha[idx];
+        }
+
+
+        //To remove the question after click on change question
+          var removed_questions_id ="0";
+        
+        $scope.onChangeQues = function(indx, rm_quesid) {
+          var exist_questions_id = "1";
+          
+         
+          
+          removed_questions_id = removed_questions_id+','+rm_quesid;
+
+          for(var key in $scope.questions){
+             // console.log($scope.questions[key].question_id);
+              if($scope.questions[key].question_id!=rm_quesid){
+                exist_questions_id =exist_questions_id+','+$scope.questions[key].question_id;
+              }
+            }
+
+
+            var dataToGetQuestions = {                
+                subjects          : frmdata.selectedSubskill,
+                grade_id          : $scope.grade_id, 
+                limit             : frmdata.questions_limit,              
+                difficulty        : 'Easy|Moderate|Difficult',
+                existing_questions_id:  exist_questions_id,
+                removed_questions_id : removed_questions_id               
+            }; 
+            
+            teacherHttpService.getQuestionsListForAssg(dataToGetQuestions).success(function(respQues) {
+                if(respQues.response.status == "True"){ 
+
+                    if(respQues.response.change_question_status == "True"){
+                      
+                       $scope.questions.splice(indx, 1);
+                       console.log($scope.questions);                        
+                      $scope.questions = respQues.response.questions;
+
+                    }
+                    else{
+                        $scope.err_message[4] = respQues.response.change_question_message;
+                        alert(respQues.response.change_question_message);
+
+                    }
+              }
+
+            });
+        }
+         
+      }
+    };
+    // end Step 2 
+
+     // Step 3 - To save the selected questions , Resources and comment in Database
+          $scope.onClickCancel = function(frmCandata){
+            $scope.frm.assignDate="";
+          };
+
+            
+          $scope.onSubmitAssignmentNow = function(frmdata){
+            //frmdata.attachedresource="";
+
+
+            $count_slectedQues = Object.keys(frmdata.selected_questions).length;
+
+            
+            
+            if($count_slectedQues !=frmdata.questions_limit){
+              $scope.err_message[5] ="Your selected question is not equal to 'Number of question'. ."
+              $count_slectedQues = "";
+              $timeout(function () { $scope.err_message[5] = ""; }, 3000);
+            }
+            else{
+
+                var assgData ={
+                      teacher_id      : get_uid,
+                      grade_id        : $scope.grade_id,
+                      main_course_id  : $scope.course_id, 
+                      subject_name    : $scope.subject_name, 
+                      group_id        : frmdata.selectedGroup,
+                      students        : frmdata.studentModel,
+                      difficulty_level: frmdata.difficultModel,
+                      skill_id        : frmdata.selectedSkill,
+                      subskill_id     : frmdata.selectedSubskill,
+                      questions_limit : frmdata.questions_limit,
+                      assignmentFor   : frmdata.assignmentFor,
+                      attachedresource :frmdata.attachedresource,
+                      selected_questions : frmdata.selected_questions,
+                      comments           : frmdata.Asscomments
+                }
+
+
+                
+                teacherHttpService.setCustomAssignmentByTeacher(assgData,get_uid).success(function(respAssg) {
+                    
+
+                    if(respAssg.response.status == "True"){ 
+
+                    }
+                  });
+
+        }
 
 
 
 
-    }
 
+          }
+
+          $scope.onSubmitAssignmentLater = function(frmdata){
+            frmdata.attachedresource = $scope.img;
+            console.log(frmdata);
+
+          }
+
+          //end- Step 3 - To save the selected questions , Resources and comment in Database
 
      
            
