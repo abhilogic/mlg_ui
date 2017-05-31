@@ -2491,8 +2491,8 @@ $scope.numberOfPages=function(){
 	}
   
   }])
-.controller('teacherCustomAssignmentCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','user_roles','commonActions','$routeParams','$compile',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,user_roles,commonActions,$routeParams,$compile) {
+.controller('teacherCustomAssignmentCtrl',['$rootScope','$scope','$timeout','teacherHttpService','loginHttpService','$location','urlParams','user_roles','commonActions','$routeParams','$compile',
+  function($rootScope,$scope,$timeout,teacherHttpService,loginHttpService,$location,urlParams,user_roles,commonActions,$routeParams,$compile) {
         var get_uid=commonActions.getcookies(get_uid);
        $scope.baseURL= urlParams.baseURL;
        $scope.grade_id = $routeParams.gradeid ;
@@ -2503,20 +2503,18 @@ $scope.numberOfPages=function(){
        $scope.frm.assignmentFor = 'class';
        $scope.frm.selectedStd =[];
        $scope.frm.Asscomments =""; 
+       
        //frm.group_image = $scope.img;
-
-
-      /* $scope.$watch('img', function (newValue, oldValue, scope) {
-        alert(newValue);
-});*/
-
+     
+var assgresources ={};
  $scope.$on('UploadedDocument', function(event, mass) { 
-        console.log(mass);
+        //console.log(mass);
+        assgresources.document = mass;
 
   });
 
  $scope.$on('UploadedImage', function(event, mass) { 
-        console.log(mass);
+        assgresources.image = mass;
   });
 
   
@@ -2628,13 +2626,14 @@ $scope.numberOfPages=function(){
     //Click on generate button and get question as per field values
     $scope.generateQuestion = function(frmdata){
           $scope.err_message =[];
+          
         if(frmdata.selectedSkill == ""){
             $scope.err_message[1] = "Please select Skill.";
         }
         else if(frmdata.selectedSubskill == ""){
             $scope.err_message[2] = "Please select SubSkill.";
         } 
-        else if( (1 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
+        else if( (5 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
             $scope.err_message[3] = "Please enter question less than 20 but greater than 5.";
         }
         else{
@@ -2659,6 +2658,8 @@ $scope.numberOfPages=function(){
             $scope.questions = respQues.response.questions;            
            }else{
             $scope.err_message[3] = respQues.response.message;
+            $timeout(function () { $scope.err_message[3] = ""; }, 5000);         
+
            }
 
       });
@@ -2735,6 +2736,7 @@ $scope.numberOfPages=function(){
             
           $scope.onSubmitAssignmentNow = function(frmdata){
             //frmdata.attachedresource="";
+            //console.log(assgresources);
 
 
             $count_slectedQues = Object.keys(frmdata.selected_questions).length;
@@ -2760,34 +2762,35 @@ $scope.numberOfPages=function(){
                       subskill_id     : frmdata.selectedSubskill,
                       questions_limit : frmdata.questions_limit,
                       assignmentFor   : frmdata.assignmentFor,
-                      attachedresource :frmdata.attachedresource,
+                      attachedresource :assgresources,
                       selected_questions : frmdata.selected_questions,
                       comments           : frmdata.Asscomments
-                }
+                };
 
 
                 
                 teacherHttpService.setCustomAssignmentByTeacher(assgData,get_uid).success(function(respAssg) {
-                    
+                  if(respAssg.response.status == "True"){ 
+                      $('#modal-sucess').modal('show'); 
 
-                    if(respAssg.response.status == "True"){ 
+                      $scope.onClickOk=function(){
+                        window.location.href='teacher/custom-assignment/'+$scope.grade_id+'/'+$scope.subject_name+'/'+$scope.course_id;
+
+                      }                   
 
                     }
                   });
-
-        }
-
-
-
-
+            }
 
           }
+
+          ;
 
           $scope.onSubmitAssignmentLater = function(frmdata){
             frmdata.attachedresource = $scope.img;
             console.log(frmdata);
 
-          }
+          };
 
           //end- Step 3 - To save the selected questions , Resources and comment in Database
 
