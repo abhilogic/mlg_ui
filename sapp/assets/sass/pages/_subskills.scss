@@ -4,12 +4,14 @@
   background:{
     image: url("../img/subskills_bg.jpg");
     size: auto 100%;
+    position: center center;
   }
   min-width: 100vw;
   min-height: 100vh;
   &.in {
      background:{
        image: url("../img/subskills_bg_in.jpg"),url("../img/subskills_bg.jpg");
+       position: center center, center center;
      }
      @media screen and (min-width: $screen-tb-land) {
        overflow: hidden;
@@ -39,6 +41,14 @@
     top: 36%;
     cursor: pointer;
     text-align: center;
+    @media screen and (max-width: $screen-md-max) {
+      left: 36%;
+      top: 41%;
+    }
+    @media screen and (max-width: $screen-sm-max) {
+      left: 40%;
+      top: 45%;
+    }
     .up_arrow {
       display: inline-block;
       @include animation(upword-arrow-animation 1.0s infinite);
@@ -137,7 +147,10 @@
         width: 906px;
       }
     @include respond-to(mobileMedium){
-        background: none;
+        background: {
+          image: url("../img/subskill_mobile_bg.jpg");
+          size: 100% auto;
+        }
         width: auto;
         height: auto;
         padding-top: 0px;
@@ -423,6 +436,7 @@
             background: {
               image: url(../img/quiz_heading.png);
               repeat: no-repeat;
+              position: center center;
             }
             padding: 11px 0px 21px;
             font-size: 20px;

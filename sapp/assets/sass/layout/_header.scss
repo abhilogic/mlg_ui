@@ -10,8 +10,9 @@
   z-index: 1000;
   @include padding(11px null 5px);
   @media screen and (max-width: $screen-sm){
+    @include padding(0px null null);
     .navbar-toggle {
-      margin-top: 27px;
+      margin-top: 18px;
       background: transparent;
       &:focus {
         background: transparent;
@@ -21,11 +22,65 @@
           background-color: #fea756;
       }
     }
+    // navbar-toggle
     .navbar-collapse {
       margin-top: 25px;
       border-top: 0px;
       @media screen and (max-width: $screen-sm){
         @include margin(0px null null null);
+        @include position(fixed, 75px null null 0px);
+        @include transform(translateX(-300%));
+        @include transition(0.3s all linear);
+        height: auto !important;
+        overflow-y: inherit;
+        &:after {
+          content: '';
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0,0,0,0.7);
+          z-index: -1;
+          @include position(fixed, -75px null null 0px);
+        }
+        &.collapse {
+         @include transform(translateX(0%));
+        }
+      }
+    }
+    // navbar-collapse
+    .mobile_universal_search_bar {
+      @include margin(18px null null null);
+      .form-control {
+        background: none;
+        @include border-color(transparent);
+        color: #fea756;
+        @include border-radius(0px);
+        @include box-shadow(none);@include placeholder(){
+          color: transparent;
+        }
+        &:focus {
+          border-bottom-color: #fea756;
+          @include placeholder(){
+            color: #fea756;
+          }
+        }
+      }
+      .input-group-addon {
+        background: none;
+        @include border-color(transparent);
+        color: #fea756;
+      }
+    }
+    // mobile_universal_search_bar
+    .navbar-header {
+      @include padding(null 0px);
+      width: 100%;
+      z-index: 10;
+      @include position(absolute, 0px null null 0px);
+      &.fixed {
+        @media screen and (max-width: $screen-xs-max){
+          @include position(fixed, 0px null null 0px);
+          @include padding(null 15px);
+        }
       }
     }
   }
@@ -36,6 +91,13 @@
     padding-top: 20px;
     margin-left: 0px;
   }
+    >li:first-child {
+     a {
+       @media screen and (max-width: $screen-xs-max){
+         padding-left: 0px;
+       }
+     }
+   }
     li{
       display: inline-block;
       float: none !Important;
@@ -67,6 +129,7 @@
           }
         }
       }
+
     }
 
     // garbage

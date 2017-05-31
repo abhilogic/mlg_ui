@@ -2,37 +2,39 @@
 angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives','ngStorage'
 ])
 .value('urlParams', {
-  users : '/users',
-  contactus: '/users/contact_us',
-  login: '/users/login',
-  logout: '/users/logout',
-  siteRoot : '/mlg_ui/app/',
-  registerUser:'/users/registerUser',
-  parentPreference:'/users/setUserPreference',
-  baseURL : 'http://localhost/mlg',
-  gradeList : '/users/getGradeList',
-  setUserStatus : '/users/setUserStatus',
-  getTermsAndConditions : '/users/getStaticContents',
-  getPaymentBrief : '/users/getPaymentBrief',
-  isUserLogin : '/users/isUserLoggedin',
-  saveCardToPaypal : '/users/saveCardToPaypal',
-  saveCardToPaypalForTeacher : '/teachers/saveCardToPaypal',
-  packageList : '/users/getPackageList',
-  planList : '/users/getPlanList',
-  getCourseByGrade :'/courses/getCourseListForLevel',
-  setChildrenCount :'/users/setCountOfChildrenOfParent',
-  getChildrenCount :'/users/getCountOfChildrenOfParent',
-  getAddedChildren :'/users/getChildrenListOfParent',
-  priceCalcOnSeclectedCourse :'/users/priceCalOnCourse',
-  getChildrenDetails :'/users/getChildrenDetails',
-  addChildRecord : '/users/addChildrenRecord',
-  addChild : '/users/addChildren',
-  offerRecords : '/users/getOffers',
-  getStepNum :'/users/getStepNum',
-  getUsedCoupon: '/users/getUsedCoupon',
-  getUserSetting: '/users/getUserSetting',
-  setUserSetting: '/users/setUserSetting',
-  setAvailableCoupon: '/users/setAvailableCoupon',
+	users : '/users',
+	contactus: '/users/contact_us',
+	login: '/users/login',
+	logout: '/users/logout',
+	siteRoot : '/mlg_ui/app/',
+	studentsiteRoot : '/mlg_ui/sapp/',
+	registerUser:'/users/registerUser',
+	parentPreference:'/users/setUserPreference',
+	baseURL : 'http://localhost/mlg',
+	gradeList : '/users/getGradeList',
+	setUserStatus : '/users/setUserStatus',
+	getTermsAndConditions : '/users/getStaticContents',
+	getPaymentBrief : '/users/getPaymentBrief',
+	isUserLogin : '/users/isUserLoggedin',
+	saveCardToPaypal : '/users/saveCardToPaypal',
+	saveCardToPaypalForTeacher : '/teachers/saveCardToPaypal',
+	packageList : '/users/getPackageList',
+	planList : '/users/getPlanList',
+	getCourseByGrade :'/courses/getCourseListForLevel',
+	setChildrenCount :'/users/setCountOfChildrenOfParent',
+	getChildrenCount :'/users/getCountOfChildrenOfParent',
+	getAddedChildren :'/users/getChildrenListOfParent',	
+	priceCalcOnSeclectedCourse :'/users/priceCalOnCourse',
+	getChildrenDetails :'/users/getChildrenDetails',
+	addChildRecord : '/users/addChildrenRecord',
+	addChild : '/users/addChildren',
+	offerRecords : '/users/getOffers',
+	setStepNum :'/users/setStepNum',
+	getStepNum :'/users/getStepNum',
+	getUsedCoupon: '/users/getUsedCoupon',
+	getUserSetting: '/users/getUserSetting',
+	setUserSetting: '/users/setUserSetting',
+    setAvailableCoupon: '/users/setAvailableCoupon',
   promocode :'/users/promocode',
   getUserPurchaseDetails :'/users/getUserPurchaseDetails',
   signUpTeacher :'/teachers/setTeacherRecord',
@@ -73,9 +75,11 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   setUserPassword : '/users/setUserPassword',
   updateMyAccount : '/users/updateMyAccount',
   getCourseSkillSubskills : '/courses/getCourseSkillSubskills',
-  uploadEvent : '/teachers/setEvent',
-  getEvent : '/teachers/getEvent',
-  getTodayEvents : '/teachers/getTodayEvents',
+  generateAssignQuestions : '/teachers/generateAssignQuestions',
+  getQuestionsListForAssg : '/teachers/getQuestionsListForAssg',
+  setCustomAssignmentByTeacher : '/teachers/setCustomAssignmentByTeacher',
+  
+
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -310,7 +314,7 @@ principal  : 30,
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth','$localStorage', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth,$localStorage) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
     var top ="";
@@ -342,7 +346,6 @@ principal  : 30,
 	   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
-          $localStorage.$reset();
 		   		 /*document.cookie = uid+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
 		   		setCookie('uid',null);

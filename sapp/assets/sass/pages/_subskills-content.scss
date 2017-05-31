@@ -2,7 +2,6 @@
   .board {
     // btn-skip
     &.subskills-content {
-
       .btn-skip {
         display: none;
         background:{
@@ -75,7 +74,7 @@
             border-bottom: 0px;
           }
           &:before {
-            content: '\0043';
+            content: '\0048';
             position: absolute;
             @include position(absolute, 12px null null 0px);
             font-family: 'Glyphter';
@@ -85,7 +84,7 @@
           }
           &.done {
             &:before {
-              content: '\0042';
+              content: '\0044';
             }
           }
           &.active {

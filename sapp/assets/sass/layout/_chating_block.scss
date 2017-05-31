@@ -45,6 +45,10 @@
   .chat_container_cover {
       display: none;
       float: left;
+      @media screen and (max-width: $screen-xs-max){
+        float: none;
+        height: 100%;
+      }
   }
   .chat_container {
     background: {
@@ -263,8 +267,9 @@
 .chating_block.in {
   z-index: 1000;
     @media screen and (max-width: $screen-mobile-md){
-      height: 100vh;
-      top: 0px;
+      height: 80vh;
+      bottom: 39px;
+      top: auto;
     }
     .chat_container_cover {
       &:nth-child(1),&:nth-child(2),&:nth-child(3) {
@@ -275,7 +280,7 @@
     min-height: 300px;
     @media screen and (max-width: $screen-mobile-md){
       padding-top: 20px;
-      height: 100vh;
+      height: 100%;
     }
 
   }

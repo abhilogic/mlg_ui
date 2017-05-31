@@ -10,7 +10,7 @@
 	line-height: $val + rem;
 }
 
-// BEM syntax
+// BEM
 @mixin element($name) {
 	@at-root &-#{$name} {
 		@content;
@@ -176,6 +176,17 @@
  }
 }
 
+@mixin placeholder(){
+&::-webkit-input-placeholder {
+   @content;
+}
+&:-moz-placeholder {
+   @content;
+}
+&:-ms-input-placeholder {
+   @content;
+ }
+}
 
 
 @mixin respond-to($media) {

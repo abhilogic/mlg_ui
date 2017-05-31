@@ -35,6 +35,7 @@
 									<div class="col-lg-2 text-xs-center">
 											<label class="color-gray text-uppercase margin-top-10">Send To:</label>
 									</div>
+
                   					<div class="col-lg-6 col-md-6">
 					                    <div class="form-group">
 											<label for="" class="col-md-5 control-label text-left padding-top-0">
@@ -42,7 +43,7 @@
 													
 
 
-		<input type="radio" name="assignTo" value="cl"  ng-model="frm.stsRadio" id="clRadio" ng-click="onChangeCL(frm.stsRadio)">
+		<input type="radio" name="assignTo" value="class"  ng-model="frm.assignmentFor" ng-click="onChangeCL(frm.assignmentFor)">
 
 											<label for="inlineRadio1" class="text-uppercase margin-top-0"> All Class</label>
 												</div>
@@ -51,7 +52,7 @@
 												<div class="row" id="divGroup">
                           							<div class="col-xs-2">
                             							<div class="radio radio-primary radio-inline">     						
-       <input type="radio" name="assignTo" value="gp"  ng-model="frm.stsRadio" id="gpRadio" ng-click="onChangeCL(frm)">
+       <input type="radio" name="assignTo" value="group"  ng-model="frm.assignmentFor" ng-click="onChangeCL(frm)">
 
                                                 <label></label>
                             							</div>
@@ -60,9 +61,9 @@
 													
 
 
-							<select class="mlg-selectpicker form-control" id="gpSelect" title="Group" data-width="auto" data-size="auto"  ng-init="frm.selectedGroup='NA'"  ng-model="frm.selectedGroup" ng-change="onChangeGP(frm)" >
+							<select class="mlg-selectpicker form-control" title="Group" data-width="auto" data-size="auto"  ng-init="frm.selectedGroup=''" ng-model="frm.selectedGroup" ng-change="onChangeGP(frm)" >
 
-														     <option value="NA">Select Group</option>
+														     <option value="">Select Group</option>
 														     <option ng-repeat="group in groups" value="{{group.id}}">{{group.title}}</option>							     
 												   		</select>
 		                          					</div>
@@ -76,7 +77,7 @@
 												<div class="radio radio-primary radio-inline">										
 
 		
-		<input type="radio" name="assignTo" value="pr" ng-model="frm.stsRadio" id="stRadio">
+		<input type="radio" name="assignTo" value="students" ng-model="frm.assignmentFor">
 
 													<label></label>
 												</div>
@@ -97,11 +98,12 @@
 											<label for="" class="col-xs-5 control-label text-left">Select A skills :</label>
                       						<div class="col-xs-7">												
 
-												<select class="mlg-selectpicker form-control" title="skills" data-width="auto" data-size="auto" ng-model="frm.selectedSkill" ng-init="frm.selectedSkill='NA'" ng-change="onChangeSkill(frm.selectedSkill)" >
-													<option value="NA">Select Skill</option>
+												<select class="mlg-selectpicker form-control" title="skills" data-width="auto" data-size="auto" ng-model="frm.selectedSkill" ng-init="frm.selectedSkill=''" ng-change="onChangeSkill(frm.selectedSkill)" >
+													<option value="">Select Skill</option>
 													<option ng-repeat="skill in skills" value="{{skill.course_id}}">{{skill.course_name}}</option>		     
 												   	</select>
-												<div class="err_msg" style="color:red;">{{err_msg[3]}}</div>
+												
+												<div style="color:red">{{err_message[1]}}</div>
                       						</div>
                     					</div>
                   					</div>
@@ -110,12 +112,13 @@
 											<label for="" class="col-xs-5 control-label">Select a subskills :</label>
 											<div class="col-xs-7">											
 
-												<select class="mlg-selectpicker form-control"  id="slcsubskill" title="subSkills" data-width="auto" data-size="auto" ng-model="frm.selectedSubskill" ng-init="frm.selectedSubskill='NA'" ng-disabled="frm.selectedSkill == 'NA' ">
+												<select class="mlg-selectpicker form-control"  id="slcsubskill" title="subSkills" data-width="auto" data-size="auto" ng-model="frm.selectedSubskill" ng-init="frm.selectedSubskill=''" ng-disabled="frm.selectedSkill == '' ">
 
 
-													<option value="NA">Select SubSkill</option>
+													<option value="">Select SubSkill</option>
 													<option ng-repeat="subskill in subskills" value="{{subskill.course_id}}">{{subskill.course_name}}</option>	   
 												   	</select>
+												  <div style="color:red">{{err_message[2]}}</div>
 											</div>
 										</div>
                   					</div>
@@ -127,9 +130,11 @@
                       						<div class="col-xs-7">
 												<div class="btn-group btn-block">
 												
-													<input type="text" class="btn btn-default width-50" min="1" max="20">
+													<input type="text" class="btn btn-default width-50" ng-model="frm.questions_limit" ng-init="5">
+
 													<button type="button" class="btn btn-default width-50">20</button>
-												</div>
+
+												</div>											
                       						</div>
                     					</div>
                   					</div>
@@ -143,102 +148,93 @@
 										</div>
                   					</div>
                 				</div>
-                				<div class="text-center margin-top-10">                  					
-
+                				<div class="margin-top-10"> 
 
                   					<button type="button" id="btnGenerate" class="btn btn-primary" ng-click="generateQuestion(frm)">Generate</button>
                 				</div>
-                				<div class="question-block-cover">
-									<div class="question-block active add-question icon-drag">
-	                  				<button type="button" class="btn  btn-check">
-	                  					<i class="icon icon-check"></i>
-	                  				</button>
-	                  				<div class="row">
-	                    				<div class="col-md-9">
-	                      					<h5 class="ques">Q1.  What comes in between 14 __ 15.</h5>
-	                    				</div>
-	                    				<div class="col-md-3 text-right text-sm-left">
-	                      					<span  class="text-uppercase color-gray-light padding-left-0">
-	                      						<i class="icon icon-my_data margin-right-10 margin-bottom-20"></i> MY Content
-	                      					</span>
-	                      					<ul class="list-inline color-gray font-weight-bold">
-	                        					<li>Skills Level:</li>
-	                        					<li>Moderate</li>
-	                      					</ul>
-	                    				</div>
-	                  				</div>
-	                  			<div class="row option-block">
-	                    			<div class="col-md-7 margin-sm-bottom-10">
-	                      				<span> A. 13 </span>
-	                    			</div>
-	                    			<div class="col-md-5 margin-sm-bottom-10">
-	                      				<span> A. 16 </span>
-	                    			</div>
-	                  			</div>
-	                  			<div class="row option-block margin-bottom-0 margin-sm-top-0 ">
-	                    			<div class="col-md-7 margin-sm-bottom-10">
-	                      				<span> C. 15 </span>
-	                    			</div>
-	                    			<div class="col-md-5 margin-sm-bottom-10">
-	                      				<span> D. 14 </span>
-	                    			</div>
-	                  			</div>
-	                  			<div class="text-right">
-	                    			<button type="button" class="btn btn-background-none color-primary">
-	                    				<u>Change Question</u>
-	                    			</button>
-	                  			</div>
-	                		</div>
-	                		<div class="question-block add-question icon-drag">
-	                  			<button type="button" class="btn  btn-check"><i class="icon icon-check"></i></button>
-	                  			<div class="row">
-	                    			<div class="col-md-9">
-	                      				<h5 class="ques">Q1.  What comes in between 14 __ 15.</h5>
-	                    			</div>
-	                    			<div class="col-md-3 text-right text-sm-left">
-	                      				<span  class="text-uppercase color-gray-light padding-left-0"><i class="icon icon-my_data margin-right-10 margin-bottom-20"></i> MY Content</span>
-	                      				<ul class="list-inline color-gray font-weight-bold">
-	                        				<li>Skills Level:</li>
-	                        				<li>Easy</li>
-	                      				</ul>
-	                    			</div>
-	                  			</div>
-	                  			<div class="row option-block">
-	                    			<div class="col-md-7 margin-sm-bottom-10">
-	                      				<span> A. 13 </span>
-	                    			</div>
-	                    			<div class="col-md-5 margin-sm-bottom-10">
-	                      <span> A. 16 </span>
-	                    </div>
-	                  </div>
-	                  <div class="row option-block margin-bottom-0 margin-sm-top-0">
-	                    <div class="col-md-7 margin-sm-bottom-10">
-	                      <span> C. 15 </span>
-	                    </div>
-	                    <div class="col-md-5 margin-sm-bottom-10">
-	                      <span> D. 14 </span>
-	                    </div>
-	                  </div>
-	                  <div class="text-right">
-	                    <button type="button" class="btn btn-background-none color-primary"><u>Change Question</u></button>
-	                  </div>
-	                </div>
 
-									<div class="add-resources-block">
-										<p><span>Resources</span><span>(optional)</span></p>
-										<button type="button" class="btn btn-add"><i class="icon icon-plus"></i> Add Resources</button>
-									</div>
-									<div class="form-group float-label margin-0">
-                    <label class="control-label text-uppercase">comments for students</label>
-                    <span class="optional-input">(optional)</span>
-                    <textarea type="email" class="form-control float-input text-primary" value="Lorem ipsum color sit dor..."></textarea>
-                  </div>
 
-									<div class="text-center margin-top-10">
-										<button type="button" class="btn btn-outline btn-default border-radius-0 margin-right-15 text-uppercase" data-toggle="modal" data-target="#modal-calender">plan for later</button>
-										<button type="button" class="btn  btn-primary border-radius-0 text-uppercase" data-toggle="modal" data-target="#modal-generateAssignmentdone">Send now</button>
-									</div>
+
+                <div class="question-block-cover" ng-if="err_message[3] " >
+                	<div class="question-block add-question" >
+                	<div style="color:red">{{err_message[3]}}</div>	
                 </div>
+                </div>		
+              <div class="question-block-cover" ng-if=" questions.length >0 ">
+
+					<div class="question-block add-question icon-drag" ng-repeat="question in questions">
+	        			<button type="button" class="btn  btn-check">
+	        				
+	        				<input type="checkbox" ng-model="frm.selected_questions[question.question_id]" ng-true-value="'{{question.level}}'" ng-false-value="''" >        
+	                  	</button>
+
+
+	                  	<div class="row">
+	                  		<div class="col-md-9">
+	                  			<h5 class="ques">
+	                  			{{$index+1 +'.'+' '+ question.questionName }}</h5>
+	                  		</div>
+	                  		<div class="col-md-3 text-right text-sm-left">
+	                  			<span  class="text-uppercase color-gray-light padding-left-0">
+	                    			<i class="icon icon-my_data margin-right-10 margin-bottom-20"></i> MY Content
+	                    		</span>
+	                    		<ul class="list-inline color-gray font-weight-bold">
+	                    			<li>Skills Level:</li>
+	                        		<li>{{question.level}}</li>
+	                      		</ul>
+	                    	</div>
+	                  	</div> 
+	                	<div ng-class="(($index+1)< 2)?'row option-block': 'row option-block margin-bottom-0 margin-sm-top-0' " ng-repeat="option in question.options">
+	                    	<div ng-class="((($index+1)%2)!= 0) ? 'col-md-7 margin-sm-bottom-10' : 'col-md-5 margin-sm-bottom-10'">
+	                    		<span>{{ numToAlpha($index) +'.  '+ option.label}}</span>
+	                    	</div>	                   	
+	                	</div>
+
+
+	                  	<!-- <div class="row option-block margin-bottom-0 margin-sm-top-0 ">
+	                    	<div class="col-md-7 margin-sm-bottom-10">
+	                    		<span> C. 15 </span>
+	                    	</div>
+	                   		<div class="col-md-5 margin-sm-bottom-10">
+	                	   		<span> D. 14 </span>
+	            	       	</div>
+	            		</div> -->	                  	
+
+
+	                  	<div class="text-right">
+	                    	<button type="button" class="btn btn-background-none color-primary" ng-click="onChangeQues($index, question.question_id)">
+	                    		<u>Change Question</u>
+	                    	</button>
+	                  	</div>
+	               	</div>	                		
+
+			
+				 <div class="add-resources-block">
+					<p><span>Resources</span><span>(optional)</span></p>
+					
+
+					<button type="button" class="btn btn-add"><i class="icon icon-plus"></i> Add Resources</button>
+
+
+					<div action="" class="dropzone" drop-zone="" id="file-all" ng-model="frm.gpimg"></div>					
+
+				</div> 				
+
+			
+
+				<div class="form-group float-label margin-0">
+                    <label class="control-label text-uppercase">comments for students</label>
+                    <span class="optional-input">(optional)</span><br><br>
+                    <textarea class="form-control float-input text-primary" ng-mode="frm.Asscomments"></textarea>
+                </div>
+
+				<div class="text-center margin-top-10">
+					<button type="button" class="btn btn-outline btn-default border-radius-0 margin-right-15 text-uppercase" data-toggle="modal" data-target="#modal-calender">plan for later</button>
+					<button type="button" class="btn  btn-primary border-radius-0 text-uppercase" ng-click="onSubmitAssignmentNow(frm)">Send now</button>
+				</div>
+				<div style="color:red">{{err_message[5]}}</div>
+
+             </div>
               </form>
             </div>
             <!-- /panel-body -->
@@ -275,7 +271,6 @@
 
 
 		<!-- modal-calender  -->
-
 		<div id="modal-calender" class="modal fade modal-calender" role="dialog">
 		  <div class="modal-dialog">
 		    <!-- Modal content-->
@@ -288,17 +283,39 @@
 						<form class="form-horizontal">
 							<div class="form-group">
 								<div class="col-xs-6 text-uppercase"><label>Select Date</label></div>
-								<div class="col-xs-6"><input type="date" class="form-control"></div>
+								<div class="col-xs-6"><input id="datetime" type="datetime-local" class="form-control" ng-model="frm.assignDate"></div>
 							</div>
 						</form>
 		      </div>
 					<div class="modal-footer text-center">
 						<button type="button" class="btn btn-background-none" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary">Save</button>
+						<button type="button" class="btn btn-primary" ng-model="frm.assignDate" ng-click="onSubmitAssignmentLater(frm)">Save</button>
 					</div>
 		    </div>
 		  </div>
 		</div>
+
+
+		<!--start- Model to sucess result-->
+		<div id="modal-sucess" class="modal fade modal-calender" role="dialog">
+		  <div class="modal-dialog">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>						
+		      </div>
+		      <div class="modal-body ">
+						<p style="color: green; font-size:20px;">
+							Assignment is created sucessfully.
+						</p>
+		      </div>
+					<div class="modal-footer text-center">
+						<button type="button" class="btn btn-primary" ng-click="onClickOk()">Ok</button>						
+					</div>
+		    </div>
+		  </div>
+		</div>
+		<!-- end model to sucess result-->
 
 	</section>
 

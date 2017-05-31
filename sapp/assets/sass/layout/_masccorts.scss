@@ -1,14 +1,14 @@
 .masscourt-cover {
   position: fixed;
   left: -27px;
-  bottom: -88px;
+  bottom: 0px;
   z-index: 1000;
   @include transition(0.5s all linear);
   @include transform(translateX(-1000px));
   .masccort-img{
-    max-width: 200px;
+    max-width: 190px;
     @media screen and (min-width: $screen-xs-max){
-      max-width: 235px;
+      max-width: 190px;
     }
   }
   .hint-block {
@@ -17,8 +17,8 @@
     width: 350px;
     min-height: 100px;
     position: absolute;
-    top: -52px;
-    right: -350px;
+    bottom:100%;
+    left: 86%;
     padding-bottom: 15px;
     &:before {
       content: '';
@@ -37,6 +37,7 @@
     .hint {
       font-size: 20px;
       color: $cola;
+      font-weight: $bold;
       margin-top: 14px;
       display: block;
     }
@@ -49,8 +50,11 @@
     @media screen and (max-width: $screen-xs-max){
     width: 310px;
     position: absolute;
-    top: -189px;
-    right: -141px;
+    top: auto;
+    left: 66%;
+    }
+    @media screen and (max-width: $screen-mobile-xs){
+    left: 15%;
     }
   }
 }

@@ -7,7 +7,7 @@
     @include position(absolute, 16px null null 0px);
     overflow: hidden;
     @media screen and (min-width: $screen-sm){
-      @include position(absolute, 16px null null 16px);
+      @include position(absolute, 16px null null 9px);
     }
     @include padding(4px);
     background: {
@@ -56,6 +56,10 @@
       @include border-radius(5px);
       color: $maroon !important;
       position: relative;
+      font-weight: $bold;
+      .icon {
+        vertical-align: sub;
+      }
       &:hover {
         background: rgba($black,0.07) !important;
       }

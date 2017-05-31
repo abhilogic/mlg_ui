@@ -46,7 +46,7 @@ $animation_duration: 500s;
 .subject_view_page {
   padding-bottom: 0px;
   @include background-img("subject_view_bg.jpg");
-  @media screen and (max-width: $screen-sm){
+  @media screen and (max-width: $screen-xs-max){
     @include background-img("subskill_mobile_bg.jpg");
     background-size: auto 100%;
   }
@@ -76,7 +76,7 @@ $animation_duration: 500s;
   .subject_frame_center {
     height: 100vh;
     width: 100vw;
-    @media screen and (max-width: $screen-sm-max){
+    @media screen and (max-width: $screen-xs-max){
       display: none !important;
     }
     .wooden_frame {
@@ -659,7 +659,7 @@ $animation_duration: 500s;
 }
 .subject_view_frame_mobile {
   display: none;
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     display: block;
     @include padding(null 20px);
   }

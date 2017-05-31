@@ -283,6 +283,7 @@
 }
 
 
+// redeem_coupon
 .redeem_coupon {
   background: none;
   border: 0px;
@@ -290,6 +291,7 @@
   @media screen and (max-width: $screen-mobile-sm){
     margin-top: 20px;
   }
+  // panel-heading
   .panel-heading {
     background: none;
     border-bottom: 0px;
@@ -305,6 +307,16 @@
           font-size: 14px;
           float: right;
         }
+      }
+    }
+  }
+  // panel-body
+  .panel-body {
+    // list-coupon
+    .list-coupon {
+      li {
+        vertical-align: middle;
+        text-align: center;
       }
     }
   }
@@ -374,7 +386,7 @@
       opacity: 0.4;
     }
     &:before {
-      content:'\0047';
+      content:'\0049';
       @include position(absolute, 34% null null 42%);
       z-index: 1;
       color: $black;
@@ -400,7 +412,6 @@
     background-image:url("../img/redeemed_coupon_bg.png");
     height: 211px;
     width: 176px;
-    margin-top: -15px;
     @include padding(38px 20px null 20px);
     .btn {
       margin-top: 34px;
@@ -582,7 +593,7 @@
 
   }
 
-// modal-content
+  // modal-content
   .modal-content {
     position: relative;
     &:before {
@@ -629,7 +640,7 @@
     }
     .close {
       opacity: 1;
-      @include filter(inverte(100%));
+      @include filter(invert(100%));
       @media screen and (min-width: $screen-sm-max){
         @include position(absolute, -83px -92px null null);
         @include filter(none);
@@ -692,7 +703,7 @@
           }
           // name
           &.name {
-            min-width: 185px;
+            min-width: 192px;
             span {
               color: #571d12;
               font-family: $font-secondary;

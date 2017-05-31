@@ -70,8 +70,7 @@
           }
           &:hover {
             border-bottom-color: transparent;
-            background: #dbdbdb;
-            color: $black;
+            color: $brand-primary;
           }
           span {
             display: none;
@@ -227,6 +226,11 @@
               max-height: 100%;
             }
           }
+          img {
+            @media screen and (min-width: $screen-sm){
+              margin-top: 30px;
+            }
+          }
         }
       }
     }
@@ -254,6 +258,16 @@
           background: #6b503f;
         }
     }
+    // avatar-img-cover
+    .btn-primary{
+      background: #3498db;
+      border-color: #3498db;
+      font-family: 'Open Sans', sans-serif;
+      &:hover {
+        @include box-shadow(0px 0px 32px rgba(52, 152, 219, 0.48));
+      }
+    }
+    // btn-primary
 
   }
 }

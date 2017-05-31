@@ -12,6 +12,17 @@
     height: 100%;
     width: 100%;
     z-index: 4;
+    @media screen and (max-width: $screen-xs-max){
+      position: relative;
+      margin-top: 50px;
+      a {
+        display: block;
+        text-align: left;
+        &:nth-child(odd){
+          text-align: right;
+        }
+      }
+    }
   }
   @media screen and (max-width: $screen-tb-port)  {
     background-size: 100% 100%;
@@ -25,6 +36,11 @@
   }
 .castle {
   position: absolute;
+  @media screen and (max-width: $screen-xs-max){
+    position: relative;
+    display: inline-block;
+    text-align: center;
+  }
 .castle__icon {
   display: inline-block;
   position: absolute;
@@ -37,7 +53,7 @@
   left: 45%;
   position: absolute;
   @include respond-to(mobileMedium){
-    bottom: -40px;
+    @include position(relative,auto auto auto auto);
   }
 }
 .challenge-notifier {
@@ -57,9 +73,9 @@
   width: 100%;
   white-space: nowrap;
   @include respond-to(mobileMedium){
-    top: 90%;
-    left: 0px;
-    line-height: 15px;
+    @include position(relative,auto auto auto auto);
+    display: inline-block;
+    bottom: auto !important;
     white-space: normal;
   }
 }
@@ -124,11 +140,7 @@
   top: 37%;
   width: 99px;
   @media screen and (max-width: $screen-tb-land)  {
-    left: 3.5%;
-    top: 37%;
-    }
-  @media screen and (max-width: $screen-tb-port)  {
-    left: 4.5%;
+    left: 6.5%;
     top: 37%;
     }
 
@@ -257,11 +269,7 @@
     width: 99px;
     @media screen and (max-width: $screen-tb-land)  {
       right: 6%;
-      top: 11%;
-      }
-    @media screen and (max-width: $screen-tb-port)  {
-      right: 8%;
-      top: 9%;
+      top: 16%;
       }
 .castle__text {
   left: 0px;
@@ -373,7 +381,7 @@
     max-width: 100%;
     padding-left: 0px;
     padding-right: 0px;
-    @media screen and (max-width: $screen-mobile-md){
+    @media screen and (max-width: $screen-xs-max){
       padding-left: 15px;
       padding-right: 15px;
     }
@@ -384,8 +392,9 @@
     top: 0px;
     left: 0px;
     background: none;
-    @media screen and (max-width: $screen-mobile-md){
+    @media screen and (max-width: $screen-xs-max){
       position: relative;
+      width: 100%;
     }
     .wooden_frame_content_cover {
       .castle_cover {

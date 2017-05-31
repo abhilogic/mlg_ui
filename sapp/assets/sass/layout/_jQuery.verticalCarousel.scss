@@ -39,7 +39,14 @@
   -webkit-transform: scale(0.7, 0.7);
   transform: scale(0.7, 0.7);
 }
-
+@media screen and (max-width: $screen-xs-max){
+  .vc_goDown {
+    margin-bottom: 30px;
+  }
+  .vc_goUp {
+    margin-top: 30px;
+  }
+}
 /* line 52, ../sass/style.scss */
 .verticalCarouselGroup.vc_list > li {
   margin-top: 0px;
@@ -56,7 +63,7 @@
     margin: auto;
     cursor: pointer;
     @include respond-to(mobileMedium){
-      width: 298px;
+      width: 100%;
     }
   }
 
@@ -88,9 +95,9 @@
   -moz-transition: height 0.2s ease-in;
   -webkit-transition: height 0.2s ease-in;
   transition: height 0.2s ease-in;
-  max-height: 427px;
+  max-height: 394px;
   @include respond-to(mobileMedium){
-    max-height: 618px;
+    max-height: 370px;
   }
 }
 

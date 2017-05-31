@@ -42,7 +42,7 @@ $(document).ready(function(){
   var mouthColor;
   var thyroidColor;
   // color tone combination block
-
+  var speColor;
   var hireStyle;
   var clothStyle;
   var capStyle;
@@ -80,6 +80,7 @@ $(document).ready(function(){
   // CLOTHS
   $("#cloth-style .btn").click(function(){
     clothStyle = $(this).children("input").attr("data-cloth");
+    speColor = $(this).children("input").attr("data-spec-color");
     $("#cloths").html(clothStyle);
     $("#avtar .body-part").css("fill", bodyTone);
     $("#shoes-style").html('');
@@ -95,8 +96,9 @@ $(document).ready(function(){
 
   // ACCESSORIES SPECS
   $("#specs .btn").click(function(){
-    specStyle = $(this).children("input").attr("data-accessories");
+     specStyle = $(this).children("input").attr("data-accessories");
       $("#specStyle").html(specStyle);
+      $("#specStyle path").css("fill",speColor);
   });
 
   // ACCESSOREIS magic-stick

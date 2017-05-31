@@ -281,6 +281,7 @@ angular.module('mlg_student')
           html +=  count+'. '+val+'\n';
           count++;
         });
+        if(html!='')
         alert(html);
         $localStorage.messageCount = '1';
 	    });
