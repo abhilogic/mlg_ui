@@ -134,8 +134,7 @@
 
 													<button type="button" class="btn btn-default width-50">20</button>
 
-												</div>
-												<div style="color:red">{{err_message[3]}}</div>
+												</div>											
                       						</div>
                     					</div>
                   					</div>
@@ -156,8 +155,11 @@
 
 
 
-
-                				
+                <div class="question-block-cover" ng-if="err_message[3] " >
+                	<div class="question-block add-question" >
+                	<div style="color:red">{{err_message[3]}}</div>	
+                </div>
+                </div>		
               <div class="question-block-cover" ng-if=" questions.length >0 ">
 
 					<div class="question-block add-question icon-drag" ng-repeat="question in questions">
@@ -213,7 +215,7 @@
 
 					<button type="button" class="btn btn-add"><i class="icon icon-plus"></i> Add Resources</button>
 
-jjjjjjj{{img}}
+
 					<div action="" class="dropzone" drop-zone="" id="file-all" ng-model="frm.gpimg"></div>					
 
 				</div> 				
@@ -292,6 +294,28 @@ jjjjjjj{{img}}
 		    </div>
 		  </div>
 		</div>
+
+
+		<!--start- Model to sucess result-->
+		<div id="modal-sucess" class="modal fade modal-calender" role="dialog">
+		  <div class="modal-dialog">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>						
+		      </div>
+		      <div class="modal-body ">
+						<p style="color: green; font-size:20px;">
+							Assignment is created sucessfully.
+						</p>
+		      </div>
+					<div class="modal-footer text-center">
+						<button type="button" class="btn btn-primary" ng-click="onClickOk()">Ok</button>						
+					</div>
+		    </div>
+		  </div>
+		</div>
+		<!-- end model to sucess result-->
 
 	</section>
 

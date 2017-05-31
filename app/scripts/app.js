@@ -456,7 +456,7 @@ $scope.userInfo=userInfo;
 return {
 	restrict: 'E',
 	templateUrl: 'include/sidebar.html',
-	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+	controller: ['$scope','$cookieStore','loginHttpService','$routeParams',function ($scope,$cookieStore,loginHttpService,$routeParams) {                         	
 		var cookieString=$cookieStore.get("userObj");
 		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
@@ -469,10 +469,33 @@ return {
 	return obj;
 }
 $scope.userInfo=userInfo;
-	}]
+  $scope.childname={};
+  $scope.frm={};
+  // Get Teacher selected class and subjects
+  var get_uid= cookieString=$cookieStore.get("uid");
+  // To call dynamic step slider
+  // and Call API to get child details for deshboard naming
+  loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
+    var childcount=chidrenName.response.length;
+    if (childcount > 0) {
+      $scope.childname=chidrenName.response;
+      $scope.frm.childnames = chidrenName.response;
+
+      for(var i in $scope.frm.childnames) {
+        if ($scope.frm.childnames[i].user_id==$routeParams.child_id) {
+          $scope.frm.selectedchild=$scope.frm.childnames[i];
+          return false;
+        }
+      }
+    //window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
+    } else {
+      $scope.childname=0;
+      $scope.frm.childnames = [];
+    }
+  });
+}]
 };
 
-	
 })
 
 

@@ -243,18 +243,17 @@ angular.module('mlg').filter('moment', function() {
 			url  : urlParams.baseURL+urlParams.addChildRecord
 		});
 	}
-	
-	
+
 	//offers
-	loginHttpResponse.offerRecords=function(){
-		return $http({
-			method:'GET',	
-			//data : childdata,		
-			url  : urlParams.baseURL+urlParams.offerRecords
-		});
+	loginHttpResponse.offerRecords=function(data){
+      return $http({
+          method:'POST',
+          data : data,
+          url  : urlParams.baseURL+urlParams.offerRecords
+      });
 	}
 
-  
+
 	loginHttpResponse.saveCardToPaypal=function(data){
 		return $http({
 			method:'POST',
@@ -1432,7 +1431,7 @@ if (typeof $routeParams.slug != 'undefined') {
 .controller('parentOffers',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','commonActions',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,commonActions) {
   var get_uid = commonActions.getcookies(get_uid);
   $scope.offers = {};
-  loginHttpService.getCouponByUserType({user_type : 'PARENT', applied_for: 'OFFER'})
+  loginHttpService.offerRecords({user_type : 'PARENT', user_id: get_uid})
     .success(
     function(response) {
       if (response.status) {
@@ -1441,6 +1440,41 @@ if (typeof $routeParams.slug != 'undefined') {
     }
   );
 
+  $scope.requestOffer = function (offer) {
+    if (offer.coupon_code != '' && offer.external_coupon == 0) {
+      var data = {user_id: get_uid, coupon_id: offer.id, status: 'acquired', updated_by_user_id: get_uid};
+      loginHttpService.setAvailableCoupon(data).success(function (response) {
+        if (response.status) {
+          var html = '<center><span style ="border: 2px solid #1688eb; border-radius: 5px;" class="btn">'+ offer.coupon_code +'</span></center>';
+          $('#showOffer' + offer.id).before(html);
+          $('#showOffer' + offer.id).remove();
+        } else {
+          if (response.message != '') {
+            alert(response.message);
+          } else {
+            alert('Some Error Occured');
+          }
+        }
+      }).error(function(err) {
+        alert('Some Error Occured');
+      });
+    } else {
+      var data = {user_id: get_uid, coupon_id: offer.id, status: 'Mlg approval pending', updated_by_user_id: get_uid};
+      loginHttpService.setAvailableCoupon(data).success(function (response) {
+        if (response.status) {
+          var html = '<center><span style ="border: 2px solid #1688eb; border-radius: 5px;" class="btn">'+ 'Mlg approval pending' + '</span></center>';    
+          $('#showOffer' + offer.id).before(html);
+          $('#showOffer' + offer.id).remove();
+        } else {
+          if (response.message != '') {
+            alert(response.message);
+          } else {
+            alert('Some Error Occured');
+          }
+        }
+      })
+    }
+  }
 }])
 .controller('teacherSingnupCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','subscription_days',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,subscription_days) {
      $scope.msg = '';
@@ -1626,7 +1660,9 @@ if (typeof $routeParams.slug != 'undefined') {
       var user = response.data.user_all_details[0];
       $scope.full_name = user.first_name + ' ' + user.last_name;
       $scope.email = user.email;
-      $scope.profile_image = response.data.image_directory + '/' + user.user_detail.profile_pic;
+      if (user.user_detail.profile_pic != '') {
+        $scope.profile_image = response.data.image_directory + '/' + user.user_detail.profile_pic;
+      }
       $scope.frm.address_line_1 = user.user_detail.address_line_1;
       $scope.frm.address_line_2 = user.user_detail.address_line_2;
       $scope.frm.district = user.user_detail.district;
