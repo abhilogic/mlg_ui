@@ -1,9 +1,22 @@
 .panel-gender-selection {
+  .panel-heading {
+    @media screen and (min-width: $screen-sm){
+      @include padding(null null 0px null);
+    }
+  }
+  // panel-heading
+  .panel-body {
+    @media screen and (min-width: $screen-sm) {
+      @include padding(0px null null null);
+    }
+  }
+  // panel-body
   .content-cover {
     text-align: center;
+    @include padding(20px null null null);
     @media screen and (min-width: $screen-xs-max){
       max-width: 400px;
-      @include padding(90px null null null);
+      @include padding(60px null null null);
       @include margin(auto);
     }
     .avtar-img {
@@ -11,6 +24,7 @@
       @include margin(0px auto 40px auto);
     }
   }
+  // content-cover
   .btn-primary{
     background: #3498db;
     border-color: #3498db;
@@ -19,7 +33,7 @@
       @include box-shadow(0px 0px 32px rgba(52, 152, 219, 0.48));
     }
   }
-
+  //btn-primary
   .btn-pink {
     background: #e73c7c;
     color: $white;
@@ -30,8 +44,12 @@
       @include box-shadow(0px 0px 32px rgba(231, 60, 124, 0.48));
     }
   }
+  // btn-pink
   .panel-footer {
     @include padding( null null 20px null);
+    @media screen and (min-width: $screen-sm){
+      @include padding(50px 50px null 50px);
+    }
     .btn-skip {
       background: none;
       border:0px;
@@ -40,4 +58,5 @@
       }
     }
   }
+  // panel-footer
 }

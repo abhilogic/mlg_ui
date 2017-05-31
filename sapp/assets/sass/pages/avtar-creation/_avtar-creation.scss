@@ -19,8 +19,11 @@
         @include padding(15px);
 
       }
+      // content-wrapper
     }
+    // pag-content
   }
+  // page-container
 }
 
 // panel-avatar
@@ -35,7 +38,7 @@
       @include padding(30px 30px 15px 30px);
     }
   }
-
+  // panel-heading
   .content-title, .content-tagline {
     text-align: center;
     font-weight: $light;
@@ -43,21 +46,23 @@
   }
   .content-title {
     font-size: 36px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     @media screen and (max-width: $screen-xs){
       font-size: 24px;
       margin-bottom: 10px;
     }
   }
+  // content-title
   .content-tagline {
     font-size: 14px;
+    font-weight: $bold;
+    color: rgba($gray,0.5);
   }
-
-  // panel-footer
+  // content-tagline
   .panel-footer {
     font-family: 'Open Sans', sans-serif;
     background: transparent;
     @include border-width(0px);
-
   }
+  // panel-footer
 }

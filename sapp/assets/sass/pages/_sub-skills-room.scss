@@ -86,6 +86,7 @@
   }
   @media screen and (max-width: $screen-sm) {
     background: none;
+    width: auto;
     @include margin(155px null null null);
   }
   @media screen and (max-width: $screen-xs-max) {

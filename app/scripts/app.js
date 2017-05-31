@@ -7,6 +7,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   login: '/users/login',
   logout: '/users/logout',
   siteRoot : '/mlg_ui/app/',
+  studentsiteRoot : '/mlg_ui/sapp/',
   registerUser:'/users/registerUser',
   parentPreference:'/users/setUserPreference',
   baseURL : 'http://localhost/mlg',

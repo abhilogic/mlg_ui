@@ -33,6 +33,11 @@ var windowHeight = $(window).height();
 var windowWidth = $(window).width();
 
 // universal veriable
+
+// navbar-toggle js
+$(".navbar-default .navbar-toggle").click(function(){
+  $(".navbar-default .navbar-header").toggleClass("fixed");
+})
 // Main App JS
 
 // masscourt-animation

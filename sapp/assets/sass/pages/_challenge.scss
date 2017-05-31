@@ -11,12 +11,23 @@
     width: 100%;
     z-index: 1500;
   }
-
+  .icon-exit-door {
+    @include cssSprite($icon-exit-door);
+    @include position(absolute, 37px 100px null null);
+    display: none;
+    @media screen and (min-width: $screen-sm){
+      display: block;
+    }
+  }
   @include respond-to(mobileMedium){
     margin: 0px;
     height: auto;
+    @include background-img("subskill_mobile_bg.jpg");
     &:before {
-      @include background-img("subskill_mobile_bg.jpg");
+      background: none;
+    }
+    .navbar {
+      display: none;
     }
   }
   .wooden_frame {
@@ -28,20 +39,30 @@
     z-index: 1550;
     bottom: 10%;
     right: 4%;
-    @include respond-to(tabletLand){
-      bottom: 0%;
-    }
-    @include respond-to(mobileMedium){
-      top: -15px;
-      right: 12px;
-      left: auto;
-    }
     .castle__text {
       padding-right: 0px;
       position: relative;
       text-align: right;
       display: block;
-      @include margin(null null 20px null);
+      @include margin(null null -30px null);
+    }
+    @include respond-to(tabletLand){
+      bottom: 4%;
+      right: auto;
+      left: 4%;
+      .castle__text  {
+        @include margin(null null 15px null);
+      }
+    }
+
+    @include respond-to(mobileMedium){
+      top: auto;
+      bottom: 0px;
+      right: auto;
+      left: 15px;
+      .castle__text {
+        @include margin(null null -30px null);
+      }
     }
   }
   .challenge_modal {
@@ -53,7 +74,7 @@
       padding-right: 15px !important;
     }
     @include respond-to(mobileMedium){
-      padding-top: 104px;
+      padding-top: 26px;
     }
     .modal-dialog {
       width: auto;
@@ -75,13 +96,31 @@
       padding: 0px;
       @include box-shadow(none);
       border: 0px;
+      height: auto;
     }
   }
   .challenge_content_frame {
-    @include respond-to(mobileMedium){
+
+    .notification {
+      @include position(absolute, -18px -18px null null);
+      width: 30px;
+      height: 30px;
+      background: rgba(86,29,18,0.5);
+      @include border-radius(100%);
+      color: $white;
+      text-align: center;
+      @include padding(0px null null null);
+      font-style: normal;
+      font-family: 'Open Sans', sans-serif;
+      display: none;
+      font-size: 14px;
+      padding-top: 4px;
+    }
+    @media screen and (max-width: $screen-xs-max){
       .panel-default {
         background: none;
         border: 0px;
+        margin-bottom: 15px;
         .panel-heading {
           @include border-radius(3px);
           padding: 0px;
@@ -91,13 +130,23 @@
             background-color: rgba($sweetCorn,0.5);
             color: rgba($mondo,0.8);
             display: block;
-            font-size: 16px;
+            font-size: 30px;
             font-weight: $bold;
             font-family: $font-open-sans;
-            padding: 10px 20px;
+            padding: 20px 20px;
             text-align: center;
             text-transform: uppercase;
             text-decoration: none;
+            position: relative;
+            .notification {
+              @include position(absolute, -10px -10px null null);
+              @include padding(6px null null null);
+              display: block;
+            }
+            &:not(.collapsed){
+              background: rgba($cola,0.7);
+              color: $white;
+            }
           }
         }
         .panel-body {
@@ -107,13 +156,25 @@
         }
       }
     }
+
+    @media screen and (max-width: $screen-xs){
+      .panel-default {
+        .panel-heading {
+          padding: 0px;
+          a {
+              @include padding(10px null);
+              font-size: 16px;
+            }
+          }
+        }
+    }
     .nav-tabs {
       border-bottom: 0px;
       display: block;
       margin-bottom: -20px;
       text-align: center;
       li {
-        @include box-shadow( 0 -4 10px rgba($black,.3));
+        @include box-shadow( 0 -4px 10px rgba($black,.3));
         @include background-cover("challenge_nav_bg.png");
         @include border-radius(8px 8px 0 0);
         @include box-sizing(border-box);
@@ -149,6 +210,9 @@
             position: relative;
             @include text-shadow(0 0 10px rgba($colabrown,1));
             z-index: 2;
+          }
+          .notification {
+            display: block !important;
           }
         }
         a {
