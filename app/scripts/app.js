@@ -485,6 +485,8 @@ $scope.userInfo=userInfo;
         if ($scope.frm.childnames[i].user_id==$routeParams.child_id) {
           $scope.frm.selectedchild=$scope.frm.childnames[i];
           return false;
+        } else {
+          $scope.frm.selectedchild = {children_name : 'My child'};
         }
       }
     //window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
