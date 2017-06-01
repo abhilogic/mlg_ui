@@ -46,16 +46,12 @@
 									</li>
 
 									<li class="toolbar-item">
-											<select class="selectpicker" title="Class" data-width="auto" data-size="auto">
-												<option>Class 6th</option>
-												<option>Class 7th</option>
-												<option>Class 8th</option>
-												<option>Class 9th</option>
-												<option>Class 10th</option>
-												<option>Class 11th</option>
-											</select>
+                    <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="gradeModel" ng-change="getGrade(gradeModel)" title="Class" 
+                            ng-options="grade.id as grade.name for grade in grades track by grade.id">
+                      <option value="">- Select Class -</option>
+                    </select>
 									</li>
-
 									<li class="toolbar-item">
 											<select class="selectpicker" title="Standard" data-width="auto" data-size="auto">
 												<option>standard A</option>
@@ -65,23 +61,22 @@
 									</li>
 
 									<li class="toolbar-item">
-											<select class="selectpicker" title="Subject" data-width="auto" data-size="auto">
-												<option>Mathematics</option>
-												<option>English</option>
-												<option>Science</option>
-												<option>Hindi</option>
-											</select>
+                    <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="courseModel" ng-change="getCourse(courseModel)" title="Class" 
+                            ng-options="course.course_id as course.course_name for course in courses track by course.course_id">
+                      <option value="">- Select Subject -</option>
+                    </select>
 									</li>
-
 									<li class="toolbar-item">
-										<select class="selectpicker" title="Skills" data-width="auto" data-size="auto">
-										  <option>Ketchup</option>
-										  <option>Relish</option>
-										</select>
+										<select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="skillModel" ng-change="getSkill(skillModel)" title="Class" 
+                            ng-options="skil.id as skil.label for skil in skill track by skil.id">
+                      <option value="">- Select Skills -</option>
+                    </select>
 									</li>
 
 									<li class="toolbar-item pull-right">
-										<a role="button" class="btn btn-primary" href="teacher/question"><i class="icon icon-plus-outline position-left"></i>Add Question</a>
+										<a role="button" class="btn btn-primary" href="teacher/add-question"><i class="icon icon-plus-outline position-left"></i>Add Question</a>
 									</li>
 							</div>
 							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-questions">
@@ -97,94 +92,16 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr class="approved">
-										<td class="sr-no">1</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Approved</td>
-										<td class="earned-points">9pts</td>
+                  <tr class="approved" ng-repeat="question in questionList track by $index">
+										<td class="sr-no">{{$index+1}}</td>
+										<td class="title"ng-bind-html="question.questionName"></td>
+										<td class="level">{{question.level}}</td>
+										<td class="type">{{question.type}}</td>
+										<td class="status">{{question.status}}</td>
+										<td class="earned-points">{{question.points}}pts</td>
 										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="pending">
-										<td class="sr-no">2</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Pending</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="disapproved">
-										<td class="sr-no">3</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Disapproved</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="submitted">
-										<td class="sr-no">4</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Submitted</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="under-review">
-										<td class="sr-no">5</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Under Review</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="draft">
-										<td class="sr-no">6</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Draft</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="under-review">
-										<td class="sr-no">7</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Under Review</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+                      <button class="btn btn-link"><a href="teacher/add-question?{{question.id}}"><i class="fa fa-pencil"></a></i></button>
+                      <button class="btn btn-link"><a ng-click="deleteQuestions(question.id,question.uniqueId)"><i class="fa fa-trash"></i></a></button>
 											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
 										</td>
 									</tr>
@@ -192,21 +109,15 @@
 								<tfoot>
 									<tr>
 										<td class="table-pagination" colspan="7">
-											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<span class="pull-left">Showing {{start}}-{{last}} out of {{total}} </span>
 											<ul class="pagination pagination-sm">
 												<li class="disabled">
 													<a>
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li class="active">
-													<a>1</a>
-												</li>
-												<li>
-													<a>2</a>
-												</li>
-												<li>
-													<a>3</a>
+                        <li ng-repeat="n in range(1,lastPage)">
+													<a href="#{{n}}">{{n}}</a>
 												</li>
 												<li>
 													<a aria-hidden="true">Next</a>

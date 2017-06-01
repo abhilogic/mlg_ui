@@ -78,8 +78,13 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   generateAssignQuestions : '/teachers/generateAssignQuestions',
   getQuestionsListForAssg : '/teachers/getQuestionsListForAssg',
   setCustomAssignmentByTeacher : '/teachers/setCustomAssignmentByTeacher',
-  
-
+  uploadEvent : '/teachers/setEvent',
+  getEvent : '/teachers/getEvent',
+  getTodayEvents : '/teachers/getTodayEvents',
+  getQuestions : '/teachers/getUserQuestions',
+  deleteQuestions : '/teachers/deleteTeacherQuestions',
+  getFilterdQuestion : '/teachers/filteredTeacherQuestions',
+  getEditQuestion : '/teachers/getEditQuestionDetails',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -121,6 +126,13 @@ student  : 60,
 teacher  : 30,
 guest_teacher  : 30,
 principal  : 30,
+}).value('mlg_points', {
+	question_type_text:1,
+	question_type_image : 2,
+	content_type_text : 3,
+	content_type_image : 4,
+	content_type_doc : 5,
+	content_type_video : 6,
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {

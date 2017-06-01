@@ -29,5 +29,18 @@
         color: $black;
       }
     }
+    // li
+    
+    // tooltip
+    .tooltip {
+      .tooltip-inner {
+        max-width: 217px;
+        @include padding(15px 19px 22px 19px);
+        text-align: left;
+        font-size: 12px;
+      }
+    }
+
+
   }
 }

@@ -227,3 +227,23 @@
     font-size: 16px;
   }
 }
+
+
+// modal-section
+.modal-parentSubscriptionUpgrade {
+  .modal-content {
+    @include border-radius(0px);
+    // modal-header
+    .modal-header {
+      @include border-width(0px);
+    }
+    // modal-body
+    .modal-body {
+      @include padding(0px);
+      .panel-onboarding {
+        width: 100%;
+        @include box-shadow(none);
+      }
+  }
+ }
+}

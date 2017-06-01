@@ -102,6 +102,7 @@
           display: block;
           text-align: center;
           font-weight: $bold;
+          margin-top: 10px;
         }
       }
       @media(min-width: $screen-sm){
@@ -180,6 +181,11 @@
     .heading-elements {
       small {
         font-weight: $semibold;
+        a {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
     .panel-body {
@@ -207,6 +213,11 @@
          }
         } // content-header
 
+        .form-group {
+          .form-control {
+            @include padding(null 0px null 0px);
+          }
+        }
       }
       @media screen and (max-width: $screen-xs-max){
         @include padding(null null 60px null);
@@ -236,11 +247,6 @@
         .content-header {
           @media screen and (min-width: $screen-sm){
             @include margin(null null 20px null);
-          }
-        }
-        .form-group {
-          .form-control {
-            @include padding(null 0px null 0px);
           }
         }
       }
@@ -411,7 +417,15 @@
         @include border-width(0px);
       }
     }
-    // panel-body {
+    .panel-body {
+      // form-login
+      .form-login {
+        .hd {
+          font-size: 20px;
+          color: rgba($gray-light,0.8);
+          text-align: center;
+        }
+      }
     .category-item {
      .icon-float  {
       @include padding(14px);
@@ -419,15 +433,17 @@
      .tab-line {
        @include margin(30px auto null auto);
        font-size: 16px;
+       color: rgba($gray-light,0.8);
        @media screen and (min-width: $screen-sm-max){
          width: 48%;
        }
        @media screen and (min-width: $screen-sm){
-         width: 55%;
+         width: 49%;
        }
      }
    }
-  }
+ }
+}
 
   // all parent-panel header styling
   &.panel-child-account-setup, &.panel-preferences , &.panel-teacher-term, &.panel-payment {
@@ -455,7 +471,7 @@
         @include margin(-16px null null null);
         position: relative;
         z-index: 10;
-        color: $gray-lighter;
+        color: rgba($gray-light,0.8);
         cursor: pointer;
         text-decoration: none;
         &:hover {
@@ -468,6 +484,14 @@
       .package-box, .package-group .btn, .subject-group .btn {
         @include margin(null null null 10px);
         min-width: 90px;
+      }
+      .child-account-setup {
+        .subject{
+          span {
+            display: inline-block;
+            vertical-align: -webkit-baseline-middle;
+          }
+        }
       }
 
       // col-right
@@ -496,11 +520,53 @@
 
   // panel-preferences
   &.panel-preferences {
-
+    @media screen and (max-width: $screen-sm){
+      text-align: center;
+    }
+    .panel-body {
+      padding-bottom: 50px;
+      @media screen and (min-width: $screen-sm){
+        padding-bottom: 70px;
+      }
+      .form-login{
+        .hd {
+          font-size: 20px;
+          color: rgba($gray-light,0.8);
+          text-align: center;
+        }
+        .phone-number {
+          margin-left: 59px;
+          .control-label {
+            left: 0px;
+          }
+          .fa-question-circle{
+            @include position(absolute, null 0px 10px null);
+            z-index: 100;
+          }
+          .allow-dropdown{
+            width: 100%;
+          }
+        }
+        .preference-tag-line {
+          color: $gray-light;
+          font-weight: normal;
+          font-size: 14px;
+          text-align: center;
+          @include margin(20px null 30px);
+          @media screen and (min-width: $screen-sm){
+            @include margin(40px null 52px);
+          }
+        }
+      }
+    }
   }
 
   &.panel-teacher-term {
     .panel-body {
+      padding-bottom: 50px;
+      @media screen and (min-width: $screen-sm){
+        padding-bottom: 70px;
+      }
       .tab-navs {
         @media screen and (min-width: $screen-lg){
           @include padding(null 30px null null);

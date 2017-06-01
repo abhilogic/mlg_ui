@@ -2492,6 +2492,10 @@ p {
   vertical-align: middle;
 }
 
+.fa-question-circle {
+  cursor: pointer;
+}
+
 /* --- TYPOGRAPHY --- */
 h1, .h1,
 h2, .h2,
@@ -11931,6 +11935,78 @@ h6 .display-block, .h6 .display-block {
 .panel.panel-empty .btn .icon {
   margin-right: 10px;
 }
+.panel-accordion .panel {
+  border-width: 0;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+.panel-accordion .panel .panel-heading {
+  padding: 0;
+  background: none;
+}
+.panel-accordion .panel .panel-heading:before {
+  display: none;
+}
+.panel-accordion .panel .panel-heading .panel-title {
+  margin-top: 0;
+  float: none;
+}
+.panel-accordion .panel .panel-heading .panel-title a {
+  padding: 15px 20px 15px 0;
+  display: block;
+  text-decoration: none;
+  font-size: 18px;
+  text-transform: none;
+  color: rgba(51, 51, 51, 0.6);
+  font-weight: 700;
+}
+@media screen and (max-width: 767px) {
+  .panel-accordion .panel .panel-heading .panel-title a {
+    padding-right: 15px;
+  }
+}
+.panel-accordion .panel .panel-heading .panel-title a.collapsed {
+  font-weight: normal;
+  color: rgba(51, 51, 51, 0.5);
+}
+.panel-accordion .panel .panel-heading .panel-title a.collapsed:before {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  font-weight: normal;
+  color: rgba(142, 142, 142, 0.7);
+}
+.panel-accordion .panel .panel-heading .panel-title a:hover {
+  color: rgba(51, 51, 51, 0.6);
+}
+.panel-accordion .panel .panel-heading .panel-title a:before {
+  font-family: 'Glyphter';
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  color: #333333;
+  font-weight: 700;
+  font-size: 12px;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+@media screen and (max-width: 767px) {
+  .panel-accordion .panel .panel-heading .panel-title a:before {
+    right: 0px;
+  }
+}
+.panel-accordion .panel .panel-body {
+  padding-top: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 16px;
+  color: rgba(142, 142, 142, 0.7);
+  font-weight: normal;
+}
 
 .heading-elements {
   display: block;
@@ -12923,6 +12999,12 @@ h6 .display-block, .h6 .display-block {
 .scope-sequence-listing ul li a {
   color: black;
 }
+.scope-sequence-listing ul .tooltip .tooltip-inner {
+  max-width: 217px;
+  padding: 15px 19px 22px;
+  text-align: left;
+  font-size: 12px;
+}
 
 .award-achived {
   position: relative;
@@ -13349,6 +13431,91 @@ h6 .display-block, .h6 .display-block {
   }
 }
 
+.clndr {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.clndr .current-year {
+  font-size: 24px;
+  display: block;
+  text-align: center;
+  text-decoration: underline;
+  color: #9f9f9f;
+  margin-bottom: 20px;
+}
+.clndr .clndr-controls {
+  position: relative;
+}
+.clndr .clndr-controls .month {
+  padding: 12px 0;
+  text-align: center;
+  font-size: 24px;
+  text-transform: uppercase;
+  color: #3f3f3f;
+  font-weight: 600;
+}
+.clndr .clndr-controls .clndr-previous-button, .clndr .clndr-controls .clndr-next-button {
+  cursor: pointer;
+  top: 0px;
+  left: 0px;
+  padding: 12px;
+  position: absolute;
+}
+.clndr .clndr-controls .clndr-previous-button .icon, .clndr .clndr-controls .clndr-next-button .icon {
+  color: #9f9f9f;
+}
+.clndr .clndr-controls .clndr-next-button {
+  left: auto;
+  right: 0px;
+}
+.clndr .clndr-grid .days-of-the-week {
+  width: 100%;
+}
+.clndr .clndr-grid .days-of-the-week .header-day {
+  float: left;
+  width: 14.28571%;
+  padding: 12px 0;
+  text-align: center;
+  color: #3f3f3f;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+.clndr .days .day, .clndr .days .empty {
+  float: left;
+  width: 14.28571%;
+  padding: 15px 0;
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+.clndr .days .day.today, .clndr .days .empty.today {
+  background-color: #cccccc;
+}
+.clndr .days .day .event-indicator, .clndr .days .empty .event-indicator {
+  background-color: #3bb7e8;
+  border-radius: 100%;
+  color: white;
+  cursor: pointer;
+  font-size: 9px;
+  height: 15px;
+  line-height: 16px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 15px;
+}
+.clndr .days .day.adjacent-month, .clndr .days .day.inactive, .clndr .days .empty.adjacent-month, .clndr .days .empty.inactive {
+  opacity: 0.3;
+}
+
 /* --- FORMS --- */
 .form-control {
   color: black;
@@ -13391,14 +13558,18 @@ h6 .display-block, .h6 .display-block {
 }
 .float-label .control-label {
   pointer-events: none;
-  -webkit-transition: all linear 0.1s;
-  -o-transition: all linear 0.1s;
-  transition: all linear 0.1s;
+  -webkit-transition: all linear 0.15s;
+  -o-transition: all linear 0.15s;
+  transition: all linear 0.15s;
   position: absolute;
 }
 .float-label.focus .control-label {
-  font-size: 12px;
-  top: 0;
+  font-size: 10px;
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  -o-transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 .float-label.has-feedback label ~ .form-control-feedback {
   top: 12px;
@@ -13557,8 +13728,8 @@ h6 .display-block, .h6 .display-block {
 }
 .checkbox input[type="checkbox"]:checked + label::after,
 .checkbox input[type="radio"]:checked + label::after {
-  font-family: "FontAwesome";
-  content: "\f00c";
+  font-family: "Glyphter";
+  content: "\004a";
 }
 .checkbox input[type="checkbox"]:indeterminate + label::after,
 .checkbox input[type="radio"]:indeterminate + label::after {
@@ -13593,57 +13764,57 @@ h6 .display-block, .h6 .display-block {
 
 .checkbox-primary input[type="checkbox"]:checked + label::before,
 .checkbox-primary input[type="radio"]:checked + label::before {
-  background-color: #2d94ed;
+  background-color: transparent;
   border-color: #2d94ed;
 }
 .checkbox-primary input[type="checkbox"]:checked + label::after,
 .checkbox-primary input[type="radio"]:checked + label::after {
-  color: #fff;
+  color: #2d94ed;
 }
 
 .checkbox-danger input[type="checkbox"]:checked + label::before,
 .checkbox-danger input[type="radio"]:checked + label::before {
-  background-color: #e74c3c;
+  background-color: transparent;
   border-color: #e74c3c;
 }
 .checkbox-danger input[type="checkbox"]:checked + label::after,
 .checkbox-danger input[type="radio"]:checked + label::after {
-  color: #fff;
+  color: #e74c3c;
 }
 
 .checkbox-info input[type="checkbox"]:checked + label::before,
 .checkbox-info input[type="radio"]:checked + label::before {
-  background-color: #5bc0de;
+  background-color: transparent;
   border-color: #5bc0de;
 }
 .checkbox-info input[type="checkbox"]:checked + label::after,
 .checkbox-info input[type="radio"]:checked + label::after {
-  color: #fff;
+  color: #5bc0de;
 }
 
 .checkbox-warning input[type="checkbox"]:checked + label::before,
 .checkbox-warning input[type="radio"]:checked + label::before {
-  background-color: #f0ad4e;
+  background-color: transparent;
   border-color: #f0ad4e;
 }
 .checkbox-warning input[type="checkbox"]:checked + label::after,
 .checkbox-warning input[type="radio"]:checked + label::after {
-  color: #fff;
+  color: #f0ad4e;
 }
 
 .checkbox-success input[type="checkbox"]:checked + label::before,
 .checkbox-success input[type="radio"]:checked + label::before {
-  background-color: #5cb85c;
+  background-color: transparent;
   border-color: #5cb85c;
 }
 .checkbox-success input[type="checkbox"]:checked + label::after,
 .checkbox-success input[type="radio"]:checked + label::after {
-  color: #fff;
+  color: #5cb85c;
 }
 
 .checkbox-primary input[type="checkbox"]:indeterminate + label::before,
 .checkbox-primary input[type="radio"]:indeterminate + label::before {
-  background-color: #2d94ed;
+  background-color: none;
   border-color: #2d94ed;
 }
 .checkbox-primary input[type="checkbox"]:indeterminate + label::after,
@@ -13653,7 +13824,7 @@ h6 .display-block, .h6 .display-block {
 
 .checkbox-danger input[type="checkbox"]:indeterminate + label::before,
 .checkbox-danger input[type="radio"]:indeterminate + label::before {
-  background-color: #e74c3c;
+  background-color: none;
   border-color: #e74c3c;
 }
 .checkbox-danger input[type="checkbox"]:indeterminate + label::after,
@@ -13663,7 +13834,7 @@ h6 .display-block, .h6 .display-block {
 
 .checkbox-info input[type="checkbox"]:indeterminate + label::before,
 .checkbox-info input[type="radio"]:indeterminate + label::before {
-  background-color: #5bc0de;
+  background-color: none;
   border-color: #5bc0de;
 }
 .checkbox-info input[type="checkbox"]:indeterminate + label::after,
@@ -13673,7 +13844,7 @@ h6 .display-block, .h6 .display-block {
 
 .checkbox-warning input[type="checkbox"]:indeterminate + label::before,
 .checkbox-warning input[type="radio"]:indeterminate + label::before {
-  background-color: #f0ad4e;
+  background-color: none;
   border-color: #f0ad4e;
 }
 .checkbox-warning input[type="checkbox"]:indeterminate + label::after,
@@ -13683,7 +13854,7 @@ h6 .display-block, .h6 .display-block {
 
 .checkbox-success input[type="checkbox"]:indeterminate + label::before,
 .checkbox-success input[type="radio"]:indeterminate + label::before {
-  background-color: #5cb85c;
+  background-color: none;
   border-color: #5cb85c;
 }
 .checkbox-success input[type="checkbox"]:indeterminate + label::after,
@@ -13815,8 +13986,8 @@ h6 .display-block, .h6 .display-block {
 
 input[type="checkbox"].styled:checked + label:after,
 input[type="radio"].styled:checked + label:after {
-  font-family: "FontAwesome";
-  content: "\f00c";
+  font-family: "Glyphter";
+  content: "\004a";
 }
 input[type="checkbox"] .styled:checked + label::before,
 input[type="radio"] .styled:checked + label::before {
@@ -14510,7 +14681,7 @@ li.multiselect-filter .form-control {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   left: 20px;
-  transition: background-color 0.4s, left 0.2s;
+  transition: background-color 0.2s, left 0.2s;
   background-color: white;
 }
 .switchery.off {
@@ -14695,6 +14866,11 @@ label .switchery-sm {
   cursor: pointer;
   position: absolute;
   display: block;
+}
+@media screen and (min-width: 768px) {
+  .radios-to-slider .slider-level:nth-child(1) {
+    left: 17px !important;
+  }
 }
 
 .radios-to-slider .slider-level.slider-lower-level {
@@ -17503,6 +17679,7 @@ body[class*=navbar-bottom] .content {
   display: block;
   text-align: center;
   font-weight: 700;
+  margin-top: 10px;
 }
 @media (min-width: 768px) {
   .panel-onboarding .panel-body .col-left {
@@ -17570,6 +17747,9 @@ body[class*=navbar-bottom] .content {
 .panel.panel-sign-in-up .heading-elements small {
   font-weight: 600;
 }
+.panel.panel-sign-in-up .heading-elements small a:hover {
+  text-decoration: underline;
+}
 .panel.panel-sign-in-up .panel-body .col-right {
   padding-right: 30px;
   padding-left: 30px;
@@ -17600,6 +17780,10 @@ body[class*=navbar-bottom] .content {
     margin-left: auto;
   }
 }
+.panel.panel-sign-in-up .panel-body .col-right .form-group .form-control {
+  padding-right: 0;
+  padding-left: 0;
+}
 @media screen and (max-width: 767px) {
   .panel.panel-sign-in-up .panel-body {
     padding-bottom: 60px;
@@ -17624,10 +17808,6 @@ body[class*=navbar-bottom] .content {
   .panel.panel-signup .panel-body .col-right .content-header {
     margin-bottom: 20px;
   }
-}
-.panel.panel-signup .panel-body .col-right .form-group .form-control {
-  padding-right: 0;
-  padding-left: 0;
 }
 .panel.panel-teacher-account .panel-body .col-right {
   padding-right: 30px;
@@ -17779,23 +17959,29 @@ body[class*=navbar-bottom] .content {
 .panel.panel-child-selection .panel-heading .panel-title {
   border-width: 0;
 }
-.panel.panel-child-selection .category-item .icon-float {
+.panel.panel-child-selection .panel-body .form-login .hd {
+  font-size: 20px;
+  color: rgba(119, 119, 119, 0.8);
+  text-align: center;
+}
+.panel.panel-child-selection .panel-body .category-item .icon-float {
   padding: 14px;
 }
-.panel.panel-child-selection .category-item .tab-line {
+.panel.panel-child-selection .panel-body .category-item .tab-line {
   margin-top: 30px;
   margin-right: auto;
   margin-left: auto;
   font-size: 16px;
+  color: rgba(119, 119, 119, 0.8);
 }
 @media screen and (min-width: 991px) {
-  .panel.panel-child-selection .category-item .tab-line {
+  .panel.panel-child-selection .panel-body .category-item .tab-line {
     width: 48%;
   }
 }
 @media screen and (min-width: 768px) {
-  .panel.panel-child-selection .category-item .tab-line {
-    width: 55%;
+  .panel.panel-child-selection .panel-body .category-item .tab-line {
+    width: 49%;
   }
 }
 .panel.panel-child-account-setup .panel-heading .panel-title, .panel.panel-preferences .panel-heading .panel-title, .panel.panel-teacher-term .panel-heading .panel-title, .panel.panel-payment .panel-heading .panel-title {
@@ -17814,7 +18000,7 @@ body[class*=navbar-bottom] .content {
   margin-top: -16px;
   position: relative;
   z-index: 10;
-  color: #eeeeee;
+  color: rgba(119, 119, 119, 0.8);
   cursor: pointer;
   text-decoration: none;
 }
@@ -17829,6 +18015,10 @@ body[class*=navbar-bottom] .content {
 .panel.panel-child-account-setup .panel-body .package-box, .panel.panel-child-account-setup .panel-body .package-group .btn, .package-group .panel.panel-child-account-setup .panel-body .btn, .panel.panel-child-account-setup .panel-body .subject-group .btn, .subject-group .panel.panel-child-account-setup .panel-body .btn, .panel.panel-child-account-setup .panel-body .package-group .btn, .panel.panel-child-account-setup .panel-body .subject-group .btn {
   margin-left: 10px;
   min-width: 90px;
+}
+.panel.panel-child-account-setup .panel-body .child-account-setup .subject span {
+  display: inline-block;
+  vertical-align: -webkit-baseline-middle;
 }
 .panel.panel-child-account-setup .panel-body .col-right .email-info {
   margin-top: 12px;
@@ -17848,8 +18038,61 @@ body[class*=navbar-bottom] .content {
   z-index: 10;
   color: #eeeeee;
 }
+@media screen and (max-width: 768px) {
+  .panel.panel-preferences {
+    text-align: center;
+  }
+}
+.panel.panel-preferences .panel-body {
+  padding-bottom: 50px;
+}
+@media screen and (min-width: 768px) {
+  .panel.panel-preferences .panel-body {
+    padding-bottom: 70px;
+  }
+}
+.panel.panel-preferences .panel-body .form-login .hd {
+  font-size: 20px;
+  color: rgba(119, 119, 119, 0.8);
+  text-align: center;
+}
+.panel.panel-preferences .panel-body .form-login .phone-number {
+  margin-left: 59px;
+}
+.panel.panel-preferences .panel-body .form-login .phone-number .control-label {
+  left: 0px;
+}
+.panel.panel-preferences .panel-body .form-login .phone-number .fa-question-circle {
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  z-index: 100;
+}
+.panel.panel-preferences .panel-body .form-login .phone-number .allow-dropdown {
+  width: 100%;
+}
+.panel.panel-preferences .panel-body .form-login .preference-tag-line {
+  color: #777777;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+@media screen and (min-width: 768px) {
+  .panel.panel-preferences .panel-body .form-login .preference-tag-line {
+    margin-top: 40px;
+    margin-bottom: 52px;
+  }
+}
 .panel.panel-teacher-term .panel-body {
+  padding-bottom: 50px;
   padding-top: 25px;
+}
+@media screen and (min-width: 768px) {
+  .panel.panel-teacher-term .panel-body {
+    padding-bottom: 70px;
+  }
 }
 @media screen and (min-width: 1200px) {
   .panel.panel-teacher-term .panel-body .tab-navs {
@@ -18343,7 +18586,7 @@ body[class*=navbar-bottom] .content {
 @media screen and (max-width: 1199px) and (min-width: 992px) {
   .prelogin .navigation .navbar-default .navbar-nav {
     margin-top: 9px;
-    margin-left: 23%;
+    margin-left: 16%;
   }
 }
 .prelogin .navigation .navbar-default .navbar-nav li {
@@ -19393,6 +19636,66 @@ body[class*=navbar-bottom] .content {
   }
 }
 
+.modal-takeATour .modal-dialog {
+  max-width: 492px;
+}
+.modal-takeATour .modal-dialog .modal-header {
+  padding-top: 30px;
+  border-bottom-width: 0;
+}
+@media screen and (min-width: 768px) {
+  .modal-takeATour .modal-dialog .modal-header {
+    padding-top: 45px;
+  }
+}
+.modal-takeATour .modal-dialog .modal-header .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.modal-takeATour .modal-dialog .modal-header .modal-title {
+  font-size: 40px;
+  color: #2d94ed;
+  font-weight: 300;
+  text-align: center;
+  word-spacing: 10px;
+}
+.modal-takeATour .modal-dialog .modal-header .modal-tag-line {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .modal-takeATour .modal-dialog .modal-header .modal-tag-line {
+    max-width: 79%;
+    margin-top: 26px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  .modal-takeATour .modal-dialog .modal-body {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+}
+.modal-takeATour .modal-dialog .modal-footer {
+  text-align: center;
+  border-top-width: 0;
+}
+@media screen and (min-width: 768px) {
+  .modal-takeATour .modal-dialog .modal-footer {
+    padding-bottom: 47px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .modal-takeATour .modal-dialog .modal-footer .btn {
+    width: 181px;
+    height: 40px;
+  }
+}
+
 .list-select-userType {
   width: 100%;
   text-align: center;
@@ -19473,7 +19776,7 @@ body[class*=navbar-bottom] .content {
   font-weight: 600;
 }
 .package-box .package-price, .package-group .btn .package-price, .subject-group .btn .package-price {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 26px;
 }
 .package-box .package-icon, .package-group .btn .package-icon, .subject-group .btn .package-icon {
@@ -19573,12 +19876,15 @@ body[class*=navbar-bottom] .content {
   overflow: hidden;
 }
 .selected-grades-subjects .subjects-list .label-subject {
-  color: #333333;
-  border: 1px solid #333333;
+  color: white;
+  background: rgba(142, 142, 142, 0.5);
   display: inline-block;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding: 8px 24px;
   font-weight: 400;
+  position: relative;
+  -webkit-transition: 0.25s linear all;
+  -o-transition: 0.25s linear all;
+  transition: 0.25s linear all;
 }
 .selected-grades-subjects .subjects-list .label-subject:not(:first-child) {
   margin-left: 10px;
@@ -19589,6 +19895,22 @@ body[class*=navbar-bottom] .content {
     margin-bottom: 5px;
     margin-left: 10px;
   }
+}
+.selected-grades-subjects .subjects-list .label-subject .link.link-gray-light {
+  color: white;
+  position: absolute;
+  right: 10px;
+  opacity: 0;
+  -webkit-transition: opacity 0.25s linear;
+  -o-transition: opacity 0.25s linear;
+  transition: opacity 0.25s linear;
+}
+.selected-grades-subjects .subjects-list .label-subject:hover {
+  padding-right: 34px;
+  padding-left: 14px;
+}
+.selected-grades-subjects .subjects-list .label-subject:hover .link.link-gray-light {
+  opacity: 1;
 }
 .selected-grades-subjects .btn-remove {
   float: right;
@@ -20113,6 +20435,125 @@ body[class*=navbar-bottom] .content {
 .panel.panel-empty .panel-body {
   padding-top: 58px;
   padding-bottom: 58px;
+}
+
+.panel-calendar .left-portion {
+  padding-right: 50px;
+  padding-bottom: 40px;
+  padding-left: 50px;
+}
+.panel-calendar .right-portion {
+  background: #2d94ed;
+  padding: 20px 40px 40px;
+  color: white !important;
+  min-height: 565px;
+}
+.panel-calendar .right-portion .icon-arrow-left {
+  color: #c2e0f4;
+}
+.panel-calendar .right-portion .date-day {
+  text-align: center;
+  color: white;
+  margin-top: 30px;
+}
+.panel-calendar .right-portion .date-day .date {
+  display: block;
+  font-size: 180px;
+  font-weight: 300;
+  line-height: 170px;
+}
+.panel-calendar .right-portion .date-day .day {
+  display: block;
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 8px;
+}
+.panel-calendar .right-portion .events-name {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+.panel-calendar .right-portion .list-style {
+  margin-top: 56px;
+}
+.panel-calendar .right-portion .list-style li {
+  font-size: 18px;
+  font-weight: 100;
+}
+.panel-calendar .right-portion .list-style li:not(:last-child) {
+  margin-bottom: 15px;
+}
+.panel-calendar .right-portion .list-style li:first-child {
+  list-style: none;
+  color: white;
+}
+.panel-calendar .right-portion .event-time-selector {
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+.panel-calendar .right-portion .bootstrap-select.btn-group .dropdown-toggle {
+  border-width: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  -moz-border-radius: 0%;
+  -webkit-border-radius: 0%;
+  border-radius: 0%;
+}
+.panel-calendar .right-portion .bootstrap-select.btn-group .dropdown-toggle .caret, .panel-calendar .right-portion .bootstrap-select.btn-group .dropdown-toggle .filter-option {
+  color: white;
+}
+.panel-calendar .right-portion .btn {
+  border: 1px solid white;
+  color: white;
+  max-width: 304px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.panel-calendar .right-portion .btn-link {
+  color: white;
+  border: 0px;
+}
+.panel-calendar .right-portion .form-horizontal .control-label {
+  color: white;
+}
+.panel-calendar .right-portion .form-horizontal .form-control, .panel-calendar .right-portion .form-horizontal .input-group-addon {
+  background: none;
+  color: white;
+  border: 1px solid white;
+}
+.panel-calendar .right-portion .form-horizontal .form-control {
+  border-right: 0px;
+  color: white !important;
+  max-width: 305px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.panel-calendar .right-portion .form-horizontal .form-control::-webkit-input-placeholder {
+  color: white;
+}
+.panel-calendar .right-portion .form-horizontal .form-control:-moz-placeholder {
+  color: white;
+}
+.panel-calendar .right-portion .form-horizontal .form-control:-ms-input-placeholder {
+  color: white;
+}
+.panel-calendar .right-portion .form-horizontal .radio label::before {
+  background: none;
+}
+.panel-calendar .right-portion .form-horizontal .radio-primary input[type="radio"]:checked + label::after {
+  background: white;
+}
+.panel-calendar .right-portion .form-horizontal .radio-primary input[type="radio"]:checked + label::before {
+  border: 1px solid white;
+}
+.panel-calendar .right-portion .form-horizontal .radio-primary input[type="radio"]:checked + label {
+  color: white !important;
+}
+
+.dtp-content .btn-flat:not(:last-child) {
+  margin-right: 15px;
 }
 
 .panel-student-profile .panel-title {
@@ -20953,6 +21394,23 @@ body[class*=navbar-bottom] .content {
   font-size: 16px;
 }
 
+.modal-parentSubscriptionUpgrade .modal-content {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+.modal-parentSubscriptionUpgrade .modal-content .modal-header {
+  border-width: 0;
+}
+.modal-parentSubscriptionUpgrade .modal-content .modal-body {
+  padding: 0;
+}
+.modal-parentSubscriptionUpgrade .modal-content .modal-body .panel-onboarding {
+  width: 100%;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 .settings-tab {
   position: relative;
 }
@@ -20978,6 +21436,9 @@ body[class*=navbar-bottom] .content {
   }
 }
 
+.settings-tab .change-code-input .form-control {
+  border-width: 1px !important;
+}
 .settings-tab .panel-heading {
   padding: 0;
 }
@@ -21412,9 +21873,7 @@ body[class*=navbar-bottom] .content {
   padding-top: 0;
 }
 .panel-setting .panel-body .btn-deactive {
-  display: block;
   text-align: left;
-  width: 100%;
 }
 .panel-setting .panel-body .edited-input-group .control-label {
   margin-top: 18px;
@@ -23134,4 +23593,36 @@ li:first-child {
 .char-group-user-list .panel-body {
   max-height: 550px;
   overflow: hidden;
+}
+
+@media screen and (min-width: 991px) {
+  .panel-help .panel-body {
+    padding-top: 48px;
+  }
+}
+.panel-help .panel-body .hd {
+  text-align: center;
+  color: rgba(142, 142, 142, 0.8);
+}
+@media screen and (min-width: 991px) {
+  .panel-help .panel-body .hd {
+    max-width: 54%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+.panel-help .panel-body .hd a {
+  color: #333333;
+  font-weight: 600;
+  text-decoration: underline;
+}
+@media screen and (min-width: 991px) {
+  .panel-help .panel-body .panel-accordion {
+    margin-top: 70px;
+  }
+}
+@media screen and (max-width: 768px) and (min-width: 767px) {
+  .panel-help .panel-body .panel-accordion {
+    margin-top: 35px;
+  }
 }

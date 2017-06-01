@@ -70,7 +70,7 @@ $white-65: rgba(#fff,0.65);
        }
 
         @media screen and (max-width: $screen-md-max) and (min-width: $screen-md)   {
-            @include margin(9px null null 23%);
+            @include margin(9px null null 16%);
         }
         li {
             position: relative;
@@ -1007,5 +1007,63 @@ $white-65: rgba(#fff,0.65);
 .carousel-inner>.item>img  {
   @media screen and (min-width: $screen-lg){
     width: 100%;
+  }
+}
+
+
+// modal-takeATour
+.modal-takeATour {
+  .modal-dialog {
+    max-width: 492px;
+    // modal-header
+    .modal-header {
+      @include padding(30px null null null);
+      @media screen and (min-width: $screen-sm){
+        @include padding(45px null null null);
+      }
+      .close {
+        @include position(absolute, 15px 15px null null);
+      }
+      @include border-width(null null 0px null);
+      .modal-title {
+        font-size: 40px;
+        color: $brand-primary;
+        font-weight: $light;
+        text-align: center;
+        word-spacing: 10px;
+      }
+      .modal-tag-line {
+        font-size: 16px;
+        color: rgba($black,0.7);
+        font-weight: $semibold;
+        text-align: center;
+        @media screen and (min-width: $screen-sm){
+          max-width: 79%;
+          @include margin(26px auto null auto);
+        }
+      }
+    }
+
+    // modal-body
+    .modal-body {
+      @media screen and (min-width: $screen-sm){
+        @include padding(null 50px null 50px);
+      }
+    }
+
+    // modal-footer
+    .modal-footer {
+      text-align: center;
+      @include border-width(0px null null null);
+      @media screen and (min-width: $screen-sm){
+        @include padding( null null 47px null );
+      }
+      .btn {
+        @media screen and (min-width: $screen-sm){
+          width: 181px;
+          height: 40px;
+        }
+      }
+    }
   }
 }

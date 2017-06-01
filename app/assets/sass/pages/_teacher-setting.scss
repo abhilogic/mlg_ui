@@ -182,6 +182,7 @@
       @include border-radius(0px);
       .panel-body {
         @include padding(null 14px);
+
         .btn-deactive {
           display: block;
           text-align: left;
@@ -199,10 +200,9 @@
     .panel-body {
       @include padding(0px null null null);
     }
+
     .btn-deactive {
-      display: block;
       text-align: left;
-      width: 100%;
     }
     .edited-input-group {
       .control-label {

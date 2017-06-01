@@ -57,7 +57,7 @@
     font-weight: $semibold;
   }
   .package-price{
-    font-weight: $ultrabold;
+    font-weight: $bold;
     font-size: 26px;
   }
   .package-icon{
@@ -158,19 +158,34 @@
     display: block;
     overflow: hidden;
     .label-subject{
-      color: $gray-dark;
-      border: 1px solid $gray-dark;
+      color: $white;
+      background: rgba($gray,0.5);
+      // border: 1px solid $gray-dark;
       display: inline-block;
-      @include padding(8px null);
+      @include padding(8px 24px);
       font-weight: $regular;
+      position:relative;
+      @include transition(0.25s linear all);
       &:not(:first-child){
         @include margin(null null null 10px);
       }
       @media screen and (max-width: $screen-xs-max){
         @include margin(5px null 5px 10px );
       }
-
+      .link.link-gray-light {
+        color: $white;
+        @include position(absolute, null 10px null null);
+        opacity: 0;
+        @include transition(opacity .25s linear);
+      }
+      &:hover {
+        @include padding(null 34px null 14px);
+        .link.link-gray-light {
+          opacity: 1;
+        }
+      }
     }
+    // label-subject
 
   }
 
