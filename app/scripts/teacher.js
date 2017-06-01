@@ -2775,7 +2775,7 @@ $scope.numberOfPages=function(){
 
       // API to call all groups of a teacher
        teacherHttpService.getGroupsOfSubjectForTeacher(get_uid,$scope.course_id).success(function(respGroup) {
-         console.log(respGroup);
+         //console.log(respGroup);
           if (respGroup.response.status == "true") {
             $scope.groups= respGroup.response.groups;
           }
@@ -2843,7 +2843,7 @@ $scope.numberOfPages=function(){
         else if(frmdata.selectedSubskill == ""){
             $scope.err_message[2] = "Please select SubSkill.";
         } 
-        else if( (1 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
+        else if( (5 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
             $scope.err_message[3] = "Please enter question less than 20 but greater than 5.";
         }
         else{
@@ -2939,9 +2939,9 @@ $scope.numberOfPages=function(){
     // end Step 2 
 
      // Step 3 - To save the selected questions , Resources and comment in Database
-          $scope.onClickCancel = function(frmCandata){
+          /*$scope.onClickCancel = function(frmCandata){
             $scope.frm.assignDate="";
-          };
+          };*/
 
             
           $scope.onSubmitAssignmentNow = function(frmdata){
@@ -3034,7 +3034,6 @@ $scope.numberOfPages=function(){
                       comments           : frmdata.asscomments,
                       schedule_time       : $scope.date
                 };
-
                 
                 teacherHttpService.setCustomAssignmentByTeacher(assgnData,get_uid).success(function(respAssg) {
                   if(respAssg.response.status == "True"){ 

@@ -154,6 +154,20 @@ angular.module('mlg_student')
 		});
 	}
 
+	loginHttpResponse.getStudentAssignments = function(uid){
+      return $http({
+          method:'GET',
+          url   : urlParams.baseURL+urlParams.getStudentAssignments + '/' + uid
+      });
+	}
+
+	loginHttpResponse.getAssignmentItems = function(assignment_id){
+      return $http({
+          method:'GET',
+          url   : urlParams.baseURL+urlParams.getAssignmentItems + '/' + assignment_id
+      });
+	}
+
 
 	return loginHttpResponse;
 	
@@ -248,6 +262,10 @@ angular.module('mlg_student')
 	   		}
 	   	}
 	   });
+
+	   //API to set the step_completed=2 in user details
+
+	   
 
 
 
@@ -1076,7 +1094,39 @@ $scope.apiTabs=function(){
   });
 
 }])
+.controller('challengesCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q) {
 
+	var get_uid=commonActions.getcookies(get_uid);
+	var assignment_id ="37";
+
+	 //API to call number of assignments
+	 loginHttpService.getStudentAssignments(get_uid).success(function(respAssgn) {
+	 	console.log(respAssgn);
+    		if (respAssgn.response.status == "True") {
+
+    		}
+    		else{
+
+    		}
+    });
+
+
+
+	loginHttpService.getAssignmentItems(assignment_id).success(function(response) {
+    
+    });
+
+
+
+
+
+
+
+
+
+
+
+}])
 .controller('backHistoryPage', function($scope){
 	$scope.goBack = function() {
 		window.history.back();

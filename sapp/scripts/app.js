@@ -29,6 +29,8 @@ getAvatarImage : '/users/getAvatarImage',
 setStepNum :'/users/setStepNum',
 getStepNum :'/users/getStepNum',
 getTodayEvents : '/teachers/getTodayEvents',
+getStudentAssignments : '/students/getStudentAssignments',
+getAssignmentItems : '/students/getAssignmentItems',
 
 }).value('REGEX', {
 LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -95,7 +97,7 @@ $routeProvider
 	controller : 'helpCtrl',		
 }).when('/challenges', {
 	templateUrl : 'views/challenges.html',
-	controller : 'journeyCtrl',		
+	controller : 'challengesCtrl',		
 }).when('/demo_video/:id', {
 	templateUrl : 'views/firsttime_demo_video.html',
 	controller : 'quizCtrl',		
