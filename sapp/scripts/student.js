@@ -1063,7 +1063,7 @@ $scope.khan_api_content = khan_api_response_content;
 $scope.apiTabs=function(){
 	$(".table-of-content .nav-tabs li").removeClass("active");
 	$(this).parent().addClass("active");
-	$(tabIdactivated).addClass("active in");				
+	//$(tabIdactivated).addClass("active in");				
 }
   // Avatar profile
   $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';

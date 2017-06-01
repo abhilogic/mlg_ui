@@ -15,9 +15,9 @@
     <div class="row">
       <div class="col-md-4 table-of-content">
         <h6>Table of Content</h6>
-        <ul class="nav nav-tabs" id="tableOfContent">
+        <ul class="nav nav-tabs" id="tableOfContent" >
             <!--<li ng-repeat="topic in topic_detail"><i class="icon icon-document"></i> <a data-toggle="tab" ng-click="apiTabs();" href="#topic_{{$index+1}}">{{topic.name}}</a></li>-->
-            <li ng-repeat="teacher_content in teacher_contents"><i class="icon icon-document"></i> <a data-toggle="tab" ng-click="apiTabs();" href="/subskill_content/#teacher_{{$index+1}}">{{teacher_content.name}}</a></li>
+            <li ng-init="apiTabs()" ng-repeat="teacher_content in teacher_contents"><i class="icon icon-document"></i> <a data-toggle="tab" ng-click="apiTabs();" href="/subskill_content/#teacher_{{$index+1}}" id="teacher_link_{{$index}}">{{teacher_content.name}}</a></li>
             <li ng-repeat="khan_content in khan_api_content" >
               <i ng-if="khan_content.kind.toUpperCase() != 'VIDEO'" class="icon icon-document"></i>
               <i ng-if="khan_content.kind.toUpperCase() == 'VIDEO'" class="icon icon-video"></i>
@@ -31,7 +31,7 @@
         </div>-->
 
         <!--Teacher Contents-->
-        <div ng-repeat="teacher_content in teacher_contents"  id="teacher_{{$index+1}}" class="tab-pane fade ">
+        <div ng-repeat="teacher_content in teacher_contents"  id="teacher_{{$index+1}}" class="tab-pane fade active in ">
           {{teacher_content.descriptions}}
         </div>
 
@@ -177,75 +177,76 @@
 		<!-- Compiled and minified Page Specific JavaScript -->
 		<script src="assets/js/plugins/bootstrap-tabcollapse.js"></script>
 		<!-- page specific js  -->
-    <script type="text/javascript">
+   <script type="text/javascript">
+    
       $(document).ready(function(){
-		//$("#cssmenu .mega .tradeAnalyser").show();
-				
-			
-				$("#tableOfContent").tabCollapse({
-					tabsClass: 'hidden-sm hidden-xs',
-    			accordionClass: 'visible-sm visible-xs'
-				});
-				
-			
-				
-				
+
+        $("#tableOfContent").tabCollapse({
+          tabsClass: 'hidden-sm hidden-xs',
+          accordionClass: 'visible-sm visible-xs'
+        });
         if($(window).width()>768){
-					$(".tab-pane, .table-of-content .nav-tabs").mCustomScrollbar();
-					
-					
-				}
-				// skip function
-				$("#skip").click(function(){
-					// js for tableOfContent
-					var targetLiIndex = $("#tableOfContent li.active").index();
-					targetLiIndex = Math.abs(targetLiIndex);
-					var noOfLi = $("#tableOfContent li").length;
-					if (targetLiIndex==noOfLi-1){
-						$("#tableOfContent li").removeClass("active");
-						$("#tableOfContent li:first").addClass("active");
-					}
-					else if(targetLiIndex<noOfLi){
-						$("#tableOfContent li.active").removeClass("active").next("li").addClass("active");
-					}
+          $(".tab-pane, .table-of-content .nav-tabs").mCustomScrollbar();
+        }
+         $("#teacher_1").addClass('active in');
 
-					// js for tab-content
-					var targetpaneIndex = $(".tab-content .tab-pane.in").index();
-					targetpaneIndex = Math.abs(targetpaneIndex);
-					var noOfpane = $(".tab-content .tab-pane").length;
-					if (targetLiIndex==noOfLi-1){
-						$(".tab-content .tab-pane").removeClass("in active");
-						$(".tab-content .tab-pane:first").addClass("in active");
-					}
-					else if(targetLiIndex<noOfLi){
-						 $(".tab-content .tab-pane.in").removeClass("in active").next(".tab-pane").addClass("in active");
-					}
- 
-				});
-				// tooltip bootstrap
-				$('[data-toggle="tooltip"]').tooltip();
-				
-				$(".nav-tabs li a").click(function(event) {
-					event.preventDefault();
-					$('.nav-tabs li a').removeClass("current");
-					$(this).addClass("current");
-					var tab = $(this).attr("href");
-					$(".tabContent").not(tab).stop().css("display", "none");
-					$(tab).fadeIn(500);
-				});
-				
+        // custom tab activation jquery
+        if($(window).width()>767){
+          $(".table-of-content .nav-tabs li a").click(function(){
+            $(".table-of-content .nav-tabs li").removeClass("active");
+            $(this).parent().addClass("active");
+              var tabIdactivated = $(this).attr("href");
+              $(".tab-content .tab-pane").removeClass("active in");
+              $(tabIdactivated).addClass("active in");
+          });
+        }
+
+        // skip function
+        $("#skip").click(function(){
+          // js for tableOfContent
+          var targetLiIndex = $("#tableOfContent li.active").index();
+          targetLiIndex = Math.abs(targetLiIndex);
+          var noOfLi = $("#tableOfContent li").length;
+          if (targetLiIndex==noOfLi-1){
+            $("#tableOfContent li").removeClass("active");
+            $("#tableOfContent li:first").addClass("active");
+          }
+          else if(targetLiIndex<noOfLi){
+            $("#tableOfContent li.active").removeClass("active").next("li").addClass("active");
+          }
+
+          // js for tab-content
+          var targetpaneIndex = $(".tab-content .tab-pane.in").index();
+          targetpaneIndex = Math.abs(targetpaneIndex);
+          var noOfpane = $(".tab-content .tab-pane").length;
+          if (targetLiIndex==noOfLi-1){
+            $(".tab-content .tab-pane").removeClass("in active");
+            $(".tab-content .tab-pane:first").addClass("in active");
+          }
+          else if(targetLiIndex<noOfLi){
+             $(".tab-content .tab-pane.in").removeClass("in active").next(".tab-pane").addClass("in active");
+          }
+
+        });
+        // tooltip bootstrap
+        $('[data-toggle="tooltip"]').tooltip();
       });
-			if($(window).width()>768){
-				$(window).load(function(){
-					// table animation
-	          var currentIndex = 1;
-	          setInterval(function () {
-	              if (currentIndex == 45) {
-	                  currentIndex = 1;
-	              }
-	              $(".table-animated-img").css('background-image', 'url("assets/img/table-animation/' + currentIndex++ + '.png")');
-	          }, 110);
-				});
-			}
-    </script>
+      if($(window).width()>768){
+        $(window).load(function(){
+          // table animation
+            var currentIndex = 1;
+            setInterval(function () {
+                if (currentIndex == 45) {
+                    currentIndex = 1;
+                }
+                $(".table-animated-img").css('background-image', 'url("assets/img/table-animation/' + currentIndex++ + '.png")');
+            }, 110);
+        });
+        $(".board-center").height($(window).height());
+        $(window).resize(function(){
+          $(".board-center").height($(window).height());
+        });
+      }
 
+    </script>
+    
