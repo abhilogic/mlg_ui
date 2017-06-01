@@ -27,6 +27,11 @@
     cursor: pointer;
     position: absolute;
     display: block;
+    @media screen and (min-width: $screen-sm){
+      &:nth-child(1) {
+        left: 17px !important;
+      }
+    }
 }
 
 .radios-to-slider .slider-level.slider-lower-level {

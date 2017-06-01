@@ -1,0 +1,29 @@
+.panel-help{
+  // panel-body
+  .panel-body {
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(48px null null null);
+    }
+    .hd {
+      text-align: center;
+      color: rgba($gray, 0.8);
+      @media screen and (min-width: $screen-sm-max){
+        max-width: 54%;
+        @include margin(null auto null auto);
+      }
+      a {
+        color: $gray-dark;
+        font-weight: $semibold;
+        text-decoration: underline;
+      }
+    }
+    .panel-accordion {
+      @media screen and (min-width: $screen-sm-max){
+        @include margin(70px null null null);
+      }
+      @media screen and (max-width: $screen-sm) and (min-width: $screen-xs-max){
+        @include margin(35px null null null);
+      }
+    }
+  }
+}

@@ -75,8 +75,8 @@
 												<label for="" class="col-xs-5 control-label">Subject :</label>
 												<div class="col-xs-7" id="courseselect">
 												  <select class="mlg-selectpicker form-control" data-size="auto" title="Select DOK" ng-model="courseSelected" ng-change="getCourseVal(courseSelected)">
-                            <option disabled>---Select Course---</option> 
-                            <option  ng-repeat="course in subject track by $index"ng-if="$index>=0"value="{{course.course_id}}">{{course.course_name}}</option>
+                            <!--<option disabled>---Select Course---</option>--> 
+                            <option  ng-repeat="course in subjects track by $index"ng-if="$index>=0"value="{{course.course_id}}">{{course.course_name}}</option>
 													</select>
 												</div>
 										</div>
@@ -324,7 +324,7 @@
 								<!-- img-answer-block -->
 
 
-								<ul class="list-inline answer-type-option">
+								<ul class="list-inline answer-type-option" id ='answer-type'>
 									<li><button type="button" class="btn btn-outline btn-default" id="addTextAns"  ng-click="addTxtAns();">Answers are Text based</button></li>
 									<li>Or</li>
 									<li><button type="button" class="btn btn-outline btn-default" id="addImgAns" ng-click="addImgAns();">Answers are Image based</button></li>

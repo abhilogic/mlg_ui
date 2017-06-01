@@ -202,3 +202,130 @@
     }
   }
 }
+
+
+// panel-calendar
+.panel-calendar {
+  .left-portion {
+    @include padding(null 50px 40px 50px);
+  }
+  // left-portion
+  .right-portion {
+    background: $brand-primary;
+    @include padding(20px 40px 40px 40px);
+    color: $white !important;
+    min-height: 565px;
+    .icon-arrow-left {
+      color: #c2e0f4;
+    }
+    // icon-arrow-left
+    .date-day {
+      text-align: center;
+      color: $white;
+      @include margin(30px null null null);
+      .date {
+        display:block;
+        font-size: 180px;
+        font-weight: $light;
+        line-height: 170px;
+      }
+      // date
+      .day {
+        display:block;
+        text-transform: uppercase;
+        font-size: 30px;
+        font-weight: $semibold;
+        letter-spacing: 8px;
+      }
+      // day
+    }
+    // date-day
+    .events-name {
+      font-size: 20px;
+      color: $white;
+      text-align: center;
+      @include margin(60px null 40px null);
+    }
+    // events-name
+    .list-style {
+      @include margin(56px null null null);
+      li{
+        font-size: 18px;
+        font-weight: $thin;
+        &:not(:last-child){
+          @include margin(null null 15px null);
+        }
+        &:first-child {
+          list-style: none;
+          color: $white;
+        }
+      }
+    }
+    // list-style
+    .event-time-selector {
+      @include margin(50px null 40px null);
+    }
+    // event-time-selector
+    .bootstrap-select.btn-group .dropdown-toggle {
+      @include border-width(0px);
+      border-bottom: 1px solid rgba($white, 0.5);
+      @include border-radius(0%);
+      .caret, .filter-option{
+        color: $white;
+      }
+    }
+     // bootstrap-select
+     .btn {
+       border: 1px solid $white;
+       color: $white;
+       max-width: 304px;
+       @include margin(null auto);
+       &-link {
+         color: $white;
+         border: 0px;
+       }
+     }
+     // btn
+     .form-horizontal {
+       .control-label{
+         color: $white;
+       }
+       .form-control , .input-group-addon {
+         background: none;
+         color: $white;
+         border: 1px solid $white;
+       }
+       .form-control {
+         border-right: 0px;
+         color: $white !important;
+         @include placeholders(){
+           color: $white;
+         }
+         max-width: 305px;
+         @include margin(null auto);
+       }
+       //form-control
+       .radio label::before {
+         background: none;
+       }
+       .radio-primary input[type="radio"]:checked + label::after {
+         background: $white;
+       }
+       .radio-primary input[type="radio"]:checked + label::before  {
+         border: 1px solid $white;
+       }
+      .radio-primary input[type="radio"]:checked + label {
+        color: $white !important;
+      }
+     }
+     // form-horizontal
+  }
+}
+
+.dtp-content {
+  .btn-flat {
+    &:not(:last-child){
+      @include margin(null 15px null null);
+    }
+  }
+}

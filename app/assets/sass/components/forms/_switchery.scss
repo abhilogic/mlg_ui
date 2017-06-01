@@ -45,7 +45,7 @@
         top: 0;
         @include box-shadow(0 1px 3px rgba(black, 0.4));
         left: 20px;
-        transition: background-color 0.4s, left 0.2s;
+        transition: background-color 0.2s, left 0.2s;
         background-color: rgb(255, 255, 255);
     }
     &.off {

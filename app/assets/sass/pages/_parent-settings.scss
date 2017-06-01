@@ -24,7 +24,11 @@
     }
   }
 
-
+  .change-code-input {
+    .form-control {
+      border-width: 1px !important;
+    }
+  }
   // panel-heading
   .panel-heading {
     @include padding(0px);

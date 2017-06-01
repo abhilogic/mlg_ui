@@ -42,14 +42,14 @@
 
   .control-label{
     pointer-events: none;
-    @include transition(all linear 0.1s);
+    @include transition(all linear 0.15s);
     @include position(absolute, null null null null);
 
   }
   &.focus{
     .control-label{
-      font-size: 12px;
-      top: 0;
+      font-size: 10px;
+      @include transform(translateY(-10px));
     }
   }
   &.has-feedback label ~ .form-control-feedback {

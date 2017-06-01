@@ -105,6 +105,69 @@
         }
       }
   }
+  &-accordion {
+    .panel {
+      @include border-width(0px);
+      @include border-radius(0px);
+      .panel-heading {
+        @include padding(0px);
+        background: none;
+        &:before {
+          display: none;
+        }
+        .panel-title {
+          @include margin(0px null null null);
+          float: none;
+          a {
+            @include padding(15px 20px 15px 0px);
+            display: block;
+            text-decoration: none;
+            font-size: 18px;
+            text-transform: none;
+            color: rgba($gray-dark,0.6);
+            font-weight: 700;
+            @media screen and (max-width: $screen-xs-max){
+              @include padding(null 15px null null);
+            }
+            &.collapsed {
+              font-weight: normal;
+              color: rgba($gray-dark,0.5);
+              &:before {
+                @include transform(rotate(-90deg));
+                font-weight: normal;
+                color: rgba($gray,0.7);
+              }
+            }
+            // collapsed condition
+            &:hover {
+              color: rgba($gray-dark,0.6);
+            }
+            &:before {
+              font-family: 'Glyphter';
+              @include position(absolute, 18px 15px null null);
+              color: $gray-dark;
+              font-weight: $bold;
+              font-size: 12px;
+              @include transition(all .2s linear);
+              @media screen and (max-width: $screen-xs-max){
+                right: 0px;
+              }
+            }
+            // icon-down-arrow
+          }
+        }
+        // panel-title
+      }
+      // panel-heading
+      .panel-body {
+        @include padding(15px 10px null 10px);
+        font-size: 16px;
+        color: rgba($gray,0.7);
+        font-weight: normal;
+      }
+      // panel-body
+    }
+  }
 }
 
 
