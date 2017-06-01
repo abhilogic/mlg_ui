@@ -1,256 +1,250 @@
     <style type="text/css">
-      .modal-backdrop {
-        display: none;
-      }
+    .modal-backdrop {
+    	display: none;
+    }
     </style>
 
     <!-- {{frm.childcourses}} 
 
-   {{frm.cousesListByGrade}} -->
-	
-	<div class="main_cover myjourney_page">
-		<div class="main_wrapper">
-			<header></header>
-				<div class="wooden_frame">
-			<div class="wooden_frame_content_cover">
-					<div class="castle_cover">			
+    {{frm.cousesListByGrade}} -->
 
-					<div ng-repeat="gradecourse in frm.cousesListByGrade" ng-init="pIndex = $index+1">
-						<div ng-if="!guest" ng-repeat="childcourse in frm.childcourses">
-								<div ng-if="gradecourse.id==childcourse.id">
-										<a ng-click="select_course(gradecourse.course_name)" href="{{redirectURL}}/{{childcourse.id}}" data-castle-name="science" >							 
-											<div class="castle subject_castle castle_{{pIndex}} active">
-												<span class="castle__img"></span>
-												<span class="castle__icon"></span>
-												<span class="castle__arrowUp"></span>
-												<span class="castle__text">{{gradecourse.course_name}}</span>
-											</div>
-										</a>
-								</div>
- 
-								 <div ng-if="gradecourse.id!=childcourse.id">
-									<div class="castle subject_castle castle_{{pIndex}} inactive">
-										<span class="castle__img"></span>
-										<span class="castle__icon"></span>
-										<span class="castle__arrowUp"></span>
-										<span class="castle__text">{{gradecourse.course_name}}</span>
-									</div>
-								</div> 					
+    
+    <div class="main_cover myjourney_page">
+    	<div class="main_wrapper">
+    		<header></header>
+    		<div class="wooden_frame">
+    			<div class="wooden_frame_content_cover">
+    				<div class="castle_cover">			
+    					<div ng-if="!guest" ng-repeat="childcourse in frm.childcourses" ng-init="pIndex = $index+1">
+    							
+    							<div >
+    								<a ng-click="select_course(childcourse.course_name)" href="{{redirectURL}}/{{childcourse.id}}" data-castle-name="science" >							 
+    									<div class="castle subject_castle castle_{{pIndex}} active">
+    										<span class="castle__img"></span>
+    										<span class="castle__icon"></span>
+    										<span class="castle__arrowUp"></span>
+    										<span class="castle__text">{{childcourse.course_name}}</span>
+    										
+    									</div>
+    								</a>
+    							</div>
+
+    							 					
+    					</div>
+    					<div ng-repeat="gradecourse in result" ng-init="pIndex = $index+child_courses.length">
+    						<div>
+    								<div class="castle subject_castle castle_{{pIndex+1}} inactive">
+    									<span class="castle__img"></span>
+    									<span class="castle__icon"></span>
+    									<span class="castle__arrowUp"></span>
+    									<span class="castle__text">{{gradecourse}}</span>
+    									
+    								</div>
+    						</div>
+    						
+    						
+    						    					</div>
+    					<a href="help" data-castle-name="science">
+    						<div class="castle help">
+    							<span class="castle__img"></span>
+    							<span class="castle__icon"></span>
+    							<span class="castle__arrowUp"></span>
+    							<span class="castle__text">Help</span>
+    						</div>
+    					</a>
+    					<a href="challenges" data-castle-name="science">
+    						<div class="castle challenge_mountain">
+    							<span class="castle__img"></span>
+    							<span class="castle__icon"></span>
+    							<span class="castle__arrowUp"></span>
+    							<span class="castle__text">Challenges</span>
+    						</div>
+    					</a>
+    				</div>
+
+
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+
+
+
+
+<div class="chat_block">
+	<div class="user_list">
+		<span class="bg__chat"></span>
+		<div class="chat_container ">
+			<ul class="user_list_ul">
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Jema Stones</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Jema Stones</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+				<li>
+					<img src="assets/img/receiver_img.png" alt="" class="user_img">
+					<span class="user_name">Caly Miles</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="chating_block">
+		<div class="chat_container_cover">
+			<div class="chat_container">
+				<div class="receiver_info">
+					<ul>
+						<li><img src="assets/img/receiver_img.png" alt="" class="receiver_img"></li>
+						<li><span class="receiver_name">Caly Miles</span></li>
+						<li><img src="assets/img/cross_icon.png" class="close" alt=""></li>
+					</ul>
+				</div>
+				<div class="conversation_block">
+					<div class="conversation_repeat_block">
+						<div class="receiver_chat msg_continuation">
+							<div class="message_content">
+								<span class="receiver_name">Caly Miles</span>
+								<span class="receiver_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
+								<time class="sending_time">00:15</time>
 							</div>
-                                                        <div ng-if="guest">
-                                                          <div>
-                                                              <a ng-click="select_course(gradecourse.course_name)" href="{{redirectURL}}/{{gradecourse.id}}" data-castle-name="science" >
-                                                                <div class="castle subject_castle castle_{{pIndex}} active">
-                                                                        <span class="castle__img"></span>
-                                                                        <span class="castle__icon"></span>
-                                                                        <span class="castle__arrowUp"></span>
-                                                                        <span class="castle__text">{{gradecourse.course_name}}</span>
-                                                                </div>
-                                                              </a>
-                                                          </div>
-                                                        </div>
-						  </div>
-						  <a href="help" data-castle-name="science">
-							<div class="castle help">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Help</span>
-							</div>
-						</a>
-						<a href="challenges" data-castle-name="science">
-							<div class="castle challenge_mountain">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Challenges</span>
-							</div>
-						</a>
+						</div>
+						<div class="receiver_chat">
+							<div class="message_content">ddfdfdfdf</div>
+						</div>
+						<div class="receiver_chat">
+							<div class="message_content">ddfdfdfdf</div>
+						</div>
+						<div class="receiver_chat">
+							<div class="message_content">ddfdfdfdf</div>
 						</div>
 
-						 
+						<h5 class="date"><span>17-feb</span></h5>
+						<div class="sender_chat msg_continuation">
+							<div class="message_content">
+								<span class="sender_name">Caly Miles</span>
+								<span class="sender_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
+								<time class="sending_time">00:15</time>
+							</div>
+						</div>
+						<h5 class="date"><span>17-march</span></h5>
 					</div>
-			</div>
+				</div>
+				<form class="form">
+					<div class="form-inline">
+						<div class="form-group">
+							<input type="text" class="chat_input" placeholder="Type your text"/>
+						</div>
+						<button type="submit" class="btn_send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 
-
-
-
-	<div class="chat_block">
-		<div class="user_list">
-			<span class="bg__chat"></span>
-			<div class="chat_container ">
-				<ul class="user_list_ul">
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Jema Stones</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Jema Stones</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-					<li>
-						<img src="assets/img/receiver_img.png" alt="" class="user_img">
-						<span class="user_name">Caly Miles</span>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="chating_block">
-			<div class="chat_container_cover">
-				<div class="chat_container">
-					<div class="receiver_info">
-						<ul>
-							<li><img src="assets/img/receiver_img.png" alt="" class="receiver_img"></li>
-							<li><span class="receiver_name">Caly Miles</span></li>
-							<li><img src="assets/img/cross_icon.png" class="close" alt=""></li>
-						</ul>
-					</div>
-					<div class="conversation_block">
-						<div class="conversation_repeat_block">
-							<div class="receiver_chat msg_continuation">
-								<div class="message_content">
-									<span class="receiver_name">Caly Miles</span>
-									<span class="receiver_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
-									<time class="sending_time">00:15</time>
-								</div>
-							</div>
-							<div class="receiver_chat">
-								<div class="message_content">ddfdfdfdf</div>
-							</div>
-							<div class="receiver_chat">
-								<div class="message_content">ddfdfdfdf</div>
-							</div>
-							<div class="receiver_chat">
-								<div class="message_content">ddfdfdfdf</div>
-							</div>
-
-							<h5 class="date"><span>17-feb</span></h5>
-							<div class="sender_chat msg_continuation">
-								<div class="message_content">
-									<span class="sender_name">Caly Miles</span>
-									<span class="sender_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
-									<time class="sending_time">00:15</time>
-								</div>
-							</div>
-							<h5 class="date"><span>17-march</span></h5>
-						</div>
-					</div>
-					<form class="form">
-						<div class="form-inline">
-							<div class="form-group">
-								<input type="text" class="chat_input" placeholder="Type your text"/>
-							</div>
-							<button type="submit" class="btn_send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-						</div>
-					</form>
+	<!-- masscourts block -->
+	<div class="masscourt-block active" ng-if="first_time_login">
+		<div class="masscourt-cover in">
+			<img src="assets/img/mascort-img/mascot.png" class="masccort-img" alt=""/>
+			<div class="hint-block">
+				<div class="col-xs-2 padding-0">
+					<!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
 				</div>
-			</div>
-		</div>
-
-		<!-- masscourts block -->
-		<div class="masscourt-block active">
-			<div class="masscourt-cover in">
-				<img src="assets/img/mascort-img/mascot.png" class="masccort-img" alt=""/>
-				<div class="hint-block">
-					<div class="col-xs-2 padding-0">
-						<!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
-					</div>
-					<div class="col-xs-10">
-						<span class="hint">
-							<p>&nbsp;</p>
-							<p>Hello young wizard, Welcome to the magical world of learning.</p>
-							<p>Click on a subject to see what’s waiting for you inside.</p>
-							<p>You can chat with your teachers and parents too - click the chat button on the right side.</p>
-							<p>If you find anything confusing you can always seek help from help section.</p>
-						</span>
-						<div class="text-right">
-							<button type="button" class="btn" id="gotIt">Got it!</button>
-						</div>
+				<div class="col-xs-10">
+					<span class="hint">
+						<p>&nbsp;</p>
+						<p>Hello young wizard, Welcome to the magical world of learning.</p>
+						<p>Click on a subject to see what’s waiting for you inside.</p>
+						<p>You can chat with your teachers and parents too - click the chat button on the right side.</p>
+						<p>If you find anything confusing you can always seek help from help section.</p>
+					</span>
+					<div class="text-right">
+						<button type="button" class="btn" id="gotItMas" ng-click="mascot_close()">Got it!</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- masscourts block -->
+	</div>
+	<!-- masscourts block -->
 
-		<div class="loader" loading>
-			<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
-		</div>
-		
-		<!-- plugins -->
+	<div class="loader" loading>
+		<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+	</div>
 
-		<!-- Compiled and minified Page Specific JavaScript -->
-		<script src="assets/js/plugins/jquery.transit.min.js"></script>
-		<script src="assets/js/plugins/bootstrap-tabcollapse.js"></script>
-		<script src="assets/js/pages/journey.js"></script>
-		<script src="assets/js/main.js"></script>
-		<audio id="mysoundclip" preload="auto" style="display:none;">
+	<!-- plugins -->
+
+	<!-- Compiled and minified Page Specific JavaScript -->
+	<script src="assets/js/plugins/jquery.transit.min.js"></script>
+	<script src="assets/js/plugins/bootstrap-tabcollapse.js"></script>
+	<script src="assets/js/pages/journey.js"></script>
+	<script src="assets/js/main.js"></script>
+	<audio id="mysoundclip" preload="auto" style="display:none;">
 		<source src="assets/sounds/click-sound.mp3"></source></audio>
-    <script type="text/javascript">
-      $(document).ready(function(){
-				 $("input[type='checkbox']").checkbox_button();
-        $("#challenge").tabCollapse();
-      });
-      $(document).ready(function(){
-        var owl = $('.challenge_option');
-        owl.owlCarousel({
-          margin: 19,
-          loop: false,
-          responsive: {
-            0: {
-              items: 1
-            },
-            600: {
-              items: 3
-            },
-            1000: {
-              items: 4
-            }
-          }
-        });
-        $(".owl-nav .owl-prev").html("<span>Previous</span>");
-        $(".owl-nav .owl-next").html("<span>Next</span>");
-      });
-    </script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("input[type='checkbox']").checkbox_button();
+			$("#challenge").tabCollapse();
+		});
+		$(document).ready(function(){
+			var owl = $('.challenge_option');
+			owl.owlCarousel({
+				margin: 19,
+				loop: false,
+				responsive: {
+					0: {
+						items: 1
+					},
+					600: {
+						items: 3
+					},
+					1000: {
+						items: 4
+					}
+				}
+			});
+			$(".owl-nav .owl-prev").html("<span>Previous</span>");
+			$(".owl-nav .owl-next").html("<span>Next</span>");
+		});
+		</script>

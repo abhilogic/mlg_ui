@@ -575,6 +575,7 @@ angular.module('mlg').filter('moment', function() {
 
     	// Track for Students
     	if (role_id == '4') {
+    		
     		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {         
         		if(stepNum.response.step.step_completed!=null ){            
           			//var step_page = stepNum.response.step.step_completed; 
