@@ -3,20 +3,23 @@
 			<div class="main_wrapper">
 				<header></header>
 			</div>
+			
 			<div class="main_container">
-				
-					<ul class="subject_gate_cover">
-						<li class="item" ng-repeat="subject in subject_detail">
-							<div class="subject_board"><span data-center="center">{{subject.name}}</span></div>
-							<a href="sub-skill/{{subject.parent_id}}/type/{{subject.course_id}}"><div class="subject_gate"></div></a>
-						</li>
-					</ul>
-					<!-- <div class="item">
-						<div class="subject_board"><span data-center="center"></span></div>
-						<a href="quiz.html"><div class="challenge_gate"></div></a>
-					</div> -->
+				<ul class="subject_gate_cover">
+					<li class="item" ng-repeat="subject in subject_detail">
+						<div class="subject_board"><span><i class="fa fa-check"></i> {{subject.name}}</span></div>
+						<a href="sub-skill/{{subject.parent_id}}/type/{{subject.course_id}}">
+							<div class="subject_gate">
+								<img src="" alt="" class="open-gate-animation"/>
+							</div>
+						</a>
+					</li>
+					<li class="item locked" ng-click="show_knight_mascot();">
+						<div class="subject_board"><span><i class="fa fa-check"></i> Knight Challanges</span></div>
+						<a href=""><div class="challenge_gate"></div></a>
+					</li>
 
-				
+				</ul>
 			</div>
 	</div>
 	<!--chating-->
@@ -134,7 +137,7 @@
 	<!--chating-->
 </div>
 <!-- masscourts block -->
-		<div class="masscourt-block active">
+<div class="masscourt-block active" id="skillmascot">
 			<div class="masscourt-cover in">
 				<img ng-src="assets/img/mascort-img/{{mascot_img}}" class="masccort-img" alt=""/>
 				<div class="hint-block">
@@ -148,7 +151,28 @@
 							
 						</span>
 						<div class="text-right">
-							<button type="button" class="btn" id="gotIt">Got it!</button>
+							<button type="button" class="btn" id="gotIt1" ng-click="close_skill_mascot();">Got it!</button>
+						</div>
+					</div>
+				</div>
+			</div>
+</div>
+
+<div class="masscourt-block" id="knight_challanges">
+			<div class="masscourt-cover in">
+				<img ng-src="assets/img/mascort-img/{{mascot_img}}" class="masccort-img" alt=""/>
+				<div class="hint-block">
+					<div class="col-xs-2 padding-0">
+						<!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
+					</div>
+					<div class="col-xs-10">
+						<span class="hint">
+							
+							You cannot get in there yet. Complete rest of the doors first. Then you can take the challenge.
+							
+						</span>
+						<div class="text-right">
+							<button type="button" class="btn" id="gotIt1" ng-click="close_challanges_mascot();">Got it!</button>
 						</div>
 					</div>
 				</div>

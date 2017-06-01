@@ -584,6 +584,8 @@ angular.module('mlg').filter('moment', function() {
              		 }
           			else if(stepNum.response.step.step_completed==1){            			 
             			 window.location.href=$scope.baseStudentURL+'journey';
+          			}else{
+          				window.location.href=$scope.baseStudentURL+'journey';
           			}                  
               
        			 }

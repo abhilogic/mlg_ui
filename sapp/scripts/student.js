@@ -953,6 +953,34 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	}else{
 		$scope.mascot_img='mascot.png';
 	}
+
+	$scope.close_skill_mascot=function(){
+			$("#skillmascot").removeClass("in");
+	  	setTimeout(function(){
+	  		$("#skillmascot").removeClass("active");
+	  	}, 100);
+                       
+	  
+	}
+
+	$scope.close_challanges_mascot=function(){
+			$("#knight_challanges").removeClass("in");
+	  	setTimeout(function(){
+	  		$("#knight_challanges").removeClass("active");
+	  	}, 100);
+                       
+	  
+	}
+
+
+
+  $scope.show_knight_mascot=function(){
+  	$("#knight_challanges").addClass("in");
+  	//$("#skillmascot").removeClass('active');
+  	$("#knight_challanges").addClass("active");
+
+
+  }	
   // Avatar profile
   $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
   loginHttpService.getAvatarImage(get_uid).success(function(response) {

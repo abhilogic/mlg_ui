@@ -359,7 +359,7 @@ principal  : 30,
 		}
 
 	$rootScope.$on('$viewContentLoaded', function() {
-      $temlateCache.removeAll();
+     // $temlateCache.removeAll();
    });
 
 } ])
