@@ -32,7 +32,7 @@
 
         <!--Teacher Contents-->
         <div ng-repeat="teacher_content in teacher_contents"  id="teacher_{{$index+1}}" class="tab-pane fade active in ">
-          {{teacher_content.descriptions}}
+          <span ng-bind-html="teacher_content.descriptions">&nbsp;</span>
         </div>
 
         <!-- KHAN Content -->
