@@ -534,31 +534,21 @@ return {
      }
   };
 }])
-.service('sharedSkill', function () {
-        var skill;
-
-        return {
-            getProperty: function () {
-                return skill;
-            },
-            setProperty: function(value) {
-                skill = value;
-            }
-        };
-
-  })
-.service('sharedSubskill', function () {
-        var subskill;
-
-        return {
-            getProperty: function () {
-                return subskill;
-            },
-            setProperty: function(value) {
-                subskill = value;
-            }
-        };
-        
-    });
+.directive('jqdatepicker', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+         link: function (scope, element, attrs, ngModelCtrl) {
+            element.datepicker({
+               // dateFormat: 'DD, d  MM, yy',
+               dateFormat: 'yy-mm-d',
+                onSelect: function (date) {
+                    scope.date = date;
+                    scope.$apply();
+                }
+            });
+        }
+    };
+});
 
 

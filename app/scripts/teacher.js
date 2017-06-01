@@ -257,6 +257,12 @@ angular.module('mlg')
         });
       }
 
+      teacherHttpResponse.setStepNum=function(uid,step_num){
+    return $http({
+      method:'GET',
+      url   : urlParams.baseURL+urlParams.setStepNum+'?user_id='+uid+'&step_num='+step_num
+    });
+  }
 
 
 
@@ -423,14 +429,26 @@ angular.module('mlg')
     };
 
     $scope.submitSkip = function(){
-          teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
-            if (response.status == true) {              
-              var grade = response.urlData.level_id;
-              var subjectName = response.urlData.course_name;
-              var subjectCode = response.urlData.course_id;
-              $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
-            }
-        });
+      var step_num =3;
+      teacherHttpService.setStepNum(get_uid,step_num).success(function(resp) { 
+            if (resp.response.status == "True") {                 
+                teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
+                    if (response.status == true) {              
+                      var grade = response.urlData.level_id;
+                      var subjectName = response.urlData.course_name;
+                      var subjectCode = response.urlData.course_id;
+                      $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
+                    }
+                });
+            }else{
+                $location.url('journey');
+          } 
+    });
+
+
+
+
+          
 
     }
 
@@ -2502,7 +2520,9 @@ $scope.numberOfPages=function(){
        $scope.frm.questions_limit =5;      
        $scope.frm.assignmentFor = 'class';
        $scope.frm.selectedStd =[];
-       $scope.frm.Asscomments =""; 
+       $scope.frm.asscomments =""; 
+       
+       
        
        //frm.group_image = $scope.img;
      
@@ -2516,6 +2536,8 @@ var assgresources ={};
  $scope.$on('UploadedImage', function(event, mass) { 
         assgresources.image = mass;
   });
+
+
 
   
 
@@ -2633,7 +2655,7 @@ var assgresources ={};
         else if(frmdata.selectedSubskill == ""){
             $scope.err_message[2] = "Please select SubSkill.";
         } 
-        else if( (5 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
+        else if( (1 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
             $scope.err_message[3] = "Please enter question less than 20 but greater than 5.";
         }
         else{
@@ -2657,8 +2679,8 @@ var assgresources ={};
           if(respQues.response.status == "True"){ 
             $scope.questions = respQues.response.questions;            
            }else{
-            $scope.err_message[3] = respQues.response.message;
-            $timeout(function () { $scope.err_message[3] = ""; }, 5000);         
+            $scope.err_message[4] = respQues.response.message;
+            $timeout(function () { $scope.err_message[4] = ""; }, 5000);         
 
            }
 
@@ -2739,9 +2761,7 @@ var assgresources ={};
             //console.log(assgresources);
 
 
-            $count_slectedQues = Object.keys(frmdata.selected_questions).length;
-
-            
+            $count_slectedQues = Object.keys(frmdata.selected_questions).length;          
             
             if($count_slectedQues !=frmdata.questions_limit){
               $scope.err_message[5] ="Your selected question is not equal to 'Number of question'. ."
@@ -2764,9 +2784,8 @@ var assgresources ={};
                       assignmentFor   : frmdata.assignmentFor,
                       attachedresource :assgresources,
                       selected_questions : frmdata.selected_questions,
-                      comments           : frmdata.Asscomments
+                      comments           : frmdata.asscomments
                 };
-
 
                 
                 teacherHttpService.setCustomAssignmentByTeacher(assgData,get_uid).success(function(respAssg) {
@@ -2786,11 +2805,68 @@ var assgresources ={};
 
           ;
 
+          $scope.onclickAssignmentLater = function(frmdata){
+            frmdata.attachedresource = $scope.img;         ;
+
+            $count_slectedQues = Object.keys(frmdata.selected_questions).length;           
+            if($count_slectedQues !=frmdata.questions_limit){
+              $scope.err_message[5] ="Your selected question is not equal to 'Number of question'. ."
+              $count_slectedQues = "";
+              $timeout(function () { $scope.err_message[5] = ""; }, 4000);
+            }
+            else{
+                $('#modal-calender').modal('show');
+            }
+            
+          };
+
+
           $scope.onSubmitAssignmentLater = function(frmdata){
             frmdata.attachedresource = $scope.img;
-            console.log(frmdata);
+            if(typeof $scope.date =='undefined'){
+                $scope.err_message[6] ="Please select date to schedule your assignment."
+              $count_slectedQues = "";
+              $timeout(function () { $scope.err_message[6] = ""; }, 4000);
+            }
+            else{
+              var assgnData ={
+                      teacher_id      : get_uid,
+                      grade_id        : $scope.grade_id,
+                      main_course_id  : $scope.course_id, 
+                      subject_name    : $scope.subject_name, 
+                      group_id        : frmdata.selectedGroup,
+                      students        : frmdata.studentModel,
+                      difficulty_level: frmdata.difficultModel,
+                      skill_id        : frmdata.selectedSkill,
+                      subskill_id     : frmdata.selectedSubskill,
+                      questions_limit : frmdata.questions_limit,
+                      assignmentFor   : frmdata.assignmentFor,
+                      attachedresource :assgresources,
+                      selected_questions : frmdata.selected_questions,
+                      comments           : frmdata.asscomments,
+                      schedule_time       : $scope.date
+                };
 
-          };
+                
+                teacherHttpService.setCustomAssignmentByTeacher(assgnData,get_uid).success(function(respAssg) {
+                  if(respAssg.response.status == "True"){ 
+                      $('#modal-sucess').modal('show'); 
+
+                      $scope.onClickOk=function(){
+                        window.location.href='teacher/custom-assignment/'+$scope.grade_id+'/'+$scope.subject_name+'/'+$scope.course_id;
+
+                      }                   
+
+                    }
+                  });
+            }
+
+
+
+          }
+
+
+      
 
           //end- Step 3 - To save the selected questions , Resources and comment in Database
 
