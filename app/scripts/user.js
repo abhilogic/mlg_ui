@@ -667,10 +667,10 @@ angular.module('mlg').filter('moment', function() {
     				$scope.frm.selectedchild=$scope.frm.childnames[i];
     				return false;
     			}else{
-
+                  
     			}
     	}
-    	window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
+   	window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
 			}else{
 				$scope.childname=0;
                 $scope.frm.childnames =[];
@@ -979,10 +979,14 @@ angular.module('mlg').filter('moment', function() {
 .controller('emailConfirmationCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
 if (typeof $routeParams.id != 'undefined') {
     loginHttpService.setUserStatus($routeParams).success(function(response) {
-      if (response.status == false) {
+      if (response.status == true) {
+        $('.confirmed').removeClass('hidden');
+      } else {
+        $('.rejected').removeClass('hidden');
         alert('Some error occured, kindly refresh the page');
       }
     }).error(function() {
+      $('.rejected').removeClass('hidden');
       alert('Unable to activate account, contact to the administrator');
     });
   }
@@ -1569,7 +1573,7 @@ if (typeof $routeParams.slug != 'undefined') {
     }
 
     $scope.changeStatus = function() {
-      var set_setting = {user_id : get_uid, settings : {automatic_approval: !$scope.automatic_approval_status} };
+      var set_setting = {user_id : get_uid, settings : {automatic_approval: !$scope.automatic_approval_status}, child_id : $routeParams.id };
       loginHttpService.setUserSetting(set_setting).success(function (response) {
         if (response.status == true) {
           $scope.automatic_approval_status = !$scope.automatic_approval_status;
