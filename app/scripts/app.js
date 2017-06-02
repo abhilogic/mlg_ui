@@ -85,6 +85,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   deleteQuestions : '/teachers/deleteTeacherQuestions',
   getFilterdQuestion : '/teachers/filteredTeacherQuestions',
   getEditQuestion : '/teachers/getEditQuestionDetails',
+  getRewards : '/teachers/getRewards',
+  getTeacherPoints : '/teachers/getTeacherPoints',
+  setAvailableRewards : '/teachers/setAvailableRewards',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -497,10 +500,11 @@ $scope.userInfo=userInfo;
         if ($scope.frm.childnames[i].user_id==$routeParams.child_id) {
           $scope.frm.selectedchild=$scope.frm.childnames[i];
           return false;
-        } else {
-          $scope.frm.selectedchild = {children_name : 'My child'};
         }
       }
+      if (typeof $scope.frm.selectedchild == 'undefined') {
+         $scope.frm.selectedchild = {children_name : 'My child'};
+       }
     //window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
     } else {
       $scope.childname=0;
