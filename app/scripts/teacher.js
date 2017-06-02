@@ -239,6 +239,7 @@ teacherHttpResponse.generateAssignQuestions=function(data){
     url   : urlParams.baseURL+urlParams.generateAssignQuestions
   });
 }
+
 teacherHttpResponse.getQuestionsListForAssg=function(data){
   return $http({
     method:'POST',
@@ -280,6 +281,8 @@ teacherHttpResponse.getEditQuestion=function(uid,QId){
     url   : urlParams.baseURL+urlParams.getEditQuestion+'/'+uid+'/'+QId
   });
 }
+
+
       teacherHttpResponse.setStepNum=function(uid,step_num){
       return $http({
           method:'GET',
@@ -329,48 +332,10 @@ teacherHttpResponse.getEditQuestion=function(uid,QId){
             url   : urlParams.baseURL+urlParams.setAvailableRewards
         });
       }
-teacherHttpResponse.getQuestionsListForAssg=function(data){
-  return $http({
-    method:'POST',
-    data  : data,
-    url   : urlParams.baseURL+urlParams.getQuestionsListForAssg
-  });
-}
 
-teacherHttpResponse.setCustomAssignmentByTeacher=function(data,teacher_id){
-  return $http({
-    method:'POST',
-    data  : data,
-    url   : urlParams.baseURL+urlParams.setCustomAssignmentByTeacher
-  });
-}
+      return teacherHttpResponse;
 
-teacherHttpResponse.setStepNum=function(uid,step_num){
-  return $http({
-    method:'GET',
-    url   : urlParams.baseURL+urlParams.setStepNum+'?user_id='+uid+'&step_num='+step_num
-  });
-}
-teacherHttpResponse.getQuestions=function(uid,pnum){
-  return $http({
-    method:'GET',
-    url   : urlParams.baseURL+urlParams.getQuestions+'/'+uid+'/'+pnum
-  });
-}
-teacherHttpResponse.deleteQuestions=function(quesId){
-  return $http({
-    method:'post',
-    data : quesId,
-    url   : urlParams.baseURL+urlParams.deleteQuestions
-  });
-}
-teacherHttpResponse.getEditQuestion=function(uid,QId){
-  return $http({
-    method:'GET',
-    url   : urlParams.baseURL+urlParams.getEditQuestion+'/'+uid+'/'+QId
-  });
-}
-return teacherHttpResponse;
+
 }])
 /**
  *Controller for Teacher 
@@ -468,6 +433,7 @@ return teacherHttpResponse;
         }
 
       }) 
+
     }
 
 
@@ -964,6 +930,7 @@ $scope.showEvents = function(events) {
     if (response_upstudent.response.status == "true") {
       $scope.success_message="Student is Updated";
       $scope.selected.id="";
+
     }else{
      $scope.upstudent_Errormessage=response_upstudent.response.message;
                         $timeout(function () { $scope.upstudent_Errormessage = ""; }, 4000); // to fadeup message
@@ -1133,6 +1100,7 @@ $scope.numberOfPages=function(){
           var st_username= value['username'];               
           frm_record[st_id] = st_username;           
         });
+
 
          var editgprecords={
           groupname : frmdata.group_title,
@@ -1897,9 +1865,12 @@ $scope.lessonPreview = function(data) {
           done();
         }else if (element.context.id == 'ans-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
           done();
-        } else if( (element.context.id == 'file-all') && (file.type == 'application/pdf' || file.type == 'image/jpeg' || file.type == 'video/*' || file.type == 'image/png') ){
+        }
+        else if( (element.context.id == 'file-all') && (file.type == 'application/pdf' || file.type == 'image/jpeg' || file.type == 'video/*' || file.type == 'image/png') ){
           done();
-        }else{
+        }
+
+        else{
          this.removeFile(file);
          alert('please choose appropriate file');
        }
@@ -3252,6 +3223,7 @@ $scope.updateQuestion = function(data) {
         }
     };
   })*/
+
 .controller('teacherRewards',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$q',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$q) {
     var get_uid=commonActions.getcookies(get_uid);

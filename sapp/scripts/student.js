@@ -261,12 +261,7 @@ angular.module('mlg_student')
 	   			$scope.redirectURL='demo_video';
 	   		}
 	   	}
-	   });
-
-	   //API to set the step_completed=2 in user details
-
-	   
-
+	   });   
 
 
 	  /*if(localStorage.getItem('preTestProcessStatus')!=null && localStorage.getItem('preTestProcessStatus')!=0 ) {
@@ -318,18 +313,14 @@ angular.module('mlg_student')
 		        	});
 		        	angular.forEach($scope.frm.childcourses, function(child_value, child_key){
 		        		$scope.child_courses.push((child_value.course_name));
-
 		        	});
 		        	$scope.result = $scope.all_courses.filter(function(n) {
 		        		return $scope.child_courses.indexOf(n) == -1;
 		        	});
-
 		        	$scope.msg=courseslistresult.response.message;
-
 		        }         
 		    });
-
-	  		}
+	  	}
 	  		console.log(studentcoursesresult.response.student_class);
 	  	});
 
@@ -1098,6 +1089,34 @@ $scope.apiTabs=function(){
 
 	var get_uid=commonActions.getcookies(get_uid);
 	var assignment_id ="37";
+
+	$("#gotIt").click(function(){
+	  	$(".masscourt-block .masscourt-cover").removeClass("in");
+	  	setTimeout(function(){
+	  		$(".masscourt-block").removeClass("active");
+	  	}, 500);
+
+	  });
+
+	loginHttpService.getStudentCourses(get_uid).success(function(res) {
+			if(res.response.status="TRUE"){
+				var st_grade_id=res.response.student_class;
+				$scope.student_courses = res.response.student_courses; 
+
+				
+			}
+
+
+
+});
+
+	
+
+
+
+
+
+
 
 	 //API to call number of assignments
 	 loginHttpService.getStudentAssignments(get_uid).success(function(respAssgn) {
