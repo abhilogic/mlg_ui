@@ -257,11 +257,11 @@ angular.module('mlg')
       }
 
       teacherHttpResponse.setStepNum=function(uid,step_num){
-    return $http({
-      method:'GET',
-      url   : urlParams.baseURL+urlParams.setStepNum+'?user_id='+uid+'&step_num='+step_num
-    });
-  }
+      return $http({
+          method:'GET',
+          url   : urlParams.baseURL+urlParams.setStepNum+'?user_id='+uid+'&step_num='+step_num
+        });
+      }
       teacherHttpResponse.getQuestions=function(uid,pnum){
         return $http({
             method:'GET',
@@ -281,8 +281,33 @@ angular.module('mlg')
             url   : urlParams.baseURL+urlParams.getEditQuestion+'/'+uid+'/'+QId
         });
       }
-        return teacherHttpResponse;
 	
+      teacherHttpResponse.getRewards=function(data){
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.getRewards
+        });
+      }
+
+      teacherHttpResponse.getTeacherPoints=function(data){
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.getTeacherPoints
+        });
+      }
+
+      teacherHttpResponse.setAvailableRewards=function(data){
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.setAvailableRewards
+        });
+      }
+
+      return teacherHttpResponse;
+
 }])
 /**
  *Controller for Teacher 
@@ -3158,12 +3183,79 @@ $scope.numberOfPages=function(){
     };
 })*/
 
-.controller('teacherRewards',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
-	$scope.openRedeenModal=function(){
-		$('.modal-backdrop').hide();
-		$("#modal-redeemcheck").modal();					
-	}  
+.controller('teacherRewards',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$q',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$q) {
+    var get_uid=commonActions.getcookies(get_uid);
+    $scope.rewards = '';
+    $scope.points = 0;
+    init_points();
+    function refresh_points() {
+      teacherHttpService.getTeacherPoints({user_id : get_uid}).then(function(resp) {
+        var response = resp.data;
+        if (response.status == true) {
+          $scope.points = response.points;
+        } else {
+          if (response.message != '') {
+            alert(response.message);
+          } else {
+            alert('Some error occured, Please ask to administrator');
+          }
+        }
+      })
+    }
+
+    function init_points() {
+      teacherHttpService.getTeacherPoints({user_id : get_uid}).then(function(resp) {
+        var response = resp.data;
+        if (response.status == true) {
+          $scope.points = response.points;
+        } else {
+          if (response.message != '') {
+            alert(response.message);
+          } else {
+            alert('Some error occured, Please ask to administrator');
+          }
+        }
+      }).then(function() {
+        getRewards();
+      });    
+    }
+
+    function getRewards() {
+      var data = {user_id : get_uid, condition_key: 'points', condition_value: $scope.points};
+      teacherHttpService.getRewards(data).success(function(response) {
+        if (response.status == true) {
+         $scope.rewards = response.result;
+         if (response.available_rewards == 0) {
+           alert('There is no more rewards availbale');
+         }
+        } else {
+          if (response.message != '') {
+            alert(response.message);
+          } else {
+            alert('Some error occured, Please ask to administrator');
+          }
+        }
+      });
+    }
+
+    $scope.requestReward = function(reward) {
+      var status = (reward.coupon_code == '') ? 'Mlg approval pending' : 'acquired';
+      var set_data = {user_id : get_uid, coupon_id : reward.coupon_id, status: status, updated_by_user_id: get_uid};
+      teacherHttpService.setAvailableRewards(set_data).success(function(response) {
+        if (response.status == true) {
+          reward.status = response.coupon_status;
+          refresh_points();
+          $('#modal-redeemCheck_' + reward.id + ' .modal-content').addClass('success');
+        } else {
+          if (response.message != '') {
+            alert(response.message);
+          } else {
+            alert('Some error occured');
+          }
+        }
+      });
+    }
 }])
 
 
