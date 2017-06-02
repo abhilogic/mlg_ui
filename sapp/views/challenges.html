@@ -106,14 +106,14 @@
           <div class="modal-body">
             <div class="challenge_content_frame">
               <ul class="nav nav-tabs" id="challenge">
-                <li class="active"><a data-toggle="tab" href="#subject_1">Maths</a></li>
-                <li><a data-toggle="tab" href="#subject_2">English</a></li>
-                <li><a data-toggle="tab" href="#subject_3">Science</a></li>
-                <li><a data-toggle="tab" href="#subject_4">Social Science</a></li>
+                <!-- <li class="active"><a data-toggle="tab" href="#subject_1">Maths</a></li> -->
+                <li ng-repeat="stcourses in student_courses"><a data-toggle="tab" href="#subject_{{stcourses.id}}">{{stcourses.course_name}}</a></li>                
               </ul>
 
               <div class="tab-content">
-                <div id="subject_1" class="tab-pane fade in active">
+                <!-- <div id="subject_1" class="tab-pane fade in active"> -->
+                
+                <div id="subject_{{stcourses.id}}" class="tab-pane fade in" ng-repeat="stcourses in student_courses">
                   <div class="owl-carousel owl-theme challenge_option">
                     <div class="item">
                       <h1>Teacher Challenge</h1>
@@ -166,165 +166,7 @@
                     </div>
                   </div>
                 </div>
-                <div id="subject_2" class="tab-pane fade">
-                  <div class="owl-carousel owl-theme challenge_option">
-                    <div class="item">
-                      <h1>Teacher Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                      </div>
-                      <h2>Whole Numbers</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Quarterly Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_chadu.png" alt="" data-center="center">
-                      </div>
-                      <h2>TIme</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                          <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Ratio</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Counting</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Teacher Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                      </div>
-                      <h2>Whole Numbers</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                          <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Ratio</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Counting</h2>
-                    </div>
-                  </div>
-                </div>
-                <div id="subject_3" class="tab-pane fade">
-                  <div class="owl-carousel owl-theme challenge_option">
-                    <div class="item">
-                      <h1>Teacher Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                      </div>
-                      <h2>Whole Numbers</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Quarterly Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_chadu.png" alt="" data-center="center">
-                      </div>
-                      <h2>TIme</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                          <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Ratio</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Counting</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Teacher Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                      </div>
-                      <h2>Whole Numbers</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                          <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Ratio</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Counting</h2>
-                    </div>
-                  </div>
-                </div>
-                <div id="subject_4" class="tab-pane fade">
-                  <div class="owl-carousel owl-theme challenge_option">
-                    <div class="item">
-                      <h1>Teacher Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                      </div>
-                      <h2>Whole Numbers</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Quarterly Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_chadu.png" alt="" data-center="center">
-                      </div>
-                      <h2>TIme</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                          <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Ratio</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Counting</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Teacher Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                      </div>
-                      <h2>Whole Numbers</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                          <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Ratio</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Counting</h2>
-                    </div>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>

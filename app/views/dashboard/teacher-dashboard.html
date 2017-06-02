@@ -244,7 +244,7 @@
 						<div class="panel-body no-padding">
 							<div class="row margin-0">
 								<div class="col-md-6 col-xs-12 pull-right right-portion">
-										<i class="icon icon-arrow-left"></i>
+									<a href=""><i class="icon icon-arrow-left"></i></a>
 										<div class="date-day">
                       <span class="date" ng-bind="ddMMyyyy"></span>
                       <span class="day" ng-bind="weak"></span>
@@ -270,8 +270,8 @@
 													<button type="button" class="btn btn-link">Cancel</button>
 													<button type="button" class="btn btn-primary" ng-click="CreateTodo(calndr)">Create</button>
 												</div>
+                         <span>{{message}}{{msg}}</span>
 										</form>
-                     <span>{{message}}{{msg}}</span>
                      <!--TODO END-->
                      <!--PARENT TEACHER MEETING START-->
                      <form class="form-horizontal" ng-show=" event == 'ptm'">
@@ -331,6 +331,7 @@
 												<button type="button" class="btn btn-link">Cancel</button>
 												<button type="button" class="btn btn-primary"ng-click="EventUpload(calender)">Create</button>
 											</div>
+                    <span>{{message}}{{msg}}</span>
                     </form>
                     <!--PARENT TEACHER MEETING END-->
                     <!--ASSIGNMENT START-->
@@ -362,7 +363,7 @@
                     </div>
                   </div>
                   <div class="days">
-                    <div class="{{day.classes}}" ng-repeat="day in days" ng-click="getUserSelectedDate(day)">
+                    <div class="{{day.classes}}" ng-repeat="day in days" ng-click="getUserSelectedDate(day)" style="cursor:pointer">
                       <div class="event-indicator" ng-show="day.events.length" ng-click="showEvents(day.events)">{{day.events.length}}</div>
                       {{day.day}}
                     </div>
