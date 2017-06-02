@@ -2920,10 +2920,7 @@ $scope.numberOfPages=function(){
           var removed_questions_id ="0";
         
         $scope.onChangeQues = function(indx, rm_quesid) {
-          var exist_questions_id = "1";
-          
-         
-          
+          var exist_questions_id = "1";         
           removed_questions_id = removed_questions_id+','+rm_quesid;
 
           for(var key in $scope.questions){
@@ -2945,18 +2942,14 @@ $scope.numberOfPages=function(){
             
             teacherHttpService.getQuestionsListForAssg(dataToGetQuestions).success(function(respQues) {
                 if(respQues.response.status == "True"){ 
-
-                    if(respQues.response.change_question_status == "True"){
-                      
+                    if(respQues.response.change_question_status == "True"){                      
                        $scope.questions.splice(indx, 1);
                        console.log($scope.questions);                        
                       $scope.questions = respQues.response.questions;
-
                     }
                     else{
                         $scope.err_message[4] = respQues.response.change_question_message;
                         alert(respQues.response.change_question_message);
-
                     }
               }
 
