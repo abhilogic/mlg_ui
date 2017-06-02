@@ -1151,6 +1151,8 @@ $scope.numberOfPages=function(){
     $scope.getCourseVal = function(){
       if($scope.gradeSelected != '---Select Subject---') {
        course = $scope.courseSelected;
+       $scope.subSkill = [];
+       $scope.skill = [];
         if(tempStatus == 0) {
           teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
             var data = response.response.course_details;
@@ -2144,6 +2146,8 @@ $scope.numberOfPages=function(){
     $scope.getCourseVal = function(data){
       if(data != null) {
        course = $scope.courseSelected;
+       $scope.subSkill = [];
+       $scope.skill = [];
        teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
           var data = response.response.course_details;
           angular.forEach(data, function(value, key) {
