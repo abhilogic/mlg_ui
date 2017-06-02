@@ -1,415 +1,412 @@
-	<!-- Main navbar -->
-	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
-	<!-- /main navbar -->
+<!-- Main navbar -->
+<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+<!-- /main navbar -->
 
-	<!-- Page container -->
-	<div class="page-container">
+<!-- Page container -->
+<div class="page-container">
 
-		<!-- Page content -->
-		<div class="page-content">
+  <!-- Page content -->
+  <div class="page-content">
 
-			<!-- Main Sidebar -->
-			<aside class="sidebar sidebar-main"></aside>
-			<!-- /sidebar -->
-
-
-			<!-- Main content -->
-			<div class="content-wrapper">
-				<!-- Content area -->
-				<div class="content">
-
-					<!-- Student List Panel  -->
-					<div class="panel panel-flat panel-student-profile" >
-						<div class="panel-heading">
-							<p><a href="teacher/dashboard" class="link link-gray-light"><i class="fa fa-arrow-left fa-2x"></i></a></p>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="media student-profile">
-										<div class="media-left">
-											<div class="profile-img">
-												<img class="img-circle" src="assets/img/student-img/stud_img_1.png" alt="Andrew Garfield"/>
-											</div>
-											<p class="status">
-												<span class="gifted"><i class="fa fa-circle"></i> Gifted</span>
-											</p>
-										</div>
-										<div class="media-body">
-											<h3 class="student-name">Andrew Garfield
-												<small class="class">Class 7th A</small>
-											</h3>
-											<p class="text-uppercase">Over a week </p>
-											<div class="time-spent">
-												<p>Time spent on platform</p>
-												<h1 class="time-value"><i class="fa fa-clock-o"></i> 2hrs</h1
-													<br>
-													<p>Average time spent by class</p>
-													<h1 class="time-value"><i class="fa fa-clock-o"></i> 2hrs</h1>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6" id="bar-chart" ng-controller="studentProgress">
-									<div class="container-progress-chart">
-										<!---<img src="assets/img/progress-chart-1.png" class="img-responsive" alt="Student Progress"/>-->
-										<canvas id="doughnut" class="chart chart-doughnut"
-										  chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
-										</canvas> 
-									</div>
-									<div class="student-progress-allover">
-										<p class="text-uppercase">System recommended progress: <b>35%</b></p>
-										<p class="text-uppercase">Class average progress: <b>30%</b></p>
-									</div>
-								</div>
-							</div>
-
-							<h4 class="panel-title">Grade Analysis
-								<select class="form-control no-border input-sm select-subject">
-									<option value="Mathematics">Mathematics</option>
-									<option value="Mathematics">English</option>
-									<option value="Mathematics">Hindi</option>
-								</select>
-							</h4>
-						</div>
-
-						<!-- grade Analysis -->
-						<div class="panel-body grade-analysis" id="doughnut-chart" ng-controller="GradeAnalysis">
-							<!--<img src="assets/img/chart-grade-analysis.png" class="img-responsive"/>-->
-							<canvas id="line" class="chart chart-line ng-isolate-scope" chart-data="data"  chart-colors="colors" chart-labels="labels" chart-click="onClick" chart-hover="onHover" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride"></canvas>
-						</div>
+    <!-- Main Sidebar -->
+    <aside class="sidebar sidebar-main"></aside>
+    <!-- /sidebar -->
 
 
-						<!-- Analysis -->
-						<div class="panel-body tabs-analysis">
-							<div class="row">
-								<div class="tab-content tab-content-left col-sm-6">
-									<h4 class="category-content text-uppercase no-margin">Needs Your Attention</h4>
-									<ul id="myNav" class="nav nav-tabs-analysis row">
-										<li class="active">
-											<a data-toggle="tab" href="#menu">
-													<h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
-													<p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-													eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam,</p>
-											</a>
-										</li>
-										<li>
-											<a data-toggle="tab" href="#menu1">
-												<h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="outstanding status"><i class="fa fa-circle"></i></span></h5>
-												<p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-												eiusmod tempor incididunt ut labore et dolore magna aliqua.
-												Ut enim ad minim veniam,</p>
-											</a>
-										</li>
-										<li>
-											<a data-toggle="tab" href="#menu2">
-												<h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="ontarget status"><i class="fa fa-circle"></i></span></h5>
-												<p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-												eiusmod tempor incididunt ut labore et dolore magna aliqua.
-												Ut enim ad minim veniam,</p>
-											</a>
-										</li>
-										<li>
-											<a data-toggle="tab" href="#menu3">
-												<h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="struggling status"><i class="fa fa-circle"></i></span></h5>
-												<p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-												eiusmod tempor incididunt ut labore et dolore magna aliqua.
-												Ut enim ad minim veniam,</p>
-											</a>
-										</li>
-									</ul>
-									<h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
-								</div>
+    <!-- Main content -->
+    <div class="content-wrapper">
+      <!-- Content area -->
+      <div class="content">
 
-								<div class="tab-content tab-content-right col-sm-6">
-									<div class="text-center">
-										<ul class="list-inline list-filters">
-											<li>
-												<select class="form-control input-sm no-border">
-													<option value="Standard">Standard</option>
-												</select>
-											</li>
-											<li>
-												<select class="form-control input-sm no-border">
-													<option value="Subject">Subject</option>
-												</select>
-											</li>
-											<li>
-												<select class="form-control input-sm no-border">
-													<option value="Skills">Skills</option>
-												</select>
-											</li>
-										</ul>
-									</div>
-									<div id="menu" class="tab-pane fade in active">
-										 <!-- remove below image in the case of using plugins -->
-										 <div class="analysis-chart-container" ng-controller="subjectPerformance">
-											<!--<img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>-->
-											<canvas id="doughnut" class="chart chart-doughnut ng-isolate-scope" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
-										</canvas>
-										</div>
-											<div class="row">
-												<div class="text-center col-sm-8 col-sm-offset-2">
-													<a href="teacher/auto-generate-assignment" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-													<br>
-													<a href="teacher/custom-assignment" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-												</div>
-											</div>
-									</div>
+        <!-- Student List Panel  -->
+        <div class="panel panel-flat panel-student-profile" >
+          <div class="panel-heading">
+            <p><a href="teacher/dashboard" class="link link-gray-light"><i class="fa fa-arrow-left fa-2x"></i></a></p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="media student-profile">
+                  <div class="media-left">
+                    <div class="profile-img">
+                      <img class="img-circle" src="{{profile_pic}}" alt="{{::student.first_name}} {{::student.last_name }}"/>
+                    </div>
+                    <p class="status">
+                      <span class="gifted"><i class="fa fa-circle"></i> Gifted</span>
+                    </p>
+                  </div>
+                  <div class="media-body">
+                    <h3 class="student-name">{{::student.first_name}} {{::student.last_name }}
+                      <small class="class">{{student_class}}</small>
+                    </h3>
+                    <p class="text-uppercase">Over a week </p>
+                    <div class="time-spent">
+                      <p>Time spent on platform</p>
+                      <h1 class="time-value"><i class="fa fa-clock-o"></i> 2hrs</h1
+                      <br>
+                      <p>Average time spent by class</p>
+                      <h1 class="time-value"><i class="fa fa-clock-o"></i> 2hrs</h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" id="bar-chart" ng-controller="studentProgress">
+                <div class="container-progress-chart">
+                  <!---<img src="assets/img/progress-chart-1.png" class="img-responsive" alt="Student Progress"/>-->
+                  <canvas id="doughnut" class="chart chart-doughnut"
+                          chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
+                  </canvas> 
+                </div>
+                <div class="student-progress-allover">
+                  <p class="text-uppercase">System recommended progress: <b>35%</b></p>
+                  <p class="text-uppercase">Class average progress: <b>30%</b></p>
+                </div>
+              </div>
+            </div>
 
-									<div id="menu1" class="tab-pane fade">
-										<!-- remove below image in the case of using plugins -->
-										<div class="analysis-chart-container">
-										 <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
-									 </div>
-										 <div class="row">
-											 <div class="text-center col-sm-8 col-sm-offset-2">
-												 <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-												<br>
-												<a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-											 </div>
-										 </div>
-									</div>
+            <h4 class="panel-title">Grade Analysis
+              <select ng-model="selected_course" ng-options = "course.id as course.course_name for course in student_courses" class="form-control no-border input-sm select-subject">
+              </select>
+            </h4>
+          </div>
 
-									<div id="menu2" class="tab-pane fade">
-										<!-- remove below image in the case of using plugins -->
-										<div class="analysis-chart-container">
-										 <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
-										 </div>
-										 <div class="row">
-											 <div class="text-center col-sm-8 col-sm-offset-2">
-												 <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-												<br>
-												<a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-											 </div>
-										 </div>
-									</div>
-
-									<div id="menu3" class="tab-pane fade">
-										<!-- remove below image in the case of using plugins -->
-										<div class="analysis-chart-container">
-											 <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
-										</div>
-
-										 <div class="row">
-											 <div class="text-center col-sm-8 col-sm-offset-2">
-												 <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-												 <br>
-												 <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-											 </div>
-										 </div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-						<!-- grade Analysis -->
-						<div class="panel-body subjects-analysis">
-							<div class="panel-group subject-panel-group" id="subjectAccordion" role="tablist" aria-multiselectable="true">
-							  <div class="panel panel-subject">
-							    <div class="panel-heading" role="tab" id="subjectId1">
-							      <h4 class="panel-title">
-							        <a role="button" data-toggle="collapse" data-parent="#subjectAccordion" href="#subjectMath" aria-expanded="true" aria-controls="subjectMath">
-							          Subject - <span class="subject-name">Math</span>
-							        </a>
-							      </h4>
-							    </div>
-							    <div id="subjectMath" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="subjectId1">
-							      <div class="panel-body">
-											<ul class="media-list sub-skill-list">
-												<li class="media skill completed">
-  												<div class="media-left">
-  													<i class="status-icon text-success fa fa-check-circle fa-2x"></i>
-  													<div class="skill-title">
-  														<span>Sub Skill 1</span>
-  														<h4>Calculas</h4>
-  													</div>
-  												</div>
-  												<div class="media-body">
-  													<h4 class="media-heading">
-  														<span class="status-text text-success">Completed</span>
-  														<span class="proficiency">Proficiency Level: 6/10</span>
-  														<a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
-  													</h4>
-  												</div>
-  												<div class="media-right">
-  													<button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
-  												</div>
-  											</li>
-												<li class="media skill completed">
-													<div class="media-left">
-														<i class="status-icon text-success fa fa-check-circle fa-2x"></i>
-														<div class="skill-title">
-															<span>Sub Skill 1</span>
-															<h4>Calculas</h4>
-														</div>
-													</div>
-													<div class="media-body">
-														<h4 class="media-heading">
-															<span class="status-text text-success">Completed</span>
-															<span class="proficiency">Proficiency Level: 6/10</span>
-															<a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
-														</h4>
-													</div>
-													<div class="media-right">
-														<button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
-													</div>
-												</li>
-										  </ul>
-										</div>
-							    </div>
-							  </div>
-
-								<div class="panel panel-subject">
-								 <div class="panel-heading" role="tab" id="subjectId2">
-									 <h4 class="panel-title">
-										 <a role="button" data-toggle="collapse" data-parent="#subjectAccordion" href="#subjectEnglish" aria-expanded="true" aria-controls="collapseOne">
-											 Subject - <span class="subject-name">English</span>
-										 </a>
-									 </h4>
-								 </div>
-								 <div id="subjectEnglish" class="panel-collapse collapse" role="tabpanel" aria-labelledby="subjectEnglish">
-									 <div class="panel-body">
-										 <ul class="media-list sub-skill-list">
-											<li class="media skill completed">
-												<div class="media-left">
-													<i class="status-icon text-success fa fa-check-circle fa-2x"></i>
-													<div class="skill-title">
-														<span>Sub Skill 1</span>
-														<h4>Calculas</h4>
-													</div>
-												</div>
-												<div class="media-body">
-													<h4 class="media-heading">
-														<span class="status-text text-success">Completed</span>
-														<span class="proficiency">Proficiency Level: 6/10</span>
-														<a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
-													</h4>
-												</div>
-												<div class="media-right">
-													<button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
-												</div>
-											</li>
-											<li class="media skill inProgress">
-												<div class="media-left">
-													<i class="status-icon fa fa-play-circle text-warning fa-2x"></i>
-													<div class="skill-title">
-														<span>Sub Skill 1</span>
-														<h4>Calculas</h4>
-													</div>
-												</div>
-												<div class="media-body">
-													<div class="progress">
-													  <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-													    <span class="sr-only">60% Complete (warning)</span>
-													  </div>
-													</div>
-												</div>
-												<div class="media-right">
-													<button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
-												</div>
-											</li>
-											<li class="media skill notAttepted">
-												<div class="media-left">
-													<i class="status-icon fa fa-minus-circle fa-2x"></i>
-													<div class="skill-title">
-														<span>Sub Skill 1</span>
-														<h4>Calculas</h4>
-													</div>
-												</div>
-												<div class="media-body">
-													<h4 class="media-heading">Not Attempted Yet<h4>
-												</div>
-											</li>
-										 </ul>
-									 </div>
-								 </div>
-							 </div>
-
-							</div>
-						</div>
-
-					</div>
-					<!-- /student list panel  -->
-
-				</div>
-				<!-- /content area -->
-
-			</div>
-			<!-- /main content -->
-
-		</div>
-		<!-- /page content -->
-
-	</div>
-	<!-- page container -->
+          <!-- grade Analysis -->
+          <div class="panel-body grade-analysis" id="doughnut-chart" ng-controller="GradeAnalysis">
+            <!--<img src="assets/img/chart-grade-analysis.png" class="img-responsive"/>-->
+            <canvas id="line" class="chart chart-line ng-isolate-scope" chart-data="data"  chart-colors="colors" chart-labels="labels" chart-click="onClick" chart-hover="onHover" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride"></canvas>
+          </div>
 
 
-	<section class="modal-section">
-		<div id="modal-addAssignment" class="modal fade modal-addAssignment modal-option" role="dialog">
-			<div class="modal-dialog">
+          <!-- Analysis -->
+          <div class="panel-body tabs-analysis">
+            <div class="row">
+              <div class="tab-content tab-content-left col-sm-6">
+                <h4 class="category-content text-uppercase no-margin">Needs Your Attention</h4>
+                <ul id="myNav" class="nav nav-tabs-analysis row">
+                  <li class="active">
+                    <a data-toggle="tab" href="#menu">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu1">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="outstanding status"><i class="fa fa-circle"></i></span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu2">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="ontarget status"><i class="fa fa-circle"></i></span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu3">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="struggling status"><i class="fa fa-circle"></i></span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                </ul>
+                <h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
+              </div>
 
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
-						<h4 class="modal-title">Send Assignment</h4>
-					</div>
-					<div class="modal-body">
-						<a href="teacher-autoGenerateAssignment.html" class='btn btn-outline btn-danger  btn-block'>Send Auto Generated Assignemt</a>
-						<a href="teacher-createCustomAssignement.html" class='btn btn-outline  btn-default btn-block'>Create a custom assignment</a>
-					</div>
-				</div>
-			</div>
-				<!-- Modal content-->
-		</div>
+              <div class="tab-content tab-content-right col-sm-6">
+                <div class="text-center">
+                  <ul class="list-inline list-filters">
+                    <li>
+                      <select class="form-control input-sm no-border">
+                        <option value="Standard">Standard</option>
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-control input-sm no-border">
+                        <option value="Subject">Subject</option>
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-control input-sm no-border">
+                        <option value="Skills">Skills</option>
+                      </select>
+                    </li>
+                  </ul>
+                </div>
+                <div id="menu" class="tab-pane fade in active">
+                  <!-- remove below image in the case of using plugins -->
+                  <div class="analysis-chart-container" ng-controller="subjectPerformance">
+                    <!--<img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>-->
+                    <canvas id="doughnut" class="chart chart-doughnut ng-isolate-scope" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
+                    </canvas>
+                  </div>
+                  <div class="row">
+                    <div class="text-center col-sm-8 col-sm-offset-2">
+                      <a href="teacher/auto-generate-assignment" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                      <br>
+                      <a href="teacher/custom-assignment" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                    </div>
+                  </div>
+                </div>
 
-		<div id="modal-viewSkills" class="modal fade modal-viewSkills" role="dialog">
-			<div class="modal-dialog">
+                <div id="menu1" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                  <div class="analysis-chart-container">
+                    <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                  </div>
+                  <div class="row">
+                    <div class="text-center col-sm-8 col-sm-offset-2">
+                      <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                      <br>
+                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                    </div>
+                  </div>
+                </div>
 
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
-						<h4 class="modal-title"><span>Skills Name</span>Calculus</h4>
-					</div>
-					<div class="modal-body">
-						<table>
-							<tbody>
-								<tr>
-									<td>Time Taken:</td>
-									<th>20 Days</th>
-								</tr>
-								<tr>
-									<td>Start Date:</td>
-									<th>02 FEB  2017</th>
-								</tr>
-								<tr>
-									<td>Question Attempted:</td>
-									<th>30</th>
-								</tr>
-								<tr>
-									<td>Correct Answerd:</td>
-									<th>20</th>
-								</tr>
-								<tr>
-									<td>Class Average:</td>
-									<th>23</th>
-								</tr>
-								<tr>
-									<td>Andrew Average: </td>
-									<th>22</th>
-								</tr>
-								<tr>
-									<td>Recommended Average</td>
-									<th>27</th>
-								</tr>
-							</tbody>
-						</table>
-						<h5><span>proficiency level:</span> 8/10</h5>
-					</div>
-				</div>
-			</div>
-				<!-- Modal content-->
-		</div>
-	</seciton>
+                <div id="menu2" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                  <div class="analysis-chart-container">
+                    <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                  </div>
+                  <div class="row">
+                    <div class="text-center col-sm-8 col-sm-offset-2">
+                      <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                      <br>
+                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="menu3" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                  <div class="analysis-chart-container">
+                    <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                  </div>
+
+                  <div class="row">
+                    <div class="text-center col-sm-8 col-sm-offset-2">
+                      <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                      <br>
+                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- grade Analysis -->
+          <div class="panel-body subjects-analysis">
+            <div class="panel-group subject-panel-group" id="subjectAccordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-subject">
+                <div class="panel-heading" role="tab" id="subjectId1">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#subjectAccordion" href="#subjectMath" aria-expanded="true" aria-controls="subjectMath">
+                      Subject - <span class="subject-name">Math</span>
+                    </a>
+                  </h4>
+                </div>
+                <div id="subjectMath" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="subjectId1">
+                  <div class="panel-body">
+                    <ul class="media-list sub-skill-list">
+                      <li class="media skill completed">
+                        <div class="media-left">
+                          <i class="status-icon text-success fa fa-check-circle fa-2x"></i>
+                          <div class="skill-title">
+                            <span>Sub Skill 1</span>
+                            <h4>Calculas</h4>
+                          </div>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">
+                            <span class="status-text text-success">Completed</span>
+                            <span class="proficiency">Proficiency Level: 6/10</span>
+                            <a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
+                          </h4>
+                        </div>
+                        <div class="media-right">
+                          <button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
+                        </div>
+                      </li>
+                      <li class="media skill completed">
+                        <div class="media-left">
+                          <i class="status-icon text-success fa fa-check-circle fa-2x"></i>
+                          <div class="skill-title">
+                            <span>Sub Skill 1</span>
+                            <h4>Calculas</h4>
+                          </div>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">
+                            <span class="status-text text-success">Completed</span>
+                            <span class="proficiency">Proficiency Level: 6/10</span>
+                            <a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
+                          </h4>
+                        </div>
+                        <div class="media-right">
+                          <button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-subject">
+                <div class="panel-heading" role="tab" id="subjectId2">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#subjectAccordion" href="#subjectEnglish" aria-expanded="true" aria-controls="collapseOne">
+                      Subject - <span class="subject-name">English</span>
+                    </a>
+                  </h4>
+                </div>
+                <div id="subjectEnglish" class="panel-collapse collapse" role="tabpanel" aria-labelledby="subjectEnglish">
+                  <div class="panel-body">
+                    <ul class="media-list sub-skill-list">
+                      <li class="media skill completed">
+                        <div class="media-left">
+                          <i class="status-icon text-success fa fa-check-circle fa-2x"></i>
+                          <div class="skill-title">
+                            <span>Sub Skill 1</span>
+                            <h4>Calculas</h4>
+                          </div>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">
+                            <span class="status-text text-success">Completed</span>
+                            <span class="proficiency">Proficiency Level: 6/10</span>
+                            <a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
+                          </h4>
+                        </div>
+                        <div class="media-right">
+                          <button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
+                        </div>
+                      </li>
+                      <li class="media skill inProgress">
+                        <div class="media-left">
+                          <i class="status-icon fa fa-play-circle text-warning fa-2x"></i>
+                          <div class="skill-title">
+                            <span>Sub Skill 1</span>
+                            <h4>Calculas</h4>
+                          </div>
+                        </div>
+                        <div class="media-body">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                              <span class="sr-only">60% Complete (warning)</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="media-right">
+                          <button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
+                        </div>
+                      </li>
+                      <li class="media skill notAttepted">
+                        <div class="media-left">
+                          <i class="status-icon fa fa-minus-circle fa-2x"></i>
+                          <div class="skill-title">
+                            <span>Sub Skill 1</span>
+                            <h4>Calculas</h4>
+                          </div>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading">Not Attempted Yet<h4>
+                              </div>
+                              </li>
+                              </ul>
+                              </div>
+                              </div>
+                              </div>
+
+                              </div>
+                              </div>
+
+                              </div>
+                              <!-- /student list panel  -->
+
+                              </div>
+                              <!-- /content area -->
+
+                              </div>
+                              <!-- /main content -->
+
+                              </div>
+                              <!-- /page content -->
+
+                              </div>
+                              <!-- page container -->
+
+
+                              <section class="modal-section">
+                                <div id="modal-addAssignment" class="modal fade modal-addAssignment modal-option" role="dialog">
+                                  <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+                                        <h4 class="modal-title">Send Assignment</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <a href="teacher-autoGenerateAssignment.html" class='btn btn-outline btn-danger  btn-block'>Send Auto Generated Assignemt</a>
+                                        <a href="teacher-createCustomAssignement.html" class='btn btn-outline  btn-default btn-block'>Create a custom assignment</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- Modal content-->
+                                </div>
+
+                                <div id="modal-viewSkills" class="modal fade modal-viewSkills" role="dialog">
+                                  <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+                                        <h4 class="modal-title"><span>Skills Name</span>Calculus</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <table>
+                                          <tbody>
+                                            <tr>
+                                              <td>Time Taken:</td>
+                                              <th>20 Days</th>
+                                            </tr>
+                                            <tr>
+                                              <td>Start Date:</td>
+                                              <th>02 FEB  2017</th>
+                                            </tr>
+                                            <tr>
+                                              <td>Question Attempted:</td>
+                                              <th>30</th>
+                                            </tr>
+                                            <tr>
+                                              <td>Correct Answerd:</td>
+                                              <th>20</th>
+                                            </tr>
+                                            <tr>
+                                              <td>Class Average:</td>
+                                              <th>23</th>
+                                            </tr>
+                                            <tr>
+                                              <td>Andrew Average: </td>
+                                              <th>22</th>
+                                            </tr>
+                                            <tr>
+                                              <td>Recommended Average</td>
+                                              <th>27</th>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <h5><span>proficiency level:</span> 8/10</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- Modal content-->
+                                </div>
+                              </section>

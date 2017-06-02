@@ -281,7 +281,14 @@ angular.module('mlg')
             url   : urlParams.baseURL+urlParams.getEditQuestion+'/'+uid+'/'+QId
         });
       }
-	
+
+      teacherHttpResponse.getStudentCourses = function(uid){
+        return $http({
+            method:'GET',
+            url   : urlParams.baseURL+urlParams.getStudentCourses + '/' + uid
+        });
+      }
+
       teacherHttpResponse.getRewards=function(data){
         return $http({
             method:'POST',
@@ -560,7 +567,6 @@ angular.module('mlg')
      });
       // API to call all groups of a teacher
       teacherHttpService.getGroupsOfSubjectForTeacher(get_uid,$scope.course_id).success(function(respGroup) {
-        console.log(respGroup);
          if (respGroup.response.status == "true") {
            $scope.groups = respGroup.response.groups;
          }
@@ -590,7 +596,6 @@ angular.module('mlg')
       $scope.grade = $routeParams.gradeid;
       loginHttpService.gradeList().success(function(response) {
         angular.forEach(response.response.Grades,function(value,key){
-          console.log(value);
           if(value['id'] == $scope.grade){
             gradeName = value['name'];
           }
@@ -3110,9 +3115,35 @@ $scope.numberOfPages=function(){
             smartButtonMaxItems: 2,
         };*/
 }])
-
-
-
+.controller('studentProfileForTeacherCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','commonActions','$routeParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location, urlParams,commonActions,$routeParams) {
+    if (typeof $routeParams.id == 'undefined' || $routeParams.id  == '') {
+      alert('No child selected');
+      return false;
+    }
+    $scope.student = {};
+    $scope.image_directory = '';
+    $scope.student_courses = {};
+    $scope.student_class = '';
+    loginHttpService.getUserDetails($routeParams.id).success(function (response) {
+      if (response.data.user_all_details != '') {
+        $scope.student = response.data.user_all_details[0];
+        var image_directory = response.data.image_directory;
+        if ($scope.student.user_detail.profile_pic != '') {
+          $scope.profile_pic = image_directory + '/' + $scope.student.user_detail.profile_pic;
+        } else {
+          $scope.profile_pic = image_directory + '/' + 'profile_img/default_studentAvtar.png';
+        }
+        teacherHttpService.getStudentCourses($routeParams.id).success(function (response) {
+          if (response.response.status.toLowerCase() == 'true') {
+            $scope.student_courses = response.response.student_courses;
+            $scope.selected_course =$scope.student_courses[0].id;
+            $scope.student_class = response.response.student_class_name;
+          }
+        });
+      }
+    });
+  }])
 .directive('owlcarousel', function() {
 
     var linker = function(scope, element, attr) {

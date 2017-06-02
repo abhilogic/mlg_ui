@@ -88,6 +88,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getRewards : '/teachers/getRewards',
   getTeacherPoints : '/teachers/getTeacherPoints',
   setAvailableRewards : '/teachers/setAvailableRewards',
+  getStudentCourses : '/students/getStudentCourses',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -249,7 +250,7 @@ principal  : 30,
 		controller : 'teacherStudentList',
 	}).when('/teacher/student-profile/:id',{
 		templateUrl : 'views/dashboard/teacher-student-profile.html',
-		//controller : 'teacherStudentProfile',
+		controller : 'studentProfileForTeacherCntrl',
 	}).when('/teacher/auto-generate-assignment',{
 		templateUrl : 'views/dashboard/teacher-autoGenerateAssignment.html',
 		controller : 'teacherAutoGenerateAssignment',
