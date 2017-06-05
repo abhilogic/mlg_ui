@@ -3304,7 +3304,7 @@ $scope.updateQuestion = function(data) {
         if (response.status == true) {
          $scope.rewards = response.result;
          if (response.available_rewards == 0) {
-           alert('There is no more rewards availbale');
+          // alert('There is no more rewards availbale');
          }
         } else {
           if (response.message != '') {
