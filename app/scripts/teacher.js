@@ -1161,6 +1161,11 @@ $scope.numberOfPages=function(){
     var countDoc = 0;
     var countVideo = 0;
     $scope.frm = {};
+
+    $scope.close_modal=function(){
+      $(".modal-backdrop").remove();
+     // window.location.href='teacher/add_content';
+    }  
 //    $scope.doc = {};
 //    $scope.img = {};
 $scope.temp = {};
