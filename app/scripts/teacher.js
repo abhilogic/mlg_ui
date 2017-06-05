@@ -2798,7 +2798,8 @@ $scope.updateQuestion = function(data) {
     $scope.frm.questions_limit =5;      
     $scope.frm.assignmentFor = 'class';
     $scope.frm.selectedStd =[];
-    $scope.frm.asscomments =""; 
+    $scope.frm.asscomments ="";
+    var  assgresources = {};
 
 
     $scope.$on('UploadedImage', function(event, mass) { 

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives','ngStorage'
+angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives','ngStorage','ngSanitize'
 ])
 .value('urlParams', {
 	users : '/users',
