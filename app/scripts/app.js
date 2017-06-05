@@ -34,7 +34,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	getUsedCoupon: '/users/getUsedCoupon',
 	getUserSetting: '/users/getUserSetting',
 	setUserSetting: '/users/setUserSetting',
-    setAvailableCoupon: '/users/setAvailableCoupon',
+  setAvailableCoupon: '/users/setAvailableCoupon',
   promocode :'/users/promocode',
   getUserPurchaseDetails :'/users/getUserPurchaseDetails',
   signUpTeacher :'/teachers/setTeacherRecord',
@@ -88,7 +88,12 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getRewards : '/teachers/getRewards',
   getTeacherPoints : '/teachers/getTeacherPoints',
   setAvailableRewards : '/teachers/setAvailableRewards',
+<<<<<<< Updated upstream
   getStudentCourses : '/students/getStudentCourses',
+=======
+  updateQuestion : '/teachers/updateTeacherQuestion',
+  getLessonForList : '/teachers/getLessonDetailForListing',
+>>>>>>> Stashed changes
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -284,7 +289,7 @@ principal  : 30,
 		controller : 'teacherQuestions',
   }).when('/teacher/lessons',{
 		templateUrl : 'views/dashboard/teacher-content-lessons.html',
-		controller : 'teacherLessonCtrl',
+		controller : 'teacherLessonListingCtrl',
   }).when('/teacher/create-group/class/:grade_id/:subject_name/:course_id',{
 		templateUrl : 'views/dashboard/teacher-create-group.html',
 		controller : 'teacherGroupCtrl',
