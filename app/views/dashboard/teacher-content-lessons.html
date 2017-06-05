@@ -53,18 +53,14 @@
 
 									<li class="toolbar-item">
 										<div class="btn-group" role="group" aria-label="...">
-										  <button type="button" class="btn btn-default">Class 5<sup>th</sup></button>
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="gradeModel" ng-change="getGrade(gradeModel)" title="Class" 
+                            ng-options="grade.id as grade.name for grade in grades track by grade.id">
+                      <option value="">- Select Class -</option>
+                    </select>
+											<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												<span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Class 6<sup>th</sup></a></li>
-												<li><a href="#">Class 7<sup>th</sup></a></li>
-												<li><a href="#">Class 8<sup>th</sup></a></li>
-												<li><a href="#">Class 9<sup>th</sup></a></li>
-												<li><a href="#">Class 10<sup>th</sup></a></li>
-												<li><a href="#">Class 11<sup>th</sup></a></li>
-											</ul>
+											</button> -->
 										</div>
 									</li>
 
@@ -84,31 +80,29 @@
 
 									<li class="toolbar-item">
 										<div class="btn-group" role="group" aria-label="...">
-										  <button type="button" class="btn btn-default">Subjetcs</button>
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="courseModel" ng-change="getCourse(courseModel)" title="Class" 
+                            ng-options="course.course_id as course.course_name for course in courses track by course.course_id">
+                      <option value="">- Select Subject -</option>
+                    </select>
+											<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												<span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Mathematics</a></li>
-												<li><a href="#">English</a></li>
-												<li><a href="#">Science</a></li>
-												<li><a href="#">Hindi</a></li>
-											</ul>
+											</button> -->
+											
 										</div>
 									</li>
 
 									<li class="toolbar-item">
 										<div class="btn-group" role="group" aria-label="...">
-										  <button type="button" class="btn btn-default">Skills</button>
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="skillModel" ng-change="getSkill(skillModel)" title="Class" 
+                            ng-options="skil.id as skil.label for skil in skill track by skil.id">
+                      <option value="">- Select Skills -</option>
+                    </select>
+							
+											<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												<span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Mathematics</a></li>
-												<li><a href="#">English</a></li>
-												<li><a href="#">Science</a></li>
-												<li><a href="#">Hindi</a></li>
-											</ul>
+											</button> -->
 										</div>
 									</li>
 
