@@ -2379,7 +2379,7 @@ $scope.subSkillEvents = {
         angular.forEach(response.data,function(type,key){
           $scope.questionType.push({
             'id' : type['name'],
-            'label' : type['label']
+            'label' : type['lable']
           });
         });
       }
@@ -2603,7 +2603,7 @@ qType = value['ques_type'];
 angular.forEach(value['ques_type'],function(type,key){
   angular.forEach($scope.questionType,function(qlist,key){
     if(type == qlist['id']){
-      $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['label']});
+      $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['lable']});
     }
   });
 });
