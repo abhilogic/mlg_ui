@@ -1,288 +1,267 @@
 angular.module('mlg')
 .factory('teacherHttpService',['$http','urlParams',function($http,urlParams){
- var teacherHttpResponse={};
- teacherHttpResponse.signUpTeacher=function(teacherdata){
-  return $http({
-    method:'POST',	
-    data : teacherdata,		
-    url  : urlParams.baseURL+urlParams.signUpTeacher
-  });  
-}
-teacherHttpResponse.teacherPayment=function(id){
-  return $http({
-    method:'POST',	
-    data : id,		
-    url  : urlParams.baseURL+urlParams.teacherPayment
-  });
-}
-teacherHttpResponse.getStudentDetail=function(grade,subject,type){
-  return $http({
-    method:'GET',			
-    url  : urlParams.baseURL+urlParams.getStudentDetail+'/'+grade+'/'+subject+'/'+type
-  });
-}
-teacherHttpResponse.getTeacherGrades=function(tid,type){
-  return $http({
-    method:'GET',			
-    url  : urlParams.baseURL+urlParams.getTeacherGrades+'/'+tid+'/'+type
-  });
-}
-teacherHttpResponse.gradeList=function(){
- return $http({
-  method:'GET',     
-  url   : urlParams.baseURL+urlParams.gradeList
-});
-}
+    var teacherHttpResponse={};
+    teacherHttpResponse.signUpTeacher=function(teacherdata){
+     return $http({
+       method:'POST',	
+       data : teacherdata,		
+       url  : urlParams.baseURL+urlParams.signUpTeacher
+     });  
+   }
+   teacherHttpResponse.teacherPayment=function(id){
+     return $http({
+       method:'POST',	
+       data : id,		
+       url  : urlParams.baseURL+urlParams.teacherPayment
+     });
+   }
+   teacherHttpResponse.getStudentDetail=function(grade,subject,type){
+     return $http({
+       method:'GET',			
+       url  : urlParams.baseURL+urlParams.getStudentDetail+'/'+grade+'/'+subject+'/'+type
+     });
+   }
+   teacherHttpResponse.getTeacherGrades=function(tid,type){
+     return $http({
+       method:'GET',			
+       url  : urlParams.baseURL+urlParams.getTeacherGrades+'/'+tid+'/'+type
+     });
+   }
+   teacherHttpResponse.gradeList=function(){
+    return $http({
+     method:'GET',     
+     url   : urlParams.baseURL+urlParams.gradeList
+   });
+   }
 
-teacherHttpResponse.getCourseByGrade=function(gradeid){    
- return $http({
-   method:'GET', 
-   data : gradeid,    
-   url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+gradeid
- });
-}
+   teacherHttpResponse.getCourseByGrade=function(gradeid){    
+    return $http({
+      method:'GET', 
+      data : gradeid,    
+      url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+gradeid
+    });
+   }
 
-teacherHttpResponse.setTeacherSubjects=function(selected_courses){    
- return $http({
-   method:'POST', 
-   data : selected_courses,    
-   url   : urlParams.baseURL+urlParams.setTeacherSubjects
- });
-}
-teacherHttpResponse.getTeacherDetailsForContent=function(tid,grade,subject,type){
-  return $http({
-    method:'GET',			
-    url  : urlParams.baseURL+urlParams.getTeacherDetailsForContent+'/'+tid+'/'+grade+'/'+subject+'/'+type
-  });
-}
-teacherHttpResponse.getAllCourseList=function(parent_id,type){
-  return $http({
-    method:'GET',			
-    url  : urlParams.baseURL+urlParams.getAllCourseList+'/'+parent_id+'/'+type
-  });
-}
-teacherHttpResponse.setContentForLesson=function(lessonDetail){
-  return $http({
-    method:'post',
-    data : lessonDetail,
-    url  : urlParams.baseURL+urlParams.setContentForLesson
-  });
-}
-teacherHttpResponse.setTemplateDetail=function(lessonDetail){
-  return $http({
-    method:'post',
-    data : lessonDetail,
-    url  : urlParams.baseURL+urlParams.setTemplateDetail
-  });
-}
-teacherHttpResponse.getTemplateDetail=function(uid,type){
-  return $http({
-    method:'GET',
-    url  : urlParams.baseURL+urlParams.getTemplateDetail+'/'+uid+'/'+type
-  });
-}
-teacherHttpResponse.delContent=function(id){
-  return $http({
-    method:'GET',
-    url  : urlParams.baseURL+urlParams.delContent+'/'+id
-  });
-}
-teacherHttpResponse.getDifficultyLevel=function(){
-  return $http({
-    method:'GET',
-    url  : urlParams.baseURL+urlParams.getDifficultyLevel
-  });
-}
-teacherHttpResponse.questionType=function(){
-  return $http({
-    method:'GET',
-    url  : urlParams.baseURL+urlParams.questionType
-  });
-}
-teacherHttpResponse.getUserContent=function(subSkill){
-  return $http({
-    method:'POST',
-    data : subSkill,
-    url  : urlParams.baseURL+urlParams.getUserContent
-  });
-}
-teacherHttpResponse.setUserContents=function(subSkill){
-  return $http({
-    method:'GET',
-    url  : urlParams.baseURL+urlParams.setUserContents+'/'+subSkill
-  });
-}
+   teacherHttpResponse.setTeacherSubjects=function(selected_courses){    
+    return $http({
+      method:'POST', 
+      data : selected_courses,    
+      url   : urlParams.baseURL+urlParams.setTeacherSubjects
+    });
+   }
+   teacherHttpResponse.getTeacherDetailsForContent=function(tid,grade,subject,type){
+     return $http({
+       method:'GET',			
+       url  : urlParams.baseURL+urlParams.getTeacherDetailsForContent+'/'+tid+'/'+grade+'/'+subject+'/'+type
+     });
+   }
+   teacherHttpResponse.getAllCourseList=function(parent_id,type){
+     return $http({
+       method:'GET',			
+       url  : urlParams.baseURL+urlParams.getAllCourseList+'/'+parent_id+'/'+type
+     });
+   }
+   teacherHttpResponse.setContentForLesson=function(lessonDetail){
+     return $http({
+       method:'post',
+       data : lessonDetail,
+       url  : urlParams.baseURL+urlParams.setContentForLesson
+     });
+   }
+   teacherHttpResponse.setTemplateDetail=function(lessonDetail){
+     return $http({
+       method:'post',
+       data : lessonDetail,
+       url  : urlParams.baseURL+urlParams.setTemplateDetail
+     });
+   }
+   teacherHttpResponse.getTemplateDetail=function(uid,type){
+     return $http({
+       method:'GET',
+       url  : urlParams.baseURL+urlParams.getTemplateDetail+'/'+uid+'/'+type
+     });
+   }
+   teacherHttpResponse.delContent=function(id){
+     return $http({
+       method:'GET',
+       url  : urlParams.baseURL+urlParams.delContent+'/'+id
+     });
+   }
+   teacherHttpResponse.getDifficultyLevel=function(){
+     return $http({
+       method:'GET',
+       url  : urlParams.baseURL+urlParams.getDifficultyLevel
+     });
+   }
+   teacherHttpResponse.questionType=function(){
+     return $http({
+       method:'GET',
+       url  : urlParams.baseURL+urlParams.questionType
+     });
+   }
+   teacherHttpResponse.getUserContent=function(subSkill){
+     return $http({
+       method:'POST',
+       data : subSkill,
+       url  : urlParams.baseURL+urlParams.getUserContent
+     });
+   }
+   teacherHttpResponse.setUserContents=function(subSkill){
+     return $http({
+       method:'GET',
+       url  : urlParams.baseURL+urlParams.setUserContents+'/'+subSkill
+     });
+   }
 
-teacherHttpResponse.addStudent=function(childdata){
-  return $http({
-    method:'POST',  
-    data : childdata,   
-    url  : urlParams.baseURL+urlParams.addStudent
-  });
-}
+   teacherHttpResponse.addStudent=function(childdata){
+     return $http({
+       method:'POST',  
+       data : childdata,   
+       url  : urlParams.baseURL+urlParams.addStudent
+     });
+   }
 
-teacherHttpResponse.getStudentsOfSubjectForTeacher=function(tid,course_id){
-  return $http({
-    method:'GET',            
-    url  : urlParams.baseURL+urlParams.getStudentsOfSubjectForTeacher+'?teacher_id='+tid+'&course_id='+course_id
-  });
-}
+   teacherHttpResponse.getStudentsOfSubjectForTeacher=function(tid,course_id){
+     return $http({
+       method:'GET',            
+       url  : urlParams.baseURL+urlParams.getStudentsOfSubjectForTeacher+'?teacher_id='+tid+'&course_id='+course_id
+     });
+   }
 
-teacherHttpResponse.updateStudent=function(stUpdate){
-  return $http({
-    method:'POST', 
-    data : stUpdate,           
-    url  : urlParams.baseURL+urlParams.updateStudent
-  });
-}
+   teacherHttpResponse.updateStudent=function(stUpdate){
+     return $http({
+       method:'POST', 
+       data : stUpdate,           
+       url  : urlParams.baseURL+urlParams.updateStudent
+     });
+   }
 
-teacherHttpResponse.deleteStudent=function(stdelete){
-  return $http({
-    method:'GET',                     
-    url  : urlParams.baseURL+urlParams.deleteStudent+'?id='+stdelete.id
-  });
-}
+   teacherHttpResponse.deleteStudent=function(stdelete){
+     return $http({
+       method:'GET',                     
+       url  : urlParams.baseURL+urlParams.deleteStudent+'?id='+stdelete.id
+     });
+   }
 
-teacherHttpResponse.sendMeMail=function(selectd_students, get_uid){
-  return $http({
-    method:'POST', 
-    data :  selectd_students,                  
-    url  : urlParams.baseURL+urlParams.sendMeMail+'?teacher_id='+get_uid
-  });
-}
+   teacherHttpResponse.sendMeMail=function(selectd_students, get_uid){
+     return $http({
+       method:'POST', 
+       data :  selectd_students,                  
+       url  : urlParams.baseURL+urlParams.sendMeMail+'?teacher_id='+get_uid
+     });
+   }
 
-teacherHttpResponse.getStudentOfTeacher=function(get_uid){
-  return $http({
-    method:'GET',                            
-    url  : urlParams.baseURL+urlParams.getStudentOfTeacher+'?teacher_id='+get_uid
-  });
-}
+   teacherHttpResponse.getStudentOfTeacher=function(get_uid){
+     return $http({
+       method:'GET',                            
+       url  : urlParams.baseURL+urlParams.getStudentOfTeacher+'?teacher_id='+get_uid
+     });
+   }
 
-teacherHttpResponse.createGroup=function(selected_students,get_uid,course_id,grade_id){
-  return $http({
-    method:'POST', 
-    data :  selected_students,                           
-    url  : urlParams.baseURL+urlParams.createGroupInSubjectByTeacher+'?teacher_id='+get_uid+'&course_id='+course_id +'&grade_id='+grade_id
-  });
-}
-
-
-teacherHttpResponse.getGroupsOfSubjectForTeacher=function(get_uid, course_id){
-  return $http({
-    method:'GET',                                  
-    url  : urlParams.baseURL+urlParams.getGroupsOfSubjectForTeacher+'?teacher_id='+get_uid+'&course_id='+course_id
-  });
-}
-
-teacherHttpResponse.getStudentsOfGroup=function(group_id){
-  return $http({
-    method:'GET',                                  
-    url  : urlParams.baseURL+urlParams.getStudentsOfGroup+'?group_id='+group_id
-  });
-}
-
-teacherHttpResponse.updateContent=function(lessonDetail){
-  return $http({
-    method:'POST',
-    data : lessonDetail,
-    url  : urlParams.baseURL+urlParams.updateContent
-  });
-}
-teacherHttpResponse.uploadQuestion=function(question){
-  return $http({
-    method:'POST',
-    data : question,
-    url  : urlParams.baseURL+urlParams.uploadQuestion
-  });
-} 
-
-teacherHttpResponse.editGroupOfSubject=function(slected_stRecords, group_id){
-  return $http({
-    method:'POST',
-    data : slected_stRecords,
-    url  : urlParams.baseURL+urlParams.editGroupOfSubject+'?group_id='+group_id
-  });
-}
-teacherHttpResponse.uploadEvent=function(eventDetails){
-  return $http({
-    method:'POST',
-    data : eventDetails,
-    url  : urlParams.baseURL+urlParams.uploadEvent
-  });
-}
-teacherHttpResponse.getEvent=function(uid){
-  return $http({
-    method:'get',
-    url  : urlParams.baseURL+urlParams.getEvent+'/'+uid
-  });
-}
+   teacherHttpResponse.createGroup=function(selected_students,get_uid,course_id,grade_id){
+     return $http({
+       method:'POST', 
+       data :  selected_students,                           
+       url  : urlParams.baseURL+urlParams.createGroupInSubjectByTeacher+'?teacher_id='+get_uid+'&course_id='+course_id +'&grade_id='+grade_id
+     });
+   }
 
 
-teacherHttpResponse.getCourseSkillSubskills=function(grade_id,parent_id){
-  return $http({
-    method:'GET',         
-    url  : urlParams.baseURL+urlParams.getCourseSkillSubskills+'?grade_id='+grade_id+'&parent_id='+parent_id
-  });
-}
+   teacherHttpResponse.getGroupsOfSubjectForTeacher=function(get_uid, course_id){
+     return $http({
+       method:'GET',                                  
+       url  : urlParams.baseURL+urlParams.getGroupsOfSubjectForTeacher+'?teacher_id='+get_uid+'&course_id='+course_id
+     });
+   }
 
-teacherHttpResponse.saveCardToPaypalForTeacher=function(data){
-  return $http({
-    method:'POST',
-    data  : data,
-    url   : urlParams.baseURL+urlParams.saveCardToPaypalForTeacher
-  });
-}
-teacherHttpResponse.generateAssignQuestions=function(data){
-  return $http({
-    method:'POST',
-    data  : data,
-    url   : urlParams.baseURL+urlParams.generateAssignQuestions
-  });
-}
+   teacherHttpResponse.getStudentsOfGroup=function(group_id){
+     return $http({
+       method:'GET',                                  
+       url  : urlParams.baseURL+urlParams.getStudentsOfGroup+'?group_id='+group_id
+     });
+   }
 
-teacherHttpResponse.getQuestionsListForAssg=function(data){
-  return $http({
-    method:'POST',
-    data  : data,
-    url   : urlParams.baseURL+urlParams.getQuestionsListForAssg
-  });
-}
+   teacherHttpResponse.updateContent=function(lessonDetail){
+     return $http({
+       method:'POST',
+       data : lessonDetail,
+       url  : urlParams.baseURL+urlParams.updateContent
+     });
+   }
+   teacherHttpResponse.uploadQuestion=function(question){
+     return $http({
+       method:'POST',
+       data : question,
+       url  : urlParams.baseURL+urlParams.uploadQuestion
+     });
+   } 
 
-teacherHttpResponse.setCustomAssignmentByTeacher=function(data,teacher_id){
-  return $http({
-    method:'POST',
-    data  : data,
-    url   : urlParams.baseURL+urlParams.setCustomAssignmentByTeacher
-  });
-}
-
-teacherHttpResponse.setStepNum=function(uid,step_num){
-  return $http({
-    method:'GET',
-    url   : urlParams.baseURL+urlParams.setStepNum+'?user_id='+uid+'&step_num='+step_num
-  });
-}
-teacherHttpResponse.getQuestions=function(uid,pnum){
-  return $http({
-    method:'GET',
-    url   : urlParams.baseURL+urlParams.getQuestions+'/'+uid+'/'+pnum
-  });
-}
-teacherHttpResponse.deleteQuestions=function(quesId){
-  return $http({
-    method:'post',
-    data : quesId,
-    url   : urlParams.baseURL+urlParams.deleteQuestions
-  });
-}
-teacherHttpResponse.getEditQuestion=function(uid,QId){
-  return $http({
-    method:'GET',
-    url   : urlParams.baseURL+urlParams.getEditQuestion+'/'+uid+'/'+QId
-  });
-}
+   teacherHttpResponse.editGroupOfSubject=function(slected_stRecords, group_id){
+     return $http({
+       method:'POST',
+       data : slected_stRecords,
+       url  : urlParams.baseURL+urlParams.editGroupOfSubject+'?group_id='+group_id
+     });
+   }
+   teacherHttpResponse.uploadEvent=function(eventDetails){
+     return $http({
+       method:'POST',
+       data : eventDetails,
+       url  : urlParams.baseURL+urlParams.uploadEvent
+     });
+   }
+   teacherHttpResponse.getEvent=function(uid){
+     return $http({
+       method:'get',
+       url  : urlParams.baseURL+urlParams.getEvent+'/'+uid
+     });
+   }
 
 
+   teacherHttpResponse.getCourseSkillSubskills=function(grade_id,parent_id){
+     return $http({
+       method:'GET',         
+       url  : urlParams.baseURL+urlParams.getCourseSkillSubskills+'?grade_id='+grade_id+'&parent_id='+parent_id
+     });
+   }
+
+   teacherHttpResponse.saveCardToPaypalForTeacher=function(data){
+     return $http({
+       method:'POST',
+       data  : data,
+       url   : urlParams.baseURL+urlParams.saveCardToPaypalForTeacher
+     });
+   }
+   teacherHttpResponse.generateAssignQuestions=function(data){
+     return $http({
+       method:'POST',
+       data  : data,
+       url   : urlParams.baseURL+urlParams.generateAssignQuestions
+     });
+   }
+
+   teacherHttpResponse.getQuestionsListForAssg=function(data){
+     return $http({
+       method:'POST',
+       data  : data,
+       url   : urlParams.baseURL+urlParams.getQuestionsListForAssg
+     });
+   }
+
+   teacherHttpResponse.setCustomAssignmentByTeacher=function(data,teacher_id){
+     return $http({
+       method:'POST',
+       data  : data,
+       url   : urlParams.baseURL+urlParams.setCustomAssignmentByTeacher
+     });
+   }
+
+   teacherHttpResponse.setStepNum=function(uid,step_num){
+     return $http({
+       method:'GET',
+       url   : urlParams.baseURL+urlParams.setStepNum+'?user_id='+uid+'&step_num='+step_num
+     });
+   }
       teacherHttpResponse.setStepNum=function(uid,step_num){
       return $http({
           method:'GET',
@@ -339,7 +318,25 @@ teacherHttpResponse.getEditQuestion=function(uid,QId){
             url   : urlParams.baseURL+urlParams.setAvailableRewards
         });
       }
-
+      teacherHttpResponse.updateQuestion=function(data){
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.updateQuestion
+        });
+      }
+      teacherHttpResponse.getLessonForList=function(uid,pnum){
+        return $http({
+            method:'GET',
+            url   : urlParams.baseURL+urlParams.getLessonForList+'/'+uid+'/'+pnum
+        });
+      }
+      teacherHttpResponse.getFilterdQuestion=function(uid,pnum,grade,course,skill){
+        return $http({
+            method:'GET',
+            url   : urlParams.baseURL+urlParams.getFilterdQuestion+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill
+        });
+      }
       return teacherHttpResponse;
 
 
@@ -1176,6 +1173,7 @@ $scope.subSkill = [];
 $scope.selectedTemplateModel = [];       
 $scope.userContentModel = [];
 $scope.template = [];
+$scope.userContent =[];
 $scope.templateDetail = [];
 $scope.type = 'ALL';
 $scope.textClass = 'active';
@@ -1841,6 +1839,26 @@ $scope.lessonPreview = function(data) {
     $scope.previewImage.push(temp_string[0]);  
   }
 }
+var lUrl = $location.url();
+if(typeof lUrl.split('?') != 'undefined') {
+  var LId = lUrl.split('?');
+}
+if(typeof LId[1] != 'undefined') {  
+var cId =  LId[1].split('&F');
+var subSkillDetail = {};
+subSkillDetail= {
+  uid : get_uid,
+  subskills :cId[1],
+} 
+  teacherHttpService.getUserContent(subSkillDetail).success(function(response) {
+    if (response.status == true) {
+      $scope.userContent = response.data;
+      $scope.setUserContent(cId[0]);
+    }else{
+      $scope.msg = 'unable to find content.';
+    }
+  });
+}
 }])
 .controller('teacherScopeSequence',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
@@ -2361,7 +2379,7 @@ $scope.subSkillEvents = {
         angular.forEach(response.data,function(type,key){
           $scope.questionType.push({
             'id' : type['name'],
-            'label' : type['label']
+            'label' : type['lable']
           });
         });
       }
@@ -2585,7 +2603,7 @@ qType = value['ques_type'];
 angular.forEach(value['ques_type'],function(type,key){
   angular.forEach($scope.questionType,function(qlist,key){
     if(type == qlist['id']){
-      $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['label']});
+      $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['lable']});
     }
   });
 });
@@ -2723,14 +2741,25 @@ angular.forEach(response.skill, function(skil, key) {
   $scope.skillmodel.push({'id' : skil['course_id']});
   skillId = skil['course_id'];
 });
-angular.forEach(response.sub_skill, function(subskil, key) {
-  $scope.subSkill.push({
-    'id' : subskil['course_id'],
-    'label': subskil['name']
+teacherHttpService.getAllCourseList(skillId,'lesson').success(function(response) {
+  angular.forEach(response.response.course_details, function(value, key) {
+    $scope.subSkill.push({
+      'id' : value['course_id'],
+      'label': value['name']
+    });
   });
-  $scope.subSkillmodel.push({'id' : subskil['course_id']});
-  subSkills = subskil['course_id'];
 }); 
+angular.forEach(response.sub_skill, function(subskil, key) {
+//  $scope.subSkill.push({
+//    'id' : subskil['course_id'],
+//    'label': subskil['name']
+//  });
+  $scope.subSkillmodel.push({'id' : subskil['course_id']});
+  subSkills.push(subskil['course_id']);
+  });
+  angular.forEach(response.header, function(subskil, key) {
+    
+  }); 
 }
 });
 $scope.updateQuestion = function(data) {
@@ -2769,6 +2798,7 @@ $scope.updateQuestion = function(data) {
   });
   question = {
     tid : get_uid,
+    qId : QId[1],
     grade : grade,
     grade_name : gradeName,
     course : course,
@@ -2785,6 +2815,11 @@ $scope.updateQuestion = function(data) {
     type : Qtyp,
     point_type : pointType,
   };
+  teacherHttpService.updateQuestion(question).success(function(response) {
+      if (response.status == true) {
+        
+      }
+  }); 
 }
 }])
 .controller('teacherCustomAssignmentCtrl',['$rootScope','$scope','$timeout','teacherHttpService','loginHttpService','$location','urlParams','user_roles','commonActions','$routeParams','$compile',
@@ -2798,7 +2833,8 @@ $scope.updateQuestion = function(data) {
     $scope.frm.questions_limit =5;      
     $scope.frm.assignmentFor = 'class';
     $scope.frm.selectedStd =[];
-    $scope.frm.asscomments =""; 
+    $scope.frm.asscomments ="";
+    var  assgresources = {};
 
 
     $scope.$on('UploadedImage', function(event, mass) { 
@@ -3398,6 +3434,104 @@ $scope.updateQuestion = function(data) {
     });
   }
 
+}
+   // Get teacher class and subjects. 
+   teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {   
+    if (response.status == true) {
+     $scope.grades = response.grade;
+   }
+ });
+     // on the basis of grade fetch the coursr list.
+     var grade = -"1";
+     var course = "-1";
+     var skill = "-1";
+     $scope.skills = [];
+     $scope.getGrade = function(){
+      grade = $scope.gradeModel;
+      teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
+        $scope.courses = response.response;
+      }).error(function(error) {
+        $scope.msg= 'Some technical error occured.';
+      });
+      teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
+        $scope.questionList = response.data;
+        $scope.lastPage = response.lastPage;
+        $scope.start = response.start;
+        $scope.last = response.last;
+        $scope.total = response.total;
+      });
+    }
+    // on the basis of courseid fetch skill
+    $scope.skill = [];
+    $scope.getCourse = function(data){
+      if(data != null) {
+        course = $scope.courseModel;
+        teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
+          var data = response.response.course_details;
+          angular.forEach(data, function(value, key) {
+            $scope.skill.push({
+              'id' : value['course_id'],
+              'label': value['name']
+            });
+          });
+        }).error(function(error) {
+          $scope.msg= 'Some technical error occured.';
+        });
+        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        });
+      }
+    }
+    $scope.getSkill = function(skil){
+      if(skil != null) {
+        skill = skil;
+        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        })
+      }
+    }
+  }])
+.controller('teacherLessonListingCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile) {
+   var get_uid = commonActions.getcookies(get_uid);
+   var pgnum = 1;
+   var tempUrl = $location.url();
+   var temp = tempUrl.split('#');
+   if(typeof temp[1] != 'undefined') {
+     pgnum = temp[1];
+   }
+   teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
+    console.log(response);
+    $scope.lessonList = response.data;
+    $scope.lastPage = response.lastPage;
+    $scope.start = response.start;
+    $scope.last = response.last;
+    $scope.total = response.total;
+  });
+   $scope.range = function(min, max, step){
+    step = step || 1;
+    var input = [];
+    for (var i = min; i <= max; i += step) input.push(i);
+      return input;
+  };
+  $scope.deleteContent = function(data){
+  teacherHttpService.delContent(data).success(function(response) {
+    if (response.status == true) {
+      alert(response.message);
+      window.location.reload();
+      return true;
+    }else{
+      alert(response.message);
+    }
+  });
 }
    // Get teacher class and subjects. 
    teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {   

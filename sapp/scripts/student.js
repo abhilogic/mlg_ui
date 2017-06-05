@@ -1090,6 +1090,7 @@ $scope.apiTabs=function(){
 	var get_uid=commonActions.getcookies(get_uid);
 	var assignment_id ="37";
 
+	// To masscourt Action
 	$("#gotIt").click(function(){
 	  	$(".masscourt-block .masscourt-cover").removeClass("in");
 	  	setTimeout(function(){
@@ -1098,17 +1099,43 @@ $scope.apiTabs=function(){
 
 	  });
 
+	// Api to get the stidents courses
 	loginHttpService.getStudentCourses(get_uid).success(function(res) {
-			if(res.response.status="TRUE"){
-				var st_grade_id=res.response.student_class;
-				$scope.student_courses = res.response.student_courses; 
+		if(res.response.status="TRUE"){
+			var st_grade_id=res.response.student_class;
+			$scope.student_courses = res.response.student_courses; 
+		}else{
+			$scope.error_message= "Issue in finding the curses.";
+		}
+	});
 
-				
-			}
+	$scope.onClickSubject = function(subid){
+		$(".subject_"+subid).addClass('active in');
+		$("#subject_"+subid).show();
+		
+		//API to call number of assignments
+	 	loginHttpService.getStudentAssignments(get_uid).success(function(respAssgn) {
+	 		console.log(respAssgn.response.status);
+    	if (respAssgn.response.status == true) {
+    			$scope.assignments =[];
+    		  angular.forEach(respAssgn.response.assignment, function(assgnitem){
+                   if(assgnitem.subject_id == subid ){
+                   	console.log(assgnitem.subject_id);
+                   	$scope.assignments.push(assgnitem); 
+                   }
+                   
+               });
+
+    		
+   		}
+   		else{
+   			$scope.error_message = respAssgn.response.message ;
+   		}
+    });
 
 
 
-});
+	}
 
 	
 
@@ -1118,16 +1145,7 @@ $scope.apiTabs=function(){
 
 
 
-	 //API to call number of assignments
-	 loginHttpService.getStudentAssignments(get_uid).success(function(respAssgn) {
-	 	console.log(respAssgn);
-    		if (respAssgn.response.status == "True") {
-
-    		}
-    		else{
-
-    		}
-    });
+	 
 
 
 
