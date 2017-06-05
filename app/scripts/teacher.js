@@ -3166,7 +3166,7 @@ $scope.updateQuestion = function(data) {
       if (response.data.user_all_details != '') {
         $scope.student = response.data.user_all_details[0];
         var image_directory = response.data.image_directory;
-        if ($scope.student.user_detail.profile_pic != '') {
+        if ($scope.student.user_detail.profile_pic != '' && $scope.student.user_detail.profile_pic != null) {
           $scope.profile_pic = image_directory + '/' + $scope.student.user_detail.profile_pic;
         } else {
           $scope.profile_pic = image_directory + '/' + 'profile_img/default_studentAvtar.png';
