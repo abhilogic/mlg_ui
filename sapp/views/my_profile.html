@@ -305,7 +305,8 @@
           <div class="owl-carousel owl-theme accquired-coupones">
 
             <!--  ITEMS  -->
-            <li ng-repeat="coupon in coupons_acquired" >
+            <div class="owl-item" ng-repeat="coupon in coupons_acquired"  >
+            <li  >
             <div  class="item">
               <div class="coupon_cover locked">
                 <img class="coupon_provider_logo" alt="" src="{{coupon.image}}">
@@ -317,6 +318,7 @@
               </div>
             </div>
           </li>
+          </div>
             <!--  ITEMS ENDED HERE -->
 
           </div>

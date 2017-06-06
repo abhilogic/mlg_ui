@@ -1,188 +1,121 @@
-		
-<div class="masscourt-block active" id="help_mascot">
-      <div class="masscourt-cover in">
-        <img ng-src="assets/img/mascort-img/mascot.png" class="masccort-img" alt=""/>
-        <div class="hint-block">
-          <div class="col-xs-2 padding-0">
-            <!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
-          </div>
-          <div class="col-xs-10">
-            <span class="hint">
-              
-              This is the challenge arena. It has all the challenges sent to you by your teacher/parents. You need to complete these challenges before (X) days or else you’ll lose some points.
 
-              <p ng-show="true">Click on a challenge to start. I hope you are prepared for it</p>
-              <p ng-show="false">Lucky, you don’t have any challenges for now. But keep an eye over here, they can come at any time</p>
-              
-            </span>
-            <div class="text-right">
-              <button type="button" class="btn" id="gotIt">Got it!</button>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
 
+   
+    <link rel="stylesheet" href="assets/css/plugins/owl.carousel.min.css">
+ 
+ 
     <div class="main_cover myjourney_page challenge_page">
-			<div class="main_wrapper">
-				<nav class="navbar navbar-default">
-						<img src="assets/img/logo.png" alt="logo" class="main_logo"/>
-						<div class="student_growth">
-							<span class="growth_text">My Growth</span>
-							<span class="growth_value">45</span>
-						</div>
-						<ul class="nav navbar-nav">
-							<li>
-								<a href="#">
-									<span class="nav_text">My Profile</span><span class="nav_icon ico_profile"></span>
-								</a>
-							</li>
-						</ul>
-						<form class="navbar-form navbar-right search_form">
-			        <input type="search" class="search__input" placeholder="Type here to search">
-			      </form>
-
-				</nav><!-- /header -->
-				<div class="wooden_frame">
-					<div class="wooden_frame_content_cover">
-						<div class="castle_cover">
-							<div class="castle subject_castle science active">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Stupendous Science Nation</span>
-							</div>
-							<div class="castle subject_castle math">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Magical Mathland</span>
-							</div>
-							<div class="castle subject_castle english inactive">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Enchanted English Empire</span>
-							</div>
-							<div class="castle subject_castle social_science inactive">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Valorous Social Science Union</span>
-							</div>
-							<div class="castle help">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Help</span>
-							</div>
-							<div class="castle challenge_mountain" data-toggle="modal" data-target="#challenge_Modal">
-								<span class="castle__img"></span>
-								<span class="castle__icon"></span>
-								<span class="castle__arrowUp"></span>
-								<span class="castle__text">Challenges</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="user_list">
-				<span class="bg__chat"></span>
-			</div>
-
-    <!-- challenge_modal -->
-    <!-- Modal -->
-    <div id="challenge_Modal" class="modal fade challenge_modal in">
-
-      <a href="journey">
-				<div class="castle challenge_mountain" >
-	        <span class="castle__text">Exit Challenges</span>
-	        <span class="castle__img" data-dismiss="modal"></span>
-      	</div>
-			</a>
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content challenge_frame">
-          <div class="modal-body">
-            <div class="challenge_content_frame">
-              <ul class="nav nav-tabs" id="challenge">
-                <!-- <li class="active"><a data-toggle="tab" href="#subject_1">Maths</a></li> -->
-                <li ng-repeat="stcourses in student_courses"><a data-toggle="tab" href="#subject_{{stcourses.id}}">{{stcourses.course_name}}</a></li>                
+      <div class="main_wrapper">
+        <nav class="navbar navbar-default">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="my_journey.html"><img src="assets/img/logo.png" alt="logo" class="main_logo "/></a>
+            <form class="form hidden-lg hidden-md mobile_universal_search_bar">
+              <div class="input-group">
+                <input id="email" type="text" class="form-control" name="email" placeholder="Search...">
+                <span class="input-group-addon"><i class="icon icon-search"></i></span>
+              </div>
+            </form>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li>
+                  <a href="#">
+                    <div class="student_growth">
+                      <span class="growth_text">My Growth</span>
+                      <span class="growth_value">350pt</span>
+                    </div>
+                  </a>
+                </li>
+                <li class="hidden-xs hidden-sm">
+                  <a href="#">
+                    <form class="navbar-form search_form">
+                      <input type="search" class="search__input" placeholder="Type here to search">
+                    </form>
+                  </a>
+                </li>
+                <li class="dropdown"><a href="#" data-toggle="dropdown"><span class="profile_bar"><span class="profile_pick"><img src="assets/img/profile_pick.png" alt='' /></span><span class='user_name'>James Gorden</span><i class="caret"></i></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="my_profile.html"><i class="icon icon-profile"></i> My Profile</a></li>
+                    <li><a href="help.html"><i class="icon icon-question-mark"></i> Help</a></li>
+                    <li><a href="#"><i class="icon icon-exit"></i> Logout</a></li>
+                  </ul>
+                </li>
               </ul>
-
-              <div class="tab-content">
-                <!-- <div id="subject_1" class="tab-pane fade in active"> -->
-                
-                <div id="subject_{{stcourses.id}}" class="tab-pane fade in" ng-repeat="stcourses in student_courses">
-                  <div class="owl-carousel owl-theme challenge_option">
-                    <div class="item">
-                      <h1>Teacher Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                      </div>
-                      <h2>Whole Numbers</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Quarterly Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_chadu.png" alt="" data-center="center">
-                      </div>
-                      <h2>TIme</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                          <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Ratio</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Counting</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Teacher Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                      </div>
-                      <h2>Whole Numbers</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                          <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Ratio</h2>
-                    </div>
-                    <div class="item">
-                      <h1>Parent Challenge</h1>
-                      <div class="img_cover">
-                            <img src="assets/img/magic_ball.png" alt="" data-center="center">
-                      </div>
-                      <h2>Counting</h2>
-                    </div>
-                  </div>
-                </div>
-
+            </div>
+        </nav>
+        <div class="wooden_frame">
+          <div class="wooden_frame_content_cover">
+            <div class="castle_cover">
+              <div class="castle challenge_mountain" data-toggle="modal" data-target="#challenge_Modal">
+                <span class="castle__img"></span>
+                <span class="castle__icon"></span>
+                <span class="castle__arrowUp"></span>
+                <span class="castle__text">Challenges</span>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+     
+    <!-- challenge_modal -->
+    <!-- Modal -->
+    <div id="challenge_Modal" class="modal fade challenge_modal in">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content challenge_frame">
+          <div class="modal-body">
+            <div class="challenge_content_frame">
+              <ul class="nav nav-tabs" id="challenge">                
+                <li class="subject_{{stcourse.id}} " ng-repeat="stcourse in student_courses">
+                  <a data-toggle="tab" href="" ng-click="onClickSubject(stcourse.id)"  >{{stcourse.course_name}}
+                     <i class="notification">3</i>
+                  </a>
+                </li>              
+              </ul>
+
+              <div class="tab-content">
+                <div id="subject_{{stcourse.id}}" class="tab-pane fade subject_{{stcourse.id}} in " ng-repeat="stcourse in student_courses" >
+                  
+                  <div class="owl-carousel owl-theme challenge_option">
+                    
+                   <div class="owl-item" ng-repeat="assignment in assignments"  >
+                      <div class="item">
+                        <h1>{{assignment.type}}</h1>
+                        <div class="img_cover">
+                              <img src="assets/img/hat_img.png" alt="" data-center="center"/>
+                        </div>
+                        <h2>{{assignment.course_name}}</h2>
+                      </div> 
+                  </div>
+                  </div>
+                </div>      
+
+            
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="icon icon-exit-door" onclick="goback();"></a>
     </div>
     <!-- challenge_modal -->
-	</div>
-		
-		<div class="loader" loading>
-			<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
-		</div>
-		
-		
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </div>
+
+
+  <!-- page loader  -->
+  <!-- <div class="loader">
+    <img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+  </div> -->
+  
    
+      <!-- <script type="text/javascript" src="assets/js/plugins/owl.carousel.min.js"></script> -->
+      
     <script type="text/javascript">
       $(document).ready(function(){
         $("#challenge").tabCollapse();
@@ -192,7 +125,7 @@
         owl.owlCarousel({
           margin: 19,
           loop: false,
-					nav: true,
+          nav: true,
           responsive: {
             0: {
               items: 1
@@ -206,6 +139,7 @@
           }
         });
         $(".owl-nav .owl-prev").html("<span>Previous</span>");
-          $(".owl-nav .owl-next").html("<span>Next</span>");
-			});
+        $(".owl-nav .owl-next").html("<span>Next</span>");
+      });
     </script>
+ 

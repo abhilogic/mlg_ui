@@ -53,18 +53,14 @@
 
 									<li class="toolbar-item">
 										<div class="btn-group" role="group" aria-label="...">
-										  <button type="button" class="btn btn-default">Class 5<sup>th</sup></button>
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="gradeModel" ng-change="getGrade(gradeModel)" title="Class" 
+                            ng-options="grade.id as grade.name for grade in grades track by grade.id">
+                      <option value="">- Select Class -</option>
+                    </select>
+											<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												<span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Class 6<sup>th</sup></a></li>
-												<li><a href="#">Class 7<sup>th</sup></a></li>
-												<li><a href="#">Class 8<sup>th</sup></a></li>
-												<li><a href="#">Class 9<sup>th</sup></a></li>
-												<li><a href="#">Class 10<sup>th</sup></a></li>
-												<li><a href="#">Class 11<sup>th</sup></a></li>
-											</ul>
+											</button> -->
 										</div>
 									</li>
 
@@ -84,31 +80,29 @@
 
 									<li class="toolbar-item">
 										<div class="btn-group" role="group" aria-label="...">
-										  <button type="button" class="btn btn-default">Subjetcs</button>
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="courseModel" ng-change="getCourse(courseModel)" title="Class" 
+                            ng-options="course.course_id as course.course_name for course in courses track by course.course_id">
+                      <option value="">- Select Subject -</option>
+                    </select>
+											<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												<span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Mathematics</a></li>
-												<li><a href="#">English</a></li>
-												<li><a href="#">Science</a></li>
-												<li><a href="#">Hindi</a></li>
-											</ul>
+											</button> -->
+											
 										</div>
 									</li>
 
 									<li class="toolbar-item">
 										<div class="btn-group" role="group" aria-label="...">
-										  <button type="button" class="btn btn-default">Skills</button>
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="skillModel" ng-change="getSkill(skillModel)" title="Class" 
+                            ng-options="skil.id as skil.label for skil in skill track by skil.id">
+                      <option value="">- Select Skills -</option>
+                    </select>
+							
+											<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												<span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Mathematics</a></li>
-												<li><a href="#">English</a></li>
-												<li><a href="#">Science</a></li>
-												<li><a href="#">Hindi</a></li>
-											</ul>
+											</button> -->
 										</div>
 									</li>
 
@@ -121,176 +115,35 @@
 									<tr>
 										<th class="sr-no">#</th>
 										<th class="title">Title</th>
-										<th class="level">Level</th>
-										<th class="type">Type</th>
 										<th class="status">Status</th>
 										<th class="earned-points">Earned</th>
 										<th class="actions">Actions</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr class="approved">
-										<td class="sr-no">1</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
+									<tr class="approved" ng-repeat="lesson in lessonList track by $index">
+										<td class="sr-no">{{$index+1}}</td>
+										<td class="title">{{lesson.title}}</td>
 										<td class="status">Approved</td>
 										<td class="earned-points">9pts</td>
 										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="pending">
-										<td class="sr-no">2</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Pending</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="disapproved">
-										<td class="sr-no">3</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Disapproved</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="submitted">
-										<td class="sr-no">4</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Submitted</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="under-review">
-										<td class="sr-no">5</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Under Review</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="submitted">
-										<td class="sr-no">4</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Submitted</td>
-										<td class="earned-points">---</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="under-review">
-										<td class="sr-no">5</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Under Review</td>
-										<td class="earned-points">---</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="submitted">
-										<td class="sr-no">4</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Submitted</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="under-review">
-										<td class="sr-no">5</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Under Review</td>
-										<td class="earned-points">---</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="draft">
-										<td class="sr-no">6</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">---</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Draft</td>
-										<td class="earned-points">---</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
-										</td>
-									</tr>
-									<tr class="under-review">
-										<td class="sr-no">7</td>
-										<td class="title">In the nuymber 7947949, which digit is in</td>
-										<td class="level">Easy</td>
-										<td class="type">Multiple Choice</td>
-										<td class="status">Under Review</td>
-										<td class="earned-points">9pts</td>
-										<td class="actions">
-											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
-											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
-											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+											<button class="btn btn-link"><a href="teacher/add_content?{{lesson.id}}&F{{lesson.course_detail_id}}"><i class="fa fa-pencil"></i></a></button>
+											<button class="btn btn-link"><a ng-click="deleteContent(lesson.id )"<i class="fa fa-trash"></i></a></button>
 										</td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
 										<td class="table-pagination" colspan="7">
-											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<!-- <span class="pull-left">Showing 1-10 of 50 entries</span> -->
 											<ul class="pagination pagination-sm">
 												<li class="disabled">
 													<a>
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li class="active">
-													<a>1</a>
-												</li>
-												<li>
-													<a>2</a>
-												</li>
-												<li>
-													<a>3</a>
+												<li ng-repeat="n in range(1,lastPage)">
+													<a href="#{{n}}">{{n}}</a>
 												</li>
 												<li>
 													<a aria-hidden="true">Next</a>
@@ -326,7 +179,7 @@
 						<h4 class="modal-title">How would you like to Add Lessons?</h4>
 					</div>
 					<div class="modal-body">
-						<a href="teacher/add_content" class='btn btn-outline btn-danger btn-block'>Add Lessons Manually</a>
+						<a href="teacher/add_content" class='btn btn-outline btn-danger btn-block' ng-click="close_modal();">Add Lessons Manually</a>
 						<button type="button" class='btn btn-outline btn-default btn-block border-radius-0' data-toggle="modal" data-target="#modal-uploadContent" data-dismiss="modal">Upload A file</button>
 					</div>
 				</div>

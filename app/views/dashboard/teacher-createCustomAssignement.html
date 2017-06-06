@@ -137,6 +137,7 @@
 												</div>											
                       						</div>
                     					</div>
+                    					<div style="color:red">{{err_message[3]}}</div>
                   					</div>
                   					<div class="col-lg-5 col-lg-offset-2">
 										<div class="form-group">
@@ -171,8 +172,7 @@
 
 	                  	<div class="row">
 	                  		<div class="col-md-9">
-	                  			<h5 class="ques">
-	                  			{{$index+1 +'.'+' '+ question.questionName }}</h5>
+	                  			<h5 class="ques" ng-bind-html="$index+1 +'.'+' '+ question.questionName">    </h5>
 	                  		</div>
 	                  		<div class="col-md-3 text-right text-sm-left">
 	                  			<span  class="text-uppercase color-gray-light padding-left-0">
