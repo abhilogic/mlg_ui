@@ -1,0 +1,175 @@
+.modal-subskillsoverview{
+    padding-left: 0px !important;
+      .icon {
+        display: inline-block;
+        vertical-align: middle;
+        &.right-arrow {
+          @include cssSprite($right-arrow);
+        }
+        &.left-arrow {
+          @include cssSprite($left-arrow);
+        }
+        &.icon-video {
+          @include cssSprite($icon-video);
+        }
+        &.icon-doc {
+          @include cssSprite($icon-document);
+        }
+        &.icon-exit-door {
+          @include cssSprite($icon-exit-door);
+        }
+      }
+  .modal-dialog {
+    background: rgba($black,0.85);
+    margin: 0px !important;
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    .modal-content {
+      @include box-shadow(none);
+      @include border-width(0px);
+      background: transparent;
+      max-width: 931px;
+      @include margin(60px auto null auto);
+      .close {
+        opacity: 1;
+        @include position(absolute, 0px -95px null null);
+        img {
+          display: none;
+        }
+        @media screen and (max-width: $screen-xs-max){
+          img {
+            display: block;
+          }
+          .icon {
+            display: none;
+          }
+            @include position(absolute, -32px 73px null null);
+        }
+      }
+    }
+  }
+  .overview-owl-carousel {
+    .item {
+      @include background-cover("topic-paper-bg.png");
+      background-size: 100% 100%;
+      @include padding(37px 29px);
+      font-family: $font-open-sans;
+      @media screen and (min-width: $screen-xs-max){
+        width: 421px;
+        min-height: 556px;
+        margin: auto;
+      }
+      .hd {
+        font-size: 14px;
+        color: $maroon;
+        border-bottom: 1px solid rgba($maroon,0.3);
+        padding-bottom: 5px;
+        font-weight: $bold;
+      }
+      .topic_no {
+        font-size: 12px;
+        color: $maroon;
+        text-transform: uppercase;
+        display: block;
+        font-weight: $bold;
+      }
+      .topic_name {
+        font-size: 18px;
+        color: $maroon;
+        @include margin(5px null 15px null);
+        @media screen and (max-width: $screen-xs-max){
+          font-size: 14px;
+        }
+      }
+      .short_description {
+        font-size: 14px;
+        color: $maroon;
+        @media screen and (max-width: $screen-xs-max){
+          font-size: 12px;
+        }
+      }
+    }
+    .video_section {
+      margin-top: 37px;
+      .video-mcustomscroller {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        .mCSB_horizontal.mCSB_inside > .mCSB_container {
+          margin-bottom: 10px;
+        }
+        .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+          background: $cola;
+        }
+        .table {
+          @include margin(null null 0px null);
+          td {
+            border: 0px;
+            min-width: 200px;
+          }
+        }
+      }
+    }
+    .doc_section {
+      margin-top: 20px;
+        ul {
+          padding-left: 20px;
+          padding-top: 10px;
+          li {
+            a {
+              font-weight: $bold;
+              color: $maroon;
+              @media screen and (max-width: $screen-xs-max){
+                font-size: 12px;
+              }
+            }
+          }
+        }
+    }
+    .owl-nav {
+      display: block !important;
+      @media screen and (max-width: $screen-sm){
+        width: 110px;
+        margin: auto;
+      }
+      @media screen and (min-width: $screen-sm-max){
+        position: absolute;
+        top: 46%;
+        width: 100%;
+      }
+      .owl-prev, .owl-next {
+        text-align: center;
+        &.disabled {
+          opacity: 0.5;
+        }
+        span {
+          color: #cba359;
+          display: block;
+          font-family: $font-open-sans;
+        }
+      }
+      .owl-prev {
+        float: left;
+        margin-left: -101px;
+        @media screen and (max-width: $screen-sm-max) {
+          margin-left: -53px;
+        }
+        @media screen and (max-width: $screen-sm) {
+          margin-left: 0px;
+        }
+      }
+      .owl-next {
+        float: right;
+        margin-right: -101px;
+        @media screen and (max-width: $screen-sm-max) {
+           margin-right: -53px;
+        }
+        @media screen and (max-width: $screen-sm) {
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+.signup_background {
+  background: {
+    image:url(../img/pri-login-images/sigup_bg_img.jpg);
+    size: cover;
+    position: center center;
+    repeat: no-repeat;
+  }
+  @include respond-to(mobileMedium){
+    background-size: auto 100%;
+  }
+}
+.teacher_signup_bg {
+  @extend .signup_background;
+  background-image: url(../img/pri-login-images/teacher_sigup_bg_img.jpg);
+}
+.sign_pages {
+  min-height: 100vh;
+  min-width: 100vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  @include respond-to(largeScreen){
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  @include respond-to(tabletPort){
+    min-height: initial;
+    min-width: initial;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+  @include respond-to(mobileMedium){
+    min-height: 100vh;
+  }
+  .note {
+    color: $cinnabar;
+    font-size: 10px;
+    text-align: center;
+  }
+}
+.signpage_block {
+  background-color: rgba($white,0.85);
+  @include border-radius(5px);
+  margin: auto;
+  min-height: 700px;
+  padding: 40px;
+  max-width: 1000px;
+  @include respond-to(tabletPort){
+    max-width: 700px;
+      min-height: 620px;
+  }
+  @include respond-to(mobileMedium){
+      max-width: 95%;
+      min-height: initial;
+      padding: 20px 15px 40px;
+  }
+  .signpage__heading {
+    clear: both;
+    .signpage___title {
+      color: rgba($black, 0.7);
+      font-weight: $semibold;
+      float: left;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+    .btn {
+      border: 0px;
+      background: none;
+      color: rgba($black, 0.6);
+      display: inline-block;
+      padding: 0px;
+      font-size: 12px;
+      float: right;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .signpage__body {
+    clear: both;
+    margin-top: 77px;
+    @include respond-to(tabletPort){
+        margin-top: 60px;
+    }
+    .signpage___left_side {
+        border-right:  1px solid rgba($gray,0.09);
+        @include respond-to(mobileMedium){
+            display: none;
+        }
+      .signpage___heading {
+        color: rgba($black,0.5);
+        font-size: 20px;
+        margin:auto;
+        margin-top: 24px;
+        line-height: 30px;
+        text-align: center;
+        width: 73%;
+        @include respond-to(tabletPort){
+            width: 94%;
+        }
+        span {
+          font-weight: $semibold;
+          display: block;
+          text-align: center;
+          text-transform: uppercase;
+        }
+       }
+       .signup_left_ilustration_img {
+         display: block;
+         margin: auto;
+         margin-top: 100px;
+       }
+    }
+    .signpage___right_side {
+      padding-left: 30px;
+      @include respond-to(mobileMedium){
+      padding-left: 15px;
+      }
+      .signpage____heading {
+        color: $pictonBlue;
+        font-weight: $light;
+        font-size: 60px;
+        text-align: center;
+      }
+      .signpage____tag_line {
+        color: rgba($black,0.7);
+        font-weight: $light;
+        font-size: 16px;
+        margin: auto;
+        margin-top: 20px;
+        text-align: center;
+        width: 50%;
+        @include respond-to(tabletPort){
+            width: 70%;
+        }
+      }
+      .term_condition {
+        color: rgba($black,0.7);
+        display: block;
+        font-size: 11px;
+        margin-top: 60px;
+        text-align: center;
+        text-decoration: underline;
+      }
+    }
+    &.teacher_setup_account {
+      .signpage___right_side {
+        .signpage____tag_line {
+          font-size: 24px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+.signpage____form {
+  margin-top: 30px;
+  text-align: center;
+   button.btn {
+     margin-top: 30px;
+   }
+   .form-group {
+     margin-top: 25px;
+     margin-bottom: 0px;
+
+   input,select {
+     border:0px;
+     border-bottom: 1px solid rgba($gray,0.35);
+     background: none;
+     @include box-shadow(none !important);
+     @include border-radius(0px);
+     color: $pictonBlue;
+     font-weight: $semibold;
+     padding-left: 0px;
+     &:focus {
+       border-bottom-color:  rgba($gray,0.35) !important;
+     }
+   }
+   label{
+     position: relative;
+     width: 100%;
+     .placholder {
+       color: rgba($black,0.7);
+       font-weight: $light;
+       left: 0px;
+       top: 8px;
+       position: absolute;
+       text-transform: uppercase;
+       @include transition(0.2s all);
+       &.active {
+         top: -10px;
+         font-size: 10px;
+       }
+     }
+     &.email_done {
+       position: relative;
+       &:before  {
+          color: $pictonBlue;
+          display: inline-block;
+          font-family: 'Glyphter';
+          font-style: normal;
+          font-weight: normal;
+          line-height: 1;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          position: absolute;
+          right: 5px;
+          top: 11px;
+       }
+     }
+   }
+   input[type="email"]{
+     position: relative;
+
+   }
+   input[type="password"]{
+     color: $gray;
+   }
+  }
+  }

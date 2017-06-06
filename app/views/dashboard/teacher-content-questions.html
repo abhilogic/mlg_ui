@@ -1,0 +1,258 @@
+
+	<!-- Main navbar -->
+	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
+		
+	</top-search-bar>
+	<!-- /main navbar -->
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main Sidebar -->
+			<aside class="sidebar sidebar-main"></aside>
+			<!-- /sidebar -->
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Content area -->
+				<div class="content">
+
+					<div class="panel panel-flat panel-teacher-content">
+						<div class="panel-heading">
+							<h5 class="panel-title text-uppercase">All Questions
+								<div class="pull-right text-capitalize">
+									<span class="text-muted">Your Points:</span> <span class="text-primary text-semibold">600</span>
+								</div>
+						</h5>
+						</div>
+						<div class="panel-body">
+							<div class="panel-toolbar responsive-md">
+									<li class="toolbar-item">
+										<label class="label-toolbar">Filters:</label>
+									</li>
+
+									<li class="toolbar-item">
+										<select class="selectpicker" title="Status" data-width="auto" data-size="auto">
+											<option>Approved</option>
+											<option>Not Approved</option>
+											<option>Submitted</option>
+											<option>Pending</option>
+											<option>Under review</option>
+											<option>Draft</option>
+										</select>
+									</li>
+
+									<li class="toolbar-item">
+											<select class="selectpicker" title="Class" data-width="auto" data-size="auto">
+												<option>Class 6th</option>
+												<option>Class 7th</option>
+												<option>Class 8th</option>
+												<option>Class 9th</option>
+												<option>Class 10th</option>
+												<option>Class 11th</option>
+											</select>
+									</li>
+
+									<li class="toolbar-item">
+											<select class="selectpicker" title="Standard" data-width="auto" data-size="auto">
+												<option>standard A</option>
+												<option>standard B</option>
+												<option>standard C</option>
+											</select>
+									</li>
+
+									<li class="toolbar-item">
+											<select class="selectpicker" title="Subject" data-width="auto" data-size="auto">
+												<option>Mathematics</option>
+												<option>English</option>
+												<option>Science</option>
+												<option>Hindi</option>
+											</select>
+									</li>
+
+									<li class="toolbar-item">
+										<select class="selectpicker" title="Skills" data-width="auto" data-size="auto">
+										  <option>Ketchup</option>
+										  <option>Relish</option>
+										</select>
+									</li>
+
+									<li class="toolbar-item pull-right">
+										<a role="button" class="btn btn-primary" href="teacher/question"><i class="icon icon-plus-outline position-left"></i>Add Question</a>
+									</li>
+							</div>
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-questions">
+								<thead>
+									<tr>
+										<th class="sr-no">#</th>
+										<th class="title">Title</th>
+										<th class="level">Level</th>
+										<th class="type">Type</th>
+										<th class="status">Status</th>
+										<th class="earned-points">Earned</th>
+										<th class="actions">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="approved">
+										<td class="sr-no">1</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Approved</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="pending">
+										<td class="sr-no">2</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Pending</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="disapproved">
+										<td class="sr-no">3</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Disapproved</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="submitted">
+										<td class="sr-no">4</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Submitted</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">5</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="draft">
+										<td class="sr-no">6</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Draft</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">7</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td class="table-pagination" colspan="7">
+											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<ul class="pagination pagination-sm">
+												<li class="disabled">
+													<a>
+														<span aria-hidden="true">Previous</span>
+													</a>
+												</li>
+												<li class="active">
+													<a>1</a>
+												</li>
+												<li>
+													<a>2</a>
+												</li>
+												<li>
+													<a>3</a>
+												</li>
+												<li>
+													<a aria-hidden="true">Next</a>
+												</li>
+											</ul>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+
+	<!-- Latest compiled and minified jQuery -->
+
+	<script>
+		//Bootstrap dropdown select
+		$('.selectpicker').selectpicker();
+
+	</script>
+
+	// Responsive Data Table
+	<script>
+		var headertext = [],
+		headers = document.querySelectorAll(".table-teacherContent th"),
+		tablerows = document.querySelectorAll(".table-teacherContent th"),
+		tablebody = document.querySelector(".table-teacherContent tbody");
+
+		for(var i = 0; i < headers.length; i++) {
+		  var current = headers[i];
+		  headertext.push(current.textContent.replace(/\r?\n|\r/,""));
+		}
+		for (var i = 0, row; row = tablebody.rows[i]; i++) {
+		  for (var j = 0, col; col = row.cells[j]; j++) {
+		    col.setAttribute("data-th", headertext[j]);
+		  }
+		}
+	</script>

@@ -1,0 +1,24 @@
+// Select type of user
+
+
+.list-select-userType{
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin: 30px auto;
+  li{
+    display: inline-block;
+    float: none;
+    a{
+      display: block;
+      text-align: center;
+      @include padding(15px);
+      img, picture{
+        display: inline-block;
+      }
+      @media(max-width: $screen-xs-max){
+        @include padding(15px 10px);
+      }
+    }
+  }
+}

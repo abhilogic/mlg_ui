@@ -1,0 +1,74 @@
+label{
+  margin-right: 10px;
+  input[type="radio"],input[type="checkbox"]{
+    vertical-align: sub;
+  }
+  span {
+    display: inline-block;
+    vertical-align: bottom;
+  }
+}
+
+/* custom radio button */
+.radio-proceed {
+	display: none !Important;
+& + .radio-btn {
+	background: {
+		image: url(../img/subskills_sprit_img.png);
+		position: -441px -258px;
+	}
+  &+ span {
+    color: rgba($black,0.7);
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+&.checked {
+	background-position: -309px -258px;
+  & + span {
+    color: $black;
+  }
+}
+  cursor: pointer;
+	display: inline-block;
+	height: 14px;
+    margin: 0px;
+	margin-right: 5px;
+	vertical-align: middle;
+    width: 16px;
+ }
+}
+/* custom radio button */
+
+
+/* custom checkbox button */
+.checkbox-proceed {
+	display: none !Important;
+  & + .checkbox-btn {
+  	background: {
+  		image: url(../img/subskills_sprit_img.png);
+  		position: -184px -19px ;
+  	}
+  &.checked {
+  	background-position: -56px -227px;
+  }
+      cursor: pointer;
+  	display: inline-block;
+  	height: 15px;
+      margin: 0px;
+  	margin-right: 5px;
+  	vertical-align: middle;
+    width: 15px;
+ }
+}
+
+.pick_check_icon {
+.checkbox-proceed {
+  & + .checkbox-btn {
+    @include cssSprite($subskill_pick_uncheck);
+  &.checked {
+  	  @include cssSprite($subskill_pick_check);
+   }
+  }
+ }
+}
+/* custom checkbox button */

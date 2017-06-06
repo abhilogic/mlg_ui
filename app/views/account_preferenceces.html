@@ -1,0 +1,91 @@
+<body class="page-onboarding onboarding-cover">
+
+  <!-- Page container -->
+  <div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+      <!-- Main content -->
+      <div class="content-wrapper">
+
+        <!-- Onboarding: Preferences -->
+
+        <div class="panel panel-flat panel-onboarding">
+          <div class="panel-heading">
+            <h4 class="spanel-title"><b><img src="assets/img/logo.png" alt="" /></b></h4>
+          </div>
+
+          <div class="panel-body">
+            <!-- Steps -->
+            <div class="steps-container">                       
+                  <ul class="steps" ng-if="childname!=null">                  
+                        <li class="completed" ng-repeat="cname in childname track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">{{cname.children_name}}</span></li>
+                        <li class="" ng-repeat="cname in counter(remainchildAccount) track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">Add Child</span></li>
+                         <li class="completed"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
+                        <li class=""><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
+                        <li class=""><span class="_serial_num"></span><span class="__text">Payment</span></li>
+                  </ul>                  
+            </div>
+
+            <form  class="form-login">
+              <br>
+              <h2 class="text-light text-gray-light text-center">Set up preferences for your children account</h4>
+                <br>
+
+                <div class="row">
+                  <div class="col-sm-6 col-sm-offset-3">
+                    <div class="form-group">
+                      <label class="control-label">How often should we send you the report :</label>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="radio radio-primary radio-inline">
+                        <input ng-model="frm.frequency" type="radio" id="reportDaily" value="daily" name="sendreport" checked>
+                        <label for="reportDaily"> Daily</label>
+                      </div>
+                      <div class="radio radio-primary radio-inline">
+                        <input ng-model="frm.frequency" type="radio" id="reportWeekly" value="weekly" name="sendreport">
+                        <label for="reportWeekly"> Weekly</label>
+                      </div>
+                      <div class="radio radio-primary radio-inline">
+                        <input ng-model="frm.frequency" type="radio" id="reportFortnightly" value="fornightly" name="sendreport">
+                        <label for="reportFortnightly"> Fortnightly</label>
+                      </div>
+                    </div>
+
+                    <div class="form-group float-label has-feedback has-feedback-left">
+                      <label class="control-label">Mobile Number</label>
+                      <input ng-model="frm.mobile" type="tel" class="form-control float-input">
+                      <div class="form-control-feedback">+1</div>
+                    </div>
+                    <div class="form-group">
+                      <div class="checkbox checkbox-primary checkbox-inline">
+                        <input ng-model="frm.sms" value="1"  type="checkbox" name="sendTextMessage" checked>
+                        <label for="sendTextMessage"> Send Text Messages</label>
+                      </div>
+                    </div>
+
+                    <br>
+                    <span class="has_error" ng-if="msg">{{msg}}</span>
+                    <div class="form-group text-center">
+                      <button ng-click="setPreference(frm)" type="submit" class="btn btn-primary">Proceed</button>
+                    </div>
+                  </div>
+                </div>
+
+            </form>
+          </div>
+        </div>
+        <!-- /.onboarding: Preferences-->
+
+      </div>
+      <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+  </div>
+  <!-- page container -->
+
+</body>

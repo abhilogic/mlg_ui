@@ -1,0 +1,162 @@
+/* --- $VARIABLES --- */
+
+// Font weights
+$thin: 100;
+$light: 300;
+$regular: 400;
+$semibold: 600;
+$bold: 700;
+$ultrabold: 800;
+
+$font-dir: "../font/";
+
+// Colors
+$white: #fff;
+$black: #000;
+$bluies_white: #c7dbf4;
+$darkstateblue: #162840;
+$darkstateblue_1: #192d46;
+$darkstateblue_border: #223a56;
+$cyan: #60d3e5;
+$lightCyan: #ecf1f7;
+$cornFlowerFlue: #3498db;
+$seaGreen: #0e7a65;
+$springGreen: #2cd875;
+$orange: #f39c12;
+$fireBrick: #c0392b;
+$gray : #8e8e8e;
+$dimGray: #3f3f3f;
+$doveGray: #676767;
+$alto: #D6D6D6;
+$bitterSweet: #FF6565;
+$pictonBlue: #2D94ED;
+$cinnabar: #E74C3C;
+$funBlue: #1D70B7;
+$grannySmith: #929D9F;
+$hippieBlue: #6390BC;
+
+// Colors Student Status
+$color-gifted: #3498db;
+$color-outstanding: #0e7a65;
+$color-ontarget: #2cd875;
+$color-struggling: #f39c12;
+$color-remedial: #c0392b;
+
+// online status
+$color-online: #2cd875;
+$color-offline: #f39c12;
+//opacities
+$alpha: 0.8;
+$beta: 0.6;
+$gama: 0.2;
+
+// Font family
+$font-primary: 'Open Sans', sans-serif;
+$font-secondary: 'MyriadProBoldCondensed', sans-serif;
+$font-secondary-condenced: "MyriadProCondensed", sans-serif;
+$font-tertiary: 'Varela Round', sans-serif;
+
+$icon-font-size: 16px;
+
+// Image dir path
+$imagedir: "../img/";
+
+
+//
+// Typography
+// ------------------------------
+//
+
+//** XLarge font size (v. 1.3)
+$font-size-xlarge:                           $font-size-h6;
+
+//** XLarge line height (v. 1.3)
+$line-height-xlarge:                         1.333334;
+
+//** Mini font size
+$font-size-mini: 						     ceil(($font-size-base * 0.8)); // ~11px
+
+//** Mini line height, for the smallest size
+$line-height-mini: 						     1.82;
+
+
+//** XLarge computed line height
+$line-height-computed-xlarge:    		     floor(($font-size-xlarge * $line-height-base)); // ~20px
+$line-height-computed-large: 			     floor(($font-size-large * $line-height-base));
+$line-height-computed-small: 			     floor(($font-size-small * $line-height-base));
+$line-height-computed-mini: 			     floor(($font-size-mini * $line-height-base));
+
+//** Adding negative letter spacing to headings
+$heading-letter-spacing:				     -0.015em;
+
+//** Vertical list padding, mainly used in navigation and dropdowns
+$list-spacing: 							     $padding-base-vertical;
+
+//** Font size used in icons. Icomoon icon set is based on 16px grid
+$icon-font-size: 						     16px;
+
+//** Additional element's horizontal spacing for inline elements
+$element-horizontal-spacing: 			     $padding-base-vertical;
+
+/*
+// Form Components
+---------------------*/
+$input-border-color: darken($gray-lighter, 10%);
+$input-height-mini : 40px;
+
+//** Checkbox and radio sizes
+$checkbox-size: 							18px;
+$checkbox-border-width: 					2px;
+
+//** Switchery toggle sizes
+$switchery-base-size: 						22px;
+
+$switchery-large-size: 						$switchery-base-size + 4; // ~ 26px
+$switchery-small-size: 						$switchery-base-size - 4; // ~ 18px
+$switchery-mini-size:						$switchery-base-size - 8; // ~ 14px
+
+
+// sidebar
+$sidebar-user-bg: #192d46;
+$sidebar-dark-bg: lighten($sidebar-user-bg, 4%);
+$sidebar-base-width: 230px;
+$sidebar-width-xs: 130px;
+
+$sidebar-active-border-color: lighten($brand-primary, 10%);;
+$sidebar-link-color: #c7dbf4;
+$sidebar-active-link-color: lighten($brand-primary, 10%);
+
+//Content Wrapper
+$content-wrapper-bg: #ecf1f7;
+
+//footer
+$footer-bg: #5a667f;
+$footer-text-color: rgba(white, 0.65);
+
+//** Required additional padding options, integrated to other less files
+$content-padding-large: 				     30px;
+$content-padding-base: 					     18px;
+$content-padding-small: 				     10px;
+
+//** Additional element's horizontal spacing for inline elements
+$element-horizontal-spacing: 			     $padding-base-vertical;
+
+// Grids
+// -------------------------------
+
+$grid-padding-width:              10px !default;
+$grid-responsive-sm-break:        767px !default;  // smaller than landscape phone
+$grid-responsive-md-break:        992px !default;  // smaller than portrait tablet
+$grid-responsive-lg-break:        1023px !default; // smaller than landscape tablet
+
+// mlg tab variable
+$mgl-tab-link-padding:            15px 15px !default;
+$mgl-tab-input-padding:           $mgl-tab-link-padding !default;
+// media width
+$screen-large : 1489px;
+$screen-tb-land : 1024px;
+$screen-tb-port: 1023px;
+$screen-mobile-md: 767px;
+$screen-mobile-sm: 413px;
+$screen-mobile-xs: 374px;
+// media width

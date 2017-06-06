@@ -1,0 +1,71 @@
+.circular_page_listing {
+    counter-reset: child_number;
+    text-align: center;
+    li {
+      max-width: 82px;
+      font-weight: $bold;
+      text-transform: capitalize;
+      vertical-align: text-top;
+      ._serial_num {
+        border: 2px solid $pictonBlue;
+        @include border-radius(100%);
+        display: block;
+        font-weight: $bold;
+        margin: auto;
+        margin-bottom: 5px;
+      }
+      .__text{
+        line-height: 15px;
+        display: block;
+      }
+      &:not(:last-child){
+        margin-right: 40px;
+      }
+      &.done {
+        color: $pictonBlue;
+        max-width: 40px;
+        ._serial_num {
+          background: $pictonBlue;
+          color: $white;
+          font-size: 14px;
+          height: 25px;
+          width: 25px;
+        }
+        .__text {
+          font-size: 10px;
+        }
+      }
+      &.active {
+        color: $pictonBlue;
+        ._serial_num {
+          color: $pictonBlue;
+          font-size: 20px;
+          height: 37px;
+          margin-top: -5px;
+          padding-top: 2px;
+          width: 37px;
+        }
+        .__text {
+          font-size: 12px;
+        }
+
+      }
+      &.not_done {
+        color: $alto;
+        ._serial_num {
+          border-color: $alto;
+          color: $alto;
+          height: 30px;
+          padding-top: 3px;
+          width: 30px;
+       }
+        .__text {
+          font-size: 10px;
+        }
+      }
+      ._serial_num:before {
+          counter-increment: child_number;
+          content:counter(child_number);
+    }
+  }
+}

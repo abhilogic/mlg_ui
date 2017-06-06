@@ -1,0 +1,38 @@
+.first_time_login_test_page {
+  .icon-exit-door {
+    @include cssSprite($icon-exit-door);
+    @include position(absolute, 20px 100px null null);
+    z-index: 200;
+    display: none;
+    @media screen and (min-width: $screen-sm){
+      display: block;
+    }
+  }
+}
+.subject-first-time-placement-video {
+  .content {
+    margin: auto;
+    @media screen and (min-width: $screen-sm-max){
+      max-width: 80%;
+    }
+    @media screen and (max-width: $screen-sm){
+      max-width: 70%;
+      margin-top: 35px;
+    }
+    @media screen and (max-width: $screen-xs-max){
+      max-width: 100%;
+    }
+    video{
+      width: 100%;
+    }
+    .video_controller .progress_bar  {
+      width: 150px;
+      @media screen and (min-width: $screen-sm-max){
+        width: 340px;
+      }
+      @media screen and (min-width: $screen-sm){
+        width: 276px;
+      }
+    }
+  }
+}

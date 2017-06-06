@@ -1,0 +1,120 @@
+.panel-view-assignement {
+  .panel-heading {
+    &:before {
+      display: none;
+    }
+  }
+  // assignment-img
+  .assignment-img {
+    max-width: 200px;
+    display: block;
+    @include margin(auto);
+    @media screen and (min-width: $screen-sm-max){
+      max-width: 100%;
+    }
+  }
+  // assignment_name
+  .assignment_name {
+    font-size: 26px;
+    color: $brand-primary;
+    text-transform: uppercase;
+    @include margin(50px null null null);
+    @media screen and (min-width: $screen-md){
+      @include margin(0px null null null);
+    }
+  }
+
+  //table-assignment-status
+  .table-assignment-status {
+    @media screen and (min-width: $screen-md){
+      width: 80%;
+      @include margin(0px null null null);
+    }
+    tr {
+      td {
+        @include border-width(0px);
+        @include padding(null null null 0px);
+        color: $gray-light;
+        &:last-child {
+          font-weight: $bold;
+        }
+      }
+    }
+  }
+  .panel {
+    @include box-shadow(none);
+    @include border-width(0px);
+    @include margin(50px null null null);
+    @media screen and (min-width: $screen-sm){
+      @include margin(100px null null null);
+    }
+    .panel-heading, .panel-body, .panel-footer {
+      @include padding(0px);
+    }
+    .panel-heading {
+      @include padding(null null 15px null );
+      &:before {
+        display: none;
+      }
+      .panel-title {
+        font-size: 16px;
+        font-weight: $bold;
+        text-transform: capitalize;
+      }
+    }
+  }
+  //assignment-block
+  .assignment-block{
+    @include padding(22px 30px);
+    border: 1px solid rgba($gray-light,0.35);
+    position: relative;
+    &:not(:last-child){
+      @include margin(null null 20px null);
+    }
+    .ans_status {
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: $bold;
+      display: block;
+      text-align: right;
+      @include margin(10px null null null);
+      @media screen and (min-width: $screen-sm){
+        @include position(absolute, 22px 30px null null);
+        @include margin(0px null null null);
+      }
+      &.correct {
+        color: green;
+      }
+      &.wrong {
+          color: red;
+      }
+    }
+    .ques, .no_of_student_attempted {
+      @include margin(0px);
+      font-size: 16px;
+    }
+    .ques {
+      color: $gray-light;
+    }
+    .no_of_student_attempted {
+      color: $gray-dark;
+      @include margin(10px null null null);
+      font-weight: $semibold;
+    }
+    .mistake_done {
+      font-size: 12px;
+      color: red;
+      display: block;
+      @include margin(5px null null null);
+    }
+  }
+
+  // btn-submit
+  .btn-submit {
+    @include padding(null 30px);
+    @media screen and (min-width: $screen-sm){
+      @include margin(30px null null null);
+    }
+  }
+
+}

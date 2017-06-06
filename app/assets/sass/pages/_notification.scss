@@ -1,0 +1,42 @@
+.panel-notification {
+ .media-list {
+   @include padding(15px null 15px null);
+   &:not(:last-child){
+       border-bottom: 1px solid $gray-lighter;
+   }
+   .icon {
+     font-size: 50px;
+     color: #6390bc;
+   }
+  .media-left {
+    @media screen and (min-width: $screen-sm){
+      @include padding(null 40px null null);
+    }
+  }
+  .media-body {
+    h5 {
+      @include margin(0px null null null);
+      color: #6390bc;
+      font-weight: $bold;
+      font-size: 14px;
+      @media screen and (min-width: $screen-sm){
+        @include margin(null null 15px null);
+      }
+      .icon {
+        @include margin(null 30px null null);
+      }
+    }
+    p {
+      font-size: 14px;
+      color: $gray-light;
+    }
+    time {
+      color: $gray-light;
+      display: block;
+      @media screen and (min-width: $screen-sm-max){
+        margin-top: -15px;
+      }
+    }
+  }
+ }
+}

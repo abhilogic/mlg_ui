@@ -1,0 +1,66 @@
+// Merge all stylesheets into one
+// Global
+// Bourbon
+@import "bourbon/bourbon";
+
+// Animate Scss
+@import "animate/animate";
+@import "animate/custom_animation/animation";
+
+// Core bootstrap variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Core App variables and mixins
+@import "modules/variables";
+@import "modules/mixins";
+
+// Base Style
+@import "base/fonts";
+@import "base/global";
+@import "base/typography";
+@import "base/helpers";
+@import "base/icon";
+
+// Sprite Style
+@import "sprites/sprite";
+
+// Layout Style
+@import "layout/header";
+@import "layout/sidebar";
+@import "layout/footer";
+@import "layout/chat_user_list";
+@import "layout/chating_block";
+@import "layout/jQuery.verticalCarousel";
+@import "layout/masccorts";
+
+// Components
+@import "components/buttons";
+@import "components/searchform";
+@import "components/forms";
+@import "components/custom_icons";
+@import "components/radio_checkbox";
+@import "components/video_design";
+@import "components/navbar-dropdown";
+@import "components/loader";
+
+// Pages
+@import "pages/myjourney";
+@import "pages/subject_view";
+@import "pages/my_profile";
+@import "pages/help";
+@import "pages/subskills";
+@import "pages/challenge";
+@import "pages/subject_door";
+@import "pages/subskillsroom";
+@import "pages/first_time_login_test";
+@import "pages/subject-first-time-placement-video";
+@import "pages/subskillsoverview";
+@import "pages/sub-skills-room";
+@import "pages/subskills-content";
+@import "pages/sub-skills-quiz";
+@import "pages/comingsoon";
+// avtar creation page
+@import "pages/avtar-creation/avtar-creation";
+@import "pages/avtar-creation/avtar-gender-selection";
+@import "pages/avtar-creation/avtar-design";

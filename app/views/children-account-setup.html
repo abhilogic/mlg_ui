@@ -1,0 +1,232 @@
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Onboarding: Login Teacher -->
+				<div class="panel panel-flat panel-onboarding">
+						<div class="panel-heading">
+							<h4 class="panel-title"><b>MLG</b></h4>
+						</div>
+
+						<div class="panel-body">
+
+							<!-- Steps -->
+							<div class="steps-container">
+								<ul class="steps">
+									<li class="completed"><span>Melissa Gordon</span></li>
+									<li class="completed"><span>James Gordon</span></li>
+									<li class="completed"><span>Jimmy Gordon</span></li>
+									<li class="active"><span>Child Account</span></li>
+									<li><span>Preferences</span></li>
+									<li><span>Terms & Conditions</span></li>
+									<li><span>Payment</span></li>
+								</ul>
+							</div>
+
+							<form action="preferences.html" class="form-login">
+								<div class="row as-table">
+									<div class=" col-sm-6 col-left">
+										<h3 class="text-center text-light text-gray-dark">Setup your child's account</h3>
+										<br>
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group float-label">
+														<label class="control-label">First Name</label>
+														<input type="text" class="form-control float-input"/>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group float-label">
+														<label class="control-label">Last Name</label>
+														<input type="text" class="form-control float-input"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group float-label">
+												<label class="control-label">School</label>
+												<input type="text" class="form-control float-input">
+					            </div>
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group float-label">
+														<label class="control-label">Grade</label>
+														<input type="text" class="form-control float-input"/>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group float-label">
+														<label class="control-label">Date of Birth</label>
+														<input type="date" class="form-control float-input"/>
+													</div>
+												</div>
+											</div>
+
+											<br>
+
+											<div class="row">
+												<div class="col-md-8">
+													<div class="form-group">
+														<label class="control-label">Would you like to give your child's email?</label>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="radio radio-primary radio-inline">
+															<input type="radio" id="inlineRadio1" value="option1" name="radioInline" checked="">
+															<label for="inlineRadio1"> Yes</label>
+													</div>
+													<div class="radio radio-primary radio-inline">
+															<input type="radio" id="inlineRadio2" value="option2" name="radioInline">
+															<label for="inlineRadio2"> No</label>
+													</div>
+												</div>
+											</div>
+
+
+											<div class="form-group float-label has-success has-feedback">
+												<label class="control-label">EMAIL Id</label>
+												<input type="text" class="form-control float-input" id="inputEmail" aria-describedby="inputEmailSuccessStatus" value="hello@mlg.com">
+												<div class="form-control-feedback"><i class="icon icon-check"></i></div>
+					            </div>
+
+											<div class="form-group">
+												<label class="control-label text-uppercase"><b>Select subject package type</b></label>
+
+												<div id="subjectPackages" class="flex-row flex-row-wrap btn-group package-group" data-toggle="buttons">
+												  <label class="flex-col btn subject">
+														<input type="radio" name="subjectPackages" id="ubjectPackage1" autocomplete="off" checked>
+														<span class="package-title">1 Subject</span>
+												  </label>
+												  <label class="flex-col btn subject active">
+												    <input type="radio" name="subjectPackages" id="ubjectPackage2" autocomplete="off">
+														<span class="package-title">2 Subjects</span>
+														<strong class="package-offer">10% off</strong>
+												  </label>
+												  <label class="flex-col btn subject">
+												    <input type="radio" name="subjectPackages" id="ubjectPackage3" autocomplete="off">
+														<span class="package-title">3 Subjects</span>
+														<strong class="package-offer">10% off</strong>
+												  </label>
+													<label class="flex-col btn subject">
+												    <input type="radio" name="subjectPackages" id="ubjectPackage4" autocomplete="off">
+														<span class="package-title">All Subjects</span>
+														<strong class="package-offer">10% off</strong>
+												  </label>
+												</div>
+					            </div>
+
+									</div><!-- /.col-left-->
+								<div class="col-sm-6 col-right">
+									<div class="form-group text-center">
+										<h4 class="control-label">Choose a plan</h4>
+										<div id="subscriptionPlans" class="btn-group package-group" data-toggle="buttons">
+											<label class="btn package-plan">
+												<input type="radio" name="subscriptionPlans" id="planMonthly" autocomplete="off" checked>
+												<span class="package-title">Monthly</span>
+												<i class="icon icon-monthly package-icon"></i>
+											</label>
+											<label class="btn package-plan active">
+												<input type="radio" name="subscriptionPlans" id="planQuarterly" autocomplete="off">
+												<span class="package-title">Quarterly</span>
+												<i class="icon icon-quarterly package-icon"></i>
+											</label>
+											<label class="btn package-plan">
+												<input type="radio" name="subscriptionPlans" id="planYearly" autocomplete="off">
+												<span class="package-title">Yearly</span>
+												<i class="icon icon-yearly package-icon"></i>
+											</label>
+										</div>
+										<p class="text-center text-danger"><small><sup>*</sup>Your selected plan will activate after free trail of 30 days</small></p>
+										<br><br>
+									</div>
+
+									<div class="form-group text-center">
+										<h4 class="control-label">Choose your subjects</h4>
+										<div id="subjectsPrice" class="flex-row flex-row-wrap btn-group package-group" data-toggle="buttons">
+											<label class="flex-col btn subject">
+												<input type="checkbox" name="math" autocomplete="off" checked>
+												<span class="package-title">Math</span>
+												<strong class="package-price">$72</strong>
+												<small class="package-type">monthly</small>
+											</label>
+											<label class="flex-col btn subject active">
+												<input type="checkbox" name="english" autocomplete="off">
+												<span class="package-title">English</span>
+												<strong class="package-price">$28</strong>
+												<small class="package-type">monthly</small>
+											</label>
+											<label class="flex-col btn subject">
+												<input type="checkbox" name="science" autocomplete="off">
+												<span class="package-title">Science</span>
+												<strong class="package-price">$50</strong>
+												<small class="package-type">monthly</small>
+											</label>
+											<label class="flex-col btn subject active">
+												<input type="checkbox" name="socialScience" autocomplete="off">
+												<span class="package-title">Social Science</span>
+												<strong class="package-price">$30</strong>
+												<small class="package-type">monthly</small>
+											</label>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<table class="table payment-summery">
+											<tbody>
+												<tr>
+													<td>Cost:</td>
+													<td>$100<small>/mo</small></td>
+												</tr>
+												<tr>
+													<td>
+														Discount:
+														<small class="display-block text-muted">(Your Savings)</small>
+													</td>
+													<td><span class="text-danger">- $10<small>/mo</small></span></td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr class="amount-subtotal">
+													<td><span class="subtotal-text">Sub total:</span></td>
+													<td><span class="subtotal-value">$90<small>/mo</small></span></td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+									<!--Note: ng-if will be easy to show or hide promo input container-->
+									<div class="form-group">
+										<p><a class="link">Have a promo code?</a></p>
+										<div class="form-inline promo-inputContainer">
+											<input type="text" class="form-control"/>
+											<button class="btn btn-primary">Apply</button>
+										</div>
+									</div>
+
+									<div class="form-group text-right">
+										<button type="submit" class="btn btn-link">< Go back</button> <button type="submit" class="btn btn-primary">Proceed</button>
+									</div>
+								</div>
+
+							</div>
+
+							</form>
+						</div>
+
+					</div>
+					<p class="legal"><a href="terms-parent.html">Terms & conditions</a></p>
+					<!-- /.onboarding: login teacher-->
+					<p class="legal"><a href="terms.html">Terms & conditions</a></p>
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>

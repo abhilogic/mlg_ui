@@ -1,0 +1,49 @@
+.get-a-quote-panel{
+  position: relative;
+  .fa-arrow-left {
+    color: $gray-light;
+    @include position(absolute, 30px null null 31px);
+  }
+  .panel-body {
+    h5 {
+      @include margin(null null 15px null);
+      @media screen and (min-width: $screen-sm-max){
+        @include margin(null null 34px null);
+        &:not(:first-child){
+          margin-top: 55px;
+        }
+      }
+      @media screen and (max-width: $screen-sm){
+        &:first-child {
+          margin-top: 15px;
+        }
+      }
+    }
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(63px  134px null 134px);
+    }
+  }
+  .float-input {
+    @include padding(null null null 0px);
+  }
+  .grade-group {
+    @include margin(0px null null null);
+    display: block;
+    width: 100%;
+    text-align: center;
+    .btn {
+      float: none;
+      @include border-color(transparent transparent null transparent);
+      &:not(:first-child){
+        margin-left: -6px;
+      }
+    }
+  }
+  .subject-group {
+    display: block;
+    text-align: center;
+    @media screen and (min-width: $screen-sm-max){
+      @include margin(null null 60px null);
+    }
+  }
+}

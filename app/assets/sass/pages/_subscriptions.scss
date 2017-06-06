@@ -1,0 +1,110 @@
+$subscription-col-margin: 30px;
+$subscription-col-padding: 15px;
+
+.title_subscription{
+  color: $brand-primary;
+  @media (max-width: $screen-xs){
+    font-size: 22px;
+    small{
+      display: block;
+    }
+  }
+}
+
+
+.subscription_table{
+  .flex-col{
+    margin-bottom: 30px;
+    padding: 0;
+    @media (min-width: $screen-sm){
+      @include padding($subscription-col-margin);
+    }
+  }
+  .subscription_col{
+    width: 100%;
+    height: 100%;
+    border: 3px solid $gray-lighter;
+    border-radius: 10px;
+    color: $gray-light;
+    @include padding($subscription-col-padding);
+    text-align: center;
+    position: relative;
+    &.recommended{
+      border-color: $brand-primary;
+      .plan_price{
+        color: $brand-primary;
+        &.old_price{
+          color: $gray-light;
+        }
+      }
+      .btn-default{
+        background-color: $brand-primary;
+        color: white;
+        border-color: $brand-primary;
+      }
+      &::before{
+        content: '\f00c';
+        @include position(absolute, -10px -10px null null);
+        width: 28px;
+        height: 28px;
+        font-family: FontAwesome;
+        line-height: 28px;
+        color: white;
+        text-align: center;
+        border-radius: 100%;
+        background-color: $brand-primary;
+      }
+      &::after{
+        content: 'Recommended';
+        @include position(absolute, null null -24px 0);
+        width: 100%;
+        color: $brand-primary;
+        text-align: center;
+        font-size: 12px;
+        font-weight: $semibold;
+        text-transform: uppercase;
+      }
+    }
+
+    .btn-default{
+      margin-top: 15px;
+      background-color: transparent;
+    }
+
+  }
+
+  .plan_price{
+    color: $gray-light;
+    font-size: 50px;
+    span{
+      font-weight: $ultrabold;
+    }
+    sup{
+      font-size: 60%;
+    }
+    small{
+      font-size: 50%;
+      font-weight: $light;
+    }
+    &.old_price{
+      text-decoration: line-through;
+      color: $gray-light !important;
+      font-size: 20px;
+      @include position(absolute, 32px 15px null null);
+      display: inline-block;
+    }
+  }
+
+  .feature_list{
+    padding-left: 15px;
+    @include margin(24px null);
+    li{
+      text-align: left;
+      list-style-position: outside;
+      list-style-type: disc;
+      line-height: 1;
+      font-weight: $semibold;
+      margin-top: 10px;
+    }
+  }
+}

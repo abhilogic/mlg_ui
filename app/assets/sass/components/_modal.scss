@@ -1,0 +1,275 @@
+
+.modal {
+  .close {
+    opacity: 1;
+    color: $gray-light;
+  }
+
+.modal-body {
+   .form-group{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  .checkbox {
+    .checker {
+      left: -19px;
+      top: 0px;
+    }
+    label {
+      &:before {
+      display: none;
+     }
+    }
+  }
+}
+
+  .connected-li-list {
+      li {
+        display: block;
+        font-size: 14px;
+        color: darken($gray,10%);
+        position: relative;
+        &:before {
+          background: lighten($gray-light,20%);
+          @include border-radius(100%);
+          content: '';
+          height: 10px;
+          left: -18px;
+          position: absolute;
+          top: 6px;
+          width: 10px;
+          z-index: 100;
+        }
+        &:after {
+          background: lighten($gray-light,20%);
+          content: '';
+          height: 29px;
+          left: -14px;
+          position: absolute;
+          top: 6px;
+          width: 2px;
+          z-index: 100;
+        }
+        &:not(:last-child){
+          margin-bottom: 10px;
+        }
+        &:last-child {
+          &:after {
+            display: none;
+          }
+        }
+      }
+  }
+}
+
+.modal {
+  // modal-addQuestion
+&.modal-option {
+    .modal-content {
+      @include border-radius(0px);
+      @media screen and (min-width: $screen-sm) {
+        max-width: 525px;
+      }
+      .modal-header {
+        @include padding(28px null null null);
+        @include border-width(null null 0px null);
+        position: relative;
+        .close {
+          @include position(absolute, 15px 15px null null);
+        }
+        .modal-title {
+          text-align: center;
+        }
+      }
+      .modal-body {
+        @include padding(10px null null 25px);
+          @media screen and (min-width: $screen-sm){
+            @include padding(35px null null 50px);
+          }
+        a {
+           text-decoration: none;
+           @include border-radius(0px);
+           @include margin(7px null 7px null);
+           &:not(:last-child) {
+             @include margin(null null 15px null);
+           }
+           &:first-child {
+               @include margin(null null 28px null);
+           }
+       }
+      .btn {
+        @include border-radius(0px);
+      }
+       @media screen and (min-width: $screen-sm) {
+         @include padding( null 100px 50px 100px);
+       }
+      }
+    }
+  }
+}
+
+
+// modal border-radius zero and modal-header, footer border-0
+.modal.modal-bd-0 {
+  .modal-content {
+    @include border-radius(0px);
+    .modal-footer, .modal-header,  {
+      @include border-width(0px);
+    }
+    .modal-header {
+      .modal-title {
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+
+// modal-saveTemplateAs
+.modal-saveTemplateAs {
+  .modal-content {
+    @include border-radius(0px);
+    @media screen and (min-width: $screen-sm){
+      max-width: 623px;
+      .modal-body {
+        @include padding(74px 82px 35px);
+        .form-group {
+          @include padding(0px);
+          @include margin(0px);
+        }
+      }
+      .modal-footer {
+        @include padding(null 82px 50px);
+      }
+    }
+
+    // modal-body
+    .modal-body {
+      .form-group {
+        .control-label {
+          text-transform: uppercase;
+          font-size: 16px;
+          font-weight: $semibold;
+        }
+      }
+    }
+    // modal-header, .modal-footer
+    .modal-header, .modal-footer {
+      @include border-width(0px);
+    }
+    // modal-content
+  }
+}
+
+
+// modal-successfull
+
+// modal-parentAssignment
+.modal-confirmSuccess {
+  .modal-content {
+    @include border-radius(0px);
+    min-height: 196px;
+    max-width: 525px;
+    &.success {
+      .modal-body {
+        >p {
+          display: none;
+        }
+        .confirm-success-msg {
+          display: block;
+          opacity: 1;
+        }
+      }
+      .modal-footer {
+        display: none;
+      }
+    }
+  }
+  // header
+  .modal-header {
+    @include border-width(0px);
+  }
+  // body
+  .modal-body {
+    text-align: center;
+    font-weight: $bold;
+    @media screen and (min-width: $screen-sm){
+      @include padding(null 53px);
+    }
+    p {
+      font-size: 16px;
+      color: gray;
+    }
+
+    // confirm-success-msg
+    .confirm-success-msg {
+      display: none;
+      opacity: 0;
+      @include transition(.5s all);
+      .icon {
+        display: inline-block;
+        width: 72px;
+        height: 72px;
+        font-size: 28px;
+        color: $white;
+        @include padding(23px null null null);
+        @include margin(null null 20px null);
+        @include border-radius(100%);
+        background: $springGreen;
+      }
+    }
+
+
+  }
+  .modal-footer {
+    text-align: center;
+    @include border-width(0px);
+    .btn {
+      @include padding(10px 24px);
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+// modal done
+.modal.modal-done {
+  .modal-content {
+    @include border-radius(0px);
+    min-height: 196px;
+    max-width: 525px;
+    // header
+    .modal-header {
+      @include border-width(0px);
+    }
+    // body
+    .modal-body {
+      text-align: center;
+      font-weight: $bold;
+      @media screen and (min-width: $screen-sm){
+        @include padding(null 53px);
+      }
+      p {
+        font-size: 16px;
+        color: gray;
+      }
+
+      // confirm-success-msg
+      .confirm-success-msg {
+        .icon {
+          display: inline-block;
+          width: 72px;
+          height: 72px;
+          font-size: 28px;
+          color: $white;
+          @include padding(23px null null null);
+          @include margin(null null 20px null);
+          @include border-radius(100%);
+          background: $springGreen;
+        }
+      }
+    }
+  }
+}

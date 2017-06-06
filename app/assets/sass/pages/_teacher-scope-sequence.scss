@@ -1,0 +1,190 @@
+.panel-scope-sequence {
+  .dragable-skills-block {
+    @include box-shadow(0px 0px 6px rgba($black,0.1));
+    @include padding(10px 15px);
+    border-left: 8px solid $sidebar-active-border-color;
+    h5 {
+      font-size: 12px;
+    }
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(15px 53px);
+      h5 {
+        font-size: 14px;
+      }
+    }
+  }
+  .panel-body {
+    .import-temp {
+      text-transform: uppercase;
+      margin-bottom: 13px;
+    }
+    .scope-sequence-listing{
+      @include margin(48px null null nul);
+      .hd {
+        text-transform: uppercase;
+        font-weight: $semibold;
+        color: #3f3f3f;
+        border-bottom: 1px solid $gray-lighter;
+        @include margin(0px null 27px null );
+        @include padding(null null 10px null);
+      }
+      .para {
+        @include margin(0px null null 15px);
+      }
+    }
+  }
+  .panel-footer {
+    @media screen and (max-width: $screen-xs-max){
+      @include padding(0px null null null);
+    }
+    .btn-print , .btn-email {
+      @include border-radius(0px);
+      @include padding( 8px 11px);
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .btn-preview {
+      @include padding(null 30px);
+    }
+  }
+}
+
+// modal-importTemplate
+
+.modal-importTemplate {
+  .modal-header {
+    border-bottom: 0px;
+  }
+  .modal-body {
+      @include padding(50px 100px);
+      .form-control {
+        @include border-width(0px 0px null 0px);
+        @include border-radius(0px);
+      }
+  }
+}
+
+
+// modal-SequencePreview
+.modal-SequencePreview {
+  .modal-content {
+    @media screen and (min-width: $screen-sm){
+      width: 701px;
+    }
+  }
+  .modal-header {
+    border-bottom: 0px;
+    .modal-title {
+      text-align: center;
+      font-size: 20px;
+      color: #192d46;
+    }
+  }
+
+  // modal-body
+  .modal-body {
+    max-height: 400px;
+    overflow: hidden;
+    @media screen and (min-width: $screen-sm-max){
+      max-height: 476px;
+    }
+  }
+  .connected-li-list {
+    @include padding(null null null 15px);
+    @include margin(15px null 0px null);
+  }
+  .content-cover {
+    @include padding(0px 20px);
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(0px 50px);
+      max-height: 658px;
+    }
+    .heading {
+      .right-side {
+        text-align: left;
+        @media screen and (min-width: $screen-sm){
+          text-align: right;
+        }
+      }
+      h5 {
+        color: $gray;
+        font-weight: $bold;
+        font-size: 20px;
+        margin-top: 0px;
+        position: relative;
+        &:before {
+          @include border-radius(100%);
+          border: 2px solid $brand-primary;
+          content:'';
+          height: 15px;
+          left: -19px;
+          position: absolute;
+          top: 3px;
+          width: 15px;
+          z-index: 100;
+        }
+      }
+      span {
+        display: block;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+    }
+    .repeat-row {
+      @include padding(15px);
+      @media screen and (min-width: $screen-sm-max){
+        @include padding(20px null 20px null);
+        &:first-child {
+          padding-top: 0px;
+        }
+      }
+      &:not(:last-child){
+        border-bottom: 1px solid $gray-lighter;
+      }
+    }
+  }
+  .modal-footer {
+    @include padding(null 40px);
+  }
+}
+
+
+
+// modal-approvedQuestion
+.modal-approvedQuestion {
+  .modal-content {
+    .modal-header {
+      @include border-width(0px);
+      .modal-title {
+        text-align: center;
+        font-size: 20px;
+        color: #192d46;
+      }
+    }
+    // modal-body, modal-header, modal-footer
+    .modal-body , .modal-header, .modal-footer{
+      @include padding(null 30px);
+    }
+
+
+    // modal-body
+    .modal-body {
+      .table-teacherContent {
+        .actions {
+          .btn-link {
+            white-space: nowrap;
+            font-size: 12px;
+            .icon {
+              @include margin(null 10px null null);
+            }
+          }
+        }
+      }
+    }
+    .modal-footer {
+      .btn-add-skills {
+        @include padding(null 30px);
+      }
+    }
+  }
+}

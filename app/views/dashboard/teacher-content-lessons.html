@@ -1,0 +1,411 @@
+
+	<!-- Main navbar -->
+	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+	<!-- /main navbar -->
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main Sidebar -->
+			<aside class="sidebar sidebar-main"></aside>
+			<!-- /sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Content area -->
+				<div class="content">
+
+					<div class="panel panel-flat panel-teacher-content">
+						<div class="panel-heading">
+							<h5 class="panel-title text-uppercase">All Lessons
+								<div class="pull-right text-capitalize">
+									<span class="text-muted">Your Points:</span> <span class="text-primary text-semibold">600</span>
+								</div>
+						</h5>
+						</div>
+						<div class="panel-body">
+							<div class="panel-toolbar responsive-md">
+									<li class="toolbar-item">
+										<label class="label-toolbar">Filters:</label>
+									</li>
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+											<button type="button" class="btn btn-default">Status</button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Approved</a></li>
+												<li><a href="#">Not Approved</a></li>
+												<li><a href="#">Submitted</a></li>
+												<li><a href="#">Pending</a></li>
+												<li><a href="#">Under review</a></li>
+												<li><a href="#">Draft</a></li>
+											</ul>
+										</div>
+									</li>
+
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+										  <button type="button" class="btn btn-default">Class 5<sup>th</sup></button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Class 6<sup>th</sup></a></li>
+												<li><a href="#">Class 7<sup>th</sup></a></li>
+												<li><a href="#">Class 8<sup>th</sup></a></li>
+												<li><a href="#">Class 9<sup>th</sup></a></li>
+												<li><a href="#">Class 10<sup>th</sup></a></li>
+												<li><a href="#">Class 11<sup>th</sup></a></li>
+											</ul>
+										</div>
+									</li>
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+											<button type="button" class="btn btn-default">Standard</button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">A</a></li>
+												<li><a href="#">B</a></li>
+												<li><a href="#">C</a></li>
+											</ul>
+										</div>
+									</li>
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+										  <button type="button" class="btn btn-default">Subjetcs</button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Mathematics</a></li>
+												<li><a href="#">English</a></li>
+												<li><a href="#">Science</a></li>
+												<li><a href="#">Hindi</a></li>
+											</ul>
+										</div>
+									</li>
+
+									<li class="toolbar-item">
+										<div class="btn-group" role="group" aria-label="...">
+										  <button type="button" class="btn btn-default">Skills</button>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">Mathematics</a></li>
+												<li><a href="#">English</a></li>
+												<li><a href="#">Science</a></li>
+												<li><a href="#">Hindi</a></li>
+											</ul>
+										</div>
+									</li>
+
+									<li class="toolbar-item pull-right">
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-addContent"><i class="icon icon-plus-outline position-left"></i>Add Lessons</button>
+									</li>
+							</div>
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons">
+								<thead>
+									<tr>
+										<th class="sr-no">#</th>
+										<th class="title">Title</th>
+										<th class="level">Level</th>
+										<th class="type">Type</th>
+										<th class="status">Status</th>
+										<th class="earned-points">Earned</th>
+										<th class="actions">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="approved">
+										<td class="sr-no">1</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Approved</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="pending">
+										<td class="sr-no">2</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Pending</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="disapproved">
+										<td class="sr-no">3</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Disapproved</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="submitted">
+										<td class="sr-no">4</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Submitted</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">5</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="submitted">
+										<td class="sr-no">4</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Submitted</td>
+										<td class="earned-points">---</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">5</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">---</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="submitted">
+										<td class="sr-no">4</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Submitted</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">5</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">---</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="draft">
+										<td class="sr-no">6</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">---</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Draft</td>
+										<td class="earned-points">---</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+									<tr class="under-review">
+										<td class="sr-no">7</td>
+										<td class="title">In the nuymber 7947949, which digit is in</td>
+										<td class="level">Easy</td>
+										<td class="type">Multiple Choice</td>
+										<td class="status">Under Review</td>
+										<td class="earned-points">9pts</td>
+										<td class="actions">
+											<button class="btn btn-link"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+											<button class="btn btn-link"><i class="fa fa-copy"></i></button>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td class="table-pagination" colspan="7">
+											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<ul class="pagination pagination-sm">
+												<li class="disabled">
+													<a>
+														<span aria-hidden="true">Previous</span>
+													</a>
+												</li>
+												<li class="active">
+													<a>1</a>
+												</li>
+												<li>
+													<a>2</a>
+												</li>
+												<li>
+													<a>3</a>
+												</li>
+												<li>
+													<a aria-hidden="true">Next</a>
+												</li>
+											</ul>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+
+	<section class="modal-section">
+		<div id="modal-addContent" class="modal fade modal-addContent" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+						<h4 class="modal-title">How would you like to Add Lessons?</h4>
+					</div>
+					<div class="modal-body">
+						<a href="teacher/add_content" class='btn btn-outline btn-danger btn-block'>Add Lessons Manually</a>
+						<button type="button" class='btn btn-outline btn-default btn-block border-radius-0' data-toggle="modal" data-target="#modal-uploadContent" data-dismiss="modal">Upload A file</button>
+					</div>
+				</div>
+			</div>
+				<!-- Modal content-->
+		</div>
+
+		<div id="modal-uploadContent" class="modal fade modal-uploadContent" role="dialog">
+			<div class="modal-dialog modal-lg">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+						<h4 class="modal-title">Upload A File</h4>
+					</div>
+					<div class="modal-body">
+					<form action="http://localhost/mlg/courses/readCSV" class="dropzone" id="dropzone_multiple"></form>
+						<div class="text-right">
+							<a href="../assets/documents/doc.pdf" download><u>Dowload a sample Version</u></a>
+							<div class="text-center">
+									<button class="btn btn-primary" id="upload">Upload</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				<!-- Modal content-->
+		</div>
+	</section>
+
+
+	<script>
+		Dropzone.options.dropzoneMultiple = {
+  		paramName: "csv", // The name that will be used to transfer the file
+  		maxFilesize: 2, // MB
+  		autoProcessQueue:false,
+  		maxFiles:1,
+  		addRemoveLinks:true,
+  		init: function() {
+    		var submitButton = document.querySelector("#upload")
+       			 myDropzone = this; // closure
+
+    	submitButton.addEventListener("click", function() {
+      			myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+    		});
+
+    // You might want to show the submit button only when 
+    // files are dropped here:
+    this.on("addedfile", function() {
+    	//$("#upload").show();
+      // Show submit button here and/or inform user to click it.
+    });
+
+    myDropzone.on("complete", function(file) {
+    	alert('file uploaded susccefully');
+    	//$("#modal-uploadContent").dismiss();
+  myDropzone.removeFile(file);
+});
+
+  }
+	  		
+  		};
+
+  		
+
+
+		var headertext = [],
+		headers = document.querySelectorAll(".table-teacherContent th"),
+		tablerows = document.querySelectorAll(".table-teacherContent th"),
+		tablebody = document.querySelector(".table-teacherContent tbody");
+
+		for(var i = 0; i < headers.length; i++) {
+		  var current = headers[i];
+		  headertext.push(current.textContent.replace(/\r?\n|\r/,""));
+		}
+		for (var i = 0, row; row = tablebody.rows[i]; i++) {
+		  for (var j = 0, col; col = row.cells[j]; j++) {
+		    col.setAttribute("data-th", headertext[j]);
+		  }
+		}
+	</script>

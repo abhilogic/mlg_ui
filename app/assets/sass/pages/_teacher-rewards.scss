@@ -1,0 +1,29 @@
+.panel-rewards {
+  .panel-heading {
+    .heading-elements {
+      h5 {
+        font-size: 16px;
+        font-weight: $semibold;
+      }
+    }
+  }
+  .redeem-list {
+    li {
+      .points {
+        font-weight: $bold;
+        font-size: 18px;
+      }
+      .media-btns{
+        @include margin(8px null null null);
+        text-align: center;
+        @media screen and (min-width: $screen-lg){
+          @include margin(17px null null null);
+        }
+        .btn {
+          @include border-radius(4px);
+          @include padding(4px null);
+        }
+      }
+    }
+  }
+}

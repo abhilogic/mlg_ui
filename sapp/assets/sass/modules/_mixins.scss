@@ -1,0 +1,211 @@
+// $MIXINS
+// Text
+@mixin rem($val) {
+	font-size: ($val * 10) + px;
+	font-size: $val + rem;
+}
+
+@mixin line-height($val) {
+	line-height: ($val * 10) + px;
+	line-height: $val + rem;
+}
+
+// BEM
+@mixin element($name) {
+	@at-root &-#{$name} {
+		@content;
+	}
+}
+
+@mixin modifier($name) {
+	@at-root &--#{$name} {
+		@content;
+	}
+}
+
+// Opacity
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// Text Truncate
+@mixin text-truncate ($overflow: ellipsis) {
+  text-overflow: $overflow;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Absolute Positioned
+@mixin abs-pos ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: absolute;
+}
+
+// Animation delay
+@mixin delay ($delay) {
+  @include animation-delay($delay);
+}
+
+// Media query
+@mixin breakpoint($point) {
+  @if $point == extralarge {
+    @media  only screen and (min-width: 1201px) { @content; }
+  }
+  @else if $point == large {
+    @media  only screen and (max-width: 1200px) { @content; }
+  }
+  @else if $point == medium {
+    @media only screen and (max-width: 992px) { @content; }
+  }
+  @else if $point == small {
+    @media only screen and (max-width: 768px) { @content; }
+  }
+  @else if $point == extrasmall {
+    @media only screen and (max-width: 767px) { @content; }
+  }
+  @else if $point == iphone_six {
+    @media only screen and (min-device-width : 375px) { @content; }
+  }
+  @else if $point == iphone {
+    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) { @content; }
+  }
+  @else if $point == retina {
+    @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) { @content; }
+  }
+}
+
+@mixin image-2x($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    /* on retina, use image that's scaled by 2 */
+    background-image: url($image);
+    background-size: $width $height;
+  }
+}
+
+// Border Radius
+@mixin border-radius($radius){
+	-moz-border-radius:$radius;
+	-webkit-border-radius:$radius;
+	border-radius:$radius;
+}
+
+// Border
+@mixin add-border($size, $color, $style, $position){
+	@if $position == 'all'{
+		border:$size $style $color;
+	} @else if $position == 'top'{
+		border-top:$size $style $color;
+	} @else if $position == 'right'{
+		border-right:$size $style $color;
+	} @else if $position == 'bottom'{
+		border-bottom:$size $style $color;
+	} @else if $position == 'left'{
+		border-left:$size $style $color;
+	} @else if $position == 'top-bottom'{
+		border-top:$size $style $color;
+		border-bottom:$size $style $color;
+	} @else if $position == 'right-left'{
+		border-right:$size $style $color;
+		border-left:$size $style $color;
+	}
+}
+
+// Box Shadow
+@mixin box-shadow($shadow1, $shadow2:false) {
+ $params: $shadow1;
+  @if $shadow2
+    { $params: $shadow1, $shadow2; }
+  -webkit-box-shadow: $params;
+     -moz-box-shadow: $params;
+          box-shadow: $params;
+}
+
+// Text Shadow
+@mixin text-shadow($shadow1, $shadow2:false) {
+ $params: $shadow1;
+  @if $shadow2
+    { $params: $shadow1, $shadow2; }
+  -webkit-text-shadow: $params;
+     -moz-text-shadow: $params;
+          text-shadow: $params;
+}
+
+// Box Sizing
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model; // Safari <= 5
+     -moz-box-sizing: $box-model; // Firefox <= 19
+          box-sizing: $box-model;
+}
+
+// Background images
+@mixin background-cover($filename, $position:center top, $size:cover, $repeat: no-repeat) {
+    background: {
+        image: url(#{$imagedir}#{$filename});
+        position: $position;
+        repeat: $repeat;
+				size:$size;
+    }
+}
+
+@mixin background-repeat($filename, $position:0 0, $repeat:repeat){
+    background: {
+        image: url(#{$imagedir}#{$filename});
+        position: $position;
+        repeat: $repeat;
+    }
+}
+
+@mixin background-img($filename){
+	background: {
+		image: url(#{$imagedir}#{$filename});
+	}
+}
+
+@mixin placeholders($selector){
+#{$selector}::-webkit-input-placeholder {
+   @content;
+ }
+}
+
+@mixin placeholder(){
+&::-webkit-input-placeholder {
+   @content;
+}
+&:-moz-placeholder {
+   @content;
+}
+&:-ms-input-placeholder {
+   @content;
+ }
+}
+
+
+@mixin respond-to($media) {
+	@if $media == largeScreen {
+    @media only screen and (min-width: $screen-large) { @content; }
+  }
+  @else if $media == tabletLand {
+    @media only screen and (max-width: $screen-tb-land) { @content; }
+  }
+  @else if $media == tabletPort  {
+    @media only screen and (max-width: $screen-tb-port) { @content; }
+  }
+  @else if $media == mobileMedium {
+    @media only screen and (max-width: $screen-mobile-md) { @content; }
+  }
+	@else if $media == mobileSmall {
+    @media only screen and (max-width: $screen-mobile-sm) { @content; }
+  }
+	@else if $media == mobileExtraSmall {
+    @media only screen and (max-width: $screen-mobile-xs) { @content; }
+  }
+}

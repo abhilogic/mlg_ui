@@ -1,0 +1,26 @@
+/* MLG: Fonts --- */
+
+//Font primary
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+//Font Secondary
+@font-face {
+    font-family: 'MyriadProBoldCondensed';
+    src: url($font_dir+'MyriadProBoldCondensed.eot');
+    src: url($font_dir+'MyriadProBoldCondensed.eot') format('embedded-opentype'),
+         url($font_dir+'MyriadProBoldCondensed.woff2') format('woff2'),
+         url($font_dir+'MyriadProBoldCondensed.woff') format('woff'),
+         url($font_dir+'MyriadProBoldCondensed.ttf') format('truetype'),
+         url($font_dir+'MyriadProBoldCondensed.svg#MyriadProBoldCondensed') format('svg');
+}
+
+@font-face {
+    font-family: 'MyriadProCondensed';
+    src: url($font_dir+'MyriadPro-Cond.eot');
+    src: url($font_dir+'MyriadPro-Cond.eot') format('embedded-opentype'),
+         url($font_dir+'MyriadPro-Cond.woff2') format('woff2'),
+         url($font_dir+'MyriadPro-Cond.woff') format('woff'),
+         url($font_dir+'MyriadPro-Cond.ttf') format('truetype'),
+         url($font_dir+'MyriadPro-Cond.svg#MyriadPro-Cond') format('svg');
+}

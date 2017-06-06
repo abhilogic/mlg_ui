@@ -1,0 +1,49 @@
+<ul class="nav sidebar_nav sidebar_nav-main">
+						<li class="active">
+							<a id="m_class" href="#" data-toggle="collapse"   ng-click="open_menu('m_class','myClass');"><i class="icon icon-my_class"></i><span class="link__text">My Classes</span></a>
+							<ul id="myClass" class="sub-menu collapse">
+								<li class="active" ng-repeat="list in subject_grade">
+									<a href="teacher/dashboard/class/{{list.level_id}}/{{list.course_name}}/{{list.course_id}}"><span class="link__text">{{list.name}} {{list.course_name}}</span></a>
+								</li>								
+								<li>
+									<a href="teacher/create-class"><span class="link__text"><i class="icon icon-plus-outline"></i> Add Students In Class</span></a>
+								</li> 
+								
+							</ul>
+						</li>
+						<li >
+							<a href="teacher/report"><i class="icon icon-report"></i><span class="link__text">Report</span></a>
+						</li>
+						<li >
+							<a href="teacher/subscription"><i class="icon icon-my_subscriptions"></i><span class="link__text">My Subscription</span></a>
+						</li>
+						<li >
+							<a href="teacher/rewards"><i class="icon icon-my_rewards"></i><span class="link__text">My Rewards</span></a>
+						</li>
+						<li >
+							<a id="m_content" href="#" data-toggle="collapse" class="collapsed" ng-click="open_menu('m_content','myContent');"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
+							<ul id="myContent" class="sub-menu collapse">
+								<li class="active">
+									<a href="teacher/questions"><span class="link__text">Questions</span></a>
+								</li>
+								<li>
+									<a href="teacher/lessons"><span class="link__text">Lessons</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="teacher/message"><i class="icon icon-message"></i><span class="link__text">Messaging</span></a>
+						</li>
+						<li>
+							<a href="scope-sequence"><i class="icon icon-my_blueprinting_tool"></i><span class="link__text">scope and sequence</span></a>
+						</li>
+						<li>
+							<a href="teacher/notification"><i class="icon icon-notification"></i><span class="link__text">Notification</span></a>
+						</li>
+            <li class="hidden-sm hidden-md hidden-lg">
+							<a href="teacher-setting.html"><i class="icon icon-my_settings"></i><span class="link__text">Setting</span></a>
+						</li>
+            <li class="hidden-sm hidden-md hidden-lg">
+							<a href="#"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
+						</li>
+					</ul>

@@ -1,0 +1,70 @@
+.signpage__body {
+  &.student_account_creation {
+    .account_preferences {
+      margin-top: 88px;
+      >.hd {
+        color: $doveGray;
+        font-size: 24px;
+        font-weight: $light;
+        text-align: center;
+        @include respond-to(mobileExtraSmall){
+          font-size: 20px;
+        }
+      }
+      .report_mail {
+        max-width: 420px;
+        margin: auto;
+        margin-top: 81px;
+        @include respond-to(mobileMedium){
+          margin-top: 40px;
+        }
+        .radio_ul {
+          margin-top: 18px;
+          text-align: center;
+          @include respond-to(mobileMedium){
+            text-align: left;
+          }
+          @include respond-to(mobileExtraSmall){
+            margin-top: 0px;
+          }
+          li {
+            &:not(:last-child){
+              margin-right: 62px;
+                @include respond-to(mobileMedium){
+                  margin-right: 30px;
+                }
+                @include respond-to(mobileExtraSmall){
+                  margin-right: 2px;
+                }
+            }
+            span {
+              font-size: 16px;
+              font-weight: $semibold;
+              @include respond-to(mobileExtraSmall){
+                font-size: 12px;
+              }
+            }
+          }
+        }
+        .form {
+          text-align: center;
+          .form-group {
+            text-align: left;
+          }
+          .placholder {
+            font-weight: $semibold;
+            @include respond-to(mobileExtraSmall){
+              font-size: 12px;
+            }
+          }
+          .send_msg {
+            margin-top: 0px;
+          }
+          .btn-proceed {
+            margin-top: 55px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,362 @@
+.panel-student-profile{
+  .panel-title{
+    text-transform: uppercase;
+    .select-subject{
+      float: right;
+      display: inline-block;
+      width: auto;
+      text-transform: uppercase;
+    }
+  }
+
+  .tabs-analysis{
+    background-color: #f5f8fb;
+  }
+}
+
+.student-profile{
+  .media-left{
+    @include padding(null 20px);
+  }
+  .status{
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+    color: $gray-light;
+    font-size: 12px;
+  }
+  .student-name{
+    font-weight: $bold;
+    color: $gray-dark;
+    margin-bottom: 15px;
+    margin-top: 0;
+    .class{
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: $gray-dark;
+    }
+  }
+  .time-spent{
+    @include margin(0px null 20px);
+    @include padding(0px null null);
+    font-weight: $semibold;
+    color: lighten($gray-light, 15%);
+
+    .time-value{
+      font-size: 22px;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: $semibold;
+      color: $gray-light;
+      i{
+        color: $brand-danger;
+      }
+    }
+  }
+
+  .activit-selector{
+    max-width:  209px;
+    @include margin(10px null null);
+    .dropdown-toggle {
+      @include padding(null null null 0px);
+    }
+  }
+}
+
+.container-progress-chart{
+  @include margin(null null 20px null);
+}
+
+.student-progress-allover{
+
+}
+
+
+
+#subjectAccordion .panel-heading { padding: 0;}
+#subjectAccordion .panel-title > a {
+	display: block;
+	padding: 0.4em 0.6em;
+    outline: none;
+    font-weight:bold;
+    text-decoration: none;
+}
+
+#subjectAccordion .panel-title > a.accordion-toggle::before, #subjectAccordion a[data-toggle="collapse"]::before  {
+    content:"\e113";
+    float: left;
+    font-family: 'Glyphicons Halflings';
+	margin-right :1em;
+}
+#subjectAccordion .panel-title > a.accordion-toggle.collapsed::before, #subjectAccordion a.collapsed[data-toggle="collapse"]::before  {
+    content:"\e114";
+}
+
+
+.subjects-analysis{
+
+  .panel-subject{
+    box-shadow: none;
+    border-radius: 0;
+    .panel-heading{
+      padding: 0;
+      &::before{
+        left: 0;
+        right: 0;
+      }
+    }
+    .panel-body{
+      padding: 0;
+    }
+    .panel-collapse>.panel-body{
+      border-width: 0;
+    }
+  }
+}
+
+.sub-skill-list{
+  .skill{
+    .media-left{
+      .skill-title{
+        text-transform: uppercase;
+        color: $gray-base;
+        font-weight: $semibold;
+        span{
+          font-size: 12px;
+          color: $gray-dark;
+        }
+        h4{
+            font-size: 16px;
+            margin: 0;
+        }
+      }
+
+    }
+    .media-body{
+      vertical-align: middle;
+      text-align: center;
+    }
+    .media-right{
+
+    }
+  }
+}
+
+// modal-viewSkills
+.modal-viewSkills{
+  .modal-content {
+    @media screen and (min-width: $screen-sm){
+      max-width: 402px;
+    }
+  }
+  .modal-header {
+    @include border-width(null null 0px null);
+    @include padding(32px null null null);
+    .close {
+      @include margin(-20px null null null);
+    }
+    .modal-title {
+      text-align: center;
+      span {
+        color: $gray;
+        font-size: 12px;
+        display: block;
+      }
+      font-size: 30px;
+      color: #fdd75e;
+      text-transform: uppercase;
+    }
+  }
+  .modal-body {
+    @include padding(null null 32px null);
+    table {
+      margin: auto;
+      width: 70%;
+      tr {
+        td{
+          color: $gray;
+          width: 60%;
+          @include padding(8px null);
+        }
+        th {
+          color: $gray-dark;
+          width: 30%;
+          @include padding(8px null);
+          font-weight: normal;
+        }
+      }
+    }
+    h5 {
+      text-align: center;
+      color: $gray-dark;
+      margin-top: 20px;
+      font-size: 18px;
+      span {
+        color: $gray;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+
+
+// panel-group-subskills-report
+.panel-group-subskills-report {
+  .panel {
+    @include border-radius(0px);
+    .panel-heading {
+      @include padding(0px);
+      .panel-title{
+        @include margin(0px null null null);
+        display: block;
+        float: none;
+        a {
+          text-decoration: none;
+          display: block;
+          @include padding(18px 30px);
+          position: relative;
+          &:before {
+            content: '\0042';
+            font-family: 'Glyphter';
+            @include position(absolute, 15px 30px null null);
+          }
+          &.collapsed {
+            &:before {
+              content: '\0046';
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //subskils-report-block
+  .subskils-report-block {
+    @include padding(15px);
+    border: 1px solid rgba($gray-light,0.3);
+    @include border-radius(4px);
+    &:not(:last-child){
+      @include margin(null null 25px null);
+    }
+    @media screen and (min-width: $screen-lg){
+      @include padding(30px);
+    }
+
+    // icon
+    .icon {
+      .fa {
+        font-size: 27px;
+        &.fa-check-circle {
+          color: #01bd76;
+        }
+        &.fa-play-circle-o {
+          color: #e1a515;
+        }
+        &.fa-minus {
+          color: $white;
+          background: rgba($gray-light,0.6);
+          width: 25px;
+          height: 25px;
+          @include border-radius(100%);
+          font-size: 18px;
+          @include padding(5px null null null);
+          text-align: center;
+        }
+      }
+    }
+
+    // subskills-name
+    .subskills-name {
+      text-align: center;
+      span {
+        color: $gray-light;
+        display: block;
+        &:first-child {
+          font-size: 12px;
+          font-weight: $semibold;
+        }
+        &:last-child {
+          font-size: 14px;
+          text-transform: uppercase;
+          font-weight: $bold;
+
+        }
+      }
+    }
+
+    // status
+    .status {
+      text-transform: uppercase;
+      color: #01bd76;
+      font-size: 14px;
+      font-weight: $bold;
+      @media screen and (min-width: $screen-sm){
+        @include padding(10px null null null);
+      }
+      @media screen and (max-width: $screen-sm){
+        text-align: right;
+      }
+    }
+
+    // skills-name, status
+    .subskills-name, .status {
+      @media screen and (max-width: $screen-sm){
+        @include margin(null null 10px null);
+      }
+    }
+
+    // rating
+    .rating {
+      @media screen and (min-width: $screen-sm){
+        @include padding(10px null null null);
+      }
+      p {
+        font-size: 14px;
+        font-weight: $bold;
+        color: rgba($gray-light,0.6);
+        text-transform: uppercase;
+      }
+    }
+
+    // view_info
+    .view_info {
+      color: #ff6565;
+      font-size: 14px;
+      display: block;
+      @media screen and (min-width: $screen-sm){
+        @include padding(10px null null null);
+      }
+      @media screen and (max-width: $screen-sm){
+        text-align: right;
+      }
+    }
+
+    // rating, view_info
+    .rating, .view_info {
+      @media screen and (max-width: $screen-sm){
+        @include margin(null null 10px null);
+      }
+    }
+
+
+  // progress-block
+  &.progress-block {
+    .progress {
+      @include border-radius(25px);
+      @include margin(10px null 0px null );
+      .progress-bar-warning {
+        background-color: #e1a515;
+      }
+    }
+   }
+
+  // not-attempted
+  &.not-attempted {
+    .status {
+      color: rgba($gray-light, 0.6);
+    }
+   }
+  }
+}

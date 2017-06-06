@@ -1,0 +1,1011 @@
+// home page color variables
+$mineShaft: #3B3B3B;
+$light-black: rgba(#000,0.6);
+$dandelion: #FDD75E;
+$Comet: #5A667F;
+$shamrock: #29C886;
+$white-65: rgba(#fff,0.65);
+.prelogin {
+    font-family: 'Open Sans', sans-serif;
+    background: none !important;
+    min-height: 100vh;
+    position: relative;
+    // navigations
+  .navigation {
+        @include position(fixed, 0px null null 0px);
+          width: 100vw;
+          &.p-relative {
+            position: relative;
+          }
+        // stickdy
+        &.sticky {
+          background: rgba(19, 56, 74, 0.95);
+          .navbar-default {
+            @include padding(5px 15px);
+          }
+        }
+
+
+        background: transparent;
+        opacity: 1;
+        @include position(fixed, 0px null null 0px);
+        @include transform(translateY(0px));
+        @include transition(.5s all linear);
+        // p-relative
+        &.p-relative {
+          display: relative;
+        }
+      z-index: 100;
+      width: 100vw;
+
+      // navbar-default
+    .navbar-default {
+      @include padding(22px 15px);
+      max-width: 1200px;
+      @include margin(auto);
+
+      // navbar-brand
+      .navbar-brand {
+        @include padding(0px null);
+        @media screen and (max-width: $screen-sm){
+          @include padding(4px null null null);
+        }
+        img {
+          max-width: 75px;
+          @media screen and (max-width: $screen-sm-max){
+            max-width: 60px;
+          }
+        }
+      }
+
+
+      // navbar-nav
+      .navbar-nav {
+        @media screen and (min-width: $screen-md-max){
+            @include margin(9px null null 25%);
+        }
+
+       @media screen and (min-width: 3000px){
+          @include margin(9px null null 14%);
+       }
+
+        @media screen and (max-width: $screen-md-max) and (min-width: $screen-md)   {
+            @include margin(9px null null 23%);
+        }
+        li {
+            position: relative;
+            @media screen and (min-width: $screen-sm){
+              @include margin(0px null null null);
+            }
+          a {
+            color: $white;
+            font-size: 13px;
+            @include padding(8px 18px);
+            text-transform: uppercase;
+            font-weight: $semibold;
+            @include border-radius(50px);
+            &:hover {
+              background: rgba($white,0.25);
+              color: #FDD75E;
+            }
+          }
+          // active li
+          &.active {
+            a {
+              @media screen and (min-width:$screen-sm-max){
+                background: rgba($white,0.25);
+              }
+            }
+          }
+        }
+          @include respond-to(mobileMedium){
+            float: none;
+            margin: auto;
+          }
+          // navbar-right
+          &.navbar-right {
+            @include margin(9px null null 0px);
+            @media screen and (max-width: $screen-sm){
+              @include margin(0px null null null);
+            }
+            li {
+              @media screen and (min-width: $screen-sm){
+                @include margin(null 2px);
+              }
+              a {
+                @include border-radius(100px);
+                @include padding( 8px 15px);
+
+              }
+              &.active {
+                a {
+                  background: transparent;
+                  @media screen and (min-width: $screen-md){
+                    background: $white;
+                    color: #f75f18;
+                  }
+                  @include padding( 7px 20px);
+                  &:hover {
+                    color: lighten(#f75f18, 20%);
+                  }
+                }
+              }
+            }
+          }
+       }
+    }
+  }
+
+
+
+//  navigation for the tablet version and mobile version
+.navbar-default {
+  .navbar-header {
+    position: relative;
+    z-index: 200;
+    .navbar-toggle {
+      border: 0px;
+      @media screen and (max-width: $screen-sm-max){
+        @include margin(5px null null null);
+      }
+      &:focus, &:hover {
+        background: transparent;
+      }
+      .icon-bar {
+        background: white;
+        width: 40px;
+        height: 2px;
+        border-radius: 1px;
+        &:not(:last-child){
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+  .navbar-collapse {
+    .navbar-nav {
+      li {
+        @include respond-to(mobileMedium){
+          display: block;
+          border: 0px;
+          @include border-radius(0px);
+          border-bottom: 0px;
+          top: 0px;
+          right: 0px;
+        }
+        a {
+          @media screen and (max-width: $screen-sm-max){
+            text-align: center;
+            font-size: 19px;
+            padding: 15px 18px !important;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: $screen-sm-max) and (min-width: $screen-xs-max){
+      display: none !important;
+    }
+    @media screen and (max-width: $screen-sm-max){
+      @include border-width(0px);
+      @include position(fixed,0px null null 0px);
+      width: 100vw;
+      min-height: 100vh;
+      padding-top: 20%;
+      background: rgba(0,0,0,0.97);
+      z-index: 10;
+      opacity: 0;
+      @include transform(translateY(50px));
+      @include transition(.3s all linear);
+      &.in {
+        opacity: 1;
+        @include transform(translateY(0px));
+        display: block !important;
+      }
+    }
+    @media screen and (max-width: $screen-xs-max){
+      padding-top: 40%;
+    }
+  }
+  @media screen and (max-width: $screen-sm-max) and (min-width: $screen-xs-max){
+  .navbar-nav, .navbar-right{
+    float: none !important;
+    li {
+      display: block;
+      width: 100%;
+      a {
+        text-align: left;
+      }
+     }
+    }
+    .navbar-toggle {
+      display: block;
+      float: right;
+      @include margin(17px null null null);
+      height: auto !important;
+    }
+    .navbar-header {
+      float: none !important;
+    }
+  }
+}
+
+  // main content section
+  .main_content_section {
+    @include padding(null null 1px null);
+    position: relative;
+    margin-top: 100vh;
+    background: $white;
+    z-index: 2;
+    &:before {
+      content: '';
+      @include position(absolute, -52px null null  0px);
+      @media screen and (max-width: $screen-md-max){
+        @include position(absolute,-52px null null  0px);
+      }
+      background: {
+        image: url("../img/prelogin_img/below_banner.svg");
+        size: auto 111%;
+        position: left bottom ;
+        repeat: no-repeat;
+      }
+      z-index: 2;
+      width: 100%;
+      height: 55px;
+      display: none;
+      @media screen and (min-width: 1700px){
+        background-size: auto 100%;
+        height: 113px;
+        top: -112px;
+      }
+
+      @media screen and (min-width: 3000px){
+        background-size: auto 138%;
+        height: 213px;
+        top: -213px;
+      }
+      @media screen and (min-width: $screen-md){
+        display: block;
+      }
+    }
+    @include respond-to(mobileMedium){
+      padding-top: 50px;
+    }
+    // core-compitancy
+    .core_compitancy {
+      padding-top: 79px;
+      @include respond-to(mobileMedium){
+        padding-top: 50px;
+      }
+      .thumbnail {
+        background: none;
+        border: 0px;
+        padding: 0px;
+        text-align: center;
+        margin-bottom: 40px;
+        h4 {
+          color: $mineShaft;
+          font-size: 16px;
+          font-family: $font-tertiary;
+          margin-top: 10px;
+          font-weight: $bold;
+          text-transform: uppercase;
+          @include respond-to(mobileMedium){
+            font-size: 23px;
+            margin-top: 13px;
+          }
+        }
+        p {
+          color: $light-black;
+          font-family: $font-tertiary;
+          font-size: 14px;
+          margin-top: 10px;
+          line-height: 22px;
+        }
+      }
+    }
+    // featuer
+    .feature_section {
+      @include margin(50px null null null);
+      overflow: hidden;
+
+      // laptop screen
+      .laptop_screen {
+          width: 100%;
+          height: 432px;
+          @media screen and (min-width: $screen-md-max){
+            position: absolute;
+          }
+
+          @media screen and (min-width: $screen-sm){
+            min-width: 736px;
+          }
+
+          @media screen and (max-width: $screen-md-max){
+            height: 377px;
+          }
+
+
+        // right side
+        &.right {
+          background: {
+            image: url("../img/prelogin_img/right-lap-screen.png");
+            size: 100% 100%;
+          }
+          @media screen and (min-width: $screen-sm-max){
+            right: -33%;
+            height: 430px;
+          }
+          @include padding(19px null null 77px);
+          @media screen and (max-width: $screen-md-max) and (min-width: $screen-md){
+            @include padding(17px null null 77px);
+            height: 363px;
+            margin-right: -52%;
+          }
+          @media screen and (max-width: $screen-sm-max){
+            @include padding(0% null null 0%);
+            background: none;
+            height: auto;
+            width: auto;
+            .featuer-carousel {
+              overflow: inherit;
+              &:before {
+                content:'';
+                width: calc(100% + 80px);
+                height: 40px;
+                @include position(absolute, null null -49px -51px);
+                @include background-cover("prelogin_img/right-lap-screen-bottom.png");
+                background: {
+                  position: center top;
+                  size: 100% auto;
+                  repeat: no-repeat;
+                }
+                z-index: 100;
+              }
+            }
+          }
+
+        }
+
+
+        // left side
+        &.left {
+          background: {
+            image: url("../img/prelogin_img/left-lap-screen.png");
+            size: 100% 100%;
+          }
+          @media screen and (min-width: $screen-sm-max){
+            left: -33%;
+            height: 427px;
+          }
+          @media screen and (min-width: $screen-lg){
+            .featuer-carousel {
+              max-width: 89%;
+            }
+          }
+          @media screen and (min-width: $screen-md) and (max-width: $screen-md-max){
+            .featuer-carousel {
+              margin-left: 65px;
+            }
+          }
+          @include padding(19px null null 46px);
+          @media screen and (max-width: $screen-md-max) and (min-width: $screen-md){
+            @include padding(null null null 42px);
+            height: 386px;
+            margin-left: -52%;
+          }
+          @media screen and (max-width: $screen-sm-max){
+            @include padding(0% null null 0%);
+            background: none;
+            height: auto;
+            width: auto;
+            .featuer-carousel {
+              overflow: inherit;
+              &:before {
+                content:'';
+                width: calc(100% + 80px);
+                height: 40px;
+                @include position(absolute, null -51px -49px null);
+                @include background-cover("prelogin_img/left-lap-screen-bottom.png");
+                background: {
+                  position: center top;
+                  size: 100% auto;
+                  repeat: no-repeat;
+                }
+                z-index: 100;
+              }
+            }
+          }
+
+        }
+
+        // laptop
+      }
+      >div {
+      @media screen and (min-width: $screen-sm){
+          padding-bottom: 143px;
+      }
+        @include respond-to(mobileMedium){
+          padding-bottom: 50px;
+          text-align: center;
+        }
+        &.teacher_feature {
+          @include padding(null null 20px null);
+          @media  screen and (max-width: $screen-xs) {
+            margin-bottom: 50px;
+          }
+        }
+      h1 {
+        font-size: 36px;
+        color: $black;
+        @include margin(30px null 29px null);
+        font-weight: $semibold;
+        text-align: center;
+        @media screen and (min-width: $screen-sm-max){
+          @include margin(101px null null null);
+         text-align: left;
+        }
+      }
+      p,span, em {
+        font-size: 15px;
+        color: $light-black;
+        font-style: normal;
+
+      }
+      p {
+        margin-bottom: 10px;
+      }
+      .learn_more {
+        background: none;
+        display:block;
+        font-size: 14px;
+        font-weight: $bold;
+        color: #f75f18;
+        text-transform: uppercase;
+        margin-top: 20px;
+        @media screen and (max-width: $screen-sm){
+          display: block;
+          text-align: center;
+          width: 100%;
+        }
+        @include padding(null null null 0px);
+        }
+      }
+    }
+
+    //about us
+    .about_us {
+      @include padding(50px null);
+      @include margin(50px null);
+      background: {
+        image: url("../img/prelogin_img/about_us_bg.jpg");
+        size: 100% cover;
+        position: center center;
+      }
+      @media screen and (min-width: $screen-sm){
+        @include padding(115px null);
+        @include margin(100px null 0px null);
+      }
+      .cover {
+        max-width: 721px;
+        @include margin(auto);
+        background: #1f724e;
+        @include padding(15px);
+        @media screen and (min-width:$screen-sm){
+          @include padding(58px 50px);
+        }
+      }
+      h1 {
+        color: white;
+        font-size: 34px;
+        font-weight: $bold;
+        @include margin(0px null 0px null);
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        & + .divider {
+          width: 21%;
+          height: 2px;
+          background: $white;
+          @include margin(20px auto 20px auto);
+          @media screen and (min-width: $screen-sm){
+            @include margin(55px auto 50px auto);
+          }
+        }
+      }
+      p {
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        span {
+          display: block;
+          font-size: 12px;
+          @include margin(30px null null null);
+        }
+        @media screen and (min-width: $screen-sm){
+          font-size: 26px;
+          span {
+            font-size: 18px;
+            @include margin(64px null null null);
+          }
+        }
+      }
+    }
+
+    // testimonial section
+    .testimonial_section {
+      text-align: center;
+      h4 {
+        color: $black;
+        font-size: 32px;
+      }
+      p {
+        color: rgba($black,0.4);
+        font-size: 32px;
+        font-style: italic;
+        margin-top: 28px;
+        max-width: 815px;
+        @include margin(null auto null auto);
+        @include respond-to(mobileMedium){
+          font-size: 24px;
+        }
+      }
+      .testimonials_info {
+        text-align: center;
+        margin-top: 90px;
+        .img_cover {
+          @include border-radius(100%);
+          width: 120px;
+          height: 120px;
+          border: 6px solid $dandelion;
+          padding-top: 4px;
+          margin: auto;
+          img {
+            @include border-radius(100%);
+            width: 100px;
+            height: 100px;
+          }
+        }
+        .testimonial_name {
+          color: rgba($black, 0.8);
+          font-size: 20px;
+          display: block;
+          margin-bottom: 5px;
+        }
+        .testimonial_post {
+          color: rgba($black,0.5);
+          font-size: 20px;
+          display: block;
+        }
+      }
+        .owl-theme .owl-controls{
+           position: absolute;
+           top: 38%;
+           width: 100%;
+           opacity: 1;
+           @include respond-to(mobileMedium) {
+              top: 48%;
+            }
+         .owl-buttons div{
+           width: 50px;
+           height: 50px;
+           line-height: 40px;
+           background: transparent;
+           border-radius: 0;
+         }
+        }
+        .owl-prev{
+           position: absolute;
+           left: -3%;
+        }
+        .owl-next{
+           position: absolute;
+           right: -3%;
+        }
+        .owl-prev:after,
+        .owl-next:after{
+           content: "\f104";
+           font-family: 'FontAwesome';
+           font-size: 50px;
+           color: #808080;
+        }
+        .owl-next:after{
+           content: "\f105";
+      }
+    }
+
+    // get in touch
+    .get_in_touch {
+      @include padding(71px null 125px null);
+      @include margin(null null 0px null);
+      @include respond-to(mobileMedium){
+        padding-top: 50px;
+      }
+      h1 {
+        color: #13384a;
+        font-size: 34px;
+        text-align: center;
+        @include margin(null null 43px null);
+        @include respond-to(mobileMedium){
+          font-size: 26px;
+          margin-bottom: 20px;
+        }
+      }
+      .cover {
+        max-width: 938px;
+        margin: auto;
+        @include box-shadow(0 0 16px rgba(0,0,0,0.4));
+        @include border-radius(10px);
+        .form_cover {
+            @include padding(41px 36px 7px);
+            @media screen and (min-width: $screen-sm-max){
+              @include padding(41px 75px 7px);
+            }
+          h4 {
+            color: #13384a;
+            font-size: 18px;
+            font-weight: $bold;
+            @include margin(0px null 36px null);
+          }
+          .form {
+            position: relative;
+            .form-group {
+              position: relative;
+              @include margin(null null 33px null);
+              &.focus {
+                label {
+                  top: -20px;
+                }
+              }
+              label {
+                color: rgba($Comet,1);
+                font-size: 12px;
+                font-weight: $light;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                text-transform: uppercase;
+                @include transition(0.3s top);
+              }
+              .form-control {
+                @include box-shadow(none);
+                @include border-radius(0px);
+                border:0px;
+                border-bottom: 2px solid $alto;
+                font-size: 20px;
+                color: rgba($Comet,0.85);
+                padding-left: 0px;
+              }
+            }
+            .btn-send {
+              @include box-shadow(0 0 16px rgba(0,0,0,0.4));
+              color: $white;
+              width: 40px;
+              height: 40px;
+              border: 0px;
+              @include border-radius(100%);
+              background: #f75f18;
+              font-size: 20px;
+              @include position(absolute, null 0px 10px null);
+              &:focus {
+                outline: 0px;
+              }
+            }
+          }
+        }
+        .detail_cover {
+          @include border-radius(0px 10px 10px 0px);
+          background: {
+            image: url("../img/prelogin_img/contact-form-right-bg.jpg");
+            size: 100% 100%;
+            position: center center;
+            color:#162840;
+          }
+          height: 100%;
+          @include padding(41px 47px);
+          @include respond-to(mobileMedium){
+              @include border-radius(0px 0px 10px 10px);
+              @include padding(41px 30px);
+              margin: auto;
+          }
+          h4 {
+            color: $white;
+            font-size: 18px;
+            @include margin(0px null 30px null);
+          }
+          .details {
+            padding-left: 0px;
+            li {
+              display: block;
+              margin-bottom: 28px;
+              .fa ,span {
+                color: rgba($white,0.4);
+                font-size: 13px;
+                display: inline-block;
+              }
+              .fa {
+                font-size: 23px;
+              }
+              span {
+                color: $white;
+                margin-left: 18px;
+                &.address {
+                  @include margin(-30px null null 25px);
+                }
+              }
+            }
+          }
+          .map {
+            width: 257px;
+            height: 152px;
+            margin: auto;
+            margin-bottom: 41px;
+          }
+          .social_icon {
+            text-align: center;
+            padding-left: 0px;
+            @include margin(45px null 0px null);
+            @media screen and (min-width: $screen-sm){
+              @include margin(0px null null null);
+            }
+            li {
+              display: inline-block;
+              &:not(:last-child){
+                margin-right: 8px;
+                @include respond-to(mobileMedium){
+                  margin-right: 15px;
+                }
+                @include respond-to(mobileExtraMedium){
+                  margin-right: 13px;
+                }
+              }
+              a {
+                display: block;
+                color: rgba($black,.75);
+                background: transparent;
+                @include border-radius(100%);
+                height: 45px;
+                width: 45px;
+                text-align: center;
+                font-size: 30px;
+                padding-top: 2px;
+                &:hover {
+                  color: $white;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // footer section
+  .footer {
+    width: 100%;
+    @include position(absolute,null null 0px 0px );
+    @include margin(null null null null);
+    background: #13384a;
+    @include padding(0px null null null);
+    @include respond-to(mobileMedium){
+        @include margin(50px null null null);
+    }
+    h4 {
+      font-size: 20px;
+      color: $white-65;
+      text-transform: uppercase;
+      font-weight: $bold;
+      @include respond-to(mobileMedium){
+        margin-top: 20px;
+      }
+    }
+    ul {
+      margin-top: 18px;
+      li {
+        display: block;
+        margin-bottom: 5px;
+        a {
+          font-size: 18px;
+          font-weight: $light;
+          color: $white-65;
+        }
+      }
+    }
+    .company_tab_line {
+      border-top: 1px solid rgba($white,0.3);
+      @include padding(15px null 15px null);
+      p {
+        color: $white-65;
+        font-size: 14px;
+        font-weight: $light;
+        @include margin(0px);
+        @include respond-to(mobileMedium){
+          text-align: center;
+        }
+        &.policy_line {
+          text-align: right;
+          @include respond-to(mobileMedium){
+            text-align: center;
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.featuer-carousel {
+  max-width: 93.5%;
+  overflow: hidden;
+  @media screen and (max-width: $screen-md-max){
+    max-width: 79%;
+  }
+
+  @media screen and (max-width: $screen-sm-max){
+    max-width: calc(100% - 80px);
+    @include margin(auto);
+    @include border-width(10px);
+    @include border-style(solid);
+    @include border-color(#b6b7b2);
+    @include border-radius(5px);
+    @include margin(null null 50px null);
+  }
+  .owl-nav {
+    display: none !important;
+    text-align: center;
+    .owl-prev, .owl-next {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      // @include box-shadow(inset 0px 0px 10px rgba(0,0,0,0.2));
+      background: #afaeae;
+      @include border-radius(100%);
+      @include margin(15px 5px);
+    }
+  }
+  .owl-dots {
+    text-align: center;
+    display: none;
+    .owl-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      // @include box-shadow(inset 0px 0px 10px rgba(0,0,0,0.2));
+      background: #afaeae;
+      @include border-radius(100%);
+      @include margin(15px 5px);
+      &.active {
+        background: darken(#afaeae,30%);
+      }
+    }
+  }
+
+}
+
+.comingsoon-img {
+  display: block;
+  @include margin(60px auto 30px auto);
+  @media screen and (min-width: $screen-sm){
+    @include margin(104px auto 30px auto);
+  }
+  max-width: 181px;
+  opacity: 0.4;
+  @media screen and (max-width: $screen-sm){
+      max-width: 120px;
+  }
+}
+
+.div-center {
+  display: table;
+  height: calc(100vh - 250px);
+  width: 100vw;
+  .table-row {
+    display: table-row;
+    .table-cell {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 30px;
+    }
+  }
+  .btn-send {
+    @include box-shadow(0 0 16px rgba(0,0,0,0.4));
+    color: $white;
+    width: 40px;
+    height: 40px;
+    border: 0px;
+    @include border-radius(100%);
+    background: #162840;
+    font-size: 18px;
+    bottom: -30px;
+    right: -30px;
+    &:focus {
+      outline: 0px;
+    }
+  }
+}
+
+
+// mlg_concern
+.prelogin {
+  .mlg_concern {
+    text-align: center;
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(90px null null null);
+    }
+    h1 {
+      font-size: 26px;
+      @media screen and (min-width: $screen-sm-max){
+        font-size: 30px;
+      }
+      @include margin(40px null 54px null);
+    }
+    p {
+      color: rgba($black,0.6);
+      display: inline-block;
+      font-size: 18px;
+      @include margin(0px null 0px null);
+      @include padding(20px null 20px null);
+      position: relative;
+      &:before {
+        background: lighten($gray, 30%);
+        content: '';
+        height: 1px;
+        @include position(absolute, null 20% 0px 20%);
+        width: 60%;
+      }
+      &:last-child {
+        &:before {
+          display: none;
+        }
+      }
+      @media screen and (min-width: $screen-sm-max){
+        width: 65%;
+      }
+      &:last-child {
+        border-bottom: 0px;
+      }
+    }
+  }
+}
+
+
+
+
+
+// Modal Style
+.modal-content{
+  overflow: hidden;
+}
+.modal-free-trail{
+  .modal-header{
+    border-width: 0;
+  }
+  .modal-body{
+    @include padding(30px null);
+    .flex-col + .flex-col{
+      border-left: 1px solid $gray-lighter;
+    }
+  }
+  .modal-footer{
+    background-color: #fdd75e;
+    border-width: 2px;
+    border-color: #caac4b;
+    color: white;
+    .btn-default{
+      background-color: #caac4b;
+      color: white;
+      min-width: 80%;
+      &:hover{
+        background-color: white;
+        color: #fdd75e;
+      }
+    }
+  }
+}
+
+.carousel-inner>.item>img  {
+  @media screen and (min-width: $screen-lg){
+    width: 100%;
+  }
+}

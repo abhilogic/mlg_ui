@@ -1,0 +1,51 @@
+
+
+// checkbox design
+.data-checkbox {
+  opacity: 0;
+  @include position(absolute,  null null null -9999px);
+    & + .checkbox-label {
+      @include margin(null null 0px null);
+      @include position(relative, null null null null);
+      &:after {
+        content: '';
+        @include position(relative, null null null null);
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid $gray-light;
+        @include border-radius(3px);
+        z-index: 11;
+      }
+      &:before {
+        @include position(absolute, 0px null null 0px);
+        z-index: 11;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        color: $gray-light;
+        font-family: 'Glyphter';
+        text-align: center;
+        padding-top: 2px;
+        opacity: 0;
+        @include transition(.5s all linear);
+      }
+    }
+    &:checked {
+      & + .checkbox-label {
+        &:before {
+          opacity: 1;
+        }
+      }
+    }
+}
+// checkbox design
+
+// radio
+.radio{
+  &.radio-primary {
+    input[type="radio"]:checked + label{
+      color: $brand-primary !important;
+  }
+ }
+}

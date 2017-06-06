@@ -1,0 +1,270 @@
+    <!-- {{qti.questions}} -->
+	<style type="text/css">
+      .modal-backdrop {
+        display: none;
+      }
+    </style>
+    <div class="main_cover subskillsroom_page">
+			<div class="main_div_center">
+				<header></header>
+				<div class="frame frams_table">
+					<div class="inner_cover">
+						<div class="content_cover">
+							<div class="panel panel-default">
+								
+
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-sm-3 col-xs-1 text-left pd0">
+											<!-- <span class="prev">Previous Lesson</span>
+											<i class="icon video_book"></i> -->
+										</div>
+										<div class="col-sm-6 col-xs-10 pd0">
+											<h4 class="panel-title">
+												<span>Quiz on Number System</span>
+												<span>{{sequence+1}}/{{qti.questions.length}}</span>
+											</h4>
+										</div>
+										<div class="col-sm-3  col-xs-1 text-right pd0">
+											<span class="next">Next Question</span>
+											<i class="icon book" ng-click="nextQuestion();"></i>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="panel-body">
+									<h4 class="ques">{{question.questionName}}</h4> 
+									
+									
+										 <div class="option" ng-if="question.type=='fillin' ">
+											<input type="text" class="form-control"/>
+										</div>
+										<div class="option" ng-if="question.type=='yesNO' ">
+											<h4><label class="radio-inline"><input type="radio" name="opt"><span style="color:#fff">Yes</span></label></h4>
+											<label class="radio-inline"><input type="radio" name="opt"><span style="color:#fff">No</span></label>
+										</div>
+										<div class="text-center">
+										<button type="button" class="btn btn-primary" id="skip">skip</button>
+										<button type="button" class="btn btn-default" id="submit">Submit</button>
+										<button type="button" class="btn btn-default" id="hint">Hint</button>
+									</div>
+									
+								</div>
+
+								
+								<div class="panel-footer">
+									<div class="owl-carousel owl-theme ques_no_indicator">
+										<!-- <div class="item" ng-repeat="q in qti.questions">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>{{$index+1}}</i></span>
+										</div> -->
+										<div class="item">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>1</i></span>
+										</div>
+										<div class="item">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>2</i></span>
+										</div>
+										<div class="item ">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>3</i></span>
+										</div>
+										<div class="item ">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>4</i></span>
+										</div>
+										<div class="item ">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>5</i></span>
+										</div>
+										<div class="item active">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>6</i></span>
+										</div>
+										<div class="item inactive">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>7</i></span>
+										</div>
+										<div class="item inactive">
+											<i class="icon"></i>
+											<span class="ques_no">Ques <i>8</i></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    </div>
+		<!--chating-->
+		<div class="chat_block">
+			<div class="user_list">
+				<span class="bg__chat"></span>
+				<div class="chat_container ">
+					<ul class="user_list_ul">
+						<li class="categories_type">Teacher</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li class="categories_type">Parent</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Jema Stones</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Jema Stones</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles <i class="no_msg">3</i></span>
+						</li>
+						<li>
+							<img src="assets/img/receiver_img.png" alt="" class="user_img">
+							<span class="user_name">Caly Miles</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="chating_block">
+				<div class="chat_container_cover">
+					<div class="chat_conversation_toggle_btn_bg">
+						<span class="reciverName">Milessa</span>
+						<img src="assets/img/cross-white.png" alt="" class="close">
+					</div>
+					<div class="chat_container">
+						<div class="conversation_block">
+							<div class="conversation_repeat_block">
+								<div class="receiver_chat msg_continuation">
+									<div class="message_content">
+										<span class="receiver_name">Caly Miles</span>
+										<span class="receiver_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
+										<time class="sending_time">00:15</time>
+									</div>
+								</div>
+								<div class="receiver_chat">
+									<div class="message_content">ddfdfdfdf</div>
+								</div>
+								<div class="receiver_chat">
+									<div class="message_content">ddfdfdfdf</div>
+								</div>
+								<div class="receiver_chat">
+									<div class="message_content">ddfdfdfdf</div>
+								</div>
+
+								<h5 class="date"><span>17-feb</span></h5>
+								<div class="sender_chat msg_continuation">
+									<div class="message_content">
+										<span class="sender_name">Caly Miles</span>
+										<span class="sender_msg">dfdfddddfgsdgsdfsdfsdfsfd</span>
+										<time class="sending_time">00:15</time>
+									</div>
+								</div>
+								<h5 class="date"><span>17-march</span></h5>
+							</div>
+						</div>
+						<form class="form">
+							<div class="form-inline">
+								<div class="form-group">
+									<input type="text" class="chat_input" placeholder="Type your text"/>
+								</div>
+								<button type="submit" class="btn_send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- masscourts block -->
+		<div class="masscourt-block">
+			<div class="masscourt-cover ">
+				<img src="assets/img/masscourts.png" class="masccort-img" alt=""/>
+				<div class="hint-block">
+					<div class="col-xs-2 padding-0">
+						<img src="assets/img/hint-bulb-img.png" alt=""/>
+					</div>
+					<div class="col-xs-10">
+						<span class="hint">#1 It will be the sum of 74+5</span>
+						<div class="text-right">
+							<button type="button" class="btn" id="gotIt">Got it!</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="loader" loading>
+			<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+		</div>
+		<!-- masscourts block -->
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- plugins -->
+    	<script src="assets/js/plugins/jquery.transit.min.js"></script>
+    <script src="assets/js/plugins/bootstrap-tabcollapse.js"></script>
+	
+    <script type="text/javascript">
+      $(document).ready(function(){
+				//$("input[type='checkbox']").checkbox_button();
+        var owl = $('.ques_no_indicator');
+        owl.owlCarousel({
+          margin: 19,
+          loop: false,
+          responsive: {
+						320: {
+							items: 4
+						},
+            375: {
+              items: 5
+            },
+            600: {
+              items: 5
+            },
+            1000: {
+              items: 5
+            }
+          }
+        });
+      });
+    </script>
+		<script type="text/javascript">
+			$(".conversation_block, .user_list .user_list_ul").mCustomScrollbar({
+				theme:"dark"
+			});
+		</script>

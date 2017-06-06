@@ -1,0 +1,114 @@
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content" banner="250">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Onboarding: Login Teacher -->
+
+					<div class="panel panel-flat panel-onboarding">
+						<div class="panel-heading">
+							<h4 class="panel-title"><b><img src="assets/img/logo.png" alt="" /></b></h4>
+						</div>
+
+						<div class="panel-body">
+							<h3 class="text-light text-gray-light text-center">Select your grades & subjects</h3>
+							
+							<form class="teacher_courses">
+								 <div class="row">
+
+								 <br><br><br>
+									<div class="col-sm-12">
+									  <div class="form-group float-label">
+										<label class="control-label">Grade</label>
+										<select name="gradename" class="form-control float-input" ng-options="grade.name for grade in grades"  ng-model="frm.levelchoice" ng-change="changeCourseList(frm.levelchoice)" required>
+										  <option value="">Select Grade</option>
+										  <!--<option ng-repeat="grade in grades" value="{{grade.id}}">{{grade.name}}</option> -->                                
+										</select>
+										
+										<span ng-show="childform.gradename.$error.required">Select service</span>
+									  </div>
+									</div>
+								   
+								  </div>
+
+								 <div class="form-group text-center">
+									<label class="control-label text-uppercase"><h5>Choose your subjects</h5></label>               
+										  
+									<div ng-if="courserecords=='0' ">
+										  <strong class="msg">{{msg}}</strong>
+									</div>
+									<div ng-if="courserecords>0 ">
+										<div id="subjectsPrice" class="flex-row flex-row-wrap btn-group package-group" data-toggle1="buttons">
+											<label class="flex-col btn package subject" ng-repeat="course in cousesListByGrade">
+											  <input type="checkbox" ng-change="onSelectCourse(frm.selectedcourse)" ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}}'" ng-false-value="''" >                      
+											  <span class="package-title">{{course.course_name}}</span>
+											  <strong class="package-price">${{course.price}}</strong>
+											  <small class="package-type">monthly</small>
+											</label>
+										  </div>
+									</div>      
+								  </div>
+
+								 <div class="form-group text-center">
+										<button type="submit" class="btn btn-primary" ng-click="submitTeacherCourses(frm)">Proceed</button>
+								  </div>
+
+							  </form>
+								
+							<!--<form action="terms-teacher.html" class="form-login">
+
+								<div class="row">
+									<div class="col-sm-12 text-center">
+										
+										
+
+
+
+										
+
+
+
+										
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-8 col-sm-offset-2">
+										<div class="form-group float-label">
+											<label class="control-label">Comments for MLG (optional)</label>
+											<input type="text" class="form-control float-input"/>
+										</div>
+									</div>
+								</div>
+
+								<br>
+								<div class="form-group text-center">
+									<button type="submit" class="btn btn-primary">Proceed</button>
+								</div>
+							</form>-->
+						</div>
+
+					</div>
+					<!-- /.onboarding: login teacher-->
+					<p class="legal"><a href="terms-parent.html">Terms & conditions</a></p>
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+
+
+	<!-- Latest compiled and minified jQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Page Specific JavaScript -->
+	<script src="assets/js/main.js"></script>

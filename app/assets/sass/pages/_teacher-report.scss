@@ -1,0 +1,140 @@
+//panel-report
+.panel.panel-report {
+  // panel-heading
+  .panel-heading {
+    @include padding(null null 9px null);
+    // heading-elements
+    .heading-elements {
+      .btn {
+        @include padding(5px null);
+      }
+    }
+  }
+
+ // panel-body
+ .panel-body {
+   @include padding(15px null null null);
+   @media screen and (min-width: $screen-sm){
+     @include padding(30px null null null);
+   }
+   .panel-toolbar {
+     @include margin(0px null 0px null);
+   }
+ }
+ // panel-report
+}
+
+//panel-area-of-gaps
+.panel-area-of-gaps {
+  // panel-heading
+  .panel-heading {
+    display: block;
+    @include padding(30px null 15px null);
+    @media screen and (min-width: $screen-sm){
+      @include padding(30px null 0px null);
+    }
+    &:before,
+    &:after {
+      display: none;
+    }
+    .panel-title {
+      border-bottom: 1px solid #eeeeee;
+      float: none;
+      display: block;
+      @include margin(0px null null null);
+      @include padding(null null 15px null);
+    }
+    .heading-elements {
+      display: block;
+      float: none;
+      @include position(relative, 0px 0px 0px 0px);
+      @include margin(0px null null null);
+      @include padding(19px null 0px null);
+      @media screen and (min-width: $screen-sm-max){
+        text-align: right;
+      }
+      // filter-cover
+      .filter-cover {
+        display: inline-block;
+
+        @media screen and (min-width: $screen-lg){
+          min-width: 80%;
+        }
+        @media screen and (max-width: $screen-md-max){
+          min-width: 100%;
+        }
+        .radio.radio-inline {
+          @include margin(7px null null null);
+        }
+      }
+    }
+  }
+
+  // panel-body
+  .panel-body {
+    .panel-toolbar {
+      @include margin(0px);
+    }
+  }
+}
+
+table.table-teacherContent {
+  thead {
+    th {
+      span {
+        text-transform: none;
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
+  }
+  tbody td {
+    vertical-align: middle;
+    &:before {
+      white-space: nowrap;
+      @include margin(null 70px null null);
+    }
+    &.area_of_gaps {
+      color: red;
+    }
+    // td subskill
+    &.subskill {
+      vertical-align: top;
+      .subkills-cover {
+        vertical-align: inherit;
+        display: inline-block;
+        width: calc(100% - 135px);
+        .btn {
+          &:not(:nth-last-child(-n+3)){
+            @include margin(null null 7px null);
+          }
+          @media screen and (max-width: $screen-xs-max){
+            &:not(:nth-last-child(-n+2)){
+              @include margin(null null 7px null);
+            }
+          }
+          @media screen and (max-width: $screen-mobile-sm){
+            &:not(:nth-last-child(-n+1)){
+              @include margin(null null 7px null);
+            }
+          }
+          @include padding(5px 10px);
+        }
+      }
+    }
+  }
+}
+
+
+// modal section
+.modal-areaOfGaps {
+  .modal-content {
+    @include border-radius(0px);
+    .modal-header, .modal-body, .modal-footer {
+      @include border-width(0px);
+    }
+    .modal-header {
+      text-align: center;
+    }
+  }
+}

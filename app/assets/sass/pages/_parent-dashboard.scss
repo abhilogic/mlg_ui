@@ -1,0 +1,45 @@
+
+
+.progress_content {
+  .left-side {
+    @media screen and (min-width: $screen-sm){
+      border-right: 1px solid $gray-lighter;
+    }
+    .progress-chart-img {
+      @media screen and (max-width: $screen-xs-max){
+        @include margin(20px null null null);
+      }
+    }
+  }
+  .right-side {
+    @include padding(30px null null null);
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(0px null null null);
+    }
+    .watch-img {
+      @media screen and (min-width: $screen-sm){
+        @include margin(45px null 20px null);
+      }
+    }
+  }
+}
+//Time spent Section Style
+
+.time-spent{
+  font-weight: $semibold;
+  color: $gray;
+  .time-value{
+    margin-bottom: 0
+  }
+  .text-muted{
+    color: lighten($gray, 15%);
+  }
+  border-bottom: 1px solid $gray-lighter;
+  @include padding(30px null 30px null);
+  &:first-child {
+    @include padding(0px);
+  }
+  &:last-child {
+    @include border-width(0px);
+  }
+}

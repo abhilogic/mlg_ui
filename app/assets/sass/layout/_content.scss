@@ -1,0 +1,108 @@
+/* --- Navigation --- */
+
+// Main wrapper
+.page-container {
+    position: relative;
+
+     .page-onboarding &{
+       width: 100%;
+       display: table;
+       table-layout: fixed;
+
+       // Min-height doesn't work in FF, bug. So we set 1px height which is overriden with min-height
+       @-moz-document url-prefix() {
+           height: 1px;
+       }
+     }
+    // Desktop view
+    @media (min-width:$screen-sm) {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+
+        // Min-height doesn't work in FF, bug. So we set 1px height which is overriden with min-height
+        @-moz-document url-prefix() {
+            height: 1px;
+        }
+    }
+}
+
+// Main container
+.page-content {
+    @media (min-width: $screen-sm) {
+        display: table-row;
+    }
+    .page-onboarding &{
+      display: table-row;
+    }
+}
+
+// Content wrapper
+.content-wrapper {
+    width: 100%;
+    background-color: $content-wrapper-bg;
+
+    @media (min-width: $screen-sm) {
+        display: table-cell;
+        vertical-align: top;
+    }
+    .page-onboarding &{
+      display: table-cell;
+      vertical-align: middle;
+    }
+}
+
+// Main content container
+.content {
+    padding: 0 $grid-gutter-width ($line-height-computed * 3) $grid-gutter-width;
+
+    @media(max-width: $screen-xs-max){
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    @media screen and (max-width: $screen-sm){
+      min-height: calc(100vh - 50px);
+    }
+
+    // Clear floats
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    // Add top padding if no header
+    &:first-child {
+        padding-top: $line-height-computed;
+        @media screen and (min-width: $screen-sm-max){
+          @include padding( 47px 47px null 47px);
+        }
+    }
+
+    // Change bottom spacing if footer is navbar
+    body[class*=navbar-bottom] & {
+        padding-bottom: $line-height-computed;
+    }
+}
+
+
+// modal-emailConfirmation
+.modal-emailConfirmation {
+  .modal-content {
+    max-width: 501px;
+    .modal-body {
+      @include padding(44px null null null);
+      .tag_line {
+        @include margin(32px null null null);
+      }
+    }
+    .modal-footer {
+      .btn {
+        @media screen and (min-width: $screen-sm-max){
+          @include padding(null 125px);
+        }
+      }
+    }
+  }
+}

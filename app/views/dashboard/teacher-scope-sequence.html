@@ -1,0 +1,508 @@
+	<!-- Main navbar -->
+	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+	<!-- /main navbar -->
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main Sidebar -->
+			<aside class="sidebar sidebar-main"></aside>
+			<!-- /sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Content area -->
+				<div class="content">
+
+					<!-- Teacher Setting  Panel  -->
+					<div class="panel panel-flat scope-sequence">
+						<div class="panel-heading padding-bottom-5">
+							<h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i> Scope and sequence</h5>
+						</div>
+						
+						<div class="panel-body">
+							<form class="form">
+								<div class="row">
+									<div class="col-lg-9">
+										<div class="row">
+											<div class="col-lg-3 col-sm-6">
+												<div class="row">
+													<div class="col-lg-4 col-xs-4">
+														<span class="color-gray text-uppercase">Subject:</span>
+													</div>
+													<div class="col-xs-6">
+														<span class="color-primary text-uppercase">Mathematics</span>
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-3 col-sm-offset-1 col-xs-6">
+												<div class="row">
+													<div class=" col-lg-4 col-xs-8">
+														<span class="color-gray text-uppercase">Grade:</span>
+													</div>
+													<div class="col-lg-4 col-xs-4">
+														<span class="color-primary text-uppercase">8th</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3 margin-top-10">
+										<div class="row">
+											<div class="col-lg-12 col-md-6">
+												<div class="text-left">
+													<button type="button" class="btn btn-block margin-sm-top-10 margin-bottom-10 btn-default btn-outline  text-uppercase border-color-gray-lighter" data-toggle="modal" data-target="#modal-ImportTemplate"><i class="icon icon-plus-outline"></i> Save Template</button>
+												</div>
+											</div>
+											<div class="col-lg-12 col-md-6">
+												<div class="text-left">
+													<select class="mlg-selectpicker margin-sm-top-10 form-control" title="APPLY TEMPLATE"  data-size="auto">
+														 <option>Approved</option>
+														 <option>Not Approved</option>
+														 <option>Submitted</option>
+														 <option>Pending</option>
+														 <option>Under review</option>
+														 <option>Draft</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-4 col-xs-12 margin-sm-top-10">
+										<div class="row">
+											<div class="col-xs-1">
+												<div class="radio radio-primary radio-inline">
+													<input type="radio" id="inlineRadio1" value="option1" name="subjectChoice" checked="">
+														<label></label>
+												</div>
+											</div>
+											<div class="col-lg-10 col-xs-11">
+												<label class="color-gray-light">All Class</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row margin-top-5">
+									<div class="col-lg-4  col-xs-12 margin-sm-top-10">
+										<div class="row">
+											<div class="col-xs-1">
+												<div class="radio radio-primary radio-inline padding-top-5">
+													<input type="radio" id="inlineRadio1" value="option1" name="subjectChoice" checked="">
+													<label></label>
+												</div>
+											</div>
+											<div class="col-lg-10 col-xs-11">
+												<select class="mlg-selectpicker form-control" title="Group"  data-size="auto">
+													 <option>All</option>
+													 <option>Struggling Student</option>
+													 <option>Remedial Students</option>
+													 <option>Outstanding Students</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row margin-top-5">
+									<div class="col-lg-4 col-xs-12 margin-sm-top-10">
+										<div class="row">
+											<div class="col-xs-1">
+												<div class="radio radio-primary radio-inline padding-top-5">
+													<input type="radio" id="inlineRadio1" value="option1" name="subjectChoice" checked="">
+													<label></label>
+												</div>
+											</div>
+											<div class="col-lg-10 col-xs-11">
+												<div class="multi-select-full">
+													<div ng-dropdown-multiselect="" options="sequenceData" selected-model="sequenceModel"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<p class="para margin-top-15">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+								<div class="scope-sequence-listing">
+									<ul>
+										<li>
+											<div class="row">
+												<div class="col-lg-5">
+													<div class="row">
+														<div class="col-md-5">
+															<h5 class="topic_name margin-sm-top-0"><i class="icon icon-drag"></i> Skill 1</h5>
+														</div>
+														<div class="col-md-7 text-right text-sm-left margin-sm-top-15">
+															<h5>START DATE : 02-01-2017</h5>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-5 col-lg-offset-2">
+													<div class="row">
+														<div class="col-md-7">
+															<h5 class="margin-sm-top-0">End DATE : 02-01-2017</h5>
+														</div>
+														<div class="col-md-5 text-right text-sm-left margin-top-5">
+															<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
+																<label>
+											            <input type="checkbox" class="js-switch">
+        											  </label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="row">
+												<div class="col-lg-5">
+													<div class="row">
+														<div class="col-md-5">
+															<h5 class="topic_name margin-sm-top-0"><i class="icon icon-drag"></i> Skill 1</h5>
+														</div>
+														<div class="col-md-7 text-right text-sm-left margin-sm-top-15">
+															<h5>START DATE : 02-01-2017</h5>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-5 col-lg-offset-2">
+													<div class="row">
+														<div class="col-md-7">
+															<h5 class="margin-sm-top-0">End DATE : 02-01-2017</h5>
+														</div>
+														<div class="col-md-5 text-right text-sm-left margin-top-5">
+															<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
+																<label>
+											            <input type="checkbox" class="js-switch">
+        											  </label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+								</ul>
+								<div class="text-right text-sm-center">
+									<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-approvedQuestion"><i class="icon icon-plus-outline"></i> Add own Skills</button>
+								</div>
+								</div>
+							</form>
+						</div>
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-lg-3 col-md-6">
+									<button type="button" class="btn btn-outline border-color-gray btn-default text-uppercase btn-block">Restore to Default</button>
+									<div class="row margin-top-10">
+										<div class="col-xs-6">
+											<button type="button" class="btn btn-outline btn-default btn-block border-color-gray-lighter text-uppercase"><i class="icon icon-print margin-right-10"></i> Print</button>
+										</div>
+										<div class="col-xs-6">
+											<button type="button" class="btn btn-outline btn-default btn-block border-color-gray-lighter text-uppercase"><i class="icon icon-mail margin-right-10"></i> eMail</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-9 col-md-6 margin-sm-top-10">
+									<div class="col-lg-8  text-center text-md-right text-sm-center padding-md-right-0">
+										<button type="button" class="btn btn-background-none padding-sm-left-0"><i class="icon icon-undo"></i> Undo</button>
+										<button type="button" class="btn btn-background-none padding-sm-right-0"> Redo <i class="icon icon-redo"></i></button>
+									</div>
+									<div class="col-lg-4  text-right padding-right-0 text-sm-center margin-sm-top-10">
+											<button type="button" class="btn btn-background-none">Cancel</button>
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-SequencePreview">Preview</button>
+									</div>
+								</div>
+							</div>
+						</div>
+            <!-- /panel-body -->
+					</div>
+					<!-- /Teacher Setting  Panel  -->
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+
+	<!-- modal section  -->
+	<section class="">
+		<!-- Modal -->
+		<div id="modal-ImportTemplate" class="modal fade modal-importTemplate" role="dialog">
+		  <div class="modal-dialog">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+					<div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+					</div>
+		      <div class="modal-body">
+		        <input type="text" class="form-control" placeholder="Template Name">
+		      </div>
+		      <div class="modal-footer text-right border-0">
+		        <button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
+						 <button type="button" data-dismiss="modal" class="btn btn-primary">Save</a>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+
+
+		<div id="modal-addSkills" class="modal fade modal-importTemplate" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+					</div>
+					<div class="modal-body">
+						<input type="text" class="form-control" placeholder="Add Skills">
+					</div>
+					<div class="modal-footer text-right border-0">
+						<button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
+						 <button type="button" data-dismiss="modal" class="btn btn-primary">Save</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- modal-SequencePreview -->
+		<div id="modal-SequencePreview" class="modal fade modal-SequencePreview" role="dialog">
+		  <div class="modal-dialog modal-lg">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		       <div class="modal-header">
+						  <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+		       	<h5 class="modal-title">Sequence Preview</h5>
+		       </div>
+		      <div class="modal-body">
+						<div class="content-cover">
+							<div class="row repeat-row">
+								<div class="heading">
+									<div class="row">
+										<div class="col-md-9 col-sm-8">
+											<h5>Numbers</h5>
+										</div>
+										<div class="col-md-3 col-sm-4">
+											<span >Start date: 02-04-2017</span>
+											<span >End date: 10-04-2017</span>
+										</div>
+									</div>
+								</div>
+								<ul class="connected-li-list">
+									<li>Whole Numbers</li>
+									<li>Prime Numbers</li>
+									<li>Integers</li>
+									<li>Lorem</li>
+									<li>lighten</li>
+									<li>color</li>
+									<li>darken</li>
+								</ul>
+							</div>
+							<div class="row repeat-row">
+								<div class="heading">
+									<div class="row">
+										<div class="col-md-9 col-sm-8">
+											<h5>Multiplication</h5>
+										</div>
+										<div class="col-md-3 col-sm-4">
+											<span >Start date: 02-04-2017</span>
+											<span >End date: 10-04-2017</span>
+										</div>
+									</div>
+								</div>
+								<ul class="connected-li-list">
+									<li>Basic Multiplication</li>
+									<li>BODMAS</li>
+									<li>Integers</li>
+								</ul>
+							</div>
+						</div>
+		      </div>
+		      <div class="modal-footer text-right border-0">
+		        <button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
+						 <a href="teacher-addQuestion.html"><button type="button" class="btn btn-primary" data-dismiss="modal">Save Sequence</button></a>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+		<!-- modal-SequencePreview -->
+
+		<!-- modal-approved-question -->
+		<div id="modal-approvedQuestion" class="modal fade modal-approvedQuestion" role="dialog">
+		  <div class="modal-dialog modal-lg">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+					<div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+						<h5 class="modal-title">Approved Questions</h5>
+					</div>
+		      <div class="modal-body">
+						<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons">
+							<thead>
+								<tr>
+									<th class="sr-no">#</th>
+									<th class="title">Title</th>
+									<th class="level">Level</th>
+									<th class="type">Type</th>
+									<th class="status">Status</th>
+									<th class="actions">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="approved">
+									<td class="sr-no">1</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Approved</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="pending">
+									<td class="sr-no">2</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Pending</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="disapproved">
+									<td class="sr-no">3</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Disapproved</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="submitted">
+									<td class="sr-no">4</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Submitted</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="under-review">
+									<td class="sr-no">5</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Under Review</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="submitted">
+									<td class="sr-no">4</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Submitted</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="under-review">
+									<td class="sr-no">5</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Under Review</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="submitted">
+									<td class="sr-no">4</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Submitted</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="under-review">
+									<td class="sr-no">5</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Under Review</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="draft">
+									<td class="sr-no">6</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">---</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Draft</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+								<tr class="under-review">
+									<td class="sr-no">7</td>
+									<td class="title">In the nuymber 7947949, which digit is in</td>
+									<td class="level">Easy</td>
+									<td class="type">Multiple Choice</td>
+									<td class="status">Under Review</td>
+									<td class="actions">
+										<button class="btn btn-link"><i class="fa fa-plus"></i></button>
+										<button class="btn btn-link"><i class="fa fa-trash"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+		      </div>
+		      <div class="modal-footer text-right border-0">
+		        <button type="button" class="btn btn-background-none" data-dismiss="modal">Cancel</button>
+						 <button class="btn btn-primary" data-dismiss="modal"  data-toggle="modal" data-target="#modal-addSkills">Add Skill</button>
+		      </div>
+		    </div>
+		  </div>
+			<script>
+				var headertext = [],
+				headers = document.querySelectorAll(".table-teacherContent th"),
+				tablerows = document.querySelectorAll(".table-teacherContent th"),
+				tablebody = document.querySelector(".table-teacherContent tbody");
+
+				for(var i = 0; i < headers.length; i++) {
+				  var current = headers[i];
+				  headertext.push(current.textContent.replace(/\r?\n|\r/,""));
+				}
+				for (var i = 0, row; row = tablebody.rows[i]; i++) {
+				  for (var j = 0, col; col = row.cells[j]; j++) {
+				    col.setAttribute("data-th", headertext[j]);
+				  }
+				}
+			</script>
+		</div>
+		<!-- modal-approved-question -->
+	</section>

@@ -1,0 +1,14 @@
+/* --- FONTS --- */
+
+// Example of Google Font include
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+
+@font-face {
+  font-family: 'MyriadPro-Regular';
+  src: url('../font/MyriadPro-Regular.eot');
+  src: url('../font/MyriadPro-Regular.eot') format('embedded-opentype'),
+  url('../font/MyriadPro-Regular.woff2') format('woff2'),
+  url('../font/MyriadPro-Regular.woff') format('woff'),
+  url('../font/MyriadPro-Regular.ttf') format('truetype'),
+  url('../font/MyriadPro-Regular.svg') format('svg');
+}

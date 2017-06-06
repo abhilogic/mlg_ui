@@ -1,0 +1,83 @@
+
+.form-group-cardDetails{
+  margin-top: 20px;
+  .input-mm{
+    max-width: 80px
+  }
+  .input-yy{
+    max-width: 130px
+  }
+  select{
+    border-width: 0 0 1px 0;
+    &:hover, &:focus{
+      box-shadow: none;
+      outline: 0;
+      border-color: $brand-primary;
+    }
+  }
+  .float-label{
+    .form-control{
+      width: 100%;
+    }
+    @media(min-width: $screen-sm){
+      float: right;
+      max-width: 70px;
+      margin-top: -15px;
+    }
+  }
+}
+
+.promo-inputContainer{
+  .form-control{
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 120px;
+  }
+}
+
+.list-cartItems{
+  padding: 0;
+  li{
+    display: block;
+    line-height: normal;
+    font-weight: $semibold;
+    @include padding(10px null);
+    &:not(:last-child){
+      border-bottom: 1px solid $gray-lighter;
+    }
+    p{
+      margin-bottom: 0;
+    }
+    span{
+      color: $gray-light;
+      display: inline-block;
+      vertical-align: middle;
+
+      &.item-label {
+        width: calc(100% - 160px);
+        text-transform: uppercase;
+      }
+
+      &.item-value {
+        width: 150px;
+        &.price{
+          font-weight: $bold;
+          font-size: 20px
+          //color: $gray-dark
+        }
+      }
+    }
+
+  }
+}
+
+// amount-list
+
+.amount-list {
+  @extend .list-cartItems;
+}
+
+// form-promocode
+.form-promocode {
+  @include margin(0px null 20px null);
+}

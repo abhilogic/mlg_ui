@@ -1,0 +1,200 @@
+.panel-teacher-create-class {
+  background: none;
+  @include box-shadow(none);
+  .panel-heading {
+    @include padding(0px );
+    &:before {
+      display: none;
+    }
+    // panel-title
+    .panel-title {
+      @include margin(0px null null null);
+      .bootstrap-select {
+        .dropdown-toggle {
+          background: none;
+          @include border-width(0px);
+          font-size: 18px;
+          color: #2c3e50;
+          @media screen and (min-width: $screen-sm){
+            @include padding(null null null 0px);
+          }
+          .filter-option {
+            text-decoration: underline;
+          }
+        }
+        .bs-caret {
+          background: none;
+          @include border-width(0px);
+          .caret {
+            color: #2c3e50;
+          }
+        }
+        @media screen and (min-width: $screen-sm-max){
+          max-width: 208px;
+        }
+      }
+    }
+    .heading-elements {
+      .bootstrap-select {
+        .dropdown-toggle {
+          @include padding(12px 12px);
+        }
+        .bs-caret {
+          background: transparent;
+        }
+        @media screen and (min-width: $screen-sm-max){
+          max-width: 208px;
+        }
+      }
+      .btn {
+        color: $gray-light;
+        background: rgba($white, 0.5);
+        @media screen and (max-width: $screen-xs-max){
+          @include margin(null null 10px null);
+        }
+          @include padding(12px 12px);
+          @media screen and (max-width: 1280px){
+            @include padding(12px 7px);
+          }
+        span {
+          display: none;
+          font-weight: $bold;
+          @media screen and (min-width: $screen-lg){
+            display: inline-block;
+          }
+        }
+        @media screen and (max-width: $screen-xs){
+          @include padding(null 11px);
+        }
+      }
+      ul {
+        text-align: center;
+        @media screen and (min-width: $screen-sm-max){
+          text-align: right;
+        }
+        .filter {
+          @media screen and (min-width: $screen-sm){
+            min-width: 170px;
+          }
+          .filter-option {
+            @media screen and (max-width: $screen-lg){
+              display: inline-block;
+            }
+          }
+          .dropdown-menu {
+            right: 0px;
+            left: auto;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+
+  // panel body
+  .panel-body {
+    @include padding(null 0px null 0px);
+    .panel-toolbar {
+      display: none;
+    }
+  }
+  .table-create-class {
+    border-collapse: separate;
+    border-spacing: 0px 8px;
+    @include margin(null null 0px null);
+    .actions .btn-link + .btn-link {
+      @media screen and (min-width: $screen-md) and (max-width: $screen-lg){
+        @include margin(null null null 0px);
+      }
+    }
+    // table caption
+    & ~ a {
+      font-size: 12px;
+      color: #90a6b1;
+      display: block;
+      text-align: center;
+      @media screen and (min-width: $screen-sm){
+        text-align: left;
+      }
+      u {
+        font-weight: $bold;
+      }
+    }
+
+    // add new row
+    & ~ .add-new-row {
+      background: $white;
+      color: $gray-light;
+      text-align: left;
+      @include margin(null null 7px null);
+      @include padding(15px null);
+      &:hover {
+        background: #e3e8ef;
+      }
+      .icon {
+        font-size: 12px;
+      }
+    }
+
+    // td th
+    tr {
+      td,th {
+        @include border-width(0px);
+        @include padding(15px null 15px null);
+        vertical-align: inherit;
+      }
+    }
+
+    // tabel-header
+    thead {
+      background: #e3e8ef;
+      .data-checkbox {
+        & + .checkbox-label {
+          &:before {
+            opacity: 1 !important;
+          }
+        }
+        &:checked {
+          & + .checkbox-label {
+            &:before {
+              content: '\0054';
+            }
+          }
+        }
+      }
+    }
+
+    // tabel body
+    tbody {
+      tr {
+        background: $white;
+        td {
+          font-size: 14px;
+            &:before {
+              @include margin(null 49px null null);
+            }
+          &:first-child {
+            &:before {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    // tabel body
+  } // tabel
+}
+
+
+
+// modal section
+
+.modal-emailTeacherConfirmation {
+  .modal-content {
+    @include border-radius(0px);
+    .modal-header,.modal-body, .modal-footer {
+      text-align: center;
+      @include border-width(0px);
+    }
+  }
+}

@@ -1,0 +1,236 @@
+<!-- Main navbar -->
+<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+
+<!-- /main navbar -->
+
+<!-- Page container -->
+<div class="page-container">
+  <!-- Page content -->
+  <div class="page-content">
+    <!-- Main Sidebar -->
+    <aside-parent class="sidebar sidebar-main"></aside-parent>
+    <!-- /sidebar -->
+
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+      <!-- Content area -->
+      <div class="content">
+
+        <div class="panel panel-flat">
+
+          <div class="panel-heading">
+            <h4 class="panel-title text-uppercase">My Settings</h4>
+          </div>
+
+          <div class="panel-body">
+
+            <div class="settings-tab row">
+
+              <div class="col-md-3 tab-nav">
+                <ul id="settingsNav" class="nav nav-settings">
+                  <li class="active"><a data-toggle="tab" href="{{page_url}}#parentAccountSettings">My Account</a></li>
+                  <li><a data-toggle="tab" ng-click="initPrivacySettingsPage(true)" href="{{page_url}}#parentMlgSettings">Privacy Settings</a></li>
+                </ul>
+              </div>
+
+              <div class="col-md-9 tab-content">
+                <div id="parentAccountSettings" class="tab-pane active">
+                  <div role="form" class="form-horizontal form-account-settings">
+                    <div class="row">
+                      <div class="col-sm-4 col-xs-12 pull-right ">
+                        <div class="img-uploader-cover icon-cemera">
+                          <div class="fileContainer">
+                            <img id="ImgShw" src="{{profile_image}}" alt="">
+                            <input id="imgInp" file-model="frm.profile_picture" type="file" accept="image/*">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-8 col-xs-12 pull-left">
+                        <div class="form-group">
+                          <label class="control-label col-md-3 padding-left-0" for="fullname">Full Name</label>
+                          <div class="col-md-9 padding-sm-left-0">
+                            <input type="text" class="form-control" ng-model="full_name" name="fullname" readonly>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 padding-left-0" for="fullname">Email</label>
+                          <div class="col-md-9 padding-sm-left-0">
+                            <input type="email" class="form-control" ng-model="email" name="email" readonly>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                      <label class="control-label col-md-2  padding-left-0" for="addressLine1">Address Line 1</label>
+                      <div class="col-md-10  padding-sm-left-0">
+                        <input type="text" class="form-control" ng-model="frm.address_line_1" name="address">
+                        <div class="form-control-feedback"><button class="btn-link btn"><i class="fa fa-pencil"></i></button></div>
+                      </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                      <label class="control-label col-md-2  padding-left-0" for="addressLine2">Address Line 2</label>
+                      <div class="col-md-10  padding-sm-left-0">
+                        <input type="text" class="form-control" ng-model="frm.address_line_2" name="address">
+                        <div class="form-control-feedback"><button class="btn-link btn"><i class="fa fa-pencil"></i></button></div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-group has-feedback">
+                          <label class="control-label col-md-2  padding-left-0" for="city">City</label>
+                          <div class="col-md-10  padding-sm-left-0">
+                            <input type="text" class="form-control" ng-model="frm.city" name="city">
+                            <div class="form-control-feedback"><button class="btn-link btn"><i class="fa fa-pencil"></i></button></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group has-feedback">
+                          <label class="control-label col-md-2  padding-left-0" for="state">State</label>
+                          <div class="col-md-10  padding-sm-left-0">
+                            <input type="text" class="form-control" ng-model="frm.state" name="state">
+                            <div class="form-control-feedback"><button class="btn-link btn"><i class="fa fa-pencil"></i></button></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-group has-feedback">
+                          <label class="control-label col-md-2  padding-left-0" for="district">District</label>
+                          <div class="col-md-10  padding-sm-left-0">
+                            <input type="text" class="form-control" ng-model="frm.district" name="district" >
+                            <div class="form-control-feedback"><button class="btn-link btn"><i class="fa fa-pencil"></i></button></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group has-feedback">
+                          <label class="control-label col-md-2  padding-left-0" for="country">Country</label>
+                          <div class="col-md-10  padding-sm-left-0">
+                            <input type="text" class="form-control" ng-model="frm.country" name="country" />
+                            <div class="form-control-feedback"><button class="btn-link btn"><i class="fa fa-pencil"></i></button></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                      <label class="control-label col-md-2  padding-left-0" for="phone">Phone No.</label>
+                      <div class="col-md-10  padding-sm-left-0">
+                        <input type="tel" class="form-control" ng-model="frm.mobile" name="phone">
+                        <div class="form-control-feedback"><button class="btn-link btn"><i class="fa fa-pencil"></i></button></div>
+                        <div class="checkbox checkbox-primary btn ">
+                          <input type="checkbox" name="sendreports" ng-model="frm.sms_subscription" id="sendreports">
+                          <label for="sendreports">
+                            Send report and progresses on my phone.
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group margin-xs-bottom-0">
+                      <div class="col-sm-12 padding-left-0">
+                        <p><button type="button" class="btn text-primary btn-background-none padding-left-0" onclick="toggleClassElement('.change-code-input','show hide')">Change Password</button></p>
+                        <div class="form-inline change-code-input hide margin-top-10" >
+                          <input placeholder="Current password" ng-model="user.old_password" type="password" class="form-control"/>
+                          <input placeholder="New password" ng-model="user.password" type="password" class="form-control"/>
+                          <button ng-click="changePassword(user)"type="button" class="btn btn-primary" placeholder="Enter Your New Password">Change</button>
+                        </div>
+                          <div class="btn text-semibold padding-left-0 checkbox checkbox-primary ">
+                            <input type="checkbox" ng-model="frm.deactivate" id="parentChat">
+                            <label for="parentChat">Deactivate My Account</label>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="text-right text-xs-center margin-top-15">
+                      <button type="submit" ng-click="updateMyAccount(frm)" class="btn btn-primary btn-xs">Save</button>
+                    </div>
+                  </div>
+                </div>
+                <div id="parentMlgSettings" class="tab-pane">
+                  <div class="setting-items-group">
+                    <div class="group-item">
+                      <h4 class="group-item-title">Notifications <i class="pull-right fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i></h4>
+                      <div class="form-group">
+                        <div class="checkbox checkbox-primary">
+                          <input ng-model="pfrm.text_notification" type="checkbox" id="acceptAllTerms1">
+                          <label for="acceptAllTerms1">
+                            Send me text messages
+                          </label>
+                        </div>
+
+                        <div class="checkbox checkbox-primary">
+                          <input ng-model="pfrm.email_notification" type="checkbox" id="acceptAllTerms2">
+                          <label for="acceptAllTerms2">
+                            Send me emails
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="group-item">
+                      <h4 class="group-item-title">Offers: <i class="pull-right fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i></h4>
+                      <p class="text-muted">Recieve offers from MLG <span class="fa fa-info-circle text-info"></span></p>
+                      <div class="form-group">
+                        <div class="radio radio-primary radio-inline">
+                          <input ng-model="pfrm.mlg_offers" type="radio" value="yes" name="recieveoffers">
+                          <label for="yes">
+                            Yes
+                          </label>
+                        </div>
+                        <div class="radio radio-primary radio-inline">
+                          <input ng-model="pfrm.mlg_offers" type="radio" value="no" name="recieveoffers">
+                          <label for="no">
+                            No
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="group-item">
+                      <h4 class="group-item-title">Redeem: <i class="pull-right fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i></h4>
+                      <p class="text-muted">Turn on/off auto redeem
+                        <span class="fa fa-info-circle text-info"></span></p>
+                      <div class="switch-box label-left is-success margin-top-0">
+                        <label for="automaticApproval" class="switch-box-label margin-top-10"></label>
+                        <span class="btn">OFF</span><i class="fa fa-toggle-on active" ng-if="global_automatic_approval_status == true" ng-click="changeStatus();"></i>
+                        <i class="fa fa-toggle-on fa-rotate-180 inactive" ng-if="global_automatic_approval_status == false" ng-click="changeStatus();"></i>
+                        <span class="btn">ON</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-right text-xs-center margin-top-15">
+                    <button type="submit" ng-click="updatePrivacySettings(pfrm)" class="btn btn-primary btn-xs">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/ tabs-mySettings-->
+
+
+          </div><!--/ panel-body-->
+
+        </div>
+
+      </div>
+      <!-- /content area -->
+
+    </div>
+    <!-- /main content -->
+
+  </div>
+  <!-- /page content -->
+
+</div>
+<!-- page container -->
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+    // tabcollapse
+    $("#settingsNav").tabCollapse({
+      tabsClass: 'hidden-sm hidden-xs',
+      accordionClass: 'visible-sm visible-xs'
+    });
+  });
+</script>

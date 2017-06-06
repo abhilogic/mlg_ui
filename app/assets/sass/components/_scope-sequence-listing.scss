@@ -1,0 +1,33 @@
+.scope-sequence-listing{
+  .para {
+    @include margin(48px null null 15px);
+  }
+  ul {
+    list-style: none;
+    padding-left: 0px;
+    li {
+      display: block;
+      @include padding(15px 30px 15px 5px);
+      border-left: 8px solid $sidebar-active-border-color;
+      text-transform: uppercase;
+      @include margin(null null 22px null);
+      @include box-shadow(0 0 4px rgba($gray-light,0.2));
+      &:not(:first-child){
+        margin-top: 15px;
+      }
+      @media screen and (max-width: $screen-sm){
+        @include padding(null null null 30px);
+      }
+      .topic_name {
+        font-weight: $semibold;
+        font-size: 16px;
+        .icon {
+          cursor: move;
+        }
+      }
+      a {
+        color: $black;
+      }
+    }
+  }
+}

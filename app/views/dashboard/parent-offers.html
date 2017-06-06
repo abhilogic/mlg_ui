@@ -1,0 +1,57 @@
+<div ng-controller="parentOffers">
+
+  <!-- Main navbar -->
+  <top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
+
+  </top-search-bar>
+  <!-- /main navbar -->
+
+  <!-- Page container -->
+  <div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content" banner="250">
+
+      <!-- Main Sidebar -->
+      <aside-parent class="sidebar sidebar-main"></aside-parent>
+      <!-- Main content -->
+      <div class="content-wrapper">
+        <!-- Content area -->
+        <div class="content">
+
+          <!-- Areas of Focus Panel  -->
+          <div class="row offers-list">
+
+            <div class="col-sm-6 col-md-4 offer-item" ng-repeat="offer in offers">
+              <div class="thumbnail offer-thumbnail">
+                <span class="new-offer">New</span>
+                <div class="thumb-img">
+                  <img class="img-responsive offer-img" ng-src="views/offerimg/{{offer.image}}" alt="Get coupen worth $12 for 200points">
+                </div>
+                <div class="caption">
+                  <h4 class="offer-text">{{offer.description}}</h4>
+                  <p class="offer-time-remain">Time Remaining: <span>{{ offer.validity | daysLeft}} Days</span></p>
+                </div>
+                <center><button class="btn btn-primary btn-accept">SHOW OFFER</button></center>
+              </div>
+            </div>
+            <!-- /student gap analysis panel  -->
+
+          </div>
+          <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+      </div>
+      <!-- /page content -->
+
+    </div>
+    <!-- page container -->
+
+  </div><!--End of parentOffers--->
+</div>
+  <!-- Latest compiled and minified jQuery -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Page Specific JavaScript -->

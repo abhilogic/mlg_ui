@@ -1,0 +1,213 @@
+.teacher_setting_tabs {
+  // img-uploader-cover
+.img-uploader-cover {
+  @media screen and (max-width: $screen-xs-max){
+    &:before {
+      left: 43%;
+    }
+  }
+}
+  // js-tabcollapse-panel-body
+  .panel-heading {
+    @include padding($content-padding-base/2 null);
+    .lable {
+      @include margin(8px null 0px null);
+      text-transform: uppercase;
+      display: block;
+      color: rgab($gray-light,0.6);
+    }
+    @media screen and (max-width: $screen-sm){
+      @include padding(0px);
+      .panel-title {
+        @include margin(0px);
+        a {
+          @include padding(15px null);
+          display: block;
+          width: 100%;
+          text-decoration: none;
+        }
+      }
+      .bootstrap-select {
+        @include margin(0px);
+      }
+    }
+  }
+  .js-tabcollapse-panel-body {
+    padding: 15px !important;
+    .panel-heading {
+      @include padding(10px 15px);
+    }
+  }
+    // form-block
+    .form-block {
+      .fa-question-circle {
+        color: $gray-light;
+        &:hover {
+          color: #1e3755;
+        }
+      }
+      @include margin(15px null null  null);
+      padding-bottom: 15px;
+      h5 {
+        font-size: 16px;
+        @include border-width(0px 0px 0px 0px);
+        @include border-color(null null $gray-lighter null);
+        @include border-style(solid);
+        @include padding(17px 0px);
+        @include margin(0px null 0px null);
+        @media screen and (max-width: $screen-sm){
+          @include margin(null null 0px null);
+          .checkbox-switchery.checkbox-inline  {
+            @include margin(10px null 10px null);
+          }
+        }
+      }
+      &:not(:last-child){
+        border-bottom: 1px solid $gray-lighter;
+      }
+    }
+
+    // checkbox-switchery
+    @media screen and (max-width: $screen-sm) {
+      .checkbox-switchery.checkbox-inline {
+        @include margin(0px null 0px null);
+        @include padding(0px null 0px null);
+      }
+    }
+
+  // form-horizontal
+  .form-horizontal {
+    margin-bottom: 15px;
+  }
+
+  // edited-input
+  .edited-input {
+    @include padding(18px null 18px null);
+    h5 {
+      font-size: 16px;
+      @include border-width(0px 0px 1px 0px);
+      @include border-color(null null $gray-lighter null);
+      @include border-style(solid);
+      @include padding(17px 15px);
+      @include margin(0px null 0px null);
+      &:not(:first-child){
+        @include margin(39px null null null);
+      }
+    }
+    h6 {
+      font-size: 16px;
+      font-weight: $semibold;
+      @include padding(0px 15px);
+      @media screen and (max-width: $screen-sm){
+        @include padding(0px 0px);
+      }
+      @include margin(null null 0px null);
+      text-align: left;
+      &:after {
+        content:'';
+        display: table;
+        clear: both;
+      }
+      span {
+        color: $gray-light;
+      }
+      .icon {
+        color: $brand-primary;
+        float: right;
+      }
+      & + span {
+        color: $gray-light;
+        font-size: 12px;
+        margin-left: 15px;
+      }
+    }
+    p {
+      @include padding(0px 15px);
+      @media screen and (max-width: $screen-sm){
+        @include padding(0px 0px);
+      }
+    }
+    .package-group {
+      text-align: left;
+      display: block;
+      @include padding(null null null 15px);
+      @include margin(2px null 15px null);
+      .btn.package-plan, .btn.subject {
+        height: 82px;
+        @media screen and (min-width: $screen-sm){
+          min-width: 143px;
+          max-width: 143px;
+          @include padding(3.5% null null null);
+          @include margin(0% null null null);
+        }
+      }
+      .btn.subject {
+        padding-top: 6.5%;
+      }
+      @media screen and (min-width: $screen-sm){
+        @include margin(2px null 41px null);
+      }
+    }
+  }
+
+  // bootstrap-select
+  .bootstrap-select {
+    @media screen and (max-width: $screen-sm){
+      @include margin(10px);
+      &.btn-group .dropdown-menu {
+        @include margin(0px null null null);
+      }
+    }
+  }
+
+  // tab-nav
+  @media screen and (min-width: $screen-sm-max){
+    .tab-nav {
+      padding-right: 0px;
+      border-right: 1px solid $gray-lighter;
+    }
+  }
+
+  // tab-pane
+  .tab-pane {
+    >h5 {
+      font-size: 16px;
+      @include border-width(0px 0px 1px 0px);
+      @include border-color(null null $gray-lighter null);
+      @include border-style(solid);
+      @include padding(17px 15px);
+      @include margin(0px null 0px null);
+    }
+    .panel {
+      @include border-radius(0px);
+      .panel-body {
+        @include padding(null 14px);
+        .btn-deactive {
+          display: block;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+
+// panel-setting
+
+.panel-setting {
+  .panel-body {
+    .panel-body {
+      @include padding(0px null null null);
+    }
+    .btn-deactive {
+      display: block;
+      text-align: left;
+      width: 100%;
+    }
+    .edited-input-group {
+      .control-label {
+        @include margin(18px null null null);
+      }
+    }
+  }
+}

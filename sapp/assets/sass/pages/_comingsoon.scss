@@ -1,0 +1,16 @@
+
+.coming-soon {
+  .form-horizontal {
+    font-size: 16px;
+    font-weight: normal;
+    @include padding(null 30px null 30px);
+    @include margin(20px auto null auto);
+    @media screen and (min-width: $screen-sm){
+      max-width: 49%;
+    }
+    label {
+      margin-top: 5px;
+      font-weight: $semibold;
+    }
+  }
+}

@@ -1,0 +1,133 @@
+.navbar-header .navbar-brand {
+	height: auto;
+}
+
+.onboarding-cover {background: transparent;}
+
+.signinonboarding-cover, .parent_signuponboarding-cover, .parent_loginonboarding-cover, .select_childrenonboarding-cover,
+
+.add_child_accountonboarding-cover, .parent_preferencesonboarding-cover, .payment_pageonboarding-cover , .teacher\/signuponboarding-cover,
+ .student\/loginonboarding-cover, .teacher\/select_coursesonboarding-cover {
+
+  background-color: #333333;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url("assets/img/cover-onboarding.jpg");
+}
+
+.signinonboarding-cover .content-wrapper, .parent_signuponboarding-cover .content-wrapper,
+.parent_loginonboarding-cover .content-wrapper, .select_childrenonboarding-cover .content-wrapper,
+.add_child_accountonboarding-cover .content-wrapper, .parent_preferencesonboarding-cover .content-wrapper,
+.payment_pageonboarding-cover .content-wrapper, .teacher\/signuponboarding-cover .content-wrapper,
+ .student\/loginonboarding-cover .content-wrapper, .teacher\/select_coursesonboarding-cover .content-wrapper{background: transparent !important;}
+ 
+.tab-content #text  .btn-group {margin-bottom: 5px;}
+ 
+ .ta-editor.form-control {height: auto;
+    min-height: 150px;
+    border: 1px solid #ddd;
+    margin-top: 10px;}
+	
+.col-xs-7 ul.dropdown-menu-form li:first-child, .col-xs-7 ul.dropdown-menu-form li:nth-child(2), .col-xs-7 ul.dropdown-menu-form li:nth-child(3){display:none;}
+
+.selected-grades-subjects .label-grade {float: none;  vertical-align: top;}
+.selected-grades-subjects .subjects-list {display: inline-block; overflow: inherit;}
+
+.customCheckboxOuter {border-bottom: 1px solid #ddd;}
+.customCheckbox {position: relative;}
+.customCheckbox:hover{border-color: #fff !important;}
+.customCheckbox  input {display: none;}
+.customCheckbox .customLabel {border: 1px solid #fff; border-bottom: 2px solid #fff; margin-bottom: -1px;}
+
+.customCheckbox .customLabel.checked, .customCheckbox .customLabel:hover {border-color: #2d94ed; color: #2d94ed}
+
+.subjectCheckboxouter input {display: none;}
+.subjectCheckboxouter .checked {border-color: #2d94ed; color: #2d94ed; position: relative;}
+
+.subjectCheckboxouter .checked:before {
+    content: '\0047';
+    display: inline-block;
+    font-family: 'Glyphter';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 16px;
+    font-size: 9px;
+    height: 16px;
+    width: 16px;
+    background-color: #2d94ed;
+    color: white;
+    border-radius: 100%;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+}
+
+.deleteBox {position: relative;}
+.deleteBox i {
+	position: absolute;
+	cursor: pointer;
+    right: -7px;
+    top: -7px;
+    width: 16px;
+    height: 16px;
+    color: #fff;
+    font-size: 11px;
+    padding-top: 2px;
+    border-radius: 50%;
+    background: #2d94ed;
+}
+
+.classId input {width: 30px;}
+
+.dropdown-multiselect, .dropdown-multiselect button {width: 100%; text-align: left;}
+
+.question-block-cover {display: block}
+
+.page-onboarding .page-container {min-height: 88vh;}
+
+.BtnGroup {
+	text-align: right;
+}
+
+.BtnGroup button{
+	background: #66c0ec;
+    border: 0;
+    color: #fff;
+    font-size: 20px;
+    padding: 2px 7px;
+    margin: 0 5px;
+	border-radius: 2px;
+	
+}
+
+.inputGroup input {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	display: inline-block;
+	vertical-align: top;
+    width: auto;
+	padding: 6px 5px;
+	
+}
+
+.inputGroup .btn {
+	padding: 9px 10px 9px;
+    margin-left: -22px;
+	border-radius: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 14px;
+    vertical-align: top;
+    vertical-align: top;
+    background: #ddd;
+}
+.navbar-default .navbar-brand img {    
+    margin-top: 7px;
+}
+
+.active, .inactive {font-size:40px;cursor:pointer;}
+.active, .inactive {font-size:40px;cursor:pointer;}
+i.active { color: #5cb85c}
+i.inactive {color: #d9534f}

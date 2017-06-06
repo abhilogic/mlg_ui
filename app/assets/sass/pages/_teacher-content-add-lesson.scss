@@ -1,0 +1,11 @@
+.panel-teacher-add-content {
+  // table-of-content
+  .table-of-content {
+    .panel-heading {
+      @include padding(1px null null null);
+    }
+    .panel-group {
+      @include margin(null null 0px null);
+    }
+  }
+}

@@ -1,0 +1,159 @@
+.subskillsroom_page {
+  @include  background-img("subskillsroom_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  min-height: 100vh;
+  min-width: 100vw;
+  @media screen and (max-width: 1366px) and (min-height: 1024px){
+    background-size: auto 100%;
+    background-position: -18vw center;
+  }
+  @media screen and (max-width: $screen-lg) and (min-height: $screen-md){
+    background-position: -71vw center;
+  }
+  @media screen and (max-width: $screen-xs-max){
+    background: {
+    position: center center;
+    size: 100% 100%;
+   }
+  }
+  // link_block
+  .link_block {
+    position: absolute;
+    width: 30%;
+    height: 27%;
+    top: 65%;
+    left: 39%;
+    @media screen and (max-width: $screen-sm) {
+      width: 47%;
+
+    }
+
+    // links
+    .lesson_link, .quiz_link {
+      display: inline-block;
+      height: 100%;
+      span {
+        @media screen and (min-width: $screen-sm){
+          background: {
+            image: url("../img/subskillsroom-text-bg.png");
+            position: center;
+            size: 100% 100%;
+          }
+          color: white;
+          display: inline-block;
+          font-size: 21px;
+          font-family: calibri;
+          height: 92px;
+          font-weight: 100;
+          @include padding(28px null null null);
+          position: absolute;
+          text-align: center;
+          width: 141px;
+          i {
+            font-size: 16px;
+            font-style: normal;
+          }
+        }
+        @media screen and (min-width: 2050px){
+          height: 100px;
+          width: 195px;
+          padding-top: 30px;
+          font-size: 27px;
+          i {
+            font-size: 21px;
+          }
+        }
+        @media screen and (min-width: 2740px){
+          height: 106px;
+          width: 234px;
+          padding-top: 30px;
+          font-size: 31px;
+        }
+      }
+    }
+    .lesson_link {
+      width: 55%;
+      @media screen and (max-width: $screen-sm){
+        width: 40%;
+      }
+      span {
+        @media screen and (min-width: $screen-sm){
+          top: -96px;
+          left: 20%;
+        }
+        @media screen and (min-width: 2740px){
+          left: 27%;
+        }
+        @media screen and (max-width: $screen-sm){
+          left: -1%;
+        }
+      }
+    }
+    .quiz_link {
+      width: 44%;
+      span {
+        @media screen and (min-width: $screen-sm){
+          height: 87px;
+          padding-left: 8px;
+          padding-right: 8px;
+          width: 177px;
+          top: 0px;
+          right: 9%;
+        }
+        @media screen and (min-width: 1700px){
+          right: 15%;
+        }
+        @media screen and (min-width: 2730px){
+          height: 106px;
+          width: 234px;
+        }
+        @media screen and (max-width: $screen-md-max){
+          top: 58px;
+          right: -35%;
+        }
+        @media screen and (max-width: $screen-md-max) and (min-width: $screen-sm){
+          top: 13px;
+          right: -6%;
+        }
+        @media screen and (max-width: $screen-sm){
+          top: 37px;
+          right: 6%;
+        }
+      }
+    }
+    // links
+
+    @media screen and (max-width: $screen-xs-max) {
+      position: relative;
+      top: 88px;
+      left: 0px;
+      margin: auto;
+      margin-top: 50px;
+      width: auto;
+      height: auto;
+      .lesson_link ,.quiz_link{
+        display: block;
+        width: 100%;
+        height: 80px;
+        margin-top: 10px;
+        text-align: center;
+        span {
+          display: block;
+          font-size: 54px;
+          color: $white;
+          font-family: $font-secondary;
+        }
+      }
+    }
+  }
+  // link_block
+
+  @include respond-to(tabletPort){
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @include respond-to(mobileMedium) {
+    @include background-img("subskillsroom_mobile_bg.jpg");
+  }
+}

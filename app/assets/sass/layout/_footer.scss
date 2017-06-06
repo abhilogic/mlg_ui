@@ -1,0 +1,53 @@
+/* --- Footer --- */
+
+.footer{
+    background-color: $footer-bg;
+    @include padding(50px null null null);
+    width: 100%;
+    color: $footer-text-color;
+    font-size: $font-size-base + 2;
+    a{
+      color: $footer-text-color;
+    }
+    .legal{
+      font-size: $font-size-base;
+      @include padding(10px null);
+      border-top: 1px solid rgba(white, 0.30);
+      .legal-links{
+        float: right;
+        a{
+          display: inline-block;
+        }
+        a + a{
+          margin-left: 8px;
+        }
+        @media(max-width: $screen-xs){
+          display: block;
+          margin-top: 5px;
+          float: left;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .footer-title{
+    font-weight: $bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .list-footer-links{
+    list-style: none;
+    text-align: left;
+    display: block;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 50px;
+    padding: 0;
+    line-height: 1.6;
+    font-weight: $light;
+    li, a{
+      display: block;
+    }
+  }

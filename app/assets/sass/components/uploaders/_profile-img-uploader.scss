@@ -1,0 +1,28 @@
+.img-uploader-cover {
+    text-align: center;
+    font-family: 'Glyphter';
+    position: relative;
+    cursor: pointer;
+    &:before {
+      color: $white;
+      position: absolute;
+      @include border-radius(100%);
+      left: 41%;
+      bottom: -20px;
+      z-index: 1;
+      width: 40px;
+      height: 40px;
+      @include padding(10px null null null);
+      background: $black;
+    }
+  .fileContainer {
+    input[type="file"] {
+      z-index: 10;
+    }
+  }
+  img {
+    width: 100px;
+    height: 100px;
+    @include border-radius(100%);
+  }
+}

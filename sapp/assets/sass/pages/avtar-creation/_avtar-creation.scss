@@ -1,0 +1,68 @@
+// avtar common assets
+
+.avtar-creation-page {
+  background-color: $gray-dark;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url('../img/avtar-creation-img/avtar-creation-bg-img.jpg');
+  min-height: 100vh;
+  .page-container{
+    display: table;
+    width: 100%;
+    .page-content{
+      display: table-row;
+      .content-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+        @include padding(15px);
+
+      }
+      // content-wrapper
+    }
+    // pag-content
+  }
+  // page-container
+}
+
+// panel-avatar
+.panel-avatar-creation {
+  @media screen and (min-width: $screen-sm-max){
+    max-width: 990px;
+    @include margin(null auto null auto);
+  }
+  .panel-heading {
+    @include padding(15px 30px 15px 30px);
+    @media screen and (min-width: $screen-sm-max){
+      @include padding(30px 30px 15px 30px);
+    }
+  }
+  // panel-heading
+  .content-title, .content-tagline {
+    text-align: center;
+    font-weight: $light;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .content-title {
+    font-size: 36px;
+    margin-bottom: 12px;
+    @media screen and (max-width: $screen-xs){
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  }
+  // content-title
+  .content-tagline {
+    font-size: 14px;
+    font-weight: $bold;
+    color: rgba($gray,0.5);
+  }
+  // content-tagline
+  .panel-footer {
+    font-family: 'Open Sans', sans-serif;
+    background: transparent;
+    @include border-width(0px);
+  }
+  // panel-footer
+}

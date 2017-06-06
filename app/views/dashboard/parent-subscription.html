@@ -1,0 +1,225 @@
+  <!-- Main navbar -->
+  <top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
+		
+	</top-search-bar>
+  <!-- /main navbar -->
+
+  <!-- Page container -->
+  <div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+      <!-- Main Sidebar -->
+      <aside-parent class="sidebar sidebar-main"></aside-parent>
+      <!-- /sidebar -->
+
+
+      <!-- Main content -->
+      <div class="content-wrapper">
+        <!-- Content area -->
+        <div class="content">
+
+          <div class="well well-lg well-flat">
+            <div class="row">
+              <div class="col-md-5">
+                <img src="assets/img/subscription.png" class="img-responsive" alt=""/>
+              </div>
+              <div class="col-md-7">
+                <h2 class="title_subscription"><span class="text-uppercase">Free Subscription</span><small>(60 days)</small></h2>
+                <br>
+                <div class="row">
+                  <div class="col-sm-4"><p class="text-muted">Subscription Type:</p></div>
+                  <div class="col-sm-4"><p class="text-uppercase">Trial</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4"><p class="text-muted">Start Date:</p></div>
+                  <div class="col-sm-4"><p class="text-uppercase">{{child_info.order_date | moment:"Do MMM YYYY"}}</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4"><p class="text-muted">End Date:</p></div>
+                  <div class="col-sm-4"><p class="text-uppercase">{{child_info.end_date | moment:"Do MMM YYYY"}}</p></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4"><p class="text-muted">Days Remaining:</p></div>
+                  <div class="col-sm-4"><p class="text-uppercase">{{days_left}}</p></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <button type="button" class="btn btn-default btn-outline"><i class="icon icon-plus-outline position-left"></i>Add Child</button>
+              </div>
+            </div>
+            <br>
+
+            <!-- Choose plans -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="parent-subscription-table">
+                  <div class="table-col col-left your-subscriptions">
+                    <div class="table-item">
+                      <h3 class="col-title">Your Subscription</h3>
+                    </div>
+                    <div class="table-item">
+                      <p class="text-uppercase">CURRENT SUBJECT PACKAGE</p>
+                      <div class="current-package package-box">
+                        <span class="package-title">{{child_info.package_subjects}}</span>
+                      </div>
+                    </div>
+                    <div class="table-item">
+                      <p class="text-uppercase">CURRENT Plan</p>
+                      <div ng-if="child_info.plan_duration == 'monthly'" class="current-plan package-box">
+                        <span class="package-title">Monthly</span>
+                        <i class="icon icon-monthly package-icon"></i>
+                      </div>
+                      <div ng-if="child_info.plan_duration == 'quaterly'" class="current-plan package-box">
+                        <span class="package-title">Quaterly</span>
+                        <i class="icon icon-quarterly package-icon"></i>
+                      </div>
+                      <div ng-if="child_info.plan_duration == 'yearly'" class="current-plan package-box">
+                        <span class="package-title">Yearly</span>
+                        <i class="icon icon-yearly package-icon"></i>
+                      </div>
+                    </div>
+                    <div class="table-item">
+                      <p class="text-uppercase">Current Subjects</p>
+                      <div style="display: inline-block; margin-right:10px" ng-repeat="purchase in child_info.purchase_detail" class="package-group">
+                        <div class="current-subject package-box">
+                          <span class="package-title">{{purchase.course_name}}</span>
+                          <strong class="package-price">${{purchase.purchase_amount}}</strong>
+                          <small class="package-type">{{child_info.plan_duration}}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-col col-right all-subscriptions">
+                    <div class="table-item">
+                      <h3 class="col-title">Upgrade to</h3>
+                    </div>
+                    <div class="table-item">
+                      <p class="text-uppercase">Select SUBJECT PACKAGE</p>
+                      <div id="ChooseSubjectPackages" class="btn-group package-group" data-toggle1="buttons">
+                        <label ng-repeat="package in packages" ng-hide="package.id == child_info.package_id" class="btn new_packages package-box">
+                          <input ng-model="frm.new_package" ng-click="discount(package)" value="{{package.no_of_subjects}}"  type="radio" name="subjectPackages" autocomplete="off">
+                          <span class="package-title">{{package.name}}</span>
+                          <strong ng-if="package.type == 'percent'" class="package-offer">{{package.discount}}% off</strong>
+                          <strong ng-if="package.type != 'percent'" class="package-offer">${{package.discount}} off</strong>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="table-item">
+                      <p class="text-uppercase">Choose a Plan</p>
+                      <div id="ChooseSubscriptionPlans" class="btn-group package-group" data-toggle1="buttons">
+                        <label ng-repeat ="plan in plans"  ng-hide="plan.id == child_info.plan_id" class="btn package-box package-plan">
+                          <input ng-model="frm.new_plan" ng-click="updatedPlan(plan)" value="{{plan.name}}" class="radio-plan-btn" ng-model="frm.plans"  type="radio" name="subscriptionPlans" id="{{'plan' + plan.name}}" autocomplete="off">
+                          <span ng-if="plan.name == 'monthly'" class="package-title">Monthly</span>
+                          <i ng-if="plan.name == 'monthly'" class="icon icon-monthly package-icon"></i>
+
+                          <!--<input ng-model="frm.plans" ng-if="plan.name == 'quaterly'" type="radio" name="subscriptionPlans" id="planQuarterly" autocomplete="off">-->
+                          <span ng-if="plan.name == 'quaterly'" class="package-title">Quarterly</span>
+                          <i ng-if="plan.name == 'quaterly'" class="icon icon-quarterly package-icon"></i>
+
+                          <!--<input ng-model="frm.plans" ng-if="plan.name == 'yearly'" type="radio" name="subscriptionPlans" id="planYearly" autocomplete="off">-->
+                          <span ng-if="plan.name == 'yearly'" class="package-title">Yearly</span>
+                          <i ng-if="plan.name == 'yearly'" class="icon icon-yearly package-icon"></i>
+
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="table-item">
+                      <p class="text-uppercase">Choose your subjects</p>
+                      <div id="ChooseSubjects" class="btn-group package-group" data-toggle1="buttons">
+                         <label ng-repeat ="course in coursesListByGrade" ng-hide="course.purchased == true" class="choose-subjects btn package-box subject">
+                           <input ng-change="getTotalPrice(frm.selectedcourse)"  ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}}'" ng-false-value="''" type="checkbox" name="{{course.course_name}}" autocomplete="off" checked="">
+                           <span class="package-title">{{course.course_name}}</span>
+                           <strong class="package-price">${{course.price}}</strong>
+                            <!--<small class="package-type">per quarter</small>-->
+                         </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="subscription-checkout">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 class="col-title">Your Expected Subscription</h3>
+                  <div class="expected-subscription">
+                    <div class="col-table col-left">
+                      <div class="table-item">
+                        <p class="text-uppercase">CURRENT SUBJECT PACKAGE</p>
+                        <div class="current-package package-box">
+                          <span class="package-title">{{new_package_name}}</span>
+                        </div>
+                      </div>
+                      <div class="table-item">
+                        <p class="text-uppercase">CURRENT Plan</p>
+                        <div ng-if="frm.new_plan == 'monthly'" class="current-plan package-box">
+                          <span class="package-title">Monthly</span>
+                          <i class="icon icon-monthly package-icon"></i>
+                        </div>
+                        <div ng-if="frm.new_plan == 'quaterly'" class="current-plan package-box">
+                          <span class="package-title">Quaterly</span>
+                          <i class="icon icon-quarterly package-icon"></i>
+                        </div>
+                        <div ng-if="frm.new_plan == 'yearly'" class="current-plan package-box">
+                          <span class="package-title">Yearly</span>
+                          <i class="icon icon-yearly package-icon"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-table col-right">
+                      <div class="table-item">
+                        <p class="text-uppercase">Current Subjects</p>
+                        <div ng-repeat=" (key, new_subject) in frm.selectedcourse"class="current-subject package-box block">
+                          <span class="package-title">{{new_subject}}</span>
+                          <!--<strong class="package-price">$72</strong>-->
+                          <!--<small class="package-type">monthly</small>-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <h3 class="col-title">Your Expected Subscription Fee</h3>
+                  <div>
+                    <p>
+                      cost: {{price}}
+                    </p>
+                    <p>
+                      discount amount: {{dis_amount}}
+                    </p>
+                    <p>
+                      total amount: {{subtotal}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <span ng-if="errMsg" class="alert-danger">
+                <center> {{errMsg}} </center>
+              </span>
+              <p class="text-center">
+                <button ng-click="upgrade(frm)" type="button" class="btn btn-primary">Upgrade</button>
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- /content area -->
+
+      </div>
+      <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+  </div>
+  <!-- page container -->

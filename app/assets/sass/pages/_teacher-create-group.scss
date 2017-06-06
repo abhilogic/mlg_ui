@@ -1,0 +1,72 @@
+.create-group {
+  .panel-body {
+    .group-information {
+      max-width: 310px;
+      @include margin(null auto null auto);
+      .img-uploader-cover {
+        @media screen and (max-width: $screen-xs-max){
+          @include margin(null null 20px null);
+        }
+        &:before {
+          width: 20px;
+          height: 20px;
+          font-size: 8px;
+          @include padding(5px null null null);
+          left: 47%;
+          bottom: -8px;
+          @media screen and (min-width: $screen-sm){
+            left: 39%;
+          }
+        }
+        img{
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+    .group-name {
+      @include border-width(0px 0px 1px 0px);
+      @include border-color($gray-light);
+      background: none;
+      text-align: center;
+      font-family: $font-secondary;
+      font-weight: $light;
+      font-size: 20px;
+      margin-bottom: 21px;
+      &:focus {
+        outline: 0px;
+        @include box-shadow(none);
+      }
+      @include placeholders(){
+        color: rgba($gray,0.5);
+      }
+    }
+    .student_list {
+      li {
+        position: relative;
+        .checkbox {
+          position: absolute;
+          right: 0px;
+          top: 0px;
+        }
+      }
+    }
+  }
+}
+
+.edit-group {
+  .panel-body {
+    .student_list {
+      li {
+        position: relative;
+        .btn-delete {
+          background: none;
+          border: 0px;
+          color: red;
+          @include position(absolute, 0px 0px null null);
+          z-index: 100;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,177 @@
+
+
+		<div class="main_cover help_page">
+			<div class="main_div_center" data-center="center">
+				<div class="frame">
+					<div class="inner_cover">
+						<div class="content_cover">
+							<div class="row">
+								<div class="col-sm-3 col-xs-12 video_list">
+									<div class="verticalCarousel help_video_list">
+				            <div class="verticalCarouselHeader">
+				                <a href="#" class=" vc_goDown"><img src="assets/img/help_arrow_up.png"  class="img-responsvie" alt=""></a>
+				            </div>
+				            <ul class="verticalCarouselGroup vc_list">
+			                <li>
+												<img src="assets/img/help_video_img.jpg" alt="" data-video-src="assets/img/video/video_1.mp4" class="img-responsive" data-toggle="modal" data-target="#videoModal"/>
+		                    <h1>Why My Castle is Burnin...</h1>
+			                </li>
+			                <li>
+												<img src="assets/img/help_video_img_1.jpg" alt="" data-video-src="assets/img/video/video_2.mp4" class="img-responsive" data-toggle="modal" data-target="#videoModal"/>
+			                 	<h1>How to Complete a gate</h1>
+			                </li>
+											<li>
+											 <img src="assets/img/help_video_img_2.jpg" alt="" data-video-src="assets/img/video/video_3.mp4" class="img-responsive" data-toggle="modal" data-target="#videoModal"/>
+											 <h1>How to Complete a Challenge</h1>
+										 	</li>
+											<li>
+												<img src="assets/img/help_video_img.jpg" alt="" data-video-src="assets/img/video/video_1.mp4" class="img-responsive" data-toggle="modal" data-target="#videoModal"/>
+		                    <h1>Why My Castle is Burnin...</h1>
+			                </li>
+			                <li>
+												<img src="assets/img/help_video_img_1.jpg" alt="" data-video-src="assets/img/video/video_2.mp4" class="img-responsive" data-toggle="modal" data-target="#videoModal"/>
+			                 	<h1>How to Complete a gate</h1>
+			                </li>
+											<li>
+											 <img src="assets/img/help_video_img_2.jpg" alt="" data-video-src="assets/img/video/video_3.mp4" class="img-responsive" data-toggle="modal" data-target="#videoModal"/>
+											 <h1>How to Complete a Challenge</h1>
+										 	</li>
+				            </ul>
+										<a href="#" class="vc_goUp"><img src="assets/img/help_arrow_down.png"  class="img-responsvie" alt=""></a>
+      					  </div>
+								</div>
+								<div class="col-sm-9 hidden-xs video">
+									<h1>How to Conquer a City?</h1>
+										<div class="video_cover">
+											<video  id="tutorialVideo" >
+												<source src="assets/img/video/video_1.mp4" type="video/mp4">
+												Your browser does not support HTML5 video.
+											</video>
+											<div class="play_btn_cover">
+	                      <button type="button" class="video_play_btn" id="video_play_btn" data-center="center"><img src="assets/img/video_play_btn_bg.png" alt=""></button>
+	                    </div>
+											<div class="video_controller ">
+												<ul>
+													<li>
+														<ul>
+															<li>
+																<button type="button" class="btnPlay btn_play">
+																	<i class="fa fa-play" aria-hidden="true"></i>
+																	<i class="fa fa-pause-circle" aria-hidden="true"></i>
+																</button>
+															</li>
+															<li>
+															<div id="slider" class="progress_bar"></div>
+															</li>
+														</ul>
+													</li>
+													<li>
+														<ul>
+															<li>
+																<span id="current">00:00</span><span> / </span>
+																<span id="duration">00:00</span>
+															</li>
+															<li>
+																<div id="volumeSlider" class="progress_bar volume_bar"></div>
+																<i class="fa fa-volume-up" aria-hidden="true" id="volume_controller"></i>
+															</li>
+															<li>
+																<img src="assets/img/video_element/full_screen.svg" alt="" id="fullScreen" class="screen_icon">
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="user_list">
+				<span class="bg__chat"></span>
+			</div>
+	</div>
+
+
+	<!-- bootstrap modal -->
+	<section class="help_modal_section">
+		<!-- Modal -->
+  <div class="modal fade" id="videoModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+					<div class="modal-heading">
+						 <img src="assets/img/close-icon.png" class="close" alt="" data-dismiss="modal">
+					</div>
+					<div class="video_cover">
+						<video  id="tutorialVideo" >
+							<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+							<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/ogg">
+							Your browser does not support HTML5 video.
+						</video>
+						<div class="video_controller">
+							<ul>
+								<li>
+									<ul>
+										<li>
+											<button type="button" class="btnPlay btn_play">
+												<i class="fa fa-play" aria-hidden="true"></i>
+												<i class="fa fa-pause-circle" aria-hidden="true"></i>
+											</button>
+										</li>
+										<li>
+										<div id="slider" class="progress_bar"></div>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<ul>
+										<li>
+											<span id="current">00:00</span><span> / </span>
+											<span id="duration">00:00</span>
+										</li>
+										<li>
+											<div id="volumeSlider" class="progress_bar volume_bar"></div>
+											<i class="fa fa-volume-up" aria-hidden="true" id="volume_controller"></i>
+										</li>
+										<li>
+											<img src="assets/img/video_element/full_screen.svg" alt="" id="fullScreen" class="screen_icon">
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+	</section>
+				
+    <script src="assets/js/plugins/jquery-ui.js"></script>
+	<script src="assets/js/video.js"></script>
+	<script src="assets/js/main.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var windowWidth = $(window).width();
+			if(windowWidth> 767){
+				$(".help_modal_section").remove();
+			}
+			else if (windowWidth<=767){
+				$(".help_page .video").remove();
+			}
+			$(".verticalCarousel").verticalCarousel({
+            currentItem: 1,
+            showItems: 3,
+        });
+				$(".help_modal_section .close").click(function(){
+						$("#tutorialVideo").get(0).pause();
+				});
+			});
+	</script>
+	

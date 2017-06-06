@@ -1,0 +1,24 @@
+.panel-onboarding {
+  .confirm-success-msg {
+    text-align: center;
+    display: none;
+    @include transition(.5s all);
+    &.success {
+      display: block;
+    }
+    .icon {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      font-size: 21px;
+      color: $white;
+      @include padding(16px null null null);
+      @include border-radius(100%);
+      @include margin(null null 20px null);
+      background: $springGreen;
+    }
+    p {
+      color: $gray;
+    }
+  }
+}

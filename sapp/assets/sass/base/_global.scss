@@ -1,0 +1,73 @@
+/* --- GLOBALS --- */
+/**
+ * Body
+ */
+body {
+	font-family: $font-primary;
+	font-size: $font-size-base;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-webkit-backface-visibility: hidden;
+	margin: 0;
+	overflow-x: hidden;
+	width: 100%;
+	@media screen and (max-width: $screen-tb-port)  {
+		background-size: 100% 100%;
+		min-height: 100vh;
+		}
+		background: none !important;
+
+}
+
+h1,h2,h3,h4,h5,p {
+	margin: 0px;
+}
+/**
+ * User selection
+ */
+::-moz-selection {
+	background: black;
+	color: white;
+}
+
+::selection {
+	background: black;
+	color: white;
+}
+
+ul {
+	list-style: none;
+	padding-left: 0px;
+	li {
+		display: inline-block;
+	}
+}
+@include placeholders(input){
+    color: $white-70;
+    font-family: $font-primary-italic;
+}
+
+@include placeholders(textarea){
+    color: $white-70;
+    font-family: $font-primary-italic;
+}
+
+
+.main_wrapper {
+	max-width: 1200px;
+	margin: auto;;
+	padding-left: 15px;
+	padding-right: 15px;
+	position: relative;
+}
+
+.element_center {
+	display: table;
+	>div {
+		display: table-row;
+		>div {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}

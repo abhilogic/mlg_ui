@@ -1,0 +1,418 @@
+
+.myjourney_page {
+  @media screen and (max-width: $screen-xs-max){
+    background: {
+      image: url("../img/myjourney_mobile_bg.jpg");
+      size: 100% auto;
+    }
+  }
+  .castle_cover {
+    @include background-cover('map.png', center center);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 4;
+    @media screen and (max-width: $screen-xs-max){
+      position: relative;
+      margin-top: 50px;
+      a {
+        display: block;
+        text-align: left;
+        &:nth-child(odd){
+          text-align: right;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: $screen-tb-port)  {
+    background-size: 100% 100%;
+    height: 520px;
+    width: 100% ;
+    margin-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow-x: hidden;
+    height: auto;
+  }
+.castle {
+  position: absolute;
+  @media screen and (max-width: $screen-xs-max){
+    position: relative;
+    display: inline-block;
+    text-align: center;
+  }
+.castle__icon {
+  display: inline-block;
+  position: absolute;
+}
+.castle__arrowUp {
+  @include animation(upword-arrow-animation 1.0s infinite);
+  display: none;
+  bottom: -40px;
+  @include cssSprite($castle__arrowUp);
+  left: 45%;
+  position: absolute;
+  @include respond-to(mobileMedium){
+    @include position(relative,auto auto auto auto);
+  }
+}
+.challenge-notifier {
+  @include cssSprite($challenge-notifier);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.castle__text {
+  bottom: -17px;
+  color: $maroon;
+  font-size: 17px;
+  font-family: $font-secondary;
+  left: -52px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  @include respond-to(mobileMedium){
+    @include position(relative,auto auto auto auto);
+    display: inline-block;
+    bottom: auto !important;
+    white-space: normal;
+  }
+}
+&.active {
+.castle__arrowUp {
+  display: inline-block;
+  }
+ }
+&.inactive {
+.castle__text {
+  color: $light-black;
+ }
+}
+&.castle_1 { // science
+    height: 93px;
+    left: 43%;
+    top:22%;
+    width: 99px;
+    @media screen and (max-width: $screen-tb-land)  {
+      left: 43%;
+      top: 18%;
+      }
+    @media screen and (max-width: $screen-tb-port)  {
+        left: 41%;
+        top: 20%;
+    }
+    @media screen and (max-width: $screen-mobile-md)  {
+      right: 7%;
+      top: 46%;
+      left: inherit;
+    }
+.castle__img {
+    @include cssSprite($castle_science);
+    display: inline-block;
+&:hover {
+      @include cssSprite($castle_science_focus);
+     }
+}
+.castle__icon {
+  @include cssSprite($castle__icon_soc_sci);
+  left: 37%;
+  top: -15px;
+ }
+&.active {
+.castle__img {
+  @include cssSprite($castle_science_focus);
+ }
+}
+&.inactive {
+.castle__img {
+  @include cssSprite( $castle_science_inactive );
+}
+.castle__icon {
+  @include cssSprite($castle__icon_sci_inactive);
+  }
+ }
+}
+
+&.castle_2 { // math
+  height: 93px;
+  left: 7.5%;
+  top: 37%;
+  width: 99px;
+  @media screen and (max-width: $screen-tb-land)  {
+    left: 6.5%;
+    top: 37%;
+    }
+
+.castle__img {
+    @include cssSprite($castle_math);
+    display: inline-block;
+&:hover {
+      @include cssSprite($castle_math_focus);
+     }
+   }
+.castle__icon {
+    @include cssSprite($castle__icon_math);
+    left: 30%;
+    top: -19px;
+}
+.castle__text {
+  bottom: -28px;
+}
+&.active {
+  .castle__img {
+    @include cssSprite($castle_math_focus);
+   }
+}
+&.inactive {
+   .castle__img {
+     @include cssSprite($castle_math_inactive);
+ }
+   .castle__icon {
+     @include cssSprite($castle__icon_math_inactive);
+  }
+ }
+}
+
+&.castle_3 { // english
+    height: 93px;
+    left: 36.499%;
+    top: 60.5%;
+    width: 99px;
+    @media screen and (max-width: $screen-tb-land)  {
+      left: 36.499%;
+      top: 62.5%;
+      }
+    @media screen and (max-width: $screen-tb-port)  {
+      left: 33.499%;
+      top: 55.5%;
+      }
+    @media screen and (max-width: $screen-mobile-md){
+      right: 9.499%;
+      top: 75.5%;
+      left: inherit;
+    }
+.castle__img {
+    @include cssSprite($castle_english);
+    display: inline-block;
+&:hover {
+      @include cssSprite($castle_english_focus);
+    }
+   }
+.castle__icon {
+    @include cssSprite($castle__icon_eng);
+    left: 37%;
+    top: -15px;
+   }
+&.active {
+  .castle__img {
+    @include cssSprite($castle_english_focus);
+   }
+  }
+&.inactive {
+.castle__img {
+      @include cssSprite($castle_english_inactive);
+  }
+.castle__icon {
+      @include cssSprite($castle__icon_eng_inactive);
+   }
+  }
+}
+&.castle_4 { // social science
+    height: 93px;
+    right: 20.5%;
+    top: 31%;
+    width: 99px;
+    @media screen and (max-width: $screen-tb-land)  {
+      right: 19.5%;
+      top: 29%;
+      }
+    @media screen and (max-width: $screen-mobile-md){
+      left: 4.5%;
+      top: 70%;
+    }
+
+.castle__img {
+  @include cssSprite($castle_soc_sci);
+  display: inline-block;
+&:hover {
+    @include cssSprite($castle_soc_sci_focus);
+   }
+ }
+.castle__text {
+  width: 143%;
+}
+.castle__icon {
+  @include cssSprite($castle__icon_soc_sci);
+  left: 37%;
+  top: -21px;
+ }
+ &.active {
+   .castle__img {
+      @include cssSprite($castle_soc_sci_focus);
+    }
+}
+&.inactive {
+.castle__img {
+    @include cssSprite($castle_soc_sci_inactive);
+ }
+.castle__icon {
+  @include cssSprite($castle__icon_soc_sci_inactive);
+  }
+ }
+}
+
+&.help {
+    height: 93px;
+    right: 10%;
+    top: 18%;
+    width: 99px;
+    @media screen and (max-width: $screen-tb-land)  {
+      right: 6%;
+      top: 16%;
+      }
+.castle__text {
+  left: 0px;
+}
+.castle__img {
+    @include cssSprite($castle_help_boat);
+    display: inline-block;
+&:hover {
+      @include cssSprite($castle_help_boat_focus);
+     }
+   }
+.castle__icon {
+    @include cssSprite($castle__icon_help);
+    left: 37%;
+    top: -15px;
+   }
+&.active {
+  .castle__img {
+      @include cssSprite($castle_help_boat_focus);
+   }
+}
+&.inactive {
+.castle__img {
+     @include cssSprite($castle_help_boat_inactive);
+}
+.castle__icon {
+   @include cssSprite($castle__icon_help_inactive);
+  }
+ }
+}
+&.challenge_mountain {
+    height: 115px;
+    right: 8%;
+    bottom: 16%;
+    width: 137px;
+    @media screen and (max-width: $screen-mobile-md)  {
+      left: 4%;
+      height:115px;
+      top: 8%;
+      width: 137px;
+      }
+.castle__text {
+  left: 0px;
+}
+.castle__img {
+    @include cssSprite($castle_challenge-mount);
+    display: inline-block;
+&:hover {
+      @include cssSprite($castle_challenge-mount_focus);
+     }
+   }
+.castle__icon {
+    @include cssSprite($castle__icon_cl_mount);
+    right: 21%;
+    top: -15px;
+}
+.castle__text {
+  text-align: right;
+    padding-right: 15px;
+}
+&.active {
+.castle__img {
+      @include cssSprite($castle_challenge-mount_focus);
+  }
+}
+&.inactive {
+.castle__img {
+      @include cssSprite($castle_challenge-mount_inactive);
+   }
+   .castle__icon {
+  @include cssSprite($castle__icon_cl_mount_inactive);
+   }
+   }
+  }
+ }
+}
+
+// dummy close btn
+.close_btn {
+  background: none;
+  border: 0px;
+  color: #fff;
+  display: none;
+  font-size: 60px;
+  font-family: $font-secondary;
+  left: 45%;
+  position: fixed;
+  top: 45%;
+  z-index: 1;
+  &:focus, &:active{
+    outline: 0px;
+  }
+}
+
+// dummy close btn
+
+.myjourney_page {
+  min-height: 100vh;
+  @media screen and (min-width: $screen-sm-max){
+    min-height: 94vh;
+  }
+  .navbar-default {
+    max-width: 985px;
+    margin: auto;
+    position: relative;
+    z-index: 1000;
+  }
+  .main_wrapper {
+    max-width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    @media screen and (max-width: $screen-xs-max){
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  .wooden_frame {
+    position: absolute;
+    width: 100vw;
+    min-height: 100vh;
+    top: 0px;
+    left: 0px;
+    background: none;
+    @media screen and (max-width: $screen-xs-max){
+      position: relative;
+      width: 100%;
+    }
+    .wooden_frame_content_cover {
+      .castle_cover {
+        background-image: url(../img/finaljourneypage.jpg);
+        @media screen and (max-width: $screen-mobile-md){
+          background: none;
+        }
+      }
+      background-size: 100% 100%;
+      @include box-shadow(inset 0 0 4px rgba(0,0,0,0.4));
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      @media screen and (max-width: $screen-mobile-md){
+        @include box-shadow(none);
+      }
+    }
+   }
+  }
+}

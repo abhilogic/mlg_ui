@@ -1,0 +1,56 @@
+.universal_searchbar {
+    background-color: $white;
+    @include padding(15px 46px 15px 46px);
+    position: relative;
+    text-align: center;
+    @include respond-to(mobileMedium){
+      @include padding(null 15px null 15px);
+    }
+    ._menu_toggle_btn {
+      display: none;
+      position: absolute;
+      z-index: 100;
+      @include respond-to(mobileMedium){
+        display: block;
+      }
+    }
+  .__searchbar {
+    @include border-radius(5px);
+    @include box-shadow(inset 0px 0px 40px rgba(0, 0, 0, 0.15));
+    background: {
+      image: url(../img/search-icon.png);
+      position: 46% center;
+      repeat: no-repeat;
+    }
+    padding-left: 39%;
+    border: 0px;
+    height: 40px;
+    width: 80%;
+    @include respond-to(tabletPort){
+      padding-left: 35%;
+      width: 70%;
+    }
+    @include respond-to(mobileMedium){
+      background-position: 10px center;
+      padding-left: 35px;
+      width: calc(100% - 55px);
+    }
+    &.active {
+      background: none;
+      padding-left: 0px;
+      text-align: center;
+    }
+    &:focus {
+      @include border-radius(5px !important);
+      @include box-shadow(inset 0px 0px 40px rgba(0, 0, 0, 0.15) !important);
+    }
+  }
+  @include placeholders(input){
+      font-size: 16px;
+      color: red;
+      text-transform: capitalize;
+  }
+  @include respond-to(tabletPort){
+    text-align: right;
+  }
+}

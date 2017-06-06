@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default" ng-controller="backHistoryPage">
+					<a href"" ng-click="goBack()"><img src="assets/img/go_back_icon.png" alt="" class="go-back-btn"/></a>
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="logo" class="main_logo "/></a>
+			    </div>
+			    <div class="collapse navbar-collapse" id="myNavbar">
+				      <ul class="nav navbar-nav">
+				        <li>
+									<a href="#">
+										<div class="student_growth">
+											<span class="growth_text">My Growth</span>
+											<span class="growth_value">{{userPoints}} point</span>
+										</div>
+									</a>
+								</li>
+				        <li>
+									<a href="#">
+										<form class="navbar-form search_form">
+											<input type="search" class="search__input" placeholder="Type here to search">
+										</form>
+									</a>
+								</li>
+				        <li id="h_menu" class="dropdown"><a href="#" data-toggle="dropdowns" ><span class="profile_bar"><span class="profile_pick"><div class="cover"><img src="{{avtar}}" alt=""></div></span><span class='user_name'>{{userInfo.userName}}</span><i class="caret"></i></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="profile"><i class="icon profile"></i> My Profile</a></li>
+										<li><a href="#"><i class="icon avtar_creation"></i> Avatar Creation</a></li>
+										<li><a href="#" ng-click="$root.logout();"><i class="icon logout"></i> Logout</a></li>
+									</ul>
+								</li>
+				      </ul>
+				    </div>
+				</nav>	
+			

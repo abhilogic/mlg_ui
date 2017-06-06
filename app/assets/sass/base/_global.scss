@@ -1,0 +1,156 @@
+/* --- GLOBALS --- */
+/**
+ * Body
+ */
+
+body {
+	font-family: $font-primary;
+	font-weight: normal;
+	font-size: $font-size-base;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-webkit-backface-visibility: hidden;
+	margin: 0;
+	overflow-x: hidden;
+	width: 100%;
+}
+
+/**
+ * User selection
+ */
+::-moz-selection {
+	background: black;
+	color: white;
+}
+
+::selection {
+	background: black;
+	color: white;
+}
+
+/*ul {
+	list-style: none;
+	padding-left: 0px;
+	li {
+		display: inline-block;
+		a {
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}*/
+
+/*input, textarea, button {
+	&:focus, &:active {
+		outline: 0px !important;
+		box-shadow: none !important;
+    border-color: transparent !important;
+
+	}
+} */
+
+/*/ hd
+h1,h2,h3,h4,h5,h6 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}*/
+// html element globle styling
+
+// global-class
+.margin_0 {
+	margin: 0px !Important;
+}
+.margin_left0 {
+	margin-left: 0px !Important;
+}
+.margin_right0 {
+	margin-right: 0px !Important;
+}
+.margin_top0 {
+	margin-top: 0px !Important;
+}
+.margin_bottom0 {
+	margin-bottom: 0px !Important;
+}
+// global-class
+
+// main_wrapper
+.main_wrapper {
+>.row {
+	margin: 0px;
+}
+	.main_left_side {
+			background-color: $darkstateblue;
+			min-height: 100vh;
+			overflow-y: hidden;
+			padding: 0px;
+			width: 250px;
+				@include respond-to(tabletPort){
+					position: absolute;
+					z-index: 100;
+					@include transition(.3s all);
+					@include transform(translateX(-250px));
+					&.in {
+						@include transform(translateX(0px));
+					}
+			  }
+			}
+	.main_right_side {
+			background-color: $lightCyan;
+			min-height: 100vh;
+			padding: 0px;
+			padding-bottom: 45px;
+
+			.main-content {
+				padding-left: 46px;
+				padding-right: 46px;
+				@include respond-to(mobileMedium){
+					padding-left: 15px;
+					padding-right: 15px;
+				}
+			 }
+			}
+	}
+// main_wrapper
+
+// white-shadow-box
+.white_shadow_box {
+	@include box-shadow(0 0 65px rgba(0,0,0,0.10));
+	background-color: $white;
+}
+
+// has_error
+.has_error {
+	color: $cinnabar;
+	display: block;
+	text-align: left;
+}
+.check_before{
+	&:before  {
+		  content: '\0043';
+		}
+}
+.icon-pencil , .icon-cross{
+	&:before {
+		cursor : pointer !important;
+	}
+}
+
+
+
+// element_center
+.element_center {
+	display: table;
+	>div {
+		display: table-row;
+		>div {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}

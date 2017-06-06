@@ -1,0 +1,92 @@
+
+.parentOffers-content{
+
+}
+.offers-list{
+    .offer-item{
+
+    }
+
+    .offer-thumbnail{
+      position: relative;
+      margin: 15px auto;
+      max-width: 320px;
+      @include padding(13px);
+      &.offer-subscription{
+        @include background-cover('../img/offer-bg.png');
+      }
+      .caption{
+        min-height: 124px;
+      }
+    }
+
+    .new-offer{
+      @include position(absolute, 12px null null 12px);
+      color: $brand-danger;
+    }
+
+
+    .thumb-img{
+      position: relative;
+      height: 140px;
+      .offer-img{
+        margin: 0 auto;
+        height: 100%;
+        max-width: 140px;
+        object-fit: contain;
+      }
+    }
+
+    .offer-price{
+      position: relative;
+      min-height: 140px;
+      max-height: 140px;
+      text-align: center;
+      vertical-align: middle;
+      .new-price{
+        margin: 0;
+        height: 100%;
+        object-fit: contain;
+        line-height: 140px;
+        color: $brand-primary;
+        sup{
+          top: -1em;
+        }
+        b{
+          font-size: 62px;
+          font-weight: $ultrabold;
+        }
+        small{
+          color: $brand-primary;
+        }
+      }
+      .old-price{
+        margin: 0;
+        @include position(absolute, 30px 30px null null);
+        display: inline-block;
+        color: lighten($gray-light, 15%);
+        text-decoration: line-through;
+      }
+    }
+
+
+    .offer-text{
+      line-height: normal;
+      min-height: 60px;
+      overflow: hidden;
+      margin-top: 0;
+      font-size: 20px;
+      font-weight: $thin;
+      font-family: $font-secondary-condenced;
+      //text-overflow: ellipsis;
+      //white-space: nowrap;
+    }
+
+    .offer-time-remain{
+      color: $gray-light;
+      font-family: $font-secondary-condenced;
+      span{
+        color: $gray-base;
+      }
+    }
+}

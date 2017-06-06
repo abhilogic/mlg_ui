@@ -1,0 +1,101 @@
+._menu_toggle_btn {
+	background: none;
+  border: 0px;
+	height: 35px;
+	position: relative;
+	width: 40px;
+span {
+	width:70%;
+	height: 4px;
+	background-color: $gray;
+	position: absolute;
+	left: 6px;
+&:first-child {
+	transform:translateY(-8px);
+}
+&:last-child {
+	transform:translateY(8px);
+ }
+}
+
+&.bar  {
+span{
+&:first-child {
+	transform:translateY(-8px);
+	animation-name:bar-span1;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+  }
+&:last-child {
+	transform:translateY(8px);
+	animation-name:bar-span2;
+	animation-duration:0.5s;
+	animation-iteration-count:1;
+  }
+ }
+}
+
+
+&.cross {
+span{
+  background-color: $white;
+&:nth-child(2){
+	display:none;
+  }
+&:first-child {
+	animation-name:cross-span1;
+	animation-duration:0.5s;
+	transform:translateY(0px) rotate(-45deg);
+	animation-iteration-count:1;
+
+  }
+&:last-child {
+	animation-name:cross-span2;
+	animation-duration:0.5s;
+	transform:translateY(0px) rotate(45deg);
+	animation-iteration-count:1;
+  }
+ }
+}
+
+@keyframes cross-span1{
+	0%{
+		transform:translateY(-8px) rotate(0deg);
+	}
+
+	100%{
+		transform:translateY(0px) rotate(-45deg);
+	}
+}
+
+
+@keyframes cross-span2{
+	0%{
+		transform:translateY(8px) rotate(0deg);
+	}
+
+	100%{
+		transform:translateY(0px) rotate(45deg);
+	}
+
+}
+
+
+@keyframes bar-span1{
+	0%{
+		transform:translateY(0px) rotate(-45deg);
+	}
+	100%{
+		transform:translateY(-8px) rotate(0deg);
+	}
+
+}
+@keyframes bar-span2{
+	0%{
+		transform:translateY(0px) rotate(45deg);
+	}
+	100%{
+		transform:translateY(8px) rotate(0deg);
+	}
+   }
+ }

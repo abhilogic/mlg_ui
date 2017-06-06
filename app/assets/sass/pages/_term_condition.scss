@@ -1,0 +1,65 @@
+.container-terms{
+  @media(min-width: $screen-sm){
+    @include padding(null 30px);
+  }
+  .nav-terms {
+    border-bottom: 0px;
+    border-right: 3px solid $gray-lighter;
+    li {
+      a {
+        border:0;
+        border-right: 3px solid transparent;
+        color: $gray-light;
+        margin-right: -3px;
+        text-align: right;
+        &:hover {
+          background: none;
+          border-color:$brand-primary;
+        }
+      }
+      &.active {
+        a {
+          border-color: $brand-primary;
+          background: transparent;
+          color: $brand-primary;
+        }
+      }
+    }
+  }
+
+  .tab-content {
+    .tab-pane{
+      @media(min-width: $screen-sm){
+        min-height: 350px;
+        max-height: 350px;
+        overflow: hidden;
+      }
+    }
+    .btn-proceed {
+      margin-top: 20px;
+    }
+  }
+}
+
+.js-tabcollapse-panel-body .mCustomScrollBox{
+    min-height: 300px !important;
+    max-height: 300px !important;
+    overflow: hidden;
+}
+
+#termsTab-accordion{
+  .panel.panel-default{
+    border: 0;
+    .panel-heading{
+      text-align: center;
+      .panel-title{
+        a{
+          &:hover{
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+  }
+}

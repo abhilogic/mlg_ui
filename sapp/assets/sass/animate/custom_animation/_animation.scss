@@ -1,0 +1,166 @@
+@include  keyframes(upword-arrow-animation) {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-5px);
+  }
+100% {
+      transform: translateY(0);
+  }
+
+}
+
+@include keyframes(goBackAnimation) {
+  0% {
+    left: -76px;
+  }
+  50% {
+    left: -70px;
+  }
+  100% {
+    left: -76px;
+  }
+}
+
+
+// clout first animation
+$cloud_first_top_pos: 170px;
+@include keyframes(cloud-animation_1){
+  0% {
+    top: $cloud_first_top_pos;
+    left: 50%;
+    opacity: 1;
+  }
+  50% {
+    top: $cloud_first_top_pos;
+    left: 120%;
+    opacity: 1;
+  }
+  50.1% {
+    top: $cloud_first_top_pos;
+    opacity: 0;
+    left: 120%;
+  }
+  50.2% {
+    top: $cloud_first_top_pos;
+    opacity: 0;
+    left: -20%;
+  }
+  50.3% {
+    top: $cloud_first_top_pos;
+    opacity: 1;
+    left: -20%;
+  }
+  100% {
+    opacity: 1;
+    top: $cloud_first_top_pos;
+    left: 50%;
+  }
+}
+
+
+// cloud second animation
+$cloud_second_bottom_pos: 20px;
+@include keyframes(cloud-animation_2){
+  0% {
+    bottom: $cloud_second_bottom_pos;
+    left: 50%;
+    opacity: 1;
+  }
+  50% {
+    bottom: $cloud_second_bottom_pos;
+    left: 120%;
+    opacity: 1;
+  }
+  50.1% {
+    bottom: $cloud_second_bottom_pos;
+    opacity: 0;
+    left: 120%;
+  }
+  50.2% {
+    bottom: $cloud_second_bottom_pos;
+    opacity: 0;
+    left: -20%;
+  }
+  50.3% {
+    bottom: $cloud_second_bottom_pos;
+    opacity: 1;
+    left: -20%;
+  }
+  100% {
+    opacity: 1;
+    bottom: $cloud_second_bottom_pos;
+    left: 50%;
+  }
+}
+
+// cloud third animation
+$cloud_third_top_pos: -90px;
+@include keyframes(cloud-animation_3){
+  0% {
+    top: $cloud_third_top_pos;
+    left: 80%;
+    opacity: 1;
+  }
+  50% {
+    top: $cloud_third_top_pos;
+    left: 120%;
+    opacity: 1;
+  }
+  50.1% {
+    top: $cloud_third_top_pos;
+    opacity: 0;
+    left: 120%;
+  }
+  50.2% {
+    top: $cloud_third_top_pos;
+    opacity: 0;
+    left: -20%;
+  }
+  50.3% {
+    top: $cloud_third_top_pos;
+    opacity: 1;
+    left: -20%;
+  }
+  100% {
+    opacity: 1;
+    top: $cloud_third_top_pos;
+    left: 80%;
+  }
+}
+
+// cloud fourth animation
+$cloud_fourth_top_pos: -90px;
+@include keyframes(cloud-animation_4){
+  0% {
+    top: $cloud_fourth_top_pos;
+    left: 10%;
+    opacity: 1;
+  }
+  50% {
+    top: $cloud_fourth_top_pos;
+    left: 120%;
+    opacity: 1;
+  }
+  50.1% {
+    top: $cloud_fourth_top_pos;
+    opacity: 0;
+    left: 120%;
+  }
+  50.2% {
+    top: $cloud_fourth_top_pos;
+    opacity: 0;
+    left: -20%;
+  }
+  50.3% {
+    top: $cloud_fourth_top_pos;
+    opacity: 1;
+    left: -20%;
+  }
+  100% {
+    opacity: 1;
+    top: $cloud_fourth_top_pos;
+    left: 10%;
+  }
+}

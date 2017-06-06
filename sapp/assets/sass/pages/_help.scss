@@ -1,0 +1,160 @@
+.help_page {
+  @include background-img("help_bg.jpg");
+  background-size: auto 116%  ;
+  padding-left: 15px;
+  padding-right: 15px;
+  min-width: 100vw;
+  min-height: 100vh;
+  .icon-exit-door {
+    @include cssSprite($icon-exit-door);
+    display: inline-block;
+    @include position(absolute, 37px 100px null null);
+    display: none;
+    @media screen and (min-width: $screen-sm){
+      display: block;
+    }
+  }
+  @include respond-to(mobileMedium){
+      @include background-img("help_mobile_bg.jpg");
+      background: {
+        size: 100% auto ;
+      }
+  }
+  &.element_center > div > div {
+    vertical-align: middle;
+  }
+  @media screen and (max-width: $screen-large){
+    padding-top: 30px;
+  }
+  .frame {
+    background-color: transparent;
+    @include background-cover("challenge_frame.png");
+    background-size: 100% 100%;
+    height: 606px;
+    margin: auto;
+    padding: 40px 35px;
+    width: 959px;
+    @include respond-to(tabletPort){
+      height: 540px;
+      width: 100%;
+    }
+    @include respond-to(mobileMedium){
+      background: none;
+      padding: 0px 15px;
+      height: auto;
+    }
+  }
+  .content_cover {
+    background-color: transparent;
+    @include background-cover("challenge_content_frame.png");
+    background-size: 100% 100%;
+    height: 525px;
+    padding: 31px 30px;
+    width: 886px;
+    .form {
+      width: 90%;
+      @include margin(null auto);
+      .form-control {
+        background: rgba(black, 0.4);
+        border: rgba(black, 0.4);
+        color: white;
+        @include placeholder(){
+          color: white;
+        }
+      }
+      .input-group-addon {
+        background: rgba(black, 0.7);
+        border: rgba(black, 0.7);
+        color: white;
+      }
+      @media screen and (max-width: $screen-xs-max){
+        @include margin(null null 50px null);
+      }
+    }
+    @include respond-to(tabletPort){
+      height: 100%;
+      width: 100%;
+    }
+    @include respond-to(mobileMedium){
+      padding: 0px;
+      background: none;
+    }
+    h1 {
+      color: $vanCleef;
+      font-size: 18px;
+      font-weight: $bold;
+      @include margin(20px null 18px null);
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .video {
+      padding-left: 0px;
+      video {
+        width: 100%;
+      }
+
+      .video_controller .progress_bar {
+        width: 348px;
+        @include respond-to(tabletPort){
+          width: 275px;
+        }
+        &.volume_bar {
+          width: 4px;
+        }
+      }
+    }
+    .help_video_list {
+      .vc_list {
+        h1 {
+          color: $vanCleef;
+          font-size: 11px;
+          margin-top: 5px;
+          margin-bottom:0px;
+          text-transform: uppercase;
+          @media screen and (max-width: $screen-xs-max){
+            font-size: 24px;
+          }
+          @media screen and (max-width: $screen-xs){
+            font-size: 16px;
+          }
+
+        }
+      }
+    }
+  }
+  .video_cover {
+    max-width: 88%;
+    @include margin(null auto);
+  }
+}
+
+.help_modal_section {
+  .modal-dialog {
+    margin-top: 28px;
+  }
+  .modal-content {
+    padding:0px;
+    background: none;
+    border: 0px;
+    .modal-body {
+      background: none;
+      padding: 0px;
+      video {
+        width: 100%;
+      }
+      .video_controller .progress_bar {
+        width: 188px;
+      }
+    }
+  }
+  .modal-heading {
+    background: none;
+    .close {
+      opacity: 1;
+      position: absolute;
+      right: -10px;
+      top: -13px;
+      z-index: 1000;
+    }
+  }
+}

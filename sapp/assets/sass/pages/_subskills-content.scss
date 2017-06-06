@@ -1,0 +1,157 @@
+.sub-skills-room {
+  .board {
+    // btn-skip
+    &.subskills-content {
+      .btn-skip {
+        display: none;
+        background:{
+          image: url(../img/submit_btn.png);
+          position: center center;
+          size: 100% 100%;
+          color: transparent;
+        }
+
+        font-size: 18px;
+        color: $white;
+        font-family: $font-primary;
+        @include padding(10px 70px 10px 35px);
+        text-align: left;
+        &:focus, &:active {
+          outline: 0px !important;
+        }
+        @media screen and (min-width: $screen-sm-max){
+          display: inline-block;
+          @include position(absolute, null 60px 71px null);
+        }
+      }
+    }
+    // table-of-content specification
+    .table-of-content {
+      // panel mobile specification
+        .panel-default {
+          background-color: rgba($white,0.85);
+          .panel-heading {
+            background: #6b5943;
+            color: #fff;
+          }
+        }
+      h6 {
+        font-size: 16px;
+        color: #f4f9f7;
+        font-weight: bold;
+        @include margin(0px);
+        @include padding(10px);
+        text-align: center;
+        @include margin(null null 15px null);
+        background: {
+          image: url(../img/TOC-hd-bg.png);
+          size: auto 100%;
+          position: center center;
+          repeat: no-repeat;
+        }
+        @media screen and (min-width:$screen-sm){
+          background-position: left center;
+          text-align: left;
+          @include margin(null null 0px null);
+        }
+      }
+      // nav-tabs specification
+      .nav-tabs{
+        @include padding(null null null 0px);
+        @include border-width(null null 0px null);
+        @media screen and (min-width: $screen-sm-max){
+          max-height: 400px;
+          overflow: hidden;
+        }
+        li {
+          display: block;
+          float: none;
+          border-bottom: 1px solid #0e4e3d;
+          position: relative;
+          @include padding(5px null 5px 30px);
+          // li before specification
+          &:last-child {
+            border-bottom: 0px;
+          }
+          &:before {
+            content: '\0048';
+            position: absolute;
+            @include position(absolute, 12px null null 0px);
+            font-family: 'Glyphter';
+            font-size: 16px;
+            color: #839892;
+            z-index: 2;
+          }
+          &.done {
+            &:before {
+              content: '\0044';
+            }
+          }
+          &.active {
+            &:before {
+              content: '\0045';
+              color: $white;
+            }
+            .icon {
+              color: $white;
+            }
+            a {
+              color: $white;
+            }
+          }
+          // li before specification
+
+          // li after specification
+          &:not(:last-child) {
+            &:after {
+              content: '';
+              width: 1px;
+              height: 100%;
+              @include position(absolute, 17px null null 7px);
+              background: #839892;
+              z-index: 1;
+            }
+          }
+          .icon {
+            width: 19px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 14px;
+            color: #839892;
+            display: inline-block;
+            vertical-align: middle;
+            @include padding(12px null null null);
+          }
+          a {
+            background: none;
+            color: rgba($white,0.85);
+            @include border-width(0px 0px 0px 0px);
+            @include border-color(null null #0e4e3d null);
+            @include padding(null null null 0px);
+            display: inline-block;
+            width: calc(100% - 33px);
+            vertical-align: -webkit-baseline-middle;
+          }
+        }
+      }
+      // nav-tabs
+    }
+      // tab-content specification
+      .tab-content {
+        .tab-pane {
+         color: $white;
+         font-size: 18px;
+         font-style: italic;
+         max-height: 400px;
+         overflow: hidden;
+         @include padding(24px null null null);
+         // iframe specification
+         .iframe {
+           width: 100%;
+           max-width: 100%;
+           height: 370px;
+         }
+      }
+    }
+  }
+}

@@ -1,0 +1,213 @@
+/* --- Header --- */
+
+.navbar-default{
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  max-width: 931px;
+  margin: auto;
+  position: relative;
+  z-index: 1000;
+  @include padding(11px null 5px);
+  @media screen and (max-width: $screen-sm){
+    @include padding(0px null null);
+    .navbar-toggle {
+      margin-top: 18px;
+      background: transparent;
+      &:focus {
+        background: transparent;
+      }
+      @include border-radius(0px);
+      .icon-bar {
+          background-color: #fea756;
+      }
+    }
+    // navbar-toggle
+    .navbar-collapse {
+      margin-top: 25px;
+      border-top: 0px;
+      @media screen and (max-width: $screen-sm){
+        @include margin(0px null null null);
+        @include position(fixed, 75px null null 0px);
+        @include transform(translateX(-300%));
+        @include transition(0.3s all linear);
+        height: auto !important;
+        overflow-y: inherit;
+        &:after {
+          content: '';
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0,0,0,0.7);
+          z-index: -1;
+          @include position(fixed, -75px null null 0px);
+        }
+        &.collapse {
+         @include transform(translateX(0%));
+        }
+      }
+    }
+    // navbar-collapse
+    .mobile_universal_search_bar {
+      @include margin(18px null null null);
+      .form-control {
+        background: none;
+        @include border-color(transparent);
+        color: #fea756;
+        @include border-radius(0px);
+        @include box-shadow(none);@include placeholder(){
+          color: transparent;
+        }
+        &:focus {
+          border-bottom-color: #fea756;
+          @include placeholder(){
+            color: #fea756;
+          }
+        }
+      }
+      .input-group-addon {
+        background: none;
+        @include border-color(transparent);
+        color: #fea756;
+      }
+    }
+    // mobile_universal_search_bar
+    .navbar-header {
+      @include padding(null 0px);
+      width: 100%;
+      z-index: 10;
+      @include position(absolute, 0px null null 0px);
+      &.fixed {
+        @media screen and (max-width: $screen-xs-max){
+          @include position(fixed, 0px null null 0px);
+          @include padding(null 15px);
+        }
+      }
+    }
+  }
+  .navbar-nav{
+  @include margin(-5px null null 10px);
+  @media screen and (max-width: $screen-mobile-md){
+    margin-top: 0px;
+    padding-top: 20px;
+    margin-left: 0px;
+  }
+    >li:first-child {
+     a {
+       @media screen and (max-width: $screen-xs-max){
+         padding-left: 0px;
+       }
+     }
+   }
+    li{
+      display: inline-block;
+      float: none !Important;
+      vertical-align: middle;
+      @media screen and (max-width: $screen-mobile-md){
+        display: block;
+      }
+      a {
+        text-align: center;
+        color: #fff ;
+        @media screen and (max-width: $screen-mobile-md){
+          text-align: left;
+        }
+        @media screen and (max-width: $screen-sm){
+          @include padding(null 11px);
+        }
+      }
+      &.active {
+        a {
+          background: none;
+          color: #fff ;
+        }
+      }
+      &.dropdown {
+        &.open {
+          a {
+            background: none;
+            color: $white;
+          }
+        }
+      }
+
+    }
+
+    // garbage
+    .nav_text{
+      display: block;
+      font-size: 14px;
+    }
+    .nav_icon{
+      display: inline-block;
+      &.ico_profile{
+        @include cssSprite($ico_profile);
+      }
+      &.ico_dragon{
+        @include cssSprite($ico_dragon);
+      }
+      &.ico_coins {
+        @include cssSprite($coins);
+      }
+    }
+    // garbage
+  }
+.navbar-form {
+  margin-right: 0px;
+  @media screen and (max-width: $screen-mobile-md){
+    border: 0px;
+    box-shadow: none;
+    clear: both;
+    margin-left: 0px;
+    text-align: center;
+   }
+  }
+  .profile_bar {
+    display: inline-block;
+    @include cssSprite($profile_bar);
+    margin-top: 0px;
+    font-size: 16px;
+    @include padding(19px null null 48px);
+    @include respond-to(mobileMedium) {
+        @include padding(19px null null 63px);
+    }
+
+    .user_name {
+      display: inline-block;
+      width: 107px;
+      overflow: hidden;
+      vertical-align: bottom;
+      white-space: pre;
+    }
+  }
+  .go-back-btn {
+    @include position(fixed, 30px null null 30px);
+    z-index: 100;
+    @media screen and (max-width: $screen-tb-land  ){
+      display: none;
+    }
+  }
+}
+
+// student growth
+.student_growth {
+  display: inline-block;
+  position: relative;
+  @include cssSprite($ico_coins);
+  color: white;
+  .growth_text{
+    @include position(absolute, -18px null null 22px);
+    width: 100%;
+&:hover {
+  color: $white-70;
+   }
+}
+  .growth_value{
+    display: block;
+    color: white;
+    text-align: center;
+    @include margin(3px null null);
+    @include padding(null null null 38px);
+    font-size: 19px;
+    line-height: 1.5;
+  }
+}

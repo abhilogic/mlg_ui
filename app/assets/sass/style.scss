@@ -1,0 +1,122 @@
+// Merge all stylesheets into one
+// Global
+// Bourbon
+@import "bourbon/bourbon";
+
+// Animate Scss
+@import "animate/animate";
+
+// Core bootstrap variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Core App variables and mixins
+@import "modules/variables";
+@import "modules/mixins";
+
+//Colors
+@import "colors/colors";
+
+// Base Style
+@import "base/fonts";
+@import "base/global";
+@import "base/typography";
+@import "base/helpers";
+@import "base/icons";
+@import "base/icomoon";
+@import "base/icons-fontawesome";
+
+// Sprite Style
+@import "sprites/sprite";
+
+// Components
+@import "components/gridflex";
+@import "components/buttons";
+@import "components/wells";
+@import "components/panels";
+@import "components/boot_popup";
+@import "components/toggle_button";
+@import "components/nav-mlg";
+@import "components/student_gap_analysis";
+@import "components/editable-block";
+@import "components/dropdown-menu";
+@import "components/modal";
+@import "components/data-table";
+@import "components/scope-sequence-listing";
+@import "components/award-achived";
+@import "components/carousel";
+@import "components/redeem-rewards-list";
+
+// Form Components
+@import "components/forms/forms";
+@import "components/forms/awesome-bootstrap-checkbox";
+@import "components/forms/switch";
+@import "components/forms/bootstrap-select";
+@import "components/forms/multiselect";
+@import "components/forms/switchery";
+@import "components/forms/radioslider";
+@import "components/forms/uniform";
+@import "components/forms/checkbox";
+@import "components/editor/summernotes";
+
+// Charts
+@import "components/charts/c3";
+@import "components/charts/charts";
+@import "components/charts/d3";
+@import "components/charts/sparklines";
+
+// Uploaders
+@import "components/uploaders/dropzone";
+@import "components/uploaders/file-input";
+@import "components/uploaders/profile-img-uploader";
+//@import "components/uploaders/plupload";
+
+// Layout Style
+@import "layout/nav";
+@import "layout/content";
+@import "layout/content-onboarding";
+@import "layout/header";
+@import "layout/sidebar";
+@import "layout/footer";
+@import "layout/main_search_form";
+
+// Pages Login/signup
+@import "pages/home";
+@import "pages/user_selection";
+@import "pages/student_account_creation";
+@import "pages/term_condition";
+@import "pages/payment";
+
+// Pages Dashboard
+@import "pages/teacher-account";
+@import "pages/teacher-dashboard";
+@import "pages/teacher-student-profile";
+@import "pages/subscriptions";
+@import "pages/parent-dashboard";
+@import "pages/parent-redeem";
+@import "pages/parent-offers";
+@import "pages/parent-subscription";
+@import "pages/parent-settings";
+@import "pages/parent-notifications";
+@import "pages/parent-view-assignment";
+@import "pages/teacher-setting";
+@import "pages/teacher-get-a-quote";
+@import "pages/teacher-group-member";
+@import "pages/teacher-gap-analysis";
+@import "pages/teacher-create-group";
+@import "pages/teacher-edit-group";
+@import "pages/teacher-scope-sequence";
+@import "pages/teacher-addQuestion";
+@import "pages/teacher-assignment";
+@import "pages/teacher-content";
+@import "pages/teacher-content-add-lesson";
+@import "pages/teacher-create-class";
+@import "pages/teacher-rewards";
+@import "pages/teacher-report";
+@import "pages/parent-report";
+@import "pages/teacher-all-student-list";
+@import "pages/teacher-subscription";
+@import "pages/notification";
+@import "pages/chat";
+@import "pages/comingsoon";
+@import "pages/char-group-user-list";

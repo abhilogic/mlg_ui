@@ -1,0 +1,337 @@
+<!-- Main navbar -->
+	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+		
+
+	<!-- /main navbar -->
+
+<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main Sidebar -->
+			<aside class="sidebar sidebar-main"></aside>
+			<!-- /sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Content area -->
+				<div class="content">
+					<!-- Teacher Setting  Panel  -->
+					<div class="panel panel-flat add-content-panel">
+						<div class="panel-heading">
+							<h5 class="panel-title"><i class="icon icon-arrow-left"></i>  Add Lessons</h5>
+							<div class="heading-elements">
+								<select class="mlg-selectpicker form-control" title="Import Template" data-width="auto" data-size="auto"ng-model="selectedTemplateModel" ng-change="getTemplate(selectedTemplate)">
+									 <option  ng-repeat="temp in template" value="{{temp.id}}">{{temp.template_name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="panel-body">
+              <form class="form-horizontal">
+								<div class="row repeat-row">
+                  <div class="col-lg-5">
+                    <div class="row">
+                      <div class="form-group">
+												<label for="" class="col-xs-5 control-label">Grade :</label>
+	                      <div class="col-xs-7">
+													<select class="mlg-selectpicker form-control "  data-size="auto" ng-model="gradeSelected" ng-change="getGradeVal(gradeSelected)">
+													 <option value="">---Select Grade---</option>
+                            <option  ng-repeat="grade in level track by $index"ng-if="$index>=0" value="{{grade.id}}">{{grade.name}}</option>
+													</select>
+                           <span style="color:red">{{message[0]}}</span>
+	                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-5 col-lg-offset-2">
+										<div class="row">
+											<div class="form-group">
+												<label for="" class="col-xs-5 control-label">Subject :</label>
+												<div class="col-xs-7" id="coursetemp">
+													<select class="mlg-selectpicker form-control" data-size="auto" ng-model="courseSelected" ng-change="getCourseVal(courseSelected)">
+                            <option value="">---Select Course---</option> 
+                            <option  ng-repeat="course in subject track by $index"ng-if="$index>=0"value="{{course.course_id}}">{{course.course_name}}</option>
+													</select>
+                           <span style="color:red">{{message[1]}}</span>
+												</div>
+											</div>
+										</div>
+                  </div>
+                </div>
+								<div class="row repeat-row">
+                  <div class="col-lg-5">
+                    <div class="row">
+                      <div class="form-group">
+												<label for="" class="col-xs-5 control-label">Standard Type :</label>
+												<div class="col-xs-7">
+												  <div ng-dropdown-multiselect="" options="standardType" selected-model="standardTypemodel" events="standardTypeEvents"></div>
+												  <span style="color:red">{{message[3]}}</span>
+                        </div>
+											</div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-lg-5 col-lg-offset-2">
+										<div class="row">
+											<div class="form-group">
+												<label for="" class="col-xs-5 control-label">Standards :</label>
+	                      <div class="col-xs-7">
+                          <div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"></div>
+                          <span style="color:red">{{message[2]}}</span>
+	                      </div>
+                      </div>
+										</div>
+                  </div>
+                </div>
+								<div class="row repeat-row">
+                  <div class="col-lg-5">
+                    <div class="row">
+                      <div class="form-group">
+												<label for="" class="col-xs-5 control-label">Lesson Name :</label>
+	                      <div class="col-xs-7">
+													<input type="text" class="form-control normal-input" ng-model="frm.lesson_name"/>
+                          <span style="color:red">{{message[4]}}</span>
+	                      </div>
+                      </div>
+                    </div>
+                  </div>
+									<div class="col-lg-5 col-lg-offset-2">
+										<div class="row">
+											<div class="form-group">
+												<label for="" class="col-xs-5 control-label">Skills :</label>
+												<div class="col-xs-7"> 
+                          <div ng-dropdown-multiselect="" options="skill" selected-model="skillmodel" events="skillEvents">
+                          </div>
+                          <span style="color:red">{{message[5]}}</span>
+												</div>
+											</div>
+										</div>
+                  </div>
+                </div>
+								<div class="row repeat-row">
+                  <div class="col-lg-5">
+                    <div class="row">
+                      <div class="form-group">
+												<label for="" class="col-xs-5 control-label">Sub skills :</label>
+	                      <div class="col-xs-7">
+													<div ng-dropdown-multiselect="" options="subSkill" selected-model="subSkillmodel"events="subSkillEvents">
+                          </div>
+                          <span style="color:red">{{message[6]}}</span>
+	                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+								<br/><br/>
+								<!-- <h5>Enter Question statement below :</h5> -->
+								<!-- summernotes  -->
+								<div class="row  table-of-content">
+									<div class="col-md-4" id="add-new-content">
+										<ul class="list-group">
+                      <li class="list-group-item"ng-model="userContentModel" ng-repeat="content in userContent track by $index">{{content.title}}<a ng-click="deleteContent(content.id )"><i class="icon icon-trash text-danger pull-right"></i></a> <a ng-click="setUserContent(content.id)"><i class="icon icon-pencil pull-right text-primary margin-right-10"></i></a> </li>
+										</ul>
+										
+									</div>
+									<div class="col-md-8 right-portion" id="content-id">
+                    <h5 class="panel-title margin-top-0 margin-sm-10"><input type="text" class="form-control" ng-model="frm.text_title" placeholder="Enter Lesson Title"></h5>
+										  <span style="color:red">{{message[8]}}{{message[9]}}</span>
+                      <ul class="nav nav-tabs">
+										  <li class="{{textClass}}" ng-show="type == 'ALL' || type=='text'"><a data-toggle="tab" href="#text">Text</a></li>
+										  <li class="{{docClass}}" ng-show="type == 'ALL' || type=='doc'"><a data-toggle="tab" href="#doc">Document</a></li>
+										  <li class="{{imgClass}}"ng-show="type == 'ALL' || type=='image'"><a data-toggle="tab" href="#img">Image</a></li>
+											<li class="{{videoClass}}"ng-show="type == 'ALL' || type=='video'"><a data-toggle="tab" href="#video">Video</a></li>
+										</ul>
+										<div class="panel">
+											<div class="panel-heading">
+											</div>
+											<div class="panel-body">
+												<div class="tab-content">
+													<div id="text" class="tab-pane fade in {{textClass}}" ng-show="type == 'ALL' || type=='text'">
+														<div class="summernote" text-angular="text-angular" name="htmlcontent" ng-model="frm.htmlcontent"></div>
+													</div>
+													<div id="doc" class="tab-pane fade in {{docClass}}"ng-show="type == 'ALL' || type=='doc'">
+														<form></form>
+														<form action="" class="dropzone" drop-zone="" id="file-doc"ng-model="fileDocModel"></form> 
+                            <div id="uploded-doc">
+                              </br>
+                            </div>
+                            <!--<embed src="assets-old/img/Calorie.pdf" width="100px" height="100px" />-->
+													</div>
+                          <div id="img" class="tab-pane fade in {{imgClass}}" ng-show="type == 'ALL' || type=='image'">
+														<form action=""class="dropzone" drop-zone="" id="file-img"ng-model="fileImgModel"></form>
+                            <div id="uploded-image">
+                            </div>
+													</div>
+													<div id="video" class="tab-pane fade in {{videoClass}}" ng-show="type == 'ALL' || type=='video'">
+														<form action="" class="dropzone" drop-zone="" id="file-video"ng-model="fileVideoModel"></form>
+														<br/>
+                            <div id="upload-video"></div>
+														<br/>
+                            <input type="text" class="form-control" placeholder="Enter Video Url" ng-model="htmlcontent.video_url"/>
+													</div>
+													<div class="text-right margin-top-15" id="save-content">
+														<button type="submit" class="btn btn-primary"ng-click="submitDocDetail(frm)">Save</button>
+                            <div id="update-content" class="text-right margin-top-15">
+                            </div>
+                            <span style="color:red">{{mesage}}</span>
+                            <span style="color:green">{{message[10]}}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- summernotes -->
+
+              </form>
+						</div>
+						<div class="panel-footer text-center">
+							<div class="text-center  margin-top-20">
+								<button type="submit" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10"data-toggle="modal" data-target="#modal-saveTemplate"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
+	              <button type="submit" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click='lessonPreview(frm)' >Preview</button>
+							<span style="color:red">{{msg}}</span>
+              </div>
+						</div>
+            <!-- /panel-body -->
+					</div>
+					<!-- /Teacher Setting  Panel  -->
+				</div>
+				<!-- /content area -->
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+
+	<section class="modal-section">
+		<div id="modal-contentPreview" class="modal fade modal-contentPreview " role="dialog">
+		  <div class="modal-dialog modal-lg">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+		        <h4 class="modal-title">Lesson Preview</h4>
+		      </div>
+		      <div class="modal-body ">
+						<div class="table-cover">
+							<div class="row table-repeat-row">
+								<div class="col-md-3 table-cell">
+									<span>GRADE</span>
+								</div>
+								<div class="col-md-9 table-cell">
+									<p>{{gradeSelected}}</p>
+								</div>
+							</div>
+							<div class="row table-repeat-row">
+								<div class="col-md-3 table-cell">
+									<span>SUBJECT</span>
+								</div>
+								<div class="col-md-9 table-cell">
+									<p>{{subjectName}}</p>
+								</div>
+							</div>
+							<div class="row table-repeat-row">
+								<div class="col-md-3 table-cell">
+									<span>LESSON NAME</span>
+								</div>
+								<div class="col-md-9 table-cell">
+									<p>{{previewLesson}}</p>
+								</div>
+							</div>
+							<div class="row table-repeat-row">
+								<div class="col-md-3 table-cell">
+									<span>STANDARDS</span>
+								</div>
+								<div class="col-md-9 table-cell">
+									<ul>
+                    <li ng-repeat="standard in standardmodel">{{standard.id}}</li>
+									</ul>
+								</div>
+							</div>
+              <div class="row table-repeat-row">
+								<div class="col-md-3 table-cell">
+									<span>TEXT</span>
+								</div>
+								<div class="col-md-9 table-cell">
+									<p>{{previewText}}</p>
+								</div>
+							</div>
+              <div class="row table-repeat-row">
+								<div class="col-md-3 table-cell">
+									<span>Image</span>
+								</div>
+								<div class="col-md-9 table-cell">
+									<img ng-repeat="pre in previewImage" src="{{preht}}://{{preHst}}/mlg/webroot/upload/{{pre}}" alt="{{pre}}"width="50px" height="50px"></img>
+								</div>
+							</div>
+							<iframe src="http://www.youtube.com/embed/W7qWa52k-nE"
+   width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+						</div>
+		      </div>
+		      <div class="modal-footer border-top-0 padding-top-0">
+						<div class="text-center">
+		        	<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+      <!-- add template  -->
+  <div id="modal-saveTemplate" class="modal fade modal-saveTemplate" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form class="form">
+       <div class="form-group float-label">
+        <label class="control-label">Template Name</label>
+        <input type="text" class="form-control float-input" ng-model="frm.template_name"/>
+       </div>
+          </form>
+        </div>
+        <div class="modal-footer border-top-0">
+          <button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary" data-dismiss="modal"ng-click="submitTemplate(frm)">Save</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- add template -->
+
+</section>
+
+<script type="text/javascript">
+  $('.nav-tabs > li > a').each(function(index) {
+        var href = $(this).attr('href');
+        console.log(href);
+	       $(this).attr('href','/teacher/add_content'+href);
+   });
+  
+	$(document).ready(function(){
+    var owl = $(".img-ans-owl-carousel");
+			owl.owlCarousel({
+				margin: 20,
+				nav: false,
+				loop: false,
+				responsive: {
+					1000: {
+						items: 6
+					}
+				}
+			});
+	})
+  
+  
+  
+</script>

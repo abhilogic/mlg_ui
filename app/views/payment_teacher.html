@@ -1,0 +1,140 @@
+<!-- Page container -->
+<div class="page-container">
+
+  <!-- Page content -->
+  <div class="page-content">
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+
+      <!-- Onboarding: Payment -->
+
+      <div class="panel panel-onboarding panel-flat">
+        <div class="panel-heading">
+          <h4 class="panel-title"><b><img src="assets/img/logo.png" alt="" /></b></h4>
+        </div>
+
+        <div class="panel-body">
+            <div class="row as-table">
+              <div class="col-sm-6 col-left">
+                <h2 class="text-light text-gray-light text-center">Your Choosen subjects</h2>
+                <br>
+                <span class="has_error" ng-if="message">{{message}}</span>
+                <ul class="list-cartItems">
+                  <li ng-repeat="grade in student" class="cart-item">
+                    <p><span class="item-label">Grade:</span><span class="item-value name">{{grade.grade}}</span></p>
+                    <p><span class="item-label">Subjects:	</span><span class="item-value package">{{grade.course_name}}</span></p>
+                    <p><span class="item-label">Sub Total:</span><span class="item-value price">${{grade.price}}<small>/mo</small></span></p>
+                  </li>
+                </ul>
+
+                <div class="total-cartValue">
+                  <h1 class="text-center text-light text-primary">Total: <span>${{totalAmount}}</span><small class="text-muted">/mo</small></h1>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-right">
+               <br>
+                **DEFAULT CARD TYPE IS VISA**
+                <h3 class="text-light text-gray-dark text-center">Address details</h3>
+                <br>
+                <form class="form-payment">
+                  <div class="form-group float-label">
+                    <label class="control-label">Address Line 1</label>
+                    <input ng-model="frm.line1" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Address Line 2</label>
+                    <input ng-model="frm.line2" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">City</label>
+                        <input ng-model="frm.city" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">State</label>
+                        <input ng-model="frm.state" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Postal Code</label>
+                        <input ng-model="frm.postal_code" type="number" class="form-control float-input"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Country Code</label>
+                        <input ng-model="frm.country_code" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Phone</label>
+                    <input ng-model="frm.phone" type="text" class="form-control float-input"/>
+                  </div>
+                  <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
+                  <br>
+                  
+                  <div class="form-group float-label">
+                    <label class="control-label">Name on the card</label>
+                    <input ng-model="frm.name" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Card number</label>
+                    <input ng-model="frm.card_number" type="text" class="form-control float-input" required/>
+                  </div>
+                  <div class="form-group form-group-inline form-group-cardDetails">
+                    <label class="control-label">Card Expiry Date</label>
+                    <select  ng-model="frm.expiry_month" class="form-control input-mm">
+                       <option value="">MM</option>
+                       <option ng-repeat="(key , value) in card_months" value="{{key}}">{{value}}</option>
+                    </select>
+                    <select  ng-model="frm.expiry_year" class="form-control input-yy">
+                       <option value="">YYYY</option>
+                       <option ng-repeat="(key , value) in card_years" value="{{key}}">{{value}}</option>
+                    </select>
+                    <div class="form-group float-label">
+                      <label class="control-label">CVV</label>
+                      <input ng-required="true" ng-model="frm.cvv" type="text" class="form-control float-input input-cvv"/>
+                    </div>
+                  </div>
+
+                   <p class="text-danger"><small><sup>*</sup>Your money will be deducted after 30 days of trial.</small></p>
+                   <div class="form-group text-right">
+                    <img src="assets/img/icon-payment-cards.png" alt="Visa, Master">
+                   </div>
+                  <br><br>
+
+                  <div class="form-group text-center">
+                    <button ng-click="submitCardDetail(frm)"type="submit" class="btn btn-primary">Proceed</button> <button ng-click="submitSkip()" type="button" class="btn btn-link">Skip for now</button>
+                  </div>
+                  <span class="has_error" ng-if="msg">{{msg}}</span>
+                  <br><br>
+                  <div class="form-group text-right">
+                   <a href="#" class="link"><img src="assets/img/icon-donate.png" alt="Visa, Master"></a>
+                  </div>
+                </form>
+              </div>
+            </div>
+        </div>
+
+      </div>
+      <!-- /.onboarding: Payment-->
+
+      <p class="legal"><a href="terms-parent.html">Terms & conditions</a></p>
+
+    </div>
+    <!-- /main content -->
+
+  </div>
+  <!-- /page content -->
+
+</div>
+<!-- page container -->

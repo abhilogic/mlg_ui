@@ -1,0 +1,94 @@
+/* --- BUTTONS --- */
+
+.btn{
+  //border-width: 0;
+  @include padding(8px 15px);
+  //border-radius: 2px;
+  &.btn-background-none {
+    background: none;
+  }
+  &.btn-outline{
+    white-space: normal;
+    &:not(:hover){
+      background-color: transparent;
+    }
+    border-width: 1px;
+    &.btn-danger:not(:hover){
+      color: $brand-danger;
+    }
+    &.btn-success:not(:hover){
+      color: $brand-success;
+    }
+    &.btn-info:not(:hover){
+      color: $brand-info;
+    }
+    &.btn-warning:not(:hover){
+      color: $brand-warning;
+    }
+  }
+  &:hover {
+    .icon-undo, .icon-redo {
+      color: $brand-primary;
+    }
+  }
+}
+.btn-rounded{
+  border-radius: 100px;
+}
+
+.icon{
+    display: inline-block;
+    border: 0;
+    color: inherit;
+    &.icon-success{
+      background-color: $brand-success;
+      color: white;
+    }
+}
+.icon-rounded{
+  border-radius: 100px;
+}
+
+.icon-float{
+  @include padding(18px);
+  i{
+    display: block;
+    margin: 0;
+    top: 0;
+  }
+  &.float-lg{
+    i{
+      font-size: 32px;
+    }
+  }
+}
+
+//Button toolbar
+
+.btn-toolbar{
+  .label-toolbar{
+    padding-left: 0;
+    padding-right: 0;
+    pointer-events: none;
+  }
+}
+
+// browser button
+.fileContainer {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  vertical-align: -webkit-baseline-middle;
+}
+.fileContainer [type=file] {
+    cursor: inherit;
+    display: block;
+    font-size: 999px;
+    filter: alpha(opacity=0);
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 2px;
+    top: 0;
+}

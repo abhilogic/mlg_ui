@@ -1,0 +1,241 @@
+	
+	<!-- Main navbar -->
+	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+		
+	<!-- /main navbar -->
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main Sidebar -->
+			<aside class="sidebar sidebar-main"></aside>
+			<!-- /sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Content area -->
+				<div class="content">
+
+					<div class="panel panel-flat panel-teacher-create-class ">
+						<div class="panel-heading">
+							
+								<div class="heading-elements">
+									<ul class="padding-left-0 list-inline">
+										<li class="toolbar-item">
+											<div class="btn-group" role="group" aria-label="...">
+												<button type="button" class="btn btn-default" ng-click="sendEmailMe(frm)"><i class="icon icon-user"></i> Email Me</button>
+											</div>
+										</li>
+
+
+										<li class="toolbar-item">
+											<div class="btn-group" role="group" aria-label="...">
+												<button type="button" class="btn btn-default" data-toggle="tooltip" title="Hooray!"><i class="icon icon-users"></i> Email Students</button>
+											</div>
+										</li>
+
+										<!-- <li class="toolbar-item">
+											<div class="btn-group" role="group" aria-label="...">
+												<button type="button" class="btn btn-default"><i class="icon icon-upload"></i> Upload an excel sheet</button>
+											</div>
+										</li>
+
+										<li class="toolbar-item">
+											<div class="btn-group" role="group" aria-label="...">
+											  <button type="button" class="btn btn-default">Select an X-tool</button>
+												<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><a href="#">Clever</a></li>
+													<li><a href="#">Student Information System</a></li>
+												</ul>
+											</div>
+										</li> -->
+									</ul>
+								</div>
+						</div>
+						<div class="panel-body">
+							<div class="panel-toolbar responsive-md">
+
+							</div>
+
+						<div class="row margin-top-20">
+								<div class="col-sm-3 panel-title text-uppercase">
+								<div class="btn-group" role="group" aria-label="...">
+									<select name="subjects" class="form-control" ng-model="frm.selectedcourse" required="Please select grade" ng-change="onChangeGetStudents(frm.selectedcourse)">
+                             			<option value="">Select Course for class</option>
+                              			<option ng-repeat="list in subject_grade" value="{{list.course_id}},{{list.course_name}},{{list.level_id}}">{{list.name}}- {{list.course_name}}</option>  
+                                    </select>
+                                    <span style="color:red">{{course_Errormessage}}</span>
+								</div></div>
+								<div class="col-sm-4 margin-bottom-10">
+									<input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+								</div>
+								<div class="col-sm-4  margin-bottom-10">
+									<select ng-model="pageSize" id="pageSize" class="form-control">
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+									 </select>
+								</div>
+							</div>
+							
+							
+
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-lessons">
+								<thead>
+									<tr>
+										<th class="sr-no">Serial Num #</th>
+										<th class="first-name">First Name</th>
+										<th class="last-name">Last Name</th>										
+										<th class="parent-student-email">Parent or Student E-mail</th>
+										<th class="user-name">User Name</th>
+										<th class="pasword">Pasword</th>
+										<th class="actions">Actions</th>
+									</tr>
+								</thead>
+
+								<tbody>				
+																
+									<tr ng-repeat="student in students | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
+											<td class="sr-no">
+												{{$index+1}}
+												<input type="checkbox" ng-model="frm.selectedstudent[student.id]" ng-true-value="'{{student.username}}'" ng-false-value="''" > 
+
+											</td>										
+										<td class="first-name">
+											<div ng-if="student.id!=selected.id">{{student.first_name}}</div>
+											<div ng-if="student.id==selected.id">
+												<input type="text" ng-model="student.first_name" />
+												<div style="color:red">{{upstudent_Errormessage[2]}}</div>
+											</div>
+
+
+										</td>
+										<td class="last-name">
+											<div ng-if="student.id!=selected.id">{{student.last_name}}</div>
+											<div ng-if="student.id==selected.id">
+												<input type="text" ng-model="student.last_name" />
+												<div style="color:red">{{upstudent_Errormessage[3]}}</div>						
+											</div>
+
+										</td>
+										<td class="parent-student-email">
+											<div ng-if="student.id!=selected.id">{{student.email}}</div>
+											<div ng-if="student.id==selected.id">
+												<input type="text" ng-model="student.email" />
+												<div style="color:red">{{upstudent_Errormessage[1]}}</div>
+											</div>
+										</td>
+										<td class="user-name">
+											<div ng-if="student.id!=selected.id">{{student.username}}</div>
+											<div ng-if="student.id==selected.id">
+												<div ng-model="student.username">{{student.username}}</div>
+											</div>
+										</td>
+										<td class="pasword">
+											<div ng-if="student.id!=selected.id">{{student.open_key}}</div>
+											<div ng-if="student.id==selected.id">
+												<input type="text" ng-model="student.open_key" />
+												<div style="color:red">{{upstudent_Errormessage[9]}}</div>
+											</div>
+										</td>
+										<td class="actions">
+											<button class="btn btn-link" ng-if="student.id!=selected.id" ng-click="editStudent(student.id)"><i class="fa fa-pencil"></i></button>
+											
+											<button class="btn btn-link" ng-if="student.id==selected.id" ng-click="updateStudent(student)"><i class="fa fa-save"></i></button>
+																					
+											<button class="btn btn-link" ng-click="delete_Student(student,$index)"><i class="fa fa-trash"></i></button>
+										</td>										
+									</tr>
+									
+									
+
+									<tr>
+										<td></td>
+										<td>
+											<input type="text" ng-model="frm.Fname" placeholder="First Name">
+											<div style="color:red">{{student_Errormessage[2]}}</div>
+										</td>
+										<td>
+											<input type="text" ng-model="frm.Lname" placeholder="Last Name" >
+											<div style="color:red">{{student_Errormessage[3]}}</div>
+										</td>
+										<td>
+											<input type="text" ng-model="frm.email" placeholder="Email" >
+											<div style="color:red">{{student_Errormessage[1]}}</div>
+										</td>
+										<td><input type="text" ng-model="frm.Uname" placeholder="User Name" readonly/></td>	
+										<td>
+											<input type="text" ng-model="frm.pass" placeholder="Password" >
+											<div style="color:red">{{student_Errormessage[9]}}</div>
+										</td>
+										<td><button type="button" ng-click="submitStudentDetails(frm)">Save</button></td>
+									</tr>
+								</tbody>
+							</table>
+							 <span style="color:red">
+							 	{{success_message}}
+							 	 {{err_message}}						 	
+							 	{{student_Errormessage[4]}}
+							 	{{student_Errormessage[5]}}
+							 	{{student_Errormessage[6]}}
+							 </span><br>
+							 
+							 
+							<div class="BtnGroup"> 
+							<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+							<i class="fa fa-angle-left"></i>
+							</button>
+							{{currentPage+1}}/{{numberOfPages()}}
+							<button ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">
+							<i class="fa fa-angle-right"></i>
+							</button>
+							</div>
+							
+							
+
+							<a href="quick-start-guide.html"><span>Have questions?</span> <b><u>Quick-start Guide</u></b></a>
+						</div>
+					</div>
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		var headertext = [],
+			headers = document.querySelectorAll(".table-teacherContent th"),
+			tablerows = document.querySelectorAll(".table-teacherContent th"),
+			tablebody = document.querySelector(".table-teacherContent tbody");
+
+			for(var i = 0; i < headers.length; i++) {
+			  var current = headers[i];
+			  headertext.push(current.textContent.replace(/\r?\n|\r/,""));
+			}
+			for (var i = 0, row; row = tablebody.rows[i]; i++) {
+			  for (var j = 0, col; col = row.cells[j]; j++) {
+			    col.setAttribute("data-th", headertext[j]);
+			  }
+			}
+			
+
+		$(document).ready(function(){
+		    $('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>

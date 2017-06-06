@@ -1,0 +1,16 @@
+.edit-group {
+  .panel-body {
+    .student_list {
+      li {
+        position: relative;
+        .btn-delete {
+          background: none;
+          border: 0px;
+          color: red;
+          @include position(absolute, 0px 0px null null);
+          z-index: 100;
+        }
+      }
+    }
+  }
+}

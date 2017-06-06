@@ -1,0 +1,241 @@
+/*
+	App Sprite
+--------------------------- */
+
+@mixin cssSprite( $spriteVals ) {
+	width: nth( $spriteVals, 1 );
+	height: nth( $spriteVals, 2 );
+	background-repeat: no-repeat;
+	background-image: url( #{ nth( $spriteVals, 3 ) } );
+	background-position: nth( $spriteVals, 4 ) nth( $spriteVals, 5 );
+}
+
+// video icons
+$video_play: 14px 20px '../img/video_element/video_scrit_img.png' -70px 0px;
+$video_pause: 20px 20px '../img/video_element/video_scrit_img.png' 0px 0px;
+$video_speaker: 20px 20px '../img/video_element/video_scrit_img.png' -25px 0px;
+$video_fs_view: 16px 16px '../img/video_element/video_scrit_img.png' -49px -3px;
+// video icons
+$btn_bg: 140px 65px '../img/btn.png' 0px 0px;
+$subject_gate: 233px 277px "../img/subject_gate.png" 0px 0px;
+$challenge_gate: 256px 251px "../img/challenge_gate.png" 0px 0px;
+$challenge_animate_gate: 256px 251px "../img/challenge_animate_gate.gif" 0px 0px;
+$challenge_gate_lock: 256px 251px "../img/challenge_gate_locked.png" 0px 0px;
+$subject_gate_open: 233px 277px "../img/subject_animate_gate.gif" 0px 0px;
+$subject_board: 141px 92px "../img/challeng_board.png" 0px 0px;
+
+// mobile owl nav indicator
+$owl-next-mb: 20px 28px "../img/challenge_mobile_arrow.png"  -20px 0px;
+$owl-prev-mb: 20px 28px "../img/challenge_mobile_arrow.png"  0px 0px;
+// ques no indicator
+$ques_no_indicator: 35px 35px "../img/subskillsroom-ques_indicators_img.png" -124px -3px;
+$ques_no_indicator_active: 35px 35px "../img/subskillsroom-ques_indicators_img.png" -162px -3px;
+$ques_no_indicator_minimize: 35px 35px "../img/subskillsroom-ques_indicators_img.png" -85px -3px;
+$ques_no_indicator_cancel: 35px 35px "../img/subskillsroom-ques_indicators_img.png" -43px -3px;
+$ques_no_indicator_done: 35px 35px "../img/subskillsroom-ques_indicators_img.png" -4px -3px;
+// ques no indicator
+
+
+// arrows
+$left-arrow: 26px 26px "../img/sprite.png" -249px -107px;
+$right-arrow: 26px 26px "../img/sprite.png" -281px -107px;
+$top-arrow: 26px 26px "../img/sprite.png" -314px -107px;
+$bottom-arrow: 26px 26px "../img/sprite.png" -28px 0px;
+// arrows
+
+// chagllenge notifier
+$challenge-notifier: 36px 40px "../img/challenge-notifire.png" 0px 0px;
+// video icons
+$icon-video : 18px 12px "../img/sprite.png" -274px -140px;
+$icon-document : 18px 22px "../img/sprite.png" -300px -136px;
+
+// exit door
+$icon-exit-door: 44px 100px "../img/sprite.png" -347px -71px;
+
+// books
+$subskill_video_book: 90px 82px "../img/subskills_book.png" 0px 0px;
+$subskill_book: 90px 82px "../img/subskills_book.png" -101px 0px;
+$subskill_quiz_book: 90px 82px "../img/subskills_book.png" -206px 0px;
+
+/* ----- Search bar----- */
+$search_desktop: 600px 42px '../img/sprite.png' 0 -173px;
+$search_tablet: 398px 42px '../img/sprite.png' 0 -216px;
+//$search_mobile:254px 42px '../img/sprite.png' 0 -261px;
+$search_mobile:100% 42px '../img/mobile-search-bar.png' center center;
+
+/* ------ Navbar Icons----*/
+$ico_trophy:150px 78px '../img/sprite.png' -3px -358px;
+$profile_bar : 188px 62px '../img/sprite.png' -347px 0px;
+$ico_profile : 43px 32px '../img/sprite.png' 0 -30px;
+$ico_dragon:43px 32px '../img/sprite.png' -43px -30px;
+$ico_coins : 133px 40px '../img/sprite.png' -133px -48px;
+$ico_avtar_creation: 21px 21px '../img/sprite.png' -219px -104px;
+$ico_profile: 23px 23px '../img/sprite.png' -219px -135px;
+$ico_logout: 20px 23px '../img/sprite.png' -249px -135px;
+
+/* chat bar */
+$chat_bar_desktop: 210px 40px '../img/sprite.png' 0 -306px;
+$open_chat_bg_desktop: 300px 40px '../img/open_chat_bg.png' 0px 0px;
+$chat_conversation_toggle_btn_bg: 300px 40px '../img/chat_conversation_toggle_btn-bg.png' 0px 0px;
+$chat_bar_mobile: 150px 40px '../img/sprite.png' -218px -306px;
+$get_more_points_bar: 168px 45px '../img/sprite.png' -93px 0px;
+$get_more_points_bar-sm: 39px 41px '../img/sprite.png' -93px -46px;
+$coins: 57px 50px '../img/sprite.png' -266px 0px;
+$coin: 12px 12px '../img/sprite.png' -328px 0px;
+/* chat bar */
+
+/* subject-castle-icon */
+$castle_science: 99px 93px '../img/sprite-castles.png'  -30px -21px;
+$castle_science_focus: 99px 93px '../img/sprite-castles.png'  -159px -21px;
+$castle_science_inactive: 99px 93px '../img/sprite-castles.png'  -279px -21px;
+
+$castle_math: 99px 93px '../img/sprite-castles.png'  -30px -136px;
+$castle_math_focus: 99px 93px '../img/sprite-castles.png'  -159px -136px;
+$castle_math_inactive: 99px 93px '../img/sprite-castles.png'  -279px -136px;
+
+$castle_english: 99px 93px '../img/sprite-castles.png'  -30px -229px;
+$castle_english_focus: 99px 93px '../img/sprite-castles.png'  -159px -229px;
+$castle_english_inactive: 99px 93px '../img/sprite-castles.png'  -279px -229px;
+
+$castle_soc_sci: 99px 93px '../img/sprite-castles.png'  -30px -328px;
+$castle_soc_sci_focus: 99px 93px '../img/sprite-castles.png'  -159px -328px;
+$castle_soc_sci_inactive: 99px 93px '../img/sprite-castles.png'  -279px -328px;
+
+$castle_help_boat: 99px 93px '../img/sprite-castles.png'  -30px -545px;
+$castle_help_boat_focus: 99px 93px '../img/sprite-castles.png'  -159px -545px;
+$castle_help_boat_inactive: 99px 93px '../img/sprite-castles.png'  -279px -545px;
+
+$castle_challenge-mount: 137px 115px '../img/sprite-castles.png'  0px -429px;
+$castle_challenge-mount_focus: 137px 115px '../img/sprite-castles.png'  -153px -429px;
+$castle_challenge-mount_inactive: 137px 115px '../img/sprite-castles.png'  -306px -429px;
+/* subject-castle-icon */
+
+
+/* active-upword-arrow */
+$castle__arrowUp: 14px 20px '../img/sprite.png' -2px 1px;
+
+/* active-upword-arrow */
+
+/* castle-top-icon */
+$castle__icon_math: 28px 30px '../img/sprite.png'  0px -101px;
+$castle__icon_math_inactive: 28px 30px '../img/sprite.png'  -0px -134px;
+
+$castle__icon_soc_sci: 28px 30px '../img/sprite.png'  -36px -101px;
+$castle__icon_soc_sci_inactive: 28px 30px '../img/sprite.png'  -36px -134px;
+
+$castle__icon_eng: 28px 30px '../img/sprite.png'  -72px -101px;
+$castle__icon_eng_inactive: 28px 30px '../img/sprite.png'  -72px -134px;
+
+$castle__icon_cl_mount: 28px 30px '../img/sprite.png'  -109px -101px;
+$castle__icon_cl_mount_inactive: 28px 30px '../img/sprite.png'  -109px -134px;
+
+$castle__icon_sci: 28px 30px '../img/sprite.png'  -145px -101px;
+$castle__icon_sci_inactive: 28px 30px '../img/sprite.png'  -145px -134px;
+
+$castle__icon_help: 28px 30px '../img/sprite.png'  -181px -101px;
+$castle__icon_help_inactive: 28px 30px '../img/sprite.png'  -181px -134px;
+
+/* castle-top-icon */
+
+
+// flag icons
+$flag__icon: 47px 75px '../img/castles-icon.png' -1254px -488px;
+
+// caslte_fire img
+$fire__img: 100px 100px '../img/fire_on_castle.gif' 0px 0px;
+
+// book icon
+$book__icon:  60px 60px '../img/castles-icon.png' -540px -180px;
+
+// compare image
+
+// subject_view_castle_icons
+
+$math_addition_icon: 236px 152px '../img/castles-icon.png' -944px 456px;
+
+$math_training_arena: 161px 141px '../img/castles-icon.png' -928px -456px;
+$math_algebra_icon : 121px 107px '../img/castles-icon.png' -737px -472px;
+$math_calculus_icon: 121px 115px '../img/castles-icon.png' -509px -473px;
+$math_compare_icon: 95px 97px '../img/castles-icon.png' -294px -488px;
+$math_counter_icon: 117px 94px '../img/castles-icon.png' -59px -484px;
+$math_decimal_icon: 145px 105px '../img/castles-icon.png' -1644px -323px;
+$math_division_icon: 97px 95px '../img/castles-icon.png' -1444px -331px;
+$math_estimation_icon: 110px 84px '../img/castles-icon.png' -1205px -337px;
+$math_fractions_icon: 106px 90px '../img/castles-icon.png' -980px -330px;
+$math_function_icon: 109px 96px '../img/castles-icon.png' -746px -330px;
+$math_exponent_icon: 115px 104px '../img/castles-icon.png' -515px -326px;
+$math_geometry_icon: 95px 104px '../img/castles-icon.png' -294px -326px;
+$math_graphs_icon: 115px 94px '../img/castles-icon.png' -59px -332px;
+$math_integers_icon: 126px 100px '../img/castles-icon.png' -1654px -175px;
+$math_logic_icon: 109px 87px '../img/castles-icon.png' -1431px -183px;
+$math_measurement_icon: 110px 87px '../img/castles-icon.png' -1205px -183px;
+$math_mixed_operation_icon: 124px 97px '../img/castles-icon.png' -972px -178px;
+$math_money_icon: 135px 97px '../img/castles-icon.png' -724px -178px;
+$math_multiplication_icon: 108px 83px '../img/castles-icon.png' -522px -183px;
+$math_number_icon: 124px 98px '../img/castles-icon.png' -280px -176px;
+$math_pattern_icon: 106px 98px '../img/castles-icon.png' -54px -176px;
+$math_percent_icon: 107px 106px '../img/castles-icon.png' -1671px -17px;
+$math_placevalue_icon: 109px 89px '../img/castles-icon.png' -1431px -23px;
+$math_probability_icon: 110px 89px '../img/castles-icon.png' -1205px -23px;
+$math_ratio_icon: 124px 118px '../img/castles-icon.png' -972px -14px;
+$math_subtraction_icon: 124px 102px '../img/castles-icon.png' -733px -23px;
+$math_time_icon: 108px 102px '../img/castles-icon.png' -522px -27px;
+$math_trigonometry_icon: 132px 102px '../img/castles-icon.png' -280px -27px;
+$math_word_problem_icon: 137px 126px '../img/castles-icon.png' -51px -14px;
+
+
+// subject_view_castle_icon for moblie view
+$fire__img_sm: 129px 135px '../img/fire_castle_tab.gif' 0px 0px;
+
+
+$math_addition_icon_sm: 129px 135px '../img/castles-icon_sm.png' -808px -807px;
+$math_algebra_icon_sm : 129px 135px '../img/castles-icon_sm.png' -557px -807px;
+$math_calculus_icon_sm: 129px 135px '../img/castles-icon_sm.png' -306px -807px;
+$compare_castle_icon_sm: 129px 135px'../img/castles-icon_sm.png' -57px -807px;
+$math_counter_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1803px -556px;
+$math_decimal_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1551px -556px;
+$math_division_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1303px -556px;
+$math_estimation_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1056px -556px;
+$math_fractions_icon_sm: 129px 135px '../img/castles-icon_sm.png' -808px -556px;
+$math_function_icon_sm: 129px 135px '../img/castles-icon_sm.png' -557px -556px;
+$math_exponent_icon_sm: 129px 135px '../img/castles-icon_sm.png' -306px -556px;
+$math_geometry_icon_sm: 129px 135px '../img/castles-icon_sm.png' -57px -556px;
+$math_graphs_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1803px -310px;
+$math_integers_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1551px -310px;
+$math_logic_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1303px -310px;
+$math_measurement_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1056px -310px;
+$math_mixed_operation_icon_sm: 129px 135px '../img/castles-icon_sm.png' -808px -310px;
+$math_money_icon_sm: 129px 135px '../img/castles-icon_sm.png' -557px -310px;
+$math_multiplication_icon_sm: 129px 135px '../img/castles-icon_sm.png' -306px -310px;
+$math_number_icon_sm: 129px 135px '../img/castles-icon_sm.png' -57px -310px;
+$math_pattern_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1803px -56px;
+$math_percent_icon_sm:  129px 135px '../img/castles-icon_sm.png' -1551px -56px;
+$math_placevalue_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1303px -56px;
+$math_probability_icon_sm: 129px 135px '../img/castles-icon_sm.png' -1056px -56px;
+$math_ratio_icon_sm: 129px 135px '../img/castles-icon_sm.png' -808px -310px;
+$math_subtraction_icon_sm: 129px 135px '../img/castles-icon_sm.png' -557px -56px;
+$math_time_icon_sm: 129px 135px '../img/castles-icon_sm.png' -306px -56px;;
+$math_trigonometry_icon_sm: 129px 135px '../img/castles-icon_sm.png' -57px -56px;
+$math_word_problem_icon_sm: 129px 135px '../img/castles-icon_sm.png' -808px -807px;
+
+
+// subskills_icons
+$subskill_left_arrow: 35px 33px '../img/subskills_sprit_img.png' -177px -218px;
+$subskill_left_arrow_active: 35px 33px '../img/subskills_sprit_img.png' -432px -218px;
+$subskill_right_arrow: 35px 33px '../img/subskills_sprit_img.png' -303px -219px;
+$subskill_right_arrow_active: 35px 33px '../img/subskills_sprit_img.png' -303px -63px;
+$subskill_play: 28px 29px '../img/subskills_sprit_img.png' -50px -168px;
+$subskill_play_active: 28px 29px '../img/subskills_sprit_img.png' -50px -116px;
+$subskill_play_inactive: 28px 29px '../img/subskills_sprit_img.png' -434px -168px;
+$subskill_paper: 30px 29px '../img/subskills_sprit_img.png' -433px -116px;
+$subskill_paper_active: 30px 29px '../img/subskills_sprit_img.png' -433px -116px;
+$subskill_paper_inactive: 30px 29px '../img/subskills_sprit_img.png' -177px -63px;
+$subskill_puzzle:  30px 29px '../img/subskills_sprit_img.png' -177px -168px;
+$subskill_puzzle_active:  30px 29px '../img/subskills_sprit_img.png' -177px -116px;
+$subskill_puzzle_inactive:  30px 29px '../img/subskills_sprit_img.png' -434px -12px;
+$subskill_check: 15px 15px '../img/subskills_sprit_img.png' -56px -227px;
+$subskill_uncheck: 15px 15px '../img/subskills_sprit_img.png' -184px -19px;
+$subskill_prev: 110px 36px '../img/subskills_sprit_img.png' -12px -9px;
+$subskill_next: 110px 36px '../img/subskills_sprit_img.png' -390px -61px;
+$subskill_pick_check: 15px 15px '../img/subskills_sprit_img.png' -56px -252px;
+$subskill_pick_uncheck: 15px 15px '../img/subskills_sprit_img.png' -186px -252px;

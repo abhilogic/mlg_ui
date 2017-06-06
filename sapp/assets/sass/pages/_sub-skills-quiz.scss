@@ -1,0 +1,150 @@
+.subskill-quiz-content {
+  color: #ccb099;
+  .hint-img{
+    max-width: 25px;
+    vertical-align: bottom;
+  }
+  .ques {
+    color: #ccb099;
+    font-family: $font-primary;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    @media screen and (max-width: $screen-xs-max){
+      width: 100%;
+    }
+  }
+  .option {
+    @include margin(49px auto 50px auto);
+    width: 450px;
+    @media screen and (max-width: $screen-xs-max){
+      width: auto;
+    }
+    li{
+    &:nth-child(2n-1) {
+      width: 80.5%;
+      @media screen and (max-width: $screen-xs-max){
+        display: block;
+      }
+    }
+    @include margin(null null 25px null);
+    span {
+    color: #ccb099;
+    display: inline-block;
+    font-family: $font-primary;
+    font-weight: 700;
+    font-size: 18px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    }
+   }
+  }
+// buttons specification
+.btn {
+  background: none;
+  @include border-width(0px);
+  @include padding(6px 25px);
+  font-size: 18px;
+  @include margin(10px);
+  &.focus , &:focus , &:active {
+    outline: 0px;
+  }
+  &:hover {
+    color: $white;
+  }
+  &.btn-hint {
+    font-size: 12px;
+    margin-top: 0px;
+  }
+  &.btn-skip {
+    background: {
+      image: url("../img/skip_bg.png");
+      size: 100% 100%;
+    }
+    color: $white;
+  }
+  &.btn-submit {
+    background: {
+      image: url("../img/submit_bg.png");
+      size: 100% 100%;
+    }
+    color: $rosewood;
+
+  }
+}
+}
+
+
+
+
+// question-no-indicator
+
+.ques_no_indicator {
+  max-width: 555px;
+  margin: auto;
+  margin-top: 40px;
+  @include respond-to(tabletPort){
+    margin-top: 23px;
+  }
+  .owl-stage {
+    @include margin(auto);
+  }
+  .owl-item {
+    &:last-child {
+      .item {
+        &:before {
+          display: none;
+        }
+      }
+    }
+  }
+  .item {
+    text-align: center;
+    &:before {
+      @include background-cover("subskillsroom-ques_indicators_before_bg.png");
+      content: '';
+      position: absolute;
+      height: 8px;
+      width: 104%;
+      left: 32px;
+      top: 15px;
+      z-index: -1;
+    }
+    .ques_no {
+      color: $rodeoDust;
+      display: inline-block;
+      font-family: $font-open-sans;
+      font-weight: $bold;
+      i {
+        font-style: normal;
+      }
+    }
+    .icon {
+      @include cssSprite($ques_no_indicator);
+      display: block;
+    }
+    &.active {
+      .icon {
+        @include cssSprite($ques_no_indicator_active);
+      }
+    }
+    &.minimize {
+      .icon {
+        @include cssSprite($ques_no_indicator_minimize);
+      }
+    }
+    &.cancel {
+      .icon {
+        @include cssSprite($ques_no_indicator_cancel);
+      }
+    }
+    &.done {
+      .icon {
+        @include cssSprite($ques_no_indicator_done);
+      }
+    }
+  }
+}

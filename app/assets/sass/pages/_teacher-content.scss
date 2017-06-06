@@ -1,0 +1,145 @@
+.panel-toolbar{
+  @include margin(0px 0 30px 0);
+  @include padding(null null null 0px);
+  @media screen and (min-width: $screen-sm){
+    @include margin(12px null null null);
+  }
+  width: 100%;
+  text-align: left;
+  @include clearfix();
+  .toolbar-item {
+    .bootstrap-select{
+      .dropdown-toggle {
+        width: 136px;
+        @media screen and (min-width: $screen-lg) and (max-width: 1280px) {
+          width: 122px;
+        }
+      }
+    }
+    display: inline-block;
+    float: left;
+    .label-toolbar{
+      @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $btn-border-radius-base);
+      @include padding(null 0);
+      pointer-events: none;
+      text-align: left;
+    }
+  }
+  .toolbar-item + .toolbar-item{
+    margin-left: 10px;
+  }
+
+  &.responsive-sm{
+    @media screen and (max-width: $screen-xs-max) {
+      .toolbar-item{
+        display: block;
+        width: 100%;
+        >.btn-group, >.btn{
+          width: 100%;
+          display: block;
+        }
+      }
+      .toolbar-item + .toolbar-item{
+        @include margin(15px 0 0 0);
+      }
+    }
+  }
+  &.responsive-md{
+    @media screen and (max-width: $screen-sm-max) {
+      .toolbar-item{
+        display: block;
+        width: 100%;
+        text-align: center;
+        >.btn-group >.btn, >.btn{
+          width: 100% !important;
+        }
+      }
+      .toolbar-item + .toolbar-item{
+        @include margin(15px 0 0 0);
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+// modal-uploadQuestion
+.modal-uploadContent {
+  .modal-content {
+    @include border-radius(0px);
+    .modal-header {
+      @include border-width(null null 0px null);
+      .modal-title {
+        text-align: center;
+      }
+    }
+    .modal-body {
+      @include padding(null 100px null 100px);
+    }
+  }
+}
+
+
+
+
+
+// modal-quesPreview
+.modal-contentPreview  {
+    iframe {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+  .modal-header {
+    border-bottom: 0px;
+    padding-bottom: 0px;
+  }
+  .modal-title {
+    text-align: center;
+  }
+  .question-block {
+    border-color: $gray-lighter;
+    margin-bottom: 15px;
+  }
+  .table-cover {
+      border: 1px solid $gray-lighter;
+      @include padding(null 15px);
+  }
+  .table-repeat-row {
+    border-bottom: 1px solid $gray-lighter;
+    .table-cell {
+      @include padding(8px 15px);
+      font-size: 14px;
+      font-weight: $semibold;
+      ul {
+        padding-left: 15px;
+      }
+      &:first-child {
+        color: rgba($gray-light,0.4);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      @media screen and (min-width: $screen-sm){
+        &:not(:first-child){
+            border-left: 1px solid $gray-lighter;
+        }
+      }
+    }
+  }
+}
+
+
+
+// bootstrap-select in teacher-content
+.panel-toolbar.responsive-md .toolbar-item{
+  .dropdown-menu.open{
+    @media screen and (max-width: $screen-xs-max){
+        position: relative;
+        @include margin(0px null null null);
+        @include box-shadow(none);
+    }
+  }
+}

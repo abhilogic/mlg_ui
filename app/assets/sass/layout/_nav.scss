@@ -1,0 +1,137 @@
+/* --- Navigation --- */
+$max-navbar-height: 59px;
+.navbar{
+  &-default{
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    @media screen and (max-width: $screen-xs-max){
+      max-height: $max-navbar-height;
+    }
+    .navbar-nav{
+      li{
+        a{
+          color: white;
+        }
+      }
+    }
+    .navbar-brand{
+      background-color: transparent;
+      color: white;
+      font-weight: $semibold;
+      &:hover{
+        background-color: transparent;
+        color: white;
+      }
+      img {
+        max-width: 50px;
+        @media screen and (min-width: $screen-sm){
+          max-width: 65px;
+          margin-top: 5px;
+
+        }
+      }
+    }
+  }
+
+  //Primary Index Navbar
+  &-primary{
+    background-color: #fdd75e;
+    border: 0;
+    margin: 0;
+    font-size: 18px;
+    @include padding(10px null);
+    .navbar-btn{
+      @extend .btn-rounded;
+      border-width: 2px;
+      border-color: white;
+      color: $gray-base;
+      min-width: 100px;
+      font-size: 18px;
+      &:hover{
+        background-color: white;
+      }
+    }
+    .navbar-btn + .navbar-btn{
+      margin-left: 15px;
+    }
+
+    .navbar-nav{
+      li{
+        a{
+          color: $gray-base;
+          font-weight: $regular;
+          @include padding(null 30px);
+          &:hover, &:focus{
+            background-color: transparent;
+          }
+        }
+        .nav-text{
+          border-bottom: 2px solid transparent;
+        }
+        a:hover .nav-text{
+          border-color: white;
+        }
+        &.active{
+          .nav-text{
+            border-color: white;
+          }
+          a:hover, a:focus{
+            background-color: transparent
+          }
+        }
+      }
+    }
+
+    .navbar-brand{
+      background-color: transparent;
+      color: $gray-base;
+      font-weight: $bold;
+      font-size: 24px;
+      &:hover{
+        background-color: transparent;
+        color: $gray-dark;
+      }
+    }
+  }
+
+  //Dashboard Navbar
+  &-dashboard{
+    box-shadow: 0 2px 6px rgba($sidebar-dark-bg, 0.1);
+    .navbar-header{
+      display: block;
+      float: left;
+      width: $sidebar-width-xs;
+      background-color: $sidebar-dark-bg;
+      @include padding(5px null 4px null);
+      @media (min-width: $screen-xs-max) {
+        max-width: $sidebar-base-width;
+        width: $sidebar-base-width;
+      }
+
+      .navbar-brand{
+        @include padding(7px 9px);
+        display: inline-block;
+        @media screen and (min-width: $screen-sm){
+          @include padding(0px null);
+          display: block;
+          width: 100%;
+          text-align: center;
+        }
+      }
+      .navbar-toggle {
+        @include border-width(0px);
+        &:hover , &:focus {
+          background-color:transparent;
+        }
+        .icon-bar {
+          background: $white;
+        }
+        @media screen and (max-width: $screen-xs-max){
+          float: left;
+          @include margin(7px 0px 0px 15px);
+        }
+      }
+    }
+  }
+}

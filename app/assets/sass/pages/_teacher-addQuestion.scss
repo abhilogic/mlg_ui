@@ -1,0 +1,175 @@
+$add-content-text-color:#9398ac;
+.add-content-panel {
+  .panel-heading {
+    &:before {
+      display: none;
+    }
+    .panel-title {
+      span {
+        color: $add-content-text-color;
+        text-transform: capitalize;
+        font-weight: $semibold;
+        font-size: 22px;
+      }
+      @media screen and (min-width: $screen-sm-max){
+        min-width: calc(100% - 181px);
+        text-align: center;
+        .icon-arrow-left {
+          float: left;
+          color: $add-content-text-color;
+        }
+        span {
+          @include margin(null null null 90px);
+        }
+      }
+    }
+    .heading-elements {
+      min-width: 181px;
+      span {
+        color: $brand-primary;
+        text-transform: uppercase;
+        &.bs-caret {
+          span {
+            color: $gray-light;
+          }
+        }
+      }
+    }
+  }
+  .panel-body {
+
+    .answer-type-option {
+      @include margin( 15p null null null);
+      @media screen and (max-width: $screen-sm){
+        text-align: center;
+      }
+      li {
+        @media screen and (max-width: $screen-sm){
+          display: block;
+          text-align: center;
+          &:not(:last-child){
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    .form-horizontal {
+      .repeat-row {
+        @media screen and (min-width: $screen-sm-max){
+            @include margin(null null 10px null);
+        }
+        .bootstrap-select {
+          .dropdown-toggle {
+            white-space: nowrap;
+            overflow: hidden;
+            span {
+              text-transform: uppercase;
+              font-weight: $semibold;
+            }
+          }
+        }
+      }
+      label {
+        color: $add-content-text-color;
+        font-weight: $semibold;
+        font-size: 13px;
+        @include margin(0px null null null);
+        text-transform: uppercase;
+        text-align: left !important;
+      }
+      h5 {
+        color:  $add-content-text-color;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: $semibold;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .normal-input {
+        @include border-radius(0px);
+        @include border-width(0px 0px null 0px);
+      }
+
+      .add-new-btn {
+        color: $brand-primary;
+        text-transform: uppercase;
+        padding-left: 0px;
+        background: none;
+        margin-top: 10px;
+      }
+      .edited-input {
+        @include padding(0px null null null);
+      }
+
+      .text-answer-block, .img-answer-block {
+        display: none;
+        @include margin(null 0px null 0px);
+      }
+
+      // text-answer-block
+      .text-answer-block {
+        &:after {
+          content:'';
+          display: table;
+          clear: both;
+        }
+        .repeat-row {
+          position: relative;
+          &:before {
+            content: '';
+            @include position(absolute, null 20px 10px 20px);
+            width: calc(100% - 40px);
+            height: 1px;
+            background: $add-content-text-color;
+          }
+        }
+        .radio.radio-inline{
+          @include padding(0px null null null);
+        }
+        .icon-trash {
+          @include margin(0px null null null);
+          color: $gray;
+        }
+        .add-new-btn {
+          @include margin(0px null null null);
+        }
+      }
+      .owl-carousel {
+        .owl-item {
+          .item.active {
+            img {
+              border: 3px solid $brand-primary;
+
+            }
+          }
+          img {
+            max-width: 100%;
+            width: auto;
+            @include border-radius(10px);
+           }
+        }
+      }
+    }
+  }
+  .panel-footer {
+    &:before {
+      display: none;
+    }
+    .btn {
+      min-width: 181px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.table-of-content {
+  .form-control {
+    @include border-width(0px 0px null 0px);
+  }
+  @media screen and (min-width: $screen-md){
+    .right-portion {
+      border-left: 1px solid $gray-lighter;
+    }
+  }
+}

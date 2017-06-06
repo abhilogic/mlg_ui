@@ -1,0 +1,204 @@
+/* Student List Grid */
+.student_status_legend{
+  font-size: 12px;
+  @include margin(0px null 0px null);
+  text-align: center;
+  @media screen and (min-width: $screen-sm-max){
+    text-align: right;
+  }
+  .fa-circle{
+    margin-right: 5px;
+    font-size: 11px;
+  }
+  li {
+    @media screen and (min-width: $screen-sm){
+      @include padding(null $content-padding-base);
+    }
+    @media screen and (max-width: $screen-sm){
+      @include margin(null null 10px null);
+    }
+  }
+}
+.gifted{
+  .fa-circle{color: $color-gifted;}
+}
+.outstanding{
+  .fa-circle{color: $color-outstanding;}
+}
+.ontarget{
+  .fa-circle{color: $color-ontarget;}
+}
+.struggling{
+  .fa-circle{color: $color-struggling;}
+}
+.remedial{
+  .fa-circle{color: $color-remedial;}
+}
+
+.list-filters{
+  .form-control{
+    text-transform: uppercase;
+    color: $gray-light;
+    font-weight: $semibold;
+  }
+}
+
+
+.list-thumb{
+  list-style: none;
+  text-align: justify;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  @media screen and (max-width: $screen-mobile-xs){
+    text-align: center;
+  }
+  li{
+    display: inline-block;
+    text-align: center;
+    @include padding($content-padding-base);
+    vertical-align: top;
+    a{
+      display: block;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+  .img-circle{
+
+  }
+}
+
+.student_list{
+  @include margin(9px null null null);
+  li{
+    max-width: 134px;
+    min-width: 134px;
+    @media(max-width:$screen-sm-max ){
+      min-width: 131px;
+      min-width: 131px;
+    }
+    @media(max-width:$screen-xs-max ){
+      max-width: 130px;
+      min-width: 130px;
+    }
+
+    .student__img {
+      .img-circle {
+        border: 3px solid transparent;
+      }
+    }
+
+    &.online {
+      .student__img {
+        .img-circle {
+          border-color: $color-online;
+        }
+      }
+    }
+  }
+  .student__name{
+    display: block;
+    @include padding(15px null null null);
+    font-weight: $bold;
+    color: rgba($gray-dark,0.75);
+    font-family: $font-secondary;
+    font-size: 16px;
+  }
+  .message {
+    color: $brand-primary;
+  }
+}
+
+.student__img{
+  max-width: 100px;
+  max-height: 100px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+  &::before{
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 4px solid white;
+    background-color: $gray-light;
+    @include border-radius(100%);
+    @include position(absolute, null null -12px 50%);
+    margin-left: -12px;
+    .gifted &{
+      background-color: $color-gifted;
+    }
+    .outstanding &{
+      background-color: $color-outstanding;
+    }
+    .ontarget &{
+      background-color: $color-ontarget;
+    }
+    .struggling &{
+      background-color: $color-struggling;
+    }
+    .remedial &{
+      background-color: $color-remedial;
+    }
+  }
+  .img-circle{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+}
+
+.group_list{
+  .group{
+    max-width: 134px;
+    min-width: 134px;
+    @media(max-width:$screen-sm-max){
+      max-width: 130px;
+      min-width: 130px;
+    }
+    .group-thumb{
+      width: 90px;
+      height: 90px;
+      display: inline-block;
+      img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .group__name{
+      display: block;
+      font-weight: $bold;
+      color: rgba($gray-dark,0.75);
+      font-family: $font-secondary;
+      font-size: 16px;
+    }
+  }
+}
+
+
+// panel-myClass
+.panel-myClass {
+  .panel-heading {
+    .panel-title {
+      text-align: center;
+      @media screen and (min-width: $screen-sm-max){
+        text-align: left;
+      }
+    }
+  }
+}
+
+
+
+// panel
+.panel {
+  &.panel-empty {
+    .panel-body {
+      @include padding(58px null);
+    }
+  }
+}

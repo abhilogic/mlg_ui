@@ -1,0 +1,273 @@
+.panel-avtar-design {
+  .panel-heading {
+    @media screen and (max-width: $screen-xs-max){
+      display: none;
+    }
+    .left-portion {
+      @media screen and (max-width: $screen-xs-max){
+        text-align: center;
+        @include margin(null null 15px null);
+      }
+    }
+    .right-portion {
+      @media screen and (max-width: $screen-xs-max){
+        text-align: center;
+      }
+    }
+  }
+    margin-bottom: 0px;
+    font-family: 'Open Sans', sans-serif;
+    @media screen and (min-width: $screen-sm-max){
+      max-width: 990px;
+      margin: auto;
+    }
+    @media screen and (max-width: $screen-sm-max) and (min-width: $screen-sm){
+      max-width: 742px;
+      margin: auto;
+    }
+
+
+
+  .panel-body {
+    min-height: auto !important;
+    font-family: 'Opan Sans', sans-serif;
+    @media screen and (max-width: $screen-xs-max){
+      @include padding(0px null 0px null);
+    }
+  }
+  .options {
+    @media screen and (max-width: $screen-sm){
+      @include margin(25px null null null);
+    }
+    .nav-tabs {
+      border-bottom: 0px;
+      @media screen and (max-width: $screen-xs-max){
+        @include position(fixed, 15% null null 0px);
+        width: 50px;
+      }
+      li {
+        text-align: center;
+          width: 25%;
+        &:not(:last-child){
+          border-right: 2px solid #dbdbdb;
+        }
+        @media screen and (max-width: $screen-xs-max){
+          width: 100%;
+          display: block;
+        }
+        a {
+          background: #f4f4f4;
+          color: darken(#dbdbdb,40%);
+          text-transform: uppercase;
+          @include border-radius(0px);
+          @include border-width(0px);
+          margin-right: 0px;
+          font-family: 'Open Sans', sans-serif;
+          @media screen and (max-width: $screen-xs-max){
+            @include padding(20px null);
+            min-height: 46px;
+            min-width: 50px;
+          }
+          &:hover {
+            border-bottom-color: transparent;
+            color: $brand-primary;
+          }
+          span {
+            display: none;
+            @media screen and (min-width: $screen-sm){
+              display: block;
+            }
+          }
+          img.icon {
+            width: 25px;
+            display: inline-block;
+            @media screen and (min-width: $screen-sm){
+              display: none;
+            }
+          }
+        }
+
+        &.active {
+          a {
+            background: #dbdbdb;
+            color: $black;
+            @include border-radius(0px);
+          }
+        }
+      }
+    }
+    .panel {
+      border: 1px solid #dbdbdb;
+      @include border-radius(0px);
+      .panel-body {
+        @include padding(0px);
+        .tab-content {
+          @include padding(15px);
+          .tab-pane {
+            max-height: 370px;
+            overflow: hidden;
+            @media screen and (max-width: $screen-xs-max){
+              max-height: 200px;
+              max-width: 250px;
+              overflow: hidden;
+              @include margin(null auto null auto);
+              .accessories-cover {
+                display: inline-block;
+              }
+            }
+            @media screen and (max-width: $screen-mobile-xs){
+              max-width: 200px;
+            }
+
+            .mCSB_inside > .mCSB_container {
+              margin-right: -5px;
+            }
+          }
+        }
+
+
+      }
+
+      // body tone
+      .btn-group {
+        display: block;
+        @media screen and (min-width: $screen-sm){
+          min-width: inherit !important;
+        }
+        .btn {
+          width: 30.5%;
+          height: 156px;
+          @media screen and (max-width: $screen-xs-max){
+            width: 70px;
+            height: 70px;
+          }
+          @include border-radius(0px);
+          position: relative;
+          margin-bottom: 8px;
+          &:focus, &:active , &.focus {
+            outline: 0px;
+            @include box-shadow(none);
+          }
+          &.active {
+            &:before {
+              content: "\f00c";
+              color: rgba(0,0,0,0.4);
+              display: block;
+              font: normal normal normal 36px/1 FontAwesome;
+              margin-top: 34%;
+              margin-left: 31%;
+              z-index: 10;
+              position: absolute;
+              @media screen and (max-width: $screen-sm){
+                @include margin(25% null null 9%);
+              }
+              @media screen and (max-width: $screen-xs-max){
+                @include margin(7% null null 9%);
+              }
+            }
+          }
+
+          &.active {
+            @include box-shadow(none);
+            background: #ededed;
+          }
+          .img-responsive {
+            @include margin(null auto null auto);
+          }
+        }
+      }
+
+
+      // here style
+      .hair-style {
+        .btn {
+          height: 137px;
+          &:first-child {
+            &.active {
+              &:after {
+                display: none;
+              }
+            }
+          }
+          img {
+            @media screen and (min-width: $screen-sm){
+              max-width: 90%;
+            }
+          }
+        }
+      }
+
+      // cloths
+      .cloth {
+        .btn {
+          height: 167px;
+          img{
+            max-height: 100%;
+          }
+          @media screen and (max-width: $screen-xs-max){
+            height: 70px;
+            img {
+              max-height: 100%;
+
+            }
+          }
+        }
+      }
+
+      // accessories
+      .accessories {
+        .btn {
+          input {
+            @include position(absolute, 0px null null -1000px);
+          }
+          @media screen and (max-width: $screen-xs-max){
+            height: 70px;
+            img {
+              max-height: 100%;
+            }
+          }
+          img {
+            @media screen and (min-width: $screen-sm){
+              margin-top: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  // avtar
+  .avtar {
+    .avtar-img-cover {
+      max-width: 110px;
+      svg:not(:root) {
+        width: 100%;
+      }
+      @include margin(null auto);
+        @include margin(43px null 25px null);
+        @media screen and (max-width: $screen-sm-max){
+          @include margin(0px null 0px null);
+          max-height: 316px;
+        }
+        .hire-style {
+          display: none;
+        }
+        // hire style color
+        .hire-style_9 {
+          background: #6b503f;
+        }
+    }
+    // avatar-img-cover
+    .btn-primary{
+      background: #3498db;
+      border-color: #3498db;
+      font-family: 'Open Sans', sans-serif;
+      &:hover {
+        @include box-shadow(0px 0px 32px rgba(52, 152, 219, 0.48));
+      }
+    }
+    // btn-primary
+
+  }
+}

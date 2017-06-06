@@ -1,0 +1,150 @@
+<body class="page-onboarding onboarding-cover">
+  <!-- Page container -->
+  <div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+      <!-- Main content -->
+      <div class="content-wrapper">
+        <!-- Onboarding: Preferences -->
+        <div class="panel panel-flat panel-onboarding">
+          <div class="panel-heading">
+            <h4 class="spanel-title"><b><img src="assets/img/logo.png" alt="" /></b></h4>
+          </div>
+          <div class="panel-body">
+            <!-- Steps -->
+            <div class="steps-container">
+                    <ul class="steps" ng-if="childname!=null">                  
+                        <li class="completed" ng-repeat="cname in childname track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">{{cname.children_name}}</span></li>
+                        <li class="" ng-repeat="cname in counter(remainchildAccount) track by $index" value="{{ $index + 1 }}"><span class="_serial_num"></span><span class="__text">Add Child</span></li>
+                         <li class="completed"><span class="_serial_num"></span><span class="__text">Preferences</span></li>
+                        <li class="completed"><span class="_serial_num"></span><span class="__text">Terms & Conditons</span></li>
+                        <li class="completed"><span class="_serial_num"></span><span class="__text">Payment</span></li>
+                  </ul> 
+            </div>
+
+            <div class="row as-table">
+              <div class="col-sm-6 col-left">
+                <br>
+                <h2 class="text-light text-gray-light text-center">Payment Brief</h2>
+                <br>
+
+                <ul ng-repeat="child in children" class="list-cartItems">
+                  <li class="cart-item">
+                    <p><span class="item-label">USER :</span><span class="item-value name">{{child.child_name}}</span></p>
+                    <p><span class="item-label">PACKAGE :	</span><span class="item-value package">{{child.package_subjects}}</span></p>
+                    <p><span class="item-label">SUB TOTAL :</span><span class="item-value price">${{child.package_amount}}<small>/{{child.plan_duration}}</small></span></p>
+                  </li>
+                </ul>
+
+                <div class="total-cartValue">
+                  <h1 class="text-center text-light text-primary">Total: <span>${{total_amount}}</span><small class="text-muted"></small></h1>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-right">
+                <br>
+                **DEFAULT CARD TYPE IS VISA**
+                <h3 class="text-light text-gray-dark text-center">Address details</h3>
+                <br>
+                <form class="form-payment">
+                  <div class="form-group float-label">
+                    <label class="control-label">Address Line 1</label>
+                    <input ng-model="frm.line1" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Address Line 2</label>
+                    <input ng-model="frm.line2" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">City</label>
+                        <input ng-model="frm.city" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">State</label>
+                        <input ng-model="frm.state" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Postal Code</label>
+                        <input ng-model="frm.postal_code" type="number" class="form-control float-input"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Country Code</label>
+                        <input ng-model="frm.country_code" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Phone</label>
+                    <input ng-model="frm.phone" type="text" class="form-control float-input"/>
+                  </div>
+                  <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
+                  <br>
+                  <div class="form-group float-label">
+                    <label class="control-label">Name on the card</label>
+                    <input ng-model="frm.name" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Card number</label>
+                    <input ng-model="frm.card_number" type="number"  class="form-control float-input" required/>
+                  </div>
+
+                  <div class="form-group form-group-inline form-group-cardDetails">
+                    <label class="control-label">Expiry Date</label>
+                    <select ng-model="frm.expiry_month" class="form-control input-mm" required>
+                      <option ng-repeat="(key , value) in card_months" value="{{key}}">{{value}}</option>
+                    </select>
+                    <select ng-model="frm.expiry_year" class="form-control input-yy" required>
+                      <option ng-repeat="(key , value) in card_years"  value="{{key}}">{{value}}</option>
+                    </select>
+                    <div class="form-group float-label">
+                      <label class="control-label">CVV</label>
+                      <input ng-required="true" ng-model="frm.cvv" type="text" class="form-control float-input input-cvv"/>
+                    </div>
+                  </div>
+                  <p class="text-danger"><small><sup>*</sup>Your money will be deducted after 30 days of trial.</small></p>
+
+                  <!--Note: ng-if will be easy to show or hide promo input container-->
+                  <!--  <div class="form-group">
+                     <h4><a class="link">Have a promo code?</a></h4>
+                     <div class="form-inline promo-inputContainer">
+                       <input ng-model="frm.promo_code" type="text" class="form-control"/>
+                       <button class="btn btn-primary">Apply</button>
+                     </div>
+                   </div>
+                  -->
+                  <br><br>
+                  <span class="has_error" ng-if="msg">{{msg}}</span>
+                  <div class="form-group text-center">
+                    <button ng-click="submitCardDetail(frm)" type="submit" class="btn btn-primary">Proceed</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.onboarding: Preferences-->
+      </div>
+      <!-- /main content -->
+    </div>
+    <!-- /page content -->
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      //Make tabs to accordian
+//      $('#termsTab').tabCollapse();
+      // Custom Scroll
+//      $(".tab-pane, .js-tabcollapse-panel-body").mCustomScrollbar();
+    });
+  </script>
+</body>

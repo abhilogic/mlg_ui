@@ -1,0 +1,31 @@
+.panel.panel-parent-report {
+  .heading-elements {
+    .list-filters
+      li{
+        &:first-child {
+          width: auto;
+        }
+      }
+      .bootstrap-select {
+        @media screen and (min-width: $screen-lg){
+          width: 130px !important;
+      }
+    }
+  }
+}
+
+.panel-parent-rewards {
+  tr {
+    td {
+      .fa {
+        color: $gray-light;
+        font-size: 16px;
+        text-decoration: none;
+        &:hover {
+          color: $gray-dark;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

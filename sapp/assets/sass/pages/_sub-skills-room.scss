@@ -1,0 +1,166 @@
+// sub-skill-room specification
+.sub-skills-room {
+  background: {
+    image: url("../img/subskillsroom_bg.jpg");
+    size: auto 100%;
+    position: center center;
+  }
+  min-width: 100vw;
+  min-height: 100vh;
+  @include padding(12px null null null);
+  @media screen and (min-width: $screen-sm){
+    background-size: auto 100%;
+  }
+  @media screen and (min-height: $screen-sm){
+    min-height: 101vh;
+  }
+
+  // main-content specification
+  .main-content {
+    position: relative;
+    .icon-exit-door {
+      @include cssSprite($icon-exit-door);
+      display: inline-block;
+      @include position(absolute, 24px 100px null null);
+      display: none;
+      @media screen and (min-width: $screen-sm){
+        display: block;
+      }
+    }
+    .google-speaker {
+        @include position(absolute, 144px 61px null null);
+        cursor: pointer;
+        display: none;
+        text-align: center;
+        @media screen and (max-width: $screen-sm){
+          @include position(absolute, 40px auto null 42px);
+        }
+        span {
+          display: block;
+          color: #999999;
+          font-family: $font-secondary;
+          i {
+            font-style: normal;
+          }
+          &:hover {
+            color: $white;
+          }
+        }
+        @media screen and (min-width: $screen-sm){
+          display: block;
+        }
+    }
+    .message {
+      @extend .google-speaker;
+        @include position(absolute, 209px 75px null null);
+        color: #999;
+        font-size: 18px;
+        .tooltip {
+          font-family: $font-secondary;
+        }
+        @media screen and (max-width: $screen-sm){
+            @include position(absolute, 40px 75px null null);
+        }
+    }  // message
+  } // main-content specification
+}
+
+// board-center
+.board-center {
+  width: 100vw;
+  @media screen and (max-width: 1370px){
+    height: auto !important;
+  }
+}
+
+// sub-skill-room board specification
+.board {
+  @include background-cover("board-bg.png");
+  background-size: 100% auto;
+  height: auto;
+  margin: auto;
+  width: 940px;
+  @include padding(null 50px 50px 50px);
+  @media screen and (min-width: $screen-sm){
+    height: 601px;
+  }
+  @media screen and (max-width: $screen-sm) {
+    background: none;
+    width: auto;
+    @include margin(155px null null null);
+  }
+  @media screen and (max-width: $screen-xs-max) {
+    @include margin(20px null null null);
+  }
+  &.table {
+    position: relative;
+
+    &:before {
+      @include background-cover("subskillsroom_table.png");
+      bottom: -48px;
+      content: '';
+      height: 283px;
+      left: -90px;
+      position: absolute;
+      width: 1084px;
+      z-index: 0;
+      display: none;
+      @media screen and (min-width: $screen-sm){
+        display: block;
+      }
+      @include respond-to(tabletPort){
+        width: 100%;
+        background-size: 100% 100%;
+      }
+      @include respond-to(mobileMedium){
+        width: 113%;
+        height: 130px;
+        left: -48px;
+      }
+      @media screen and (max-width: $screen-sm){
+        display: none;
+      }
+
+    }
+    .table-animated-img {
+      @include background-cover("subskillsroom_table.png");
+      background-position: -125px 95px;
+      background-size: auto auto;
+      bottom: -48px;
+      content: '';
+      height: 283px;
+      left: -90px;
+      position: absolute;
+      width: 1084px;
+      z-index: 0;
+      display: none;
+      @media screen and (min-width: $screen-sm-max){
+        display: block;
+      }
+      @include respond-to(tabletPort){
+        width: 100%;
+        background-size: 100% 100%;
+      }
+      @include respond-to(mobileMedium){
+        width: 113%;
+        height: 130px;
+        left: -48px;
+      }
+
+    }
+  } // table
+  // baord heading
+  .hd {
+    text-transform: uppercase;
+    color: $white;
+    font-size: 16px;
+    text-align: center;
+    font-family: $font-secondary;
+    @include margin(null null 35px null);
+    @include padding(13px null null null);
+    span {
+      display: block;
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,228 @@
+/* --- Panels --- */
+.panel{
+
+  &-flat{
+    box-shadow: 0 0 20px rgba($gray-dark, 0.10);
+    border: 0;
+    &-flat {
+      @media screen and (min-width: $screen-lg){
+        @include margin(null null 47px null);
+      }
+    }
+    @include margin(null null 40px null);
+    .panel-heading{
+      position: relative;
+      @include padding($content-padding-base $content-padding-large $content-padding-base/2);
+      @media(max-width: $screen-xs){
+        @include padding($content-padding-base $content-padding-base null);
+      }
+      &:after {
+        content: " "; // 1
+        clear: both;
+        display: table; // 2
+      }
+      &::before{
+        content: '';
+        height: 1px;
+        background-color: $gray-lighter;
+        @include position(absolute, null $content-padding-large 0px $content-padding-large);
+        @media(max-width: $screen-xs-max){
+          left: $content-padding-base;
+          right: $content-padding-base;
+        }
+      }
+      .panel-title {
+        @include margin(10px null null null);
+        font-weight: $semibold;
+        text-align: center;
+        text-transform: uppercase;
+        .icon-arrow-left {
+          float: left;
+          @include margin(null 15px null null);
+          vertical-align: bottom;
+          @media screen and (min-width: $screen-sm-max){
+            float: none;
+          }
+        }
+        @media screen and (min-width: $screen-sm-max){
+          float: left;
+          text-align: left;
+        }
+      }
+    }
+    .panel-body{
+      @include padding($content-padding-base $content-padding-large);
+      @media(max-width: $screen-xs){
+        @include padding($content-padding-base $content-padding-base);
+      }
+    }
+
+    .panel-footer{
+      background-color: transparent;
+      border: 0;
+      position: relative;
+      @include padding($content-padding-base $content-padding-large);
+      @media(max-width: $screen-xs){
+        @include padding($content-padding-base $content-padding-base);
+      }
+      &::before{
+        content: '';
+        height: 1px;
+        background-color: $gray-lighter;
+        @include position(absolute, 0 $content-padding-large null $content-padding-large);
+        @media(max-width: $screen-xs-max){
+          left: $content-padding-base;
+          right: $content-padding-base;
+        }
+      }
+    }
+  }
+
+
+  &.panel-empty {
+    .heading-elements {
+      select[disabled] {
+        background: none;
+        color: #eee;
+        @media screen and (min-width: $screen-sm){
+          color: lighten($gray, 60%);
+        }
+
+      }
+    }
+    .panel-body
+      .hd {
+        text-align: center;
+        font-size: 24px;
+        font-weight: $thin;
+        span {
+          display: block;
+        }
+      }
+      .btn {
+        .icon {
+          @include margin(null 10px null null);
+        }
+      }
+  }
+}
+
+
+// Heading elements base
+.heading-elements {
+    display: block;
+    min-width: 200px;
+    @include margin(($input-height-base / 2) null null null);
+
+    .btn {
+      font-family: $font-primary;
+    }
+
+    text-align: center;
+    @media (min-width: $screen-sm-max) {
+      background-color: inherit;
+      text-align: right;
+      display: inline-block;
+      min-width: 320px;
+      @include margin(0px null null null);
+      float: right;
+    }
+    // filter list
+    .list-filters {
+      text-align: center;
+      @media screen and (min-width: $screen-sm-max){
+        text-align: right;
+      }
+      li {
+        @media screen and (max-width: $screen-xs-max){
+          display: block;
+          .btn {
+            display: block;
+            width: 100%;
+          }
+          @include margin(null null 10px null);
+        }
+      }
+
+      // bootstrap-select
+      .bootstrap-select {
+        @media screen and (min-width: $screen-lg){
+          width: 156px !important;
+        }
+        @media screen and (max-widht: $screen-xs-max){
+          max-height: 41px;
+        }
+        @media screen and (max-width: $screen-xs-max){
+          .dropdown-menu {
+            position: relative;
+            float: none;
+            @include box-shadow(none);
+            @include margin(-10px null null null);
+          }
+        }
+      }
+
+      // list-filter without background
+      &.background-bd-none {
+        .bootstrap-select {
+          .btn {
+            background: transparent;
+            @include border-width(0px);
+            &:focus, &:active {
+              outline: 0px;
+            }
+            .bs-caret {
+              @include border-width(0px);
+              background: transparent;
+            }
+          }
+        }
+      }
+    }
+
+
+    .list-inline{
+      margin-bottom: 0;
+    }
+
+    // Make them visible starting from tablet
+    @media (min-width: $screen-md-min) {
+
+        // Make them inline
+        .heading-text,
+        > .btn-group {
+            float: left;
+            margin-left: $content-padding-large;
+        }
+
+        // Heading text
+        .heading-text {
+            display: inline-block;
+
+            & + .heading-text {
+                margin-left: $content-padding-large;
+            }
+        }
+      }
+
+    // search and edit box
+    .search-box {
+      .form-control {
+        @include border-color(transparent transparent null transparent);
+        @include border-radius(0px);
+        &:focus {
+          outline: 0px;
+          @include box-shadow(none);
+          @include border-color(transparent transparent $brand-primary transparent);
+        }
+      }
+      .input-group-addon {
+        background: transparent;
+        @include border-color(transparent);
+        &:hover, &:focus , &:active {
+          outline: 0px;
+          background: transparent;
+        }
+      }
+    }
+}

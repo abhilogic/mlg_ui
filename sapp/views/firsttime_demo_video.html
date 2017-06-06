@@ -1,0 +1,95 @@
+
+		<div class="main_cover first_time_login_test_page">
+			<div class="main_wrapper">
+				<div class="wooden_frame">
+						<div class="wooden_frame_content_cover">
+              <div class="content-cover subject-first-time-placement-video">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="content">
+                      <div class="video_cover">
+                        <video  id="tutorialVideo" >
+                          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/ogg">
+                          Your browser does not support HTML5 video.
+                        </video>
+                        <div class="play_btn_cover">
+                          <button type="button" class="video_play_btn" id="video_play_btn" data-center="center"><img src="assets/img/video_play_btn_bg.png" alt=""></button>
+                        </div>
+                        <div class="video_controller">
+                          <ul>
+                            <li>
+                              <ul>
+                                <li>
+                                  <button type="button" class="btnPlay btn_play">
+                                    <i class="fa fa-play" aria-hidden="true"></i>
+                                    <i class="fa fa-pause-circle" aria-hidden="true"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                <div id="slider" class="progress_bar"></div>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <ul>
+                                <li>
+                                  <span id="current">00:00</span><span> / </span>
+                                  <span id="duration">00:00</span>
+                                </li>
+                                <li>
+                                  <div id="volumeSlider" class="progress_bar volume_bar"></div>
+                                  <i class="fa fa-volume-up" aria-hidden="true" id="volume_controller"></i>
+                                </li>
+                                <li>
+                                  <img src="assets/img/video_element/full_screen.svg" alt="" id="fullScreen" class="screen_icon">
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="text-center btn_submit_cover">
+                        <br>                      
+                      <!-- <a class="btn btn-submit" style="float:right" href="pre-test/{{data.param1}}">Skip</a> -->
+                      <a class="btn btn-submit" style="float:right" href="pre-test/{{data.param1}}">Start Quiz</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+						</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="loader" loading>
+		<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+	</div>
+	
+    <script src="assets/js/video.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			//$(document).ready(function(){
+				$("input[type='checkbox']").checkbox_button();
+				$("#subskils_nav_tabs").tabCollapse();
+				$(".masscourt-block").addClass("active");
+		    setTimeout(function(){
+		        $(".masscourt-block .masscourt-cover").addClass("in");
+		    }, 500);
+				function vidplay() {
+			        var video = $("#tutorialVideo").get(0);
+			        if (video.paused) {
+			         video.play();
+			      } else {
+			         video.pause();
+			      }
+			    };
+				//$(window).load(function(){
+					vidplay();
+			    $(".video_cover").toggleClass("start");
+				//})
+
+			//});
+		</script>
+	

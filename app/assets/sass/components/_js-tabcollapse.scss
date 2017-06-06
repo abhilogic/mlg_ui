@@ -1,0 +1,39 @@
+.js-tabcollapse-panel {
+  .panel {
+    &:not(:last-child){
+      margin-bottom: 5px;
+    }
+    .panel-heading{
+      padding: 0px;
+      .panel-title {
+        border-bottom: 0px;
+        padding-bottom: 0px;
+        a {
+          display: block;
+          padding: 15px 0px;
+          text-align: center;
+        }
+      }
+    }
+    @include respond-to(mobileExtraSmall){
+      .panel-collapse {
+        .panel-body {
+          @include padding(null 0px null 0px);
+          .para {
+            font-size: 12px;
+            padding-right: 15px;
+          }
+        }
+      }
+    }
+    .mCustomScrollBox {
+      max-width: 100% !important;
+      min-height: 300px !important;
+      margin-bottom: 25px;
+      overflow: scroll;
+      .mCSB_container {
+        margin-right: 0px;
+      }
+    }
+  }
+}

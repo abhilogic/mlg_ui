@@ -1,0 +1,520 @@
+<!-- Main navbar -->
+<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+<!-- /main navbar -->
+
+<!-- Page container -->
+<div class="page-container">
+
+  <!-- Page content -->
+  <div class="page-content">
+
+    <!-- Main Sidebar -->
+  <aside class="sidebar sidebar-main"></aside>
+    <!-- /sidebar -->
+
+
+    <!-- Main content -->
+    <div class="content-wrapper">
+      <!-- Content area -->
+      <div class="content" ng-if="students_count!=null">
+
+        <!-- Student List Panel  -->
+        <div class="panel panel-flat">
+          <div class="panel-heading">
+            <h5 class="panel-title text-uppercase">My Class</h5>
+            <div class="heading-elements">
+                <ul class="list-inline heading-text list-filters">
+                  <li>
+                    <select class="form-control input-sm no-border">
+                      <option value="Standard">Standard</option>
+<!--                      <option  ng-repeat="grade in level " value="{{grade}}">{{grade}}</option>-->
+                    </select>
+                  </li>
+                  <li>
+                    <select class="form-control input-sm no-border">
+                      <option value="Subject">Subject</option>
+                      <!--<option  ng-repeat="course in subject" value="{{course}}">{{course}}</option>-->
+                    </select>
+                  </li>
+                  <li>
+                    <select class="form-control input-sm no-border">
+                      <option value="Skills">Skills</option>
+                    </select>
+                  </li>
+                  <li>
+                    <select class="form-control input-sm no-border">
+                      <option value="Sub Skills">Sub Skills</option>
+                    </select>
+                  </li>
+                  <li>
+                    <select class="form-control input-sm no-border">
+                      <option value="Time relevance">Time relevance</option>
+                    </select>
+                  </li>
+                </ul>
+            </div>
+          </div>
+          <div class="panel-body">
+            <ul class="list-inline student_status_legend">
+                <li class="gifted"><i class="fa fa-circle"></i>Gifted</li>
+                <li class="outstanding"><i class="fa fa-circle"></i>Outstanding</li>
+                <li class="ontarget"><i class="fa fa-circle"></i>On Target</li>
+                <li class="struggling"><i class="fa fa-circle"></i>Struggling</li>
+                <li class="remedial"><i class="fa fa-circle"></i>Remedial</li>
+            </ul>
+            <br>
+            <ul class="row list-thumb student_list">
+              <li ng-repeat="student in students" class="student gifted">
+                <a href="teacher/student-profile/{{student.first_name}}">
+                  <div class="student__img">
+                 
+                 <img class="img-circle" src="{{baseURL}}/{{student.profile_pic}}" alt="{{student.first_name + student.last_name}}"/>
+                  
+                </div>
+                  <span class="student__name">{{student.first_name }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- <div class="panel-footer text-center">
+              <a class="link link-gray-dark" href="#">Show All</a>
+          </div> -->
+        </div>
+        <!-- /student list panel  -->
+
+        <!-- Student Gap Analysis Panel  -->
+        <div class="well well-flat tabs-analysis">
+          <div class="row">
+            <div class="tab-content tab-content-left col-sm-6">
+              <h4 class="category-content text-uppercase no-margin">Needs Your Attention</h4>
+              <ul id="myNav" class="nav nav-tabs-analysis row">
+                <li class="active">
+                  <a data-toggle="tab" href="#menu">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam,</p>
+                  </a>
+                </li>
+                <li>
+                  <a data-toggle="tab" href="#menu1">
+                    <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="outstanding status"><i class="fa fa-circle"></i></span></h5>
+                    <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam,</p>
+                  </a>
+                </li>
+                <li>
+                  <a data-toggle="tab" href="#menu2">
+                    <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="ontarget status"><i class="fa fa-circle"></i></span></h5>
+                    <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam,</p>
+                  </a>
+                </li>
+                <li>
+                  <a data-toggle="tab" href="#menu3">
+                    <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="struggling status"><i class="fa fa-circle"></i></span></h5>
+                    <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam,</p>
+                  </a>
+                </li>
+              </ul>
+              <h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
+            </div>
+
+            <div class="tab-content tab-content-right col-sm-6">
+              <div class="text-center">
+                <ul class="list-inline list-filters">
+                  <li>
+                    <select class="form-control input-sm no-border">
+                      <option value="Standard">Standard</option>
+                      <!--<option  ng-repeat="grade in level " value="{{grade}}">{{grade}}</option>-->
+                    </select>
+                  </li>
+                  <li>
+                    <select class="form-control input-sm no-border">
+                      <option value="Subject">Subject</option>
+                      <!--<option  ng-repeat="course in subject" value="{{course}}">{{course}}</option>-->
+                    </select>
+                  </li>
+                  <li>
+                    <select class="form-control input-sm no-border">
+                      <option value="Skills">Skills</option>
+                    </select>
+                  </li>
+                </ul>
+              </div>
+              <div id="menu" class="tab-pane fade in active">
+                 <!-- remove below image in the case of using plugins -->
+                 <div class="analysis-chart-container">
+                  <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                </div>
+                  <div class="row">
+                    <div class="text-center col-sm-8 col-sm-offset-2">
+                      <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
+                      <br>
+                      
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                    </div>
+                  </div>
+              </div>
+
+              <div id="menu1" class="tab-pane fade">
+                <!-- remove below image in the case of using plugins -->
+                <div class="analysis-chart-container">
+                 <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+               </div>
+                 <div class="row">
+                   <div class="text-center col-sm-8 col-sm-offset-2">
+                     <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
+                     <br>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                   </div>
+                 </div>
+              </div>
+
+              <div id="menu2" class="tab-pane fade">
+                <!-- remove below image in the case of using plugins -->
+                <div class="analysis-chart-container">
+                 <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                 </div>
+                 <div class="row">
+                   <div class="text-center col-sm-8 col-sm-offset-2">
+                     <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
+                     <br>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a></button>
+                   </div>
+                 </div>
+              </div>
+
+              <div id="menu3" class="tab-pane fade">
+                <!-- remove below image in the case of using plugins -->
+                <div class="analysis-chart-container">
+                   <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                </div>
+
+                 <div class="row">
+                   <div class="text-center col-sm-8 col-sm-offset-2">
+                     <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
+                     <br>
+                     
+                     <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                   </div>
+                 </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- /student gap analysis panel  -->
+
+        <!-- group List Panel  -->
+        <div class="panel panel-flat">
+          <div class="panel-heading">
+            <h5 class="panel-title text-uppercase">My Groups</h5>
+          </div>
+          <div class="panel-body">
+            <ul class="row list-thumb group_list">
+             <li class="group">
+                <a class="add__group" href="teacher/create-group/class/{{grade_id}}/{{subject_name}}/{{course_id}}">
+                  <img class="img-circle" src="assets/img/group-img/add_group_img.png" alt="Group Default"/>
+                  <span class="group__name">Add Group</span>
+                </a>
+              </li>              
+             
+              <li class="group" ng-repeat="group in groups">
+                <a href="teacher/edit-group/{{group.URL_title}}/{{group.id}}">
+                  <div class="group-thumb">
+                  <img class="img-circle" src="{{baseURL}}/upload/{{group.group_icon}}" alt="Group Default"/>
+                </div>
+                  <span class="group__name">{{group.title}}</span>
+                </a>
+              </li>           
+              
+            </ul>
+          </div>
+        </div>
+        <!-- /group list panel  -->
+
+        <!-- Planner Panel  -->
+        <div class="panel panel-flat">
+          <div class="panel-body no-padding">
+            <div class='col-xs-6'>
+              <tien-clndr class="clndr" tien-clndr-object="clndr" tien-clndr-events="events">
+                <div class="clndr-controls">
+                  <div class="clndr-previous-button" ng-click="clndr.back()">
+                    &lsaquo;
+                  </div>
+                  <div class="month">
+                    {{month}}
+                  </div>
+                  <div class="clndr-next-button" ng-click="clndr.forward()">
+                    &rsaquo;
+                  </div>
+                </div>
+                <div class="clndr-grid">
+                  <div class="days-of-the-week">
+                    <div class="header-day" ng-repeat="day in daysOfTheWeek track by $index">
+                      {{day}}
+                    </div>
+                  </div>
+                  <div class="days">
+                    <div class="{{day.classes}}" ng-repeat="day in days" ng-click="getUserSelectedDate(day)">
+                      <div class="event-indicator" ng-show="day.events.length" ng-click="showEvents(day.events)">{{day.events.length}}</div>
+                      {{day.day}}
+                    </div>
+                  </div>
+                </div>
+            </tien-clndr>
+            </div>
+            <div class='col-xs-6'>
+                <label>{{userDate}}</label></br>
+                <input type="radio" name="ptm" ng-model="calender.checkedType" value="all" checked='' >
+                <label>All</label>
+                <input type="radio" name="ptm" ng-model="calender.checkedType" value="group" checked='' >
+                <select ng-model="calender.selectedGroupModel" ng-change="getGroup(calender.selectedGroupModel)">
+                  <option ng-repeat="group in groups" value="{{group.id}}">{{group.title}}</option>
+                </select>
+                <input type="radio" name="ptm" ng-model="calender.checkedType" value="people" checked='' >
+                <select ng-model="calender.selectedPeopleModel">
+                <option ng-repeat="student in students" value="{{student.id}}"> {{student.first_name}}</option>
+                </select>
+                <select ng-model="calender.selectedTimeModel">
+                <option value="10:00-12:00">10:00 am - 12:00 pm </option>
+                <option value="13:00-15:00">01:00 pm - 03:00 pm </option>
+                <option value="16:00-17:00">04:00 pm - 05:00 pm </option>
+                </select>
+                <input type="submit" ng-click="EventUpload(calender)"></br>
+                <span>{{message}}{{msg}}</span></br>
+                <label>Next EVENT</label></br>
+                <label>TO DO</label><input type="text" name="todo" ng-model="calndr.todo">
+                <input type="submit" ng-click="CreateTodo(calndr)">
+              
+            </div>
+              
+          </div>
+        </div>
+        <!-- /planner panel  -->
+
+      </div>
+      <!-- /content area -->
+
+
+
+       <!--start- /content area when dashboard is empty -->
+             <!-- Content area -->
+        <div class="content" ng-if="students_count==null">
+
+          <!-- Student List Panel  -->
+          <div class="panel panel-flat panel-empty">
+            <div class="panel-heading">
+              <h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i> My Class</h5>
+              <div class="heading-elements">
+                  <ul class="list-inline heading-text list-filters">
+                    <li>
+                      <select class="form-control input-sm no-border" disabled>
+                        <option value="Standard" >Standard</option>
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-control input-sm no-border" disabled>
+                        <option value="Subject">Subject</option>
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-control input-sm no-border" disabled>
+                        <option value="Skills">Skills</option>
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-control input-sm no-border" disabled>
+                        <option value="Sub Skills">Sub Skills</option>
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-control input-sm no-border" disabled>
+                        <option value="Time relevance">Time relevance</option>
+                      </select>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+            <div class="panel-body">
+                <h5 class="hd"><span>Oh oh!</span><span>Your class is empty bring in some Students</span></h5>
+                <div class="text-center">
+                  <span class="btn btn-background-none text-primary"><a href="teacher/create-class"><i class="icon icon-plus-outline"></i> Add Students</a></span>
+                </div>
+            </div>
+          </div>
+          <!-- /student list panel  -->
+
+          <!-- Student List Panel  -->
+          <div class="panel panel-flat panel-empty">
+            <div class="panel-heading">
+              <h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i> My Group</h5>
+            </div>
+            <div class="panel-body">
+                <h5 class="hd">Create Group of studnets</h5>
+                <div class="text-center">
+                  <span class="btn btn-background-none text-primary"><i class="icon icon-plus-outline"></i><a class="add__group" href="teacher/create-group/{{subject_name}}/{{course_id}}"> Add Students </a></span>
+                </div>
+            </div>
+          </div>
+          <!-- /student list panel  -->
+
+          <!-- Student Gap Analysis Panel  -->
+          <div class="panel-body tabs-analysis">
+            <div class="row">
+              <div class="tab-content tab-content-left col-sm-6">
+                <h4 class="category-content text-uppercase no-margin">Needs Your Attention</h4>
+                <ul id="myNav" class="nav nav-tabs-analysis row">
+                  <li class="active">
+                    <a data-toggle="tab" href="#menu">
+                        <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
+                        <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu1">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="outstanding status"><i class="fa fa-circle"></i></span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu2">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="ontarget status"><i class="fa fa-circle"></i></span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#menu3">
+                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="struggling status"><i class="fa fa-circle"></i></span></h5>
+                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam,</p>
+                    </a>
+                  </li>
+                </ul>
+                <h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
+              </div>
+
+              <div class="tab-content tab-content-right col-sm-6">
+                <div class="text-center">
+                  <ul class="list-inline list-filters">
+                    <li>
+                      <select class="form-control input-sm no-border">
+                        <option value="Standard">Standard</option>
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-control input-sm no-border">
+                        <option value="Subject">Subject</option>
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-control input-sm no-border">
+                        <option value="Skills">Skills</option>
+                      </select>
+                    </li>
+                  </ul>
+                </div>
+                <div id="menu" class="tab-pane fade in active">
+                   <!-- remove below image in the case of using plugins -->
+                   <div class="analysis-chart-container">
+                    <img src="../assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                  </div>
+                    <div class="row">
+                      <div class="text-center col-sm-8 col-sm-offset-2">
+                       
+                        <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                        <br>
+                       
+
+                        <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                      </div>
+                    </div>
+                </div>
+
+                <div id="menu1" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                  <div class="analysis-chart-container">
+                   <img src="../assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                 </div>
+                   <div class="row">
+                     <div class="text-center col-sm-8 col-sm-offset-2">
+                       <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                      <br>
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                     </div>
+                   </div>
+                </div>
+
+                <div id="menu2" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                  <div class="analysis-chart-container">
+                   <img src="../assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                   </div>
+                   <div class="row">
+                     <div class="text-center col-sm-8 col-sm-offset-2">
+                       <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                      <br>
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                     </div>
+                   </div>
+                </div>
+
+                <div id="menu3" class="tab-pane fade">
+                  <!-- remove below image in the case of using plugins -->
+                  <div class="analysis-chart-container">
+                     <img src="../assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
+                  </div>
+
+                   <div class="row">
+                     <div class="text-center col-sm-8 col-sm-offset-2">
+                       <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                       <br>
+                       <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                     </div>
+                   </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- /student gap analysis panel  -->
+
+          <!-- Planner Panel  -->
+          <div class="panel panel-flat">
+            <div class="panel-body no-padding">
+              <img src="../assets/img/calendar.png" alt="" class="img-responsive" style="width:100%"/>
+            </div>
+          </div>
+          <!-- /planner panel  -->
+
+        </div>
+        <!-- /content area -->
+
+
+        <!--end  /content area when dashboard is empty -->
+
+
+
+
+    </div>
+    <!-- /main content -->
+
+  </div>
+  <!-- /page content -->
+
+</div>
+  <!-- page container -->

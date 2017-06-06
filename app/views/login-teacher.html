@@ -1,0 +1,69 @@
+<body class="page-onboarding onboarding-cover">
+
+  <!-- Page container -->
+  <div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+      <!-- Main content -->
+      <div class="content-wrapper">
+
+        <!-- Onboarding: Login Teacher -->
+
+        <div class="panel panel-flat panel-onboarding">
+          <div class="panel-heading">
+            <h4 class="spanel-title"><b><img src="assets/img/logo.png" alt="" /></b> <small class="pull-right"><a href="teache/signup" class="link link-gray-light">Don't have an account?</a></small></h4>
+          </div>
+
+          <div class="panel-body">
+            <div class="row as-table">
+              <div class="col-sm-6 col-left">
+                <h4 class="text-center">
+                  Boost your Subject Skills and check progress online with
+                  <span class="display-block text-muted">MY LEARNING GURU</span>
+                </h4>
+                <br>
+                <br>
+                <img src="assets/img/rocket_img.png" class="img-responsive img-content">
+              </div>
+
+              <div class=" col-sm-6 col-right">
+
+                <div class="content-header">
+                  <h1 class="content-title">Sign In</h1>
+                  <p class="content-tagline">Hello there! Sign in and start improving your skills</p>
+                </div>
+
+                <form ng-submit="login(form, 'teacher')" class="form-login">
+                  <div class="form-group float-label" ng-class="{focus: !form.username == ''}">
+                    <label class="control-label">USERNAME</label>
+                    <input ng-model="form.username" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="form-group float-label" ng-class="{focus: !form.password == ''}">
+                    <label class="control-label">PASSWORD</label>
+                    <input ng-model="form.password" type="password" class="form-control float-input"/>
+                  </div>
+                  <br>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </div>
+                  <span class="has_error" ng-if="msg">{{msg}}</span>
+                </form>
+
+              </div><!-- /.col-right-->
+            </div>
+          </div>
+
+        </div>
+        <!-- /.onboarding: login teacher-->
+
+      </div>
+      <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+  </div>
+
+</body>

@@ -1,0 +1,352 @@
+
+/*
+// Setup child Account
+--------------------*/
+.selected_package{
+  content: '\004a';
+  display: inline-block;
+  font-family: 'Glyphter';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 16px;
+  font-size: 9px;
+  height: 16px;
+  width: 16px;
+  background-color: $brand-primary;
+  color: white;
+  border-radius: 100%;
+  @include position(absolute, -6px -6px null null);
+
+  &.disabled{
+    background-color: darken($gray-lighter, 10%);
+  }
+}
+.package-box{
+  text-align: center;
+  border: 1px solid $gray-lighter;
+  border-radius: 6px !important;
+  color: $gray-light;
+  float: none;
+  min-height: 50px;
+  min-width: 100px;
+  @include margin(10px null null null);
+  @include padding(6px 8px);
+  display: inline-block;
+
+  &.active{
+    border-color: $brand-primary;
+    color: $brand-primary;
+    box-shadow: none;
+    outline: 0;
+
+    &.disabled{
+      border-color: darken($gray-lighter, 10%);
+      color: darken($gray-lighter, 10%);
+      pointer-events: none;
+    }
+    &:before{
+      @extend .selected_package;
+    }
+  }
+  span, strong, small{
+    display: block;
+  }
+  .package-title{
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: $semibold;
+  }
+  .package-price{
+    font-weight: $ultrabold;
+    font-size: 26px;
+  }
+  .package-icon{
+    font-size: 40px;
+  }
+  .package-type{
+    font-size: 11px;
+  }
+  span, strong, small{
+    display: block;
+  }
+}
+.package-group{
+  padding: 0;
+  .btn{
+    @extend .package-box;
+  }
+}
+
+.grade-group{
+  padding: 0;
+  text-align: center;
+  @include margin(40px auto 15px auto);
+  .btn{
+    @include padding(0);
+    border: 0px;
+    border-bottom: 1px solid $gray-light;
+    color: $gray-light;
+    margin: 0;
+    display: inline-block;
+    float: left;
+    &:hover{
+      color: $gray-dark;
+      border-color: $gray-dark;
+    }
+    &.active, &:focus, &:active{
+      box-shadow: none;
+      color: $brand-primary;
+      border-color: $brand-primary;
+      outline: 0;
+      .grade{
+        border-color: $brand-primary;
+      }
+    }
+  }
+  .grade{
+    font-weight: $semibold;
+    display: block;
+    position: relative;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    @include padding(10px 15px);
+    >span{
+      text-transform: uppercase;
+    }
+  }
+}
+
+.subject-group{
+  padding: 0;
+  text-align: center;
+  @include margin(15px auto 15px auto);
+  @media screen and (min-width: $screen-sm){
+    @include margin(15px auto 75px auto);
+  }
+  .btn{
+    @extend .package-box;
+    min-height: inherit;
+    @include padding(20px);
+    border-width: 2px;
+    border-color: $gray-light;
+    color: $gray-light;
+    font-weight: $semibold;
+    display: inline-block;
+    float: none;
+    text-transform: uppercase;
+  }
+  .btn + .btn{
+    margin-left: 10px;
+  }
+}
+
+.selected-grades-subjects{
+  >.form-group{
+    border-bottom: 1px solid $gray-lighter;
+    margin: 0;
+    @include padding(10px null);
+    font-size: 18px;
+  }
+  .label-grade{
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    font-weight: $semibold;
+    color: $gray-dark;
+  }
+  .subjects-list{
+    display: block;
+    overflow: hidden;
+    .label-subject{
+      color: $gray-dark;
+      border: 1px solid $gray-dark;
+      display: inline-block;
+      @include padding(8px null);
+      font-weight: $regular;
+      &:not(:first-child){
+        @include margin(null null null 10px);
+      }
+      @media screen and (max-width: $screen-xs-max){
+        @include margin(5px null 5px 10px );
+      }
+
+    }
+
+  }
+
+  .btn-remove{
+    float: right;
+    color: $gray-light;
+  }
+
+}
+
+/*
+// Total cost table
+------------------*/
+.table-totalCost{
+  @include margin(30px null);
+  tbody{
+    tr td{
+        border: 0;
+        vertical-align: middle;
+        &:last-child{
+          text-align: right;
+        }
+      }
+  }
+}
+
+.payment-summery{
+  @include margin(30px null);
+  tbody{
+    >tr td{
+        border: 0;
+        vertical-align: middle;
+        &:last-child{
+          text-align: right;
+        }
+      }
+  }
+  tfoot{
+    >tr>td{
+        &:last-child{
+          text-align: right;
+        }
+      }
+  }
+  .amount-subtotal{
+
+  }
+  .subtotal-value{
+    font-weight: $bold;
+    color:$gray-light;
+    font-size: 18px;
+    small{
+      font-weight: $regular;
+    }
+  }
+  .subtotal-text{
+    text-transform: uppercase;
+  }
+}
+
+/*
+// Form steps-color-base
+------------------*/
+$steps-color-base: darken($gray-lighter, 18%);
+.steps-container{
+  @include margin(0 auto 30px auto);
+  @media(min-width: $screen-sm){
+    width: 90%;
+    margin-top: -20px;
+  }
+}
+/* Accout Setup Steps */
+.steps {
+  @include margin(0);
+  @include padding(10px 0 0 0);
+	//overflow: hidden;
+  display: table;
+  width: 100%;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+  li {
+  	list-style-type: none;
+  	color: $steps-color-base;
+    display: table-cell;
+  	width: 1%;
+  	position: relative;
+    text-align: center;
+    font-size: 12px;
+    line-height: normal;
+    font-weight: $semibold;
+    span{
+      display: block;
+      @include padding(null 5px);
+      word-break: break-all;
+      @media(max-width: $screen-xs-max){
+        display: none;
+      }
+    }
+
+    @media(max-width: $screen-xs-max){
+
+    }
+
+    &:before {
+    	content: counter(step);
+    	counter-increment: step;
+      border: 2px solid $steps-color-base;
+      background-color: white;
+      color: $steps-color-base;
+    	width: 28px;
+      height: 28px;
+    	line-height: 24px;
+    	display: block;
+    	font-size: 14px;
+      font-weight: $semibold;
+      text-align: center;
+    	border-radius: 100%;
+    	margin: 0 auto 6px auto;
+      position: relative;
+      z-index: 100;
+
+      @media(max-width: $screen-xs-max){
+
+      }
+    }
+    /*steps connectors*/
+    &:after {
+    	content: '';
+    	width: 100%;
+    	height: 2px;
+      background-color: $steps-color-base;
+    	position: absolute;
+    	left: -50%;
+    	top: 12px;
+    	//z-index: -1; /*put it behind the numbers*/
+    }
+    &:first-child:after {
+    	/*connector not needed before the first step*/
+    	content: none;
+    }
+  }
+
+  /*Marking completed steps*/
+  li.completed{
+    color: $brand-primary;
+    &:before{
+      color: white;
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+    }
+    &:after{
+      background-color: $brand-primary;
+    }
+  }
+  li.active{
+    color: $brand-primary;
+    &:before{
+      background-color: white;
+      border-color: $brand-primary;
+      color: $brand-primary;
+      @include transform(scale(1.4));
+      @media(max-width: $screen-xs-max){
+        @include transform(scale(1.1));
+      }
+    }
+    &:after{
+      background-color: $brand-primary;
+    }
+    @media(max-width: $screen-xs-max){
+      span{
+        display: block;
+        width: 120px;
+        @include position(absolute, 100% null null 50%);
+        margin-left: -60px;
+        z-index: 100;
+      }
+    }
+  }
+}

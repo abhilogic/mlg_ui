@@ -1,0 +1,131 @@
+
+		<div class="main_cover first_time_login_test_page">
+			<div class="main_wrapper">
+				<div class="wooden_frame">
+						<div class="wooden_frame_content_cover">
+              <div class="content-cover subskills_quiz">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <div class="col-md-offset-3 col-sm-offset-2 col-sm-6 text-center">
+                        <h4 class="panel-title">
+                          <span>Quiz on Number System</span>
+                          <span>{{sequence+1}}/{{data.questions.length}}</span>
+                        </h4>
+                      </div>
+                      <div class="col-sm-2 text-right ">                        
+                       <a href=""><img src="assets/img/speaker_icon.png" alt="" class="speaker_icon" ng-click="readQuestion()">
+                        <audio id="player1" src="" class="speech" hidden></audio></a>
+                      </div>
+                      <a ng-if="guest" href="#" ng-click="skipQuiz()">Skip</a>
+                    </div>
+                  </div>
+                  <div class="panel-body">
+                    <div class="content" ng-init="frm={};">
+                    			<h4 class="ques">
+                    				<span>Q{{sequence+1}} :</span>  
+                    				<span>{{currentquestion.questionName}}</span>
+                    			</h4>
+                    			
+                    			<div ng-if="currentquestion.type=='fillin' ">
+                    				<ul class="option">
+                    					<li ng-repeat="option in currentquestion.options">                    					
+                          					<span>
+                          						<label>
+                          							<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" class="checkbox-proceed" >
+													<a class="checkbox-btn" ng-class="{checked: frm.selectedoption == option.value}"></a>
+                          						</label>
+                          					</span>
+                          					<span>{{option.label}}</span>
+                       					 </li>
+                    				</ul>
+                    				<span style="color:red">{{error_message}}</span>                    				
+                    			</div>
+
+								<br>
+                    			<div ng-if="currentquestion.type=='yesNO' ">
+                    				<label class="radio-inline" ng-repeat="option in currentquestion.options">
+                    					
+										<input type="radio" name="quiz_option" class="radio-proceed" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required>
+										<a class="radio-btn" ng-class="{checked: frm.selectedoption == option.value}"></a>
+										<span style="color:#fff">{{option.label}}</span>
+										
+                    				</label>
+									<span style="color:red">{{error_message}}</span>									
+                    				
+                    			</div>
+                    			<div ng-if="currentquestion.type=='mcq' ">
+                    				<ul class="option">
+									  <li ng-repeat="option in currentquestion.options">                              
+											<span>
+											  <label>
+												<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+											  </label>
+											</span>
+											<span>{{option.label}}</span>
+										 </li>
+									</ul> 
+									<span style="color:red">{{error_message}}</span>              				
+                    			</div>
+                    			<div ng-if="currentquestion.type=='mrq' ">
+									<ul class="option">
+									  <li ng-repeat="option in currentquestion.options">                              
+											<span>
+											  <label>
+												<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+											  </label>
+											</span>
+											<span>{{option.label}}</span>
+										 </li>
+									</ul>
+									<span style="color:red">{{error_message}}</span>
+                    			</div>
+
+
+						  <div class="text-center btn_submit_cover">
+							<button type="submit" class="btn btn-submit" ng-click="submitQuestion(frm);">Submit</button>
+						  </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+						</div>
+				</div>
+			</div>
+		</div>
+		<!-- masscourts block -->
+    <div class="masscourt-block">
+      <div class="masscourt-cover ">
+        <img ng-if="answer_result" src="assets/img/happy-masscourts.png" class="masccort-img" alt=""/>
+        <img ng-if="!answer_result" src="assets/img/sad-masscourts.png" class="masccort-img" alt=""/>
+        <div class="hint-block">
+          <!-- <div class="col-xs-2 padding-0">
+            <img src="assets/img/hint-bulb-img.png" alt=""/>
+          </div> -->
+          <div class="col-xs-12">
+            <span class="hint">{{answer_response}}</span>
+            <div class="text-right">
+              <button type="button" class="btn" id="gotIt">OK!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	<div class="loader" loading>
+		<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+	</div>
+    <!-- masscourts block -->
+		<script src="assets/js/main.js"></script>
+		<script>
+			/*$(document).ready(function(){
+        $("input[type='checkbox']").checkbox_button();
+				$("#subskils_nav_tabs").tabCollapse();
+			});*/
+
+     
+
+		</script>
+
+
+	

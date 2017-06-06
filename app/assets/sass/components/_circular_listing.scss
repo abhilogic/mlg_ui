@@ -1,0 +1,151 @@
+.circular_listing {
+      @include respond-to(mobileSmall)    {
+        text-align: center;
+      }
+  li {
+      margin-left: 16px;
+      margin-right: 16px;
+      margin-bottom: 40px;
+      max-width: 104px;
+      vertical-align: text-top;
+  @include respond-to(largeScreen)   {
+      margin-left: 24px;
+      margin-right: 24px;
+      margin-bottom: 56px;
+      max-width: 115px;
+    }
+    @include respond-to(tabletLand)  {
+      margin-left: 9px;
+      margin-right: 10px;
+    }
+
+
+    .__img_cover {
+      position: relative;
+      &.status {
+      &:before {
+        border: 5px solid $white;
+        @include border-radius(100%);
+        content: '';
+        bottom: -12px;
+        left: 37%;
+        height: 24px;
+        position: absolute;
+        width: 24px;
+        z-index: 10;
+      }
+      &.gifted {
+        &:before {
+           background: $cornFlowerFlue;
+          }
+      }
+      &.outstanding {
+        &:before {
+          background: $seaGreen;
+        }
+      }
+      &.onTarget {
+        &:before {
+          background: $springGreen;
+        }
+      }
+      &.struggling {
+        &:before {
+          background: $orange;
+        }
+      }
+      &.remedial {
+        &:before {
+          background: $fireBrick;
+          }
+        }
+      }
+    }
+    &:nth-child(1){
+      margin-left: 0px;
+    }
+    &:nth-child(7n){
+      margin-right: 0px;
+    }
+    &:nth-child(8n){
+      margin-left: 0px;
+    }
+    &:nth-last-child(-n+7){
+      margin-bottom: 0px;
+    }
+    @include respond-to(tabletPort)    {
+      margin-left: 9px;
+      margin-right: 9px;
+      &:nth-child(7n){
+        margin-right: 9px;
+      }
+      &:nth-child(8n){
+        margin-left: 9px;
+      }
+      &:nth-last-child(-n+7){
+        margin-bottom: 40px;
+      }
+      &:nth-last-child(-n+5){
+        margin-bottom: 0px;
+      }
+      @include respond-to(mobileMedium)    {
+        margin-left: 6px;
+        margin-right: 6px;
+        margin-bottom: 20px;
+        &:nth-child(7n){
+          margin-right: 7px;
+        }
+        &:nth-child(8n){
+          margin-left: 7px;
+        }
+        &:nth-last-child(-n+7){
+          margin-bottom: 20px;
+        }
+      }
+      @include respond-to(mobileSmall)    {
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+      }
+      @include respond-to(mobileExtraSmall)    {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+      }
+    }
+    @include respond-to(largeScreen)    {
+      margin-left: 24px !important;
+      margin-right: 24px !important;
+      margin-bottom: 25px !important;
+      margin-top: 25px !important;
+    }
+    .__img{
+      @include border-radius(100%);
+      display: block;
+      height: 102px;
+      margin: auto;
+      position: relative;
+      width: 102px;
+      &:before {
+        background-color: $cornFlowerFlue;
+        border: 5px solid $white;
+        @include border-radius(100%);
+        @include box-sizing(inset 0px 0px 11px rgba(0,0,0,0.15));
+        content: '';
+        height: 24px;
+        position: absolute;
+        width: 24px;
+      }
+    }
+    .__name{
+      color: $doveGray;
+      display: block;
+      font-family: $font-secondary;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
+        @include respond-to(largeScreen)   {
+          font-size: 16px;
+        }
+    }
+  }
+}

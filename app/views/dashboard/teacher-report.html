@@ -1,0 +1,477 @@
+
+	<!-- Main navbar -->
+	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+	<!-- /main navbar -->
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main Sidebar -->
+			<aside class="sidebar sidebar-main">
+					<ul class="nav sidebar_nav sidebar_nav-main">
+						<li>
+							<a href="#myClass" data-toggle="collapse" class="collapsed"><i class="icon icon-my_class"></i><span class="link__text">My Class</span></a>
+							<ul id="myClass" class="sub-menu collapse">
+								<li class="active">
+									<a href="teacher-myClass.html"><span class="link__text">Class 7th A Math</span></a>
+								</li>
+								<li>
+									<a href="teacher-myClass.html"><span class="link__text">Class 7th A Math</span></a>
+								</li>
+								<li>
+									<a href="teacher-myClass.html"><span class="link__text">Class 7th A Math</span></a>
+								</li>
+								<li>
+									<a href="teacher-myClass.html"><span class="link__text"><i class="icon icon-plus-outline"></i> Add class</span></a>
+								</li>
+							</ul>
+						</li>
+						<li class="active">
+							<a href="teacher-report.html"><i class="icon icon-report"></i><span class="link__text">Report</span></a>
+						</li>
+						<li >
+							<a href="teacher-subscription.html"><i class="icon icon-my_subscriptions"></i><span class="link__text">My Subscription</span></a>
+						</li>
+						<li >
+							<a href="teacher-rewards.html"><i class="icon icon-my_rewards"></i><span class="link__text">My Rewards</span></a>
+						</li>
+						<li >
+							<a href="#myContent" data-toggle="collapse" class="collapsed"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
+							<ul id="myContent" class="sub-menu collapse">
+								<li class="active">
+									<a href="teacher-content-questions.html"><span class="link__text">Questions</span></a>
+								</li>
+								<li>
+									<a href="teacher-content-lessons.html"><span class="link__text">Lessons</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="teacher-message.html"><i class="icon icon-message"></i><span class="link__text">Messaging</span></a>
+						</li>
+						<li>
+							<a href="teacher-scope-sequence.html"><i class="icon icon-my_blueprinting_tool"></i><span class="link__text">scope and sequence</span></a>
+						</li>
+						<li>
+							<a href="teacher-notification.html"><i class="icon icon-notification"></i><span class="link__text">Notification</span></a>
+						</li>
+            <li class="hidden-sm hidden-md hidden-lg">
+							<a href="teacher-setting.html"><i class="icon icon-my_settings"></i><span class="link__text">Setting</span></a>
+						</li>
+            <li class="hidden-sm hidden-md hidden-lg">
+							<a href="#"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
+						</li>
+					</ul>
+			</aside>
+			<!-- /sidebar -->
+
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+				<!-- Content area -->
+				<div class="content">
+					<!-- panel-report -->
+					<div class="panel panel-flat panel-report">
+						<div class="panel-heading">
+							<h5 class="panel-title text-uppercase">proficiency</h5>
+								<div class="heading-elements">
+									<ul class="padding-left-0 list-inline">
+										<li class="toolbar-item">
+											<select class="mlg-selectpicker" title="Sort By" data-width="auto" data-size="auto">
+												 <option>Student Name</option>
+												 <option>Mastered</option>
+												 <option>Started</option>
+												 <option>Not Started</option>
+												 <option>Area of Gaps</option>
+											</select>
+										</li>
+										<li class="toolbar-item">
+											<button type="button" class="btn btn-primary">Print</button>
+										</li>
+									</ul>
+								</div>
+						</div>
+						<div class="panel-body">
+							<div class="panel-toolbar responsive-md">
+
+							</div>
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-report">
+								<thead>
+									<tr>
+										<th class="standard">STANDARD</th>
+                    <th class="student_name">STUDENT NAME</th>
+										<th class="mastered">MASTERED (%)</th>
+										<th class="started">STARTED (%)</th>
+										<th class="not_started">NOT STARTED (%)</th>
+										<th class="area_of_gaps">AREA OF GAPS</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="standard">1</td>
+										<td class="studen_name">Henston</td>
+										<td class="mastered">20%</td>
+										<td class="started">30%</td>
+										<td class="not_started">50%</td>
+										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
+									</tr>
+									<tr>
+										<td class="standard">2</td>
+										<td class="studen_name">Henston</td>
+										<td class="mastered">20%</td>
+										<td class="started">30%</td>
+										<td class="not_started">50%</td>
+										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
+									</tr>
+									<tr>
+										<td class="standard">3</td>
+										<td class="studen_name">Henston</td>
+										<td class="mastered">20%</td>
+										<td class="started">30%</td>
+										<td class="not_started">50%</td>
+										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
+									</tr>
+									<tr>
+										<td class="standard">4</td>
+										<td class="studen_name">Henston</td>
+										<td class="mastered">20%</td>
+										<td class="started">30%</td>
+										<td class="not_started">50%</td>
+										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
+									</tr>
+									<tr>
+										<td class="standard">5</td>
+										<td class="studen_name">Henston</td>
+										<td class="mastered">20%</td>
+										<td class="started">30%</td>
+										<td class="not_started">50%</td>
+										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
+									</tr>
+									<tr>
+										<td class="standard">6</td>
+										<td class="studen_name">Henston</td>
+										<td class="mastered">20%</td>
+										<td class="started">30%</td>
+										<td class="not_started">50%</td>
+										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
+									</tr>
+									<tr>
+										<td class="standard">7</td>
+										<td class="studen_name">Henston</td>
+										<td class="mastered">20%</td>
+										<td class="started">30%</td>
+										<td class="not_started">50%</td>
+										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
+									</tr>
+								</tbody>
+                <tfoot>
+									<tr>
+										<td class="table-pagination" colspan="7">
+											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<ul class="pagination pagination-sm">
+												<li class="disabled">
+													<a>
+														<span aria-hidden="true">Previous</span>
+													</a>
+												</li>
+												<li class="active">
+													<a>1</a>
+												</li>
+												<li>
+													<a>2</a>
+												</li>
+												<li>
+													<a>3</a>
+												</li>
+												<li>
+													<a aria-hidden="true">Next</a>
+												</li>
+											</ul>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					<!-- panel-report -->
+
+					<!-- panel-area-of-gaps -->
+					<div class="panel panel-flat panel-area-of-gaps">
+						<div class="panel-heading">
+							<h5 class="panel-title text-uppercase">area of gaps</h5>
+								<div class="heading-elements">
+									<div class="row filter-cover">
+										<div class="col-lg-2 col-md-4 margin-sm-bottom-15">
+											<div class="radio radio-primary radio-inline">
+												<input type="radio" id="inlineRadio1"  value="option1" name="challengesGroup" checked="">
+												<label for="inlineRadio1" class="text-uppercase"> All Class</label>
+											</div>
+										</div>
+										<div class="col-lg-5 col-md-4 margin-sm-bottom-15">
+											<div class="row">
+												<div class="col-sm-1 col-xs-2">
+													<div class="radio radio-primary radio-inline margin-sm-top-10">
+														<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+														<label></label>
+													</div>
+												</div>
+												<div class="col-sm-10 col-xs-10">
+													<select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
+														 <option>Approved</option>
+														 <option>Not Approved</option>
+														 <option>Submitted</option>
+														 <option>Pending</option>
+														 <option>Under review</option>
+														 <option>Draft</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-5 col-md-4">
+											<div class="row">
+												<div class="col-sm-1 col-xs-2">
+													<div class="radio radio-primary radio-inline margin-sm-top-10">
+														<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+														<label></label>
+													</div>
+												</div>
+												<div class="col-sm-10 col-xs-10 padding-right-0 padding-sm-right-15">
+													<select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
+														 <option>Approved</option>
+														 <option>Not Approved</option>
+														 <option>Submitted</option>
+														 <option>Pending</option>
+														 <option>Under review</option>
+														 <option>Draft</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+						</div>
+						<div class="panel-body">
+							<div class="panel-toolbar responsive-md"></div>
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-area-of-gaps">
+								<thead>
+									<tr>
+										<th class="standard">STANDARD</th>
+										<th class="student_name">SKILL NAME</th>
+										<th class="mastered">SUBSKILLS <span>(Click tab to send  assignement)</span></th>
+										<th class="started">NO OF STUDENTS LACKING</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="standard" data-th="STANDARD">1</td>
+										<td class="skill_name" data-th="SKILLS NAME">Whole Number</td>
+										<td class="subskill" data-th="SUBSKILLS">
+											<div class="subkills-cover">
+												<button type="button" class="btn btn-danger btn-outline">Divison</button>
+												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+												<button type="button" class="btn btn-danger btn-outline">decimal</button>
+												<button type="button" class="btn btn-danger btn-outline border-0">+5 more</button>
+											</div>
+										</td>
+										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
+									</tr>
+									<tr>
+										<td class="standard" data-th="STANDARD">2</td>
+										<td class="skill_name" data-th="SKILLS NAME">Divison</td>
+										<td class="subskill" data-th="SUBSKILLS">
+											<div class="subkills-cover">
+												<button type="button" class="btn btn-danger btn-outline">Divison</button>
+												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+											</div>
+										</td>
+										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
+									</tr>
+									<tr>
+										<td class="standard" data-th="STANDARD">3</td>
+										<td class="skill_name" data-th="SKILLS NAME">Multiplication</td>
+										<td class="subskill" data-th="SUBSKILLS">
+											<div class="subkills-cover">
+												<button type="button" class="btn btn-danger btn-outline">Divison</button>
+												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+											</div>
+										</td>
+										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
+									</tr>
+									<tr>
+										<td class="standard" data-th="STANDARD">4</td>
+										<td class="skill_name" data-th="SKILLS NAME">Subtraction</td>
+										<td class="subskill" data-th="SUBSKILLS">
+											<div class="subkills-cover">
+												<button type="button" class="btn btn-danger btn-outline">Divison</button>
+												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+											</div>
+										</td>
+										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
+									</tr>
+									<tr>
+										<td class="standard" data-th="STANDARD">5</td>
+										<td class="skill_name" data-th="SKILLS NAME">Addition</td>
+										<td class="subskill" data-th="SUBSKILLS">
+											<div class="subkills-cover">
+												<button type="button" class="btn btn-danger btn-outline">Divison</button>
+												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+											</div>
+										</td>
+										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
+									</tr>
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<td class="table-pagination" colspan="7">
+											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<ul class="pagination pagination-sm">
+												<li class="disabled">
+													<a>
+														<span aria-hidden="true">Previous</span>
+													</a>
+												</li>
+												<li class="active">
+													<a>1</a>
+												</li>
+												<li>
+													<a>2</a>
+												</li>
+												<li>
+													<a>3</a>
+												</li>
+												<li>
+													<a aria-hidden="true">Next</a>
+												</li>
+											</ul>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					<!-- panel-area-of-gaps -->
+
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- page container -->
+
+	<!-- modal-section  -->
+	<section class="modal-section">
+		<!-- Modal content-->
+		<div id="modal-areaOfGaps" class="modal fade modal-areaOfGaps" role="dialog">
+			<div class="modal-dialog modal-lg">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+						<h4 class="modal-title">JOHN DOE - AREA OF GAPS</h4>
+					</div>
+					<div class="modal-body">
+						<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-area-of-gaps">
+							<thead>
+								<tr>
+									<th class="standard">STANDARD</th>
+									<th class="student_name">SKILL NAME</th>
+									<th class="mastered">SUBSKILLS <span>(Click tab to send  assignement)</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="standard" data-th="STANDARD">1</td>
+									<td class="skill_name" data-th="SKILLS NAME">Whole Number</td>
+									<td class="subskill" data-th="SUBSKILLS">
+										<div class="subkills-cover">
+											<button type="button" class="btn btn-danger btn-outline">Divison</button>
+											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+											<button type="button" class="btn btn-danger btn-outline">decimal</button>
+											<button type="button" class="btn btn-danger btn-outline border-0">+5 more</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="standard" data-th="STANDARD">2</td>
+									<td class="skill_name" data-th="SKILLS NAME">Divison</td>
+									<td class="subskill" data-th="SUBSKILLS">
+										<div class="subkills-cover">
+											<button type="button" class="btn btn-danger btn-outline">Divison</button>
+											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="standard" data-th="STANDARD">3</td>
+									<td class="skill_name" data-th="SKILLS NAME">Multiplication</td>
+									<td class="subskill" data-th="SUBSKILLS">
+										<div class="subkills-cover">
+											<button type="button" class="btn btn-danger btn-outline">Divison</button>
+											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="standard" data-th="STANDARD">4</td>
+									<td class="skill_name" data-th="SKILLS NAME">Subtraction</td>
+									<td class="subskill" data-th="SUBSKILLS">
+										<div class="subkills-cover">
+											<button type="button" class="btn btn-danger btn-outline">Divison</button>
+											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="standard" data-th="STANDARD">5</td>
+									<td class="skill_name" data-th="SKILLS NAME">Addition</td>
+									<td class="subskill" data-th="SUBSKILLS">
+										<div class="subkills-cover">
+											<button type="button" class="btn btn-danger btn-outline">Divison</button>
+											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</section>
+
+
+	<script>
+		var headertext = [],
+		headers = document.querySelectorAll(".table-teacherContent th"),
+		tablerows = document.querySelectorAll(".table-teacherContent th"),
+		tablebody = document.querySelector(".table-teacherContent tbody");
+
+		for(var i = 0; i < headers.length; i++) {
+		  var current = headers[i];
+		  headertext.push(current.textContent.replace(/\r?\n|\r/,""));
+		}
+		for (var i = 0, row; row = tablebody.rows[i]; i++) {
+		  for (var j = 0, col; col = row.cells[j]; j++) {
+		    col.setAttribute("data-th", headertext[j]);
+		  }
+		}
+
+	$(document).ready(function(){
+		// tooltip
+	    $('[data-toggle="tooltip"]').tooltip();
+			// mlg-selectpicker
+			$('.mlg-selectpicker').selectpicker();
+	});
+	</script>

@@ -1,0 +1,11 @@
+/* --- Wells --- */
+.well{
+  @include padding($grid-gutter-width/2);
+  @media screen and (min-width: $screen-sm-max){
+    @include padding(58px null 33px null);
+  }
+  &.well-flat{
+      background-color: white;
+      @include box-shadow(0 0 20px rgba($gray-dark, 0.15));
+  }
+}

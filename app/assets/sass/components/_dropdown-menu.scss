@@ -1,0 +1,15 @@
+.btn-group.bootstrap-select {
+  width: 100% !important;
+  .dropdown-toggle {
+    color: $gray-light;
+  }
+  .bs-caret {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 33px;
+    border-left: 1px solid #ccc;
+    background: $white;
+  }
+}

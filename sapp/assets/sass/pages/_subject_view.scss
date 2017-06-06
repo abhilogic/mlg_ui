@@ -1,0 +1,986 @@
+$animation_duration: 500s;
+.cloud-cover {
+  display: none;
+  @media screen and (min-width: $screen-sm-max){
+    display: block;
+  }
+  .animated-cloud {
+    position: absolute;
+    z-index: 900;
+    display: none;
+    @media screen and (min-width: $screen-lg){
+      display: block;
+    }
+    &:nth-child(1) {
+      top: $cloud_first_top_pos;
+      left: 50%;
+      @include animation(cloud-animation_1 $animation_duration  linear infinite );
+
+    }
+
+    &:nth-child(2) {
+      bottom: $cloud_second_bottom_pos;
+      left: 80%;
+      @include animation(cloud-animation_2 $animation_duration  linear infinite );
+      @media screen and (max-width: $screen-lg){
+        left: 60%;
+      }
+    }
+    &:nth-child(3) {
+      top: $cloud_third_top_pos;
+      left: 80%;
+      @include animation(cloud-animation_3 $animation_duration  linear infinite );
+      @media screen and (max-width: $screen-lg){
+        left: 60%;
+      }
+    }
+    &:nth-child(4) {
+      top: $cloud_fourth_top_pos;
+      left: 30%;
+      @include animation(cloud-animation_4 $animation_duration  linear infinite );
+    }
+  }
+}
+
+
+.subject_view_page {
+  padding-bottom: 0px;
+  @include background-img("subject_view_bg.jpg");
+  @media screen and (max-width: $screen-xs-max){
+    @include background-img("subskill_mobile_bg.jpg");
+    background-size: auto 100%;
+  }
+  // mCustomScrollbar
+  .mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  opacity: 0;
+  }
+  .main_wrapper {
+    position: absolute;
+    width: 100vw;
+    max-width: 100vw;
+    .navbar-default {
+      max-width: 998px;
+      margin-left: auto;
+      margin-right: auto;
+      .go_back_icon {
+        position: absolute;
+        left: -76px;
+        top: 40px;
+        @include animation(goBackAnimation 1s linear infinite);
+        @include respond-to(mobileMedium) {
+          display: none;
+        }
+    }
+  }
+}
+  .subject_frame_center {
+    height: 100vh;
+    width: 100vw;
+    @media screen and (max-width: $screen-xs-max){
+      display: none !important;
+    }
+    .wooden_frame {
+      @include margin(null auto null auto);
+      background: none;
+      height: 662px;
+      width: 100vw;
+      max-width: 1721px;
+      .wooden_frame_content_cover {
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        .castles_map_web_img {
+          position: relative;
+          z-index: 10;
+        }
+      }
+    }
+
+  }
+  @include respond-to(mobileMedium){
+    .main_wrapper {
+      position: relative;
+    }
+    .wooden_frame {
+      display: none;
+    }
+  }
+}
+
+
+.subject_view_castles_block {
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 200;
+  .castle {
+    position: absolute;
+    z-index: 100;
+
+    .flag__icon {
+      @include cssSprite($flag__icon);
+      display: none;
+      position: absolute;
+      left: 32px;
+      top: 57px;
+    }
+    .fire__img {
+      @include cssSprite($fire__img);
+      background-size: 100% 100%;
+      display: none;
+      left: 8px;
+      position: absolute;
+      top: -9px;
+    }
+    .castle__text {
+      color: $drover;
+      font-family: $font-primary;
+      font-weight: $semibold;
+      font-style: italic;
+      font-size: 18px;
+      left: 3px;
+      position: absolute;
+      top: -15px;
+      text-transform: capitalize;
+      white-space: nowrap;
+    }
+    &.challenge_castle {
+      .fire__img {
+        display: block;
+      }
+    }
+    &.winned_castle {
+      .flag__icon {
+        display: block;
+      }
+    }
+    .castle__img {
+      position: absolute;
+    }
+
+    // topic castel
+    &.subskills_castle_1 {  //Training Arena
+      left: 88px;
+      top: 38px;
+      .castle__img {
+          @include cssSprite($math_training_arena);
+      }
+      .castle__text {
+        top: -12px;
+        left: -36px;
+      }
+      .flag__icon {
+        left: 110px;
+        top: 54px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_2 {  // algebra
+      left: 19px;
+      top: 224px;
+      .castle__img {
+        @include cssSprite($math_algebra_icon);
+      }
+      .castle__text {
+        left: 37px;
+      }
+      .flag__icon {
+        left: 82px;
+        top: 6px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+        .castle__img {
+
+        }
+      }
+    }
+    &.subskills_castle_3 { //Calculus
+      left: 175px;
+      top: 316px;
+      .castle__img {
+          @include cssSprite($math_calculus_icon);
+      }
+      .castle__text {
+        left: 21px;
+        top: -11px;
+      }
+      .flag__icon {
+        left: -1px;
+        top: -9px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_4 { //comparing
+      left: 41px;
+      top: 460px;
+      .castle__img {
+          @include cssSprite($math_compare_icon);
+      }
+      .flag__icon {
+        left: 55px;
+        top: 8px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_5 { // Counting
+      left: 152px;
+      bottom: 76px;
+      .castle__img {
+          @include cssSprite($math_counter_icon);
+      }
+
+      .castle__text {
+        left: 35px;
+      }
+      .flag__icon {
+        left: 24px;
+        top: -47px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_6 { // Decimals
+      left: 222px;
+      bottom: 205px;
+      .castle__img {
+          @include cssSprite($math_decimal_icon);
+      }
+      .castle__text {
+        left: 37px;
+      }
+      .flag__icon {
+        left: 100px;
+        top: 13px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_7 { // Division
+      left: 427px;
+      top: 348px;
+      .castle__img {
+          @include cssSprite($math_division_icon);
+      }
+      .flag__icon {
+        left: -19px;
+        top: -4px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_8 { // Estimation
+      left: 269px;
+      top: 259px;
+      .castle__img {
+          @include cssSprite($math_estimation_icon);
+      }
+      .castle__text {
+        left: 22px;
+      }
+      .flag__icon {
+        left: 94px;
+        top: -31px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_9 { // Fractions
+      left: 308px;
+      top: 99px;
+      .castle__img {
+          @include cssSprite($math_fractions_icon);
+      }
+      .castle__text {
+        left: 28px;
+        top: -22px;
+      }
+      .flag__icon {
+        left: 80px;
+        top: -1px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_10 {  // Functions
+      left: 442px;
+      top: 172px;
+      .castle__img {
+          @include cssSprite($math_function_icon);
+      }
+      .castle__text {
+        left: -20px;
+      }
+      .flag__icon {
+        top: -47px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_11 {  // Exponents
+        left: 719px;
+        top: 93px;
+      .castle__img {
+          @include cssSprite($math_exponent_icon);
+      }
+      .castle__text {
+        left: 5px;
+        top: -25px;
+      }
+      .flag__icon {
+        left: 75px;
+        top: 16px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_12 { //  Geometry
+      left: 646px;
+      top: 185px;
+      .castle__img {
+          @include cssSprite($math_geometry_icon);
+      }
+      .castle__text {
+        top: -15px;
+        left: 20px;
+      }
+      .flag__icon {
+        left: 73px;
+        top: 6px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_13 {  // Graphs
+      left: 697px;
+      top: 288px;
+        .castle__img {
+            @include cssSprite($math_graphs_icon);
+        }
+        .castle__text {
+          top: -24px;
+          left: 34px;
+        }
+        .flag__icon{
+          left: 14px;
+          top: 9px;
+        }
+        @media screen and (max-width: $screen-tb-port){
+
+        }
+    }
+    &.subskills_castle_14 { //  Integer
+      left: 747px;
+      top: 363px;
+      .castle__img {
+          @include cssSprite($math_integers_icon);
+      }
+      .castle__text {
+        left: 28px;
+        top: -28px;
+      }
+      .flag__icon {
+        left: 86px;
+        top: 10px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_15 { // Logic
+      left: 588px;
+      top: 461px;
+      .castle__img {
+          @include cssSprite($math_logic_icon);
+      }
+      .castle__text {
+        left: -6px;
+        top: -25px;
+      }
+      .flag__icon {
+        left: 3px;
+        top: -42px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_16 { // Measurement
+      left: 503px;
+      bottom: 89px;
+      .castle__img {
+          @include cssSprite($math_measurement_icon);
+      }
+      .castle__text {
+        left: 18px;
+      }
+      .flag__icon {
+        left: 42px;
+        top: -62px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_17 { // Mixed operations
+      left: 727px;
+      bottom: 85px;
+      .castle__img {
+          @include cssSprite($math_mixed_operation_icon);
+      }
+      .castle__text {
+        left: 8px;
+        top: -32px;
+      }
+      .flag__icon {
+        left: 34px;
+        top: -51px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_18 {  // Money & consumer maths
+      left: 894px;
+      bottom: 147px;
+      .castle__img {
+          @include cssSprite($math_money_icon);
+      }
+      .castle__text {
+        left: -26px;
+        top: -23px;
+      }
+      .flag__icon {
+        left: 94px;
+        top: 6px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_19 { // Multiplication
+      left: 969px;
+      bottom: 255px;
+      .castle__img {
+          @include cssSprite($math_multiplication_icon);
+      }
+      .flag__icon {
+        left: 32px;
+        top: -60px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_20 { // Number Theory
+      left: 1113px;
+      bottom: 247px;
+      .castle__img {
+          @include cssSprite($math_number_icon);
+      }
+      .castle__text {
+        top: -26px;
+      }
+      .flag__icon {
+        left: 32px;
+        top: 12px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_21 { // Patterns
+      left: 1115px;
+      bottom: 81px;
+      .castle__img {
+          @include cssSprite($math_pattern_icon);
+      }
+      .castle__text {
+        left: 24px;
+      }
+      .flag__icon {
+        left: 56px;
+        top: -48px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_22 { // Percents
+      left: 1253px;
+      bottom: 154px;
+      .castle__img {
+          @include cssSprite($math_percent_icon);
+      }
+      .castle__text {
+        left: 16px;
+      }
+      .flag__icon {
+        left: 83px;
+        top: 2px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_23 { // Place values
+      left: 1298px;
+      bottom: 283px;
+      .castle__img {
+          @include cssSprite($math_placevalue_icon);
+      }
+      .flag__icon {
+        left: 11px;
+        top: 0px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_24 { // Probability
+      left: 1246px;
+      top: 211px;
+      .castle__img {
+          @include cssSprite($math_probability_icon);
+      }
+      .castle__text {
+        left: -22px;
+      }
+      .flag__icon {
+        left: 89px;
+        top: 0px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_25 { // Ratios & Proportions
+      left: 1391px;
+      top: 94px;
+      .castle__img {
+          @include cssSprite($math_ratio_icon);
+      }
+      .castle__text {
+        top: -26px;
+      }
+      .flag__icon {
+        left: 83px;
+        top: 14px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_26 { // Subtraction
+      left: 1447px;
+      top: 226px;
+      .castle__img {
+          @include cssSprite($math_subtraction_icon);
+      }
+      .castle__text {
+        left: 19px;
+        top: -3px;
+      }
+      .flag__icon {
+        left: 107px;
+        top: -24px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_27 { // Time
+      left: 1569px;
+      top: 317px;
+      .castle__img {
+          @include cssSprite($math_time_icon);
+      }
+      .castle__text {
+        left: 34px;
+        top: -17px;
+      }
+      .flag__icon {
+        left: -11px;
+        top: -6px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_28 { // Trigonometry
+      left: 1386px;
+      top: 473px;
+      .castle__img {
+          @include cssSprite($math_trigonometry_icon);
+      }
+      .castle__text {
+        left: 28px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    &.subskills_castle_29 { // Word problems
+      left: 1543px;
+      bottom: 135px;
+      .castle__img {
+          @include cssSprite($math_word_problem_icon);
+      }
+      .castle__text {
+        left: 17px;
+        top: -30px;
+      }
+      .flag__icon {
+        left: 20px;
+        top: -24px;
+      }
+      @media screen and (max-width: $screen-tb-port){
+
+      }
+    }
+    // topic castel
+  }
+}
+.subject_view_frame_mobile {
+  display: none;
+  @media screen and (max-width: $screen-xs-max) {
+    display: block;
+    @include padding(null 20px);
+  }
+  .castle_repeat_block {
+    padding-top: 60px;
+
+    @media screen and (min-width: $screen-sm){
+      &:first-child {
+        @include padding( 120px null null null);
+      }
+      width: 90%;
+      @include margin(auto);
+    }
+    &:nth-child(odd){
+      text-align: left;
+    }
+    &:nth-child(even){
+      text-align: right;
+    }
+    .castle {
+      display: inline-block;
+      position: relative;
+      .castle__img {
+        display: inline-block;
+      }
+      .fire__img {
+        display: none;
+        @include cssSprite($fire__img_sm);
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+      }
+      .flag__icon {
+        display: none;
+        @include cssSprite($flag__icon);
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+      }
+      .castle__text {
+        color: $white;
+        display: block;
+        font-size: 20px;
+        font-family: $journey_castel_font;
+        left: 0px;
+        line-height: 25px;
+        margin: auto;
+        top: -47px;
+        text-align: center;
+        max-width: 100px;
+        word-wrap: inherit;
+      }
+      &.winned_castle {
+        .flag__icon {
+          display: inline-block;
+        }
+      }
+      &.challenge_castle {
+        .fire__img {
+          display: inline-block;
+        }
+      }
+      &.subskills_castle_1 {
+        .castle__img {
+          @include cssSprite($math_training_arena);
+        }
+
+      }
+      &.subskills_castle_2 {
+        .castle__img {
+            @include cssSprite($math_algebra_icon);
+        }
+      }
+      &.subskills_castle_3 {
+        .castle__img {
+            @include cssSprite($math_calculus_icon);
+        }
+      }
+      &.subskills_castle_4 {
+        .castle__img {
+            @include cssSprite($math_compare_icon);
+        }
+      }
+      &.subskills_castle_5 {
+        .castle__img {
+            @include cssSprite($math_counter_icon);
+        }
+      }
+      &.subskills_castle_6 {
+        .castle__img {
+            @include cssSprite($math_decimal_icon);
+        }
+      }
+      &.subskills_castle_7 {
+        .castle__img {
+            @include cssSprite($math_division_icon);
+        }
+      }
+      &.subskills_castle_8 {
+        .castle__img {
+            @include cssSprite($math_estimation_icon);
+        }
+      }
+      &.subskills_castle_9 {
+        .castle__img {
+            @include cssSprite($math_fractions_icon);
+        }
+      }
+      &.subskills_castle_10 {
+        .castle__img {
+            @include cssSprite($math_function_icon);
+        }
+      }
+      &.subskills_castle_11 {
+        .castle__img {
+            @include cssSprite($math_exponent_icon);
+        }
+      }
+      &.subskills_castle_12 {
+        .castle__img {
+            @include cssSprite($math_geometry_icon);
+        }
+      }
+      &.subskills_castle_13 {
+        .castle__img {
+            @include cssSprite($math_graphs_icon);
+        }
+      }
+      &.subskills_castle_14 {
+        .castle__img {
+            @include cssSprite($math_integers_icon);
+        }
+      }
+      &.subskills_castle_15 {
+        .castle__img {
+            @include cssSprite($math_logic_icon);
+        }
+      }
+      &.subskills_castle_16 {
+        .castle__img {
+            @include cssSprite($math_measurement_icon);
+        }
+      }
+      &.subskills_castle_17 {
+        .castle__img {
+            @include cssSprite($math_mixed_operation_icon);
+        }
+      }
+      &.subskills_castle_18 {
+        .castle__img {
+            @include cssSprite($math_money_icon);
+        }
+      }
+      &.subskills_castle_19 {
+        .castle__img {
+            @include cssSprite($math_multiplication_icon);
+        }
+      }
+      &.subskills_castle_20 {
+        .castle__img {
+            @include cssSprite($math_number_icon);
+        }
+      }
+      &.subskills_castle_21 {
+        .castle__img {
+            @include cssSprite($math_pattern_icon);
+        }
+      }
+      &.subskills_castle_22 {
+        .castle__img {
+            @include cssSprite($math_percent_icon);
+        }
+      }
+      &.subskills_castle_23 {
+        .castle__img {
+            @include cssSprite($math_placevalue_icon);
+        }
+      }
+      &.subskills_castle_24 {
+        .castle__img {
+            @include cssSprite($math_probability_icon);
+        }
+      }
+      &.subskills_castle_25 {
+        .castle__img {
+            @include cssSprite($math_ratio_icon);
+        }
+      }
+      &.subskills_castle_26 {
+        .castle__img {
+            @include cssSprite($math_subtraction_icon);
+        }
+      }
+      &.subskills_castle_27 {
+        .castle__img {
+            @include cssSprite($math_time_icon);
+        }
+      }
+      &.subskills_castle_28 {
+        .castle__img {
+            @include cssSprite($math_trigonometry_icon);
+        }
+      }
+      &.subskills_castle_29 {
+        .castle__img {
+            @include cssSprite($math_word_problem_icon);
+        }
+      }
+      &.subskills_castle_30 {
+        .castle__img {
+            @include cssSprite($math_ratio_icon);
+        }
+      }
+    }
+  }
+}
+
+
+
+// modal result
+.modal-summary {
+  .modal-content {
+    background: {
+      image: url(../img/modal-summary-bg.png);
+      size: 134% 100%;
+      position: center center;
+      color: transparent;
+    }
+    @media screen and (min-width: $screen-sm){
+      background-size: 100% 100%;
+    }
+    @include box-shadow(none);
+    @include border-width(0px);
+    min-height: 706px;
+    @include padding(145px null null null);
+      @media screen and (min-width: $screen-sm){
+        min-width: 552px;
+      }
+    // modal header
+    .modal-header {
+      border-bottom: 0px;
+      text-align: center;
+      @include padding(null null 0px null);
+      .modal-title {
+        background: {
+          image: url(../img/quiz_heading.png);
+          size: 100% auto;
+          position: center center;
+          repeat: no-repeat;
+        }
+        display: inline-block;
+        text-align: center;
+        font-family: $font-secondary;
+        color: $maroon;
+        min-height: 62px;
+        min-width: 230px;
+        font-size: 35px;
+        font-family: $justanotherhand;
+        @include padding(4px null null null);
+        @media screen and (min-width: $screen-sm){
+          min-width: 273px;
+        }
+      }
+    }
+    // modal body
+    .modal-body {
+      @include padding(0px null null null);
+      text-align: center;
+      .icon {
+        @include cssSprite($coins);
+        display: inline-block;
+        vertical-align: -webkit-baseline-middle;
+      }
+      .summary-ul {
+        @include margin(null auto 0px auto);
+        width: 62%;
+        @media screen and (min-width: $screen-sm){
+          width: 40%;
+        }
+        li {
+          display: block;
+          &:not(:last-child){
+            border-bottom: 2px solid rgba($maroon,0.4);
+          }
+          &:first-child {
+            @include padding(10px null null null);
+          }
+          &:last-child {
+            @include padding(null null 15px null);
+          }
+          @include padding(23px null);
+          span {
+            font-family: $font-secondary;
+            color: $maroon;
+            display: block;
+            &:first-child {
+              font-size: 12px;
+              text-transform: uppercase;
+            }
+            &:last-child {
+              font-size: 24px;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+      .btn-submit {
+        background: {
+          image: url(../img/submit_btn.png);
+          position: center center;
+          size: 100% auto;
+          color: transparent;
+          repeat: no-repeat;
+        }
+        font-family: $font-secondary;
+        color: $maroon;
+        font-size: 18px;
+        @include padding(5px 36px);
+      }
+    }
+
+  }
+
+}
