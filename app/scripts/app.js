@@ -91,6 +91,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getStudentCourses : '/students/getStudentCourses',
   updateQuestion : '/teachers/updateTeacherQuestion',
   getLessonForList : '/teachers/getLessonDetailForListing',
+  getFilterdLesson : '/teachers/filteredTeacherLessons',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',

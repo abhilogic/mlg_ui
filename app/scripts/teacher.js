@@ -337,6 +337,12 @@ teacherHttpResponse.getFilterdQuestion=function(uid,pnum,grade,course,skill){
     url   : urlParams.baseURL+urlParams.getFilterdQuestion+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill
   });
 }
+teacherHttpResponse.getFilterdLesson=function(uid,pnum,grade,course,skill){
+  return $http({
+    method:'GET',
+    url   : urlParams.baseURL+urlParams.getFilterdLesson+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill
+  });
+}
 return teacherHttpResponse;
 
 
@@ -1313,7 +1319,6 @@ onItemDeselect: function(item) {
    });
   }
 });
-console.log(subSkils);
 }
 };
 $scope.subSkillEvents = {
@@ -3516,6 +3521,8 @@ $scope.deleteQuestions = function(Qid,uniqId){
       }).error(function(error) {
         $scope.msg= 'Some technical error occured.';
       });
+      course = '-1';
+      $scope.skill = [];
       teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
         $scope.questionList = response.data;
         $scope.lastPage = response.lastPage;
@@ -3573,7 +3580,6 @@ $scope.deleteQuestions = function(Qid,uniqId){
      pgnum = temp[1];
    }
    teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
-    console.log(response);
     $scope.lessonList = response.data;
     $scope.lastPage = response.lastPage;
     $scope.start = response.start;
@@ -3615,8 +3621,10 @@ $scope.deleteQuestions = function(Qid,uniqId){
       }).error(function(error) {
         $scope.msg= 'Some technical error occured.';
       });
-      teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
-        $scope.questionList = response.data;
+      course = '-1';
+      $scope.skill = [];
+      teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill).success(function(response) {
+        $scope.lessonList = response.data;
         $scope.lastPage = response.lastPage;
         $scope.start = response.start;
         $scope.last = response.last;
@@ -3640,8 +3648,8 @@ $scope.deleteQuestions = function(Qid,uniqId){
         }).error(function(error) {
           $scope.msg= 'Some technical error occured.';
         });
-        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
-          $scope.questionList = response.data;
+        teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill).success(function(response) {
+          $scope.lessonList = response.data;
           $scope.lastPage = response.lastPage;
           $scope.start = response.start;
           $scope.last = response.last;
@@ -3652,8 +3660,8 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.getSkill = function(skil){
       if(skil != null) {
         skill = skil;
-        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
-          $scope.questionList = response.data;
+        teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill).success(function(response) {
+          $scope.lessonList = response.data;
           $scope.lastPage = response.lastPage;
           $scope.start = response.start;
           $scope.last = response.last;
