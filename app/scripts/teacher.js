@@ -340,6 +340,22 @@ teacherHttpResponse.getEditQuestion=function(uid,QId){
         });
       }
 
+      teacherHttpResponse.timeSpentOnPlatform = function(data) {
+        return $http({
+          method:'POST',
+          data  : data,
+          url   : urlParams.baseURL+urlParams.timeSpentOnPlatform
+        });
+      }
+
+      teacherHttpResponse.timeSpentByClassOnPlatform = function(data) {
+        return $http({
+          method:'POST',
+          data  : data,
+          url   : urlParams.baseURL+urlParams.timeSpentByClassOnPlatform
+        });
+      }
+
       return teacherHttpResponse;
 
 
@@ -3174,12 +3190,31 @@ $scope.updateQuestion = function(data) {
         teacherHttpService.getStudentCourses($routeParams.id).success(function (response) {
           if (response.response.status.toLowerCase() == 'true') {
             $scope.student_courses = response.response.student_courses;
-            $scope.selected_course =$scope.student_courses[0].id;
+            $scope.selected_course = $scope.student_courses[0].id;
             $scope.student_class = response.response.student_class_name;
           }
         });
       }
     });
+
+    // duration will be calculated on the basis of weeks
+    // such as -1 for 1 past 1 week.
+    $scope.total_duration_in_hrs = 0;
+    var send_data = {'user_ids' : [$routeParams.id], 'week': -1};
+    teacherHttpService.timeSpentOnPlatform(send_data).success(function (response) {
+      if (response.status == true) {
+        $scope.total_duration_in_hrs = response.total_duration_in_hrs;
+      }
+    });
+
+    $scope.average_duration_in_hrs = 0;
+    var send_data = {'sid' : $routeParams.id};
+    teacherHttpService.timeSpentByClassOnPlatform(send_data).success(function (response) {
+      if (response.status == true) {
+        $scope.average_duration_in_hrs = response.average_duration_in_hrs;
+      }
+    });
+
   }])
 .directive('owlcarousel', function() {
 
