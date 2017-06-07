@@ -115,6 +115,7 @@
 									<tr>
 										<th class="sr-no">#</th>
 										<th class="title">Title</th>
+                    <th class="title">Sub Skill</th>
 										<th class="status">Status</th>
 										<th class="earned-points">Earned</th>
 										<th class="actions">Actions</th>
@@ -124,11 +125,12 @@
 									<tr class="approved" ng-repeat="lesson in lessonList track by $index">
 										<td class="sr-no">{{$index+1}}</td>
 										<td class="title">{{lesson.title}}</td>
-										<td class="status">Approved</td>
-										<td class="earned-points">9pts</td>
+                    <td class="title">{{lesson.sub_skill_name}}</td>
+										<td class="status">{{lesson.status}}</td>
+										<td class="earned-points">{{lesson.points}}</td>
 										<td class="actions">
-											<button class="btn btn-link"><a href="teacher/add_content?{{lesson.id}}&F{{lesson.course_detail_id}}"><i class="fa fa-pencil"></i></a></button>
-											<button class="btn btn-link"><a ng-click="deleteContent(lesson.id )"<i class="fa fa-trash"></i></a></button>
+											<button class="btn btn-link"><a href="teacher/add_content?{{lesson.course_content_id}}&F{{lesson.course_detail_id}}"><i class="fa fa-pencil"></i></a></button>
+											<button class="btn btn-link"><a ng-click="deleteContent(lesson.course_content_id )"<i class="fa fa-trash"></i></a></button>
 										</td>
 									</tr>
 								</tbody>
