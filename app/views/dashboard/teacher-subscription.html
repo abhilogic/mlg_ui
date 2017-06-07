@@ -24,7 +24,7 @@
               <img src="assets/img/subscription.png" class="img-responsive" alt=""/>
             </div>
             <div class="col-md-7">
-              <h2 class="title_subscription"><span class="text-uppercase text-semibold">Free Subscription</span><small>(30 days)</small></h2>
+              <h2 class="title_subscription"><span class="text-uppercase text-semibold">Free Subscription</span><small>({{teacher_subscription_days}} days)</small></h2>
               <br>
               <div class="row">
                 <div class="col-sm-4"><p class="text-muted">Subscription Type:</p></div>
@@ -48,7 +48,7 @@
           <!-- Change take the all main content  -->
           <div class="main-content">
             <!-- Change remove class text-muted -->
-            <h3 class="text-muted"><b>Your subscription going to after 59 days</b></h3>
+            <h3 class="text-muted"><b>Your subscription going to after {{days_left}} days</b></h3>
             <div class="row">
               <!-- Change remove col-md-offset-2 and col-md-8 to col-md-12 -->
               <div class="col-md-12">
@@ -60,7 +60,7 @@
                   </div>
                   <div class="col-md-10 col-sm-9">
                     <!-- Change add the class hours-hd -->
-                    <h4 class="text-muted hours-hd">Your class has used MLG for <b>50 hrs</b> in last week.</h4>
+                    <h4 class="text-muted hours-hd">Your class has used MLG for <b>{{average_duration_in_hrs}} hrs</b> in last week.</h4>
                     <!-- Changes cut and past the complete below row  and in row class margin-bottom-20 kindly match with last one-->
                     <div class="row margin-bottom-20 margin-xs-bottom-0">
                       <div class="col-lg-9 col-sm-8">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="row margin-top-20 margin-bottom-20">
                   <div class="col-lg-9 col-sm-8">
-                    <h4 class="text-muted">Your class has less than 20 students. To increase your class size request a qoute.</h4>
+                    <h4 class="text-muted">Your class has {{number_of_students}} students. To increase your class size request a qoute.</h4>
                   </div>
                   <div class="col-lg-3 col-sm-4"><a role="button" ng-click="requestQuote()" class="btn btn-primary btn-block">Request a qoute</a></div>
                 </div>

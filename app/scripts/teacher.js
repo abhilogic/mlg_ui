@@ -589,6 +589,9 @@ $scope.submitSkip = function(){
 		// $scope.stcourses.splice($index, 1);
 		$scope.$emit('customerDeleted', customer); 
 	};*/
+    $scope.hello =function(){
+      alert('hii');
+    }
 
 }])
 
@@ -1892,8 +1895,8 @@ if(typeof LId[1] != 'undefined') {
    ]
 
  }])
- .controller('teacherSubscriptionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
- function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+ .controller('teacherSubscriptionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','subscription_days',
+ function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,subscription_days) {
     var get_uid = commonActions.getcookies(get_uid);
     $scope.teacher = {};
     $scope.days_left = 0;
@@ -1909,6 +1912,14 @@ if(typeof LId[1] != 'undefined') {
         $scope.days_left = moment(end_date).diff(moment(), 'days');
       }
     });
+
+     $scope.number_of_students = 0;
+     $scope.average_duration_in_hrs = 0;
+     $scope.teacher_subscription_days = subscription_days['teacher'];
+     teacherHttpService.timeSpentByClassOnPlatform({tid: get_uid}).success(function(response) {
+        $scope.number_of_students = response.number_of_students;
+        $scope.average_duration_in_hrs = response.average_duration_in_hrs;
+     });
 
     $scope.requestQuote = function() {
       $location.url('/teacher/requestQuote');
@@ -1932,6 +1943,10 @@ if(typeof LId[1] != 'undefined') {
         $scope.mobile = resp.data.mobile;
       }
     });
+
+
+
+
  }])
  .directive('dropZone', function() {
   return function($scope, element, attrs) {    
