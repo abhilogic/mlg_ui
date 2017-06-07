@@ -168,6 +168,7 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
   loginHttpService.getUserDetails(uid).success(function(response) {
     if (typeof (response.data.user_all_details) != 'undefined') {
       var user = response.data.user_all_details;
+      if(user[0])
       $rootScope.userPoints = user[0].user_detail.points;
     } else {
       alert('Please sign up to continue');

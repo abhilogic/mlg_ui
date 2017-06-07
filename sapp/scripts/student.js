@@ -250,7 +250,7 @@ angular.module('mlg_student')
 
 
                     });
-
+	  $scope.redirectURL='demo_video';
 	   // Check the condition to move either on pre-Test Page or On Sub Skill Page
 	   loginHttpService.getpreTestStatus(get_uid).success(function(pretestResponse) {
 	   	if (pretestResponse.response.status == "True") { 
@@ -288,7 +288,7 @@ angular.module('mlg_student')
           } else {
           	$scope.frm.childcourses = courseslistresult.response.courses;
           	$scope.frm.childclass = '';
-          	$scope.frm.cousesListByGrade= courseslistresult.response.courses;
+          	$scope.frm.cousesListByGrade= $scope.result=courseslistresult.response.courses;
           	$scope.msg=courseslistresult.response.message;
           }
       })
@@ -329,7 +329,7 @@ angular.module('mlg_student')
 $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
 loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	if(response.message == '') {
-		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
+		if(response.response[0] && response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
 			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
 		}
 	}

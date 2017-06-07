@@ -31,7 +31,7 @@
 
     							 					
     					</div>
-    					<div ng-repeat="gradecourse in result" ng-init="pIndex = $index+child_courses.length">
+    					<div ng-if="!guest" ng-repeat="gradecourse in result" ng-init="pIndex = $index+child_courses.length">
     						<div>
     								<div class="castle subject_castle castle_{{pIndex+1}} inactive">
     									<span class="castle__img"></span>
@@ -43,7 +43,19 @@
     						</div>
     						
     						
-    						    					</div>
+    				   </div>
+    				   <div ng-if="guest" ng-repeat="gradecourse in result">
+    								<a ng-click="select_course(gradecourse.course_name)" href="{{redirectURL}}/{{gradecourse.id}}" data-castle-name="science" >							 
+    									<div class="castle subject_castle castle_{{$index+1}} active">
+    										<span class="castle__img"></span>
+    										<span class="castle__icon"></span>
+    										<span class="castle__arrowUp"></span>
+    										<span class="castle__text">{{gradecourse.course_name}}</span>
+    										
+    									</div>
+    								</a>
+    							</div>
+
     					<a href="help" data-castle-name="science">
     						<div class="castle help">
     							<span class="castle__img"></span>
