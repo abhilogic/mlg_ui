@@ -1398,7 +1398,7 @@ function generate_error_reason(error_code) {
     $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
     loginHttpService.getAvatarImage(get_uid).success(function(response) {
     	if (response.message == '') {
-    		if (response.response[0]['profile_pic'] != '') {
+    		if (response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
     			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
     		}
     	}
