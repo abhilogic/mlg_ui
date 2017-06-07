@@ -184,11 +184,18 @@
 	                      		</ul>
 	                    	</div>
 	                  	</div> 
-	                	<div ng-class="(($index+1)< 2)?'row option-block': 'row option-block margin-bottom-0 margin-sm-top-0' " ng-repeat="option in question.options">
+	                	<!-- <div  ng-class="(($index+1)< 2)?'row option-block': 'row option-block margin-bottom-0 margin-sm-top-0' " ng-repeat="option in question.options">
 	                    	<div ng-class="((($index+1)%2)!= 0) ? 'col-md-7 margin-sm-bottom-10' : 'col-md-5 margin-sm-bottom-10'">
 	                    		<span>{{ numToAlpha($index) +'.  '+ option.label}}</span>
 	                    	</div>	                   	
+	                	</div> -->
+
+	                	<div class="row option-block">
+	                    	<div ng-class="((($index+1)%2)!= 0) ? 'col-md-7 margin-sm-bottom-10' : 'col-md-5 margin-sm-bottom-10'"  ng-repeat="option in question.options">
+	                    		<span>{{ numToAlpha($index) +'.  '+ option.label}}</span>
+	                    	</div>	                   	
 	                	</div>
+
 
 
 	                  	<!-- <div class="row option-block margin-bottom-0 margin-sm-top-0 ">
