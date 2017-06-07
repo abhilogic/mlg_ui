@@ -1085,10 +1085,11 @@ $scope.apiTabs=function(){
   });
 
 }])
-.controller('challengesCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q) {
+.controller('challengesCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$routeParams','$http','user_roles','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$routeParams,$http,user_roles,commonActions,$sce,$q) {
 
 	var get_uid=commonActions.getcookies(get_uid);
 	var assignment_id ="37";
+
 
 	// To masscourt Action
 	$("#gotIt").click(function(){
@@ -1099,19 +1100,27 @@ $scope.apiTabs=function(){
 
 	  });
 
+if(typeof($routeParams.assignment_id) == 'undefined') {
+// Step -1 to show student assignments
 	// Api to get the stidents courses
 	loginHttpService.getStudentCourses(get_uid).success(function(res) {
 		if(res.response.status="TRUE"){
 			var st_grade_id=res.response.student_class;
-			$scope.student_courses = res.response.student_courses; 
+			$scope.student_courses = res.response.student_courses;
+			var first_subj = $scope.student_courses[0].id;	
 		}else{
 			$scope.error_message= "Issue in finding the curses.";
 		}
 	});
 
+
 	$scope.onClickSubject = function(subid){
+
+		$('ul li.active').removeClass('active');
 		$(".subject_"+subid).addClass('active in');
 		$("#subject_"+subid).show();
+
+
 		
 		//API to call number of assignments
 	 	loginHttpService.getStudentAssignments(get_uid).success(function(respAssgn) {
@@ -1122,36 +1131,79 @@ $scope.apiTabs=function(){
                    if(assgnitem.subject_id == subid ){
                    	console.log(assgnitem.subject_id);
                    	$scope.assignments.push(assgnitem); 
-                   }
-                   
+                   }                   
                });
-
-    		
    		}
    		else{
    			$scope.error_message = respAssgn.response.message ;
    		}
     });
 
-
-
 	}
 
-	
 
+}
+else{
+	// Step - 2 To call items of assignments	
+	 $scope.numToAlpha =function(idx) {
+          var getAlpha = ['A','B','C','D','E','F','G'];
+          return getAlpha[idx];
+        }
 
+       $scope.questate_class = 'active';
 
+	//API to get items/questions of assignments
+	loginHttpService.getAssignmentItems($routeParams.assignment_id).success(function(resitem) {
+		if (resitem.response.status == true) {
+			$scope.assignment_details = resitem.response.assignment_details;
+			$scope.assigment_items = resitem.response.questions;
 
+			$scope.sequence=0;
+    		$scope.currentquestion= $scope.assigment_items[$scope.sequence];
+    		$scope.total_questions=$scope.assigment_items.length+1;
 
-
-
-	 
-
-
-
-	loginHttpService.getAssignmentItems(assignment_id).success(function(response) {
+/*
+    		if($scope.currentquestion.options.length == 0	){
+    			$scope.sequence= $scope.sequence + 1;
+    			$scope.currentquestion= $scope.assigment_items[$scope.sequence];
+    		}*/
+			
+		}else{
+			$scope.message = "Issue in traversing page";
+		}
     
     });
+
+
+
+
+    //get student response for question/ on Submit question answer.
+    $scope.onSubmitQuestion = function(frmdt){
+    	
+    	$scope.sequence +=1;
+    	$scope.currentquestion= $scope.assigment_items[$scope.sequence];
+
+
+    }
+
+
+    $scope.onSkipQuestion = function(frmdata){
+    	
+    	$scope.sequence +=1;
+    	$scope.currentquestion= $scope.assigment_items[$scope.sequence];
+
+
+    }
+
+
+
+
+
+
+}
+	
+	
+	
 
 
 
