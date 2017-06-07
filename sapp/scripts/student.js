@@ -1175,15 +1175,29 @@ else{
     });
 
 
+    // To read the question in male UK voice
+    // Read Question in UK voice
+	  	$scope.readQuestion=function(){            
+            var questiontext= $scope.currentquestion.question_name;          
+            responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+	  	}
+
+
 
 
     //get student response for question/ on Submit question answer.
-    $scope.onSubmitQuestion = function(frmdt){
-    	
+    $scope.onSubmitQuestion = function(frmdt){ 
+    	$scope.error_message=""; 	
+	 	// check selected option   frm.selectedoption
+	 		if(typeof frmdt.selectedoption=='undefined'){
+	 			$scope.error_message="Please select you option";	 			
+	 		}else{
+	 			
+	 		}
+
+
     	$scope.sequence +=1;
     	$scope.currentquestion= $scope.assigment_items[$scope.sequence];
-
-
     }
 
 

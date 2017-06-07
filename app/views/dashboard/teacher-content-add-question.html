@@ -282,9 +282,9 @@
 								<!-- answer_block -->
 								<!-- img-answer-block -->
 								<div class="row img-answer-block">
-                   <div class="container ">
+                   <div class="container" id="ans-imag">
                      <form></form>
-                     <form action="" class="dropzone col-xs-9 " drop-zone="" id="ans-img" ></form>
+                     <form action="" class="dropzone col-xs-9 " drop-zone="" id="ans-img" ng-model="fileImgModel"></form>
                    </div>
                    <div class="container margin-top-10" id="answer-img">
                      <ul> 
@@ -443,7 +443,7 @@
 		        </form>
 		      </div>
 		      <div class="modal-footer border-top-0">
-		        <button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-background-none" data-dismiss="modal"ng-click="closeTemplate(temp)">Close</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submitTemplate(temp)">Save</button>
 		      </div>
 		    </div>

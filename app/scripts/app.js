@@ -275,7 +275,7 @@ principal  : 30,
 	}).when('/teacher/payment_page',{
 		templateUrl : 'views/payment_teacher.html',
 		controller : 'teacherOnBoardingCtrl',
-  }).when('/teacher/add_content',{
+  }).when('/teacher/add-content',{
 		templateUrl : 'views/dashboard/teacher-content-add-lesson.html',
 		controller : 'teacherLessonCtrl',
   }).when('/teacher/create-class',{  	
