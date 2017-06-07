@@ -329,7 +329,7 @@ angular.module('mlg_student')
 $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
 loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	if(response.message == '') {
-		if(response.response[0]['profile_pic'] != '') {
+		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
 			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
 		}
 	}
@@ -814,7 +814,7 @@ img.src = url;
     $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
     loginHttpService.getAvatarImage(get_uid).success(function(response) {
     	if(response.message == '') {
-    		if(response.response[0]['profile_pic'] != '') {
+    		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
     			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
     		}
     	}
@@ -888,7 +888,7 @@ img.src = url;
  $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
  loginHttpService.getAvatarImage(get_uid).success(function(response) {
  	if(response.message == '') {
- 		if(response.response[0]['profile_pic'] != '') {
+ 		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
  			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
  		}
  	}
@@ -927,7 +927,7 @@ img.src = url;
 $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
 loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	if(response.message == '') {
-		if(response.response[0]['profile_pic'] != '') {
+		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
 			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
 		}
 	}
@@ -994,7 +994,7 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
   $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
   loginHttpService.getAvatarImage(get_uid).success(function(response) {
   	if(response.message == '') {
-  		if(response.response[0]['profile_pic'] != '') {
+  		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
   			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
   		}
   	}
@@ -1078,14 +1078,14 @@ $scope.apiTabs=function(){
   $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
   loginHttpService.getAvatarImage(get_uid).success(function(response) {
   	if(response.message == '') {
-  		if(response.response[0]['profile_pic'] != '') {
+  		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null ) {
   			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
   		}
   	}
   });
 
 }])
-.controller('challengesCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$routeParams','$http','user_roles','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$routeParams,$http,user_roles,commonActions,$sce,$q) {
+.controller('challengesCtrl',['$rootScope','$scope','$localStorage','$filter','loginHttpService','$location','urlParams','$routeParams','$http','user_roles','commonActions','$sce','$q',function($rootScope,$scope,$localStorage,$filter, loginHttpService,$location,urlParams,$routeParams,$http,user_roles,commonActions,$sce,$q) {
 
 	var get_uid=commonActions.getcookies(get_uid);
 	var assignment_id ="37";
@@ -1151,22 +1151,31 @@ else{
         }
 
        $scope.questate_class = 'active';
+       $scope.data = {};
+       var skip = null;
 
 	//API to get items/questions of assignments
 	loginHttpService.getAssignmentItems($routeParams.assignment_id).success(function(resitem) {
 		if (resitem.response.status == true) {
 			$scope.assignment_details = resitem.response.assignment_details;
-			$scope.assigment_items = resitem.response.questions;
+			var assigmentquestions = resitem.response.questions;
 
-			$scope.sequence=0;
-    		$scope.currentquestion= $scope.assigment_items[$scope.sequence];
-    		$scope.total_questions=$scope.assigment_items.length+1;
+			//local storage functionality implementation
+	  		$localStorage.localquestions= assigmentquestions; //set value in local storage	  	
+	  		$scope.data.questions= $localStorage.localquestions //get value in localstorage
 
-/*
-    		if($scope.currentquestion.options.length == 0	){
-    			$scope.sequence= $scope.sequence + 1;
-    			$scope.currentquestion= $scope.assigment_items[$scope.sequence];
-    		}*/
+	  		// To check the sequence of the question in quiz	  	
+	  		if(localStorage.getItem('userQuesSequence')!=null ) {
+	  			$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
+	  		}else{
+	  			$scope.sequence=0;
+	  			var a=[];
+	  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+	  		}	  	
+	  	
+	  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
+	  		$scope.total_questions=$scope.data.questions.length-1;
+
 			
 		}else{
 			$scope.message = "Issue in traversing page";
@@ -1175,8 +1184,7 @@ else{
     });
 
 
-    // To read the question in male UK voice
-    // Read Question in UK voice
+    // To read the question in male UK voice    
 	  	$scope.readQuestion=function(){            
             var questiontext= $scope.currentquestion.question_name;          
             responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
@@ -1186,19 +1194,134 @@ else{
 
 
     //get student response for question/ on Submit question answer.
-    $scope.onSubmitQuestion = function(frmdt){ 
-    	$scope.error_message=""; 	
-	 	// check selected option   frm.selectedoption
-	 		if(typeof frmdt.selectedoption=='undefined'){
-	 			$scope.error_message="Please select you option";	 			
+    $scope.onSubmitQuestion = function(frm,skip){ 
+    	$scope.error_optionmessage=""; 
+    	var correctoption=$scope.currentquestion.answer[0].value;
+		 var question_marks=$scope.currentquestion.answer[0].score;
+
+
+    	// step 1- To check buton click is submit or skip button (if skip = 0 means click on submit/ skip)
+    	if(skip == 1){ // if skip button is clicked
+    		
+    		//Step-2  Set required coulum values
+	 			var userExamResponse={};
+      	 		userExamResponse={
+       				user_id 	: get_uid,
+       				exam_id 	: $scope.assignment_details.quiz_id,
+       				item_id 	: $scope.currentquestion.question_id,
+       				response 	: '',
+       				correct 	: 0,
+       				score 		: 0,
+       				item_marks	: question_marks,
+       				skip_count 	: 1,
+       				//time_taken 	: 1,
+       			}
+
+    	}
+    	else{	// if submit button is clicked
+
+    		// check selected option   frm.selectedoption
+	 		if(typeof frm.selectedoption=='undefined'){
+	 			$scope.error_optionmessage="Please select you option";	 			
 	 		}else{
-	 			
-	 		}
+	 			//$scope.sequence +=1;
+    			//$scope.currentquestion= $scope.assigment_items[$scope.sequence];
+
+    			//step-1 - calculate right and wrong attempt 		 		
+		 		if(frm.selectedoption==correctoption){
+		 			console.log(frm.selectedoption);
+		 			var selectedAnswer=1; // select option is correct
+		 			$scope.answer_response="Awesome, you got this correct";
+		 			alert('Correct');
+		 			var score= $scope.currentquestion.answer[0].score;
+		 		}
+		 		else{
+		 			selectedAnswer=0; // select option is wrong
+		 			if(typeof $scope.currentquestion.penalty_score=='undefined'){ score=0}
+		 			else{ score =$scope.currentquestion.penalty_score; }
+		 			$scope.answer_response="Oops, This is not the correct answer";		 				
+		 			alert('wrong'); 
+		 		}
+
+		 		//Step-2  Set required coulum values
+	 			var userExamResponse={};
+      	 		userExamResponse={
+       				user_id 	: get_uid,
+       				exam_id 	: $scope.assignment_details.quiz_id,
+       				item_id 	: $scope.currentquestion.question_id,
+       				response 	: frm.selectedoption,
+       				correct 	: selectedAnswer,
+       				score 		: score,
+       				item_marks	: question_marks,
+       				//skip_count 	: 1,
+       				//time_taken 	: 1,
+       			}
+       		}
+    	}	
+	 	
+ 			
+
+       			
+
+    			//Step-3 Procceed check questions sequence either for next question or show result if sequence is on last.
+		 		if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
+		 			//3.1 Add the quiz response in local storage
+       				//var b;
+       				a = JSON.parse(localStorage.getItem('localQuizResponse'));    
+    				a.push(userExamResponse); 
+    				localStorage.setItem('localQuizResponse', JSON.stringify(a));
 
 
-    	$scope.sequence +=1;
-    	$scope.currentquestion= $scope.assigment_items[$scope.sequence];
-    }
+		 			localStorage.setItem('userQuesSequence', $scope.sequence+1);
+		 			$scope.sequence+=1;
+		 			$scope.currentquestion= $scope.data.questions[$scope.sequence];
+		 			$scope.frm={};
+		 		}
+		 		else if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
+		 			console.log($scope.error_optionmessage);
+		 		}	 			 		
+				else{ 
+
+						//Step- 4 send local Stoage Quiz attand Response to API						
+						localStorage.setItem('userQuesSequence', 0);
+						
+						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
+						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
+							if (apiresponse.response.status == "true") {
+								var quiz_id=apiresponse.response.quiz_attampt;
+								localStorage.setItem('quiz_id', quiz_id);				
+		  						// Step -5 to Get the User Result
+		  						loginHttpService.getUserQuizResponse(get_uid,$scope.assignment_details.quiz_id,quiz_id).success(function(quizResultResponse) {
+						 			 a=[];
+		  							localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+						 			if (quizResultResponse.response.status == "true") {
+						 					var correct_answer= quizResultResponse.response.correct_questions;
+						 					var wrong_answer= quizResultResponse.response.correct_questions;
+						 					var st_result="";
+						 					if(quizResultResponse.response.student_result< 60){
+						 						 st_result= "Your are Fail";
+						 						alert("Your are Fail");
+						 					}
+						 					else{
+						 						st_result= "Your are Pass";
+						 						alert("Your are Pass");
+						 					}
+											//window.location.href='subject-view/'+$routeParams.id;
+						 					}
+						 				});
+
+	  					}else{
+	  						alert('Opps something is wrong to store your quiz result');
+	  					}
+							
+					});
+
+
+				}  
+	 					
+
+	 		//}    	
+    }; // end submit question operation
 
 
     $scope.onSkipQuestion = function(frmdata){
@@ -1398,7 +1521,7 @@ function generate_error_reason(error_code) {
     $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
     loginHttpService.getAvatarImage(get_uid).success(function(response) {
     	if (response.message == '') {
-    		if (response.response[0]['profile_pic'] != '') {
+    		if (response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
     			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
     		}
     	}

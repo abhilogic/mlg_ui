@@ -19,14 +19,16 @@
 				<!-- <div class="table-animated-img"></div> -->
           <h5 class="hd"><span>Subskills:</span> {{assignment_details.course_name | limitTo: 21}}</h5>
 
-          <div class="text-center" >
-              <button  class="btn btn-skip" ng-click="onSkipQuestion(frm)">skip</button>
-              <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm)">Submit</button>
-            </div>        
+              
 
 
           <div class="subskill-quiz-content">        
             <div class="text-right"><button type="button" class="btn btn-hint"><img src="assets/img/hint-bulb-img.png" alt="" class="hint-img">HINT (3 left)</button></div>
+
+            <div class="text-center" >
+              <button  class="btn btn-skip" ng-click="onSubmitQuestion(frm,skip=1)">skip</button>
+              <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm,skip=0)">Submit</button>
+            </div>
 
             <p class="ques" ng-bind-html="'Question- '+(sequence+1)+' : '+ currentquestion.question_name"></p>
 
@@ -47,6 +49,7 @@
               	<!-- type is mcq -->
               	<li ng-if="currentquestion.type=='mcq'" ng-repeat="option in currentquestion.options">
               		<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+              		
               		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
               	</li> 
 
@@ -54,10 +57,14 @@
               	<li ng-if="currentquestion.type=='mrq'" ng-repeat="option in currentquestion.options">
               		<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
               		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
-              	</li>              
+              	</li>
+
+              	<!-- <li> <button  class="btn btn-skip" ng-click="onSkipQuestion(frm)">skip</button>
+              	<button  class="btn btn-submit" ng-click="onSubmitQuestion(frm)">Submit</button>
+              	</li>  -->                
             </ul>
             <div class="text-center" >
-            	<span style="color:red; font:14px;">{{error_message}}</span>
+            	<span style="color:red; font-size:14px;">{{error_optionmessage}}</span>
             </div>
 
             
@@ -91,7 +98,7 @@
 	
     <script>
       $(document).ready(function(){
-        $("input[type='checkbox']").checkbox_button();
+       // $("input[type='checkbox']").checkbox_button();
   
         // tooltip bootstrap
 			$('[data-toggle="tooltip"]').tooltip();
