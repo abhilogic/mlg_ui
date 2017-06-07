@@ -335,19 +335,19 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	}
 });
     //event alert.
-    if($localStorage.messageCount != '1') {
-    	loginHttpService.getTodayEvents(get_uid).success(function(response) {
-    		var html = '';
-    		var count = 1;
-    		angular.forEach(response.response,function(val,key){
-    			html +=  count+'. '+val+'\n';
-    			count++;
-    		});
-    		if(html!='')
-    			alert(html);
-    		$localStorage.messageCount = '1';
-    	});
-    }
+//    if($localStorage.messageCount != '1') {
+//    	loginHttpService.getTodayEvents(get_uid).success(function(response) {
+//    		var html = '';
+//    		var count = 1;
+//    		angular.forEach(response.response,function(val,key){
+//    			html +=  count+'. '+val+'\n';
+//    			count++;
+//    		});
+//    		if(html!='')
+//    			alert(html);
+//    		$localStorage.messageCount = '1';
+//    	});
+//    }
 }])
 
 
