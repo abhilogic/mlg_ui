@@ -129,7 +129,7 @@
 										<td class="status">{{lesson.status}}</td>
 										<td class="earned-points">{{lesson.points}}</td>
 										<td class="actions">
-											<button class="btn btn-link"><a href="teacher/add_content?{{lesson.course_content_id}}&F{{lesson.course_detail_id}}"><i class="fa fa-pencil"></i></a></button>
+											<button class="btn btn-link"><a href="teacher/add-content?{{lesson.course_content_id}}&F{{lesson.course_detail_id}}"><i class="fa fa-pencil"></i></a></button>
 											<button class="btn btn-link"><a ng-click="deleteContent(lesson.course_content_id )"<i class="fa fa-trash"></i></a></button>
 										</td>
 									</tr>
@@ -181,7 +181,7 @@
 						<h4 class="modal-title">How would you like to Add Lessons?</h4>
 					</div>
 					<div class="modal-body">
-						<a href="teacher/add_content" class='btn btn-outline btn-danger btn-block' ng-click="close_modal();">Add Lessons Manually</a>
+						<a href="teacher/add-content" class='btn btn-outline btn-danger btn-block' ng-click="close_modal();">Add Lessons Manually</a>
 						<button type="button" class='btn btn-outline btn-default btn-block border-radius-0' data-toggle="modal" data-target="#modal-uploadContent" data-dismiss="modal">Upload A file</button>
 					</div>
 				</div>

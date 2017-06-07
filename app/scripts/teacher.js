@@ -655,19 +655,19 @@ $scope.submitSkip = function(){
         if(response.status == true) {
           var currentDate = $filter('date')(Date.now(), 'yyyy-MM-dd ');
           currentDate = moment(currentDate).format('YYYY-MM-DD');
-          if($localStorage.event !=1) {
-            if(response.response[0].event_date == currentDate) {
-              ptm = '';
-              todo = '';
-              if(response.response[0].event_type == 'ptm') {
-                ptm = ptmCount+'. '+'You have a ptm with '+response.response[0].event_for+' of '+response.response[0].grade_name +' today.\n ';
-                ptmCount++;
-              }else if(response.response[0].event_type == 'todo') {
-                todo = todoCount+'. '+response.response[0].event_title+'.\n';
-                todoCount++;
-              }
-            } 
-          }
+//          if($localStorage.event !=1) {
+//            if(response.response[0].event_date == currentDate) {
+//              ptm = '';
+//              todo = '';
+//              if(response.response[0].event_type == 'ptm') {
+//                ptm = ptmCount+'. '+'You have a ptm with '+response.response[0].event_for+' of '+response.response[0].grade_name +' today.\n ';
+//                ptmCount++;
+//              }else if(response.response[0].event_type == 'todo') {
+//                todo = todoCount+'. '+response.response[0].event_title+'.\n';
+//                todoCount++;
+//              }
+//            } 
+//          }
           $scope.events = ([{
            date: moment(response.response[0].event_date).add(0, 'days').format(), 
            title: response.response[0].event_title,
@@ -699,11 +699,11 @@ $scope.submitSkip = function(){
               // }
             }
           });
-          if($localStorage.event != 1) {
-            alert('\t\tPARENT TEACHER MEETING \n\t\t'+ ptm+
-              '\n\t\t\t\t\tTODO\n\t\t'+todo);
-            $localStorage.event = '1';
-          }
+//          if($localStorage.event != 1) {
+//            alert('\t\tPARENT TEACHER MEETING \n\t\t'+ ptm+
+//              '\n\t\t\t\t\tTODO\n\t\t'+todo);
+//            $localStorage.event = '1';
+//          }
         }
       });
 $scope.showEvents = function(events) {
@@ -1182,7 +1182,7 @@ $scope.numberOfPages=function(){
 
     $scope.close_modal=function(){
       $(".modal-backdrop").remove();
-     // window.location.href='teacher/add_content';
+     // window.location.href='teacher/add-content';
    }  
 //    $scope.doc = {};
 //    $scope.img = {};
@@ -2361,10 +2361,10 @@ $scope.subSkillEvents = {
   },
   onItemDeselect: function(item) {
     angular.forEach(subSkills,function(value, key) {
-      console.log(value+','+item['id']);
       if (value == item['id']) {
        subSkills.splice(key);
      }
+     console.log(subSkills);
    });
   }
 };
@@ -2522,14 +2522,26 @@ $scope.subSkillEvents = {
       question.template_id = templateId;
     }
     teacherHttpService.uploadQuestion(question).success(function(response){
-     $scope.msg = '';
-     $scope.message = '';
-     if(response.status == true){
-       questionId = response.question_id;
-       if(templateId == ''){
-         $('#modal-saveTemplateAs').modal({backdrop: 'static', keyboard: false}); 
-       }
-       $scope.msg = response.message;
+      $scope.msg = '';
+      $scope.message = '';
+      if(response.status == true){
+        questionId = response.question_id;
+        $scope.frm.questionStatement = '';
+        if(Qtyp == 'text') {
+          $scope.frm.ans1=$scope.frm.ans2=$scope.frm.ans3=$scope.frm.ans4 = '';
+        }
+        if(Qtyp == 'image') {
+          $scope.video = '';
+          $("#ans-imag form").html("");
+          $scope.ansCount = 0;
+          $scope.img = '';
+          var myElem = angular.element(document.querySelector('#answer-img ul '));
+         myElem.remove();
+        }
+        if(templateId == ''){
+          $('#modal-saveTemplateAs').modal({backdrop: 'static', keyboard: false}); 
+        }
+        $scope.msg = response.message;
      }else{
        $scope.message = response.message;
      } 
