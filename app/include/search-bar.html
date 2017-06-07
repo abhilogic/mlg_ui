@@ -11,14 +11,14 @@
 			<div class="row">
 				<div class="col-lg-9 col-md-8 col-sm-6">
 					<div class="form-group has-feedback has-feedback-left">
-						<input type="search" class="form-control" placeholder="Search...">
+						<input type="search" class="form-control" placeholder="Searches...">
 						<div class="form-control-feedback"><i class="fa fa-search"></i><i class="icon icon-cross"></i><span class="sr-only">Search</span></div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-6 hidden-xs ">
-					<div class="dropdown"> 
+					<div class="dropdown" id="h_menu"> 
 						<img src="assets/img/student-img/stud_img_1.png" class="profile_img"/>
-						<button type="button" class="btn btn-primary" data-toggle="dropdown">{{$root.logged_user.first_name+' '+$root.logged_user.last_name}}  <i class="fa fa-angle-down"></i></button>
+						<button id="h_menu" type="button" class="btn btn-primary" data-toggle="dropdowns">{{$root.logged_user.first_name+' '+$root.logged_user.last_name}}  <i class="fa fa-angle-down"></i></button>
 						<ul class="dropdown-menu">
 							<li><a href="teacher/settings"><i class="icon icon-my_settings"></i>Setting</a></li>
 							<li><a href="teacher/help"><i class="icon icon-help"></i>Help</a></li>

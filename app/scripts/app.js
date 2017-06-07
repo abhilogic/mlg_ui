@@ -530,7 +530,14 @@ $scope.userInfo=userInfo;
 return {
 	restrict: 'E',
 	templateUrl: 'include/search-bar.html',
-	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {                         	
+	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {  
+		 $('html').click(function (e) {      
+    if ($(e.target).parents('#h_menu').length==1) {
+        $('#h_menu').addClass('open')
+    } else {
+        $('#h_menu').removeClass('open')
+    }
+});                        	
 		var cookieString=$cookieStore.get("userObj");
 		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
