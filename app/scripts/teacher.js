@@ -1891,12 +1891,48 @@ if(typeof LId[1] != 'undefined') {
    {id: 5, label: "Soniya Gandhi"}
    ]
 
- }]).controller('teacherSubscriptionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+ }])
+ .controller('teacherSubscriptionCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+    var get_uid = commonActions.getcookies(get_uid);
+    $scope.teacher = {};
+    $scope.days_left = 0;
+    $scope.start_date = '';
+    $scope.end_date = '';
+    $scope.days_left = '';
+    loginHttpService.getUserDetails(get_uid).success(function (response) {
+      if (response.data.user_all_details != '') {
+        $scope.teacher = response.data.user_all_details[0];
+        $scope.start_date = moment($scope.teacher.created).format("DD MMM YYYY");
+        $scope.end_date = moment($scope.teacher.subscription_end_date).format("DD MMM YYYY");
+        var end_date = moment($scope.teacher.subscription_end_date).format("YYYY-MM-DD");
+        $scope.days_left = moment(end_date).diff(moment(), 'days');
+      }
+    });
+
+    $scope.requestQuote = function() {
+      $location.url('/teacher/requestQuote');
+    };
 
  }])
-
-
+ .controller('teacherQuoteCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
+ function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+    var get_uid = commonActions.getcookies(get_uid);
+     $scope.frm = {};
+     $scope.mobile = '';
+     $scope.position = 'Teacher';
+     $scope.teacher = {};
+    loginHttpService.getUserDetails(get_uid).success(function (response) {
+      if (response.data.user_all_details != '') {
+        $scope.teacher = response.data.user_all_details[0];
+      }
+    });
+    loginHttpService.getUserPreferences(get_uid).success(function (resp) {
+      if (resp.status == true) {
+        $scope.mobile = resp.data.mobile;
+      }
+    });
+ }])
  .directive('dropZone', function() {
   return function($scope, element, attrs) {    
     return element.dropzone({

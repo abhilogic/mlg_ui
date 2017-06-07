@@ -1,116 +1,198 @@
-	<!-- Main navbar -->
-	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
-	<!-- /main navbar -->
+<!-- Main navbar -->
+<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+<!-- /main navbar -->
 
-	<!-- Page container -->
-	<div class="page-container">
+<!-- Page container -->
+<div class="page-container">
 
-		<!-- Page content -->
-		<div class="page-content">
+  <!-- Page content -->
+  <div class="page-content">
 
-			<!-- Main Sidebar -->
-			<aside class="sidebar sidebar-main"></aside>
-			<!-- /sidebar -->
+    <!-- Main Sidebar -->
+    <aside class="sidebar sidebar-main"></aside>
+    <!-- /sidebar -->
 
 
-			<!-- Main content -->
-			<div class="content-wrapper">
-				<!-- Content area -->
-				<div class="content">
+    <!-- Main content --><!-- Main content -->
+    <div class="content-wrapper">
+      <!-- Content area -->
+      <div class="content">
 
-					<div class="well well-lg well-flat">
-						<div class="row">
-							<div class="col-md-5"></div>
-							<div class="col-md-7">
-								<h2 class="title_subscription"><span class="text-uppercase">Free Subscription</span><small>(60 days)</small></h2>
-								<br>
-								<div class="row">
-									<div class="col-sm-4"><p class="text-muted">Subscription Type:</p></div>
-									<div class="col-sm-4"><p class="text-uppercase">Trial</p></div>
-								</div>
-								<div class="row">
-									<div class="col-sm-4"><p class="text-muted">Start Date:</p></div>
-									<div class="col-sm-4"><p class="text-uppercase">26 Feb 2017</p></div>
-								</div>
-								<div class="row">
-									<div class="col-sm-4"><p class="text-muted">End Date:</p></div>
-									<div class="col-sm-4"><p class="text-uppercase">25 April 2017</p></div>
-								</div>
-								<div class="row">
-									<div class="col-sm-4"><p class="text-muted">Days Remaining:</p></div>
-									<div class="col-sm-4"><p class="text-uppercase">59 days</p></div>
-								</div>
-							</div>
-						</div>
-						<br>
-						<h3 class="text-center text-muted"><b>Your Subscription will auto re-new to Quarterly after 59 days</b></h3>
-						<div class="flex-row responsive-md subscription_table">
-							<div class="flex-col">
-								<div class="subscription_col">
-									<h4 class="text-uppercase">Monthly</h4>
-									<h1 class="plan_price"><sup>$</sup><b>99</b><small>/mo</small></h1>
-									<ul class="feature_list">
-										<li>Feature 1 loreum ipsum dolor sit amet</li>
-										<li>Feature 2 loreum ipsum dolor sit amet</li>
-										<li>Feature 3 loreum ipsum dolor sit amet</li>
-										<li>Feature 4 loreum ipsum dolor sit amet</li>
-									</ul>
-									<p>
-										<button type="button" class="btn btn-default btn-lg text-uppercase">Upgrade Now</button>
-									</p>
-								</div>
-							</div>
-							<div class="flex-col">
-								<div class="subscription_col recommended">
-									<h4 class="text-uppercase">Quarterly</h4>
-									<h1 class="plan_price"><sup>$</sup><b>99</b><small>/qu</small></h1>
-									<h1 class="plan_price old_price"><sup>$</sup><b>108</b><small>/qu</small></h1>
-									<ul class="feature_list">
-										<li>Feature 1 loreum ipsum dolor sit amet</li>
-										<li>Feature 2 loreum ipsum dolor sit amet</li>
-										<li>Feature 3 loreum ipsum dolor sit amet</li>
-										<li>Feature 4 loreum ipsum dolor sit amet</li>
-									</ul>
-									<p>
-										<button type="button" class="btn btn-default btn-lg text-uppercase">Upgrade Now</button>
-									</p>
-								</div>
-							</div>
-							<div class="flex-col">
-								<div class="subscription_col">
-									<h4 class="text-uppercase">Yearly</h4>
-									<h1 class="plan_price"><sup>$</sup><b>99</b><small>/yr</small></h1>
-									<ul class="feature_list">
-										<li>Feature 1 loreum ipsum dolor sit amet</li>
-										<li>Feature 2 loreum ipsum dolor sit amet</li>
-										<li>Feature 3 loreum ipsum dolor sit amet</li>
-										<li>Feature 4 loreum ipsum dolor sit amet</li>
-									</ul>
-									<p>
-										<button type="button" class="btn btn-default btn-lg text-uppercase">Upgrade Now</button>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
+        <div class="well well-lg well-flat well-subscription">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="assets/img/subscription.png" class="img-responsive" alt=""/>
+            </div>
+            <div class="col-md-7">
+              <h2 class="title_subscription"><span class="text-uppercase text-semibold">Free Subscription</span><small>(30 days)</small></h2>
+              <br>
+              <div class="row">
+                <div class="col-sm-4"><p class="text-muted">Subscription Type:</p></div>
+                <div class="col-sm-4"><p class="text-uppercase">Trial</p></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"><p class="text-muted">Start Date:</p></div>
+                <div class="col-sm-4"><p class="text-uppercase">{{start_date}}</p></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"><p class="text-muted">End Date:</p></div>
+                <div class="col-sm-4"><p class="text-uppercase">{{end_date}}</p></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"><p class="text-muted">Days Remaining:</p></div>
+                <div class="col-sm-4"><p class="text-uppercase">{{days_left}} days</p></div>
+              </div>
+            </div>
+          </div>
 
-				</div>
-				<!-- /content area -->
+          <!-- Change take the all main content  -->
+          <div class="main-content">
+            <!-- Change remove class text-muted -->
+            <h3 class="text-muted"><b>Your subscription going to after 59 days</b></h3>
+            <div class="row">
+              <!-- Change remove col-md-offset-2 and col-md-8 to col-md-12 -->
+              <div class="col-md-12">
+                <div class="row">
+                  <!-- Change col-sm-3 to col-md-2 col-sm-3 -->
+                  <div class="col-md-2 col-sm-3">
+                    <!-- Change add class margin-left-0 -->
+                    <img src="assets/img/icon-stopwatch.png" class="img-responsive margin-left-0 margin-xs-left-auto" alt=""/>
+                  </div>
+                  <div class="col-md-10 col-sm-9">
+                    <!-- Change add the class hours-hd -->
+                    <h4 class="text-muted hours-hd">Your class has used MLG for <b>50 hrs</b> in last week.</h4>
+                    <!-- Changes cut and past the complete below row  and in row class margin-bottom-20 kindly match with last one-->
+                    <div class="row margin-bottom-20 margin-xs-bottom-0">
+                      <div class="col-lg-9 col-sm-8">
+                        <h4 class="text-muted">To extend your subscription pay here</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-4"><a role="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-teacherPayment">Pay now</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row margin-top-20 margin-bottom-20">
+                  <div class="col-lg-9 col-sm-8">
+                    <h4 class="text-muted">Your class has less than 20 students. To increase your class size request a qoute.</h4>
+                  </div>
+                  <div class="col-lg-3 col-sm-4"><a role="button" ng-click="requestQuote()" class="btn btn-primary btn-block">Request a qoute</a></div>
+                </div>
+                <!-- Change add class margin-top-20 -->
+                <div class="row margin-top-20">
+                  <div class="col-md-8 col-md-offset-2">
+                    <a role="button" class="btn btn-outline btn-default btn-block">You requested to quote on 27 Feb 2017. <u class="text-danger">Pay for your qoute</u></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-			</div>
-			<!-- /main content -->
+      </div>
+      <!-- /content area -->
 
-		</div>
-		<!-- /page content -->
+    </div>
+    <!-- /main content -->
 
-	</div>
-	<!-- page container -->
+  </div>
+  <!-- /page content -->
 
-	<!-- Latest compiled and minified jQuery -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</div>
+<!-- page container -->
 
-	<!-- Page Specific JavaScript -->
-	<script src="../assets/js/main.js"></script>
-	<script src="../assets/js/pages/dashboard.js"></script>
+<!-- modal-section  -->
+<section class="modal-section">
+  <!-- Modal -->
+  <div id="modal-teacherPayment" class="modal fade modal-teacherPayment" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="row as-table">
+            <div class="col-sm-6 col-left">
+              <h2 class="text-light text-gray-light text-center">Your Choosen subjects</h2>
+              <br>
+
+              <ul class="list-cartItems">
+                <li class="cart-item">
+                  <p><span class="item-label">Grade:</span><span class="item-value name">6th</span></p>
+                  <p><span class="item-label">Subjects:	</span><span class="item-value package">English</span></p>
+                  <p><span class="item-label">Sub Total:</span><span class="item-value price">$90<small>/mo</small></span></p>
+                </li>
+                <li class="cart-item">
+                  <p><span class="item-label">Grade:</span><span class="item-value name">7th</span></p>
+                  <p><span class="item-label">Subjects:	</span><span class="item-value package">English, Science</span></p>
+                  <p><span class="item-label">Sub Total:</span><span class="item-value price">$90<small>/mo</small></span></p>
+                </li>
+                <li class="cart-item">
+                  <p><span class="item-label">Grade:</span><span class="item-value name">8th</span></p>
+                  <p><span class="item-label">Subjects:	</span><span class="item-value package">English, Math, Science</span></p>
+                  <p><span class="item-label">Sub Total:</span><span class="item-value price">$90<small>/mo</small></span></p>
+                </li>
+                <li class="cart-item">
+                  <p><span class="item-label">Grade:</span><span class="item-value name">10th</span></p>
+                  <p><span class="item-label">Subjects:	</span><span class="item-value package">Math, Social Science</span></p>
+                  <p><span class="item-label">Sub Total:</span><span class="item-value price">$90<small>/mo</small></span></p>
+                </li>
+              </ul>
+
+              <div class="total-cartValue">
+                <h1 class="text-center text-light text-primary">Total: <span>$360</span><small class="text-muted"></small></h1>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-right">
+              <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
+              <br>
+              <form action="" class="form-payment">
+                <div class="form-group float-label">
+                  <label class="control-label">Card number</label>
+                  <input type="text" class="form-control float-input"/>
+                </div>
+
+                <div class="form-group float-label">
+                  <label class="control-label">Name on the card</label>
+                  <input type="text" class="form-control float-input"/>
+                </div>
+
+                <div class="form-group form-group-inline form-group-cardDetails">
+                  <label class="control-label">Card Expiry Date</label>
+                  <select class="form-control input-mm">
+                    <option value="mm">MM</option>
+                  </select>
+                  <select class="form-control input-yy">
+                    <option value="mm">YYYY</option>
+                  </select>
+                  <div class="form-group float-label">
+                    <label class="control-label">CVV</label>
+                    <input type="text" class="form-control float-input input-cvv"/>
+                  </div>
+                </div>
+                <br><br>
+
+                <div class="form-group text-center">
+                  <button type="submit" class="btn btn-primary">Proceed</button> <button type="submit" class="btn btn-link">Skip for now</button>
+                </div>
+                <br><br>
+                <div class="form-group text-right">
+                  <a href="#" class="link"><img src="assets/img/icon-donate.png" alt="done image"></a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal -->
+</section>
+<!-- Latest compiled and minified jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Page Specific JavaScript -->
+<script src="assets/js/main.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>

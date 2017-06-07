@@ -320,6 +320,9 @@ principal  : 30,
   }).when('/teacher/scope-sequence',{
 		templateUrl : 'views/dashboard/teacher-scope-sequence.html',
 		controller : 'teacherScopeSequence',
+  }).when('/teacher/requestQuote',{
+		templateUrl : 'views/dashboard/teacher-getQuote.html',
+		controller : 'teacherQuoteCntrl',
   }).when('/guest', {
 	templateUrl : 'views/guest_login.html',
 	controller : 'guestCtrl',
