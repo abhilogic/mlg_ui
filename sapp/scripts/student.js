@@ -919,7 +919,7 @@ img.src = url;
 	$scope.studentResult = 'fail';
 	var quiz_id=localStorage.getItem('quiz_id');
 	loginHttpService.getUserQuizResponse(get_uid,null,null).success(function(response) {
-		if (response.response.status == "true" && response.response.student_result>60 ) {
+		if (response.response.status == "true" && response.response.student_result>=60 ) {
 			$scope.studentResult = 'pass';
 		}
 	});
@@ -1306,7 +1306,7 @@ else{
 						 						st_result= "Your are Pass";
 						 						alert("Your are Pass");
 						 					}
-											//window.location.href='subject-view/'+$routeParams.id;
+											window.location.href='challenges';
 						 					}
 						 				});
 
