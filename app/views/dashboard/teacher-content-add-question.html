@@ -15,7 +15,6 @@
 			<div class="content-wrapper">
 				<!-- Content area -->
 				<div class="content">
-
 					<!-- Teacher Setting  Panel  -->
 					<div class="panel panel-flat add-content-panel">
 						<div class="panel-heading">
@@ -43,6 +42,7 @@
                   <div class="col-lg-5 col-lg-offset-2">
 											<div class="form-group">
 												<label for="" class="col-xs-5 control-label">Subject :</label>
+                        {{course}}
 												<div class="col-xs-7" id="courseselect">
 												  <select class="mlg-selectpicker form-control" data-size="auto" title="Select DOK" ng-model="courseSelected" ng-change="getCourseVal(courseSelected)">
                             <!--<option disabled>---Select Course---</option>--> 
@@ -52,8 +52,6 @@
 										</div>
                   </div>
                 </div>
-
-
 								<div class="row repeat-row">
 									<div class="col-lg-5">
 										<div class="form-group">
@@ -304,6 +302,7 @@
 						<div class="panel-footer text-center">
               <div id="save-question">
                 <button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
+                <!--<button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>-->
               </div>
               <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>
               <span style="color:green">{{msg}}</span>
@@ -374,7 +373,7 @@
 									<span>Claim</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p></p>
+									<p>{{claimModel}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -382,7 +381,7 @@
 									<span>DEPTH OF KNOWLEDGE</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p></p>
+									<p>{{dOKModel}}</p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -394,9 +393,15 @@
 								</div>
 							</div>
 							<div class="question-block">
+                <div class="row">
+									<div class="col-md-12">
+										<h5 class="">Question Statement</h5>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<h5 class="ques">{{frm.questionStatement}}</h5>
+										<h5 class="ques">{{frm.questionStatement}}</h5></br>
+                    <p>Options</p>
 									</div>
 								</div>
 								<div class="row option-block">

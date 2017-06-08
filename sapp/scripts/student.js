@@ -326,11 +326,11 @@ angular.module('mlg_student')
 
 }
 // Avatar profile
-$scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+$scope.avtar = urlParams.baseURL+'/upload/Avtar/'+'Avtar_profile_pick.png';
 loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	if(response.message == '') {
-		if(response.response[0] && response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
-			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
+			$scope.avtar = urlParams.baseURL+response.response[0]['profile_pic']+'?'+Date.now();
 		}
 	}
 });
@@ -811,11 +811,11 @@ img.src = url;
 .controller('subskillQuizCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','commonActions','urlParams','$http','user_roles',function($rootScope,$scope,$filter, loginHttpService,$location,commonActions,urlParams,$http,user_roles) {
 	var get_uid=commonActions.getcookies(get_uid);
     // Avatar profile
-    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    $scope.avtar = urlParams.baseURL+'/upload/Avtar/'+'Avtar_profile_pick.png';
     loginHttpService.getAvatarImage(get_uid).success(function(response) {
     	if(response.message == '') {
     		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
-    			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+    			$scope.avtar = urlParams.baseURL+response.response[0]['profile_pic']+'?'+Date.now();
     		}
     	}
     });
@@ -885,11 +885,11 @@ img.src = url;
 		$location.url('/subskill_content/'+ pid + '/type/' + course_id);
 	};
  // Avatar profile
- $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+ $scope.avtar = urlParams.baseURL+'/upload/Avtar/'+'Avtar_profile_pick.png';
  loginHttpService.getAvatarImage(get_uid).success(function(response) {
  	if(response.message == '') {
  		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
- 			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+ 			$scope.avtar = urlParams.baseURL+response.response[0]['profile_pic']+'?'+Date.now();
  		}
  	}
  });
@@ -924,11 +924,11 @@ img.src = url;
 		}
 	});
 // Avatar profile
-$scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+$scope.avtar = urlParams.baseURL+'/upload/Avtar/'+'Avtar_profile_pick.png';
 loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	if(response.message == '') {
 		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
-			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+			$scope.avtar = urlParams.baseURL+response.response[0]['profile_pic']+'?'+Date.now();
 		}
 	}
 });
@@ -991,11 +991,11 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 
   }	
   // Avatar profile
-  $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+  $scope.avtar = urlParams.baseURL+'/upload/Avtar/'+'Avtar_profile_pick.png';
   loginHttpService.getAvatarImage(get_uid).success(function(response) {
   	if(response.message == '') {
   		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
-  			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+  			$scope.avtar = urlParams.baseURL+response.response[0]['profile_pic']+'?'+Date.now();
   		}
   	}
   });
@@ -1075,11 +1075,11 @@ $scope.apiTabs=function(){
 	//$(tabIdactivated).addClass("active in");				
 }
   // Avatar profile
-  $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+  $scope.avtar = urlParams.baseURL+'/upload/Avtar/'+'Avtar_profile_pick.png';
   loginHttpService.getAvatarImage(get_uid).success(function(response) {
   	if(response.message == '') {
   		if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null ) {
-  			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+  			$scope.avtar = urlParams.baseURL+response.response[0]['profile_pic']+'?'+Date.now();
   		}
   	}
   });
@@ -1518,11 +1518,11 @@ function generate_error_reason(error_code) {
 }
 
     // Avatar profile
-    $scope.avtar = urlParams.baseURL+'/webroot/Avtar/'+'Avtar_profile_pick.png';
+    $scope.avtar = urlParams.baseURL+'/upload/Avtar/'+'Avtar_profile_pick.png';
     loginHttpService.getAvatarImage(get_uid).success(function(response) {
     	if (response.message == '') {
     		if (response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
-    			$scope.avtar = urlParams.baseURL+'/webroot/'+response.response[0]['profile_pic']+'?'+Date.now();
+    			$scope.avtar = urlParams.baseURL+response.response[0]['profile_pic']+'?'+Date.now();
     		}
     	}
     });
