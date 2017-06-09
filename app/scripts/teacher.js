@@ -341,6 +341,13 @@ teacherHttpResponse.updateQuestion=function(data){
     url   : urlParams.baseURL+urlParams.updateQuestion
   });
 }
+teacherHttpResponse.setQuotation=function(data){
+  return $http({
+    method:'POST',
+    data  : data,
+    url   : urlParams.baseURL+urlParams.setQuotation
+  });
+}
 teacherHttpResponse.getLessonForList=function(uid,pnum){
   return $http({
     method:'GET',
@@ -473,7 +480,6 @@ return teacherHttpResponse;
   var get_uid=commonActions.getcookies(get_uid);
   user_id = { uid : get_uid };
   teacherHttpService.teacherPayment(user_id).success(function(response) {
-    console.log('hhhh');
     if(response.data.length > 0) {
      $scope.student = response.data;
      $scope.totalAmount = response.total;
@@ -1964,13 +1970,23 @@ if(typeof LId[1] != 'undefined') {
  .controller('teacherQuoteCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
     var get_uid = commonActions.getcookies(get_uid);
-     $scope.frm = {};
-     $scope.mobile = '';
-     $scope.position = 'Teacher';
-     $scope.teacher = {};
+    if (get_uid == '') {
+      alert('Kindly login');
+       window.location.href='/mlg_ui/app/signin';
+      return false;
+    }
+
+    $scope.frm = {};
+    $scope.mobile = '';
+    $scope.position = 'Teacher';
+    $scope.msg = '';
+    $scope.frm.first_name = $scope.frm.last_name = $scope.frm.email = '';
     loginHttpService.getUserDetails(get_uid).success(function (response) {
       if (response.data.user_all_details != '') {
-        $scope.teacher = response.data.user_all_details[0];
+        var teacher = response.data.user_all_details[0];
+        $scope.frm.first_name = teacher.first_name;
+        $scope.frm.last_name = teacher.last_name;
+        $scope.frm.email = teacher.email;
       }
     });
     loginHttpService.getUserPreferences(get_uid).success(function (resp) {
@@ -1979,9 +1995,65 @@ if(typeof LId[1] != 'undefined') {
       }
     });
 
+    teacherHttpService.gradeList().success(function(response) {
+      $scope.grades = response.response.Grades;
+    });
 
+    //show courses on change on class/grade--call API to getCourseList for a level on change of grade
+    $scope.changeCourseList = function(grade_id) {
+      $scope.message='';
+      teacherHttpService.getCourseByGrade(grade_id).success(function(courseslistresult) {
+  	     if (!courseslistresult.response.courses){  // value is null, empty
+            $scope.msg=courseslistresult.response.message;
+            $scope.records=courseslistresult.response.course_list;
+         } else {
+           $scope.cousesListByGrade= courseslistresult.response.courses;
+           $scope.msg=courseslistresult.response.message;
+           $scope.courserecords=courseslistresult.response.course_list;
+         }
+      });
+    };
 
-
+    $scope.stcourses = {};
+    // selected course
+    $scope.onchangeSelectedcourse = function(selected_courses) {
+      $scope.message='';
+      var selected_cour=[];
+      angular.forEach(selected_courses, function(value, key) {
+        if (value) {
+          selected_cour.push({id:key,name:value.split(',')[0],level_id:value.split(',')[1] });
+        }
+      });
+      $scope.stcourses = selected_cour;
+    };
+    $scope.setQuotation = function(frm) {
+      if (frm.first_name === '') {
+        $scope.msg = 'first name cannot be empty';
+        alert('first name cannot be empty');
+        return false;
+      }
+      frm.selected_course_values = $scope.stcourses;
+      var data = {};
+      data.user_id = get_uid;
+      data.first_name = frm.first_name;
+      data.last_name = frm.last_name;
+      data.email = frm.email;
+      data.phone_number = frm.phone_number;
+      data.quotation = frm;
+      teacherHttpService.setQuotation(data).success(function(response) {
+  	     if (response.status == true) {
+           alert('Your data saved successfully');
+           window.location.reload();
+         } else {
+           if (response.message != '') {
+             $scope.msg = response.message;
+           } else {
+             alert('some error occured');
+           }
+         }
+      });
+      return false;
+    };
  }])
  .directive('dropZone', function() {
   return function($scope, element, attrs) {    

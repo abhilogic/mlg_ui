@@ -21,25 +21,25 @@
         <!-- get a quote  Panel  -->
         <div class="panel panel-flat get-a-quote-panel">
           <div class="panel-body">
-            <form action="select-children.html" class="form-login">
+            <form action="" class="form-login">
               <h5 class="text-uppercase"><i class="icon icon-arrow-left"></i> Your contact information</h5>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group float-label">
                     <label class="control-label">First Name</label>
-                    <input type="text" class="form-control float-input" value="{{teacher.first_name}}" readonly/>
+                    <input ng-model="frm.first_name" type="text" class="form-control float-input" value="{{teacher.first_name}}" />
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group float-label">
                     <label class="control-label">Last Name</label>
-                    <input type="text" class="form-control float-input" value="{{teacher.last_name}}" readonly/>
+                    <input ng-model="frm.last_name" type="text" class="form-control float-input" value="{{teacher.last_name}}" />
                   </div>
                 </div>
               </div>
               <div class="form-group float-label  has-feedback">
                 <label class="control-label">EMAIL ADDRESS</label>
-                <input type="text" value="{{teacher.email}}" class="form-control float-input" id="inputEmail" aria-describedby="inputEmailErrorStatus" readonly>
+                <input ng-model="frm.email" type="text" value="{{teacher.email}}" class="form-control float-input" id="inputEmail" aria-describedby="inputEmailErrorStatus" >
                 <div class="form-control-feedback"><i class="fa"></i></div>
                 <!--<span id="inputEmailErrorStatus" class="help-block">Enter valid email</span>-->
               </div>
@@ -47,13 +47,13 @@
                 <div class="col-sm-6">
                   <div class="form-group float-label">
                     <label class="control-label">Phone Number</label>
-                    <input value="{{mobile}}" type="phone" class="form-control float-input" id="inputEmail">
+                    <input ng-model="frm.phone_number" value="{{mobile}}" type="phone" class="form-control float-input" id="inputEmail">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group float-label has-success has-feedback">
                     <label class="control-label">Position</label>
-                    <input value="{{position}}" ype="text" class="form-control float-input">
+                    <input ng-model="frm.position" value="{{position}}" ype="text" class="form-control float-input">
                   </div>
                 </div>
               </div>
@@ -85,18 +85,6 @@
                     <input ng-model="frm.district" type="text" class="form-control float-input">
                   </div>
                 </div>
-<!--                <div class="col-sm-4">
-                  <div class="form-group float-label">
-                    <label class="control-label">City</label>
-                    <select  class="form-control float-input">
-                      <opiton value=""></option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Haryana">Haryana</option>
-                        <option value="Uttarpardesh">Uttarpardesh</option>
-                        <option value="Uttrakhand">Uttrakhand</option>
-                    </select>
-                  </div>
-                </div>-->
               </div>
               <div class="row">
                 <div class="col-sm-6">
@@ -109,7 +97,7 @@
                   <div class="form-group float-label">
                     <label class="control-label">Country</label>
                     <select ng-model="frm.country" class="form-control float-input" >
-                      <opiton value=""></option>
+                      <option value=""></opiton>
                       <option value="India">India</option>
                       <option value="Australia">Australia</option>
                       <option value="America">America</option>
@@ -130,108 +118,66 @@
                 </select>
               </div>
               <!-- implementation -->
-              <h5 class="text-uppercase">Select your Grades & Subjects</h5>
-              <div class="subject-grade-section">
-                <div class="btn-group grade-group" data-toggle="buttons">
-                  <!-- to show the selected or checked add class active to label as below-->
-                  <label class="btn active">
-                    <input type="checkbox" name="grade6" autocomplete="off" checked>
-                    <span class="grade"><span class="hidden-xs">grade</span> 6<sup>th</sup></span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="grade7" autocomplete="off">
-                    <span class="grade"><span class="hidden-xs">grade</span> 7<sup>th</sup></span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="grade8" autocomplete="off">
-                    <span class="grade"><span class="hidden-xs">grade</span> 8<sup>th</sup></span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="grade9" autocomplete="off">
-                    <span class="grade"><span class="hidden-xs">grade</span> 9<sup>th</sup></span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="grade10" autocomplete="off">
-                    <span class="grade"><span class="hidden-xs">grade</span> 10<sup>th</sup></span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="grade12" autocomplete="off">
-                    <span class="grade"><span class="hidden-xs">grade</span> 11<sup>th</sup></span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="grade12" autocomplete="off">
-                    <span class="grade"><span class="hidden-xs">grade</span> 12<sup>th</sup></span>
-                  </label>
-                </div>
-                <!-- grade_btn_group -->
-                <div class="btn-group subject-group" data-toggle="buttons">
-                  <!-- to show the selected or checked add class active to label as below-->
-                  <label class="btn active">
-                    <input type="checkbox" name="math" autocomplete="off" checked>
-                    <span class="subject">Math</span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="english" autocomplete="off">
-                    <span class="subject">English</span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="science" autocomplete="off">
-                    <span class="subject">Science</span>
-                  </label>
-                  <label class="btn">
-                    <input type="checkbox" name="socialScience" autocomplete="off">
-                    <span class="subject">Social Science</span>
-                  </label>
-                </div>
-              </div>
 
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-md-10 col-md-offset-1 selected-grades-subjects">
-                    <h3 class="text-gray-light">Your choosen grades and subjects</h3>
+              <div>
+                <!--<div>-->
+                <h5 class="text-uppercase">Select your Grades & Subjects</h5>
+                <div class="subject-grade-section">
+                  <div class="btn-group grade-group" data-toggle="1buttons">
+                    <!-- to show the selected or checked add class active to label as below-->
+                    <label class="btn active1 customCheckbox" ng-repeat="grade in grades" >
+                      <input type="checkbox" ng-change="changeCourseList(frm.selectedgrade)" ng-model="frm.selectedgrade" ng-true-value="'{{grade.id}}'" ng-false-value="''" > 
+                      <span class="grade customLabel" ng-class="{checked: frm.selectedgrade == grade.id}"><span class="hidden-xs">{{grade.name}}</span></span>
+                    </label>
                   </div>
+                  <!-- grade_btn_group -->
+                  <div class="btn-group subject-group subjectCheckboxouter" data-toggle="1buttons">
+                    <!-- to show the selected or checked add class active to label as below-->
+                    <label class="btn active1" ng-repeat="course in cousesListByGrade" ng-class="{checked: frm.selectedcourse[course.id]}">						
+                      <input type="checkbox" ng-change="onchangeSelectedcourse(frm.selectedcourse)" ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}},{{course.level_id}}'" ng-false-value="''" > 
+                      <span class="subject">{{course.course_name}}</span>
+                    </label>
+                  </div>
+                  <div class="error" style="color:red;">{{message}}</div>
                 </div>
-                <div class="row">
-                  <div class="col-md-10 col-md-offset-1 selected-grades-subjects">
-                    <div class="form-group">
-                      <label class="label-grade">Grade 6<sup>th</sup></label>
-                      <button type="button" class="btn btn-sm btn-link btn-remove"><i class="fa fa-trash position-left"></i> Remove</button>
-                      <div class="subjects-list">
-                        <span class="label label-subject">Maths <a class="link link-gray-light">X</a></span>
-                        <span class="label label-subject">Science <a class="link link-gray-light">X</a></span>
-                        <span class="label label-subject">English <a class="link link-gray-light">X</a></span>
-                        <span class="label label-subject">French <a class="link link-gray-light">X</a></span>
-                      </div>
+
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-10 col-md-offset-1 selected-grades-subjects">
+                      <h3 class="text-gray-light">Your choosen grades and subjects</h3>
                     </div>
-                    <div class="form-group">
-                      <label class="label-grade">Grade 8<sup>th</sup></label>
-                      <button type="button" class="btn btn-sm btn-link btn-remove"><i class="fa fa-trash position-left"></i> Remove</button>
-                      <div class="subjects-list">
-                        <span class="label label-subject">Maths <a class="link link-gray-light">X</a></span>
-                        <span class="label label-subject">Science <a class="link link-gray-light">X</a></span>
-                        <span class="label label-subject">English <a class="link link-gray-light">X</a></span>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-10 col-md-offset-1 selected-grades-subjects">
+                      <div class="form-group" ng-repeat="grade in grades">
+                        <label class="label-grade">{{grade.name}}</label>
+                        <div class="subjects-list">
+                          <span class="label label-subject deleteBox" ng-repeat="stcourse in stcourses" ng-if="grade.id == stcourse.level_id">{{stcourse.name}}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
+              
               <div class="row margin-top-20">
                 <div class="col-sm-6">
                   <div class="form-group float-label">
                     <label class="control-label">Number of Student</label>
-                    <input type="number" class="form-control float-input">
+                    <input ng-model="frm.number_of_student" type="number" class="form-control float-input">
                   </div>
                 </div>
               </div>
               <div class="form-group float-label">
                 <label class="control-label text-uppercase">comments for mlg</label>
                 <span class="optional-input">(optional)</span>
-                <textarea type="email" class="form-control float-input"></textarea>
+                <textarea ng-model="frm.comment_for_mlg" type="email" class="form-control float-input"></textarea>
               </div>
               <br>
+              <center ng-if="msg"><span class="text-warning">{{msg}}</span></center>
               <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary">Get a quote</button>
+                <span ng-click="setQuotation(frm)"  class="btn btn-primary">Get a quote</span>
+                <!--<button ng-click="getQuote(frm)"  class="btn btn-primary">Get a quote</button>-->
               </div>
             </form>
           </div>
