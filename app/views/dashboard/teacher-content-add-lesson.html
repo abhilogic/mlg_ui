@@ -132,7 +132,14 @@
 								<div class="row  table-of-content">
 									<div class="col-md-4" id="add-new-content">
 										<ul class="list-group">
-                      <li class="list-group-item"ng-model="userContentModel" ng-repeat="content in userContent track by $index">{{content.title}}<a ng-click="deleteContent(content.id )"><i class="icon icon-trash text-danger pull-right"></i></a> <a ng-click="setUserContent(content.id)"><i class="icon icon-pencil pull-right text-primary margin-right-10"></i></a> </li>
+                      <li class="list-group-item"ng-model="userContentModel" ng-repeat="content in userContent track by $index" >
+                        <i class="glyphicon glyphicon-text-background margin-right-5" ng-show="content.type == 'text'"></i>
+                        <i class="glyphicon glyphicon-file margin-right-5" ng-show="content.type == 'doc'"></i>
+                        <i class="glyphicon glyphicon-picture margin-right-5" ng-show="content.type == 'image'"></i>
+                        <i class="glyphicon glyphicon-facetime-video margin-right-5" ng-show="content.type == 'video' "></i>
+                        {{content.title}}<a ng-click="deleteContent(content.id )"><i class="icon icon-trash text-danger pull-right"></i></a> 
+                        <a ng-click="setUserContent(content.id)"><i class="icon icon-pencil pull-right text-primary margin-right-10"></i></a>
+                        </br><p>{{content.name}}</p></li>
 										</ul>
 										
 									</div>

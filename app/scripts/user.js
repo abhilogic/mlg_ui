@@ -625,7 +625,7 @@ angular.module('mlg').filter('moment', function() {
 			
 					//alert('registered succefully');
 			}).error(function(error) {
-				alert('registration fail');
+				alert('Some Error occured, registration fail');
 			});
 	};
 

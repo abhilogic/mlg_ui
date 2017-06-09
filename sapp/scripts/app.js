@@ -163,17 +163,6 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
 
 
   }
-
-  $rootScope.userPoints = 0;
-  loginHttpService.getUserDetails(uid).success(function(response) {
-    if (typeof (response.data.user_all_details) != 'undefined') {
-      var user = response.data.user_all_details;
-      if(user[0])
-      $rootScope.userPoints = user[0].user_detail.points;
-    } else {
-      alert('Please sign up to continue');
-    }
-  });
   $rootScope.logout=function(){
 		   	loginHttpService.logout().success(function(response) {
 		   		$rootScope.logged_user = '';
@@ -241,7 +230,7 @@ $rootScope.$on('$viewContentLoaded', function() {
 return {
 	restrict: 'E',
 	templateUrl: 'views/header.html',
-	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {  
+	controller: ['$rootScope','$scope','$cookieStore','loginHttpService','urlParams','commonActions',function ($rootScope,$scope,$cookieStore,loginHttpService,urlParams,commonActions) {  
     
      $('html').click(function (e) {      
     if ($(e.target).parents('#h_menu').length==1) {
@@ -263,6 +252,28 @@ return {
 	return obj;
 }
 $scope.userInfo=userInfo;
+    // Avatar profile
+    var get_uid=commonActions.getcookies(get_uid);
+    $scope.avtar = urlParams.baseURL+'/upload/Avtar/'+'Avtar_profile_pick.png';
+    loginHttpService.getAvatarImage(get_uid).success(function(response) {
+      if(response.message == '') {
+        if(response.response[0]['profile_pic'] != '' && response.response[0]['profile_pic'] != null) {
+          $scope.avtar = urlParams.baseURL+response.response[0]['profile_pic']+'?'+Date.now();
+        }
+      }
+    });
+
+    // user points
+    $rootScope.userPoints = 0;
+    loginHttpService.getUserDetails(get_uid).success(function(response) {
+      if (typeof (response.data.user_all_details) != 'undefined') {
+        var user = response.data.user_all_details;
+        if(user[0])
+        $rootScope.userPoints = user[0].user_detail.points;
+      } else {
+        alert('Please sign up to continue');
+      }
+    });
 	}]
 };
 }).directive('mascot', function () {

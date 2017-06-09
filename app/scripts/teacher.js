@@ -1463,12 +1463,15 @@ $scope.submitDocDetail = function(data) {
   }else if(typeof(doc) === 'string'){
     content = doc;
     type = 'doc';
+    pointType = mlg_points['content_type_doc'];
   }else if(typeof(img) === 'string'){
     content = $scope.img;
     type = 'image';
+    pointType = mlg_points['content_type_image'];
   }else if(typeof(video) === 'string'){
     content = video;
     type = 'video';
+    pointType = mlg_points['content_type_video'];
   }
   lessonDetail = {
     tid : get_uid,
@@ -1803,9 +1806,6 @@ $scope.deleteContent = function(data){
   if (r == true) {
     teacherHttpService.delContent(data).success(function(response) {
       if (response.status == true) {
-        alert(response.message);
-        console.log(subSkills.length);
-        console.log($scope.tempsubskil);
         var subSkillDetail = {};
         if((subSkills.length) > 0) {
           alert(subSkills);
@@ -2511,7 +2511,7 @@ $scope.subSkillEvents = {
     if(typeof(data.ans1) == 'undefined'&& typeof(data.ans2) == 'undefined'&&
             typeof(data.ans3) == 'undefined' && typeof(data.ans4) == 'undefined'
             &&typeof($scope.img) == 'undefined') {
-      $scope.msg = "Please provide answer first";
+      $scope.msg = "Please provide options first";
       $timeout(function () {$scope.msg = ""; }, 3000);
     }else if(typeof(data.ans1) == 'undefined'&& typeof(data.ans2) == 'undefined'&&
             typeof(data.ans3) == 'undefined' && typeof(data.ans4) == 'undefined'
