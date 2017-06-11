@@ -31,6 +31,8 @@ getStepNum :'/users/getStepNum',
 getTodayEvents : '/teachers/getTodayEvents',
 getStudentAssignments : '/students/getStudentAssignments',
 getAssignmentItems : '/students/getAssignmentItems',
+getCourseInfo : '/courses/getCourseInfo',
+createQuizOnSubskill: '/exams/createQuizOnSubskill/',
 
 }).value('REGEX', {
 LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -77,13 +79,13 @@ $routeProvider
 }).when('/subject-view/:id', {
 	templateUrl : 'views/math_subject_view.html',
 	controller : 'subjectViewCtrl',		
-}).when('/skill-door/:id', {
+}).when('/skill-door/:skill_name/:id', {
 	templateUrl : 'views/skills_door.html',
 	controller : 'skillDoorCtrl',		
-}).when('/sub-skill/:id/:type/:course_id', {
+}).when('/sub-skill/:subskill_name/:course_id', {
 	templateUrl : 'views/subskillsroom.html',
 	controller : 'subSkillRoomCtrl',		
-}).when('/sub-skill-quiz/:id', {
+}).when('/subskill-quiz/:subskill_name/:subskill_id', {
 	templateUrl : 'views/subskill_quiz.html',
 	controller : 'subskillQuizCtrl',		
 }).when('/sub-skill-video/:id', {
@@ -116,7 +118,7 @@ $routeProvider
 }).when('/avtar3', {
   templateUrl : 'views/avatar-girl-design.html',
   controller : 'avtarCtrl',   
-}).when('/subskill_content/:pid/:type/:course_id', {
+}).when('/subskill_content/:subskill_name/:course_id', {
 	templateUrl : 'views/subskills-content.html',
 	controller : 'subskillContent',		
 }).when('/challenge/:assignment_id', {

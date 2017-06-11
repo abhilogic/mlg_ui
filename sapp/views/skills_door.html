@@ -8,7 +8,7 @@
 				<ul class="subject_gate_cover">
 					<li class="item" ng-repeat="subject in subject_detail">
 						<div class="subject_board"><span><i class="fa fa-check"></i> {{subject.name}}</span></div>
-						<a href="sub-skill/{{subject.parent_id}}/type/{{subject.course_id}}">
+						<a href="sub-skill/{{ subject.name |changeInURL}}/{{subject.course_id}}">
 							<div class="subject_gate">
 								<img src="" alt="" class="open-gate-animation"/>
 							</div>
