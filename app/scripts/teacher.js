@@ -2057,6 +2057,7 @@ if(typeof LId[1] != 'undefined') {
  }])
  .directive('dropZone', function() {
   return function($scope, element, attrs) {    
+    var video_extsn = ['video/ogg', 'video/mp4', 'video/3gp'];
     return element.dropzone({
       url: "/mlg/teachers/uploadfile",
       maxFilesize: 100,
@@ -2067,7 +2068,7 @@ if(typeof LId[1] != 'undefined') {
           done();
         }else if (element.context.id == 'file-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
           done();
-        }else if (element.context.id == 'file-video' && file.type == 'video/*') {
+        }else if (element.context.id == 'file-video' && video_extsn.indexOf(file.type) != -1) {
           done();
         }else if (element.context.id == 'ans-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
           done();
@@ -2157,7 +2158,7 @@ if(typeof LId[1] != 'undefined') {
             alert('YOU can upload only 4 images.');
           }
 
-        }else if(file.type == 'video/*') {
+        }else if(video_extsn.indexOf(file.type) != -1) {
           if (videos != '') {
             videos = videos +','+file.xhr.response;
             $scope.video = videos;
