@@ -1,4 +1,12 @@
 angular.module('mlg_student')
+  .filter("commaBreak", function () {
+    return function ( value ) {
+      if (!value.length) {
+          return;
+      }
+      return value.split(',');
+    };
+})
 .factory('loginHttpService',['$http','urlParams',function($http,urlParams){
 	
 	var loginHttpResponse={};	
@@ -961,67 +969,73 @@ img.src = url;
 		window.location.href='/mlg_ui/app/';
 	}
 	$scope.getIframeSrc = function (videoId) {
-		return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + videoId);
+      return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + videoId);
 	};
+	$scope.getImgSrc = function (imageUrl) {
+      return $sce.trustAsResourceUrl($scope.base_url + '/' + imageUrl.trim());
+	};
+	$scope.getVideoSrc = function (videoUrl) {
+      return $sce.trustAsResourceUrl($scope.base_url + '/' + videoUrl.trim());
+	};
+    $scope.base_url = urlParams.baseURL;
 	var pid = $routeParams.pid;
 	var type = $routeParams.type;
 	var course_id = $routeParams.course_id;
 	loginHttpService.getAllCourseList(pid, type, course_id).success(function(response) {
-		if(response.response.course_details.length > 0){
-			$scope.topic_detail = response.response.course_details;
-			var khan_api_slugs = response.response.khan_api_slugs;
-			$scope.teacher_contents = response.response.teacher_contents;
-			var khan_api_response_content = [];
-			if (khan_api_slugs != '') {
-				angular.forEach(khan_api_slugs, function(khan_api_slug, index) {
-					$http.get(urlParams.khanApiTopic + khan_api_slug).success(
-						function(contents) {
-							angular.forEach(contents.children, function(child, key) {
-								if (child.kind.toUpperCase() != 'EXERCISE') {
-									if (child.kind.toUpperCase() == 'VIDEO') {
-										var content_title = response.response.khan_api_content_title;
-										if (content_title.indexOf(child.id) !== -1) {
-											$http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
-												var youtube_id = video_response.data.translated_youtube_id;
-												khan_api_response_content.push({
-													name: child.title,
-													descriptions: child.description,
-													kind: child.kind,
-													url: child.url,
-													youtube_id: youtube_id
-												});
-											});
-										}
-									} else if (child.kind.toUpperCase() == 'ARTICLE') {
-										$http.get(urlParams.khanApiArticle + child.internal_id).then(function(article_response) {
-											var article_content = JSON.parse(article_response.data.perseus_content);
-											var article_description = article_content[0].content;
-											khan_api_response_content.push({
-												name: child.title,
-												descriptions: article_description,
-												kind: child.kind,
-												url: child.url,
-											});
-										});
-									} else {
-										khan_api_response_content.push({
-											name: child.title,
-											descriptions: child.description,
-											kind: child.kind,
-											url: child.url,
-										});
-									}
-								}
-							});
-}
-);
-});
-}
-$scope.khan_api_content = khan_api_response_content;
-} else {
-	response.topic_detail = [];
-}
-});
+      if (response.response.course_details.length > 0) {
+		$scope.topic_detail = response.response.course_details;
+		var khan_api_slugs = response.response.khan_api_slugs;
+		$scope.teacher_contents = response.response.teacher_contents;
+		var khan_api_response_content = [];
+		if (khan_api_slugs != '') {
+		  angular.forEach(khan_api_slugs, function(khan_api_slug, index) {
+		    $http.get(urlParams.khanApiTopic + khan_api_slug).success(
+              function(contents) {
+                angular.forEach(contents.children, function(child, key) {
+                  if (child.kind.toUpperCase() != 'EXERCISE') {
+                    if (child.kind.toUpperCase() == 'VIDEO') {
+                      var content_title = response.response.khan_api_content_title;
+                      if (content_title.indexOf(child.id) !== -1) {
+                        $http.get(urlParams.khanApiVideo + child.id).then(function(video_response) {
+                          var youtube_id = video_response.data.translated_youtube_id;
+                          khan_api_response_content.push({
+                            name: child.title,
+                            descriptions: child.description,
+                            kind: child.kind,
+                            url: child.url,
+                            youtube_id: youtube_id
+                          });
+                        });
+                      }
+                    } else if (child.kind.toUpperCase() == 'ARTICLE') {
+                      $http.get(urlParams.khanApiArticle + child.internal_id).then(function(article_response) {
+                        var article_content = JSON.parse(article_response.data.perseus_content);
+                        var article_description = article_content[0].content;
+                        khan_api_response_content.push({
+                          name: child.title,
+                          descriptions: article_description,
+                          kind: child.kind,
+                          url: child.url,
+                        });
+                      });
+                    } else {
+                      khan_api_response_content.push({
+                        name: child.title,
+                        descriptions: child.description,
+                        kind: child.kind,
+                        url: child.url,
+                      });
+                    }
+                  }
+                });
+              });
+            });
+          }
+        $scope.khan_api_content = khan_api_response_content;
+      } else {
+        response.topic_detail = [];
+      }
+    });
 
 $scope.apiTabs=function(){
 	$(".table-of-content .nav-tabs li").removeClass("active");

@@ -17,7 +17,12 @@
         <h6>Table of Content</h6>
         <ul class="nav nav-tabs" id="tableOfContent" >
             <!--<li ng-repeat="topic in topic_detail"><i class="icon icon-document"></i> <a data-toggle="tab" ng-click="apiTabs();" href="#topic_{{$index+1}}">{{topic.name}}</a></li>-->
-            <li ng-init="apiTabs()" ng-repeat="teacher_content in teacher_contents"><i class="icon icon-document"></i> <a data-toggle="tab" ng-click="apiTabs();" href="/subskill_content/#teacher_{{$index+1}}" id="teacher_link_{{$index}}">{{teacher_content.name}}</a></li>
+            <li ng-init="apiTabs()" ng-repeat="teacher_content in teacher_contents">
+              <i ng-if="teacher_content.kind.toUpperCase() == 'TEXT'" class="icon icon-document"></i>
+              <i ng-if="teacher_content.kind.toUpperCase() == 'VIDEO'" class="icon icon-video"></i>
+              <i ng-if="teacher_content.kind.toUpperCase() == 'IMAGE'" class="icon icon-document"></i>
+              <a data-toggle="tab" ng-click="apiTabs();" href="/subskill_content/#teacher_{{$index+1}}" id="teacher_link_{{$index}}">{{teacher_content.name}}</a>
+            </li>
             <li ng-repeat="khan_content in khan_api_content" >
               <i ng-if="khan_content.kind.toUpperCase() != 'VIDEO'" class="icon icon-document"></i>
               <i ng-if="khan_content.kind.toUpperCase() == 'VIDEO'" class="icon icon-video"></i>
@@ -32,7 +37,24 @@
 
         <!--Teacher Contents-->
         <div ng-repeat="teacher_content in teacher_contents"  id="teacher_{{$index+1}}" class="tab-pane fade active in ">
-          <span ng-bind-html="teacher_content.descriptions">&nbsp;</span>
+          <!--<span ng-if="teacher_content.kind == 'image'"><embed ng-src="{{getEmbedSrc(teacher_content.descriptions)}}"/></span>-->
+          <span ng-if="teacher_content.kind.toUpperCase() == 'IMAGE'">
+            <span ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">
+              <a href="{{getImgSrc(value)}}" target="_blank"><img ng-src="{{getImgSrc(value)}}" width="130px" height="100px"></a>
+            <br>
+            <br>
+            </span>
+          </span>
+          <span ng-if="teacher_content.kind.toUpperCase() == 'VIDEO'">
+            <span ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">
+              <video width="320" height="240" controls>
+                  <source ng-src="{{getVideoSrc(value)}}">
+              </video>
+              <br>
+              <br>
+            </span>
+          </span>
+          <span ng-if="teacher_content.kind == 'text'" ng-bind-html="teacher_content.descriptions">&nbsp;</span>
         </div>
 
         <!-- KHAN Content -->
