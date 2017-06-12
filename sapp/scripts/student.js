@@ -56,10 +56,13 @@ angular.module('mlg_student')
 	}
 
 	loginHttpResponse.getAllCourseList=function(pid, type, course_id, user_id){
-		var url = urlParams.baseURL+urlParams.getAllCourseList+'/'+pid;
-		if ((typeof course_id != 'undefined') && (course_id != '')) {
-			url = urlParams.baseURL+urlParams.getAllCourseList+'/'+ pid + '/' + type +'/' + course_id;
-		}
+        if ((typeof pid == 'undefined') || (pid === '')) {
+          pid = null;
+        }
+        var url = urlParams.baseURL+urlParams.getAllCourseList+'/'+pid;
+        if ((typeof course_id != 'undefined') && (course_id != '')) {
+          url = urlParams.baseURL+urlParams.getAllCourseList+'/'+ pid + '/' + type +'/' + course_id;
+        }
 		if ((typeof user_id != 'undefined') && (user_id != '')) {
 			url = url + '/' + user_id;
 		}
@@ -1211,7 +1214,13 @@ promise.then(function(result) {
 	var course_id = $routeParams.course_id;
 	loginHttpService.getAllCourseList(pid, type, course_id, get_uid).success(function(response) {
       if (response.response.course_details.length > 0) {
-		$scope.topic_detail = response.response.course_details;
+		process_page(response);
+      } else {
+        response.topic_detail = [];
+      }
+
+      function process_page(response) {
+        $scope.topic_detail = response.response.course_details;
 		var khan_api_slugs = response.response.khan_api_slugs;
 		$scope.teacher_contents = response.response.teacher_contents;
 		var khan_api_response_content = [];
@@ -1260,8 +1269,6 @@ promise.then(function(result) {
             });
           }
         $scope.khan_api_content = khan_api_response_content;
-      } else {
-        response.topic_detail = [];
       }
     });
 
