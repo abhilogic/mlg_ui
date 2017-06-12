@@ -46,7 +46,7 @@
             </span>
           </span>
           <span ng-if="teacher_content.kind.toUpperCase() == 'VIDEO'">
-            <span ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">
+            <span class="MLG-{{networkState}}" ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">
               <video width="320" height="240" controls>
                   <source ng-src="{{getVideoSrc(value)}}">
               </video>

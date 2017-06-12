@@ -1212,12 +1212,21 @@ promise.then(function(result) {
 	//var type = $routeParams.type;
 	var type = 'type';
 	var course_id = $routeParams.course_id;
-	loginHttpService.getAllCourseList(pid, type, course_id, get_uid).success(function(response) {
-      if (response.response.course_details.length > 0) {
-		process_page(response);
-      } else {
-        response.topic_detail = [];
-      }
+    $scope.networkState = 'online';
+    if ((navigator.onLine == false) && (localStorage.getItem('responseForStudentContent') != null)) {
+      $scope.networkState = 'offline';
+      var response = JSON.parse(localStorage.getItem('responseForStudentContent'));
+      process_page(response);
+    } else {
+      loginHttpService.getAllCourseList(pid, type, course_id, get_uid).success(function(response) {
+        if (response.response.course_details.length > 0) {
+          localStorage.setItem('responseForStudentContent', JSON.stringify(response));
+          process_page(response);
+        } else {
+          response.topic_detail = [];
+        }
+      });
+    }
 
       function process_page(response) {
         $scope.topic_detail = response.response.course_details;
@@ -1270,7 +1279,8 @@ promise.then(function(result) {
           }
         $scope.khan_api_content = khan_api_response_content;
       }
-    });
+
+
 
 $scope.apiTabs=function(){
 	$(".table-of-content .nav-tabs li").removeClass("active");
