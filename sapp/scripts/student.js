@@ -55,10 +55,13 @@ angular.module('mlg_student')
 		});
 	}
 
-	loginHttpResponse.getAllCourseList=function(pid, type, course_id){
+	loginHttpResponse.getAllCourseList=function(pid, type, course_id, user_id){
 		var url = urlParams.baseURL+urlParams.getAllCourseList+'/'+pid;
 		if ((typeof course_id != 'undefined') && (course_id != '')) {
 			url = urlParams.baseURL+urlParams.getAllCourseList+'/'+ pid + '/' + type +'/' + course_id;
+		}
+		if ((typeof user_id != 'undefined') && (user_id != '')) {
+			url = url + '/' + user_id;
 		}
 		return $http({
 			method:'GET',				
@@ -889,7 +892,6 @@ img.src = url;
 	var pid = $routeParams.id;
 	$scope.cid=$routeParams.id;
 	loginHttpService.getAllCourseList(pid).success(function(response) {
-		console.log(response.response);
 		if(response.response.course_details.length > 0){
 			$scope.subject_detail = response.response.course_details;
 		} else{
@@ -981,7 +983,7 @@ img.src = url;
 	var pid = $routeParams.pid;
 	var type = $routeParams.type;
 	var course_id = $routeParams.course_id;
-	loginHttpService.getAllCourseList(pid, type, course_id).success(function(response) {
+	loginHttpService.getAllCourseList(pid, type, course_id, get_uid).success(function(response) {
       if (response.response.course_details.length > 0) {
 		$scope.topic_detail = response.response.course_details;
 		var khan_api_slugs = response.response.khan_api_slugs;
