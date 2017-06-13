@@ -70,6 +70,8 @@ student : 4,
 parent  : 30,
 student  : 60,
 teacher  : 30,
+}).value('quiz_pass_score', {
+  score  : 60
 }).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 //var access = routingConfig.accessLevels;
 $routeProvider

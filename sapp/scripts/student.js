@@ -833,6 +833,9 @@ img.src = url;
 .controller('subskillQuizCtrl',['$rootScope','$scope','$routeParams','$localStorage','$filter','loginHttpService','$location','commonActions','urlParams','$http','user_roles',function($rootScope,$scope,$routeParams,$localStorage,$filter, loginHttpService,$location,commonActions,urlParams,$http,user_roles) {
 	var get_uid=commonActions.getcookies(get_uid);
 	var senddata= {};
+	var attempt_questions_status = [];
+	$scope.questions_status = [];
+			  	
 	 
 
 	var promise = loginHttpService.getCourseInfo($routeParams.subskill_id).success(function(crinfo) {	
@@ -847,14 +850,16 @@ img.src = url;
 
 
 promise.then(function(result) {
+	$scope.course_name = result.data.response.course_Information.course_name;
 		 $scope.numToAlpha =function(idx) {
           var getAlpha = ['A','B','C','D','E','F','G'];
           return getAlpha[idx];
         }
 
-       $scope.questate_class = 'active';
+       //$scope.questate_class = 'active';
        $scope.data = {};
        var skip = null;
+       $scope.attempts = 0;
 
 	//console.log(result);
 	senddata ={
@@ -863,44 +868,112 @@ promise.then(function(result) {
 		subskill_id : $routeParams.subskill_id
 	};
 
-	// API to create quiz and questions list of quiz created for user 
-	loginHttpService.createQuizOnSubskill(senddata).success(function(resitem){
 
-		if (resitem.data.status == true) {
-			//$scope.assignment_details = resitem.data.assignment_details;
-			var quizquestions = resitem.data.questions;
+	// To maintain old quiz questions if user quize questions response is incomplete
+	var localQuizResponse = JSON.parse(localStorage.getItem('localQuizResponse'));
+	var localQuestions= JSON.parse(localStorage.getItem('ngStorage-localquestions'));
+	if(localQuizResponse ==null && localQuestions==null ){
+		
+		// API to create quiz and questions list of quiz created for user 
+		loginHttpService.createQuizOnSubskill(senddata).success(function(resitem){
 
-			//local storage functionality implementation
-	  		$localStorage.localquestions= quizquestions; //set value in local storage	  	
-	  		$scope.data.questions= $localStorage.localquestions //get value in localstorage
+			if (resitem.data.status == true) {
+				//$scope.assignment_details = resitem.data.assignment_details;
+				var quizquestions = resitem.data.questions;
 
-	  		// To check the sequence of the question in quiz	  	
-	  		if(localStorage.getItem('userQuesSequence')!=null ) {
+				//local storage functionality implementation
+		  		$localStorage.localquestions= quizquestions; //set value in local storage	  	
+		  		$scope.data.questions= $localStorage.localquestions //get value in localstorage
+
+
+
+		  		// To check the sequence of the question in quiz	  	
+		  		if(localStorage.getItem('userQuesSequence')!=null ) {
+		  			$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
+		  		}else{
+		  			$scope.sequence=0;	  				  			
+		  			var a=[];
+		  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+		  		}
+
+		  		// Set current question
+		  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
+		  		$scope.total_questions=$scope.data.questions.length-1;
+
+		  		// To maintain the question number indicator
+			  	var qstatus={};
+			  	for(var i=0; i<$scope.total_questions; i++){
+			  		qstatus ={
+		    			sequence : i,
+		    			status   : 'inactive'
+		    		}
+		    		attempt_questions_status.push(qstatus);
+
+			  	}
+			  	if(localStorage.getItem('questionsStatus')==null ) {
+			  		localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));	  	
+			  	}
+			  	
+			  	
+			  	//$scope.questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
+			  	attempt_questions_status[$scope.sequence]['status']="minimize";
+			  	$scope.questions_status = attempt_questions_status;
+
+		  		
+
+			}else{
+					$scope.message = "Issue in traversing page";
+			}
+		}); // end createquiz APi
+			
+
+	}else{ // if quiz attemped incomplete
+		$scope.data.questions= $localStorage.localquestions;
+		
+		// To check the sequence of the question in quiz	  	
+	  		if(localStorage.getItem('userQuesSequence')!=null && localStorage.getItem('userQuesSequence') !=0 ) {
 	  			$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
 	  		}else{
 	  			$scope.sequence=0;
 	  			var a=[];
 	  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
 	  		}	  	
-		  	
+	  	
 	  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
 	  		$scope.total_questions=$scope.data.questions.length-1;
-		}else{
-				$scope.message = "Issue in traversing page";
-		}
-	});
 
-});
-	 
+	  		// To maintain the question number indicator
+			  	var qstatus={};
+			  	for(var i=0; i<$scope.total_questions; i++){
+			  		qstatus ={
+		    			sequence : i,
+		    			status   : 'inactive'
+		    		}
+		    		attempt_questions_status.push(qstatus);
 
-			
+			  	}
+			  	if(localStorage.getItem('questionsStatus')==null ) {
+			  		localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));	  	
+			  	}
+			  	
+			  	
+			  	//$scope.questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
+			  	attempt_questions_status[$scope.sequence]['status']="minimize";
+			  	$scope.questions_status = attempt_questions_status;
+
+
+
+	}
+
+
 	
 
-	//});
+}); // end then promise
+	 
 
 		 // To read the question in male UK voice    
 	  	$scope.readQuestion=function(){            
-            var questiontext= $scope.currentquestion.question_name;          
+            var questiontext= $scope.currentquestion.questionName;          
             responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
 	  	}
 
@@ -909,22 +982,26 @@ promise.then(function(result) {
     $scope.onSubmitQuestion = function(frm,skip){ 
     	$scope.error_optionmessage=""; 
     	var correctoption=$scope.currentquestion.answers[0].value;
-		 var question_marks=$scope.currentquestion.answers[0].score;
+    	var newqstate ='active';
+
+    	
+		 //var question_marks=$scope.currentquestion.question_marks;
 
 
     	// step 1- To check buton click is submit or skip button (if skip = 0 means click on submit/ skip)
-    	if(skip == 1){ // if skip button is clicked
-    		
-    		//Step-2  Set required coulum values
+    	if(skip == 1){ // if skip button is clicked    		
+        	newqstate ="cancel";        	
+     
+    		//Step-2  Set required coulum values    			
 	 			var userExamResponse={};
       	 		userExamResponse={
        				user_id 	: get_uid,
        				exam_id 	: $scope.currentquestion.quiz_id,
        				item_id 	: $scope.currentquestion.question_id,
+       				item_marks	: $scope.currentquestion.question_marks,
        				response 	: '',
        				correct 	: 0,
-       				score 		: 0,
-       				item_marks	: question_marks,
+       				score 		: 0,       				
        				skip_count 	: 1,
        				//time_taken 	: 1,
        			}
@@ -932,12 +1009,24 @@ promise.then(function(result) {
     	}
     	else{	// if submit button is clicked
 
+    		 newqstate ="done";
+
+    		/*// update question status in question indicator
+        	attempt_questions_status[$scope.sequence]['status']="done";
+        	attempt_questions_status[$scope.sequence+1]['status']="minimize";
+        	localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));        	
+        	//$scope.questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
+        	$scope.questions_status = attempt_questions_status;*/
+        	
+
     		// check selected option   frm.selectedoption
 	 		if(typeof frm.selectedoption=='undefined'){
 	 			$scope.error_optionmessage="Please select you option";	 			
 	 		}else{
 	 			//$scope.sequence +=1;
     			//$scope.currentquestion= $scope.assigment_items[$scope.sequence];
+
+    			
 
     			//step-1 - calculate right and wrong attempt 		 		
 		 		if(frm.selectedoption==correctoption){
@@ -955,17 +1044,17 @@ promise.then(function(result) {
 		 			alert('wrong'); 
 		 		}
 
-		 		//Step-2  Set required coulum values
+		 		//Step-2  Set required coulum values		 		
 	 			var userExamResponse={};
       	 		userExamResponse={
        				user_id 	: get_uid,
        				exam_id 	: $scope.currentquestion.quiz_id,
        				item_id 	: $scope.currentquestion.question_id,
+       				item_marks	: $scope.currentquestion.question_marks,
        				response 	: frm.selectedoption,
        				correct 	: selectedAnswer,
-       				score 		: score,
-       				item_marks	: question_marks,
-       				//skip_count 	: 1,
+       				score 		: score,       				
+       				skip_count 	: 0,
        				//time_taken 	: 1,
        			}
        		}
@@ -982,12 +1071,21 @@ promise.then(function(result) {
        				a = JSON.parse(localStorage.getItem('localQuizResponse'));    
     				a.push(userExamResponse); 
     				localStorage.setItem('localQuizResponse', JSON.stringify(a));
-
-
 		 			localStorage.setItem('userQuesSequence', $scope.sequence+1);
 		 			$scope.sequence+=1;
 		 			$scope.currentquestion= $scope.data.questions[$scope.sequence];
 		 			$scope.frm={};
+
+		 			/*// update question status in question indicator        	
+		        	attempt_questions_status[$scope.sequence]['status']= newqstate;
+		        	attempt_questions_status[$scope.sequence+1]['status']="minimize";
+		        	      		
+		        	localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));        	
+		        	//$scope.questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
+		        	$scope.questions_status = attempt_questions_status;*/
+
+
+
 		 		}
 		 		else if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
 		 			console.log($scope.error_optionmessage);
@@ -1002,10 +1100,16 @@ promise.then(function(result) {
 							if (apiresponse.response.status == "true") {
 								var quiz_id=apiresponse.response.quiz_attampt;
 								localStorage.setItem('quiz_id', quiz_id);				
+		  						
 		  						// Step -5 to Get the User Result
 		  						loginHttpService.getUserQuizResponse(get_uid,$scope.currentquestion.quiz_id,quiz_id).success(function(quizResultResponse) {
-						 			 a=[];
-		  							localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+						 			// a=[];
+		  							//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+						 			//localStorage.setItem('ngStorage-localquestions', JSON.stringify(a));
+						 			
+						 			localStorage.removeItem("localQuizResponse"); // empty the local storage
+						 			localStorage.removeItem("ngStorage-localquestions");
+
 						 			if (quizResultResponse.response.status == "true") {
 						 					var correct_answer= quizResultResponse.response.correct_questions;
 						 					var wrong_answer= quizResultResponse.response.correct_questions;
@@ -1018,7 +1122,7 @@ promise.then(function(result) {
 						 						st_result= "Your are Pass";
 						 						alert("Your are Pass");
 						 					}
-											window.location.href='challenges';
+											//window.location.href='challenges';
 						 					}
 						 				});
 

@@ -58,10 +58,7 @@
               		<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
               		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
               	</li>
-
-              	<!-- <li> <button  class="btn btn-skip" ng-click="onSkipQuestion(frm)">skip</button>
-              	<button  class="btn btn-submit" ng-click="onSubmitQuestion(frm)">Submit</button>
-              	</li>  -->                
+              	          
             </ul>
             <div class="text-center" >
             	<span style="color:red; font-size:14px;">{{error_optionmessage}}</span>
@@ -74,14 +71,12 @@
               <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm)">Submit</button>
             </div> -->
       
-            <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: false, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
-     			 <div owl-carousel-item=""  class="item" ng-repeat="ques in assigment_items" class="item">        			
-                		<i class="icon"></i>
-                		<span class="ques_no">Ques <i>{{$index+1}}</i></span>
+            <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: yes, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
+     			    <div owl-carousel-item=""  class="item {{ques.status}}" ng-repeat="ques in questions_status"> 
+                	  <i class="icon"></i>
+                    <span class="ques_no">Ques <i>{{$index+1}}</i></span>
              	</div>
-    		</data-owl-carousel> 
-
-
+    		</data-owl-carousel>
 
           </div>
       </div>
