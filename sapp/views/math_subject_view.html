@@ -14,7 +14,8 @@
 						<div class="wooden_frame_content_cover">
 							<img src="assets/img/castles_map_web.jpg" alt="" class="castles_map_web_img"/>
 							<div class="subject_view_castles_block" >
-								<a href="pre-test/{{cid}}"  ng-value="studentResult">
+								
+						<!-- 		<a href="pre-test/{{cid}}"  ng-value="studentResult">
 									<div ng-class="{'winned_castle': studentResult == 'pass' }" class="castle topic_castle subskills_castle_1">
 										<span class="castle__img "></span>
 										<span class="fire__img"></span>
@@ -22,300 +23,75 @@
 										<span class="castle__text">Training Arena</span>
 									</div>
 								</a>
+
 								<a ng-if="studentResult == 'pass'"  ng-repeat="subject in subject_detail " href="skill-door/{{subject.name|changeInURL }}/{{subject.course_id}}">
-                                                                 <div ng-class="{'inactive' : studentResult == 'fail'}" class="castle topic_castle subskills_castle_{{$index+2}}">
+                                      <div class="castle topic_castle subskills_castle_{{$index+2}}">
 										<span class="castle__img "></span>
 										<span class="fire__img"></span>
 										<span class="flag__icon"></span>
 										<span class="castle__text">{{subject.name}}</span>
 									</div>
 								</a>
-                                                                <a ng-if="studentResult == 'fail'"  ng-repeat="subject in subject_detail " ng-disabled="studentResult == 'fail'">
+
+                               <a ng-if="studentResult == 'fail'"  ng-repeat="subject in subject_detail " ng-disabled="studentResult == 'fail'">
 								  <div ng-class="{'inactive' : studentResult == 'fail'}" class="castle topic_castle subskills_castle_{{$index+2}}">
 										<span class="castle__img "></span>
 										<span class="fire__img"></span>
 										<span class="flag__icon"></span>
 										<span class="castle__text">{{subject.name}}</span>
 									</div>
-								</a>
+								</a> -->
+
+						<!-- pre Test -->
+						<a href="#" ng-if="pretest_result =='pass' ">
+							<div ng-class="{'winned_castle': pretest_result == 'pass' }" class="castle topic_castle subskills_castle_1">
+								<span class="castle__img "></span>
+								<span class="fire__img"></span>
+								<span class="flag__icon"></span>
+								<span class="castle__text">Training Arena</span>
+							</div>
+						</a>
+						<a href="pre-test/{{cid}}"  ng-if="pretest_result == 'fail' ">
+							<div ng-class="{'inactive': pretest_result == 'fail' }" class="castle topic_castle subskills_castle_1">
+								<span class="castle__img "></span>
+								<span class="fire__img"></span>
+								<span class="flag__icon"></span>
+								<span class="castle__text">Training Arena</span>
+							</div>
+						</a>
+						<!-- end pre Test -->
+
+						<!-- start skill links -->
+						<a href="skill-door/{{subject.name|changeInURL }}/{{subject.course_id}}"  ng-if="pretest_result == 'pass' "  ng-repeat="subject in subject_detail " >
+							  <div class="castle topic_castle subskills_castle_{{$index+2}}">
+									<span class="castle__img "></span>
+										<span class="fire__img"></span>
+										<span class="flag__icon"></span>
+										<span class="castle__text">{{subject.name}}</span>
+									</div>
+						</a>
+						<a href="#" ng-if="pretest_result == 'fail'"  ng-repeat="subject in subject_detail " >
+							<div class="castle topic_castle subskills_castle_{{$index+2}}">
+								<span class="castle__img "></span>
+								<span class="fire__img"></span>
+								<span class="flag__icon"></span>
+								<span class="castle__text">{{subject.name}}</span>
+							</div>
+						</a>						
+						<!-- start skill links -->
+
+
+
+
+
+
+
+
+
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- subject_view_frame -->
-			<!-- <div class="subject_view_frame_mobile">
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_1 winned_castle">
-							<span class="castle__text">Addition</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_2">
-							<span class="castle__text">Algebra</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_3 challenge_castle">
-							<span class="castle__text">Calculus</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_4">
-							<span class="castle__text">Comparing</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_5">
-							<span class="castle__text">Decimals</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_6">
-							<span class="castle__text">Division</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_7">
-							<span class="castle__text">Estimation</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_8">
-							<span class="castle__text">Fractions</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_9">
-							<span class="castle__text">Functions & Equations</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_10">
-							<span class="castle__text">Geometry</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_11">
-							<span class="castle__text">Graphs</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_12">
-							<span class="castle__text">Integers</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_13">
-							<span class="castle__text">Logic & Reasoning</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_14">
-							<span class="castle__text">Measurement</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_15">
-							<span class="castle__text">Mixed operations</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_16">
-							<span class="castle__text">Money & consumer maths</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_17">
-							<span class="castle__text">Multiplication</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_18">
-							<span class="castle__text">Number Theory</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_19">
-							<span class="castle__text">Patterns</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_20">
-							<span class="castle__text">Percents</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_21">
-							<span class="castle__text">Place values</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_22">
-							<span class="castle__text">Probability & statistics</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_23">
-							<span class="castle__text">Ratios & Proportions</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_24 ">
-							<span class="castle__text">Subtraction</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_25">
-							<span class="castle__text">Time</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_26">
-							<span class="castle__text">Trigonometry</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-				<div class="castle_repeat_block">
-					<a href="#">
-						<div class="castle topic_castle subskills_castle_27">
-							<span class="castle__text">Word problems</span>
-							<span class="castle__img "></span>
-							<span class="fire__img"></span>
-							<span class="flag__icon"></span>
-						</div>
-					</a>
-				</div>
-			</div> -->
+				</div>			
 		</div>
 	</div>
 	

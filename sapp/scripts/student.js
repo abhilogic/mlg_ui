@@ -1185,18 +1185,25 @@ promise.then(function(result) {
 		}                 
 	});
 
-	
+	// API to check arena  Flag/unflag
 	var quiz_id=localStorage.getItem('quiz_id');
 	var quiz_type_id = quiz_type.PRETEST;
-	var quiz_course_id = $routeParams.id;
-	
+	var quiz_course_id = $routeParams.id;	
 	loginHttpService.getUserQuizResponseOnSite(get_uid,quiz_type_id,quiz_course_id).success(function(response) {
 		if (response.response.status == true && response.response.student_result_percent>= quiz_mastered_score.PRETEST ) {
-			$scope.studentResult = 'pass';
+			$scope.pretest_result = 'pass';
 		}else{
-			$scope.studentResult = 'fail';
+			$scope.pretest_result = 'fail';
 		}
 	});
+
+	//API to check burn fire
+	//1. if knight challenge done get flag
+	// 2. if quiz in skilldoor is not mastered and student get assignment get burn fire.
+	$scope.mycourse = function($index,$skill_id){
+		console.log($index);
+	}
+
 
 }])
 .controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$localStorage',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$localStorage) {
