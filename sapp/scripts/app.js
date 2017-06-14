@@ -122,7 +122,7 @@ $routeProvider
   controller : 'avtarCtrl',   
 }).when('/subskill_content/:subskill_name/:course_id', {
 	templateUrl : 'views/subskills-content.html',
-	controller : 'subskillContent',		
+	controller : 'subskillContent',
 }).when('/challenge/:assignment_id', {
   templateUrl : 'views/assignment-quiz.html',
   controller : 'challengesCtrl',   
@@ -226,6 +226,9 @@ $rootScope.$on('$viewContentLoaded', function() {
         }
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
           redirectStudentOnSubscriptionOver();
+          if (next !== current && (localStorage.getItem('responseForStudentContent') !== null)) {
+            localStorage.removeItem('responseForStudentContent');
+          }
         });
 });
 

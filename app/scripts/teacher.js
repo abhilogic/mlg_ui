@@ -366,6 +366,13 @@ teacherHttpResponse.getFilterdLesson=function(uid,pnum,grade,course,skill){
     url   : urlParams.baseURL+urlParams.getFilterdLesson+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill
   });
 }
+teacherHttpResponse.setTeacherSettings = function(data){
+  return $http({
+    method: 'POST',
+    data  : data,
+    url   : urlParams.baseURL+urlParams.setTeacherSettings
+  });
+}
 return teacherHttpResponse;
 
 }])
@@ -3956,5 +3963,187 @@ $scope.deleteQuestions = function(Qid,uniqId){
         })
       }
     }
-  }]);
+  }])
+.controller('teacherSettingCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile','urlParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile,urlParams) {
+    var get_uid = commonActions.getcookies(get_uid);
+    $scope.page_url = $location.path();
+    $scope.site_root = urlParams.siteRoot;
+    $scope.frm = {};
+    $scope.frm.address_line_1 = '';
+    $scope.frm.profile_picture = '';
+    $scope.profile_image = '/assets/img/student-img/stud_img_1.png';
+    loginHttpService.getUserDetails(get_uid).success(function (response) {
+      if (response.data.user_all_details != '') {
+        var user = response.data.user_all_details[0];
+        $scope.full_name = user.first_name + ' ' + user.last_name;
+        $scope.email = user.email;
+        if (user.user_detail.profile_pic != '' && user.user_detail.profile_pic != null) {
+          $scope.profile_image = response.data.image_directory + '/' + user.user_detail.profile_pic;
+        }
+        $scope.frm.address_line_1 = user.user_detail.address_line_1;
+        $scope.frm.address_line_2 = user.user_detail.address_line_2;
+        $scope.frm.district = user.user_detail.district;
+        $scope.frm.city = user.user_detail.city;
+        $scope.frm.state = user.user_detail.state;
+        $scope.frm.country = user.user_detail.country;
+      }
+      loginHttpService.getUserPreferences(get_uid).success(function (resp) {
+        if (resp.status == true) {
+          $scope.frm.mobile = resp.data.mobile;
+          $scope.frm.sms_subscription = (resp.data.sms_subscription == 0) ? false : true;
+        } else {
+          $scope.frm.mobile = '';
+          $scope.frm.sms_subscription = false;
+        }
+      });
+    }).error(function(err) {
+      alert('Some Error occured while getting your data');
+    });
 
+    $scope.changePassword = function(user) {
+      loginHttpService.setUserPassword(get_uid, user).success(function (resp) {
+        if (resp.response == true) {
+          alert('Your Password changed sucessfully');
+        } else {
+          alert(resp.response);
+        }
+      });
+    }
+
+    $("#imgInp").on('change', function() {
+        readURL(this);
+    });
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#ImgShw').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $scope.updateMyAccount = function(frm) {
+    if ((typeof frm.profile_picture != 'undefined') && frm.profile_picture != '') {
+      var fd = new FormData();
+      fd.append('file', frm.profile_picture);
+      fd.append('user_id', get_uid);
+      loginHttpService.updateProfilePic(fd).success(function (resp) {
+        if (resp.status == false) {
+          alert('unable to update profile picture');
+        }
+      });
+    }
+    if ($scope.frm.deactivate == true) {
+      var deactivate = confirm('Do you really want to deactivate your account');
+      if (deactivate == false) {
+        return false;
+      } else {
+        loginHttpService.setUserStatus({id: get_uid, status: 0}).success(function(response) {
+          if (response.status) {
+            alert('Your account deactivated successfully');
+          } else {
+            alert('Unable to deactivate your account, Some Error occured');
+          }
+        }).error(function(err) {
+          alert('Some error occured');
+        });
+      }
+    }
+    frm.user_id = get_uid;
+    loginHttpService.updateMyAccount(frm).success(function (resp) {
+      if (resp.status == true) {
+        alert('your Details saved successfully');
+      } else {
+        if (resp.message != '') {
+          alert(resp.message);
+        } else {
+          alert('Some Error occured while saving data');
+        }
+      }
+    }).error(function(x) {
+      alert('Some Error occured while saving data');
+    });
+  };
+
+  $scope.grades = {};
+  $scope.subject_id = '';
+  $scope.subject_name = '';
+  $scope.grade_id = '';
+  $scope.selected_grade = '';
+  $scope.number_of_students_in_class = 0;
+  $scope.getClassSettings = function(grade_subject) {
+    var grade_info = grade_subject.split(',');
+    $scope.subject_id = grade_info[0];
+    $scope.subject_name = grade_info[1];
+    $scope.grade_id = grade_info[2];
+    $scope.selected_grade = grade_info[3];
+    teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,$scope.subject_id).success(function(student_response) {
+      if (student_response.response.status=="true") {
+        $scope.number_of_students_in_class = student_response.response.students.length;
+      } else{
+        $scope.err_message = "No Record Found. Please add student for this class";
+        $timeout(function () { $scope.err_message = ""; }, 3000);
+      }
+    });
+  };
+
+  $scope.pfrm = {};
+  $scope.pfrm.fill_in_the_blanks_question = true;
+  $scope.pfrm.single_choice_question = true;
+  $scope.pfrm.multiple_choice_question = true;
+  $scope.pfrm.true_false_question = true;
+  $scope.changeStatus = function(question_type) {
+    $scope.pfrm[question_type] = !$scope.pfrm[question_type];
+  };
+
+  $scope.teacherClassSettings = function() {
+    getTeacherGrades();
+  };
+
+  function getTeacherGrades() {
+    teacherHttpService.getTeacherGrades(get_uid, user_roles['teacher']).success(function (resp) {
+      if (resp.status == true) {
+       $scope.grades = resp.response;
+      } else {
+        if (resp.message != '') {
+          alert(resp.message);
+        } else {
+          alert('Some Error occured while saving data');
+        }
+      }
+    }).error(function(x) {
+      alert('Some Error occured while saving data');
+    });
+  }
+
+  $scope.submitTeacherSettingForClass = function(pfrm) {
+    if ($scope.selected_grade == '' || $scope.subject_name == '') {
+      alert('Please choose subject or grade to save settings');
+      return false;
+    }
+    pfrm.group_bulder = (pfrm.group_bulder == 'true') ? true : false;
+    pfrm.chat_status = (pfrm.chat_status == 'true') ? true : false;
+    var data = {
+      user_id: get_uid,
+      level_id : $scope.grade_id,
+      course_id : $scope.subject_id,
+      course_name: $scope.subject_name,
+      settings: pfrm
+    }
+    teacherHttpService.setTeacherSettings(data).success(function (resp) {
+      if (resp.status == true) {
+        alert('Your settings saved successfully');
+      } else {
+        if (typeof resp.message != 'undefined' || resp.message != '') {
+          alert(resp.message);
+        } else {
+          alert('Some Error occured while saving data');
+        }
+      }
+    }).error(function(x) {
+      alert('Some Error occured while saving data');
+    });
+  };
+}]);

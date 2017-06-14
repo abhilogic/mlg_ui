@@ -95,6 +95,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getLessonForList : '/teachers/getLessonDetailForListing',
   getFilterdLesson : '/teachers/filteredTeacherLessons',
   setQuotation : '/teachers/setQuotation',
+  setTeacherSettings : '/teachers/setTeacherSettings',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -242,9 +243,9 @@ principal  : 30,
 	}).when('/teacher/subscription',{
 		templateUrl : 'views/dashboard/teacher-subscription.html',
 		controller : 'teacherSubscriptionCtrl',
-	}).when('/teacher/settings',{
+	}).when('/teacher/dashboard/settings',{
 		templateUrl : 'views/dashboard/teacher-setting.html',
-		controller : 'teacherSubscriptionCtrl',
+		controller : 'teacherSettingCtrl',
 	}).when('/teacher/add-new-event-ptm',{
 		templateUrl : 'views/dashboard/teacher-AddNewEventPTM.html',
 		controller : 'teacherAddNewEventPTM',

@@ -1,55 +1,60 @@
-	<!-- Main navbar -->
-	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
-		
-	</top-search-bar>
-	<!-- /main navbar -->
+<!-- Main navbar -->
+<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+<!-- /main navbar -->
 
-	<!-- Page container -->
-	<div class="page-container">
+<!-- Page container -->
+<div class="page-container">
 
-		<!-- Page content -->
-		<div class="page-content">
+  <!-- Page content -->
+  <div class="page-content">
 
-			<!-- Main Sidebar -->
-			<aside class="sidebar sidebar-main" ></aside>
-			<!-- /sidebar -->
+    <!-- Main Sidebar -->
+    <aside class="sidebar sidebar-main"></aside>
+    <!-- /sidebar -->
 
 
-			<!-- Main content -->
-			<div class="content-wrapper">
-				<!-- Content area -->
-				<div class="content">
+    <!-- Main content -->
+    <div class="content-wrapper">
+      <!-- Content area -->
+      <div class="content">
 
-					<!-- Teacher Setting  Panel  -->
-					<div class="panel panel-flat">
-						<div class="panel-heading padding-bottom-5">
-							<h5 class="panel-title text-uppercase">My Setting</h5>
-						</div>
-						<div class="summernote" text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent"></div>
-						<div class="panel-body">
-              <!-- mlg tabs  -->
-                <div class="teacher_setting_tabs">
-                  <div class="row">
-                    <div class="col-md-3 col-sm-12 tab-nav">
-                      <ul class="nav nav-mlg" id="settingTabs">
-                        <li class="active"><a data-toggle="tab" href="#myAcount">My Account</a></li>
-                        <li><a href="#myClasses" data-toggle="tab" >My Class</a></li>
-                        <li><a href="#mySubscription" data-toggle="tab" >My Subscription</a></li>
-                        <li><a href="#myMlgSetting" data-toggle="tab" >MLG Settings</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-md-9 col-sm-12">
-                      <div class="tab-content">
-                        <div id="myAcount" class="tab-pane fade in active">
-                          <form class="form-horizontal">
+        <!-- Teacher Setting  Panel  -->
+        <div class="panel panel-flat panel-setting">
+          <div class="panel-heading padding-bottom-5">
+            <h5 class="panel-title text-uppercase">My Setting</h5>
+          </div>
+          <div class="panel-body">
+            <!-- mlg tabs  -->
+            <div class="teacher_setting_tabs">
+              <div class="row">
+                <div class="col-md-3 col-sm-12 tab-nav">
+                  <ul class="nav nav-mlg" id="settingTabs">
+                    <li class="active"><a data-toggle="tab" href="{{page_url}}#myAcount">My Account</a></li>
+                    <li><a ng-click="teacherClassSettings()" href="{{page_url}}#other" data-toggle="tab" >Other</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                  <div class="tab-content">
+                    <div id="myAcount" class="tab-pane fade in active">
+                      <form class="form-horizontal">
+                        <div class="row">
+                          <div class="col-sm-4 col-xs-12 pull-right">
+                            <div class="img-uploader-cover icon-cemera">
+                              <div class="fileContainer">
+                                <img id="ImgShw" src="{{profile_image}}" alt="">
+                                <input id="imgInp" file-model="frm.profile_picture" type="file">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-8  col-xs-12 pull-left">
                             <div class="form-group edited-input-group">
                               <div class="col-md-3">
                                 <label class="control-label" for="">Full Name</label>
                               </div>
                               <div class="col-md-9">
                                 <div class="input-group edited-input">
-                                  <input  type="text" class="form-control" name="name" value="Jake Jhonson" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
+                                  <input  type="text" class="form-control" name="name" value="{{full_name}}" disabled="disabled">
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
                                 </div>
                               </div>
                             </div>
@@ -59,8 +64,8 @@
                               </div>
                               <div class="col-md-9">
                                 <div class="input-group edited-input">
-                                  <input  type="email" class="form-control" name="name" value="Jhon.jake@gmail.com" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
+                                  <input  type="email" class="form-control" name="name" value="{{email}}" disabled="disabled">
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
                                 </div>
                               </div>
                             </div>
@@ -71,39 +76,144 @@
                               <div class="col-md-9">
                                 <div class="input-group edited-input">
                                   <input  type="text" class="form-control" name="name" value="Christ Sr. Sec. school" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Address</label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <input  type="text" class="form-control" name="name" value="20093 County U Rd, Archbold, OH, 43502" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Phone No.</label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <input  type="phone" class="form-control" name="name" value="+1 - 11111111" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                          <!-- /form -->
-                          <button type="button" class="btn btn-background-none text-primary display-block">Change Password</button>
-                          <button type="button" class="btn btn-background-none text-muted display-block">Deactivate My Account</button>
+                          </div>
                         </div>
-                        <div id="myClasses" class="tab-pane fade">
-                          <h5>Class 7 - C : Science</h5>
+
+                        <div class="form-group edited-input-group">
+                          <div class="col-md-2 ">
+                            <label class="control-label" for="">Address Line 1</label>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="input-group edited-input">
+                              <input  type="text" class="form-control" name="name" ng-model="frm.address_line_1">
+                              <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group edited-input-group">
+                          <div class="col-md-2 ">
+                            <label class="control-label" for="">Address Line 2</label>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="input-group edited-input">
+                              <input  type="text" class="form-control" name="name" ng-model="frm.address_line_2">
+                              <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group edited-input-group">
+                              <div class="col-md-2 ">
+                                <label class="control-label" for="">City</label>
+                              </div>
+                              <div class="col-md-9">
+                                <div class="input-group edited-input">
+                                  <input  type="text" class="form-control" name="name" ng-model="frm.city">
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group edited-input-group">
+                              <div class="col-md-2 ">
+                                <label class="control-label" for="">State</label>
+                              </div>
+                              <div class="col-md-9">
+                                <div class="input-group edited-input">
+                                  <input  type="text" class="form-control" name="name" ng-model="frm.state">
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group edited-input-group">
+                              <div class="col-md-2 ">
+                                <label class="control-label" for="">District</label>
+                              </div>
+                              <div class="col-md-9">
+                                <div class="input-group edited-input">
+                                  <input  type="text" class="form-control" name="name" ng-model="frm.district">
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group edited-input-group">
+                              <div class="col-md-2 ">
+                                <label class="control-label" for="">Country</label>
+                              </div>
+                              <div class="col-md-9">
+                                <div class="input-group edited-input">
+                                  <input  type="text" class="form-control" name="name" ng-model="frm.country">
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group edited-input-group">
+                          <div class="col-md-2 "> 
+                            <label class="control-label" for="">Phone No.</label>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="input-group edited-input">
+                              <input  type="phone" class="form-control" name="name" ng-model="frm.mobile">
+                              <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      <!-- /form -->
+                      <button type="button" class="btn btn-background-none text-primary  padding-left-0" onclick="toggleClassElement('.change-code-input', 'show hide')">Change Password</button>
+                      <div class="form-inline change-code-input hide margin-top-10" >
+                        <input type="password" placeholder="Current Password" ng-model="user.old_password" class="form-control"/>
+                        <input type="password" placeholder="New Password" ng-model="user.password" class="form-control"/>
+                        <button type="button" ng-click="changePassword(user)" class="btn btn-primary ">Change</button>
+                      </div>
+                      <br/>
+                      <button type="button" class="btn btn-background-none text-muted btn-deactive padding-left-0">
+                        <div class="checkbox checkbox-primary display-inline">
+                          <input type="checkbox" ng-model="frm.deactivate" id="parentChat">
+                          <label for="parentChat">Deactivate My Account</label>
+                        </div>
+                      </button>
+                      <i class="pull-right fa fa-question-circle margin-top-15" data-toggle="tooltip" data-placement="left" title="" data-original-title="Turning of this Setting will automatically approve the coupon request by your kids"></i>
+                      <div class="text-right text-xs-center">
+                        <button ng-click="updateMyAccount(frm)" class="btn btn-primary btn-xs">Save</button>
+                      </div>
+                    </div>
+                    <div  id="other" class="tab-pane fade mgl-setting ">
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-5 col-sm-6">
+                                  <label class="lable">Select Class</label>
+                                </div>
+                                <div class="col-md-7 col-sm-6">
+                                  <select ng-change="getClassSettings(frm.grade)" ng-model="frm.grade" class="mlg-selectpicker" 
+                                       ng-options="grade.course_id+','+grade.course_name+','+grade.level_id+','+grade.name as grade.name +'-'+grade.course_name for grade in grades track by grade.course_id" title="Select Class" data-width="auto" data-size="auto">
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel-body">
                           <form class="form-horizontal">
                             <div class="form-group edited-input-group">
                               <div class="col-md-3">
@@ -111,537 +221,303 @@
                               </div>
                               <div class="col-md-9">
                                 <div class="input-group edited-input">
-                                  <input  type="text" class="form-control" name="name" value="Science" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
+                                  <input  type="text" class="form-control" name="name" ng-model="subject_name" disabled="disabled">
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
                                 </div>
                               </div>
                             </div>
+
                             <div class="form-group edited-input-group">
                               <div class="col-md-3">
                                 <label class="control-label" for="">Grade</label>
                               </div>
                               <div class="col-md-9">
                                 <div class="input-group edited-input">
-                                  <input  type="text" class="form-control" name="name" value="Grade 7" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
+                                  <input  type="text" class="form-control" name="name" ng-model="selected_grade" disabled="disabled">
+                                  <span class="input-group-addon"><i class="icon icon-pencil"></i></span>
                                 </div>
                               </div>
                             </div>
+
                             <div class="form-group edited-input-group">
                               <div class="col-md-3">
                                 <label class="control-label" for="">No of students</label>
                               </div>
                               <div class="col-md-9">
                                 <div class="input-group edited-input">
-                                  <input  type="text" class="form-control" name="name" value="Jake Jhonson" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
+                                  <h6>{{number_of_students_in_class}}</h6>
+                                  <p>To Increase number of stundents more than {{number_of_students_in_class}}. Get a personalized quote : <a href="{{site_root}}teacher/requestQuote">Get a Quote</a></p>
                                 </div>
                               </div>
                             </div>
+
                             <div class="form-group edited-input-group">
                               <div class="col-md-3">
-                                <label class="control-label" for="">No of students</label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <h6>20</h6>
-                                  <p>To Increase number of stundents more than 20. Get a personalized quote : <a href="get-quote.html">Get a Quote</a></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Subscriptions</label>
+                                <label class="control-label" for="">Subscriptions </label>
                               </div>
                               <div class="col-md-9">
                                 <div class="input-group edited-input">
                                   <h6>Monthly</h6>
-                                  <p>To change your subscripton for your class, Manage subscription : Subscription Setting </p>
+                                  <p>To change your subscripton for your class, Manage subscription : <a href="{{site_root}}teacher/subscription">Subscription Setting</a></p>
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Automatic Progression <i class="icon icon-i-outline"></i></label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <h6>Monthly</h6>
-                                  <p>To change your subscripton for your class, Manage subscription : Subscription Setting </p>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                          <h5>Class 6 - C : Science</h5>
-                          <form class="form-horizontal">
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Subject</label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <input  type="text" class="form-control" name="name" value="Science" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Grade</label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <input  type="text" class="form-control" name="name" value="Grade 7" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">No of students</label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <input  type="text" class="form-control" name="name" value="Jake Jhonson" disabled="disabled">
-                                    <span class="input-group-addon"><i class="icon icon-pencile"></i></span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">No of students</label>
-                              </div>
-                              <div class="col-sm-9">
-                                <div class="input-group edited-input">
-                                  <h6>20</h6>
-                                  <p>To Increase number of stundents more than 20. Get a personalized quote : <a href="get-quote.html">Get a Quote</a></p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Subscriptions</label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <h6>Monthly</h6>
-                                  <p>To change your subscripton for your class, Manage subscription : Subscription Setting </p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Automatic Progression <i class="icon icon-i-outline"></i></label>
-                              </div>
-                              <div class="col-md-9">
-                                <div class="input-group edited-input">
-                                  <h6>Monthly</h6>
-                                  <p>To change your subscripton for your class, Manage subscription : Subscription Setting </p>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                        <div id="mySubscription" class="tab-pane fade">
-                          <h5>Subscriptions Type</h5>
-                          <form class="form-horizontal">
-                            <div class="row margin-0">
-															<div class="col-md-3">
-	                              <label class="control-label" for="">Duration</label>
-	                            </div>
-	                            <div class="col-md-9">
-	                              <div class="input-group edited-input display-block">
-	                                <h6>Montly <span>(current)</span> <i class="icon icon-pencile"></i></h6>
-	                                <span>change plan</span>
-																	<div id="subscriptionPlans" class="btn-group package-group" data-toggle="buttons">
-																		<label class="btn package-plan">
-																			<input type="radio" name="subscriptionPlans" id="planMonthly" autocomplete="off" checked>
-																			<span class="package-title">Monthly</span>
-																			<strong class="package-offer">20% off</strong>
-																		</label>
-																		<label class="btn package-plan active">
-																			<input type="radio" name="subscriptionPlans" id="planQuarterly" autocomplete="off">
-																			<span class="package-title">Quarterly</span>
-																			<strong class="package-offer">20% off</strong>
-																		</label>
-																		<label class="btn border-0">
-																			<button type="button" class="btn">Save</button>
-																		</label>
-																	</div>
-	                              </div>
-	                            </div>
-                            </div>
-                          </form>
-                          <form class="form-horizontal">
-														<div class="form-group edited-input-group">
-                              <div class="col-md-3">
-                                <label class="control-label" for="">Subject</label>
-                              </div>
-		                          <div class="col-md-9">
-		                            <div class="input-group edited-input display-block">
-		                              <h6>Math and Science <span>(current)</span> <i class="icon icon-pencile"></i></h6>
-		                              <span>add more subjects</span>
-																	<div id="subjectPackages" class="flex-row flex-row-wrap btn-group package-group" data-toggle="buttons">
-																	  <label class="flex-col btn subject">
-																			<input type="radio" name="subjectPackages" id="ubjectPackage1" autocomplete="off" checked>
-																			<span class="package-title">1 Subject</span>
-																	  </label>
-																	  <label class="flex-col btn subject active">
-																	    <input type="radio" name="subjectPackages" id="ubjectPackage2" autocomplete="off">
-																			<span class="package-title">2 Subjects</span>
-																	  </label>
-																		<label class="flex-col btn subject border-0 padding-top-0">
-																			<button type="button" class="btn ">Save</button>
-																	  </label>
-																	</div>
-		                            </div>
-		                          </div>
-                            </div>
-                          </form>
-                        </div>
-                        <div id="myMlgSetting" class="tab-pane fade mgl-setting">
-                          <h5>Frequency of challenges:</h5>
-													<form class="form-horizontal">
+
                             <div class="form-block">
-															<div class="row margin-0">
-																<div class="col-md-2">
-																	<div class="radio radio-primary radio-inline">
-																		<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
-																		<label for="inlineRadio1" class="text-uppercase"> All Class</label>
-																	</div>
-		                            </div>
-																<div class="col-md-5">
-																	<div class="row">
-																		<div class="col-sm-1 col-xs-2">
-																			<div class="radio radio-primary radio-inline">
-																				<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
-																				<label></label>
-				                            	</div>
-																		</div>
-																		<div class="col-sm-10 col-xs-10">
-																			<div class="input-group input-dropdown">
-																				<input type="text" class="form-control" placeholder="Group">
-																		      <div class="input-group-btn">
-																		        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		          <span class="caret"></span>
-																		        </button>
-																		        <ul class="dropdown-menu">
-																		          <li><a class="dropdown-item" href="#">Action</a></li>
-																		          <li><a class="dropdown-item" href="#">Another action</a></li>
-																		          <li><a class="dropdown-item" href="#">Something else here</a></li>
-																		        </ul>
-																		      </div>
-																	    </div>
-																		</div>
-																	</div>
-																</div>
-																<div class="col-md-5">
-																	<div class="row">
-																		<div class="col-sm-1 col-xs-2">
-																			<div class="radio radio-primary radio-inline">
-																				<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
-																				<label></label>
-				                            	</div>
-																		</div>
-																		<div class="col-sm-10 col-xs-10">
-																			<div class="input-group input-dropdown">
-																				<input type="text" class="form-control" placeholder="People">
-																		      <div class="input-group-btn">
-																		        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		          <span class="caret"></span>
-																		        </button>
-																		        <ul class="dropdown-menu">
-																		          <li><a class="dropdown-item" href="#">Action</a></li>
-																		          <li><a class="dropdown-item" href="#">Another action</a></li>
-																		          <li><a class="dropdown-item" href="#">Something else here</a></li>
-																		        </ul>
-																		      </div>
-																	    </div>
-																		</div>
-																	</div>
-		                            </div>
-															</div>
-															<div class="row margin-0">
-																<div class="col-sm-2 col-xs-4">
-																	<div class="radio radio-primary radio-inline">
-																		<input type="radio" id="inlineRadio1" value="option1" name="timePeriod" checked="">
-																		<label>Daily</label>
-																	</div>
-																</div>
-																<div class="col-sm-2 col-xs-4">
-																	<div class="radio radio-primary radio-inline">
-																		<input type="radio" id="inlineRadio1" value="option1" name="timePeriod" checked="">
-																		<label>Weekly</label>
-																	</div>
-																</div>
-																<div class="col-sm-2 col-xs-4">
-																	<div class="radio radio-primary radio-inline">
-																		<input type="radio" id="inlineRadio1" value="option1" name="timePeriod" checked="">
-																		<label>Fortnightly</label>
-																	</div>
-																</div>
-															</div>
+                              <h5>Frequency of challenges : <i class="pull-right fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i></h5>
+                              <div class="row">
+                                <div class="col-md-2">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+                                    <label for="inlineRadio1" class="text-uppercase"> All Class</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-5">
+                                  <div class="row">
+                                    <div class="col-sm-1 col-xs-2">
+                                      <div class="radio radio-primary radio-inline margin-sm-top-10">
+                                        <input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+                                        <label></label>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-10 col-xs-10">
+                                      <select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
+                                        <option>Approved</option>
+                                        <option>Not Approved</option>
+                                        <option>Submitted</option>
+                                        <option>Pending</option>
+                                        <option>Under review</option>
+                                        <option>Draft</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-5">
+                                  <div class="row">
+                                    <div class="col-sm-1 col-xs-2">
+                                      <div class="radio radio-primary radio-inline margin-sm-top-10">
+                                        <input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+                                        <label></label>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-10 col-xs-10">
+                                      <select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
+                                        <option>Approved</option>
+                                        <option>Not Approved</option>
+                                        <option>Submitted</option>
+                                        <option>Pending</option>
+                                        <option>Under review</option>
+                                        <option>Draft</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-2 col-sm-6">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.challenges_frequency" value="daily" name="timePeriod" checked="">
+                                    <label>Daily</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.challenges_frequency" value="weekly" name="timePeriod" checked="">
+                                    <label>Weekly</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.challenges_frequency" value="fortnightly" name="timePeriod" checked="">
+                                    <label>Fortnightly</label>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-														<div class="form-block">
-															<div class="row margin-0">
-																<div class="col-sm-6 padding-0">
-																	<h5>Chat enable/disable :</h5>
-																</div>
-																<div class="col-sm-6">
-																	<div class="row margin-0">
-																		<div class="col-xs-6 padding-0">
-																			<div class="checkbox checkbox-primary">
-																				<input type="checkbox" value="parentChat">
-																				<label>Parent</label>
-																			</div>
-																		</div>
-																		<div class="col-xs-6 padding-0">
-																			<div class="checkbox checkbox-primary">
-																				<input type="checkbox" value="studentChat">
-																				<label>Student</label>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="row margin-0">
-																<div class="col-sm-2 col-xs-4 padding">
-																	<div class="radio radio-primary radio-inline">
-																		<input type="radio" id="inlineRadio1" value="option1" name="chatEnablity" checked="">
-																		<label>Enable</label>
-																	</div>
-																</div>
-																<div class="col-sm-2 col-xs-4">
-																	<div class="radio radio-primary radio-inline">
-																		<input type="radio" id="inlineRadio1" value="option1" name="chatEnablity" checked="">
-																		<label>Disable</label>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="form-block">
-															<h5>Group builder enable/disable :</h5>
-															<div class="row margin-0">
-																<div class="col-sm-2 col-xs-4">
-																	<div class="radio radio-primary radio-inline">
-																		<input type="radio" id="inlineRadio1" value="option1" name="groupBuilderEnablity" checked="">
-																		<label>Enable</label>
-																	</div>
-																</div>
-																<div class="col-sm-2 col-xs-4">
-																	<div class="radio radio-primary radio-inline">
-																		<input type="radio" id="inlineRadio1" value="option1" name="groupBuilderEnablity" checked="">
-																		<label>Disable</label>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="form-block">
-															<div class="row margin-0">
-																<div class="col-sm-6 padding-0">
-																	<h5>Placement Test :</h5>
-																	<a href="#" class="padding-left-15"><u>Review placement test</u></a>
-																</div>
-																<div class="col-sm-6 padding-0">
-																	<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
-																		<label>
-																			<span class="off">OFF</span>
-																			<input type="checkbox" class="switchery" checked>
-																			<span class="on">ON</span>
-																		</label>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="form-block">
-															<h5>Auto-progression on/off per student :</h5>
-															<div class="row margin-0">
-																<div class="col-md-2">
-																	<div class="radio radio-primary radio-inline">
-																			<input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
-																			<label for="inlineRadio1" class="text-uppercase"> All Class</label>
-																	</div>
-		                            </div>
-																<div class="col-md-5">
-																	<div class="row">
-																		<div class="col-sm-1 col-xs-2">
-																			<div class="radio radio-primary radio-inline">
-																				<input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
-																				<label></label>
-				                            	</div>
-																		</div>
-																		<div class="col-sm-10 col-xs-10">
-																			<div class="input-group input-dropdown">
-																				<input type="text" class="form-control" placeholder="Group">
-																		      <div class="input-group-btn">
-																		        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		          <span class="caret"></span>
-																		        </button>
-																		        <ul class="dropdown-menu">
-																		          <li><a class="dropdown-item" href="#">Action</a></li>
-																		          <li><a class="dropdown-item" href="#">Another action</a></li>
-																		          <li><a class="dropdown-item" href="#">Something else here</a></li>
-																		        </ul>
-																		      </div>
-																	    </div>
-																		</div>
-																	</div>
-																</div>
-																<div class="col-md-5">
-																	<div class="row">
-																		<div class="col-sm-1 col-xs-2">
-																			<div class="radio radio-primary radio-inline">
-																				<input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
-																				<label></label>
-				                            	</div>
-																		</div>
-																		<div class="col-sm-10 col-xs-10">
-																			<div class="input-group input-dropdown">
-																				<input type="text" class="form-control" placeholder="People">
-																		      <div class="input-group-btn">
-																		        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		          <span class="caret"></span>
-																		        </button>
-																		        <ul class="dropdown-menu">
-																		          <li><a class="dropdown-item" href="#">Action</a></li>
-																		          <li><a class="dropdown-item" href="#">Another action</a></li>
-																		          <li><a class="dropdown-item" href="#">Something else here</a></li>
-																		        </ul>
-																		      </div>
-																	    </div>
-																		</div>
-																	</div>
-		                            </div>
-																<div class="col-xs-12">
-																	<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
-																		<label>
-																			<span class="off">OFF</span>
-																			<input type="checkbox" class="switchery" checked>
-																			<span class="on">ON</span>
-																		</label>
-																	</div>
-																</div>
-															</div>
+                            <div class="form-block">
+                              <div class="row margin-0">
+                                <div class="col-sm-6 padding-0">
+                                  <h5>Chat enable/disable : </h5>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="row">
+                                    <div class="col-xs-6 padding-0">
+                                      <div class="checkbox checkbox-primary">
+                                        <input ng-model="pfrm.parent_chat_enabled" type="checkbox" value="parentChat">
+                                        <label>Parent</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-6 padding-0">
+                                      <div class="checkbox checkbox-primary">
+                                        <input ng-model="pfrm.student_chat_enabled" type="checkbox" value="studentChat">
+                                        <label>Student</label>
+                                        <i class="pull-right margn-top-5 fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-2 col-sm-6">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.chat_status" name="chatEnablity" value="true" checked="">
+                                    <label>Enable</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.chat_status" value="false" name="chatEnablity" checked="">
+                                    <label>Disable</label>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-														<div class="form-block">
-															<h5>Type of questions turned off/on :</h5>
-															<div class="row margin-0">
-																<div class="col-sm-6 ">
-																	<p>1. Fill in the blank</p>
-																</div>
-																<div class="col-sm-6 text-right">
-																	<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
-																		<label>
-																			<span class="off">OFF</span>
-																			<input type="checkbox" class="switchery" checked>
-																			<span class="on">ON</span>
-																		</label>
-																	</div>
-																</div>
-															</div>
-															<div class="row margin-0">
-																<div class="col-sm-6 ">
-																	<p>2. Single choice</p>
-																</div>
-																<div class="col-sm-6 text-right">
-																	<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
-																		<label>
-																			<span class="off">OFF</span>
-																			<input type="checkbox" class="switchery" checked>
-																			<span class="on">ON</span>
-																		</label>
-																	</div>
-																</div>
-															</div>
-															<div class="row margin-0">
-																<div class="col-sm-6 ">
-																	<p>3. Multipule choice</p>
-																</div>
-																<div class="col-sm-6 text-right">
-																	<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
-																		<label>
-																			<span class="off">OFF</span>
-																			<input type="checkbox" class="switchery" checked>
-																			<span class="on">ON</span>
-																		</label>
-																	</div>
-																</div>
-															</div>
-															<div class="row margin-0">
-																<div class="col-sm-6 ">
-																	<p>1. True False</p>
-																</div>
-																<div class="col-sm-6 text-right">
-																	<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
-																		<label>
-																			<span class="off">OFF</span>
-																			<input type="checkbox" class="switchery" checked>
-																			<span class="on">ON</span>
-																		</label>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="form-block">
-															<h5>Subject Choice</h5>
-															<div class="row margin-0">
-																<div class="col-md-2">
-																	<div class="radio radio-primary radio-inline">
-																			<input type="radio" id="inlineRadio1" value="option1" name="subjectChoice" checked="">
-																			<label for="inlineRadio1" class="text-uppercase"> All Class</label>
-																	</div>
-		                            </div>
-																<div class="col-md-5">
-																	<div class="row">
-																		<div class="col-sm-1 col-xs-2">
-																			<div class="radio radio-primary radio-inline">
-																				<input type="radio" id="inlineRadio1" value="option1" name="subjectChoice" checked="">
-																				<label></label>
-				                            	</div>
-																		</div>
-																		<div class="col-sm-10 col-xs-10">
-																			<div class="input-group input-dropdown">
-																				<input type="text" class="form-control" placeholder="Group">
-																		      <div class="input-group-btn">
-																		        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		          <span class="caret"></span>
-																		        </button>
-																		        <ul class="dropdown-menu">
-																		          <li><a class="dropdown-item" href="#">Action</a></li>
-																		          <li><a class="dropdown-item" href="#">Another action</a></li>
-																		          <li><a class="dropdown-item" href="#">Something else here</a></li>
-																		        </ul>
-																		      </div>
-																	    </div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="row margin-0">
-																<div class="col-xs-12">
-																	<div class="checkbox checkbox-primary">
-																		<input type="checkbox">
-																		<label>Math</label>
-																	</div>
-																</div>
-																<div class="col-xs-12">
-																	<div class="checkbox checkbox-primary">
-																		<input type="checkbox">
-																		<label>English</label>
-																	</div>
-																</div>
-																<div class="col-xs-12">
-																	<div class="checkbox checkbox-primary">
-																		<input type="checkbox">
-																		<label>Science</label>
-																	</div>
-																</div>
-																<div class="col-xs-12">
-																	<div class="checkbox checkbox-primary">
-																		<input type="checkbox">
-																		<label>Social Science</label>
-																	</div>
-															</div>
+                            <div class="form-block">
+                              <h5>Group builder enable/disable : <i class="pull-right fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i></h5>
+                              <div class="row">
+                                <div class="col-md-2 col-sm-6">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.group_builder" value="true" name="groupBuilderEnablity" checked="">
+                                    <label>Enable</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.group_builder" value="false" name="groupBuilderEnablity" checked="">
+                                    <label>Disable</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-block">
+                              <h5>Placement Test : <a href="teacher-review-placement.html" class="padding-left-15"><u>Review placement test</u> </a>
+                                <i class="pull-right fa fa-question-circle margin-left-15" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i>
+                                <div class="checkbox pull-right padding-top-0 checkbox-switchery checkbox-inline switchery-sm switchery-double">
+                                  <label>
+                                    <input type="checkbox" class="js-switch">
+                                  </label>
+                                </div>
+
+                              </h5>
+                            </div>
+                            <div class="form-block">
+                              <h5>Auto-progression on/off per student : <i class="pull-right fa fa-question-circle margin-left-15" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i>
+                                <div class="checkbox pull-right padding-top-0 margin-bottom-5 checkbox-switchery checkbox-inline switchery-sm switchery-double">
+                                  <label>
+                                    <input type="checkbox" class="js-switch">
+                                  </label>
+                                </div>
+                              </h5>
+                              <div class="row">
+                                <div class="col-md-2">
+                                  <div class="radio radio-primary radio-inline">
+                                    <input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
+                                    <label for="inlineRadio1" class="text-uppercase"> All Class</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-5">
+                                  <div class="row">
+                                    <div class="col-sm-1 col-xs-2">
+                                      <div class="radio radio-primary radio-inline margin-sm-top-10">
+                                        <input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
+                                        <label></label>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-10 col-xs-10">
+                                      <select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
+                                        <option>Approved</option>
+                                        <option>Not Approved</option>
+                                        <option>Submitted</option>
+                                        <option>Pending</option>
+                                        <option>Under review</option>
+                                        <option>Draft</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-5">
+                                  <div class="row">
+                                    <div class="col-sm-1 col-xs-2">
+                                      <div class="radio radio-primary radio-inline margin-sm-top-10">
+                                        <input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
+                                        <label></label>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-10 col-xs-10">
+                                      <select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
+                                        <option>Approved</option>
+                                        <option>Not Approved</option>
+                                        <option>Submitted</option>
+                                        <option>Pending</option>
+                                        <option>Under review</option>
+                                        <option>Draft</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-block">
+                              <h5>Type of questions turned off/on : <i class="pull-right fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i></h5>
+                              <div class="row">
+                                <div class="col-xs-6 ">
+                                  <p>1. Fill in the blank</p>
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                  <div class="switch-box label-left is-success margin-top-0">
+                                    <label class="switch-box-label margin-top-10" for="fillIntheBlanks"></label>
+                                    <span class="btn">OFF</span>
+                                    <i class="fa fa-toggle-on active" ng-if="pfrm.fill_in_the_blanks_question == true" ng-click="changeStatus('fill_in_the_blanks_question');"></i>
+                                    <i ng-click="changeStatus('fill_in_the_blanks_question');" ng-if="pfrm.fill_in_the_blanks_question == false" class="fa fa-toggle-on fa-rotate-180 inactive ng-scope"></i>
+                                    <span class="btn">ON</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xs-6 ">
+                                  <p>2. Single choice</p>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                  <div class="switch-box label-left is-success margin-top-0">
+                                    <label class="switch-box-label margin-top-10" for="fillIntheBlanks"></label>
+                                    <span class="btn">OFF</span>
+                                    <i class="fa fa-toggle-on active" ng-if="pfrm.single_choice_question == true" ng-click="changeStatus('single_choice_question');"></i>
+                                    <i ng-click="changeStatus('single_choice_question');" ng-if="pfrm.single_choice_question == false" class="fa fa-toggle-on fa-rotate-180 inactive ng-scope"></i>
+                                    <span class="btn">ON</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xs-6 ">
+                                  <p>3. Multipule choice</p>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                  <div class="switch-box label-left is-success margin-top-0">
+                                    <label class="switch-box-label margin-top-10" for="fillIntheBlanks"></label>
+                                    <span class="btn">OFF</span>
+                                    <i class="fa fa-toggle-on active" ng-if="pfrm.multiple_choice_question == true" ng-click="changeStatus('multiple_choice_question');"></i>
+                                    <i ng-click="changeStatus('multiple_choice_question');" ng-if="pfrm.multiple_choice_question == false" class="fa fa-toggle-on fa-rotate-180 inactive ng-scope"></i>
+                                    <span class="btn">ON</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xs-6 ">
+                                  <p>4. True False</p>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                  <div class="switch-box label-left is-success margin-top-0">
+                                    <label class="switch-box-label margin-top-10" for="fillIntheBlanks"></label>
+                                    <span class="btn">OFF</span>
+                                    <i class="fa fa-toggle-on active" ng-if="pfrm.true_false_question == true" ng-click="changeStatus('true_false_question');"></i>
+                                    <i ng-click="changeStatus('true_false_question');" ng-if="pfrm.true_false_question == false" class="fa fa-toggle-on fa-rotate-180 inactive ng-scope"></i>
+                                    <span class="btn">ON</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="text-right text-xs-center margin-top-15">
+                                <button ng-click="submitTeacherSettingForClass(pfrm)" class="btn btn-primary btn-xs">Save</button>
+                              </div>
                             </div>
                           </form>
                         </div>
@@ -649,20 +525,21 @@
                     </div>
                   </div>
                 </div>
-                <!-- /mlg tabs  -->
-						</div>
-            <!-- /panel-body -->
-					</div>
-					<!-- /Teacher Setting  Panel  -->
-				</div>
-				<!-- /content area -->
+              </div>
+            </div>
+            <!-- /mlg tabs  -->
+          </div>
+          <!-- /panel-body -->
+        </div>
+        <!-- /Teacher Setting  Panel  -->
+      </div>
+      <!-- /content area -->
 
-			</div>
-			<!-- /main content -->
+    </div>
+    <!-- /main content -->
 
-		</div>
-		<!-- /page content -->
+  </div>
+  <!-- /page content -->
 
-	</div>
-	<!-- page container -->
-  
+</div>
+<!-- page container -->
