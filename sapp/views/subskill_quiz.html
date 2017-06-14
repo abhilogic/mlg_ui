@@ -71,12 +71,12 @@
               <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm)">Submit</button>
             </div> -->
       
-            <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: yes, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
-     			    <div owl-carousel-item=""  class="item {{ques.status}}" ng-repeat="ques in questions_status"> 
-                	  <i class="icon"></i>
+               <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: false, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
+           <div owl-carousel-item=""  class="item" ng-repeat="ques in questions_status" class="item">              
+                    <i class="icon"></i>
                     <span class="ques_no">Ques <i>{{$index+1}}</i></span>
-             	</div>
-    		</data-owl-carousel>
+              </div>
+        </data-owl-carousel> 
 
           </div>
       </div>
