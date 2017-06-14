@@ -205,6 +205,16 @@ angular.module('mlg_student')
       });
 	}
 
+	loginHttpResponse.studentReport = function(user_id){
+      return $http({
+          	method:'GET',          	
+         	url   : urlParams.baseURL+urlParams.studentReport+'/'+user_id
+      });
+	}
+
+
+	
+
 	return loginHttpResponse;
 	
 }])
@@ -1177,19 +1187,50 @@ promise.then(function(result) {
 
 	var pid = $routeParams.id;
 	$scope.cid=$routeParams.id;	
-	loginHttpService.getAllCourseList(pid).success(function(response) {
-		if(response.response.course_details.length > 0){
-			$scope.subject_detail = response.response.course_details;
+	$scope.skill_result = [];
+	
+	loginHttpService.getAllCourseList(pid).success(function(res_skill) {
+		if(res_skill.response.course_details.length > 0){
+			$scope.subject_detail = res_skill.response.course_details;
+
+			
+			for(var i=0; i< $scope.subject_detail.length ; i++){				
+				var skill_id = $scope.subject_detail[i].course_id;
+
+				// API to get all subskill of skill.
+				loginHttpService.getAllCourseList(skill_id).success(function(res_subskill) {
+				if (res_subskill.response.course_details.length > 0){
+					var subskill_details = res_subskill.response.course_details;
+					for(var j=0; j< subskill_details.length ; j++){
+						var subskill_id = subskill_details[j].course_id;
+						//API to 1. check subskill quiz is pass/fail  or 2. any challenges from teacer/parents
+						loginHttpService.getUserQuizResponseOnSite(get_uid,quiz_type.SUBSKILLQUIZ, subskill_id).success(function(res_skillquiz) {
+							if (res_skillquiz.response.status == true){
+								if(res_skillquiz.response.student_result_percent>= quiz_mastered_score.SUBSKILLQUIZ ) 
+									$scope.skill_result[subskill_id] = 'pass';
+								else
+									$scope.skill_result[subskill_id] = 'fail';
+							}else{
+								$scope.skill_result[$scope.skill_result] =  res_skillquiz.response.message;
+							}
+							console.log($scope.skill_result);
+						});
+					}
+				} else{
+					 $scope.msg ="No subskill";
+				}                 
+			});				
+			}
+
 		} else{
-			response.subject_detail = 0;
-		}                 
+			$scope.subject_detail = 0;
+		} 
 	});
 
-	// API to check arena  Flag/unflag
-	var quiz_id=localStorage.getItem('quiz_id');
+	// API to check arena  Flag/unflag	
 	var quiz_type_id = quiz_type.PRETEST;
-	var quiz_course_id = $routeParams.id;	
-	loginHttpService.getUserQuizResponseOnSite(get_uid,quiz_type_id,quiz_course_id).success(function(response) {
+	var subject_id = $routeParams.id;	
+	loginHttpService.getUserQuizResponseOnSite(get_uid, quiz_type_id, subject_id).success(function(response) {
 		if (response.response.status == true && response.response.student_result_percent>= quiz_mastered_score.PRETEST ) {
 			$scope.pretest_result = 'pass';
 		}else{
@@ -1197,12 +1238,34 @@ promise.then(function(result) {
 		}
 	});
 
-	//API to check burn fire
+
+	//API to check burn fire 
 	//1. if knight challenge done get flag
 	// 2. if quiz in skilldoor is not mastered and student get assignment get burn fire.
-	$scope.mycourse = function($index,$skill_id){
-		console.log($index);
-	}
+	/*$scope.mytest = function(inx, skill_id){
+		//alert(inx);
+		loginHttpService.getUserQuizResponseOnSite(get_uid,quiz_type.SUBSKILLQUIZ, skill_id).success(function(response) {
+		if (response.response.status == true && response.response.student_result_percent>= quiz_mastered_score.SUBSKILLQUIZ ) {
+			$scope.skill_result = 'pass';
+		}else{
+			$scope.skill_result = 'fail';
+		}
+	});
+
+	}*/
+
+
+
+
+	
+
+
+
+
+
+
+
+	
 
 
 }])
@@ -1773,4 +1836,21 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 		}
 	}
 });
+
+
+// Student Reports
+loginHttpService.studentReport(get_uid).success(function(res_resport) {
+	if(res_resport.response.status=true){
+		$scope.details = res_resport.response.details;
+	}
+	else{
+		$scope.error_message ="Issue in retrieving the student report";
+	}
+
+});
+
+
+
+
+
 }]);

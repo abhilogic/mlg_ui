@@ -33,6 +33,7 @@ getStudentAssignments : '/students/getStudentAssignments',
 getAssignmentItems : '/students/getAssignmentItems',
 getCourseInfo : '/courses/getCourseInfo',
 createQuizOnStudent: '/exams/createQuizOnStudent/',
+studentReport : '/students/studentReport',
 
 }).value('REGEX', {
 LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
