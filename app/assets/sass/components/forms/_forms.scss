@@ -130,7 +130,7 @@
   }
   .form-control {
     @include border-width(0px 0px 1px 0px);
-    @include padding($mgl-tab-input-padding);
+    @include padding(8px 15px);
     background: none;
     @media screen and (max-width: $screen-sm){
       @include padding(null null null 0px);
