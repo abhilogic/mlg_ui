@@ -4075,13 +4075,14 @@ $scope.deleteQuestions = function(Qid,uniqId){
   };
 
   $scope.grades = {};
+  $scope.class_students = {};
+  $scope.class_groups = {};
   $scope.subject_id = '';
   $scope.subject_name = '';
   $scope.grade_id = '';
   $scope.selected_grade = '';
   $scope.number_of_students_in_class = 0;
   $scope.getClassSettingsOnChange = function(grade_subject) {
-    $scope.pfrm = {};
     var grade_info = grade_subject.split(',');
     $scope.subject_id = grade_info[0];
     $scope.subject_name = grade_info[1];
@@ -4089,15 +4090,25 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.selected_grade = grade_info[3];
     teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,$scope.subject_id).success(function(student_response) {
       if (student_response.response.status=="true") {
+        $scope.class_students = student_response.response.students;
         $scope.number_of_students_in_class = student_response.response.students.length;
       } else{
         $scope.err_message = "No Record Found. Please add student for this class";
-        $timeout(function () { $scope.err_message = ""; }, 3000);
       }
     });
+
+    teacherHttpService.getGroupsOfSubjectForTeacher(get_uid, $scope.subject_id).success(function(group_response) {
+      if (group_response.response.status == "true") {
+        $scope.class_groups = group_response.response.groups;
+      } else{
+        $scope.err_message = "No Record Found. Please add student for this class";
+      }
+    });
+
     var data = {user_id : get_uid, level_id: $scope.grade_id, course_id: $scope.subject_id}
     teacherHttpService.getTeacherSettings(data).success(function(response) {
       if (response.status == true) {
+        $scope.pfrm = {};
         var result = response.result;
         var settings = JSON.parse(result.settings);
         $scope.pfrm.fill_in_the_blanks_question = settings.fill_in_the_blanks_question;
@@ -4108,13 +4119,31 @@ $scope.deleteQuestions = function(Qid,uniqId){
         $scope.pfrm.chat_status = (settings.chat_status == true) ? 'true' : 'false';
         $scope.pfrm.student_chat_enabled = settings.student_chat_enabled;
         $scope.pfrm.parent_chat_enabled = settings.parent_chat_enabled;
+        $scope.pfrm.placement_test = settings.placement_test;
+        $scope.pfrm.auto_progression = settings.auto_progression;
         $scope.pfrm.challenges_frequency = (typeof settings.challenges_frequency != 'undefined') ?
             settings.challenges_frequency : '';
+        $scope.pfrm.frequency_of_challenges_by = settings.frequency_of_challenges_by;
+        $scope.pfrm.auto_progression_by = settings.auto_progression_by;
+        $scope.pfrm.frequency_of_challenges_for_individual = (typeof settings.frequency_of_challenges_for_individual != 'undefined') ?
+            settings.frequency_of_challenges_for_individual : '';
+        $scope.pfrm.frequency_of_challenges_for_group = (typeof settings.frequency_of_challenges_for_group != 'undefined') ?
+            settings.frequency_of_challenges_for_group : '';
+        $scope.pfrm.auto_progression_for_individual = (typeof settings.auto_progression_for_individual != 'undefined') ?
+            settings.auto_progression_for_individual : '';
+        $scope.pfrm.auto_progression_for_group = (typeof settings.auto_progression_for_group != 'undefined') ?
+            settings.auto_progression_for_group : '';
       }
     });
   };
 
   $scope.pfrm = {};
+  $scope.pfrm.frequency_of_challenges_for_individual = '';
+  $scope.pfrm.frequency_of_challenges_for_group = '';
+  $scope.pfrm.auto_progression_for_individual = '';
+  $scope.pfrm.auto_progression_for_group = '';
+  $scope.pfrm.placement_test = true;
+  $scope.pfrm.auto_progression = true;
   $scope.pfrm.fill_in_the_blanks_question = true;
   $scope.pfrm.single_choice_question = true;
   $scope.pfrm.multiple_choice_question = true;
@@ -4148,8 +4177,31 @@ $scope.deleteQuestions = function(Qid,uniqId){
       alert('Please choose subject or grade to save settings');
       return false;
     }
-    pfrm.group_builder = (pfrm.group_builder == 'true') ? true : false;
-    pfrm.chat_status = (pfrm.chat_status == 'true') ? true : false;
+
+    if (pfrm.frequency_of_challenges_by == 'all_class') {
+      pfrm.frequency_of_challenges_for_group = '';
+      pfrm.frequency_of_challenges_for_individual = '';
+    } else if (pfrm.frequency_of_challenges_by == 'group' && pfrm.frequency_of_challenges_for_group == '') {
+      alert('Kindly choose a group from frequency of challenges');
+      return false;
+    } else if (pfrm.frequency_of_challenges_by == 'individual' && pfrm.frequency_of_challenges_for_individual == '') {
+      alert('kindly choose an individual for frequency of challenge');
+      return false;
+    }
+
+    if (pfrm.auto_progression_by == 'all_class') {
+      pfrm.auto_progression_for_group = '';
+      pfrm.auto_progression_for_individual = '';
+    } else if (pfrm.auto_progression_by == 'group' && pfrm.auto_progression_for_group == '') {
+      alert('Kindly choose a group fro auto progression');
+      return false;
+    } else if (pfrm.auto_progression_by == 'individual' && pfrm.auto_progression_for_individual == '') {
+      alert('kindly choose an individual for auto progression');
+      return false;
+    }
+
+    pfrm.group_builder = (pfrm.group_builder == 'false') ? false : true;
+    pfrm.chat_status = (pfrm.chat_status == 'false') ? false : true;
     var data = {
       user_id: get_uid,
       level_id : $scope.grade_id,

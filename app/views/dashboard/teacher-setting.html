@@ -268,7 +268,7 @@
                               <div class="row">
                                 <div class="col-md-2">
                                   <div class="radio radio-primary radio-inline">
-                                    <input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.frequency_of_challenges_by" value="all_class" name="challengesGroup" checked="">
                                     <label for="inlineRadio1" class="text-uppercase"> All Class</label>
                                   </div>
                                 </div>
@@ -276,18 +276,14 @@
                                   <div class="row">
                                     <div class="col-sm-1 col-xs-2">
                                       <div class="radio radio-primary radio-inline margin-sm-top-10">
-                                        <input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+                                        <input type="radio" id="inlineRadio1" ng-model="pfrm.frequency_of_challenges_by" value="group" name="challengesGroup" checked="">
                                         <label></label>
                                       </div>
                                     </div>
-                                    <div class="col-sm-10 col-xs-10">
-                                      <select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
-                                        <option>Approved</option>
-                                        <option>Not Approved</option>
-                                        <option>Submitted</option>
-                                        <option>Pending</option>
-                                        <option>Under review</option>
-                                        <option>Draft</option>
+                                    <div class="col-sm-10 col-xs-10">{{class_groups}}
+                                      <select class="mlg-selectpicker" title="Status" ng-model="pfrm.frequency_of_challenges_for_group" 
+                                              ng-options="group.id as group.title for group in class_groups track by group.id" 
+                                              data-width="auto" data-size="auto">
                                       </select>
                                     </div>
                                   </div>
@@ -296,18 +292,14 @@
                                   <div class="row">
                                     <div class="col-sm-1 col-xs-2">
                                       <div class="radio radio-primary radio-inline margin-sm-top-10">
-                                        <input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+                                        <input type="radio" id="inlineRadio1" ng-model="pfrm.frequency_of_challenges_by" value="individual" name="challengesGroup" checked="">
                                         <label></label>
                                       </div>
                                     </div>
                                     <div class="col-sm-10 col-xs-10">
-                                      <select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
-                                        <option>Approved</option>
-                                        <option>Not Approved</option>
-                                        <option>Submitted</option>
-                                        <option>Pending</option>
-                                        <option>Under review</option>
-                                        <option>Draft</option>
+                                      <select class="mlg-selectpicker" title="Status" ng-model="pfrm.frequency_of_challenges_for_individual" 
+                                        ng-options="student.id as student.first_name +' '+student.last_name for student in class_students track by student.id"  
+                                        data-width="auto" data-size="auto">
                                       </select>
                                     </div>
                                   </div>
@@ -392,26 +384,29 @@
                             <div class="form-block">
                               <h5>Placement Test : <a href="teacher-review-placement.html" class="padding-left-15"><u>Review placement test</u> </a>
                                 <i class="pull-right fa fa-question-circle margin-left-15" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i>
-                                <div class="checkbox pull-right padding-top-0 checkbox-switchery checkbox-inline switchery-sm switchery-double">
-                                  <label>
-                                    <input type="checkbox" class="js-switch">
-                                  </label>
+                                <div class="switch-box pull-right padding-top-0 margin-bottom-5 checkbox-switchery checkbox-inline label-left is-success margin-top-0">
+                                  <label class="switch-box-label margin-top-10" for="fillIntheBlanks"></label>
+                                  <span class="btn">OFF</span>
+                                  <i class="fa fa-toggle-on active" ng-if="pfrm.placement_test == true" ng-click="changeStatus('placement_test');"></i>
+                                  <i ng-click="changeStatus('placement_test');" ng-if="pfrm.placement_test == false" class="fa fa-toggle-on fa-rotate-180 inactive ng-scope"></i>
+                                  <span class="btn">ON</span>
                                 </div>
-
                               </h5>
                             </div>
                             <div class="form-block">
                               <h5>Auto-progression on/off per student : <i class="pull-right fa fa-question-circle margin-left-15" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i>
-                                <div class="checkbox pull-right padding-top-0 margin-bottom-5 checkbox-switchery checkbox-inline switchery-sm switchery-double">
-                                  <label>
-                                    <input type="checkbox" class="js-switch">
-                                  </label>
+                                <div class="pull-right padding-top-0 margin-bottom-5 checkbox-switchery checkbox-inline switch-box label-left is-success margin-top-0">
+                                  <label class="switch-box-label margin-top-10" for="fillIntheBlanks"></label>
+                                  <span class="btn">OFF</span>
+                                  <i class="fa fa-toggle-on active" ng-if="pfrm.auto_progression == true" ng-click="changeStatus('auto_progression');"></i>
+                                  <i ng-click="changeStatus('auto_progression');" ng-if="pfrm.auto_progression == false" class="fa fa-toggle-on fa-rotate-180 inactive ng-scope"></i>
+                                  <span class="btn">ON</span>
                                 </div>
                               </h5>
                               <div class="row">
                                 <div class="col-md-2">
                                   <div class="radio radio-primary radio-inline">
-                                    <input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
+                                    <input type="radio" id="inlineRadio1" ng-model="pfrm.auto_progression_by" value="all_class" name="autoProgression" checked="">
                                     <label for="inlineRadio1" class="text-uppercase"> All Class</label>
                                   </div>
                                 </div>
@@ -419,18 +414,14 @@
                                   <div class="row">
                                     <div class="col-sm-1 col-xs-2">
                                       <div class="radio radio-primary radio-inline margin-sm-top-10">
-                                        <input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
+                                        <input type="radio" id="inlineRadio1" ng-model="pfrm.auto_progression_by" value="group" name="autoProgression" checked="">
                                         <label></label>
                                       </div>
                                     </div>
                                     <div class="col-sm-10 col-xs-10">
-                                      <select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
-                                        <option>Approved</option>
-                                        <option>Not Approved</option>
-                                        <option>Submitted</option>
-                                        <option>Pending</option>
-                                        <option>Under review</option>
-                                        <option>Draft</option>
+                                      <select class="mlg-selectpicker" title="Status" ng-model="pfrm.auto_progression_for_group" 
+                                              ng-options="group.id as group.title for group in class_groups track by group.id" 
+                                              data-width="auto" data-size="auto">
                                       </select>
                                     </div>
                                   </div>
@@ -439,18 +430,14 @@
                                   <div class="row">
                                     <div class="col-sm-1 col-xs-2">
                                       <div class="radio radio-primary radio-inline margin-sm-top-10">
-                                        <input type="radio" id="inlineRadio1" value="option1" name="autoProgression" checked="">
+                                        <input type="radio" id="inlineRadio1" ng-model="pfrm.auto_progression_by" value="individual" name="autoProgression" checked="">
                                         <label></label>
                                       </div>
                                     </div>
                                     <div class="col-sm-10 col-xs-10">
-                                      <select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
-                                        <option>Approved</option>
-                                        <option>Not Approved</option>
-                                        <option>Submitted</option>
-                                        <option>Pending</option>
-                                        <option>Under review</option>
-                                        <option>Draft</option>
+                                      <select class="mlg-selectpicker" title="Status" ng-model="pfrm.auto_progression_for_individual" 
+                                        ng-options="student.id as student.first_name +' '+student.last_name for student in class_students track by student.id"  
+                                        data-width="auto" data-size="auto">
                                       </select>
                                     </div>
                                   </div>
