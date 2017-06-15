@@ -4108,6 +4108,8 @@ $scope.deleteQuestions = function(Qid,uniqId){
         $scope.pfrm.chat_status = (settings.chat_status == true) ? 'true' : 'false';
         $scope.pfrm.student_chat_enabled = settings.student_chat_enabled;
         $scope.pfrm.parent_chat_enabled = settings.parent_chat_enabled;
+        $scope.pfrm.challenges_frequency = (typeof settings.challenges_frequency != 'undefined') ?
+            settings.challenges_frequency : '';
       }
     });
   };
