@@ -1327,7 +1327,7 @@ promise.then(function(result) {
 
   }
 }])
-.controller('subskillContent',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q) {
+.controller('subskillContent',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q','$route',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q,$route) {
 	var get_uid=commonActions.getcookies(get_uid);
 	if (document.cookie == '' || get_uid == 'null') {
 		alert('kindly login');
@@ -1348,11 +1348,22 @@ promise.then(function(result) {
 	var type = 'type';
 	var course_id = $routeParams.course_id;
     $scope.networkState = 'online';
-    if ((navigator.onLine == false) && (localStorage.getItem('responseForStudentContent') != null)) {
-      $scope.networkState = 'offline';
-      var response = JSON.parse(localStorage.getItem('responseForStudentContent'));
-      process_page(response);
-    } else {
+
+      var previous_network_state = '';
+      $scope.check_network_state = function() {
+        $scope.networkState = (navigator.onLine == false) ? 'offline' : 'online';
+        if ((navigator.onLine == false) && (localStorage.getItem('responseForStudentContent') != null)) {
+          $scope.networkState = previous_network_state = 'offline';
+          var response = JSON.parse(localStorage.getItem('responseForStudentContent'));
+          process_page(response);
+        }
+        if ($scope.networkState == 'online' && previous_network_state == 'offline') {
+           $route.reload();
+        }
+      };
+
+      $scope.check_network_state();
+
       loginHttpService.getAllCourseList(pid, type, course_id, get_uid).success(function(response) {
         if (response.response.course_details.length > 0) {
           localStorage.setItem('responseForStudentContent', JSON.stringify(response));
@@ -1361,7 +1372,6 @@ promise.then(function(result) {
           response.topic_detail = [];
         }
       });
-    }
 
       function process_page(response) {
         $scope.topic_detail = response.response.course_details;
