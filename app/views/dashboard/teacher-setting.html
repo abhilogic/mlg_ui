@@ -184,12 +184,12 @@
                         <button type="button" ng-click="changePassword(user)" class="btn btn-primary ">Change</button>
                       </div>
                       <br/>
-                      <button type="button" class="btn btn-background-none text-muted btn-deactive padding-left-0">
-                        <div class="checkbox checkbox-primary display-inline">
-                          <input type="checkbox" ng-model="frm.deactivate" id="parentChat">
-                          <label for="parentChat">Deactivate My Account</label>
-                        </div>
-                      </button>
+                      <div class="checkbox checkbox-primary display-inline">
+                        <input ng-model="frm.deactivate" type="checkbox" value="parentChat" id="parentChat">
+                        <label for="parentChat">Deactivate My Account</label>
+                      </div>
+                      <br/>
+                      <br/>
                       <i class="pull-right fa fa-question-circle margin-top-15" data-toggle="tooltip" data-placement="left" title="" data-original-title="Turning of this Setting will automatically approve the coupon request by your kids"></i>
                       <div class="text-right text-xs-center">
                         <button ng-click="updateMyAccount(frm)" class="btn btn-primary btn-xs">Save</button>
@@ -282,7 +282,7 @@
                                     </div>
                                     <div class="col-sm-10 col-xs-10">
                                       <select class="mlg-selectpicker" title="Status" ng-model="pfrm.frequency_of_challenges_for_group" 
-                                              ng-options="group.id as group.title for group in class_groups track by group.id" 
+                                              ng-options="group.id as group.title for group in class_groups" 
                                               data-width="auto" data-size="auto">
                                       </select>
                                     </div>
@@ -298,7 +298,7 @@
                                     </div>
                                     <div class="col-sm-10 col-xs-10">
                                       <select class="mlg-selectpicker" title="Status" ng-model="pfrm.frequency_of_challenges_for_individual" 
-                                        ng-options="student.id as student.first_name +' '+student.last_name for student in class_students track by student.id"  
+                                        ng-options="student.id as student.first_name +' '+student.last_name for student in class_students"  
                                         data-width="auto" data-size="auto">
                                       </select>
                                     </div>
@@ -420,7 +420,7 @@
                                     </div>
                                     <div class="col-sm-10 col-xs-10">
                                       <select class="mlg-selectpicker" title="Status" ng-model="pfrm.auto_progression_for_group" 
-                                              ng-options="group.id as group.title for group in class_groups track by group.id" 
+                                              ng-options="group.id as group.title for group in class_groups" 
                                               data-width="auto" data-size="auto">
                                       </select>
                                     </div>
@@ -436,7 +436,7 @@
                                     </div>
                                     <div class="col-sm-10 col-xs-10">
                                       <select class="mlg-selectpicker" title="Status" ng-model="pfrm.auto_progression_for_individual" 
-                                        ng-options="student.id as student.first_name +' '+student.last_name for student in class_students track by student.id"  
+                                        ng-options="student.id as student.first_name +' '+student.last_name for student in class_students"  
                                         data-width="auto" data-size="auto">
                                       </select>
                                     </div>

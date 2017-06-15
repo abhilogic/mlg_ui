@@ -4189,6 +4189,12 @@ $scope.deleteQuestions = function(Qid,uniqId){
       return false;
     }
 
+    if (pfrm.frequency_of_challenges_by == 'group') {
+      pfrm.frequency_of_challenges_for_individual = '';
+    } else if (pfrm.frequency_of_challenges_by == 'individual') {
+      pfrm.frequency_of_challenges_for_group = '';
+    }
+
     if (pfrm.auto_progression_by == 'all_class') {
       pfrm.auto_progression_for_group = '';
       pfrm.auto_progression_for_individual = '';
@@ -4198,6 +4204,12 @@ $scope.deleteQuestions = function(Qid,uniqId){
     } else if (pfrm.auto_progression_by == 'individual' && pfrm.auto_progression_for_individual == '') {
       alert('kindly choose an individual for auto progression');
       return false;
+    }
+
+    if (pfrm.auto_progression_by == 'group') {
+      pfrm.auto_progression_for_individual = '';
+    } else if (pfrm.auto_progression_by == 'individual') {
+      pfrm.auto_progression_for_group = '';
     }
 
     pfrm.group_builder = (pfrm.group_builder == 'false') ? false : true;
