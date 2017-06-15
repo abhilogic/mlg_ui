@@ -366,145 +366,25 @@
           </h4>
         </div>
         <div class="modal-body">
-          <div class="report-row">
+          <div class="report-row" ng-repeat="detail in details">
             <ul>
               <li class="name">
-                <span>WHOLE NUMBERS</span>
-                <span>Properties of Whole Numbers</span>
+                <span>{{detail.course_name}}</span>
+                <!-- <span>{{detail.course_name}}</span> -->
               </li>
               <li class="status">
-                <button type="button" class="btn complete">90% Completed</button>
+                <button type="button" class="btn complete">{{detail.student_result_percent}}% Completed</button>
               </li>
               <li class="score">
                 <span>MY SCORE</span>
-                <span>8/10</span>
+                <span>{{detail.student_result_percent/10}}</span>
               </li>
               <li class="group-score">
                 <span>PEER GROUP SCORE</span>
-                <span>6/10</span>
+                <span>{{detail.other_Student_average/10}}</span>
               </li>
             </ul>
-          </div>
-
-          <div class="report-row">
-            <ul>
-              <li class="name">
-                <span>DIVISION</span>
-                <span>Properties of Division</span>
-              </li>
-              <li class="status">
-                <button type="button" class="btn warning"><i class="fa fa-exclamation-triangle"></i> 40% Completed</button>
-              </li>
-              <li class="score">
-                <span>MY SCORE</span>
-                <span>8/10</span>
-              </li>
-              <li class="group-score">
-                <span>PEER GROUP SCORE</span>
-                <span>6/10</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="report-row">
-            <ul>
-              <li class="name">
-                <span>MULTIPLICATION</span>
-                <span>Properties of Multiplication</span>
-              </li>
-              <li class="status">
-                <button type="button" class="btn complete">90% Completed</button>
-              </li>
-              <li class="score">
-                <span>MY SCORE</span>
-                <span>8/10</span>
-              </li>
-              <li class="group-score">
-                <span>PEER GROUP SCORE</span>
-                <span>6/10</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="report-row">
-            <ul>
-              <li class="name">
-                <span>WHOLE NUMBERS</span>
-                <span>Properties of Whole Numbers</span>
-              </li>
-              <li class="status">
-                <button type="button" class="btn warning"><i class="fa fa-exclamation-triangle"></i> 40% Completed</button>
-              </li>
-              <li class="score">
-                <span>MY SCORE</span>
-                <span>8/10</span>
-              </li>
-              <li class="group-score">
-                <span>PEER GROUP SCORE</span>
-                <span>6/10</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="report-row">
-            <ul>
-              <li class="name">
-                <span>WHOLE NUMBERS</span>
-                <span>Properties of Whole Numbers</span>
-              </li>
-              <li class="status">
-                <button type="button" class="btn warning"><img src="assets/img/view-report-bg/badge-1.png" class="badge-icon" alt=""> 40% Completed</button>
-              </li>
-              <li class="score">
-                <span>MY SCORE</span>
-                <span>8/10</span>
-              </li>
-              <li class="group-score">
-                <span>PEER GROUP SCORE</span>
-                <span>6/10</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="report-row">
-            <ul>
-              <li class="name">
-                <span>WHOLE NUMBERS</span>
-                <span>Properties of Whole Numbers</span>
-              </li>
-              <li class="status">
-                <button type="button" class="btn warning"><img src="assets/img/view-report-bg/badge-2.png" class="badge-icon" alt=""> Apprentice</button>
-              </li>
-              <li class="score">
-                <span>MY SCORE</span>
-                <span>8/10</span>
-              </li>
-              <li class="group-score">
-                <span>PEER GROUP SCORE</span>
-                <span>6/10</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="report-row">
-            <ul>
-              <li class="name">
-                <span>WHOLE NUMBERS</span>
-                <span>Properties of Whole Numbers</span>
-              </li>
-              <li class="status">
-                <button type="button" class="btn warning"><img src="assets/img/view-report-bg/badge-3.png" class="badge-icon" alt=""> Recruit</button>
-              </li>
-              <li class="score">
-                <span>MY SCORE</span>
-                <span>8/10</span>
-              </li>
-              <li class="group-score">
-                <span>PEER GROUP SCORE</span>
-                <span>6/10</span>
-              </li>
-            </ul>
-          </div>
+          </div>          
         </div>
         <div class="modal-footer">
           <ul class="pagination">

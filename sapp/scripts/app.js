@@ -32,7 +32,8 @@ getTodayEvents : '/teachers/getTodayEvents',
 getStudentAssignments : '/students/getStudentAssignments',
 getAssignmentItems : '/students/getAssignmentItems',
 getCourseInfo : '/courses/getCourseInfo',
-createQuizOnSubskill: '/exams/createQuizOnSubskill/',
+createQuizOnStudent: '/exams/createQuizOnStudent/',
+studentReport : '/students/studentReport',
 
 }).value('REGEX', {
 LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -47,32 +48,35 @@ admin:1,
 parent : 2,
 teacher : 3,
 student : 4,
-}).value('card_months', {
-1  : '1',
-2  : '2',
-3  : '3',
-4  : '4',
-5  : '5',
-6  : '6',
-7  : '7',
-8  : '8',
-9  : '9',
-10 : '10',
-11 : '11',
-12 : '12',
-}).value('card_years', {
-2018  : '2018',
-2019  : '2019',
-2020  : '2020',
-2021  : '2021',
-2022  : '2022',
 }).value('subscription_days', {
-parent  : 30,
-student  : 60,
-teacher  : 30,
+    parent  : 30,
+    student  : 60,
+    teacher  : 30,
 }).value('quiz_pass_score', {
   score  : 60
-}).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+}).value('questionslimit', {
+  PRETEST : '10',
+  SUBSKILLQUIZ : '15',
+  PRACTICES : '10',  
+}).value('quiz_type', {
+      PRETEST            : 1,
+      SUBSKILLQUIZ       : 2,
+      PRACTICES           : 3, 
+      KNIGHTCHALLENGE    : 4,
+      TEACHERCUSTOMASSIGNMENT : 5,
+      TEACHERAUTOASSIGNMENT : 6, 
+      PARENTAUTOASSIGNMENT :7,
+}).value('quiz_mastered_score', {
+      PRETEST            : 80,
+      SUBSKILLQUIZ       : 80,
+      PRACTICES           : 80, 
+      KNIGHTCHALLENGE    : 80,
+      TEACHERCUSTOMASSIGNMENT : 80,
+      TEACHERAUTOASSIGNMENT : 80, 
+      PARENTAUTOASSIGNMENT :80,
+})
+
+.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 //var access = routingConfig.accessLevels;
 $routeProvider
 .when('/journey', {
@@ -104,13 +108,13 @@ $routeProvider
 	controller : 'challengesCtrl',		
 }).when('/demo_video/:id', {
 	templateUrl : 'views/firsttime_demo_video.html',
-	controller : 'quizCtrl',		
+	controller : 'preTestQuizCtrl',		
 }).when('/pre-test/:id', {
 	templateUrl : 'views/firsttimelogintest.html',
-	controller : 'quizCtrl',		
+	controller : 'preTestQuizCtrl',		
 }).when('/quiz', {
 	templateUrl : 'views/quiz.html',
-	controller : 'quizCtrl',		
+	controller : 'preTestQuizCtrl',		
 }).when('/avtar1', {
 	templateUrl : 'views/avtar-gender-selection.html',
 	controller : 'avtarCtrl',		
@@ -326,11 +330,11 @@ $scope.this_route = function(){
   return {
     restrict: 'E',
     transclude: false,
+    replace : true,
     link: function (scope) {
       scope.initCarousel = function(element) {
         // provide any default options you want
-        var defaultOptions = {
-        };
+        var defaultOptions = {};
         var customOptions = scope.$eval($(element).attr('data-options'));
         // combine the two options objects
         for(var key in customOptions) {
