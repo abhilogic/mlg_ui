@@ -373,6 +373,13 @@ teacherHttpResponse.setTeacherSettings = function(data){
     url   : urlParams.baseURL+urlParams.setTeacherSettings
   });
 }
+teacherHttpResponse.getTeacherSettings = function(data){
+  return $http({
+    method: 'POST',
+    data  : data,
+    url   : urlParams.baseURL+urlParams.getTeacherSettings
+  });
+}
 return teacherHttpResponse;
 
 }])
@@ -860,9 +867,9 @@ $scope.showEvents = function(events) {
     });
 
     // Display the students in a class for a course
-    $scope.onChangeGetStudents = function(stcourse){     
-      var stcourseid=stcourse.split(',')[0];
-      teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,stcourseid).success(function(student_response) {
+    $scope.onChangeGetStudents = function(stcourse){
+        var stcourseid=stcourse.split(',')[0];
+        teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,stcourseid).success(function(student_response) {
             //console.log(student_response);
             if(student_response.response.status=="true"){
               $scope.students=student_response.response.students;
@@ -870,16 +877,16 @@ $scope.showEvents = function(events) {
               $scope.students=[];
               $scope.err_message = "No Record Found. Please add student for this class";
               $timeout(function () { $scope.err_message = ""; }, 3000);
-            }            
-            
+            }
+
             //to edit the data
             $scope.selected={};
             $scope.editStudent=function(sid){
               $scope.selected.id=sid;
             }
           });
-    }
-
+        }
+      
 
   // start:- To add the student in class
   $scope.submitStudentDetails = function(frmdata){
@@ -4073,7 +4080,8 @@ $scope.deleteQuestions = function(Qid,uniqId){
   $scope.grade_id = '';
   $scope.selected_grade = '';
   $scope.number_of_students_in_class = 0;
-  $scope.getClassSettings = function(grade_subject) {
+  $scope.getClassSettingsOnChange = function(grade_subject) {
+    $scope.pfrm = {};
     var grade_info = grade_subject.split(',');
     $scope.subject_id = grade_info[0];
     $scope.subject_name = grade_info[1];
@@ -4085,6 +4093,21 @@ $scope.deleteQuestions = function(Qid,uniqId){
       } else{
         $scope.err_message = "No Record Found. Please add student for this class";
         $timeout(function () { $scope.err_message = ""; }, 3000);
+      }
+    });
+    var data = {user_id : get_uid, level_id: $scope.grade_id, course_id: $scope.subject_id}
+    teacherHttpService.getTeacherSettings(data).success(function(response) {
+      if (response.status == true) {
+        var result = response.result;
+        var settings = JSON.parse(result.settings);
+        $scope.pfrm.fill_in_the_blanks_question = settings.fill_in_the_blanks_question;
+        $scope.pfrm.single_choice_question = settings.single_choice_question;
+        $scope.pfrm.multiple_choice_question = settings.multiple_choice_question;
+        $scope.pfrm.true_false_question = settings.true_false_question;
+        $scope.pfrm.group_builder = (settings.group_builder == true) ? 'true' : 'false';;
+        $scope.pfrm.chat_status = (settings.chat_status == true) ? 'true' : 'false';
+        $scope.pfrm.student_chat_enabled = settings.student_chat_enabled;
+        $scope.pfrm.parent_chat_enabled = settings.parent_chat_enabled;
       }
     });
   };
@@ -4123,7 +4146,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
       alert('Please choose subject or grade to save settings');
       return false;
     }
-    pfrm.group_bulder = (pfrm.group_bulder == 'true') ? true : false;
+    pfrm.group_builder = (pfrm.group_builder == 'true') ? true : false;
     pfrm.chat_status = (pfrm.chat_status == 'true') ? true : false;
     var data = {
       user_id: get_uid,

@@ -205,7 +205,7 @@
                                   <label class="lable">Select Class</label>
                                 </div>
                                 <div class="col-md-7 col-sm-6">
-                                  <select ng-change="getClassSettings(frm.grade)" ng-model="frm.grade" class="mlg-selectpicker" 
+                                  <select ng-change="getClassSettingsOnChange(frm.grade)" ng-model="frm.grade" class="mlg-selectpicker" 
                                        ng-options="grade.course_id+','+grade.course_name+','+grade.level_id+','+grade.name as grade.name +'-'+grade.course_name for grade in grades track by grade.course_id" title="Select Class" data-width="auto" data-size="auto">
                                   </select>
                                 </div>
