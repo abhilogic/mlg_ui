@@ -704,11 +704,13 @@
           // name
           &.name {
             min-width: 192px;
+            max-width: 192px;
             span {
               color: #571d12;
               font-family: $font-secondary;
               display: block;
               font-weight: $bold;
+              word-wrap: break-word;
               &:first-child {
                 font-size: 12px;
                 text-transform: uppercase;

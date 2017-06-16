@@ -99,7 +99,7 @@
       @include background-cover("subskillsroom_table.png");
       bottom: -48px;
       content: '';
-      height: 283px;
+      height: 151px;
       left: -90px;
       position: absolute;
       width: 1084px;
@@ -123,12 +123,13 @@
 
     }
     .table-animated-img {
-      @include background-cover("subskillsroom_table.png");
-      background-position: -125px 95px;
+      @include background-cover("table-animation/1.png");
+      animation: candelAnimation 2s infinite;
+      background-position: 0px 0px;
       background-size: auto auto;
       bottom: -48px;
       content: '';
-      height: 283px;
+      height: 151px;
       left: -90px;
       position: absolute;
       width: 1084px;

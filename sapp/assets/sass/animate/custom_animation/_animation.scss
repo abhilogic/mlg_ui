@@ -164,3 +164,19 @@ $cloud_fourth_top_pos: -90px;
     left: 10%;
   }
 }
+
+
+
+
+// subskills room animation
+
+@include keyframes(candelAnimation){
+  $unit: "%" !default;
+  $value: 0;
+  @for $i from 1 through 45 {
+    $value: $value + 2.22;
+    #{$value}#{$unit}{
+      background-image:url("../img/table-animation/"#{$i}".png");
+      }
+    }
+}
