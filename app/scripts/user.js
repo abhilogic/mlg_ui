@@ -119,51 +119,24 @@ angular.module('mlg').filter('moment', function() {
 		});
 	}
 
-	loginHttpResponse.getPaymentBrief=function(data){
+	loginHttpResponse.getPaymentBrief=function(data, child_id) {
+        var url = urlParams.baseURL+urlParams.getPaymentBrief;
+        if (typeof child_id != 'undefined' && child_id != null) {
+          url = urlParams.baseURL+urlParams.getPaymentBrief + '/' + child_id;
+        }
 		return $http({
 			method:'POST',
             data  : data,
-			url   : urlParams.baseURL+urlParams.getPaymentBrief
+			url   : url
 		});
-	}
+	};
 
 	loginHttpResponse.gradeList=function(){
 		return $http({
 			method:'GET',			
 			url   : urlParams.baseURL+urlParams.gradeList
 		});
-	}
-
-	loginHttpResponse.packageList=function(){
-		return $http({
-			method:'GET',			
-			url   : urlParams.baseURL+urlParams.packageList
-		});
-	}
-
-	loginHttpResponse.planList=function(){
-		return $http({
-			method:'GET',			
-			url   : urlParams.baseURL+urlParams.planList
-		});
-	}
-
-	loginHttpResponse.getCourseByGrade=function(grade_id){		
-		return $http({
-			method:'GET',	
-			data : grade_id,		
-			url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+grade_id.id
-		});
-	}
-
-	loginHttpResponse.setChildrenCount=function(ccount){		
-		return $http({
-			method:'POST',	
-			data : ccount,		
-			url   : urlParams.baseURL+urlParams.getCourseByGrade+'/'+grade_id.id
-		});
-	}
-
+	};
 
 	loginHttpResponse.addChild=function(data){
 		return $http({
@@ -815,8 +788,9 @@ angular.module('mlg').filter('moment', function() {
     });
   };
 }])
-.controller('parentSubscriptionCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
+.controller('parentSubscriptionCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions','urlParams',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions,urlParams) {
   $scope.frm = {}
+  $scope.site_root = urlParams.siteRoot;
   $scope.childname={};
   var get_uid=commonActions.getcookies(get_uid);
 
@@ -853,8 +827,8 @@ angular.module('mlg').filter('moment', function() {
  //Child Purchase history.
     $scope.child_info={}
     $scope.days_left = '';
-    $scope.packages = {}
-    $scope.plans = {}
+    $scope.packages = {};
+    $scope.plans = {};
     $scope.level_id = '';
     $scope.price = 0;
     $scope.dis_val = 0;
@@ -869,18 +843,18 @@ angular.module('mlg').filter('moment', function() {
         $scope.dis_amount = $scope.price * $scope.dis_val * 0.01;
         $scope.subtotal = $scope.price - $scope.dis_amount;
 	  });
-    }
+    };
     $scope.discount = function(package) {
      $scope.frm.updatedPackage = package;
      $scope.dis_val = package.discount;
      $scope.new_package_name = package.name;
      $scope.dis_amount = $scope.price * $scope.dis_val * 0.01;
      $scope.subtotal = $scope.price-$scope.dis_amount;
-    }
+    };
 
     $scope.updatedPlan = function(plan) {
       $scope.frm.updatedPlan = plan;
-    }
+    };
 
     $scope.upgrade = function(frm) {
      if (typeof frm.new_package == 'undefined') {
@@ -931,11 +905,11 @@ angular.module('mlg').filter('moment', function() {
      }
      frm.updatedCourses = course_chosen;
      loginHttpService.upgradePackage(frm).success(function(response){
-       if (response.status) {
-         $location.url('/parent/dashboard/110');
+       if (response.response.status == true) {
+         $location.url('/payment_page/' + $routeParams.child_id);
        }
      });
-    }
+    };
     if (typeof $routeParams.child_id != 'undefined') {
       loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
         if (result.status == true) {
@@ -1178,17 +1152,17 @@ if (typeof $routeParams.slug != 'undefined') {
 
 	}
 
-       //how many childeren has been added n
-       	loginHttpService.getAddedChildren(get_uid).success(function(response) {
-			if (typeof response.response.added_children !='undefined') {
-					var added_children =response.response.added_children;					
-					
-					if( (added_children==$rootScope.childrencount) && (added_children>0 ) ){       				       		       		
-		     			window.location.href=urlParams.siteRoot+'parent_preferences'; 
-       				}
-       			}
-       		});
-       	
+    //how many childeren has been added
+      loginHttpService.getAddedChildren(get_uid).success(function(response) {
+        if (typeof response.response.added_children !='undefined') {
+          var added_children =response.response.added_children;					
+
+          if ((added_children==$rootScope.childrencount) && (added_children>0 ) ){       				       		       		
+            window.location.href=urlParams.siteRoot+'parent_preferences'; 
+          }
+        }
+      });
+   
 
 
        	// promo code implementation
@@ -1368,8 +1342,8 @@ if (typeof $routeParams.slug != 'undefined') {
     }
 
 }])
-.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','commonActions','$location','card_months', 'card_years',
-  function($scope, $rootScope, loginHttpService,commonActions,$location, card_months, card_years) {
+.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','commonActions','$location','card_months', 'card_years','$routeParams',
+  function($scope, $rootScope, loginHttpService,commonActions,$location, card_months, card_years, $routeParams) {
     $scope.children = {};
     $scope.total_amount = 0;
 
@@ -1386,19 +1360,19 @@ if (typeof $routeParams.slug != 'undefined') {
 				
 			});
 		// end to call dynamic step slider    
-     data = {user_id : get_uid};
-      loginHttpService.getPaymentBrief(data).success(function(response) {
+     var data = {user_id : get_uid};
+     var child_id = (typeof $routeParams.child_id != 'undefined' && $routeParams.child_id != '') ? $routeParams.child_id : '';
+      loginHttpService.getPaymentBrief(data,child_id).success(function(response) {
         if (response.status) {
           $scope.children = response.data;
           $scope.total_amount = response.total_amount;
         }
       });
-   
+
     $scope.frm = {};
     $scope.card_months = card_months;
     $scope.card_years = card_years;
     $scope.frm.expiry_month = card_months['1'];
-    $scope.frm.expiry_year = card_years['2017'];
     $scope.submitCardDetail = function(data) {
       data.user_id = $rootScope.logged_user.id;
       var children_ids = [];
@@ -1412,7 +1386,7 @@ if (typeof $routeParams.slug != 'undefined') {
       data.children_ids = children_ids;
       data.amount = $scope.total_amount;
       loginHttpService.saveCardToPaypal(data).success(function(response) {
-        if (response.status == true) {
+        if (response.status === true) {
           $location.url('/parent/dashboard/110');
         } else {
           $scope.msg = response.message;
@@ -1895,4 +1869,58 @@ if (typeof $routeParams.slug != 'undefined') {
         $scope.msg = 'some error occured';
       });
     };
-}]);
+}])
+.controller('addMoreChildCntrl', ['$scope', 'loginHttpService', '$location', 'urlParams',
+   function ($scope, loginHttpService, $location, urlParams) {
+      // get children count
+      $scope.number = 5;
+      $scope.counter = Array;
+
+      //get cookies
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      var get_uid = getCookie('uid');
+      if (typeof get_uid == '') {
+        alert('kindly login');
+        window.location.href = urlParams.siteRoot;
+      }
+
+      var number_of_children = 0;
+      loginHttpService.getChildrenCount(get_uid).success(function(resp) {
+        if (resp.response.number_of_children > 0) {
+          number_of_children = resp.response.number_of_children;
+        } else {
+          alert('Kindly add at least one child');
+          $location.url('/select_children');
+        }
+      });
+
+      // Call to redirect on add child after child selection
+      $scope.submitChildrenCount = function(childrencount) {
+        //call API to save number of children of a parents
+        var data = {};
+        data.uid = get_uid;
+        data.numofchild = childrencount + number_of_children;
+        loginHttpService.setChildrenCount(data).success(function(response) {
+        if (response.response.status == "True") {
+          alert('Children added successfully');
+        }
+        $location.url('/add_child_account');
+        });
+      };
+    }
+ ]);

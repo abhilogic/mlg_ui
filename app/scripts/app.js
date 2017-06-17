@@ -192,15 +192,15 @@ principal  : 30,
 		templateUrl : 'views/term_condition.html',
 		controller : 'termsAndConditionsCtrl',
 		access : access.parents
-	}).when('/payment_page', {
+	}).when('/payment_page/:child_id?', {
 		templateUrl : 'views/payment_page.html',
 		controller : 'paymentPageCtrl',
 	}).when('/preferences', {
 		templateUrl : 'views/preferences.html',
 		controller : 'preferences',
-	}).when('/select-children', {
-		templateUrl : 'views/select-children.html',
-		controller : 'selectChildren',
+	}).when('/add/children', {
+		templateUrl : 'views/number_children.html',
+		controller : 'addMoreChildCntrl',
 	}).when('/parent/dashboard/subscription/:child_id', {
 		templateUrl : 'views/dashboard/parent-subscription.html',
 		controller : 'parentSubscriptionCtrl',
