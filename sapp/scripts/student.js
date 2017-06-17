@@ -590,10 +590,8 @@ img.src = url;
 
 }
 
-
-
 }])
-.controller('preTestQuizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles','quiz_type','quiz_mastered_score','$cookieStore',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles,quiz_type,quiz_mastered_score,$cookieStore) {
+.controller('preTestQuizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles','quiz_type','quiz_mastered_score','questionslimit','$cookieStore',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles,quiz_type,quiz_mastered_score,questionslimit,$cookieStore) {
 	 // alert(navigator.onLine);
 
 	 $scope.data={};
@@ -642,43 +640,74 @@ img.src = url;
 	 	$location.url('/subject-view/' + $routeParams.id);
 	 }
 
+	 var promise = loginHttpService.getCourseInfo($routeParams.id).success(function(crinfo) {	
+		return crinfo ;
+	});
 
-	 var quizquestions=[
-	 {"id":"response_id-7609","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110UA2098985","questionName":"Sqaure of 5 is 25?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7610","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PN6373960","questionName":"Is 7 an irrational number?","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"No","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7611","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110SW4723875","questionName":"Irrational numbers cannot be written as a/b (where a and b are integers and b is not zero).  When written as decimals, irrational numbers do not terminate or repeat.","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7603","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"","questionName":"Write 61/100 as a decimal number.","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"0.61","label":"0.61"},{"value":"0.32","label":"0.32"},{"value":"0.65","label":"0.65"},{"value":"0.77","label":"0.77"}],"valid_responses":[{"value":"0.61","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7604","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110SM4787496","questionName":"Sum of two Positive number is always?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"positive","label":"positive"},{"value":"negative","label":"negative"},{"value":"0","label":"0"},{"value":"1","label":"1"}],"valid_responses":[{"value":"positive","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7605","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110OS3391753","questionName":"Sum of – 36 and 29 is____?.","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"-65","label":"-65"},{"value":"65","label":"65"},{"value":"-7","label":"-7"},{"value":"7","label":"7"}],"valid_responses":[{"value":"-7","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7606","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PS8184364","questionName":"The pair of integers whose sum is -5.","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"1,-4","label":"1,-4"},{"value":"-1,6","label":"-1,6"},{"value":"-3,-2","label":"-3,-2"},{"value":"2,3","label":"2,3"}],"valid_responses":[{"value":"-3,-2","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7607","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110WJ8451694","questionName":"Write 50/150 as a decimal number","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"30","label":"30"},{"value":"0.25","label":"0.25"},{"value":"0.33","label":"0.33"},{"value":"0.30","label":"0.30"}],"valid_responses":[{"value":"0.33","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7608","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110GJ9662352","questionName":"Write additive inverse of -5?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"-6","label":"-6"},{"value":"-4","label":"-4"},{"value":"-5","label":"-5"},{"value":"5","label":"5"}],"valid_responses":[{"value":"5","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7609","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110UA2098985","questionName":"Sqaure of 5 is 25?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7610","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PN6373960","questionName":"Is 7 an irrational number?","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"No","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7606","type":"fillin","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PS8184364","questionName":"The pair of integers whose sum is -5.","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"1,-4","label":"1,-4"},{"value":"-1,6","label":"-1,6"},{"value":"-3,-2","label":"-3,-2"},{"value":"2,3","label":"2,3"}],"valid_responses":[{"value":"-3,-2","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7609","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110UA2098985","questionName":"Sqaure of 5 is 25?","level":"Easy","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"Yes","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7610","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110PN6373960","questionName":"Is 7 an irrational number?","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"No","score":1}],"penalty_score":-1},
-	 {"id":"response_id-7612","type":"yesNO","grade":"11th","subject":"Maths","standard":"1","docId":"20170318225110AJ1668693","uniqueId":"20170318225110AK9743127","questionName":"Is 2/10 an irrational number?","level":"Moderate","mimeType":null,"paragraph":null,"item":"E.1","Claim":"1","Domain":"NBT","Target":"E","CCSS-MC":"CCSS.MATH.CONTENT.8.EE.A.3","CCSS-MP":"N/A","state":"NRC","GUID":"54133f7b-5f95-4898-96e4-02a01f3230c8","ParentGUID":null,"AuthorityGUID":null,"Document":"Grade Level Disciplinary Core Ideas","Label":"Disciplinary Core Idea","Number":"MS-PS1","Description":"Matter and Its Interactions","Year":"2013","createdDate":"2017-03-18 22:51:10","options":[{"value":"Yes","label":"Yes"},{"value":"No","label":"No"}],"valid_responses":[{"value":"No","score":1}],"penalty_score":-1}
+promise.then(function(result) {
 
-	 ];
+	 	//console.log(result);
+		var d = new Date();
+		senddata ={
+			user_id 	: get_uid,
+			grade_id 	: result.data.response.course_Information.level_id,
+			subskill_id : -1,
+			quiz_type_id : quiz_type.PRETEST, // id of the table quiz_types
+			questions_limit : questionslimit.PRETEST,
+			quiz_name : 'preTest-'+ d.getFullYear()+(d.getMonth()+1)+d.getDate(),
+		};
 
-	  	//local storage functionality implementation
-	  	$localStorage.localquestions= quizquestions; //set value in local storage
+		// To maintain old quiz questions if user quize questions response is incomplete
+		var localQuizResponse = JSON.parse(localStorage.getItem('localQuizResponse'));
+		var localQuestions= JSON.parse(localStorage.getItem('ngStorage-localquestions'));
+		if(localQuizResponse ==null && localQuestions==null ){
+			
+			// API to create quiz and questions list of quiz created for user 
+		loginHttpService.createQuizOnStudent(senddata).success(function(resitem){
+
+			if (resitem.data.status == true) {
+				//$scope.assignment_details = resitem.data.assignment_details;
+				var quizquestions = resitem.data.questions;
+
+				//local storage functionality implementation
+		  		$localStorage.localquestions= quizquestions; //set value in local storage	  	
+		  		$scope.data.questions= $localStorage.localquestions //get value in localstorage
+
+
+		  		// To check the sequence of the question in quiz	  	
+		  		if(localStorage.getItem('userQuesSequence')!=null ) {
+		  			$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
+		  		}else{
+		  			$scope.sequence=0;	  				  			
+		  			var a=[];
+		  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+		  		}
+
+		  		// Set current question
+		  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
+		  		$scope.total_questions=$scope.data.questions.length-1;
+			}else{
+					$scope.message = "Issue in traversing page";
+			}
+		}); // end createquiz APi
+
+		}else{   // if quiz attemped incomplete then pick question from localstorage 
+
+			$scope.data.questions= $localStorage.localquestions;
+		
+			// To check the sequence of the question in quiz	  	
+	  		if(localStorage.getItem('userQuesSequence')!=null && localStorage.getItem('userQuesSequence') !=0 ) {
+	  			$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
+	  		}else{
+	  			$scope.sequence=0;
+	  			var a=[];
+	  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+	  		}	
 	  	
-	  	$scope.data.questions= $localStorage.localquestions //get value in localstorage
-
-	  	// To check the sequence of the question in quiz	  	
-	  	if(localStorage.getItem('userQuesSequence')!=null ) {
-	  		$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
-	  	}else{
-	  		$scope.sequence=0;
-	  		var a=[];
-	  		localStorage.setItem('localQuizResponse', JSON.stringify(a));
-	  	}	  	
-	  	
-	  	$scope.currentquestion= $scope.data.questions[$scope.sequence];	
-	  	$scope.total_questions=$scope.data.questions.length-1;
-
+	  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
+	  		$scope.total_questions=$scope.data.questions.length-1;
+		}
+	}); // end then promise
 
 	  	// Read Question in UK voice
 	  	$scope.readQuestion=function(){            
@@ -688,7 +717,7 @@ img.src = url;
 
 
 	  	$scope.submitQuestion=function(frm){
-	  		console.log(frm);	
+	  		//console.log(frm);	
 	  		$scope.error_message=""; 	
 	 	// check selected option   frm.selectedoption
 	 	if(typeof frm.selectedoption=='undefined'){
@@ -697,14 +726,14 @@ img.src = url;
 	 	else{	 		
 
 	 				//step-1 - calculate 
-	 				var correctoption=$scope.currentquestion.valid_responses[0].value;
-	 				var question_marks=$scope.currentquestion.valid_responses[0].score;
+	 				var correctoption=$scope.currentquestion.answers[0].value;
+	 				var question_marks=$scope.currentquestion.answers[0].score;
 	 				if(frm.selectedoption==correctoption){
 	 					console.log(frm.selectedoption);
 		 				var selectedAnswer=1; // select option is correct
 		 				$scope.answer_response="Awesome, you got this correct";
 		 				//alert('Correct');
-		 				var score= $scope.currentquestion.valid_responses[0].score;
+		 				var score= $scope.currentquestion.answers[0].score;
 		 				$scope.answer_result=true;
 		 			}
 		 			else{
@@ -753,18 +782,20 @@ img.src = url;
 
 	 				//Step-2  Set required coulum values
 	 				var userExamResponse={};
-	 				userExamResponse={
-	 					user_id 	: get_uid,
-	 					exam_id 	: 1,
-	 					item_id 	: $scope.currentquestion.id,
-	 					response 	: frm.selectedoption,
-	 					correct 	: selectedAnswer,
-	 					score 		: score,
-	 					item_marks	: question_marks,
-       						//skip_count 	: 1,
-       						//time_taken 	: 1,
-       					}
-
+	      	 		userExamResponse={
+	       				user_id 	: get_uid,
+	       				exam_id 	: $scope.currentquestion.quiz_id,
+	       				item_id 	: $scope.currentquestion.question_id,
+	       				item_marks	: $scope.currentquestion.question_marks,
+	       				response 	: frm.selectedoption,
+	       				correct 	: selectedAnswer,
+	       				score 		: score,       				
+	       				skip_count 	: 0,
+	       				grade_id 	: $scope.currentquestion.grade_id,
+						course_id : $scope.currentquestion.course_id,
+						quiz_type_id : quiz_type.PRETEST,
+	       				//time_taken 	: 1,
+	       			}
 
        				//2.1 Add the quiz response in local storage
        				var b;
@@ -772,16 +803,7 @@ img.src = url;
        				a.push(userExamResponse); 
        				localStorage.setItem('localQuizResponse', JSON.stringify(a));  
 
-
-
-
-		 			// Step - 3 Send data to API to store value in database (user_quiz_response)
-		 			/*loginHttpService.setUserQuizResponse(userExamResponse).success(function(apiresponse) {		 				
-		 				if (apiresponse.response.status == "true") {*/		 						
-		 						//Step-4 -  Next Question
-
 		 			//Step-3 Procceed steps once value has been add in local storage
-		 			
 		 			if( ($scope.sequence < $scope.total_questions) && (($scope.sequence!=4) && ($scope.sequence!=9)) ){
 		 				localStorage.setItem('userQuesSequence', $scope.sequence+1);
 		 				$scope.sequence+=1;
@@ -800,23 +822,26 @@ img.src = url;
 		 			else{ 									
 
 						//Step- 4 send local Stoage Quiz attand Response to API						
-						localStorage.setItem('userQuesSequence', 0);
-						localStorage.setItem('preTestProcessStatus',1);
+						//localStorage.setItem('userQuesSequence', 0);
+						localStorage.removeItem("userQuesSequence");
+						//localStorage.setItem('preTestProcessStatus',1);
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
 						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {
 						//alert('final')							
 						if (apiresponse.response.status == "true") {
-							var quiz_id=apiresponse.response.quiz_attampt;
-							localStorage.setItem('quiz_id', quiz_id);
+							var user_quiz_id=apiresponse.response.quiz_attempt_id;
+							//localStorage.setItem('quiz_id', quiz_id);
 
 								// set the pretest status in user details
 								loginHttpService.setpreTestStatus(1,get_uid).success(function(preTestResponse) {});
 
 
 		  						// Step -5 to Get the User Result
-		  						loginHttpService.getUserQuizResponse(get_uid,1,quiz_id).success(function(quizResultResponse) {
-		  							a=[];
-		  							localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+		  						loginHttpService.getUserQuizResponse(get_uid,$scope.currentquestion.quiz_id,user_quiz_id).success(function(quizResultResponse) {
+		  							//a=[];
+		  							//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+		  							localStorage.removeItem("localQuizResponse"); // empty the local storage
+						 			localStorage.removeItem("ngStorage-localquestions");
 		  							if (quizResultResponse.response.status == "true") {
 		  								var correct_answer= quizResultResponse.response.correct_questions;
 		  								var wrong_answer= quizResultResponse.response.correct_questions;
@@ -867,7 +892,7 @@ img.src = url;
 
 promise.then(function(result) {
 	$scope.course_name = result.data.response.course_Information.course_name;
-	var selected_subject = result.data.response.parent_info_of_skill.course_name;
+	$scope.selected_subject = result.data.response.parent_info_of_skill.course_name;
 	
 		 $scope.numToAlpha =function(idx) {
           var getAlpha = ['A','B','C','D','E','F','G'];
@@ -878,23 +903,6 @@ promise.then(function(result) {
        $scope.data = {};
        var skip = null;
        $scope.attempts = 0;
-
-       // decide masscourt image
-		if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
-			$scope.mascot_img='math_normal.png';
-		}
-		else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
-			$scope.mascot_img='english_normal.png';
-		}
-		else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
-			$scope.mascot_img='science_normal.png'; 
-		}
-		else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
-			$scope.mascot_img='social_studies_normal.png';
-		}else{
-			$scope.mascot_img='mascot.png';
-		}
-
 
 	//console.log(result);
 	var d = new Date();
@@ -963,7 +971,7 @@ promise.then(function(result) {
 		}); // end createquiz APi
 			
 
-	}else{ // if quiz attemped incomplete
+	}else{ // if quiz attemped incomplete then pick question from localstorage
 		$scope.data.questions= $localStorage.localquestions;
 		
 		// To check the sequence of the question in quiz	  	
@@ -1009,9 +1017,11 @@ promise.then(function(result) {
 
 
 	//close masscourt
-	$scope.closeMascot=function(st_result){            
-        $("#skillquizmasscourt_id").removeClass("active");
-        if(st_result=='pass'){
+	$scope.closeMascot=function(st_result){         
+        if(st_result=='correct' || st_result=='wrong'){
+        	$("#skillquizmasscourt_id").removeClass("active");
+        } 
+        else if(st_result=='pass'){
         	window.location.href='skill-door/whole-numbers/13';
         } else{
         	window.location.href='subskill_content/place-values-in-whole-numbers/18';
@@ -1070,16 +1080,24 @@ promise.then(function(result) {
 		 		if(frm.selectedoption==correctoption){
 		 			console.log(frm.selectedoption);
 		 			var selectedAnswer=1; // select option is correct
-		 			$scope.answer_response="Awesome, you got this correct";
-		 			alert('Correct');
+		 			$scope.masscourt_message="Awesome, you got this correct";		 			
 		 			var score= $scope.currentquestion.answers[0].score;
+		 			//alert('Correct');
+
+		 			$scope.current_quesstatus="correct";
+		 			$scope.st_result="correct";
+		 			//$scope.answer_result = "correct"; 
 		 		}
 		 		else{
 		 			selectedAnswer=0; // select option is wrong
 		 			if(typeof $scope.currentquestion.penalty_score=='undefined'){ score=0}
 		 			else{ score =$scope.currentquestion.penalty_score; }
-		 			$scope.answer_response="Oops, This is not the correct answer";		 				
-		 			alert('wrong'); 
+		 			$scope.masscourt_message="Oops, This is not the correct answer";		 				
+		 			//alert('wrong');
+		 			$scope.current_quesstatus="wrong";
+		 			$scope.st_result="wrong";
+
+		 			//$scope.answer_result = "wrong"; 
 		 		}
 
 		 		//Step-2  Set required coulum values		 		
@@ -1098,91 +1116,129 @@ promise.then(function(result) {
 					quiz_type_id : quiz_type.SUBSKILLQUIZ,
        				//time_taken 	: 1,
        			}
-       		}
-    	}	
+
+       		// Check Masscourt image and message			
+			var selected_subject = $scope.currentquestion.subject;
+			if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
+				if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="math_right.png";}
+				else{ $scope.masscourt_image ="math_wrong.png";	}
+			}
+			else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
+				if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="english_right.png";}
+				else{ $scope.masscourt_image ="english_wrong.png";	}
+			}
+			else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
+				if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="science_right.png";}
+				else{ $scope.masscourt_image ="science_wrong.png";	}
+			}
+			else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
+				if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="social_studies_right.png";}
+				else{ $scope.masscourt_image ="social_studies_wrong.png";	}
+
+			}else{
+				$scope.masscourt_image='mascot.png';
+			} 
+			$("#skillquizmasscourt_id").addClass("active"); // show masscourt with value of masscourt_image and masscourt_message
+   		}
+   	}	
 	 	
  			
 
-       			
+       	//Step-3 Procceed check questions sequence either for next question or show result if sequence is on last.
+		if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
+		
+			//3.1 Add the quiz response in local storage
+       		//var b;
+       		//console.log(a); 
+       		a = JSON.parse(localStorage.getItem('localQuizResponse')); 
+       		a.push(userExamResponse); 
+    		localStorage.setItem('localQuizResponse', JSON.stringify(a));
+		 	localStorage.setItem('userQuesSequence', $scope.sequence+1);
+		 	$scope.sequence+=1;
+		 	$scope.currentquestion= $scope.data.questions[$scope.sequence];
+		 	$scope.frm={};
 
-    			//Step-3 Procceed check questions sequence either for next question or show result if sequence is on last.
-		 		if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
-		 			//3.1 Add the quiz response in local storage
-       				//var b;
-       				console.log(a); 
-       				a = JSON.parse(localStorage.getItem('localQuizResponse')); 
-       				console.log(a);   
-    				a.push(userExamResponse); 
-    				localStorage.setItem('localQuizResponse', JSON.stringify(a));
-		 			localStorage.setItem('userQuesSequence', $scope.sequence+1);
-		 			$scope.sequence+=1;
-		 			$scope.currentquestion= $scope.data.questions[$scope.sequence];
-		 			$scope.frm={};
+		 	// update question status in question indicator        	
+		    attempt_questions_status[$scope.sequence]['status']= newqstate;
+		    attempt_questions_status[$scope.sequence+1]['status']="minimize";
+		       	      		
+		    localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));        	
+		    local_questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
+		    $scope.questions_status = attempt_questions_status;    	
 
-		 			// update question status in question indicator        	
-		        	attempt_questions_status[$scope.sequence]['status']= newqstate;
-		        	attempt_questions_status[$scope.sequence+1]['status']="minimize";
-		        	      		
-		        	localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));        	
-		        	local_questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
-		           	$scope.questions_status = attempt_questions_status;    	
+		}
+		else if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
+			console.log($scope.error_optionmessage);
+		}	 			 		
+		else{ 
 
-		 		}
-		 		else if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
-		 			console.log($scope.error_optionmessage);
-		 		}	 			 		
-				else{ 
-
-						//Step- 4 send local Stoage Quiz attand Response to API						
-						//localStorage.setItem('userQuesSequence', 0);
-						localStorage.removeItem("userQuesSequence");
-						
-						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
-						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
-							if (apiresponse.response.status == "true") {
-								var user_quiz_id=apiresponse.response.quiz_attempt_id;
-								localStorage.setItem('user_quiz_id', user_quiz_id);
-
+			//Step- 4 send local Stoage Quiz attand Response to API						
+			//localStorage.setItem('userQuesSequence', 0);
+			localStorage.removeItem("userQuesSequence");
+					
+			var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
+			loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
+				if (apiresponse.response.status == "true") {
+					var user_quiz_id=apiresponse.response.quiz_attempt_id;
+					localStorage.setItem('user_quiz_id', user_quiz_id);
 		  						
-		  						// Step -5 to Get the User Result
-		  						loginHttpService.getUserQuizResponse(get_uid,$scope.currentquestion.quiz_id,user_quiz_id).success(function(quizResultResponse) {
-						 			// a=[];
-		  							//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
-						 			//localStorage.setItem('ngStorage-localquestions', JSON.stringify(a));
-						 			
-						 			localStorage.removeItem("localQuizResponse"); // empty the local storage
-						 			localStorage.removeItem("ngStorage-localquestions");
+					// Step -5 to Get the User Result
+					loginHttpService.getUserQuizResponse(get_uid,$scope.currentquestion.quiz_id,user_quiz_id).success(function(quizResultResponse) {
+			 			// a=[];
+						//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+			 			//localStorage.setItem('ngStorage-localquestions', JSON.stringify(a));
+					 			
+			 			localStorage.removeItem("localQuizResponse"); // empty the local storage
+			 			localStorage.removeItem("ngStorage-localquestions");
 
-						 			if (quizResultResponse.response.status == true) {
-						 					//var correct_answer= quizResultResponse.response.correct_questions;
-						 					//var wrong_answer= quizResultResponse.response.correct_questions;
-						 					var st_result="";
-						 					if(quizResultResponse.response.student_result_percent< quiz_mastered_score.SUBSKILLQUIZ){
-						 						$scope.st_result= "fail";
-						 						$("#skillquizmasscourt_id").addClass("active");
-						 						//alert("Your are Fail");
-						 					}
-						 					else{
-						 						$scope.st_result= "pass";
-						 						$("#skillquizmasscourt_id").addClass("active");
-						 						//alert("Your are Pass");
-						 					}
-											//window.location.href='challenges';
-						 					}
-						 				});
+			 			if (quizResultResponse.response.status == true) {
+		 					//var correct_answer= quizResultResponse.response.correct_questions;
+		 					//var wrong_answer= quizResultResponse.response.correct_questions;
+		 					var st_result="";
+		 					if(quizResultResponse.response.student_result_percent< quiz_mastered_score.SUBSKILLQUIZ){
+		 						$scope.st_result= "fail";
+		 						$("#skillquizmasscourt_id").addClass("active");
+		 						//alert("Your are Fail");
+		 						$scope.masscourt_message="You need more attention. Your are not mastered.";
+		 					}
+		 					else{
+			 						$scope.st_result= "pass";			 						
+			 						//alert("Your are Pass");
+			 						$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
+			 					}
+								//window.location.href='challenges';
+							// Check Masscourt image and message			
+							var selected_subject = $scope.currentquestion.subject;
+							if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
+								$scope.masscourt_image ='math_normal.png';
+							}
+							else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
+								$scope.masscourt_image ='english_normal.png';
+							}
+							else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
+								$scope.masscourt_image = 'science_normal.png';
+							}
+							else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
+								$scope.masscourt_image = 'social_studies_normal.png';
+							}else{
+								$scope.masscourt_image='mascot.png';
+							} 
+							$("#skillquizmasscourt_id").addClass("active"); // show masscourt with value of masscourt_image and masscourt_message
+   	
 
-	  					}else{
-	  						alert('Opps something is wrong to store your quiz result');
-	  					}
+	 					}
+	 				});
+				}else{
+					alert('Opps something is wrong to store your quiz result');
+				}
 							
-					});
+			});
 
+		} 					
 
-				}  
-	 					
-
-	 		//}    	
+	 //}    	
     }; // end submit question operation
+
 
 }])
 
@@ -1263,7 +1319,8 @@ promise.then(function(result) {
 
 	// API to check arena  Flag/unflag	
 	var quiz_type_id = quiz_type.PRETEST;
-	var subject_id = $routeParams.id;	
+	//var subject_id = $routeParams.id;	
+	var subject_id =-1;
 	loginHttpService.getUserQuizResponseOnSite(get_uid, quiz_type_id, subject_id).success(function(response) {
 		if (response.response.status == true && response.response.student_result_percent>= quiz_mastered_score.PRETEST ) {
 			$scope.pretest_result = 'pass';

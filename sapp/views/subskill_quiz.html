@@ -25,10 +25,10 @@
           <div class="subskill-quiz-content">        
             <div class="text-right"><button type="button" class="btn btn-hint"><img src="assets/img/hint-bulb-img.png" alt="" class="hint-img">HINT (3 left)</button></div>
 
-            <div class="text-center" >
-              <button  class="btn btn-skip" ng-click="onSubmitQuestion(frm,skip=1)">skip</button>
+            <!-- <div class="text-center" >
+            <button  class="btn btn-skip" ng-click="onSubmitQuestion(frm,skip=1)">skip</button>
               <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm,skip=0)">Submit</button>
-            </div>
+            </div> -->
 
             <p class="ques" ng-bind-html="'Question- '+(sequence+1)+' : '+ currentquestion.questionName"></p>
 
@@ -66,10 +66,10 @@
 
             
 
-            <!-- <div class="text-center" >
-              <button  class="btn btn-skip" ng-click="onSkipQuestion(frm)">skip</button>
-              <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm)">Submit</button>
-            </div> -->
+             <div class="text-center" >
+            <button  class="btn btn-skip" ng-click="onSubmitQuestion(frm,skip=1)">skip</button>
+              <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm,skip=0)">Submit</button>
+            </div>
       
                <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: false, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
            <div owl-carousel-item=""  class="item" ng-repeat="ques in questions_status" class="item">              
@@ -86,19 +86,17 @@
     <!--start masscourt-->
     <div class="masscourt-block" id="skillquizmasscourt_id">
       <div class="masscourt-cover in">
-        <img ng-src="assets/img/mascort-img/{{mascot_img}}" class="masccort-img" alt=""/>
+        <img ng-src="assets/img/mascort-img/{{masscourt_image}}" class="masccort-img" alt=""/>
         <div class="hint-block">
           <div class="col-xs-2 padding-0">
             <!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
           </div>
           <div class="col-xs-10">
-            <span class="hint" ng-if="st_result=='fail' ">              
-              You Need More Practice to be mastered in this skill.              
+            <span class="hint">   
+               {{masscourt_message}}            
             </span>
 
-            <span class="hint" ng-if="st_result=='pass' ">              
-                Congrats you got mastered. You can move for our next subskill.             
-            </span>
+           
 
             <div class="text-right">
               <button type="button" class="btn" id="gotIt1" ng-click="closeMascot(st_result);">Got it!</button>

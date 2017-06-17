@@ -56,7 +56,7 @@ student : 4,
 }).value('quiz_pass_score', {
   score  : 60
 }).value('questionslimit', {
-  PRETEST : '10',
+  PRETEST : '3',
   SUBSKILLQUIZ : '15',
   KNIGHTCHALLENGE :'15',
   PRACTICES : '10',  
