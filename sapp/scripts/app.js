@@ -63,7 +63,7 @@ student : 4,
 }).value('quiz_type', {
       PRETEST            : 1,
       SUBSKILLQUIZ       : 2,
-      PRACTICES           : 3, 
+      PRACTICE          : 3, 
       KNIGHTCHALLENGE    : 4,
       TEACHERCUSTOMASSIGNMENT : 5,
       TEACHERAUTOASSIGNMENT : 6, 
@@ -102,6 +102,9 @@ $routeProvider
 }).when('/subskill-quiz/:subskill_name/:subskill_id', {
 	templateUrl : 'views/subskill_quiz.html',
 	controller : 'subskillQuizCtrl',		
+}).when('/practice/:subskill_name/:subskill_id', {
+  templateUrl : 'views/practice.html',
+  controller : 'practiceCtrl',    
 }).when('/sub-skill-video/:id', {
 	templateUrl : 'views/subkills_view_video.html',
 	controller : 'subjectViewCtrl',	
