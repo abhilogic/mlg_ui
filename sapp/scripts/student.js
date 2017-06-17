@@ -205,10 +205,17 @@ angular.module('mlg_student')
       });
 	}
 
-	loginHttpResponse.studentReport = function(user_id){
+	loginHttpResponse.getStudentReport = function(user_id){
       return $http({
           	method:'GET',          	
-         	url   : urlParams.baseURL+urlParams.studentReport+'/'+user_id
+         	url   : urlParams.baseURL+urlParams.getStudentReport+'/'+user_id
+      });
+	}	
+
+	loginHttpResponse.checkKnightQuizStatus = function(skill_id,user_id){
+      return $http({
+          	method:'GET',          	
+         	url   : urlParams.baseURL+urlParams.checkKnightQuizStatus+'?skill_id='+skill_id+'&user_id='+user_id
       });
 	}
 
@@ -847,7 +854,7 @@ img.src = url;
 }])
 
 
-.controller('subskillQuizCtrl',['$rootScope','$scope','$routeParams','$localStorage','$filter','loginHttpService','$location','commonActions','urlParams','$http','user_roles','questionslimit','quiz_type','quiz_mastered_score',function($rootScope,$scope,$routeParams,$localStorage,$filter, loginHttpService,$location,commonActions,urlParams,$http,user_roles,questionslimit,quiz_type,quiz_mastered_score) {
+.controller('subskillQuizCtrl',['$rootScope','$scope','$routeParams','$localStorage','$filter','loginHttpService','$location','commonActions','urlParams','$http','user_roles','questionslimit','quiz_type','quiz_mastered_score','mlg_subjects_for_masscourt',function($rootScope,$scope,$routeParams,$localStorage,$filter, loginHttpService,$location,commonActions,urlParams,$http,user_roles,questionslimit,quiz_type,quiz_mastered_score,mlg_subjects_for_masscourt) {
 	var get_uid=commonActions.getcookies(get_uid);
 	var senddata= {};
 	var attempt_questions_status = [];
@@ -855,18 +862,13 @@ img.src = url;
 	$scope.questions_status = [];
 
 	var promise = loginHttpService.getCourseInfo($routeParams.subskill_id).success(function(crinfo) {	
-		//$scope.course_name = crinfo.response.course_Information.course_name;
-		//$scope.grade_id = crinfo.response.course_Information.level_id;
 		return crinfo ;
-	
 	});
-
-
-	
-
 
 promise.then(function(result) {
 	$scope.course_name = result.data.response.course_Information.course_name;
+	var selected_subject = result.data.response.parent_info_of_skill.course_name;
+	
 		 $scope.numToAlpha =function(idx) {
           var getAlpha = ['A','B','C','D','E','F','G'];
           return getAlpha[idx];
@@ -876,6 +878,23 @@ promise.then(function(result) {
        $scope.data = {};
        var skip = null;
        $scope.attempts = 0;
+
+       // decide masscourt image
+		if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
+			$scope.mascot_img='math_normal.png';
+		}
+		else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
+			$scope.mascot_img='english_normal.png';
+		}
+		else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
+			$scope.mascot_img='science_normal.png'; 
+		}
+		else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
+			$scope.mascot_img='social_studies_normal.png';
+		}else{
+			$scope.mascot_img='mascot.png';
+		}
+
 
 	//console.log(result);
 	var d = new Date();
@@ -982,14 +1001,28 @@ promise.then(function(result) {
 }); // end then promise
 	 
 
-		 // To read the question in male UK voice    
-	  	$scope.readQuestion=function(){            
-            var questiontext= $scope.currentquestion.questionName;          
-            responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
-	  	}
+	// To read the question in male UK voice    
+	$scope.readQuestion=function(){            
+        var questiontext= $scope.currentquestion.questionName;          
+        responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+	}
 
 
-	  	//get student response for question/ on Submit question answer.
+	//close masscourt
+	$scope.closeMascot=function(st_result){            
+        $("#skillquizmasscourt_id").removeClass("active");
+        if(st_result=='pass'){
+        	window.location.href='skill-door/whole-numbers/13';
+        } else{
+        	window.location.href='subskill_content/place-values-in-whole-numbers/18';
+        }                     
+	}
+	
+
+
+
+
+	//get student response for question/ on Submit question answer.
     $scope.onSubmitQuestion = function(frm,skip){ 
     	$scope.error_optionmessage=""; 
     	var correctoption=$scope.currentquestion.answers[0].value;
@@ -1092,10 +1125,7 @@ promise.then(function(result) {
 		        	      		
 		        	localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));        	
 		        	local_questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
-		           	$scope.questions_status = attempt_questions_status;
-		           	
-
-
+		           	$scope.questions_status = attempt_questions_status;    	
 
 		 		}
 		 		else if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
@@ -1104,13 +1134,15 @@ promise.then(function(result) {
 				else{ 
 
 						//Step- 4 send local Stoage Quiz attand Response to API						
-						localStorage.setItem('userQuesSequence', 0);
+						//localStorage.setItem('userQuesSequence', 0);
+						localStorage.removeItem("userQuesSequence");
 						
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
 						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
 							if (apiresponse.response.status == "true") {
 								var user_quiz_id=apiresponse.response.quiz_attempt_id;
-								localStorage.setItem('user_quiz_id', user_quiz_id);				
+								localStorage.setItem('user_quiz_id', user_quiz_id);
+
 		  						
 		  						// Step -5 to Get the User Result
 		  						loginHttpService.getUserQuizResponse(get_uid,$scope.currentquestion.quiz_id,user_quiz_id).success(function(quizResultResponse) {
@@ -1126,12 +1158,14 @@ promise.then(function(result) {
 						 					//var wrong_answer= quizResultResponse.response.correct_questions;
 						 					var st_result="";
 						 					if(quizResultResponse.response.student_result_percent< quiz_mastered_score.SUBSKILLQUIZ){
-						 						 st_result= "Your are Fail";
-						 						alert("Your are Fail");
+						 						$scope.st_result= "fail";
+						 						$("#skillquizmasscourt_id").addClass("active");
+						 						//alert("Your are Fail");
 						 					}
 						 					else{
-						 						st_result= "Your are Pass";
-						 						alert("Your are Pass");
+						 						$scope.st_result= "pass";
+						 						$("#skillquizmasscourt_id").addClass("active");
+						 						//alert("Your are Pass");
 						 					}
 											//window.location.href='challenges';
 						 					}
@@ -1276,6 +1310,8 @@ promise.then(function(result) {
 		window.location.href='/mlg_ui/app/';
 	}
 	var pid = $routeParams.id;
+	$scope.URLskill_id = $routeParams.id;
+	$scope.URLskill_name = $routeParams.skill_name;
 	loginHttpService.getAllCourseList(pid).success(function(response) {
 		if (response.response.course_details.length > 0){
 			$scope.subject_detail = response.response.course_details;
@@ -1283,6 +1319,7 @@ promise.then(function(result) {
 			response.subject_detail = 0;
 		}                 
 	});
+
 	var selected_course=$localStorage.selected_course;
 	if(selected_course=='Math'){
 		$scope.mascot_img='math_normal.png';
@@ -1300,32 +1337,29 @@ promise.then(function(result) {
 	}
 
 	$scope.close_skill_mascot=function(){
-			$("#skillmascot").removeClass("in");
-	  	setTimeout(function(){
-	  		$("#skillmascot").removeClass("active");
-	  	}, 100);
-                       
-	  
+		$("#skillmascot").removeClass("in");
+	  	setTimeout(function(){ $("#skillmascot").removeClass("active"); }, 100);	  
 	}
 
 	$scope.close_challanges_mascot=function(){
-			$("#knight_challanges").removeClass("in");
-	  	setTimeout(function(){
-	  		$("#knight_challanges").removeClass("active");
-	  	}, 100);
-                       
-	  
+		$("#knight_challanges").removeClass("in");
+	  	setTimeout(function(){ $("#knight_challanges").removeClass("active"); }, 100);
 	}
-
-
 
   $scope.show_knight_mascot=function(){
   	$("#knight_challanges").addClass("in");
   	//$("#skillmascot").removeClass('active');
   	$("#knight_challanges").addClass("active");
-
-
   }
+
+
+  // API to check the knight challenge will locked/unlocked
+  loginHttpService.checkKnightQuizStatus($routeParams.id,get_uid).success(function(res) {  		
+  		if(res.response.status=true && res.response.KnightQuiz_status=="enable" ){  			
+  			$scope.kstatus =1;
+  		}
+  });
+
 }])
 .controller('subskillContent',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q','$route',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q,$route) {
 	var get_uid=commonActions.getcookies(get_uid);
@@ -1673,6 +1707,296 @@ else{
     }
 }
 }])
+.controller('knightChallengeCtrl',['$rootScope','$scope','$localStorage','$filter','loginHttpService','$location','urlParams','$routeParams','$http','user_roles','quiz_type','questionslimit','quiz_mastered_score','commonActions','$sce','$q',function($rootScope,$scope,$localStorage,$filter, loginHttpService,$location,urlParams,$routeParams,$http,user_roles,quiz_type,questionslimit,quiz_mastered_score,commonActions,$sce,$q) {
+
+	var get_uid=commonActions.getcookies(get_uid);
+	var senddata= {};
+	var attempt_questions_status = [];
+	var local_questions_status =[];
+	$scope.questions_status = [];
+
+	$scope.numToAlpha =function(idx) {
+        var getAlpha = ['A','B','C','D','E','F','G'];
+        return getAlpha[idx];
+    }
+
+    // API to get course_info and its child info
+	 loginHttpService.getAllCourseList($routeParams.skill_id).success(function(crinfo) {
+
+		$scope.course_name = crinfo.response.course_information[0].course_name;		
+       	$scope.data = {};
+       	var skip = null;
+       	$scope.attempts = 0;
+       	var subskill_ids ='0';
+
+       	for(var i=0; i<crinfo.response.course_details.length; i++ ){
+       		subskill_ids = subskill_ids+','+crinfo.response.course_details[i].id;
+       	}
+
+		//console.log(result);
+		var d = new Date();
+		senddata ={
+			user_id 	: get_uid,
+			grade_id 	: crinfo.response.course_information[0].level_id,
+			subskill_id : subskill_ids,
+			quiz_type_id : quiz_type.KNIGHTCHALLENGE, // id of the table quiz_types
+			questions_limit : questionslimit.KNIGHTCHALLENGE,
+			quiz_name : 'knightchallenge-'+ d.getFullYear()+(d.getMonth()+1)+d.getDate(),
+		};
+
+
+	// To maintain old quiz questions if user quize questions response is incomplete
+	var localQuizResponse = JSON.parse(localStorage.getItem('localQuizResponse'));
+	var localQuestions= JSON.parse(localStorage.getItem('ngStorage-localquestions'));
+	if(localQuizResponse ==null && localQuestions==null ){
+		
+		// API to create quiz and questions list of quiz created for user 
+		loginHttpService.createQuizOnStudent(senddata).success(function(resitem){
+
+			if (resitem.data.status == true) {
+				//$scope.assignment_details = resitem.data.assignment_details;
+				var quizquestions = resitem.data.questions;
+
+				//local storage functionality implementation
+		  		$localStorage.localquestions= quizquestions; //set value in local storage	  	
+		  		$scope.data.questions= $localStorage.localquestions //get value in localstorage
+
+
+		  		// To check the sequence of the question in quiz	  	
+		  		if(localStorage.getItem('userQuesSequence')!=null ) {
+		  			$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
+		  		}else{
+		  			$scope.sequence=0;	  				  			
+		  			var a=[];
+		  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+		  		}
+
+		  		// Set current question
+		  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
+		  		$scope.total_questions=$scope.data.questions.length-1;
+
+		  		// To maintain the question number indicator
+			  	var qstatus={};
+			  	for(var i=0; i<$scope.total_questions; i++){
+			  		qstatus ={
+		    			sequence : i,
+		    			status   : 'inactive'
+		    		}
+		    		attempt_questions_status.push(qstatus);
+
+			  	}
+			  	if(localStorage.getItem('questionsStatus')==null ) {
+			  		localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));	  	
+			  	}			  	
+			  	
+			  	local_questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
+			  	attempt_questions_status[$scope.sequence]['status']="minimize";
+			  	$scope.questions_status = attempt_questions_status;		  		
+
+			}else{
+					$scope.message = "Issue in traversing page";
+			}
+		}); // end createquiz APi
+			
+
+	}else{ // if quiz attemped incomplete
+		$scope.data.questions= $localStorage.localquestions;
+		
+		// To check the sequence of the question in quiz	  	
+	  		if(localStorage.getItem('userQuesSequence')!=null && localStorage.getItem('userQuesSequence') !=0 ) {
+	  			$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
+	  		}else{
+	  			$scope.sequence=0;
+	  			var a=[];
+	  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+	  		}	  	
+	  	
+	  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
+	  		$scope.total_questions=$scope.data.questions.length-1;
+
+	  		// To maintain the question number indicator
+			  	var qstatus={};
+			  	for(var i=0; i<$scope.total_questions; i++){
+			  		qstatus ={
+		    			sequence : i,
+		    			status   : 'inactive'
+		    		}
+		    		attempt_questions_status.push(qstatus);
+			  	}
+			  	if(localStorage.getItem('questionsStatus')==null ) {
+			  		localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));	  	
+			  	}
+			  	
+			  	
+			  	local_questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
+			  	attempt_questions_status[$scope.sequence]['status']="minimize";
+			  	$scope.questions_status = attempt_questions_status;
+	}
+
+}); 
+
+	
+		// To read the question in male UK voice    
+	 	$scope.readQuestion=function(){            
+            var questiontext= $scope.currentquestion.questionName;          
+            responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+	  	}
+
+	
+	//get student response for question/ on Submit question answer.
+    $scope.onSubmitQuestion = function(frm,skip){ 
+    	$scope.error_optionmessage=""; 
+    	var correctoption=$scope.currentquestion.answers[0].value;
+    	var newqstate ='active';
+    	var a = [];
+    	
+		 //var question_marks=$scope.currentquestion.question_marks;
+
+    	// step 1- To check buton click is submit or skip button (if skip = 0 means click on submit/ skip)
+    	if(skip == 1){ // if skip button is clicked    		
+        	newqstate ="cancel";        	
+     
+    		//Step-2  Set required coulum values    			
+	 			var userExamResponse={};
+      	 		userExamResponse={
+       				user_id 	: get_uid,
+       				exam_id 	: $scope.currentquestion.quiz_id,
+       				item_id 	: $scope.currentquestion.question_id,
+       				item_marks	: $scope.currentquestion.question_marks,
+       				response 	: '',
+       				correct 	: 0,
+       				score 		: 0,       				
+       				skip_count 	: 1,
+       				grade_id 	: $scope.currentquestion.grade_id,
+					course_id 	: $routeParams.skill_id,
+					quiz_type_id : quiz_type.KNIGHTCHALLENGE, // id of the table quiz_types
+					//time_taken 	: 1,
+       			}
+
+    	}
+    	else{	// if submit button is clicked
+
+    		 newqstate ="done";    		
+
+    		// check selected option   frm.selectedoption
+	 		if(typeof frm.selectedoption=='undefined'){
+	 			$scope.error_optionmessage="Please select you option";	 			
+	 		}else{
+	 			//$scope.sequence +=1;
+    			//$scope.currentquestion= $scope.assigment_items[$scope.sequence];
+    			
+
+    			//step-1 - calculate right and wrong attempt 		 		
+		 		if(frm.selectedoption==correctoption){
+		 			console.log(frm.selectedoption);
+		 			var selectedAnswer=1; // select option is correct
+		 			$scope.answer_response="Awesome, you got this correct";
+		 			alert('Correct');
+		 			var score= $scope.currentquestion.answers[0].score;
+		 		}
+		 		else{
+		 			selectedAnswer=0; // select option is wrong
+		 			if(typeof $scope.currentquestion.penalty_score=='undefined'){ score=0}
+		 			else{ score =$scope.currentquestion.penalty_score; }
+		 			$scope.answer_response="Oops, This is not the correct answer";		 				
+		 			alert('wrong'); 
+		 		}
+
+		 		//Step-2  Set required coulum values		 		
+	 			var userExamResponse={};
+      	 		userExamResponse={
+       				user_id 	: get_uid,
+       				exam_id 	: $scope.currentquestion.quiz_id,
+       				item_id 	: $scope.currentquestion.question_id,
+       				item_marks	: $scope.currentquestion.question_marks,
+       				response 	: frm.selectedoption,
+       				correct 	: selectedAnswer,
+       				score 		: score,       				
+       				skip_count 	: 0,
+       				grade_id 	: $scope.currentquestion.grade_id,
+					course_id 	: $routeParams.skill_id,
+					quiz_type_id : quiz_type.KNIGHTCHALLENGE,
+       				//time_taken 	: 1,
+       			}
+       		}
+    	}	
+	 	
+ 			
+		//Step-3 Procceed check questions sequence either for next question or show result if sequence is on last.
+ 		if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
+
+ 			//3.1 Add the quiz response in local storage
+			//var b;
+				 
+       		a = JSON.parse(localStorage.getItem('localQuizResponse')); 
+       		a.push(userExamResponse); 
+    		localStorage.setItem('localQuizResponse', JSON.stringify(a));
+		 	localStorage.setItem('userQuesSequence', $scope.sequence+1);
+		 	$scope.sequence+=1;
+		 	$scope.currentquestion= $scope.data.questions[$scope.sequence];
+		 	$scope.frm={};
+
+		 	// update question status in question indicator        	
+		    attempt_questions_status[$scope.sequence]['status']= newqstate;
+		    attempt_questions_status[$scope.sequence+1]['status']="minimize";
+		        	      		
+		    localStorage.setItem('questionsStatus', JSON.stringify(attempt_questions_status));        	
+		    local_questions_status = JSON.parse(localStorage.getItem('questionsStatus'));
+		    $scope.questions_status = attempt_questions_status;
+		   
+		}
+		else if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
+			console.log($scope.error_optionmessage);
+		}	 			 		
+		else{ 
+
+			//Step- 4 send local Stoage Quiz attand Response to API						
+			//localStorage.setItem('userQuesSequence', 0);
+			localStorage.removeItem("ngStorage-localquestions");
+						
+			var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
+			loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
+			if (apiresponse.response.status == "true") {
+				var user_quiz_id=apiresponse.response.quiz_attempt_id;
+				localStorage.setItem('user_quiz_id', user_quiz_id);				
+		  						
+				// Step -5 to Get the User Result
+				loginHttpService.getUserQuizResponse(get_uid,$scope.currentquestion.quiz_id,user_quiz_id).success(function(quizResultResponse) {
+					// a=[];
+			  		//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+					//localStorage.setItem('ngStorage-localquestions', JSON.stringify(a));
+						 			
+					localStorage.removeItem("localQuizResponse"); // empty the local storage
+					localStorage.removeItem("ngStorage-localquestions");
+
+					if (quizResultResponse.response.status == true) {
+				
+						//var correct_answer= quizResultResponse.response.correct_questions;
+						//var wrong_answer= quizResultResponse.response.correct_questions;
+						var st_result="";
+						if(quizResultResponse.response.student_result_percent< quiz_mastered_score.KNIGHTCHALLENGE){
+							st_result= "Your are Fail";
+							//alert("Your are Fail");
+							window.location.href='challenges';
+						}
+						else{
+							st_result= "Your are Pass";
+							alert("Your are Pass");
+						}
+						//window.location.href='challenges';
+					}
+				});
+
+	  		}else{
+	  				alert('Opps something is wrong to store your quiz result');
+	  		}
+				
+		});
+	}  
+	   	
+    }; // end submit question operation
+
+}])
 .controller('backHistoryPage', function($scope){
 	$scope.goBack = function() {
 		window.history.back();
@@ -1849,12 +2173,12 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 
 
 // Student Reports
-loginHttpService.studentReport(get_uid).success(function(res_resport) {
+loginHttpService.getStudentReport(get_uid).success(function(res_resport) {
 	if(res_resport.response.status=true){
 		$scope.details = res_resport.response.details;
 	}
 	else{
-		$scope.error_message ="Issue in retrieving the student report";
+		$scope.error_message ="No Report generated now.";
 	}
 
 });
