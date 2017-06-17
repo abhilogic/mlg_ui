@@ -72,7 +72,7 @@
 									  <li ng-repeat="option in currentquestion.options">                              
 											<span>
 											  <label>
-												<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+												<input type="checkbox" name="selectedchkoption" class="checkbox-proceed" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
 											  </label>
 											</span>
 											<span>{{option.label}}</span>
@@ -93,94 +93,27 @@
 				</div>
 			</div>
 		</div>
-		<!-- masscourts block -->
-    <div class="masscourt-block" id="mascot_quiz">
-      <div class="masscourt-cover ">
-        <img ng-if="answer_result && selected_course=='Math'" src="assets/img/mascort-img/math_right.png" class="masccort-img" alt=""/>
-        <img ng-if="answer_result && selected_course=='English'" src="assets/img/mascort-img/english_right.png" class="masccort-img" alt=""/>
-        <img ng-if="answer_result && selected_course=='Science'" src="assets/img/mascort-img/science_right.png" class="masccort-img" alt=""/>
-        <img ng-if="answer_result && selected_course=='Social Science'" src="assets/img/mascort-img/social_studies_right.png" class="masccort-img" alt=""/>
-        <img ng-if="!answer_result && selected_course=='Math'" src="assets/img/mascort-img/math_wrong.png" class="masccort-img" alt=""/>
-        <img ng-if="!answer_result && selected_course=='English'" src="assets/img/mascort-img/english_wrong.png" class="masccort-img" alt=""/>
-        <img ng-if="!answer_result && selected_course=='Science'" src="assets/img/mascort-img/science_wrong.png" class="masccort-img" alt=""/>
-        <img ng-if="!answer_result && selected_course=='Social Science'" src="assets/img/mascort-img/social_studies_wrong.png" class="masccort-img" alt=""/>
-        
+
+		   <!--start masscourt-->
+    <div class="masscourt-block" id="pretestmasscourt_id">
+      <div class="masscourt-cover in">
+        <img ng-src="assets/img/mascort-img/{{masscourt_image}}" class="masccort-img" alt=""/>
         <div class="hint-block">
-          <!-- <div class="col-xs-2 padding-0">
-            <img src="assets/img/hint-bulb-img.png" alt=""/>
-          </div> -->
-          <div class="col-xs-12">
-            <span class="hint">{{answer_response}}</span>
+          <div class="col-xs-2 padding-0">
+            <!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
+          </div>
+          <div class="col-xs-10">
+            <span class="hint">{{masscourt_message}}</span>
             <div class="text-right">
-              <button type="button" class="btn" id="gotIt1">OK!</button>
+              <button type="button" class="btn" id="gotIt1" ng-click="closeMascot(st_result);">Got it!</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!--end- masscourt -->
 
-    <div class="masscourt-block active" id="mascot">
-      <div class="masscourt-cover in">
-        <img ng-src="assets/img/mascort-img/{{mascot_img}}" class="masccort-img" alt=""/>
-        <div class="hint-block">
-          <div class="col-xs-2 padding-0">
-            <!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
-          </div>
-          <div class="col-xs-10">
-            <span class="hint">
-              
-              Hi {{userInfo.userName}}. Give some quick answers to start your journey.
-              
-            </span>
-            <div class="text-right">
-              <button type="button" class="btn" id="gotIt">Got it!</button>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
 
-   <div class="masscourt-block" id="mascot_pass">
-      <div class="masscourt-cover in">
-        <img ng-src="assets/img/mascort-img/{{mascot_img}}" class="masccort-img" alt=""/>
-        <div class="hint-block">
-          <div class="col-xs-2 padding-0">
-            <!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
-          </div>
-          <div class="col-xs-10">
-            <span class="hint">
-              
-              You are good to go. Choose a skill to see what’s inside.
-              
-            </span>
-            <div class="text-right">
-              <button type="button" class="btn" id="gotIt_pass">Got it!</button>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
-
-<div class="masscourt-block" id="mascot_fail">
-      <div class="masscourt-cover in">
-        <img ng-src="assets/img/mascort-img/{{mascot_img}}" class="masccort-img" alt=""/>
-        <div class="hint-block">
-          <div class="col-xs-2 padding-0">
-            <!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
-          </div>
-          <div class="col-xs-10">
-            <span class="hint">
-              
-              Ahh, looks like you need some practice. Get in the first castle to hone your skills.
-              
-            </span>
-            <div class="text-right">
-              <button type="button" class="btn" id="gotIt_fail">Got it!</button>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
 	
 	<div class="loader" loading>
 		<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">

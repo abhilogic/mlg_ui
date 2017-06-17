@@ -591,7 +591,7 @@ img.src = url;
 }
 
 }])
-.controller('preTestQuizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles','quiz_type','quiz_mastered_score','questionslimit','$cookieStore',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles,quiz_type,quiz_mastered_score,questionslimit,$cookieStore) {
+.controller('preTestQuizCtrl',['$rootScope','$scope','$localStorage','$sessionStorage','$filter','$routeParams','loginHttpService','commonActions','$location','urlParams','$http','user_roles','quiz_type','quiz_mastered_score','questionslimit','mlg_subjects_for_masscourt','$cookieStore',function($rootScope,$scope,$localStorage,$sessionStorage,$filter,$routeParams,loginHttpService,commonActions,$location,urlParams,$http,user_roles,quiz_type,quiz_mastered_score,questionslimit,mlg_subjects_for_masscourt,$cookieStore) {
 	 // alert(navigator.onLine);
 
 	 $scope.data={};
@@ -610,24 +610,6 @@ img.src = url;
 	 }
 	 $scope.userInfo=userInfo;
 
-	 var selected_course=$localStorage.selected_course;
-	 $scope.selected_course=selected_course;
-	 if(selected_course=='Math'){
-	 	$scope.mascot_img='math_normal.png';
-	 }
-	 else if(selected_course=='English'){
-	 	$scope.mascot_img='english_normal.png';
-	 }
-	 else if(selected_course=='Science'){
-	 	$scope.mascot_img='science_normal.png';
-	 }
-	 else if(selected_course=='Social Science'){
-	 	$scope.mascot_img='social_studies_normal.png';
-	 }else{
-	 	$scope.mascot_img='mascot.png';
-	 }
-
-
 	 if (document.cookie == '' || get_uid == 'null') {
 	 	alert('kindly login');
 	 	window.location.href='/mlg_ui/app/';
@@ -645,6 +627,26 @@ img.src = url;
 	});
 
 promise.then(function(result) {
+
+		// Masscourt- Display in starting, before starting quiz(set Masscourt image and message)
+		var selected_subject = result.data.response.course_Information.course_name;
+		$scope.masscourt_message = "Ahh, looks like you need some practice. Get in the first castle to hone your skills.";		
+		if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
+			$scope.masscourt_image ='math_normal.png';
+		}
+		else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
+			$scope.masscourt_image ='english_normal.png';
+		}
+		else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
+			$scope.masscourt_image = 'science_normal.png';
+		}
+		else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
+			$scope.masscourt_image = 'social_studies_normal.png';
+		}else{
+				$scope.masscourt_image='mascot.png';
+		} 
+		$("#pretestmasscourt_id").addClass("active"); // show masscourt with value of masscourt_image and masscourt_message
+   	
 
 	 	//console.log(result);
 		var d = new Date();
@@ -715,6 +717,21 @@ promise.then(function(result) {
 	  		responsiveVoice.speak("" + text +"", "UK English Male");                        
 	  	}
 
+	  	//close masscourt
+		$scope.closeMascot=function(st_result){         
+	        if(st_result=='correct' || st_result=='wrong'){
+	        	$("#pretestmasscourt_id").removeClass("active");
+	        } 
+	        else if(st_result=='pass'){
+	        	window.location.href='skill-door/whole-numbers/13';
+	        } else if(st_result=='fail') {
+	        	window.location.href='skill-door/whole-numbers/13';
+	        }  
+	        else{
+	        	$("#pretestmasscourt_id").removeClass("active");
+	        }                   
+		}
+
 
 	  	$scope.submitQuestion=function(frm){
 	  		//console.log(frm);	
@@ -731,54 +748,24 @@ promise.then(function(result) {
 	 				if(frm.selectedoption==correctoption){
 	 					console.log(frm.selectedoption);
 		 				var selectedAnswer=1; // select option is correct
-		 				$scope.answer_response="Awesome, you got this correct";
+		 				$scope.masscourt_message="Awesome, you got this correct";
 		 				//alert('Correct');
 		 				var score= $scope.currentquestion.answers[0].score;
 		 				$scope.answer_result=true;
+		 				$scope.current_quesstatus="correct";
+		 				$scope.st_result="correct";
 		 			}
 		 			else{
 		 				selectedAnswer=0; // select option is wrong
 		 				if(typeof $scope.currentquestion.penalty_score=='undefined'){ score=0}
 		 					else{ score =$scope.currentquestion.penalty_score; }
-		 				$scope.answer_response="Oops, This is not the correct answer";
-		 				$scope.answer_result=false;		 				
+		 				$scope.masscourt_message="Oops, This is not the correct answer";
+		 				$scope.answer_result=false;	
+		 				$scope.current_quesstatus="wrong";
+		 				$scope.st_result="wrong";	 				
 		 				//alert('wrong'); 
 		 			}
-		 			$("#gotIt").click(function(){
-		 				$(".masscourt-block .masscourt-cover").removeClass("in");
-		 				setTimeout(function(){
-		 					$(".masscourt-block").removeClass("active");
-		 				}, 500);
-		 			});
-		 			$("#gotIt1").click(function(){
-		 				$(".masscourt-block .masscourt-cover").removeClass("in");
-		 				setTimeout(function(){
-		 					$(".masscourt-block").removeClass("active");
-		 				}, 500);
-		 			});
-		 			$("#gotIt_pass").click(function(){
-		 				$(".masscourt-block .masscourt-cover").removeClass("in");
-		 				setTimeout(function(){
-		 					$(".masscourt-block").removeClass("active");
-		 				}, 500);
-		 				window.location.href='subject-view/'+$routeParams.id;
-
-		 			});
-		 			$("#gotIt_fail").click(function(){
-		 				$(".masscourt-block .masscourt-cover").removeClass("in");
-		 				setTimeout(function(){
-		 					$(".masscourt-block").removeClass("active");
-		 				}, 500);
-		 				window.location.href='subject-view/'+$routeParams.id;
-		 			});
-
-		 			$("#mascot_quiz").addClass("active");
-		 			$("#mascot").removeClass("active");
-		 			setTimeout(function(){
-		 				$(".masscourt-block .masscourt-cover").addClass("in");
-		 			}, 500);
-
-
+		 		
 
 	 				//Step-2  Set required coulum values
 	 				var userExamResponse={};
@@ -796,6 +783,31 @@ promise.then(function(result) {
 						quiz_type_id : quiz_type.PRETEST,
 	       				//time_taken 	: 1,
 	       			}
+
+	       				// Masscourt- Display in starting, before starting quiz(set Masscourt image and message)
+					var selected_subject = $scope.currentquestion.subject;
+					if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
+						if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="math_right.png";}
+						else{ $scope.masscourt_image ="math_wrong.png";	}
+					}
+					else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
+						if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="english_right.png";}
+						else{ $scope.masscourt_image ="english_wrong.png";	}
+					}
+					else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
+						if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="science_right.png";}
+						else{ $scope.masscourt_image ="science_wrong.png";	}
+					}
+					else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
+						if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="social_studies_right.png";}
+						else{ $scope.masscourt_image ="social_studies_wrong.png";	}
+
+					}else{
+						$scope.masscourt_image='mascot.png';
+					} 
+					$("#pretestmasscourt_id").addClass("active"); // show masscourt with value of masscourt_image and masscourt_message
+   		
+
 
        				//2.1 Add the quiz response in local storage
        				var b;
@@ -842,29 +854,49 @@ promise.then(function(result) {
 		  							//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
 		  							localStorage.removeItem("localQuizResponse"); // empty the local storage
 						 			localStorage.removeItem("ngStorage-localquestions");
-		  							if (quizResultResponse.response.status == "true") {
+		  							if (quizResultResponse.response.status == true) {
 		  								var correct_answer= quizResultResponse.response.correct_questions;
 		  								var wrong_answer= quizResultResponse.response.correct_questions;
 		  								var st_result="";
 		  								if(quizResultResponse.response. student_result_percent < quiz_mastered_score.PRETEST){
-		  									st_result= "Your are Fail";
+		  									$scope.st_result= "fail";
+		  									$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
+						 						
 						 						//alert("Your are Fail");
-						 						$("#mascot_quiz").removeClass("active");
-						 						$("#mascot_fail").addClass("active");
-						 						//alert('You are Fail.')
-						 						//return false;
+						 						//$("#mascot_quiz").removeClass("active");
+						 						//$("#mascot_fail").addClass("active");
+						 						
 						 					}
 						 					else{
-						 						st_result= "Your are Pass";
+						 						$scope.st_result= "pass";
+						 						$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
 						 						//alert("Your are Pass");
-						 						$("#mascot_quiz").removeClass("active");
-						 						$("#mascot_pass").addClass("active");
-						 						//alert('You are Pass.')
+						 						//$("#mascot_quiz").removeClass("active");
+						 						//$("#mascot_pass").addClass("active");						 						
 						 					}
-						 					//alert('inn')
-						 					//$("#mascot_quiz").removeClass("active");
-						 					//	$("#mascot_pass").addClass("active");
-										//	window.location.href='subject-view/'+$routeParams.id;
+
+
+						 					// Check Masscourt image and message			
+											var selected_subject = $scope.currentquestion.subject;
+											if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
+												$scope.masscourt_image ='math_normal.png';
+											}
+											else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
+												$scope.masscourt_image ='english_normal.png';
+											}
+											else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
+												$scope.masscourt_image = 'science_normal.png';
+											}
+											else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
+												$scope.masscourt_image = 'social_studies_normal.png';
+											}else{
+												$scope.masscourt_image='mascot.png';
+											} 
+											$("#pretestmasscourt_id").addClass("active"); // show masscourt with value of masscourt_image and masscourt_message
+   	
+
+
+						 					
 									}
 								});
 
