@@ -1374,7 +1374,7 @@ if (typeof $routeParams.slug != 'undefined') {
     $scope.card_years = card_years;
     $scope.frm.expiry_month = card_months['1'];
     $scope.submitCardDetail = function(data) {
-      data.user_id = $rootScope.logged_user.id;
+      data.user_id = get_uid;
       var children_ids = [];
       angular.forEach($scope.children, function(value, key) {
         children_ids.push(value.child_id);
