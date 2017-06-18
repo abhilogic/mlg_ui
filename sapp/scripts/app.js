@@ -33,7 +33,8 @@ getStudentAssignments : '/students/getStudentAssignments',
 getAssignmentItems : '/students/getAssignmentItems',
 getCourseInfo : '/courses/getCourseInfo',
 createQuizOnStudent: '/exams/createQuizOnStudent/',
-studentReport : '/students/studentReport',
+getStudentReport : '/students/getStudentReport',
+checkKnightQuizStatus : '/exams/checkKnightQuizStatus'
 
 }).value('REGEX', {
 LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -55,13 +56,14 @@ student : 4,
 }).value('quiz_pass_score', {
   score  : 60
 }).value('questionslimit', {
-  PRETEST : '10',
+  PRETEST : '3',
   SUBSKILLQUIZ : '15',
+  KNIGHTCHALLENGE :'15',
   PRACTICES : '10',  
 }).value('quiz_type', {
       PRETEST            : 1,
       SUBSKILLQUIZ       : 2,
-      PRACTICES           : 3, 
+      PRACTICE          : 3, 
       KNIGHTCHALLENGE    : 4,
       TEACHERCUSTOMASSIGNMENT : 5,
       TEACHERAUTOASSIGNMENT : 6, 
@@ -74,6 +76,12 @@ student : 4,
       TEACHERCUSTOMASSIGNMENT : 80,
       TEACHERAUTOASSIGNMENT : 80, 
       PARENTAUTOASSIGNMENT :80,
+}).value('mlg_subjects_for_masscourt', {  // please mention all subject name(where parent_id=0) that has been stored in DB.
+      MATH         : 'Math',  // if grade=6th, 7th, 8th all have Math subject
+      ENGLISH       : 'English',
+      SCIENCE       : 'Science', 
+      SOCIALSCIENCE : 'Social Science', 
+      MATHS   :  'Maths'    // if subject name if any one of grade has name Maths except math in dabaabase. 
 })
 
 .config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -94,6 +102,9 @@ $routeProvider
 }).when('/subskill-quiz/:subskill_name/:subskill_id', {
 	templateUrl : 'views/subskill_quiz.html',
 	controller : 'subskillQuizCtrl',		
+}).when('/practice/:subskill_name/:subskill_id', {
+  templateUrl : 'views/practice.html',
+  controller : 'practiceCtrl',    
 }).when('/sub-skill-video/:id', {
 	templateUrl : 'views/subkills_view_video.html',
 	controller : 'subjectViewCtrl',	
@@ -130,6 +141,9 @@ $routeProvider
 }).when('/challenge/:assignment_id', {
   templateUrl : 'views/assignment-quiz.html',
   controller : 'challengesCtrl',   
+}).when('/knight-challenge/:skill_name/:skill_id', {
+  templateUrl : 'views/knight_challenge.html',
+  controller : 'knightChallengeCtrl',    
 })
 
 .otherwise({

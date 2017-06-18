@@ -524,6 +524,549 @@
     left: 10%;
   }
 }
+@-webkit-keyframes candelAnimation {
+  2.22% {
+    background-image: url("../img/table-animation/1.png");
+  }
+
+  4.44% {
+    background-image: url("../img/table-animation/2.png");
+  }
+
+  6.66% {
+    background-image: url("../img/table-animation/3.png");
+  }
+
+  8.88% {
+    background-image: url("../img/table-animation/4.png");
+  }
+
+  11.1% {
+    background-image: url("../img/table-animation/5.png");
+  }
+
+  13.32% {
+    background-image: url("../img/table-animation/6.png");
+  }
+
+  15.54% {
+    background-image: url("../img/table-animation/7.png");
+  }
+
+  17.76% {
+    background-image: url("../img/table-animation/8.png");
+  }
+
+  19.98% {
+    background-image: url("../img/table-animation/9.png");
+  }
+
+  22.2% {
+    background-image: url("../img/table-animation/10.png");
+  }
+
+  24.42% {
+    background-image: url("../img/table-animation/11.png");
+  }
+
+  26.64% {
+    background-image: url("../img/table-animation/12.png");
+  }
+
+  28.86% {
+    background-image: url("../img/table-animation/13.png");
+  }
+
+  31.08% {
+    background-image: url("../img/table-animation/14.png");
+  }
+
+  33.3% {
+    background-image: url("../img/table-animation/15.png");
+  }
+
+  35.52% {
+    background-image: url("../img/table-animation/16.png");
+  }
+
+  37.74% {
+    background-image: url("../img/table-animation/17.png");
+  }
+
+  39.96% {
+    background-image: url("../img/table-animation/18.png");
+  }
+
+  42.18% {
+    background-image: url("../img/table-animation/19.png");
+  }
+
+  44.4% {
+    background-image: url("../img/table-animation/20.png");
+  }
+
+  46.62% {
+    background-image: url("../img/table-animation/21.png");
+  }
+
+  48.84% {
+    background-image: url("../img/table-animation/22.png");
+  }
+
+  51.06% {
+    background-image: url("../img/table-animation/23.png");
+  }
+
+  53.28% {
+    background-image: url("../img/table-animation/24.png");
+  }
+
+  55.5% {
+    background-image: url("../img/table-animation/25.png");
+  }
+
+  57.72% {
+    background-image: url("../img/table-animation/26.png");
+  }
+
+  59.94% {
+    background-image: url("../img/table-animation/27.png");
+  }
+
+  62.16% {
+    background-image: url("../img/table-animation/28.png");
+  }
+
+  64.38% {
+    background-image: url("../img/table-animation/29.png");
+  }
+
+  66.6% {
+    background-image: url("../img/table-animation/30.png");
+  }
+
+  68.82% {
+    background-image: url("../img/table-animation/31.png");
+  }
+
+  71.04% {
+    background-image: url("../img/table-animation/32.png");
+  }
+
+  73.26% {
+    background-image: url("../img/table-animation/33.png");
+  }
+
+  75.48% {
+    background-image: url("../img/table-animation/34.png");
+  }
+
+  77.7% {
+    background-image: url("../img/table-animation/35.png");
+  }
+
+  79.92% {
+    background-image: url("../img/table-animation/36.png");
+  }
+
+  82.14% {
+    background-image: url("../img/table-animation/37.png");
+  }
+
+  84.36% {
+    background-image: url("../img/table-animation/38.png");
+  }
+
+  86.58% {
+    background-image: url("../img/table-animation/39.png");
+  }
+
+  88.8% {
+    background-image: url("../img/table-animation/40.png");
+  }
+
+  91.02% {
+    background-image: url("../img/table-animation/41.png");
+  }
+
+  93.24% {
+    background-image: url("../img/table-animation/42.png");
+  }
+
+  95.46% {
+    background-image: url("../img/table-animation/43.png");
+  }
+
+  97.68% {
+    background-image: url("../img/table-animation/44.png");
+  }
+
+  99.9% {
+    background-image: url("../img/table-animation/45.png");
+  }
+}
+@-moz-keyframes candelAnimation {
+  2.22% {
+    background-image: url("../img/table-animation/1.png");
+  }
+
+  4.44% {
+    background-image: url("../img/table-animation/2.png");
+  }
+
+  6.66% {
+    background-image: url("../img/table-animation/3.png");
+  }
+
+  8.88% {
+    background-image: url("../img/table-animation/4.png");
+  }
+
+  11.1% {
+    background-image: url("../img/table-animation/5.png");
+  }
+
+  13.32% {
+    background-image: url("../img/table-animation/6.png");
+  }
+
+  15.54% {
+    background-image: url("../img/table-animation/7.png");
+  }
+
+  17.76% {
+    background-image: url("../img/table-animation/8.png");
+  }
+
+  19.98% {
+    background-image: url("../img/table-animation/9.png");
+  }
+
+  22.2% {
+    background-image: url("../img/table-animation/10.png");
+  }
+
+  24.42% {
+    background-image: url("../img/table-animation/11.png");
+  }
+
+  26.64% {
+    background-image: url("../img/table-animation/12.png");
+  }
+
+  28.86% {
+    background-image: url("../img/table-animation/13.png");
+  }
+
+  31.08% {
+    background-image: url("../img/table-animation/14.png");
+  }
+
+  33.3% {
+    background-image: url("../img/table-animation/15.png");
+  }
+
+  35.52% {
+    background-image: url("../img/table-animation/16.png");
+  }
+
+  37.74% {
+    background-image: url("../img/table-animation/17.png");
+  }
+
+  39.96% {
+    background-image: url("../img/table-animation/18.png");
+  }
+
+  42.18% {
+    background-image: url("../img/table-animation/19.png");
+  }
+
+  44.4% {
+    background-image: url("../img/table-animation/20.png");
+  }
+
+  46.62% {
+    background-image: url("../img/table-animation/21.png");
+  }
+
+  48.84% {
+    background-image: url("../img/table-animation/22.png");
+  }
+
+  51.06% {
+    background-image: url("../img/table-animation/23.png");
+  }
+
+  53.28% {
+    background-image: url("../img/table-animation/24.png");
+  }
+
+  55.5% {
+    background-image: url("../img/table-animation/25.png");
+  }
+
+  57.72% {
+    background-image: url("../img/table-animation/26.png");
+  }
+
+  59.94% {
+    background-image: url("../img/table-animation/27.png");
+  }
+
+  62.16% {
+    background-image: url("../img/table-animation/28.png");
+  }
+
+  64.38% {
+    background-image: url("../img/table-animation/29.png");
+  }
+
+  66.6% {
+    background-image: url("../img/table-animation/30.png");
+  }
+
+  68.82% {
+    background-image: url("../img/table-animation/31.png");
+  }
+
+  71.04% {
+    background-image: url("../img/table-animation/32.png");
+  }
+
+  73.26% {
+    background-image: url("../img/table-animation/33.png");
+  }
+
+  75.48% {
+    background-image: url("../img/table-animation/34.png");
+  }
+
+  77.7% {
+    background-image: url("../img/table-animation/35.png");
+  }
+
+  79.92% {
+    background-image: url("../img/table-animation/36.png");
+  }
+
+  82.14% {
+    background-image: url("../img/table-animation/37.png");
+  }
+
+  84.36% {
+    background-image: url("../img/table-animation/38.png");
+  }
+
+  86.58% {
+    background-image: url("../img/table-animation/39.png");
+  }
+
+  88.8% {
+    background-image: url("../img/table-animation/40.png");
+  }
+
+  91.02% {
+    background-image: url("../img/table-animation/41.png");
+  }
+
+  93.24% {
+    background-image: url("../img/table-animation/42.png");
+  }
+
+  95.46% {
+    background-image: url("../img/table-animation/43.png");
+  }
+
+  97.68% {
+    background-image: url("../img/table-animation/44.png");
+  }
+
+  99.9% {
+    background-image: url("../img/table-animation/45.png");
+  }
+}
+@keyframes candelAnimation {
+  2.22% {
+    background-image: url("../img/table-animation/1.png");
+  }
+
+  4.44% {
+    background-image: url("../img/table-animation/2.png");
+  }
+
+  6.66% {
+    background-image: url("../img/table-animation/3.png");
+  }
+
+  8.88% {
+    background-image: url("../img/table-animation/4.png");
+  }
+
+  11.1% {
+    background-image: url("../img/table-animation/5.png");
+  }
+
+  13.32% {
+    background-image: url("../img/table-animation/6.png");
+  }
+
+  15.54% {
+    background-image: url("../img/table-animation/7.png");
+  }
+
+  17.76% {
+    background-image: url("../img/table-animation/8.png");
+  }
+
+  19.98% {
+    background-image: url("../img/table-animation/9.png");
+  }
+
+  22.2% {
+    background-image: url("../img/table-animation/10.png");
+  }
+
+  24.42% {
+    background-image: url("../img/table-animation/11.png");
+  }
+
+  26.64% {
+    background-image: url("../img/table-animation/12.png");
+  }
+
+  28.86% {
+    background-image: url("../img/table-animation/13.png");
+  }
+
+  31.08% {
+    background-image: url("../img/table-animation/14.png");
+  }
+
+  33.3% {
+    background-image: url("../img/table-animation/15.png");
+  }
+
+  35.52% {
+    background-image: url("../img/table-animation/16.png");
+  }
+
+  37.74% {
+    background-image: url("../img/table-animation/17.png");
+  }
+
+  39.96% {
+    background-image: url("../img/table-animation/18.png");
+  }
+
+  42.18% {
+    background-image: url("../img/table-animation/19.png");
+  }
+
+  44.4% {
+    background-image: url("../img/table-animation/20.png");
+  }
+
+  46.62% {
+    background-image: url("../img/table-animation/21.png");
+  }
+
+  48.84% {
+    background-image: url("../img/table-animation/22.png");
+  }
+
+  51.06% {
+    background-image: url("../img/table-animation/23.png");
+  }
+
+  53.28% {
+    background-image: url("../img/table-animation/24.png");
+  }
+
+  55.5% {
+    background-image: url("../img/table-animation/25.png");
+  }
+
+  57.72% {
+    background-image: url("../img/table-animation/26.png");
+  }
+
+  59.94% {
+    background-image: url("../img/table-animation/27.png");
+  }
+
+  62.16% {
+    background-image: url("../img/table-animation/28.png");
+  }
+
+  64.38% {
+    background-image: url("../img/table-animation/29.png");
+  }
+
+  66.6% {
+    background-image: url("../img/table-animation/30.png");
+  }
+
+  68.82% {
+    background-image: url("../img/table-animation/31.png");
+  }
+
+  71.04% {
+    background-image: url("../img/table-animation/32.png");
+  }
+
+  73.26% {
+    background-image: url("../img/table-animation/33.png");
+  }
+
+  75.48% {
+    background-image: url("../img/table-animation/34.png");
+  }
+
+  77.7% {
+    background-image: url("../img/table-animation/35.png");
+  }
+
+  79.92% {
+    background-image: url("../img/table-animation/36.png");
+  }
+
+  82.14% {
+    background-image: url("../img/table-animation/37.png");
+  }
+
+  84.36% {
+    background-image: url("../img/table-animation/38.png");
+  }
+
+  86.58% {
+    background-image: url("../img/table-animation/39.png");
+  }
+
+  88.8% {
+    background-image: url("../img/table-animation/40.png");
+  }
+
+  91.02% {
+    background-image: url("../img/table-animation/41.png");
+  }
+
+  93.24% {
+    background-image: url("../img/table-animation/42.png");
+  }
+
+  95.46% {
+    background-image: url("../img/table-animation/43.png");
+  }
+
+  97.68% {
+    background-image: url("../img/table-animation/44.png");
+  }
+
+  99.9% {
+    background-image: url("../img/table-animation/45.png");
+  }
+}
 /* --- $VARIABLES --- */
 /* --- FONTS --- */
 /* --- GLOBALS --- */
@@ -850,7 +1393,7 @@ textarea::-webkit-input-placeholder {
   padding-top: 11px;
   padding-bottom: 5px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .navbar-default {
     padding-top: 0;
   }
@@ -872,7 +1415,7 @@ textarea::-webkit-input-placeholder {
     border-top: 0px;
   }
 }
-@media screen and (max-width: 768px) and (max-width: 768px) {
+@media screen and (max-width: 767px) and (max-width: 768px) {
   .navbar-default .navbar-collapse {
     margin-top: 0;
     position: fixed;
@@ -907,7 +1450,7 @@ textarea::-webkit-input-placeholder {
     transform: translateX(0%);
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .navbar-default .mobile_universal_search_bar {
     margin-top: 18px;
   }
@@ -958,7 +1501,7 @@ textarea::-webkit-input-placeholder {
     left: 0px;
   }
 }
-@media screen and (max-width: 768px) and (max-width: 767px) {
+@media screen and (max-width: 767px) and (max-width: 767px) {
   .navbar-default .navbar-header.fixed {
     position: fixed;
     top: 0px;
@@ -4666,12 +5209,14 @@ label span {
 }
 .modal-view-report .modal-body .report-row ul li.name {
   min-width: 192px;
+  max-width: 192px;
 }
 .modal-view-report .modal-body .report-row ul li.name span {
   color: #571d12;
   font-family: "Playfair Display", serif;
   display: block;
   font-weight: 700;
+  word-wrap: break-word;
 }
 .modal-view-report .modal-body .report-row ul li.name span:first-child {
   font-size: 12px;
@@ -6667,7 +7212,7 @@ label span {
 }
 @media screen and (min-width: 991px) {
   .subject-first-time-placement-video .content {
-    max-width: 80%;
+    max-width: 65%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -6689,12 +7234,12 @@ label span {
 }
 @media screen and (min-width: 991px) {
   .subject-first-time-placement-video .content .video_controller .progress_bar {
-    width: 340px;
+    width: 220px;
   }
 }
 @media screen and (min-width: 768px) {
   .subject-first-time-placement-video .content .video_controller .progress_bar {
-    width: 276px;
+    width: 220px;
   }
 }
 
@@ -7061,7 +7606,7 @@ label span {
   background-size: cover;
   bottom: -48px;
   content: '';
-  height: 283px;
+  height: 151px;
   left: -90px;
   position: absolute;
   width: 1084px;
@@ -7092,15 +7637,16 @@ label span {
   }
 }
 .board.table .table-animated-img {
-  background-image: url(../img/subskillsroom_table.png);
+  background-image: url(../img/table-animation/1.png);
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: -125px 95px;
+  animation: candelAnimation 2s infinite;
+  background-position: 0px 0px;
   background-size: auto auto;
   bottom: -48px;
   content: '';
-  height: 283px;
+  height: 151px;
   left: -90px;
   position: absolute;
   width: 1084px;

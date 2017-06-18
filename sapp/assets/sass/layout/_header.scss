@@ -9,7 +9,7 @@
   position: relative;
   z-index: 1000;
   @include padding(11px null 5px);
-  @media screen and (max-width: $screen-sm){
+  @media screen and (max-width: $screen-xs-max){
     @include padding(0px null null);
     .navbar-toggle {
       margin-top: 18px;
