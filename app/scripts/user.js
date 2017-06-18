@@ -819,7 +819,12 @@ angular.module('mlg').filter('moment', function() {
 		});
 
     	
-
+      //available subjects will be automatically selected, when clicked to all subjects.
+      if ($('.all_subjects').length) {
+        $(document.body).on('click','.all_subjects', function() {
+         $('.available_subjects').click();
+        }); 
+      }
 
 	// end to call dynamic step slider
 
@@ -857,7 +862,7 @@ angular.module('mlg').filter('moment', function() {
     };
 
     $scope.upgrade = function(frm) {
-     if (typeof frm.new_package == 'undefined') {
+      if (typeof frm.new_package == 'undefined') {
        $scope.errMsg = 'Please choose Package';
        return false;
      }
@@ -870,18 +875,17 @@ angular.module('mlg').filter('moment', function() {
        return false;
      }
      var num_of_subjects_opted = frm.new_package;
+     var previously_purchased_subjects_count = $scope.child_info.purchase_detail.length;
      var selected_subjects = 0;
-     angular.forEach(frm.selectedcourse, function(sub, sub_key){
-       if (sub != '') {
+     angular.forEach(frm.selectedcourse, function(sub_value, sub_key){
+       if (sub_value !== '') {
          selected_subjects++;
        }
      });
-     var all_subjects = false;
      angular.forEach($scope.packages , function(package_val , key) {
-       if (package_val.no_of_subjects == num_of_subjects_opted) {
-         if (package_val.name.toUpperCase() == "ALL SUBJECTS") {
-           selected_subjects = package_val.no_of_subjects;
-           all_subjects = true;
+       if ((package_val.name.toUpperCase() == "ALL SUBJECTS") && package_val.no_of_subjects == num_of_subjects_opted) {
+         if (selected_subjects + previously_purchased_subjects_count == package_val.no_of_subjects) {
+           selected_subjects = selected_subjects + previously_purchased_subjects_count;
          }
        }
      });
@@ -892,17 +896,13 @@ angular.module('mlg').filter('moment', function() {
      frm.user_id = get_uid;
      frm.child_id = $routeParams.child_id;
      var course_chosen = [];
-     if (all_subjects == false) {
-      angular.forEach(all_courses, function(course, index) {
-        angular.forEach(frm.selectedcourse, function (subject, key) {
-          if (course.id == key && subject != '') {
-            course_chosen.push(course);
-          }
-        });
-      });
-     } else {
-       course_chosen = all_courses;
-     }
+     angular.forEach(all_courses, function(course, index) {
+       angular.forEach(frm.selectedcourse, function (subject, key) {
+         if (course.id == key && subject != '') {
+           course_chosen.push(course);
+         }
+       });
+     });
      frm.updatedCourses = course_chosen;
      loginHttpService.upgradePackage(frm).success(function(response){
        if (response.response.status == true) {
@@ -1342,8 +1342,8 @@ if (typeof $routeParams.slug != 'undefined') {
     }
 
 }])
-.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','commonActions','$location','card_months', 'card_years','$routeParams',
-  function($scope, $rootScope, loginHttpService,commonActions,$location, card_months, card_years, $routeParams) {
+.controller('paymentPageCtrl',['$scope', '$rootScope','loginHttpService','commonActions','$location','card_months', 'card_years','$routeParams', 'urlParams',
+  function($scope, $rootScope, loginHttpService,commonActions,$location, card_months, card_years, $routeParams, urlParams) {
     $scope.children = {};
     $scope.total_amount = 0;
 
@@ -1370,10 +1370,26 @@ if (typeof $routeParams.slug != 'undefined') {
       });
 
     $scope.frm = {};
+    $scope.frm.line1 = '';
+    $scope.frm.line2 = '';
+    $scope.frm.city = '';
+    $scope.frm.state = '';
+    $scope.frm.postal_code = '';
+    $scope.frm.country_code = '';
+    $scope.frm.phone = '';
+    $scope.frm.name = '';
+    $scope.frm.card_number = '';
+    $scope.frm.expiry_year = '';
+    $scope.frm.cvv = '';
     $scope.card_months = card_months;
     $scope.card_years = card_years;
     $scope.frm.expiry_month = card_months['1'];
     $scope.submitCardDetail = function(data) {
+      var err_msg = validate_submission(data);
+      if (err_msg !== null) {
+        $scope.msg = err_msg;
+        return false;
+      }
       data.user_id = get_uid;
       var children_ids = [];
       angular.forEach($scope.children, function(value, key) {
@@ -1394,8 +1410,50 @@ if (typeof $routeParams.slug != 'undefined') {
       });
     };
 
+    function validate_submission(data) {
+      if (typeof get_uid === 'undefined' || get_uid === null) {
+        alert('Kindly login');
+        window.location.href='/mlg_ui/app/signin';
+        return false;
+      }
+      if (data.line1 === '') {
+        return 'Please enter Address line 1';
+      }
+      if (data.line2 === '') {
+        return 'Please enter Address line 2';
+      }
+      if (data.city === '') {
+        return 'Please enter city';
+      }
+      if (data.state === '') {
+        return 'Please enter state';
+      }
+      if (data.postal_code === '') {
+        return 'Please enter postal code';
+      }
+      if (data.country_code === '') {
+        return 'Please enter country code';
+      }
+      if (data.phone === '') {
+        return 'Please enter phone number';
+      }
+      if (data.name === '') {
+        return 'Please enter your name';
+      }
+      if (data.card_number === '') {
+        return 'Please enter your card number';
+      }
+      if (data.expiry_year === '') {
+        return 'Please enter your expiry year';
+      }
+      if (data.cvv === '') {
+        return 'Please enter your cvv';
+      }
 
-      var step_num =1;
+      return null;
+    }
+
+    var step_num =1;
 	$scope.onSkipClick=function(){		
 			loginHttpService.setStepNum(get_uid,step_num).success(function(resp) { 
             if (resp.response.status == "True") {                 
@@ -1917,9 +1975,8 @@ if (typeof $routeParams.slug != 'undefined') {
         data.numofchild = childrencount + number_of_children;
         loginHttpService.setChildrenCount(data).success(function(response) {
         if (response.response.status == "True") {
-          alert('Children added successfully');
+          $location.url('/add_child_account');
         }
-        $location.url('/add_child_account');
         });
       };
     }

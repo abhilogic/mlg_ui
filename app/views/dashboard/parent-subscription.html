@@ -102,7 +102,7 @@
                       <p class="text-uppercase">Select SUBJECT PACKAGE</p>
                       <div id="ChooseSubjectPackages" class="btn-group package-group" data-toggle1="buttons">
                         <label ng-repeat="package in packages" ng-hide="package.id == child_info.package_id" class="btn new_packages package-box">
-                          <input ng-model="frm.new_package" ng-click="discount(package)" value="{{package.no_of_subjects}}"  type="radio" name="subjectPackages" autocomplete="off">
+                          <input ng-class="{'all_subjects': package.name.toUpperCase() == 'ALL SUBJECTS'}" ng-model="frm.new_package" ng-click="discount(package)" value="{{package.no_of_subjects}}"  type="radio" name="subjectPackages" autocomplete="off">
                           <span class="package-title">{{package.name}}</span>
                           <strong ng-if="package.type == 'percent'" class="package-offer">{{package.discount}}% off</strong>
                           <strong ng-if="package.type != 'percent'" class="package-offer">${{package.discount}} off</strong>
@@ -134,7 +134,7 @@
                       <p class="text-uppercase">Choose your subjects</p>
                       <div id="ChooseSubjects" class="btn-group package-group" data-toggle1="buttons">
                          <label ng-repeat ="course in coursesListByGrade" ng-hide="course.purchased == true" class="choose-subjects btn package-box subject">
-                           <input ng-change="getTotalPrice(frm.selectedcourse)"  ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}}'" ng-false-value="''" type="checkbox" name="{{course.course_name}}" autocomplete="off" checked="">
+                           <input ng-class="{'available_subjects' : course.purchased != true}" ng-change="getTotalPrice(frm.selectedcourse)"  ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}}'" ng-false-value="''" type="checkbox" name="{{course.course_name}}" autocomplete="off" checked="">
                            <span class="package-title">{{course.course_name}}</span>
                            <strong class="package-price">${{course.price}}</strong>
                             <!--<small class="package-type">per quarter</small>-->
