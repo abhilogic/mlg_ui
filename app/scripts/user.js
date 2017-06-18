@@ -820,11 +820,13 @@ angular.module('mlg').filter('moment', function() {
 
     	
       //available subjects will be automatically selected, when clicked to all subjects.
-      if ($('.all_subjects').length) {
         $(document.body).on('click','.all_subjects', function() {
-         $('.available_subjects').click();
-        }); 
-      }
+          $('.available_subjects').each(function() {
+            if ($(this).prop('checked') !== true) {
+              $(this).click();
+            }
+         });
+        });
 
 	// end to call dynamic step slider
 
