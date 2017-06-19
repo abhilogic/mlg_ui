@@ -6,7 +6,7 @@
 		<div class="page-content">
 
 			<!-- Main Sidebar -->
-			<<aside class="sidebar sidebar-main"></aside>
+			<aside class="sidebar sidebar-main"></aside>
 			<!-- /sidebar -->
 			<!-- Main content -->
 			<div class="content-wrapper">
@@ -116,7 +116,6 @@
                                       ng-options="student.id as student.first_name+' '+student.last_name for student in students">
                           <option value="">Select People</option>
                           </select>
-                    
 												</div>
 											</div>
 										</div>
@@ -126,9 +125,9 @@
 								<div class="scope-sequence-listing">
 								<p class="para">Click a skill to see the subskills. Hold and drag to change the order.</p>
 									<ul as-sortable="sortableOptions" data-ng-model="scopeSkills">
-                    <li ng-repeat="skill in scopeSkills track by $index" as-sortable-item>
+                    <li ng-repeat="skill in scopeSkills" as-sortable-item>
 											<a href="teacher/scope-sequence-subskill/{{skill.course_id}}/{{scopeGradeModel}}/{{scopeCourseModel}}/{{option}}/{{grpId}}">
-												<div class="row" as-sortable-item-handle>
+												<div class="row"  as-sortable-item-handle>
 													<div class="col-lg-5">
 														<div class="row">
 															<div class="col-md-5">
@@ -149,10 +148,10 @@
                                   <label>
                                   <input class="js-switch" type="checkbox" >
                                   <span class="off">OFF</span>
-                                  <span class="switchery switchery-default {{skill.course_id}}"ng-if="skill.visibility == 1">
+                                  <span class="switchery switchery-default {{skill.course_id}}"ng-if="skill.visibility == '1'">
                                     <small></small>
                                   </span>
-                                  <span class="switchery switchery-default off {{skill.course_id}}" ng-if="skill.visibility != 1">
+                                  <span class="switchery switchery-default off {{skill.course_id}}" ng-if="skill.visibility != '1'">
                                   <small></small>
                                   </span>
                                   <span class="on">ON</span>
@@ -192,9 +191,10 @@
 									<div class="col-lg-4  text-right padding-right-0 text-sm-center margin-sm-top-10">
 											<button type="button" class="btn btn-background-none">Cancel</button>
 											<button type="button" class="btn btn-primary btn-preview" data-toggle="modal" data-target="#modal-SequencePreview">Preview</button>
-									</div>
-                  <span style="color:green">{{msg}}</span>
+									<span style="color:green">{{msg}}</span>
                   <span style="color:red">{{message}}</span>
+                  </div>
+                  
 								</div>
 							</div>
 						</div>
