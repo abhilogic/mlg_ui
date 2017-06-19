@@ -338,6 +338,14 @@ angular.module('mlg').filter('moment', function() {
         });
       }
 
+    loginHttpResponse.deactivateChildrenAccount = function(data) {
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.deactivateChildrenAccount
+        });
+	}
+
       
 	return loginHttpResponse;
 	
@@ -1751,13 +1759,27 @@ if (typeof $routeParams.slug != 'undefined') {
       });
     }
     if ($scope.frm.deactivate == true) {
-      var deactivate = confirm('Do you really want to deactivate your account');
+      var deactivate = confirm('Do you really want to deactivate your account,\n\
+        Your all relative account if existed (eg. children account) will also be deactivated');
       if (deactivate == false) {
         return false;
       } else {
         loginHttpService.setUserStatus({id: get_uid, status: 0}).success(function(response) {
           if (response.status) {
             alert('Your account deactivated successfully');
+            loginHttpService.deactivateChildrenAccount({parent_id: get_uid}).success(
+              function(resp) {
+                if (resp.status == true) {
+                  alert('Your all relavtive account has been deactivated');
+                } else {
+                  alert('Unable to deactivate your relative accounts');
+                }
+              }
+            ).error(
+              function(err) {
+                alert('Some error occured, Kindly contact the Administrator');
+              }
+            );
           } else {
             alert('Unable to deactivate your account, Some Error occured');
           }
