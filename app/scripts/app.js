@@ -356,6 +356,7 @@ principal  : 30,
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
     var top ="";
+    $cookieStore.put('selected_child_id', null);
     loginHttpService.isUserlogin().success(function(response) {
          if (response.status=='false') {
            $rootScope.logged_user = '';
@@ -388,6 +389,7 @@ principal  : 30,
 		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
 		   		setCookie('uid',null);
 		   		setCookie('userObj',null);
+		   		$cookieStore.remove('selected_child_id');
 
 
 	         window.location.href='/mlg_ui/app';
@@ -526,8 +528,10 @@ $scope.userInfo=userInfo;
         }
       }
       if (typeof $scope.frm.selectedchild == 'undefined') {
-         $scope.frm.selectedchild = {children_name : 'My child'};
-       }
+        $scope.frm.selectedchild = {children_name : 'My child', user_id : $cookieStore.get('selected_child_id')};
+      } else if($scope.frm.selectedchild != '') {
+        $cookieStore.put('selected_child_id', $scope.frm.selectedchild.user_id);
+      }
     //window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
     } else {
       $scope.childname=0;
