@@ -346,6 +346,14 @@ angular.module('mlg').filter('moment', function() {
         });
 	}
 
+    loginHttpResponse.getUserOrders = function(data) {
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.getUserOrders
+        });
+	}
+
       
 	return loginHttpResponse;
 	
@@ -796,7 +804,7 @@ angular.module('mlg').filter('moment', function() {
     });
   };
 }])
-.controller('parentSubscriptionCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions','urlParams',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions,urlParams) {
+.controller('parentSubscriptionCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions','urlParams','subscription_days',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions,urlParams,subscription_days) {
   $scope.frm = {}
   $scope.site_root = urlParams.siteRoot;
   $scope.childname={};
@@ -921,10 +929,12 @@ angular.module('mlg').filter('moment', function() {
      });
     };
     if (typeof $routeParams.child_id != 'undefined') {
+      $scope.subscription_type = 'NaN';
       loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
         if (result.status == true) {
           $scope.child_info = result.response;
-          $scope.child_info.end_date = moment($scope.child_info.order_date).add(30, 'days').calendar();
+          $scope.student_subscription_days = subscription_days['student'];
+          $scope.child_info.end_date = moment($scope.child_info.order_date).add(subscription_days['student'], 'days').calendar();
           var end_date = moment($scope.child_info.end_date).format("YYYY-MM-DD");
           $scope.days_left = moment(end_date).diff(moment(), 'days');
           $scope.level = {id : result.response.level_id};
@@ -947,6 +957,17 @@ angular.module('mlg').filter('moment', function() {
               $scope.courserecords=courseslistresult.response.course_list;
             }
           });
+          loginHttpService.getUserOrders({child_id : $routeParams.child_id, last_order : true}).success(
+            function (order) {
+              if (order.status == true) {
+                if (order.data[0].trial_period == 1) {
+                  $scope.subscription_type = 'TRIAL';
+                } else {
+                  $scope.subscription_type = $scope.child_info.plan_duration.toUpperCase();
+                }
+              }
+            }
+          );
         }
       });
       // call API to get packages

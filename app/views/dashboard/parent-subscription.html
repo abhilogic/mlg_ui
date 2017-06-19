@@ -26,11 +26,11 @@
                 <img src="assets/img/subscription.png" class="img-responsive" alt=""/>
               </div>
               <div class="col-md-7">
-                <h2 class="title_subscription"><span class="text-uppercase">Free Subscription</span><small>(60 days)</small></h2>
+                <h2 class="title_subscription"><span class="text-uppercase">Free Subscription</span><small>({{student_subscription_days}} days)</small></h2>
                 <br>
                 <div class="row">
                   <div class="col-sm-4"><p class="text-muted">Subscription Type:</p></div>
-                  <div class="col-sm-4"><p class="text-uppercase">Trial</p></div>
+                  <div class="col-sm-4"><p class="text-uppercase">{{subscription_type}}</p></div>
                 </div>
                 <div class="row">
                   <div class="col-sm-4"><p class="text-muted">Start Date:</p></div>
@@ -177,7 +177,7 @@
                     <div class="col-table col-right">
                       <div class="table-item">
                         <p class="text-uppercase">Current Subjects</p>
-                        <div ng-repeat=" (key, new_subject) in frm.selectedcourse"class="current-subject package-box block">
+                        <div ng-hide="!(new_subject.length)" ng-repeat=" (key, new_subject) in frm.selectedcourse"class="current-subject package-box block">
                           <span class="package-title">{{new_subject}}</span>
                           <!--<strong class="package-price">$72</strong>-->
                           <!--<small class="package-type">monthly</small>-->

@@ -98,6 +98,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   setTeacherSettings : '/teachers/setTeacherSettings',
   getTeacherSettings : '/teachers/getTeacherSettings',
   deactivateChildrenAccount : '/users/deactivateChildrenOnParentDeactivation',
+  getUserOrders : '/users/getUserOrders',
   deleteImage : '/teachers/deleteImages',
   addNewScope : '/teachers/addNewScope',
   teacherScope : '/teachers/getUserCreatedScope',
@@ -141,8 +142,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
 	2022  : '2022',
 }).value('subscription_days', {
 parent  : 30,
-student  : 60,
-teacher  : 30,
+student  : 30,
+teacher  : 60,
 guest_teacher  : 30,
 principal  : 30,
 }).value('mlg_points', {
