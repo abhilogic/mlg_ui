@@ -1,64 +1,39 @@
-<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
-	<!-- Page container -->
+<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>	
+<!-- Page container -->
 	<div class="page-container">
 
 		<!-- Page content -->
 		<div class="page-content">
 
 			<!-- Main Sidebar -->
-			<<aside class="sidebar sidebar-main"></aside>
-			<!-- /sidebar -->
+      <<aside class="sidebar sidebar-main"></aside>
 			<!-- Main content -->
 			<div class="content-wrapper">
 				<!-- Content area -->
 				<div class="content">
+
 					<!-- Teacher Setting  Panel  -->
 					<div class="panel panel-flat panel panel-scope-sequence">
 						<div class="panel-heading padding-bottom-5">
-							<h5 class="panel-title text-uppercase">Scope and sequence</h5>
+							<h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i><span ng-repeat="skill in Skills">
+                    <h4 class="hd">{{skill.name}}</h4>
+                  </span></h5>
 						</div>
 						<div class="panel-body">
 							<form class="form">
 								<div class="row">
-									<div class="col-lg-9">
-										<div class="row">
-											<div class="col-lg-3 col-sm-6">
-												<div class="row">
-													<div class="col-xs-12">
-														<select class="mlg-selectpicker form-control" title="Grade"  data-size="auto"
-                                     ng-model="scopeGradeModel" ng-change="getScopeGrade(scopeGradeModel)"
-                                    ng-options="grade.id as grade.name for grade in scopeLevel">
-                              <option value="">Select Grade</option>
-														</select>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-3 col-sm-offset-1 col-xs-6">
-												<div class="row">
-													<div class="col-xs-12">
-														<select class="mlg-selectpicker form-control" title="Subject"  data-size="auto"
-                                     ng-model="scopeCourseModel" ng-change="getScopeCourse(scopeCourseModel)"
-                                    ng-options="subject.course_id as subject.course_name for subject in scopeSubject">
-                              <option value="">Select Course</option>
-														</select>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-3 margin-top-xs-10">
+									<div class="col-lg-3 col-md-offset-9 margin-top-xs-10">
 										<div class="row">
 											<div class="col-lg-12 col-md-6">
 												<div class="text-left">
 													<button type="button" class="btn btn-block margin-sm-top-10 margin-bottom-10 btn-default btn-outline  text-uppercase border-color-gray-lighter" data-toggle="modal" data-target="#modal-ImportTemplate"><i class="icon icon-plus-outline margin-right-10"></i> Save Template</button>
-									
 												</div>
 											</div>
 											<div class="col-lg-12 col-md-6">
 												<div class="text-left">
-                          <select class="mlg-selectpicker form-control"
+													<select class="mlg-selectpicker form-control"
                                   ng-model="templateModel" ng-init="templateModel=''" ng-change="getTemplate(templateModel)"
-                                  ng-options="temp.id as temp.name for temp in template track by temp.id" >
+                                  ng-options="temp.id as temp.name for temp in templat track by temp.id" >
 														 <option value="">APPLY TEMPLATE</option>
 													</select>
 												</div>
@@ -66,93 +41,38 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-lg-4 col-xs-12 margin-sm-top-10">
-										<div class="row">
-											<div class="col-xs-1">
-												<div class="radio radio-primary radio-inline">
-													<input type="radio" id="inlineRadio1" value="class" name="SCOPE" ng-model="option" checked="">
-														<label></label>
-												</div>
-											</div>
-											<div class="col-lg-10 col-xs-10">
-												<label class="color-gray-light">All Class</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row margin-top-5">
-									<div class="col-lg-4  col-xs-12 margin-sm-top-10">
-										<div class="row">
-											<div class="col-xs-1">
-												<div class="radio radio-primary radio-inline padding-top-5">
-													<input type="radio" id="inlineRadio1" value="group" name="SCOPE" ng-model="option">
-													<label></label>
-												</div>
-											</div>
-											<div class="col-lg-10 col-xs-10">
-												<select class="mlg-selectpicker form-control" title="Group"  data-size="auto"
-                                ng-model="scopeGroupModel" ng-init="scopeGroupModel=''" ng-change="getGroup(scopeGroupModel)"
-                           ng-options="grp.id as grp.title for grp in groups" >
-													 <option value="">Select Group</option>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row margin-top-5">
-									<div class="col-lg-4 col-xs-12 margin-sm-top-10">
-										<div class="row">
-											<div class="col-xs-1">
-												<div class="radio radio-primary radio-inline padding-top-5">
-													<input type="radio" id="inlineRadio1" value="people" name="SCOPE" ng-model="option">
-													<label></label>
-												</div>
-											</div>
-											<div class="col-lg-10 col-xs-10">
-												<div class="multi-select-full">
-                          <select class="mlg-selectpicker form-control" title="people" data-width="auto" data-size="auto"
-                                  ng-model="scopePeopleModel" ng-init="scopePeopleModel='' " ng-change="getPeople(scopePeopleModel)"
-                                      ng-options="student.id as student.first_name+' '+student.last_name for student in students">
-                          <option value="">Select People</option>
-                          </select>
-                    
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-                <!--teacher/scope-sequence-subskill/{{skill.course_id}}**/-->
 								<div class="scope-sequence-listing">
-								<p class="para">Click a skill to see the subskills. Hold and drag to change the order.</p>
-									<ul as-sortable="sortableOptions" data-ng-model="scopeSkills">
-                    <li ng-repeat="skill in scopeSkills track by $index" as-sortable-item>
-											<a href="teacher/scope-sequence-subskill/{{skill.course_id}}/{{scopeGradeModel}}/{{scopeCourseModel}}/{{option}}/{{grpId}}">
-												<div class="row" as-sortable-item-handle>
+                  <span ng-repeat="skill in Skills">
+                    <h4 class="hd">{{skill.name}}</h4>
+                  </span>
+								<p class="para">Hold and drag to change the order</p>
+									<ul as-sortable="sortableOptions" data-ng-model="scopeSubSkills">
+                    <li ng-repeat="subskill in scopeSubSkills" as-sortable-item>
+											<div class="row" as-sortable-item-handle>
 													<div class="col-lg-5">
 														<div class="row">
 															<div class="col-md-5">
-																<h5 class="topic_name margin-sm-top-0"><i class="icon icon-drag"></i>{{skill.name}}</h5>
+															<h5 class="topic_name margin-sm-top-0"><i class="icon icon-drag"></i>{{subskill.name}}</h5>
 															</div>
 															<div class="col-md-7 text-right text-sm-left margin-sm-top-15">
-																<h5>{{skill.start_date}}</h5>
+															<h5>START DATE : {{subskill.start_date}}</h5>
 															</div>
 														</div>
 													</div>
 													<div class="col-lg-5 col-lg-offset-2">
 														<div class="row">
 															<div class="col-md-7">
-																<h5 class="margin-sm-top-0">{{skill.end_date}}</h5>
+															<h5 class="margin-sm-top-0">End DATE : {{subskill.end_date}}</h5>
 															</div>
                               <div class="col-md-5 text-right text-sm-left margin-top-5">
 																<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
                                   <label>
                                   <input class="js-switch" type="checkbox" >
                                   <span class="off">OFF</span>
-                                  <span class="switchery switchery-default {{skill.course_id}}"ng-if="skill.visibility == 1">
+                                  <span class="switchery switchery-default {{subskill.course_id}}"ng-if="subskill.visibility == 1">
                                     <small></small>
                                   </span>
-                                  <span class="switchery switchery-default off {{skill.course_id}}" ng-if="skill.visibility != 1">
+                                  <span class="switchery switchery-default off {{subskill.course_id}}" ng-if="subskill.visibility != 1">
                                   <small></small>
                                   </span>
                                   <span class="on">ON</span>
@@ -162,11 +82,11 @@
 														</div>
 													</div>
 												</div>
-											</a>
 										</li>
 								</ul>
-								<div class="text-right text-sm-center"><!--#modal-approvedQuestion-->
-									<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-addSkills"><i class="icon icon-plus-outline margin-right-10"></i> Add own Skills</button>
+								<div class="text-right text-sm-center">
+                  <!--data-target="#modal-approvedQuestion"-->
+									<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-addSkills"><i class="icon icon-plus-outline margin-right-10"></i> Add own Subskills</button>
 								</div>
 								</div>
 							</form>
@@ -193,8 +113,6 @@
 											<button type="button" class="btn btn-background-none">Cancel</button>
 											<button type="button" class="btn btn-primary btn-preview" data-toggle="modal" data-target="#modal-SequencePreview">Preview</button>
 									</div>
-                  <span style="color:green">{{msg}}</span>
-                  <span style="color:red">{{message}}</span>
 								</div>
 							</div>
 						</div>
@@ -218,22 +136,20 @@
 		<!-- Modal -->
 		<div id="modal-ImportTemplate" class="modal fade modal-saveTemplateAs" role="dialog">
 		  <div class="modal-dialog">
+
 		    <!-- Modal content-->
 		    <div class="modal-content">
-					<div class="modal-header">
-				    <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
-					</div>
 		      <div class="modal-body">
-						<form class="form">
+		        <form class="form">
 							<div class="form-group float-label">
 								<label class="control-label">Template Name</label>
-								<input type="text" class="form-control float-input" value=""ng-model="frm.template_name"/>
+								<input type="text" class="form-control float-input" ng-model="frm.template_name"/>
 							</div>
 		        </form>
 		      </div>
-		      <div class="modal-footer text-right border-0">
+		      <div class="modal-footer border-top-0">
 		        <button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
-            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="saveScopeTemplate(frm,'skills')">Save</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveScopeSubSkillTemplate(frm,'subSkill')">Save</button>
 		      </div>
 		    </div>
 
@@ -241,7 +157,7 @@
 		</div>
 
 
-		<div id="modal-addSkills" class="modal fade modal-saveTemplateAs" role="dialog">
+		<div id="modal-addSkills" class="modal fade modal-importTemplate" role="dialog">
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -249,16 +165,11 @@
 						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
 					</div>
 					<div class="modal-body">
-						<form class="form">
-							<div class="form-group float-label">
-								<label class="control-label">Add Skills</label>
-                <input type="text" class="form-control float-input" value="" ng-model="frm.newSkill"/>
-							</div>
-		        </form>
+						<input type="text" class="form-control" placeholder="Add Skills" ng-model="frm.newSubSkill">
 					</div>
 					<div class="modal-footer text-right border-0">
 						<button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
-						<button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="setNewSkill(frm)">Save</button>
+            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="setNewSubSkill(frm)">Save</button>
 					</div>
 				</div>
 
@@ -275,31 +186,27 @@
 		       </div>
 		      <div class="modal-body">
 						<div class="content-cover">
-							<div class="row repeat-row" ng-repeat="skill in scopeSkills">
-                <div ng-if="skill.visibility == '1'">
-								<div class="heading">
+							<div class="row repeat-row" ng-repeat="skill in Skills">
+								<div class="heading" >
 									<div class="row">
 										<div class="col-md-6 col-sm-8 left-side">
 											<h5>{{skill.name}}</h5>
 										</div>
 										<div class="col-md-6 col-sm-4 right-side">
 											<span >Start date: {{skill.start_date}}</span>
-											<span >End date: 1{{skill.end_date}}</span>
+											<span >End date: {{skill.end_date}}</span>
 										</div>
 									</div>
 								</div>
-                  <div ng-repeat="sub in subSkill">
-                    <ul class="connected-li-list" ng-repeat="subSkill in sub">
-									    <li ng-if="subSkill.parent_id == skill.course_id">{{subSkill.name}}</li>
-								    </ul>
-                  </div>
-                </div>
+								<ul class="connected-li-list" ng-repeat=" subskil in scopeSubSkills">
+									<li ng-if="subskil.visibility == '1'">{{subskil.name}}</li>
+								</ul>
 							</div>
 						</div>
 		      </div>
 		      <div class="modal-footer text-right border-0">
 		        <button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>
-            <a href="teacher-addQuestion.html"><button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveScope()">Save Sequence</button></a>
+						 <a href="teacher-addQuestion.html"><button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveScopeSubSkill()">Save Sequence</button></a>
 		      </div>
 		    </div>
 
@@ -358,9 +265,33 @@
 		      </div>
 		    </div>
 		  </div>
-			<script>
-			</script>
+<!--			<script>
+				var headertext = [],
+				headers = document.querySelectorAll(".table-teacherContent th"),
+				tablerows = document.querySelectorAll(".table-teacherContent th"),
+				tablebody = document.querySelector(".table-teacherContent tbody");
+
+				for(var i = 0; i < headers.length; i++) {
+				  var current = headers[i];
+				  headertext.push(current.textContent.replace(/\r?\n|\r/,""));
+				}
+				for (var i = 0, row; row = tablebody.rows[i]; i++) {
+				  for (var j = 0, col; col = row.cells[j]; j++) {
+				    col.setAttribute("data-th", headertext[j]);
+				  }
+				}
+
+				$(document).ready(function(){
+					$('[data-toggle="tooltip"]').tooltip();
+				});
+
+				$(window).load(function(){
+						$(".modal-SequencePreview .modal-body").mCustomScrollbar();
+        });
+			</script>-->
 		</div>
 		<!-- modal-approved-question -->
 	</section>
 	<!-- modal section  -->
+</body>
+</html>

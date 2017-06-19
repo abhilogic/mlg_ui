@@ -1,6 +1,6 @@
 'use strict';
 angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','angularjs-dropdown-multiselect','textAngular','AUTH','tien.clndr','chart.js', 'datatablesDirectives','ngStorage','ngSanitize'
-])
+,'as.sortable'])
 .value('urlParams', {
 	users : '/users',
 	contactus: '/users/contact_us',
@@ -98,6 +98,12 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   setTeacherSettings : '/teachers/setTeacherSettings',
   getTeacherSettings : '/teachers/getTeacherSettings',
   deactivateChildrenAccount : '/users/deactivateChildrenOnParentDeactivation',
+  deleteImage : '/teachers/deleteImages',
+  addNewScope : '/teachers/addNewScope',
+  teacherScope : '/teachers/getUserCreatedScope',
+  scopeAndSequenceTemplate : '/teachers/saveScopesAsTemplate',
+  scopeAndSequence : '/teachers/saveScopesAsSequence',
+  getScopeTemplates : '/teachers/getScopeTemplate',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -323,6 +329,9 @@ principal  : 30,
 		controller : 'teacherRewards',
   }).when('/teacher/scope-sequence',{
 		templateUrl : 'views/dashboard/teacher-scope-sequence.html',
+		controller : 'teacherScopeSequence',
+  }).when('/teacher/scope-sequence-subskill/:skill/:grade/:subject/:group/:id',{
+		templateUrl : 'views/dashboard/teacher-scope-sequence-subskills.html',
 		controller : 'teacherScopeSequence',
   }).when('/teacher/requestQuote',{
 		templateUrl : 'views/dashboard/teacher-getQuote.html',
