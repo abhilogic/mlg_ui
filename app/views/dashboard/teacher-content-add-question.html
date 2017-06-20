@@ -288,6 +288,10 @@
                      <ul> 
                      </ul>
                    </div>
+                  <div class="container margin-top-10" id="edit-answer-img">
+                     <ul> 
+                     </ul>
+                   </div>
 								</div>
 								<!-- img-answer-block -->
 
@@ -456,4 +460,27 @@
 		  </div>
 		</div>
 		<!-- add template -->
+    <!--start- Model to sucess result-->
+		<div id="modal-sucess" class="modal fade modal-calender" role="dialog">
+		  <div class="modal-dialog">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>						
+		      </div>
+		      <div class="modal-body ">
+						<p  style="color: green; font-size:20px;">
+							{{msg}}
+						</p>
+            <p  style="color: red; font-size:20px;">
+							{{message}}
+						</p>
+		      </div>
+					<div class="modal-footer text-center">
+						<button type="button" class="btn btn-primary" ng-click="clickAlert('update')">Ok</button>						
+					</div>
+		    </div>
+		  </div>
+		</div>
+		<!-- end model to sucess result-->
 </section>
