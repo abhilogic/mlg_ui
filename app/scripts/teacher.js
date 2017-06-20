@@ -1984,7 +1984,7 @@ if(typeof lUrl.split('?') != 'undefined') {
 }
 if(typeof LId[1] != 'undefined') {  
   var cId =  LId[1].split('&F');
-  subSkills.push(cId[1],);
+  subSkills.push(cId[1]);
   var subSkillDetail = {};
   subSkillDetail= {
     uid : get_uid,
