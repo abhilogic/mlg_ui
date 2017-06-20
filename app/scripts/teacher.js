@@ -55,10 +55,10 @@ teacherHttpResponse.getTeacherDetailsForContent=function(tid,grade,subject,type)
    url  : urlParams.baseURL+urlParams.getTeacherDetailsForContent+'/'+tid+'/'+grade+'/'+subject+'/'+type
  });
 }
-teacherHttpResponse.getAllCourseList=function(parent_id,type){
+teacherHttpResponse.getAllCourseList=function(parent_id,type,course,uid){
  return $http({
    method:'GET',			
-   url  : urlParams.baseURL+urlParams.getAllCourseList+'/'+parent_id+'/'+type
+   url  : urlParams.baseURL+urlParams.getAllCourseList+'/'+parent_id+'/'+type+'/'+course+'/'+uid
  });
 }
 teacherHttpResponse.setContentForLesson=function(lessonDetail){
@@ -1308,7 +1308,7 @@ var mlg = '';
        $scope.subSkill = [];
        $scope.skill = [];
        if(tempStatus == 0) {
-        teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
+        teacherHttpService.getAllCourseList(course,'lesson','-1',get_uid).success(function(response) {
           var data = response.response.course_details;
           angular.forEach(data, function(value, key) {
             $scope.skill.push({
@@ -1328,7 +1328,7 @@ var mlg = '';
       parentId = item['id'];
       skillId.push(parentId);
       var count = 0;
-      teacherHttpService.getAllCourseList(parentId,'lesson').success(function(response) {
+      teacherHttpService.getAllCourseList(parentId,'lesson','-1',get_uid).success(function(response) {
         angular.forEach(response.response.course_details, function(value, key) {
           $scope.subSkill.push({
             'id' : value['course_id'],
@@ -1365,7 +1365,7 @@ var mlg = '';
         angular.forEach(skillId,function(value, key) {
           if (value == Id) {
            skillId.splice(key);         
-           teacherHttpService.getAllCourseList(Id,'lesson').success(function(response) {
+           teacherHttpService.getAllCourseList(Id,'lesson','-1',get_uid).success(function(response) {
             angular.forEach(response.response.course_details, function(value, key) {
               angular.forEach($scope.subSkill, function(val, ki) {
                 if(value['course_id'] == val['id']) {
@@ -1821,7 +1821,7 @@ teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
               $scope.courseSelected = $scope.subject[0]['course_id'];
               course = $scope.subject[0]['course_id'];
             });
-            teacherHttpService.getAllCourseList(value['course_id'],'lesson').success(function(response) {
+            teacherHttpService.getAllCourseList(value['course_id'],'lesson','-1',get_uid).success(function(response) {
               var data = response.response.course_details;   
               angular.forEach(data, function(skil, key) {
                 $scope.skill.push({
@@ -1831,7 +1831,7 @@ teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
               });
               //for selected skill.
               angular.forEach($scope.skill , function(val, ki) { 
-                teacherHttpService.getAllCourseList(val['id'],'lesson').success(function(response) {
+                teacherHttpService.getAllCourseList(val['id'],'lesson','-1',get_uid).success(function(response) {
                   angular.forEach(response.response.course_details, function(subskil, key) {
                     $scope.subSkill.push({
                       'id' : subskil['course_id'],
@@ -2510,7 +2510,7 @@ $scope.removePerson = function(index){
        course = $scope.courseSelected;
        $scope.subSkill = [];
        $scope.skill = [];
-       teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
+       teacherHttpService.getAllCourseList(course,'lesson','-1',get_uid).success(function(response) {
         var data = response.response.course_details;
         angular.forEach(data, function(value, key) {
           $scope.skill.push({
@@ -2532,7 +2532,7 @@ $scope.removePerson = function(index){
 parentId = item['id'];
 //                skillName = skills[1];
 skillId.push(parentId);
-teacherHttpService.getAllCourseList(parentId,'lesson').success(function(response) {
+teacherHttpService.getAllCourseList(parentId,'lesson','-1',get_uid).success(function(response) {
   angular.forEach(response.response.course_details, function(value, key) {
     $scope.subSkill.push({
       'id' : value['course_id'],
@@ -2549,7 +2549,7 @@ onItemDeselect: function(item) {
   angular.forEach(skillId,function(value, key) {
     if (value == Id) {
      skillId.splice(key);
-     teacherHttpService.getAllCourseList(Id,'lesson').success(function(response) {
+     teacherHttpService.getAllCourseList(Id,'lesson','-1',get_uid).success(function(response) {
       angular.forEach(response.response.course_details, function(value, key) {
         angular.forEach($scope.subSkill, function(val, ki) {
           if(value['course_id'] == val['id']) {
@@ -2879,7 +2879,7 @@ $scope.closeTemplate = function(){
               $scope.courseSelected = $scope.subjects[0]['course_id'];
               course = $scope.subjects[0]['course_id'];
             });
-            teacherHttpService.getAllCourseList(value['course_id'],'lesson').success(function(response) {
+            teacherHttpService.getAllCourseList(value['course_id'],'lesson','-1',get_uid).success(function(response) {
               var data = response.response.course_details;   
               angular.forEach(data, function(skil, key) {
                 $scope.skill.push({
@@ -2889,7 +2889,7 @@ $scope.closeTemplate = function(){
               });
               //for selected skill.
               angular.forEach($scope.skill , function(val, ki) { 
-                teacherHttpService.getAllCourseList(val['id'],'lesson').success(function(response) {
+                teacherHttpService.getAllCourseList(val['id'],'lesson','-1',get_uid).success(function(response) {
                   angular.forEach(response.response.course_details, function(subskil, key) {
                     $scope.subSkill.push({
                       'id' : subskil['course_id'],
@@ -3105,7 +3105,7 @@ angular.forEach(response.skill, function(skil, key) {
   $scope.skillmodel.push({'id' : skil['course_id']});
   skillId = skil['course_id'];
 });
-teacherHttpService.getAllCourseList(skillId,'lesson').success(function(response) {
+teacherHttpService.getAllCourseList(skillId,'lesson','-1',get_uid).success(function(response) {
   angular.forEach(response.response.course_details, function(value, key) {
     $scope.subSkill.push({
       'id' : value['course_id'],
@@ -3921,10 +3921,21 @@ $scope.deleteImage = function(j,data) {
   });
    $scope.getPrevious = function() {
     pgnum = pgnum - 1;
-    if(pgnum <= '0') {
+    if(pgnum < '1') {
       pgnum = 1;
       $scope.nexClass = '';
       $scope.preClass = 'disabled';
+    }else if(pgnum == '1'){
+      pgnum = 1;
+      $scope.nexClass = '';
+      $scope.preClass = 'disabled';
+      teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
+        $scope.questionList = response.data;
+        $scope.lastPage = response.lastPage;
+        $scope.start = response.start;
+        $scope.last = response.last;
+        $scope.total = response.total;
+      });
     }else{
       if(pgnum > 1) {
        $scope.preClass = '';
@@ -3946,10 +3957,20 @@ $scope.deleteImage = function(j,data) {
  }
  $scope.getNext = function() {
   pgnum = pgnum + 1;
-  if(pgnum >=$scope.lastPage) {
-    pgnum = pgnum -1 ;
+  if(pgnum > $scope.lastPage) {
     $scope.nexClass = 'disabled';
     $scope.preClass = '';
+    pgnum = pgnum -1 ;
+  }else if(pgnum == $scope.lastPage) {
+    $scope.nexClass = 'disabled';
+    $scope.preClass = '';
+    teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
+      $scope.questionList = response.data;
+      $scope.lastPage = response.lastPage;
+      $scope.start = response.start;
+      $scope.last = response.last;
+      $scope.total = response.total;
+    });
   }else{
    teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
     $scope.questionList = response.data;
@@ -4100,37 +4121,50 @@ $scope.deleteQuestions = function(Qid,uniqId){
      $scope.total = response.total;
    });
    $scope.getPrevious = function() {
-     pgnum = pgnum - 1;
-     if(pgnum <= '0') {
-       pgnum = 1;
-       $scope.nexClass = '';
-       $scope.preClass = 'disabled';
-     }else{
-       if(pgnum > 1) {
-        $scope.preClass = '';
-      }else if(typeof $scope.lastPage != undefined && pgnum == $scope.lastPage  ) {
-        $scope.nexClass = 'disabled';
-        $scope.preClass = '';
-      }else if(pgnum > 1 && typeof $scope.lastPage != undefined && pgnum >= $scope.lastPage){
-        $scope.nexClass = '';
-        $scope.preClass = '';
-      }
+    pgnum = pgnum - 1;
+    if(pgnum < '1') {
+      pgnum = 1;
+      $scope.nexClass = '';
+      $scope.preClass = 'disabled';
+    }else if(pgnum == '1'){
+      pgnum = 1;
+      $scope.nexClass = '';
+      $scope.preClass = 'disabled';
       teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
         $scope.lessonList = response.data;
         $scope.lastPage = response.lastPage;
         $scope.start = response.start;
         $scope.last = response.last;
         $scope.total = response.total;
-      }); 
-    }
-  }
-  $scope.getNext = function() {
-   pgnum = pgnum + 1;
-   if(pgnum >=$scope.lastPage) {
-     pgnum = pgnum -1 ;
-     $scope.nexClass = 'disabled';
-     $scope.preClass = '';
-   }else{
+      });
+    }else{
+      if(pgnum > 1) {
+       $scope.preClass = '';
+     }else if(typeof $scope.lastPage != undefined && pgnum == $scope.lastPage  ) {
+       $scope.nexClass = 'disabled';
+       $scope.preClass = '';
+     }else if(pgnum > 1 && typeof $scope.lastPage != undefined && pgnum >= $scope.lastPage){
+       $scope.nexClass = '';
+       $scope.preClass = '';
+     }
+     teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
+      $scope.lessonList = response.data;
+      $scope.lastPage = response.lastPage;
+      $scope.start = response.start;
+      $scope.last = response.last;
+      $scope.total = response.total;
+    });
+   }
+ }
+ $scope.getNext = function() {
+  pgnum = pgnum + 1;
+  if(pgnum > $scope.lastPage) {
+    $scope.nexClass = 'disabled';
+    $scope.preClass = '';
+    pgnum = pgnum -1 ;
+  }else if(pgnum == $scope.lastPage) {
+    $scope.nexClass = 'disabled';
+    $scope.preClass = '';
     teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
       $scope.lessonList = response.data;
       $scope.lastPage = response.lastPage;
@@ -4138,17 +4172,25 @@ $scope.deleteQuestions = function(Qid,uniqId){
       $scope.last = response.last;
       $scope.total = response.total;
     });
-  }
-  if(pgnum > 1) {
-      $scope.preClass = '';
-    }else if(typeof $scope.lastPage != undefined && pgnum == $scope.lastPage  ) {
-      $scope.nexClass = 'disabled';
-      $scope.preClass = '';
-    }else if(pgnum > 1 && typeof $scope.lastPage != undefined && pgnum < $scope.lastPage){
-      $scope.nexClass = '';
-      $scope.preClass = '';
-    }
+  }else{
+   teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
+      $scope.lessonList = response.data;
+      $scope.lastPage = response.lastPage;
+      $scope.start = response.start;
+      $scope.last = response.last;
+      $scope.total = response.total;
+    });
  }
+ if(pgnum > 1) {
+     $scope.preClass = '';
+   }else if(typeof $scope.lastPage != undefined && pgnum == $scope.lastPage  ) {
+     $scope.nexClass = 'disabled';
+     $scope.preClass = '';
+   }else if(pgnum > 1 && typeof $scope.lastPage != undefined && pgnum < $scope.lastPage){
+     $scope.nexClass = '';
+     $scope.preClass = '';
+   }
+}
    $scope.range = function(min, max, step){
     step = step || 1;
     var input = [];
@@ -4208,7 +4250,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
       if(data != null) {
         $scope.skill = [];
         course = $scope.courseModel;
-        teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
+        teacherHttpService.getAllCourseList(course,'lesson','-1',get_uid).success(function(response) {
           var data = response.response.course_details;
           angular.forEach(data, function(value, key) {
             $scope.skill.push({
@@ -4986,18 +5028,19 @@ $scope.deleteQuestions = function(Qid,uniqId){
       }
    };
     $scope.changeStatus = function(status,id){
-      if(status == true) {
+      if(status == false) {
         angular.forEach($scope.scopeSkills,function(scope,key){
           if(scope['course_id'] == id) {
             scope['visibility'] = '1';
           }
         }); 
+        console.log($scope.scopeSkills);
         angular.forEach($scope.scopeSubSkills,function(scope,key){
           if(scope['course_id'] == id) {
             scope['visibility'] = '1';
           }
         }); 
-      }else if(status == false) {
+      }else if(status == true) {
         angular.forEach($scope.scopeSkills,function(scope ,key){
           if(scope['course_id'] == id) {
             scope['visibility'] = '0';
