@@ -1437,8 +1437,14 @@ if (typeof $routeParams.slug != 'undefined') {
         if (response.status === true) {
           $location.url('/parent/dashboard/110');
         } else {
-          $scope.msg = response.message;
+          if (response.message != null) {
+            $scope.msg = response.message;
+          } else {
+            $scope.msg = 'Some Error occured, Kindly contact to administrator';
+          }
         }
+      }).error(function() {
+        $scope.msg = 'Some Error occured, Kindly contact to administrator';
       });
     };
 
