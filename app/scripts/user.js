@@ -104,9 +104,10 @@ angular.module('mlg').filter('moment', function() {
 		});
 	}
 
-	loginHttpResponse.logout=function(){
+	loginHttpResponse.logout=function(data){
 		return $http({
-			method:'GET',			
+			method:'POST',
+            data : data,
 			url   : urlParams.baseURL+urlParams.logout
 		});
 	}

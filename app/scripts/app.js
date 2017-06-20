@@ -352,7 +352,7 @@ principal  : 30,
 		requireBase : false
 	});
 
-} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','Auth','commonActions', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,Auth, commonActions) {
 
     urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
     var top ="";
@@ -383,7 +383,8 @@ principal  : 30,
 
 		
 	   $rootScope.logout=function(){
-		   	loginHttpService.logout().success(function(response) {
+         var get_uid = commonActions.getcookies(get_uid);
+		   	loginHttpService.logout({user_id: get_uid}).success(function(response) {
 		   		$rootScope.logged_user = '';
 		   		 /*document.cookie = uid+ '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		   		 document.cookie =  'userObj=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';*/
