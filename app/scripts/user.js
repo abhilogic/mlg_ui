@@ -807,6 +807,7 @@ angular.module('mlg').filter('moment', function() {
 }])
 .controller('parentSubscriptionCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions','urlParams','subscription_days',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions,urlParams,subscription_days) {
   $scope.frm = {}
+  $scope.subscription_end_date = 'NaN';
   $scope.site_root = urlParams.siteRoot;
   $scope.childname={};
   var get_uid=commonActions.getcookies(get_uid);
@@ -815,10 +816,18 @@ angular.module('mlg').filter('moment', function() {
 	// and Call API to get child details for deshboard naming
     loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
 			var childcount=chidrenName.response.length;
-			if(childcount>0){																
+			if(childcount>0){
 					$scope.childname=chidrenName.response;
                     $scope.frm.childnames = chidrenName.response;
-                    
+                    if (typeof $routeParams.child_id != 'undefined') {
+                        angular.forEach($scope.childname, function(child, index) {
+                          if (child.user_id == $routeParams.child_id) {
+                            $scope.child_created_date = child.created_date;
+                            $scope.subscription_end_date = moment(child.subscription_end_date).format("YYYY-MM-DD");
+                            $scope.days_left = moment($scope.subscription_end_date).diff(moment(), 'days');
+                          }
+                        });
+                      }
                     for(var i in $scope.frm.childnames){
 
     			if($scope.frm.childnames[i].user_id==$routeParams.child_id){
@@ -930,14 +939,11 @@ angular.module('mlg').filter('moment', function() {
      });
     };
     if (typeof $routeParams.child_id != 'undefined') {
-      $scope.subscription_type = 'NaN';
+      $scope.student_subscription_days = subscription_days['student'];
+      $scope.subscription_type = $scope.user_start_date = 'TRIAL';
       loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
         if (result.status == true) {
           $scope.child_info = result.response;
-          $scope.student_subscription_days = subscription_days['student'];
-          $scope.child_info.end_date = moment($scope.child_info.order_date).add(subscription_days['student'], 'days').calendar();
-          var end_date = moment($scope.child_info.end_date).format("YYYY-MM-DD");
-          $scope.days_left = moment(end_date).diff(moment(), 'days');
           $scope.level = {id : result.response.level_id};
           loginHttpService.getCourseByGrade($scope.level).success(function(courseslistresult) {
           if(!courseslistresult.response.courses){  // value is null, empty
@@ -961,11 +967,14 @@ angular.module('mlg').filter('moment', function() {
           loginHttpService.getUserOrders({child_id : $routeParams.child_id, last_order : true}).success(
             function (order) {
               if (order.status == true) {
+                $scope.user_start_date = order.data[0].order_date;
                 if (order.data[0].trial_period == 1) {
                   $scope.subscription_type = 'TRIAL';
                 } else {
                   $scope.subscription_type = $scope.child_info.plan_duration.toUpperCase();
                 }
+              } else {
+                $scope.user_start_date = $scope.child_created_date;
               }
             }
           );
