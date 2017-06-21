@@ -60,6 +60,9 @@ angular.module('mlg_student')
           pid = null;
         }
         var url = urlParams.baseURL+urlParams.getAllCourseList+'/'+pid;
+        if(type == 'student') {
+          url = urlParams.baseURL+urlParams.getAllCourseList+'/'+pid+'/'+type;
+        }
         if ((typeof course_id != 'undefined') && (course_id != '')) {
           url = urlParams.baseURL+urlParams.getAllCourseList+'/'+ pid + '/' + type +'/' + course_id;
         }
@@ -69,6 +72,18 @@ angular.module('mlg_student')
 		return $http({
 			method:'GET',				
 			url   : url
+		});
+	}
+  loginHttpResponse.getStudentCourseList=function(uid,parentId,course){
+    var url = '';
+    if ((typeof course != 'undefined') && (course != '')) {
+      url = urlParams.baseURL+urlParams.getStudentCourseList+'/'+uid+'/'+parentId+'/'+course;
+    }else{
+       url = urlParams.baseURL+urlParams.getStudentCourseList+'/'+uid+'/'+parentId;
+    }
+		return $http({
+			method: 'GET',				
+			url: url
 		});
 	}
 
@@ -1691,23 +1706,42 @@ promise.then(function(result) {
 	$scope.cid=$routeParams.id;	
 	$scope.skill_result = [];
 	
-	loginHttpService.getAllCourseList(pid).success(function(res_skill) {
-		if(res_skill.response.course_details.length > 0){
-			$scope.subject_detail = res_skill.response.course_details;
-
-			
+	loginHttpService.getStudentCourseList(get_uid,pid).success(function(res_skill) {
+    var stu_skill = '';
+    if(res_skill.by == 'scope') {
+      stu_skill = angular.fromJson(res_skill.response[0].scope);
+      console.log(stu_skill);
+    }else if(res_skill.by == 'course') {
+      stu_skill = res_skill.response;
+    }
+    $scope.subject_detail = [];
+		if(stu_skill.length > 0){
+      angular.forEach(stu_skill,function(skil,key){
+        if(skil['visibility'] == '1') {
+         $scope.subject_detail.push({
+           'course_id' : skil['course_id'],
+           'name' : skil['name'],
+           'start_date' : skil['start_date'],
+           'end_date' : skil['end_date'],
+           'parent_id' : skil['parent_id'],
+           'visibility' : skil['visibility'],
+         }); 
+        } 
+      });
+//			$scope.subject_detail = stu_skill;
 			for(var i=0; i< $scope.subject_detail.length ; i++){				
 				var skill_id = $scope.subject_detail[i].course_id;
-
+        var course = $scope.subject_detail[i].parent_id;
 				// API to get all subskill of skill.
-				loginHttpService.getAllCourseList(skill_id).success(function(res_subskill) {
-				if (res_subskill.response.course_details.length > 0){
-					var subskill_details = res_subskill.response.course_details;
+				loginHttpService.getStudentCourseList(get_uid,skill_id,course).success(function(res_subskill) {
+        var stu_subSkill = res_subskill.response;
+				if (stu_subSkill.length > 0){
+					var subskill_details = stu_subSkill;
 					for(var j=0; j< subskill_details.length ; j++){
 						var subskill_id = subskill_details[j].course_id;
 						//API to 1. check subskill quiz is pass/fail  or 2. any challenges from teacer/parents
 						loginHttpService.getUserQuizResponseOnSite(get_uid,quiz_type.SUBSKILLQUIZ, subskill_id).success(function(res_skillquiz) {
-							if (res_skillquiz.response.status == true){
+              if (res_skillquiz.response.status == true){
 								if(res_skillquiz.response.student_result_percent>= quiz_mastered_score.SUBSKILLQUIZ ) 
 									$scope.skill_result[subskill_id] = 'pass';
 								else
@@ -1766,11 +1800,31 @@ promise.then(function(result) {
 		window.location.href='/mlg_ui/app/';
 	}
 	var pid = $routeParams.id;
+  var course = '-1';
 	$scope.URLskill_id = $routeParams.id;
 	$scope.URLskill_name = $routeParams.skill_name;
-	loginHttpService.getAllCourseList(pid).success(function(response) {
-		if (response.response.course_details.length > 0){
-			$scope.subject_detail = response.response.course_details;
+	loginHttpService.getStudentCourseList(get_uid,pid,course).success(function(response) {
+    var stu_skill = '';
+    if(response.by == 'scope') {
+      stu_skill = angular.fromJson(response.response[0].scope);
+    }else if(response.by == 'course') {
+      stu_skill = response.response;
+    }
+    $scope.subject_detail = [];  
+		if (stu_skill.length > 0){
+//			$scope.subject_detail = response.response.course_details;
+      angular.forEach(stu_skill,function(skil,key){
+        if(skil['visibility'] == '1') {
+         $scope.subject_detail.push({
+           'course_id' : skil['course_id'],
+           'name' : skil['name'],
+           'start_date' : skil['start_date'],
+           'end_date' : skil['end_date'],
+           'parent_id' : skil['parent_id'],
+           'visibility' : skil['visibility'],
+         }); 
+        } 
+      });
 		} else{
 			response.subject_detail = 0;
 		}                 
@@ -2177,7 +2231,7 @@ else{
     }
 
     // API to get course_info and its child info
-	 loginHttpService.getAllCourseList($routeParams.skill_id).success(function(crinfo) {
+	 loginHttpService.getAllCourseList($routeParams.skill_id,'student').success(function(crinfo) {
 
 		$scope.course_name = crinfo.response.course_information[0].course_name;		
        	$scope.data = {};

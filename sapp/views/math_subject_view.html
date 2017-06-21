@@ -62,13 +62,16 @@
 						<!-- end pre Test -->
 
 						<!-- start skill links -->
-						<a href="skill-door/{{subject.name|changeInURL }}/{{subject.course_id}}"  ng-if="pretest_result == 'pass' " ng-model="mytest[$index]"  ng-repeat="subject in subject_detail " >
-							  <div class="castle topic_castle subskills_castle_{{$index+2}}">
+						<a href="skill-door/{{subject.name|changeInURL}}/{{subject.course_id}}"  ng-if="pretest_result == 'pass' " 
+               ng-model="mytest[$index]"  ng-repeat="subject in subject_detail " >
+              <div ng-if=" subject.visibility == '1'">
+							  <div class="castle topic_castle subskills_castle_{{$index+2}}" >
 									<span class="castle__img "></span>
 										<span class="fire__img"></span>
 										<span class="flag__icon"></span>
 										<span class="castle__text">{{subject.name}}</span>
 									</div>
+              </div>
 						</a>
 						<a href="#" ng-if="pretest_result == 'fail'"  ng-repeat="subject in subject_detail " >
 							<div class="castle topic_castle subskills_castle_{{$index+2}}">

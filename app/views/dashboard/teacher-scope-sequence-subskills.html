@@ -62,17 +62,17 @@
 													<div class="col-lg-5 col-lg-offset-2">
 														<div class="row">
 															<div class="col-md-7">
-															<h5 class="margin-sm-top-0">End DATE : {{subskill.end_date}}</h5>
+																<h5 class="margin-sm-top-0">{{subskill.end_date}}</h5>
 															</div>
                               <div class="col-md-5 text-right text-sm-left margin-top-5">
 																<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
                                   <label>
                                   <input class="js-switch" type="checkbox" >
                                   <span class="off">OFF</span>
-                                  <span class="switchery switchery-default {{subskill.course_id}}"ng-if="subskill.visibility == 1">
+                                  <span class="switchery switchery-default {{subskill.course_id}}"ng-if="subskill.visibility == '1'">
                                     <small></small>
                                   </span>
-                                  <span class="switchery switchery-default off {{subskill.course_id}}" ng-if="subskill.visibility != 1">
+                                  <span class="switchery switchery-default off {{subskill.course_id}}" ng-if="subskill.visibility != '1'">
                                   <small></small>
                                   </span>
                                   <span class="on">ON</span>

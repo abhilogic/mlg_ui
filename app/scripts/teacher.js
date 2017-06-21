@@ -4865,6 +4865,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     }
     /** subskil scope and sequence start**/
     if(skill != undefined) {
+      $scope.grpId = $routeParams.id;
         // this api used for get templates
       teacherHttpService.getScopeTemplates(get_uid,'subSkill').success(function(response) {
         if (response.status == true) {          
@@ -4917,7 +4918,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
       }).error(function(error) {
         $scope.msg= 'Some technical error occured.';
       });
-      teacherHttpService.teacherScope(get_uid,courses,options,null).success(function(response) {
+      teacherHttpService.teacherScope(get_uid,courses,options,$scope.grpId).success(function(response) {
         var tempArray = [];
         if(response.status == true) {
           if(response.by == 'course') {
@@ -5028,7 +5029,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
       }
    };
     $scope.changeStatus = function(status,id){
-      if(status == false) {
+      if(status == true) {
         angular.forEach($scope.scopeSkills,function(scope,key){
           if(scope['course_id'] == id) {
             scope['visibility'] = '1';
@@ -5040,7 +5041,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
             scope['visibility'] = '1';
           }
         }); 
-      }else if(status == true) {
+      }else if(status == false) {
         angular.forEach($scope.scopeSkills,function(scope ,key){
           if(scope['course_id'] == id) {
             scope['visibility'] = '0';
