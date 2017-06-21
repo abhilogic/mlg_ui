@@ -940,7 +940,8 @@ angular.module('mlg').filter('moment', function() {
     };
     if (typeof $routeParams.child_id != 'undefined') {
       $scope.student_subscription_days = subscription_days['student'];
-      $scope.subscription_type = $scope.user_start_date = 'TRIAL';
+      $scope.subscription_type = 'TRIAL';
+      $scope.user_start_date = '';
       loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
         if (result.status == true) {
           $scope.child_info = result.response;
