@@ -810,6 +810,7 @@ angular.module('mlg').filter('moment', function() {
   $scope.subscription_end_date = 'NaN';
   $scope.site_root = urlParams.siteRoot;
   $scope.childname={};
+  $scope.is_child_on_trial = false;
   var get_uid=commonActions.getcookies(get_uid);
 
 	// To call dynamic step slider
@@ -823,10 +824,32 @@ angular.module('mlg').filter('moment', function() {
                         angular.forEach($scope.childname, function(child, index) {
                           if (child.user_id == $routeParams.child_id) {
                             $scope.child_created_date = child.created_date;
-                            $scope.subscription_end_date = moment(child.subscription_end_date).format("YYYY-MM-DD");
-                            $scope.days_left = moment($scope.subscription_end_date).diff(moment(), 'days');
+                            var trial_days = moment(child.trial_period_end_date).diff(moment(), 'days');
+                            if (trial_days > 0) {
+                              $scope.is_child_on_trial = true;
+                              $scope.subscription_end_date = moment(child.trial_period_end_date).format("YYYY-MM-DD");
+                              $scope.days_left = trial_days;
+                            } else {
+                              $scope.subscription_end_date = moment(child.subscription_end_date).format("YYYY-MM-DD");
+                              $scope.days_left = moment($scope.subscription_end_date).diff(moment(), 'days');
+                            }
                           }
                         });
+                        if ($scope.is_child_on_trial == true) {
+                          $scope.subscription_type = 'TRIAL';
+                        }
+                        loginHttpService.getUserOrders({child_id : $routeParams.child_id, last_order : true}).success(
+                          function (order) {
+                            if (order.status == true) {
+                              $scope.user_start_date = order.data[0].order_date;
+                              if (!$scope.is_child_on_trial) {
+                                $scope.subscription_type = $scope.child_info.plan_duration.toUpperCase();
+                              }
+                            } else {
+                              $scope.user_start_date = $scope.child_created_date;
+                            }
+                          }
+                        );
                       }
                     for(var i in $scope.frm.childnames){
 
@@ -965,20 +988,6 @@ angular.module('mlg').filter('moment', function() {
               $scope.courserecords=courseslistresult.response.course_list;
             }
           });
-          loginHttpService.getUserOrders({child_id : $routeParams.child_id, last_order : true}).success(
-            function (order) {
-              if (order.status == true) {
-                $scope.user_start_date = order.data[0].order_date;
-                if (order.data[0].trial_period == 1) {
-                  $scope.subscription_type = 'TRIAL';
-                } else {
-                  $scope.subscription_type = $scope.child_info.plan_duration.toUpperCase();
-                }
-              } else {
-                $scope.user_start_date = $scope.child_created_date;
-              }
-            }
-          );
         }
       });
       // call API to get packages
