@@ -106,6 +106,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   scopeAndSequence : '/teachers/saveScopesAsSequence',
   getScopeTemplates : '/teachers/getScopeTemplate',
   getNeedAttention : '/teachers/getNeedAttention',
+  getSubskillAnalytic : '/teachers/getSubskillAnalytic',
+
+  
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
