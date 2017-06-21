@@ -2199,13 +2199,10 @@ else{
 
 	  					}else{
 	  						alert('Opps something is wrong to store your quiz result');
-	  					}
-							
+	  					}							
 					});
 
-
-				}  
-	 					
+				} 		
 
 	 		//}    	
     }; // end submit question operation
@@ -2586,7 +2583,6 @@ $scope.openmodelRedeem=function(){
 };
 
 
-
 $scope.open_avatar=function(){
 	$("#modal-selectAvatar").modal();
 }
@@ -2682,16 +2678,16 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 });
 
 
-// Student Reports
-loginHttpService.getStudentReport(get_uid).success(function(res_resport) {
-	if(res_resport.response.status=true){
-		$scope.details = res_resport.response.details;
-	}
-	else{
-		$scope.error_message ="No Report generated now.";
-	}
+	// Student Reports
+	loginHttpService.getStudentReport(get_uid).success(function(res_resport) {
+		if(res_resport.response.status=true){
+			$scope.details = res_resport.response.details;
+		}
+		else{
+			$scope.error_message ="No Report generated now.";
+		}
 
-});
+	});
 
 
 

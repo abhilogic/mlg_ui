@@ -105,6 +105,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   scopeAndSequenceTemplate : '/teachers/saveScopesAsTemplate',
   scopeAndSequence : '/teachers/saveScopesAsSequence',
   getScopeTemplates : '/teachers/getScopeTemplate',
+  getNeedAttention : '/teachers/getNeedAttention',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -153,7 +154,15 @@ principal  : 30,
 	content_type_image : 4,
 	content_type_doc : 5,
 	content_type_video : 6,
-}).config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+}).value('class_students_classification', {
+	NO_ATTACK  	: 0,  //student not present in user_quiz
+	REMEDIAL  	: 50,  //student scored 0 to 50
+	STRUGGLING  : 79,  // student scored 51 to 79
+	ON_TARGET  	: 85,  //student scored 80 to 85
+	OUTSTANDING : 95,  // student scored 86 to 95
+	GIFTED		: 100     // 96 to 100
+})
+.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	var access = routingConfig.accessLevels;
 	$routeProvider.when('/', {
 		templateUrl : 'views/landing.html',

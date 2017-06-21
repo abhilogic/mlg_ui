@@ -145,7 +145,6 @@ $routeProvider
   templateUrl : 'views/knight_challenge.html',
   controller : 'knightChallengeCtrl',    
 })
-
 .otherwise({
 	redirectTo : '/journey',
 });
@@ -276,6 +275,7 @@ return {
 	});
 	return obj;
 }
+
 $scope.userInfo=userInfo;
     // Avatar profile
     var get_uid=commonActions.getcookies(get_uid);

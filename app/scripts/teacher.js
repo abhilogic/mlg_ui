@@ -419,6 +419,13 @@ teacherHttpResponse.getScopeTemplates=function(uid,type){
     url   : urlParams.baseURL+urlParams.getScopeTemplates+'/'+uid+'/'+type
   });
 }
+teacherHttpResponse.getNeedAttention=function(teacher_id, subject_id){
+  return $http({
+    method:'GET',
+    url   : urlParams.baseURL+urlParams.getNeedAttention+'?teacher_id='+teacher_id+'&subject_id='+subject_id
+  });
+}
+
 return teacherHttpResponse;
 
 }])
@@ -652,8 +659,8 @@ $scope.submitSkip = function(){
 
 }])
 
-.controller('teacherDashboardViewCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','$routeParams','user_roles','commonActions','$filter','$localStorage',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,$routeParams,user_roles,commonActions,$filter,$localStorage) {
+.controller('teacherDashboardViewCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','$routeParams','user_roles','class_students_classification','commonActions','$filter','$localStorage',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,$routeParams,user_roles,class_students_classification,commonActions,$filter,$localStorage) {
       //Step- 1 check students of teacher to show empty / non-empty dashboard
 
        // Api to call all students of a teacher
@@ -677,6 +684,7 @@ $scope.submitSkip = function(){
          $scope.groups = respGroup.response.groups;
        }
      });
+
       // calender event show
       $scope.event = 'all';
       var date = new Date();
@@ -888,6 +896,68 @@ $scope.showEvents = function(events) {
           }
         });
       }
+
+
+      // start-  Need For Atentions
+      teacherHttpService.getNeedAttention(get_uid,$routeParams.courseid).success(function(resAtn) {
+          if(resAtn.response.status==true){
+            $scope.strecords= resAtn.response.attention_records;
+          }
+          else{
+            $scope.Attention_message = resAtn.response.message;
+          }
+      });
+    // end-  Need For Atentions
+
+
+    // Start-  Analytic Class Graph
+    $scope.clickNeedAttention= function(indx, subskillid){
+        $(".tab-pane.in.active").removeClass('in active'); 
+        $("#menu"+indx).addClass('in active');
+
+        
+
+
+
+
+    };
+     $scope.labels = [];
+     angular.forEach(class_students_classification, function(value, key) {               
+        $scope.labels.push(key);    
+      });
+
+      $scope.colors = ['#e8e8e8','#db4a4a','#f1c40f','#69e59d','#249626','#8a81e8'];
+      $scope.data = [30,10,20,20,15,5];
+      
+      $scope.datasetOverride = [{ label: 'Bar chart', borderWidth: 1,  type: 'bar'  }];
+      $scope.options = {  
+          animation: {duration: 1000 },
+          legend: { 
+                    display: true, position: 'right',
+                    labels: {  fontColor: '#333', fontSize: 14, boxWidth: 15, },
+                  },
+
+          tooltips: {
+              callbacks: {
+                    label: function(tooltipItem, data) {
+                        var allData = data.datasets[tooltipItem.datasetIndex].data;
+                        var tooltipLabel = data.labels[tooltipItem.index];
+                        var tooltipData = allData[tooltipItem.index];
+                        var total = 0;
+                        for (var i in allData) {
+                              total += allData[i];
+                        }
+                        var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                        return tooltipLabel + ': ' + tooltipData + '%';
+          
+                    }
+              }
+          }
+      };
+
+   // end-  Analytic Class Graph
+
+
     }])
 
 .controller('teacherCreateClassCtrl',['$rootScope','$scope', '$filter','$timeout', 'teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
