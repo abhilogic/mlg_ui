@@ -609,13 +609,13 @@ angular.module('mlg').filter('moment', function() {
 			loginHttpService.register(data).success(function(response) {
 				if(!response.data.response){
 					$scope.msg=response.message;
+                    $("#errorOnRegistration").modal();
 				}else{
-					$("#emailConfirmation").modal();					
+					$("#emailConfirmation").modal();
 				}
-			
-					//alert('registered succefully');
 			}).error(function(error) {
-				alert('Some Error occured, registration fail');
+              $scope.msg = 'Some Error occured, registration fail';
+              $("#errorOnRegistration").modal();
 			});
 	};
 
@@ -926,20 +926,20 @@ angular.module('mlg').filter('moment', function() {
        return false;
      }
      var num_of_subjects_opted = frm.new_package;
-     var previously_purchased_subjects_count = $scope.child_info.purchase_detail.length;
+//     var previously_purchased_subjects_count = $scope.child_info.purchase_detail.length;
      var selected_subjects = 0;
      angular.forEach(frm.selectedcourse, function(sub_value, sub_key){
        if (sub_value !== '') {
          selected_subjects++;
        }
      });
-     angular.forEach($scope.packages , function(package_val , key) {
-       if ((package_val.name.toUpperCase() == "ALL SUBJECTS") && package_val.no_of_subjects == num_of_subjects_opted) {
-         if (selected_subjects + previously_purchased_subjects_count == package_val.no_of_subjects) {
-           selected_subjects = selected_subjects + previously_purchased_subjects_count;
-         }
-       }
-     });
+//     angular.forEach($scope.packages , function(package_val , key) {
+//       if ((package_val.name.toUpperCase() == "ALL SUBJECTS") && package_val.no_of_subjects == num_of_subjects_opted) {
+//         if (selected_subjects + previously_purchased_subjects_count == package_val.no_of_subjects) {
+//           selected_subjects = selected_subjects + previously_purchased_subjects_count;
+//         }
+//       }
+//     });
      if (num_of_subjects_opted != selected_subjects) {
        $scope.errMsg = 'Please choose the subjects equal to the subject packages';
        return false;
@@ -2051,4 +2051,8 @@ if (typeof $routeParams.slug != 'undefined') {
         });
       };
     }
+ ]).controller('parentNotificationCntrl', ['$scope', 'loginHttpService', '$location', 'urlParams',
+   function ($scope, loginHttpService, $location, urlParams) {
+ 
+   }
  ]);

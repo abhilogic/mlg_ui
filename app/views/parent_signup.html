@@ -123,7 +123,27 @@
 		</div>
 	</div>
     </section>
+    <section class="modal__section">
+      <div id="errorOnRegistration" class="modal fade modal-emailConfirmation" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+            </div>
+            <div class="modal-body">
+              <span class="icon icon-rounded float-lg icon-float icon-success">
+                <i class="icon-times"></i>
+              </span>
+              <p class="tag_line">{{msg}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="gohome();">Go</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   <!-- bootstrap modal  -->
 	
   <script src="assets/js/main.js"></script>
-</div>
