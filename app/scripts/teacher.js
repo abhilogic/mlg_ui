@@ -4533,13 +4533,13 @@ $scope.deleteQuestions = function(Qid,uniqId){
     var data = {user_id : get_uid, level_id: $scope.grade_id, course_id: $scope.subject_id}
     teacherHttpService.getTeacherSettings(data).success(function(response) {
       if (response.status == true) {
-        $scope.pfrm = {};
         var result = response.result;
         var settings = JSON.parse(result.settings);
-        $scope.pfrm.fill_in_the_blanks_question = settings.fill_in_the_blanks_question;
-        $scope.pfrm.single_choice_question = settings.single_choice_question;
-        $scope.pfrm.multiple_choice_question = settings.multiple_choice_question;
-        $scope.pfrm.true_false_question = settings.true_false_question;
+        if (typeof settings.question_type != 'undefined') {
+          angular.forEach(settings.question_type, function(question_value, question_id) {
+            $scope.pfrm.question_type[question_id] = question_value;
+          });
+        }
         $scope.pfrm.group_builder = (settings.group_builder == true) ? 'true' : 'false';;
         $scope.pfrm.chat_status = (settings.chat_status == true) ? 'true' : 'false';
         $scope.pfrm.student_chat_enabled = settings.student_chat_enabled;
@@ -4563,23 +4563,34 @@ $scope.deleteQuestions = function(Qid,uniqId){
   };
 
   $scope.pfrm = {};
+  $scope.pfrm.question_type = {};
   $scope.pfrm.frequency_of_challenges_for_individual = '';
   $scope.pfrm.frequency_of_challenges_for_group = '';
   $scope.pfrm.auto_progression_for_individual = '';
   $scope.pfrm.auto_progression_for_group = '';
   $scope.pfrm.placement_test = true;
   $scope.pfrm.auto_progression = true;
-  $scope.pfrm.fill_in_the_blanks_question = true;
-  $scope.pfrm.single_choice_question = true;
-  $scope.pfrm.multiple_choice_question = true;
-  $scope.pfrm.true_false_question = true;
-  $scope.changeStatus = function(question_type) {
-    $scope.pfrm[question_type] = !$scope.pfrm[question_type];
+  $scope.changeStatus = function(question_id) {
+    $scope.pfrm.question_type[question_id] = !$scope.pfrm.question_type[question_id];
   };
 
   $scope.teacherClassSettings = function() {
     getTeacherGrades();
+    getQuestionType();
   };
+
+  function getQuestionType() {
+    teacherHttpService.questionType().success(function(resp) {
+      if (resp.status == true) {
+        $scope.question_types = resp.data;
+        angular.forEach(resp.data , function(question, index) {
+          $scope.pfrm.question_type[question.id] = true;
+        });
+      }
+    }).error(function(x) {
+      alert('Some Error occured while getting question types');
+    });
+  }
 
   function getTeacherGrades() {
     teacherHttpService.getTeacherGrades(get_uid, user_roles['teacher']).success(function (resp) {
