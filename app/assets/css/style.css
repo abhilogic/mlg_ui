@@ -22140,6 +22140,7 @@ body[class*=navbar-bottom] .content {
 .modal-SequencePreview .modal-body {
   max-height: 400px;
   overflow: hidden;
+  overflow-y: auto;
 }
 @media screen and (min-width: 991px) {
   .modal-SequencePreview .modal-body {
