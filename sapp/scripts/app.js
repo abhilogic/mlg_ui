@@ -154,7 +154,7 @@ $locationProvider.html5Mode({
 	requireBase : false
 });
 
-} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','$localStorage', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,$localStorage) {
+} ]).run([ '$rootScope','$templateCache', '$location','loginHttpService', 'urlParams', '$http', '$cookies', '$cookieStore','$localStorage','commonActions', function($rootScope,$templateCache,$location, loginHttpService, urlParams, $http, $cookies, $cookieStore,$localStorage,commonActions) {
 
 urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
 	function setCookie(key, value) {
@@ -185,7 +185,8 @@ urlParams.baseURL=$location.protocol()+'://'+$location.host()+'/mlg';
 
   }
   $rootScope.logout=function(){
-		   	loginHttpService.logout().success(function(response) {
+            var get_uid = commonActions.getcookies(get_uid);
+		   	loginHttpService.logout({user_id: get_uid}).success(function(response) {
 		   		$rootScope.logged_user = '';
           var question = $localStorage.localquestions;
           $localStorage.$reset();

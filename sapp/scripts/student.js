@@ -48,9 +48,10 @@ angular.module('mlg_student')
 		});
 	}
 
-	loginHttpResponse.logout=function(){
+	loginHttpResponse.logout=function(data){
 		return $http({
-			method:'GET',			
+			method:'POST',
+            data : data,
 			url   : urlParams.baseURL+urlParams.logout
 		});
 	}
