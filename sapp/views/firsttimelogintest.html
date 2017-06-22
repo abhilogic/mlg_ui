@@ -59,7 +59,9 @@
 									  <li ng-repeat="option in currentquestion.options">                              
 											<span>
 											  <label>
-												<input type="checkbox" name="selectedchkoption" class="checkbox-proceed"  ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+												<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" class="checkbox-proceed" >
+                          <a class="checkbox-btn" ng-class="{checked: frm.selectedoption == option.value}"></a>
+                           
 											  </label>
 											</span>
 											<span>{{option.label}}</span>
