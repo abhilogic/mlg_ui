@@ -27,13 +27,13 @@
                   <li>
                     <select class="form-control input-sm no-border">
                       <option value="Standard">Standard</option>
-<!--                      <option  ng-repeat="grade in level " value="{{grade}}">{{grade}}</option>-->
+
                     </select>
                   </li>
                   <li>
                     <select class="form-control input-sm no-border">
                       <option value="Subject">Subject</option>
-                      <!--<option  ng-repeat="course in subject" value="{{course}}">{{course}}</option>-->
+                      
                     </select>
                   </li>
                   <li>
@@ -102,8 +102,8 @@
                       </p>
                   </a>
 
-                </li>
-                 <li class="active" ng-if="analytic_message"><span style="color:green">{{analytic_message}}</span></li>
+                </li>                
+                 <li ng-if="attention_message"><h5 style="color:green">{{attention_message}}</h5></li>
 
               </ul>
               <h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
@@ -324,7 +324,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 					</div>
 					<!-- /planner panel  -->
       </div>
@@ -468,11 +468,143 @@
           <!-- /student gap analysis panel  -->
 
           <!-- Planner Panel  -->
-          <div class="panel panel-flat">
+          <!-- calender/schedular for teacher meeting  -->
+          <div class="panel panel-flat panel-calendar">
             <div class="panel-body no-padding">
-              <img src="../assets/img/calendar.png" alt="" class="img-responsive" style="width:100%"/>
-            </div>
-          </div><!-- /planner panel  -->
+              <div class="row margin-0">
+                <div class="col-md-6 col-xs-12 pull-right right-portion">
+                  <a href=""><i class="icon icon-arrow-left"></i></a>
+                    <div class="date-day">
+                      <span class="date" ng-bind="ddMMyyyy"></span>
+                      <span class="day" ng-bind="weak"></span>
+                    </div>
+                     <!--EVENT CREATION ALL Start-->
+                    <div class="text-center" ng-show=" event == 'all'">
+                      <h4 class="events-name">What type of Event do you want to create?</h4>
+                      <a href="" ng-click="assignmentEvent()" role="button" class="btn btn-primary btn-block">Assignment</a>
+                      <br/>
+                      <a href="" ng-click="pTMEvent()" class="btn btn-primary btn-block">Parent Teacher Meeting</a>
+                      <br/>
+                      <a href="" ng-click="toDoEvent()" class="btn btn-primary btn-block">To Do</a>
+                    </div>
+                     <!--EVENT CREATION ALL END-->
+                     <!--TODO END-->
+                     <form class="form-horizontal" ng-show=" event == 'todo'">
+                      <h4 class="events-name">To do</h4>
+                        <div class="form-group">
+                          <input type="text" class="form-control border-top-0 border-left-0 border-right-0"
+                                 placeholder="Enter your text here..." name="todo" ng-model="calndr.todo"/>
+                        </div>
+                        <div class="text-right">
+                          <button type="button" class="btn btn-link">Cancel</button>
+                          <button type="button" class="btn btn-primary" ng-click="CreateTodo(calndr)">Create</button>
+                        </div>
+                         <span>{{message}}{{msg}}</span>
+                    </form>
+                     <!--TODO END-->
+                     <!--PARENT TEACHER MEETING START-->
+                     <form class="form-horizontal" ng-show=" event == 'ptm'">
+                    <h4 class="events-name">Parents Teacher Meating</h4>
+                      <div class="row">
+                        <div class="col-md-4 padding-0">
+                          <div class="radio radio-primary radio-inline">
+                            <input type="radio" id="inlineRadio1" name="ptm" ng-model="calender.checkedType" value="all" checked="">
+                            <label for="inlineRadio1" class="text-uppercase"> All Class</label>
+                          </div>
+                        </div>
+                        <div class="col-md-4 padding-0">
+                          <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                              <div class="radio radio-primary radio-inline margin-sm-top-10">
+                                <input type="radio" id="inlineRadio2"name="ptm" ng-model="calender.checkedType" value="people" checked="">
+                                <label for="inlineRadio2"></label>
+                              </div>
+                            </div>
+                            <div class="col-sm-10 col-xs-10">
+                              <select class="mlg-selectpicker background-none" title="people" data-width="auto" data-size="auto"
+                                      ng-model="calender.selectedPeopleModel"
+                                      ng-options="student.id as student.first_name+' '+student.last_name for student in students track by student.id">
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4 padding-0">
+                          <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                              <div class="radio radio-primary radio-inline margin-sm-top-10">
+                                <input type="radio" id="inlineRadio3" name="ptm" ng-model="calender.checkedType" value="group" checked="">
+                                <label for="inlineRadio3"></label>
+                              </div>
+                            </div>
+                            <div class="col-sm-10 col-xs-10">
+                              <select class="mlg-selectpicker background-none" title="Group" data-width="auto" data-size="auto"
+                                      ng-model="calender.selectedGroupModel" ng-change="getGroup(calender.selectedGroupModel)"
+                                      ng-options="group.id as group.title for group in groups track by group.id">
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group event-time-selector">
+                        <label class="col-sm-4 control-label col-sm-offset-2">SELECT TIME</label>
+                        <div class="col-sm-4">
+                          <div class="input-group clockpicker">
+                            <input type="text" id="time" class="form-control floating-label" placeholder="Time" ng-click="getTime()"ng-model="calender.time">
+                            <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-right">
+                        <button type="button" class="btn btn-link">Cancel</button>
+                        <button type="button" class="btn btn-primary"ng-click="EventUpload(calender)">Create</button>
+                      </div>
+                    <span>{{message}}{{msg}}</span>
+                    </form>
+                    <!--PARENT TEACHER MEETING END-->
+                    <!--ASSIGNMENT START-->
+                    <div class="text-center" ng-show="event == 'assignment'">
+                      <h4 class="events-name">Assignment</h4>
+                      <a href="teacher-autoGenerateAssignment.html" role="button" class="btn btn-primary btn-block">Send Auto-Generated Assignment</a>
+                      <br/>
+                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" class="btn btn-primary btn-block">Create Custom Assignment</a>
+                    </div>
+                    <!--ASSIGNMENT END-->
+                </div>
+                <div class="col-md-6 col-xs-12 pull-left left-portion">
+                  <tien-clndr class="clndr" tien-clndr-object="clndr" tien-clndr-events="events">
+                <div class="clndr-controls">
+                  <div class="clndr-previous-button" ng-click="clndr.back()">
+                    &lsaquo;
+                  </div>
+                  <div class="month">
+                    {{month}}
+                  </div>
+                  <div class="clndr-next-button" ng-click="clndr.forward()">
+                    &rsaquo;
+                  </div>
+                </div>
+                <div class="clndr-grid">
+                  <div class="days-of-the-week">
+                    <div class="header-day" ng-repeat="day in daysOfTheWeek track by $index">
+                      {{day}}
+                    </div>
+                  </div>
+                  <div class="days">
+                    <div class="{{day.classes}}" ng-repeat="day in days" ng-click="getUserSelectedDate(day)" style="cursor:pointer">
+                      <div class="event-indicator" ng-show="day.events.length" ng-click="showEvents(day.events)">{{day.events.length}}</div>
+                      {{day.day}}
+                    </div>
+                  </div>
+                </div>
+            </tien-clndr>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+          <!-- /planner panel  -->
         </div><!-- /content area -->
 
 
