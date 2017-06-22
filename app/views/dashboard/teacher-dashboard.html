@@ -103,6 +103,7 @@
                   </a>
 
                 </li>
+                 <li class="active" ng-if="analytic_message"><span style="color:green">{{analytic_message}}</span></li>
 
               </ul>
               <h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
@@ -139,10 +140,7 @@
                       <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
                       </canvas> 
                     </div>
-                    <div class="student-progress-allover">
-                      <p class="text-uppercase">{{$index+1}}System recommended progress: <b>35%</b></p>
-                      <p class="text-uppercase">Class average progress: <b>30%</b></p>
-                    </div>
+                
 
 
                 </div>

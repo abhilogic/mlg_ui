@@ -426,12 +426,20 @@ teacherHttpResponse.getNeedAttention=function(teacher_id, subject_id){
   });
 }
 
+teacherHttpResponse.getNeedAttentionOFStudent=function(student_id){
+  return $http({
+    method:'GET',
+    url   : urlParams.baseURL+urlParams.getNeedAttentionOFStudent+'?student_id='+student_id
+  });
+}
+
 teacherHttpResponse.getSubskillAnalytic=function(teacher_id,subject_id,subskill_id){
   return $http({
     method:'GET',
     url   : urlParams.baseURL+urlParams.getSubskillAnalytic+'?teacher_id='+teacher_id+'&subject_id='+subject_id+'&subskill_id='+subskill_id
   });
 }
+
 
 
 
@@ -927,12 +935,9 @@ $scope.showEvents = function(events) {
           else{
             $scope.analytic_message = resAna.response.message;
           }
-
-
         });
 
-
-          }
+       }
           else{
             $scope.attention_message = resAtn.response.message;
           }
@@ -3834,6 +3839,36 @@ $scope.deleteImage = function(j,data) {
         $scope.average_duration_in_hrs = response.average_duration_in_hrs;
       }
     });
+
+
+
+    //Need Your Attention Block
+    teacherHttpService.getNeedAttentionOFStudent($routeParams.id).success(function(resAtn) {
+          if(resAtn.response.status==true){
+              $scope.st_atnrecords = resAtn.response.attention_records ;             
+
+          }else{
+              $scope.attention_message = resAtn.response.message;
+          }
+
+      });
+
+
+    $scope.clickNeedAttention= function(idx,course_id){
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
   }])
 .directive('owlcarousel', function() {
