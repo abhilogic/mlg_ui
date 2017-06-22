@@ -739,15 +739,15 @@ promise.then(function(result) {
 	        	$("#pretestmasscourt_id").removeClass("active");
 	        } 
 	        else if(st_result=='pass'){
-	        	window.location.href='skill-door/whole-numbers/13';
+	        	window.location.href='subject-view/'+$routeParams.id;
 	        } else if(st_result=='fail') {
-	        	window.location.href='skill-door/whole-numbers/13';
+	        	window.location.href='subject-view/'+$routeParams.id;
 	        }  
 	        else{
 	        	$("#pretestmasscourt_id").removeClass("active");
 	        }                   
 		}
-
+ 
 
 	  	$scope.submitQuestion=function(frm){
 	  		//console.log(frm);	
