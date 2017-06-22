@@ -890,7 +890,7 @@ angular.module('mlg').filter('moment', function() {
     $scope.dis_val = 0;
     $scope.dis_amount = 0;
     $scope.pageNumber = 0;
-    $scope.new_package_name = 'NaN';
+    $scope.new_package_name = '';
     $scope.errMsg = '';
     var all_courses = '';
     $scope.getTotalPrice = function(subject) {
