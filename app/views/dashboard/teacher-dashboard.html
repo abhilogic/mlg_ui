@@ -98,7 +98,8 @@
                       <p class="nav__text">                        
                           <span><strong>Result On :</strong> {{atnRecord.quiz_type_name}}</span><br>
                           <span ><strong>Attempt :</strong> {{atnRecord.attempts}} OUT OF: {{atnRecord.attempts}} </span><br>
-                          <span ><strong>Scored :</strong> {{atnRecord.score}} OUT OF: {{atnRecord.exam_marks}} </span>
+                          <span ><strong>Scored :</strong> {{atnRecord.score}} OUT OF: {{atnRecord.exam_marks}} </span><br>
+                           <span ><strong>Scored(%) :</strong> {{ ((atnRecord.score/atnRecord.exam_marks)*100)|number :2 }} % </span>
                       </p>
                   </a>
 

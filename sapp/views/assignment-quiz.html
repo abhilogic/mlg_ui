@@ -25,10 +25,10 @@
           <div class="subskill-quiz-content">        
             <div class="text-right"><button type="button" class="btn btn-hint"><img src="assets/img/hint-bulb-img.png" alt="" class="hint-img">HINT (3 left)</button></div>
 
-            <div class="text-center" >
+           <!--  <div class="text-center" >
               <button  class="btn btn-skip" ng-click="onSubmitQuestion(frm,skip=1)">skip</button>
               <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm,skip=0)">Submit</button>
-            </div>
+            </div> -->
 
             <p class="ques" ng-bind-html="'Question- '+(sequence+1)+' : '+ currentquestion.question_name"></p>
 
@@ -36,26 +36,26 @@
 
             <!-- type is filling -->
               	<li ng-if="currentquestion.type=='fillin'" ng-repeat="option in currentquestion.options">
-              	<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" class="checkbox-proceed" ><span>{{numToAlpha($index) +'.  '+ option.label}}</span>
+              	<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" class="checkbox-proceed1" ><span>{{numToAlpha($index) +'.  '+ option.label}}</span>
               	</li>               	
 
               	<!-- type is yesNO -->
               	<li ng-if="currentquestion.type=='yesNO' " ng-repeat="option in currentquestion.options">
-              		<input type="radio" name="quiz_option" class="radio-proceed" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required>   	
+              		<input type="radio" name="quiz_option" class="radio-proceed1" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required>   	
               		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
               	</li> 
 
 
               	<!-- type is mcq -->
               	<li ng-if="currentquestion.type=='mcq'" ng-repeat="option in currentquestion.options">
-              		<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+              		<input type="checkbox" name="selectedchkoption" class="radio-proceed1" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
               		
               		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
               	</li> 
 
               	<!-- type is mrq -->
               	<li ng-if="currentquestion.type=='mrq'" ng-repeat="option in currentquestion.options">
-              		<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+              		<input type="checkbox" name="selectedchkoption" class="radio-proceed1" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
               		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
               	</li>
 
@@ -69,10 +69,10 @@
 
             
 
-            <!-- <div class="text-center" >
-              <button  class="btn btn-skip" ng-click="onSkipQuestion(frm)">skip</button>
-              <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm)">Submit</button>
-            </div> -->
+             <div class="text-center" >
+              <button  class="btn btn-skip" ng-click="onSubmitQuestion(frm,skip=1)">skip</button>
+              <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm,skip=0)">Submit</button>
+            </div>
       
             <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: false, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
      			 <div owl-carousel-item=""  class="item" ng-repeat="ques in assigment_items" class="item">        			
@@ -96,27 +96,4 @@
 		<!-- page loader  -->
 
 	
-    <script>
-      $(document).ready(function(){
-       // $("input[type='checkbox']").checkbox_button();
-  
-        // tooltip bootstrap
-			$('[data-toggle="tooltip"]').tooltip();
-      });
-
-
-			$(window).load(function(){
-				// table animation
-          var currentIndex = 1;
-          setInterval(function () {
-              if (currentIndex == 45) {
-                  currentIndex = 1;
-              }
-              $(".table-animated-img").css('background-image', 'url("assets/img/table-animation/' + currentIndex++ + '.png")');
-          }, 200);
-			});
-    </script>
-		<!-- page specific js  -->
-	</body>
-
-</html>
+   

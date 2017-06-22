@@ -2028,7 +2028,8 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
                });
    		}
    		else{
-   			$scope.error_message = respAssgn.response.message ;
+   			//$scope.err_assignment_message = respAssgn.response.message ;
+   			$scope.err_assignment_message = "Wait!! No challenges are assigned you by your teacher." ;
    		}
     });
 
