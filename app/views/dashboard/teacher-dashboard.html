@@ -395,74 +395,15 @@
           <!-- /student list panel  -->
 
           <!-- Student Gap Analysis Panel  -->
-          <div class="panel-body tabs-analysis">
-            <div class="row">
-              <div class="tab-content tab-content-left col-sm-6">
-                <h4 class="category-content text-uppercase no-margin">Needs Your Attention</h4>
-                <ul id="myNav" class="nav nav-tabs-analysis row">
-                  <li class="active">
-                    <a data-toggle="tab" href="#menu">
-                        <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
-                        <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam,</p>
-                    </a>
-                  </li>                
-                </ul>
-                <h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
-              </div>
-
-              <div class="tab-content tab-content-right col-sm-6">
-              <!--   <div class="text-center">
-                  <ul class="list-inline list-filters">
-                    <li>
-                      <select class="form-control input-sm no-border">
-                        <option value="Standard">Standard</option>
-                      </select>
-                    </li>
-                    <li>
-                      <select class="form-control input-sm no-border">
-                        <option value="Subject">Subject</option>
-                      </select>
-                    </li>
-                    <li>
-                      <select class="form-control input-sm no-border">
-                        <option value="Skills">Skills</option>
-                      </select>
-                    </li>
-                  </ul>
-                </div> -->
-                <div id="menu" class="tab-pane fade in">
-                   <!-- remove below image in the case of using plugins -->
-                   <div class="analysis-chart-container">
-                    <img src="../assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
-                  </div>
-                    <div class="row">
-                      <div class="text-center col-sm-8 col-sm-offset-2">
-                       
-                        <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-                        <br>
-                       
-
-                        <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-                      </div>
-                    </div>
+          <div class="panel panel-flat panel-empty">
+            <div class="panel-heading">
+              <h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i> Need You Attention</h5>
+            </div>
+            <div class="panel-body">
+                <h5 class="hd">No Students Attention Records.</h5>
+                <div class="text-center">
+                  <span class="btn btn-background-none text-primary"><i class="icon icon-plus-outline"></i><a class="add__group" href="teacher/create-group/{{subject_name}}/{{course_id}}"> Add Students </a></span>
                 </div>
-
-                <div id="menu1" class="tab-pane fade">
-                  
-                  <div class="analysis-chart-container">
-                   <img src="../assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
-                 </div>
-                   <div class="row">
-                     <div class="text-center col-sm-8 col-sm-offset-2">
-                       <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-                      <br>
-                      <a href="teacher/custom-assignment/{{grade_id}}/{{subject_name}}/{{course_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-                     </div>
-                   </div>
-                </div>     
-              </div>
             </div>
           </div>
           <!-- /student gap analysis panel  -->
