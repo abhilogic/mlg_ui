@@ -26,7 +26,8 @@
               <div class="thumbnail offer-thumbnail">
                 <span class="new-offer">New</span>
                 <div class="thumb-img">
-                  <img class="img-responsive offer-img" src="{{offer.image}}" alt="">
+                  <img ng-if="offer.image != ''" class="img-responsive offer-img" src="{{offer.image}}" alt="">
+                  <img ng-if="offer.image == ''" class="img-responsive offer-img" src="assets/img/logo_1.png" alt="">
                 </div>
                 <div class="caption">
                   <h4 class="offer-text">{{offer.description}}</h4>
