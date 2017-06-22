@@ -101,7 +101,7 @@
                     <div class="table-item">
                       <p class="text-uppercase">Select SUBJECT PACKAGE</p>
                       <div id="ChooseSubjectPackages" class="btn-group package-group" data-toggle1="buttons">
-                        <label ng-repeat="package in packages" ng-hide="package.id == child_info.package_id" class="btn new_packages package-box">
+                        <label ng-repeat="package in packages"  class="btn new_packages package-box">
                           <input ng-class="{'all_subjects': package.name.toUpperCase() == 'ALL SUBJECTS'}" ng-model="frm.new_package" ng-click="discount(package)" value="{{package.no_of_subjects}}"  type="radio" name="subjectPackages" autocomplete="off">
                           <span class="package-title">{{package.name}}</span>
                           <strong ng-if="package.type == 'percent'" class="package-offer">{{package.discount}}% off</strong>
@@ -113,7 +113,7 @@
                     <div class="table-item">
                       <p class="text-uppercase">Choose a Plan</p>
                       <div id="ChooseSubscriptionPlans" class="btn-group package-group" data-toggle1="buttons">
-                        <label ng-repeat ="plan in plans"  ng-hide="plan.id == child_info.plan_id" class="btn package-box package-plan">
+                        <label ng-repeat ="plan in plans"  class="btn package-box package-plan">
                           <input ng-model="frm.new_plan" ng-click="updatedPlan(plan)" value="{{plan.name}}" class="radio-plan-btn" ng-model="frm.plans"  type="radio" name="subscriptionPlans" id="{{'plan' + plan.name}}" autocomplete="off">
                           <span ng-if="plan.name == 'monthly'" class="package-title">Monthly</span>
                           <i ng-if="plan.name == 'monthly'" class="icon icon-monthly package-icon"></i>
@@ -133,8 +133,8 @@
                     <div class="table-item">
                       <p class="text-uppercase">Choose your subjects</p>
                       <div id="ChooseSubjects" class="btn-group package-group" data-toggle1="buttons">
-                         <label ng-repeat ="course in coursesListByGrade" ng-hide="course.purchased == true" class="choose-subjects btn package-box subject">
-                           <input ng-class="{'available_subjects' : course.purchased != true}" ng-change="getTotalPrice(frm.selectedcourse)"  ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}}'" ng-false-value="''" type="checkbox" name="{{course.course_name}}" autocomplete="off" checked="">
+                         <label ng-repeat ="course in coursesListByGrade" class="choose-subjects btn package-box subject">
+                           <input class="available_subjects" ng-change="getTotalPrice(frm.selectedcourse)"  ng-model="frm.selectedcourse[course.id]" ng-true-value="'{{course.course_name}}'" ng-false-value="''" type="checkbox" name="{{course.course_name}}" autocomplete="off" checked="">
                            <span class="package-title">{{course.course_name}}</span>
                            <strong class="package-price">${{course.price}}</strong>
                             <!--<small class="package-type">per quarter</small>-->
@@ -153,7 +153,7 @@
                   <div class="expected-subscription">
                     <div class="col-table col-left">
                       <div class="table-item">
-                        <p class="text-uppercase">CURRENT SUBJECT PACKAGE</p>
+                        <p class="text-uppercase">UPGRADED SUBJECT PACKAGE</p>
                         <div class="current-package package-box">
                           <span class="package-title">{{new_package_name}}</span>
                         </div>
