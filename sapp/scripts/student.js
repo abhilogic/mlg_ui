@@ -191,10 +191,10 @@ angular.module('mlg_student')
 		});
 	}
 
-	loginHttpResponse.getStudentAssignments = function(uid){
+	loginHttpResponse.getStudentAssignments = function(uid,course_id){ //course_id may be subject_id or skill_id
       return $http({
           method:'GET',
-          url   : urlParams.baseURL+urlParams.getStudentAssignments + '/' + uid
+          url   : urlParams.baseURL+urlParams.getStudentAssignments + '/' + uid+'/'+course_id
       });
 	}
 
@@ -965,9 +965,9 @@ promise.then(function(result) {
 
 
 	// To maintain old quiz questions if user quize questions response is incomplete
-	var localQuizResponse = JSON.parse(localStorage.getItem('localQuizResponse'));
-	var localQuestions= JSON.parse(localStorage.getItem('ngStorage-localquestions'));
-	if(localQuizResponse ==null && localQuestions==null ){
+	var localsubskillQuizResponse = JSON.parse(localStorage.getItem('localsubskillQuizResponse'));
+	var localsubskillquestions= JSON.parse(localStorage.getItem('ngStorage-localsubskillquestions'));
+	if(localsubskillQuizResponse ==null && localsubskillquestions==null ){
 		
 		// API to create quiz and questions list of quiz created for user 
 		loginHttpService.createQuizOnStudent(senddata).success(function(resitem){
@@ -977,8 +977,8 @@ promise.then(function(result) {
 				var quizquestions = resitem.data.questions;
 
 				//local storage functionality implementation
-		  		$localStorage.localquestions= quizquestions; //set value in local storage	  	
-		  		$scope.data.questions= $localStorage.localquestions //get value in localstorage
+		  		$localStorage.localsubskillquestions= quizquestions; //set value in local storage	  	
+		  		$scope.data.questions= $localStorage.localsubskillquestions //get value in localstorage
 
 
 
@@ -988,7 +988,7 @@ promise.then(function(result) {
 		  		}else{
 		  			$scope.sequence=0;	  				  			
 		  			var a=[];
-		  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+		  			localStorage.setItem('localsubskillQuizResponse', JSON.stringify(a));
 		  		}
 
 		  		// Set current question
@@ -1014,13 +1014,14 @@ promise.then(function(result) {
 			  	$scope.questions_status = attempt_questions_status;		  		
 
 			}else{
-					$scope.message = "Issue in traversing page";
+					//$scope.message = "Issue in traversing page";
+					$scope.creatquiz_message = "Soon Quiz will generate for you. Till then read lesson";
 			}
 		}); // end createquiz APi
 			
 
 	}else{ // if quiz attemped incomplete then pick question from localstorage
-		$scope.data.questions= $localStorage.localquestions;
+		$scope.data.questions= $localStorage.localsubskillquestions;
 		
 		// To check the sequence of the question in quiz	  	
 	  		if(localStorage.getItem('userQuesSequence')!=null && localStorage.getItem('userQuesSequence') !=0 ) {
@@ -1028,7 +1029,7 @@ promise.then(function(result) {
 	  		}else{
 	  			$scope.sequence=0;
 	  			var a=[];
-	  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+	  			localStorage.setItem('localsubskillQuizResponse', JSON.stringify(a));
 	  		}	  	
 	  	
 	  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
@@ -1198,9 +1199,9 @@ promise.then(function(result) {
 			//3.1 Add the quiz response in local storage
        		//var b;
        		//console.log(a); 
-       		a = JSON.parse(localStorage.getItem('localQuizResponse')); 
+       		a = JSON.parse(localStorage.getItem('localsubskillQuizResponse')); 
        		a.push(userExamResponse); 
-    		localStorage.setItem('localQuizResponse', JSON.stringify(a));
+    		localStorage.setItem('localsubskillQuizResponse', JSON.stringify(a));
 		 	localStorage.setItem('userQuesSequence', $scope.sequence+1);
 		 	$scope.sequence+=1;
 		 	$scope.currentquestion= $scope.data.questions[$scope.sequence];
@@ -1224,7 +1225,7 @@ promise.then(function(result) {
 			//localStorage.setItem('userQuesSequence', 0);
 			localStorage.removeItem("userQuesSequence");
 					
-			var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
+			var userQuizAttandResponses=localStorage.getItem('localsubskillQuizResponse')
 			loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
 				if (apiresponse.response.status == "true") {
 					var user_quiz_id=apiresponse.response.quiz_attempt_id;
@@ -1233,11 +1234,11 @@ promise.then(function(result) {
 					// Step -5 to Get the User Result
 					loginHttpService.getUserQuizResponse(get_uid,$scope.currentquestion.quiz_id,user_quiz_id).success(function(quizResultResponse) {
 			 			// a=[];
-						//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
-			 			//localStorage.setItem('ngStorage-localquestions', JSON.stringify(a));
+						//localStorage.setItem('subskillQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+			 			//localStorage.setItem('ngStorage-localsubskillquestions', JSON.stringify(a));
 					 			
-			 			localStorage.removeItem("localQuizResponse"); // empty the local storage
-			 			localStorage.removeItem("ngStorage-localquestions");
+			 			localStorage.removeItem("localsubskillQuizResponse"); // empty the local storage
+			 			localStorage.removeItem("ngStorage-localsubskillquestions");
 
 			 			if (quizResultResponse.response.status == true) {
 		 					//var correct_answer= quizResultResponse.response.correct_questions;
@@ -1376,7 +1377,8 @@ promise.then(function(result) {
 			  	$scope.questions_status = attempt_questions_status;		  		
 
 			}else{
-					$scope.message = "Issue in traversing page";
+					$scope.creatquiz_message = "Soon Quiz will generate for you for this susbkill.";
+
 			}
 		}); // end createquiz APi
 			
@@ -1982,6 +1984,7 @@ $scope.apiTabs=function(){
 
 	var get_uid=commonActions.getcookies(get_uid);
 	var assignment_id ="37";
+	$scope.mastered = quiz_mastered_score.TEACHERCUSTOMASSIGNMENT;
 
 
 	// To masscourt Action
@@ -2016,14 +2019,13 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 
 		
 		//API to call number of assignments
-	 	loginHttpService.getStudentAssignments(get_uid).success(function(respAssgn) {
+	 	loginHttpService.getStudentAssignments(get_uid,subid).success(function(respAssgn) {
 	 		console.log(respAssgn.response.status);
     	if (respAssgn.response.status == true) {
     			$scope.assignments =[];
     		  angular.forEach(respAssgn.response.assignment, function(assgnitem){
-                   if(assgnitem.subject_id == subid ){
-                   	console.log(assgnitem.subject_id);
-                   	$scope.assignments.push(assgnitem); 
+                   if(assgnitem.subject_id == subid ){                   	
+                   		$scope.assignments.push(assgnitem); 
                    }                   
                });
    		}

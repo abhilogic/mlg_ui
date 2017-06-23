@@ -22,7 +22,7 @@
               
 
 
-          <div class="subskill-quiz-content">        
+          <div class="subskill-quiz-content" ng-if="creatquiz_message==null ">        
             <div class="text-right"><button type="button" class="btn btn-hint"><img src="assets/img/hint-bulb-img.png" alt="" class="hint-img">HINT (3 left)</button></div>
 
             <!-- <div class="text-center" >
@@ -79,6 +79,8 @@
         </data-owl-carousel> 
 
           </div>
+
+            <div class="error_msg" ng-if="creatquiz_message" style="text-align:center;color:#fff;font-size:20px;">{{creatquiz_message}}</div>
       </div>
     <!-- main-content -->
 

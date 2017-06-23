@@ -97,22 +97,42 @@
                   </div>
                   </div> -->
 
-                    <data-owl-carousel class="owl-carousel owl-theme challenge_option" data-options="{margin: 19, loop: false, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
+                    <data-owl-carousel class="owl-carousel owl-theme challenge_option" data-options="{margin: 19, loop: false, responsive: { 0: {items: 1}, 600: {items: 3}, 1000: {items: 4} }}">
                         <div owl-carousel-item=""  class="item" ng-repeat="assignment in assignments"> 
-                            <a href="challenge/{{assignment.assignment_id}}" style="text-decoration:none;">
+                            <!-- If student has not attemped challenge -->
+                            <a href="challenge/{{assignment.assignment_id}}" style="text-decoration:none;" ng-if="assignment.has_attempted_challenge==0">
                                 <h1>{{assignment.type}}</h1>
                                     <div class="img_cover">
                                         <img src="assets/img/hat_img.png" alt="" data-center="center"/>
                                     </div>
                               <h2>{{assignment.course_name}}</h2>
-                            </a>      
+                            </a> 
+
+                            <!-- If student has attemped challenge -->
+                          <a href="#" style="text-decoration:none;" ng-if="assignment.has_attempted_challenge==1">
+                                <h1>{{assignment.type}}</h1>
+                                    <div class="img_cover">
+                                        <img src="assets/img/hat_img.png" alt="" data-center="center"/>
+                                    </div>
+                              <h2>{{assignment.course_name}}</h2><br>
+                              <h2 ng-if="assignment.student_result_percent >= mastered" style="color:green" >Mastered</h2>
+                              <h2 ng-if="assignment.student_result_percent < mastered" style="color:red">Not Mastered</h2>
+                              <br>
+                            </a>                            
+
                         </div>
                    </data-owl-carousel>
+
+
+
 
                   <!-- If assignment exist for a student-->
                   <div class="challenge_option" ng-if="err_assignment_message" style="text:center;">
                       <h1>{{err_assignment_message}}</h1>
+
                   </div> 
+
+
 
                 </div> 
               </div>
