@@ -81,21 +81,7 @@
 
               <div class="tab-content">
                 <div id="subject_{{stcourse.id}}" class="tab-pane fade subject_{{stcourse.id}} in " ng-repeat="stcourse in student_courses" >
-                  
-                  <!-- If assignment exist for a student-->  
-                 <!--  <div class="owl-carousel owl-theme challenge_option">                    
-                   <div class="owl-item" ng-repeat="assignment in assignments"  >
-                      <div class="item">
-                      <a href="challenge/{{assignment.assignment_id}}" style="text-decoration:none;">
-                        <h1>{{assignment.type}}</h1>
-                        <div class="img_cover">
-                              <img src="assets/img/hat_img.png" alt="" data-center="center"/>
-                        </div>
-                        <h2>{{assignment.course_name}}</h2>
-                        </a>
-                      </div> 
-                  </div>
-                  </div> -->
+            
 
                     <data-owl-carousel class="owl-carousel owl-theme challenge_option" data-options="{margin: 19, loop: false, responsive: { 0: {items: 1}, 600: {items: 3}, 1000: {items: 4} }}">
                         <div owl-carousel-item=""  class="item" ng-repeat="assignment in assignments"> 
@@ -123,17 +109,10 @@
                         </div>
                    </data-owl-carousel>
 
-
-
-
                   <!-- If assignment exist for a student-->
                   <div class="challenge_option" ng-if="err_assignment_message" style="text:center;">
                       <h1>{{err_assignment_message}}</h1>
-
                   </div> 
-
-
-
                 </div> 
               </div>
             </div>

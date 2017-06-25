@@ -942,6 +942,10 @@ promise.then(function(result) {
 	$scope.course_name = result.data.response.course_Information.course_name;
 	$scope.selected_subject = result.data.response.parent_info_of_skill.course_name;
 	
+	$scope.skill_id_URL = result.data.response.skill_info_of_subskill.id;
+	var skillname = result.data.response.skill_info_of_subskill.course_name.toLowerCase();
+	$scope.skill_name_URL =	skillname.replace(/\s+/g, '-'); 
+	
 		 $scope.numToAlpha =function(idx) {
           var getAlpha = ['A','B','C','D','E','F','G'];
           return getAlpha[idx];
@@ -1015,9 +1019,11 @@ promise.then(function(result) {
 
 			}else{
 					//$scope.message = "Issue in traversing page";
-					$scope.creatquiz_message = "Soon Quiz will generate for you. Till then read lesson";
+					$scope.creatquiz_message = "Soon Quiz will generate for you. Till then read lesson"+
+												"<br><br><a href='subskill_content/"+$routeParams.subskill_name+"/"+$routeParams.subskill_id+"'> Click here</a>"
+					;
 			}
-		}); // end createquiz APi
+		}); // end createquiz APi 
 			
 
 	}else{ // if quiz attemped incomplete then pick question from localstorage
@@ -1071,9 +1077,9 @@ promise.then(function(result) {
         	$("#skillquizmasscourt_id").removeClass("active");
         } 
         else if(st_result=='pass'){
-        	window.location.href='skill-door/whole-numbers/13';
+        	window.location.href='skill-door/'+$scope.skill_name_URL+'/'+$scope.skill_id_URL;
         } else{
-        	window.location.href='subskill_content/place-values-in-whole-numbers/18';
+        	window.location.href='subskill_content/'+$routeParams.subskill_name+'/'+$routeParams.subskill_id;
         }                     
 	}
 	
@@ -1304,6 +1310,10 @@ promise.then(function(result) {
 promise.then(function(result) {
 	$scope.course_name = result.data.response.course_Information.course_name;
 	$scope.selected_subject = result.data.response.parent_info_of_skill.course_name;
+
+	$scope.skill_id_URL = result.data.response.skill_info_of_subskill.id;
+	var skillname = result.data.response.skill_info_of_subskill.course_name.toLowerCase();
+	$scope.skill_name_URL =	skillname.replace(/\s+/g, '-'); 
 	
 		 $scope.numToAlpha =function(idx) {
           var getAlpha = ['A','B','C','D','E','F','G'];
@@ -1330,7 +1340,8 @@ promise.then(function(result) {
 	// To maintain old quiz questions if user quize questions response is incomplete
 	var localQuizResponse = JSON.parse(localStorage.getItem('localQuizResponse'));
 	var localQuestions= JSON.parse(localStorage.getItem('ngStorage-localquestions'));
-	if(localQuizResponse ==null && localQuestions==null ){
+	//if(localQuizResponse ==null && localQuestions==null ){
+		if(localQuestions==null ){
 		
 		// API to create quiz and questions list of quiz created for user 
 		loginHttpService.createQuizOnStudent(senddata).success(function(resitem){
@@ -1434,9 +1445,9 @@ promise.then(function(result) {
         	$("#skillquizmasscourt_id").removeClass("active");
         } 
         else if(st_result=='pass'){
-        	window.location.href='skill-door/whole-numbers/13';
+        	window.location.href='skill-door/'+$scope.skill_name_URL+'/'+$scope.skill_id_URL;
         } else{
-        	window.location.href='subskill_content/place-values-in-whole-numbers/18';
+        	window.location.href='subskill_content/'+$routeParams.subskill_name+'/'+$routeParams.subskill_id;
         }                     
 	}
 	
@@ -1611,12 +1622,12 @@ promise.then(function(result) {
 		 						$scope.st_result= "fail";
 		 						$("#skillquizmasscourt_id").addClass("active");
 		 						//alert("Your are Fail");
-		 						$scope.masscourt_message="You need more attention. Your are not mastered.";
+		 						$scope.masscourt_message="Your this practice will not scored good.";
 		 					}
 		 					else{
 			 						$scope.st_result= "pass";			 						
 			 						//alert("Your are Pass");
-			 						$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
+			 						$scope.masscourt_message="Excellent... You did good.";
 			 					}
 								//window.location.href='challenges';
 							// Check Masscourt image and message			
@@ -1797,6 +1808,10 @@ promise.then(function(result) {
 
 }])
 .controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$localStorage',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$localStorage) {
+		
+
+				
+
 	var get_uid=commonActions.getcookies(get_uid);
 	if (document.cookie == '' || get_uid == 'null') {
 		alert('kindly login');
@@ -2003,7 +2018,31 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 		if(res.response.status="TRUE"){
 			var st_grade_id=res.response.student_class;
 			$scope.student_courses = res.response.student_courses;
-			var first_subj = $scope.student_courses[0].id;	
+			var first_subj = $scope.student_courses[0].id;
+
+
+				// to make first tab of subject active
+				//API to call number of assignments
+			 	loginHttpService.getStudentAssignments(get_uid,first_subj).success(function(respAssgn) {			 		
+			 		//console.log(respAssgn.response.status);
+		    	if (respAssgn.response.status == true) {
+		    			$scope.assignments =[];
+		    		  angular.forEach(respAssgn.response.assignment, function(assgnitem){
+		                   if(assgnitem.subject_id == first_subj ){                   	
+		                   		$scope.assignments.push(assgnitem); 
+		                   }                   
+		               });
+		   		}
+		   		else{
+		   			//$scope.err_assignment_message = respAssgn.response.message ;
+		   			$scope.err_assignment_message = "Wait!! No challenges are assigned you by your teacher." ;
+		   		}
+		   		$(".subject_"+first_subj).addClass('active in');
+		    });
+
+
+
+
 		}else{
 			$scope.error_message= "Issue in finding the courses.";
 		}
@@ -2012,10 +2051,10 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 
 	$scope.onClickSubject = function(subid){
 
-		$('ul li.active').removeClass('active');
+		$('ul li.active').removeClass('active in');
+		$('.tab-pane').removeClass('active in');
 		$(".subject_"+subid).addClass('active in');
-		$("#subject_"+subid).show();
-
+		
 
 		
 		//API to call number of assignments
@@ -2103,8 +2142,8 @@ else{
     //get student response for question/ on Submit question answer.
     $scope.onSubmitQuestion = function(frm,skip){ 
     	$scope.error_optionmessage=""; 
-    	var correctoption=$scope.currentquestion.answer[0].value;
-		 var question_marks=$scope.currentquestion.answer[0].score;
+    	var correctoption=$scope.currentquestion.answers[0].value;
+		 var question_marks=$scope.currentquestion.answers[0].score;
 
 
     	// step 1- To check buton click is submit or skip button (if skip = 0 means click on submit/ skip)
@@ -2143,7 +2182,7 @@ else{
 		 			var selectedAnswer=1; // select option is correct
 		 			$scope.masscourt_message="Awesome, you got this correct";
 		 			//alert('Correct');
-		 			var score= $scope.currentquestion.answer[0].score;
+		 			var score= $scope.currentquestion.answers[0].score;
 		 			$scope.current_quesstatus="correct";
 		 			$scope.st_result="correct";
 		 		}

@@ -62,25 +62,23 @@
             </ul>
             <div class="text-center" >
             	<span style="color:red; font-size:14px;">{{error_optionmessage}}</span>
-            </div>
-
-            
+            </div>            
 
              <div class="text-center" >
             <button  class="btn btn-skip" ng-click="onSubmitQuestion(frm,skip=1)">skip</button>
               <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm,skip=0)">Submit</button>
             </div>
       
-               <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: false, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
-           <div owl-carousel-item=""  class="item" ng-repeat="ques in questions_status" class="item">              
-                    <i class="icon"></i>
-                    <span class="ques_no">Ques <i>{{$index+1}}</i></span>
-              </div>
-        </data-owl-carousel> 
+              <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: false, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items:10}, 1000: {items:10} }}">
+                  <div owl-carousel-item=""  class="item" ng-repeat="ques in questions_status" class="item">      
+                      <i class="icon"></i>
+                      <span class="ques_no">Ques <i>{{$index+1}}</i></span>
+                  </div>
+              </data-owl-carousel> 
 
           </div>
 
-            <div class="error_msg" ng-if="creatquiz_message" style="text-align:center;color:#fff;font-size:20px;">{{creatquiz_message}}</div>
+            <div class="error_msg" ng-if="creatquiz_message" style="text-align:center;color:#fff;font-size:20px;" ng-bind-html="creatquiz_message"></div>
       </div>
     <!-- main-content -->
 
