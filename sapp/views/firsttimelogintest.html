@@ -24,7 +24,7 @@
                       <div class="content" ng-init="frm={};">
                       		<h4 class="ques">
                       			<span>Q{{sequence+1}} :</span>  
-                      			<span>{{currentquestion.questionName}}</span>
+                      			<span ng-bind-html="currentquestion.questionName"></span>
                       		</h4>
                       			
                       		<div ng-if="currentquestion.type=='fillin' ">
