@@ -97,7 +97,7 @@
                       </h6>
                       <p class="nav__text">                        
                           <span><strong>Result On :</strong> {{atnRecord.quiz_type_name}}</span><br>
-                          <span ><strong>Attempt :</strong> {{atnRecord.attempts}} OUT OF: {{atnRecord.attempts}} </span><br>
+                          <span ><strong>Attempt :</strong> {{atnRecord.attempts}} OUT OF: {{atnRecord.quiz_questions}} </span><br>
                           <span ><strong>Scored :</strong> {{atnRecord.score}} OUT OF: {{atnRecord.exam_marks}} </span><br>
                            <span ><strong>Scored(%) :</strong> {{ ((atnRecord.score/atnRecord.exam_marks)*100)|number :2 }} % </span>
                       </p>
@@ -135,15 +135,12 @@
               </div> -->
               
              
-              <div id="menu{{$index+1}}" class="tab-pane fade" ng-repeat="atnRecord in strecords" >                 
+              <div id="menu{{$index+1}}" class="tab-pane fade" ng-repeat="atnRecord in strecords" >               
                  <div class="analysis-chart-container" id="bar-chart">                   
                     <div class="container-progress-chart">                 
                       <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
                       </canvas> 
                     </div>
-                
-
-
                 </div>
                   <div class="row">
                     <div class="text-center col-sm-8 col-sm-offset-2">
@@ -154,9 +151,6 @@
                     </div>
                   </div>
               </div>
-          
-
-
 
             </div>
 

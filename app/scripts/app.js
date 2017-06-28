@@ -108,7 +108,10 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getNeedAttention : '/teachers/getNeedAttention',
   getNeedAttentionOFStudent : '/teachers/getNeedAttentionOFStudent',  
   getSubskillAnalytic : '/teachers/getSubskillAnalytic',
-
+  getAreaOfFocusForParent :'/users/getAreaOfFocusForParent',
+  getChildSubskillResult :'/users/getChildSubskillResult', 
+  setAutoAssignmentByParents :'/users/setAutoAssignmentByParents',
+  getUserQuizResponse :'/users/getUserQuizResponse', 
   
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -165,6 +168,20 @@ principal  : 30,
 	ON_TARGET  	: 85,  //student scored 80 to 85
 	OUTSTANDING : 95,  // student scored 86 to 95
 	GIFTED		: 100     // 96 to 100
+}).value('questionslimit', {
+  PRETEST : 3,
+  SUBSKILLQUIZ : 15,
+  KNIGHTCHALLENGE :15,
+  PRACTICE : 10,
+  PARENTS_ASSIGNMENT :15,  
+}).value('quiz_type', {
+      PRETEST            : 1,
+      SUBSKILLQUIZ       : 2,
+      PRACTICE          : 3, 
+      KNIGHTCHALLENGE    : 4,
+      TEACHERCUSTOMASSIGNMENT : 5,
+      TEACHERAUTOASSIGNMENT : 6, 
+      PARENTAUTOASSIGNMENT :7,
 })
 .config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	var access = routingConfig.accessLevels;

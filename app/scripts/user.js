@@ -355,7 +355,37 @@ angular.module('mlg').filter('moment', function() {
         });
 	}
 
+	loginHttpResponse.getAreaOfFocusForParent = function(child_id) {
+        return $http({
+            method:'GET',           
+            url   : urlParams.baseURL+urlParams.getAreaOfFocusForParent+'/'+child_id
+        });
+	}	
+
+	loginHttpResponse.getChildSubskillResult = function(child_id, subskill_id, user_quiz_id) {
+        return $http({
+            method:'GET',           
+            url   : urlParams.baseURL+urlParams.getChildSubskillResult+'?child_id='+child_id+'&subskill_id='+subskill_id+'&user_quiz_id='+user_quiz_id
+        });
+	}
+
+	loginHttpResponse.setAutoAssignmentByParents = function(data) {
+        return $http({
+            method:'POST',
+            data : data,           
+            url   : urlParams.baseURL+urlParams.setAutoAssignmentByParents
+        });
+	}
       
+	loginHttpResponse.getUserQuizResponse = function(child_id, user_quiz_id) {
+        return $http({
+            method:'GET',           
+            url   : urlParams.baseURL+urlParams.getUserQuizResponse+'?user_id='+child_id+'&user_quiz_id='+user_quiz_id
+        });
+	}
+      
+
+
 	return loginHttpResponse;
 	
 }])
@@ -406,8 +436,7 @@ angular.module('mlg').filter('moment', function() {
 
 		
 		// To find number of children
-		commonActions.chidrenNameFactory = function (get_uid) {
-			
+		commonActions.chidrenNameFactory = function (get_uid) {			
 				var childname= loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
                   var childcount=chidrenName.response.length;
                     if(childcount>0){
@@ -415,13 +444,10 @@ angular.module('mlg').filter('moment', function() {
                       return  chidrenName.response;
                     }
 				});
-
-				return childname;
+			return childname;
 		}
-
 		return commonActions;
 	}])
-
 .controller('loginCtrl',['$rootScope','$scope','loginHttpService','urlParams','$location','user_roles', 'subscription_days',function($rootScope,$scope,
    loginHttpService,urlParams,$location,user_roles,subscription_days) {
     $scope.form={};	
@@ -455,7 +481,8 @@ angular.module('mlg').filter('moment', function() {
 	$scope.openFreeModal=function(){
 		$("#modalFreeTrail").modal();					
 	}
-	 $scope.login = function(data) {
+	
+	$scope.login = function(data) {
 	   loginHttpService.login(data).success(function(response) {
            var role_id = response.role_id;
            var role_name='';
@@ -539,7 +566,6 @@ angular.module('mlg').filter('moment', function() {
 							 $location.url('teacher/payment_page');
 						}
 						else if(stepNum.response.step.step_completed==3){
-
 							loginHttpService.getTeacherGrades(response.user.id,user_roles['teacher']).success(function(response) {
                                     if (response.status == true) {
                                         $scope.subject_grade = response.response;
@@ -553,19 +579,14 @@ angular.module('mlg').filter('moment', function() {
                                         $location.url('teacher/dashboard/class/'+grade+'/'+subjectName+'/'+subjectCode);
                                     }
                                 });
-
-
 							//$location.url('teacher/dashboard');
-						}								
-							
+						}							
 				   	}
 				});
-
     	}
 
     	// Track for Students
-    	if (role_id == '4') {
-    		
+    	if (role_id == '4') {    		
     		loginHttpService.getStepNum(response.user.id).success(function(stepNum) {         
         		if(stepNum.response.step.step_completed!=null ){            
           			//var step_page = stepNum.response.step.step_completed; 
@@ -576,16 +597,11 @@ angular.module('mlg').filter('moment', function() {
             			 window.location.href=$scope.baseStudentURL+'journey';
           			}
           			else{
-
           				window.location.href=$scope.baseStudentURL+'journey';
-          			}                  
-              
+          			}               
        			 }
         	});
           }
-
-
-
          }
 	   }).error(function(error) {
 		  $scope.msg="Invalid Username Password";
@@ -636,7 +652,7 @@ angular.module('mlg').filter('moment', function() {
 			});
 	};
 }])
-.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions) {
+.controller('parentDashboardCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','quiz_type','questionslimit','$routeParams','commonActions',function($rootScope,$scope, loginHttpService, $location, user_roles,quiz_type,questionslimit, $routeParams,commonActions) {
   $scope.frm = {}
   $scope.childname={};
 
@@ -646,164 +662,142 @@ angular.module('mlg').filter('moment', function() {
 	// To call dynamic step slider
 	// and Call API to get child details for deshboard naming
     loginHttpService.getChildrenDetails(get_uid).success(function(chidrenName) {
-			var childcount=chidrenName.response.length;
-			if(childcount>0){																
-					$scope.childname=chidrenName.response;
-                    $scope.frm.childnames = chidrenName.response;
+		var childcount=chidrenName.response.length;
+		if(childcount>0){																
+			$scope.childname=chidrenName.response;
+            $scope.frm.childnames = chidrenName.response;
                     
-                    for(var i in $scope.frm.childnames){
-
-    			if($scope.frm.childnames[i].user_id==$routeParams.id){
+            for(var i in $scope.frm.childnames){
+	   			if($scope.frm.childnames[i].user_id==$routeParams.id){
     				$scope.frm.selectedchild=$scope.frm.childnames[i];
     				return false;
-    			}else{
-                  
-    			}
-    	}
-   	window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
-			}else{
-				$scope.childname=0;
-                $scope.frm.childnames =[];
-			}			
-		});
-
-    	
-
-
+    			}else{}
+    		}	
+   			window.location.href='parent/dashboard/'+$scope.frm.childnames[0].user_id;
+		}else{
+			$scope.childname=0;
+            $scope.frm.childnames =[];
+		}			
+	});
 	// end to call dynamic step slider
 
 
 //  $rootScope.username=$location.search().uid;
 
-    //Child Purchase history.
-    $scope.child_info={}
-    $scope.packages = {}
-    $scope.plans = {}
-    $scope.level_id = '';
-    $scope.price = 0;
-    $scope.dis_val = 0;
-    $scope.dis_amount = 0;
-    $scope.pageNumber = 0;
-    $scope.new_package_name = 'NaN';
-    $scope.errMsg = '';
-    var all_courses = '';
-    $scope.getTotalPrice = function(subject) {
-      loginHttpService.pricecalc(subject).success(function(courseprice) {
-        $scope.price = courseprice.response.amount;
-        $scope.dis_amount = $scope.price * $scope.dis_val * 0.01;
-        $scope.subtotal = $scope.price - $scope.dis_amount;
-	  });
-    }
-    $scope.discount = function(package) {
-     $scope.frm.updatedPackage = package;
-     $scope.dis_val = package.discount;
-     $scope.new_package_name = package.name;
-     $scope.dis_amount = $scope.price * $scope.dis_val * 0.01;
-     $scope.subtotal = $scope.price-$scope.dis_amount;
+	//Block-  Area of focus
+	loginHttpService.getAreaOfFocusForParent($routeParams.id).success(function(record) {
+			if(record.response.status==true){
+				$scope.strecords = record.response.attention_records;
+
+				// to make active first records of loop				
+				var subskillid =  record.response.attention_records[0].course_id;
+				var user_quiz_id =  record.response.attention_records[0].id;
+				 loginHttpService.getChildSubskillResult($routeParams.id,subskillid,user_quiz_id).success(function(record) {
+	        		if(record.response.status==true){
+	        			$scope.child_name = record.response.child_result['child_name'];
+	        			$scope.child_score_percentage = (record.response.child_result['score']*100) / record.response.child_result['exam_marks']
+	        			$scope.course_name = record.response.child_result['course_name'];
+	        			$scope.child_grade_id = record.response.child_result['grade_id'];
+        				$scope.child_course_id = record.response.child_result['course_id'];
+	        			$scope.peer_result = record.response.peer_children_result;
+	        			$scope.child_user_quiz_id = record.response.child_result['id'];
+	        			$scope.child_attempts = record.response.child_result['attempts'];
+	        			$scope.child_quiz_questions = record.response.child_result['quiz_questions'];
+	        			$scope.child_score = record.response.child_result['score'];
+	        			$scope.child_exam_marks = record.response.child_result['exam_marks'];
+	        			$("#menu"+1).addClass('in active');
+	        		}else{
+	        			$scope.err_quiz_message = record.response.message;
+	        		}
+	        	});
+			}else{
+				$scope.blankmsg_areaoffocus= record.response.message;
+			}
+	});
+
+
+	// On click on any one of item in area of focus 
+	$scope.clickAreaOfFocus= function(indx, subskillid,user_quiz_id){
+        $(".tab-pane.in.active").removeClass('in active'); 
+        $("#menu"+indx).addClass('in active');
+
+        loginHttpService.getChildSubskillResult($routeParams.id,subskillid,user_quiz_id).success(function(record) {
+        		if(record.response.status==true){
+        			$scope.child_name = record.response.child_result['child_name'];
+        			$scope.child_score_percentage = (record.response.child_result['score']*100) / record.response.child_result['exam_marks']
+        			$scope.course_name = record.response.child_result['course_name'];
+        			$scope.child_grade_id = record.response.child_result['grade_id'];
+        			$scope.child_course_id = record.response.child_result['course_id'];
+        			$scope.peer_result = record.response.peer_children_result;
+        			$scope.child_user_quiz_id = record.response.child_result['id'];
+
+        			$scope.child_attempts = record.response.child_result['attempts'];
+        			$scope.child_quiz_questions = record.response.child_result['quiz_questions'];
+        			$scope.child_score = record.response.child_result['score'];
+        			$scope.child_exam_marks = record.response.child_result['exam_marks'];
+
+        			
+        		
+        		}else{
+        			$scope.err_quiz_message = record.response.message;
+        		}
+        });
+    };
+
+
+   // On click of send Assignment button
+    $scope.confirmSendAssignment = function(gradeid, courseid){
+    	var d = new Date();
+		var senddata ={
+			user_id 	: $routeParams.id,
+			parent_id 	: get_uid,
+			grade_id 	: gradeid,
+			subskill_id : courseid,
+			quiz_type_id : quiz_type.PARENTAUTOASSIGNMENT, // id of the table quiz_types
+			questions_limit : questionslimit.PARENTS_ASSIGNMENT,
+			quiz_name : 'parentAutoAssignment-'+ d.getFullYear()+(d.getMonth()+1)+d.getDate(),
+		};
+
+		// API to create the auto assignment by parent
+		loginHttpService.setAutoAssignmentByParents(senddata).success(function(record) {
+        		if(record.response.status==true){
+        			$scope.auto_quiz_message = "Quiz submited.";
+        			$('#modal-parentAssignment').modal('hide');
+        			$('#modal-parentAssignmentsubmitted').modal('show');
+        		}else{
+        			$scope.auto_quiz_message = record.response.message;
+        		}
+        });
     }
 
-    $scope.updatedPlan = function(plan) {
-      $scope.frm.updatedPlan = plan;
+    
+
+    // On click of view Assignment button
+    $scope.clickViewAssignment = function(){
+    	$('#modal-childQuizView').modal('show');
+
+    	// API to show the result of items attempted by child in his/her quiz
+		loginHttpService.getUserQuizResponse($routeParams.id, $scope.child_user_quiz_id).success(function(record) {
+        		if(record.response.status==true){
+        			$scope.userQuizResponse = record.response.user_quiz_response
+        			
+        		}else{
+        			$scope.auto_quiz_message = record.response.message;
+        		}
+        });
+
+
+
+
+
+    	
+    	
     }
 
-    $scope.upgrade = function(frm) {
-     if (typeof frm.new_package == 'undefined') {
-       $scope.errMsg = 'Please choose Package';
-       return false;
-     }
-     if (typeof frm.new_plan == 'undefined' || frm.new_plan == '') {
-       $scope.errMsg = 'Please choose Plan';
-       return false;
-     }
-     if (typeof frm.selectedcourse == 'undefined' || selected_subjects == '') {
-       $scope.errMsg = 'Please choose Course';
-       return false;
-     }
-     var num_of_subjects_opted = frm.new_package;
-     var selected_subjects = 0;
-     angular.forEach(frm.selectedcourse, function(sub, sub_key){
-       if (sub != '') {
-         selected_subjects++;
-       }
-     });
-     if (num_of_subjects_opted != selected_subjects) {
-       $scope.errMsg = 'Please choose the subjects equal to the subject packages';
-       return false;
-     }
-     frm.user_id = get_uid;
-     frm.child_id = $routeParams.child_id;
-     var course_chosen = [];
-     angular.forEach(all_courses, function(course, index) {
-       angular.forEach(frm.selectedcourse, function (subject, key) {
-         if (course.id == key && subject != '') {
-           course_chosen.push(course);
-         }
-       });
-     });
-     frm.updatedCourses = course_chosen;
-     loginHttpService.upgradePackage(frm).success(function(response){
-       if (response.status) {
-         $location.url('/parent/dashboard/110');
-       }
-     });
-    }
-    if (typeof $routeParams.child_id != 'undefined') {
-      loginHttpService.getUserPurchaseDetails($routeParams.child_id).success(function(result) {
-        if (result.status == true) {
-          $scope.child_info = result.response;
-          $scope.level = {id : result.response.level_id};
-          loginHttpService.getCourseByGrade($scope.level).success(function(courseslistresult) {
-          if(!courseslistresult.response.courses){  // value is null, empty
-            $scope.msg=courseslistresult.response.message;
-            $scope.records=courseslistresult.response.course_list;
-            } else {
-              var purchased_detail = $scope.child_info.purchase_detail;
-              all_courses = courseslistresult.response.courses;
-              angular.forEach(all_courses, function(course, index) {
-              angular.forEach(purchased_detail, function(purchased, key) {
-                 if (course.id == purchased.course_id) {
-                   course.purchased = true;
-                 }
-               });
-              });
-              $scope.coursesListByGrade = all_courses;
-              $scope.msg=courseslistresult.response.message;
-              $scope.courserecords=courseslistresult.response.course_list;
-            }
-          });
-        }
-      });
-      // call API to get packages
-      loginHttpService.packageList().success(function(packrecords) {
-          $scope.packages = packrecords.response.package;
-      });
+    
 
-      // call API to get plans
-      loginHttpService.planList().success(function(planrecord) {
-  		$scope.plans = planrecord.response.plans;
-      });
-    }
 
-  $scope.setPreference = function(data) {
-    /*if (typeof $rootScope.logged_user == 'undefined') {
-      alert('kindly login');
-      window.location.href='/mlg_ui/app';
-    }*/
-   // data.user_id = $rootScope.logged_user.id;
-   data.user_id = get_uid;
-    loginHttpService.setPreference(data).success(function(response) {
-      if (response.status == true) {
-        if ((typeof response.warning != 'undefined') && (response.warning == true)) {
-          alert(response.message);
-        }
-        $location.url('/terms_and_conditions');
-      } else {
-        $scope.msg = response.message;
-      }
-    }).error(function(error) {
-      $scope.msg = 'some error occured';
-    });
-  };
+
 }])
 .controller('parentSubscriptionCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions','urlParams','subscription_days',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions,urlParams,subscription_days) {
   $scope.frm = {}
