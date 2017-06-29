@@ -105,7 +105,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   scopeAndSequenceTemplate : '/teachers/saveScopesAsTemplate',
   scopeAndSequence : '/teachers/saveScopesAsSequence',
   getScopeTemplates : '/teachers/getScopeTemplate',
-  getNeedAttention : '/teachers/getNeedAttention',
+  getNeedAttentionForTeacher : '/teachers/getNeedAttentionForTeacher',
   getNeedAttentionOFStudent : '/teachers/getNeedAttentionOFStudent',  
   getSubskillAnalytic : '/teachers/getSubskillAnalytic',
   getAreaOfFocusForParent :'/users/getAreaOfFocusForParent',

@@ -134,7 +134,7 @@
                 </ul> 
               </div> -->
               
-             
+             <!-- if records are present in Need Your attention block -->
               <div id="menu{{$index+1}}" class="tab-pane fade" ng-repeat="atnRecord in strecords" >               
                  <div class="analysis-chart-container" id="bar-chart">                   
                     <div class="container-progress-chart">                 
@@ -152,6 +152,15 @@
                   </div>
               </div>
 
+              <!-- if record is not present in Need Your attention block -->
+              <div id="menu" class="tab-pane fade active in" ng-if="scope.attention_message!='' " >              
+                 <div class="analysis-chart-container" id="bar-chart">                   
+                    <div class="container-progress-chart">                 
+                      <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
+                      </canvas> 
+                    </div>
+                </div>              
+              </div>
             </div>
 
           </div>

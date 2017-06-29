@@ -419,10 +419,10 @@ teacherHttpResponse.getScopeTemplates=function(uid,type){
     url   : urlParams.baseURL+urlParams.getScopeTemplates+'/'+uid+'/'+type
   });
 }
-teacherHttpResponse.getNeedAttention=function(teacher_id, subject_id){
+teacherHttpResponse.getNeedAttentionForTeacher=function(teacher_id, subject_id){
   return $http({
     method:'GET',
-    url   : urlParams.baseURL+urlParams.getNeedAttention+'?teacher_id='+teacher_id+'&subject_id='+subject_id
+    url   : urlParams.baseURL+urlParams.getNeedAttentionForTeacher+'?teacher_id='+teacher_id+'&subject_id='+subject_id
   });
 }
 
@@ -935,8 +935,8 @@ $scope.showEvents = function(events) {
       }
 
 
-      // start-  Need For Atentions
-      teacherHttpService.getNeedAttention(get_uid,$routeParams.courseid).success(function(resAtn) {
+      // start-  NEEDS YOUR ATTENTION
+      teacherHttpService.getNeedAttentionForTeacher(get_uid,$routeParams.courseid).success(function(resAtn) {
           if(resAtn.response.status==true){
             $scope.strecords= resAtn.response.attention_records;
             var first_subskill_id =resAtn.response.attention_records[0].course_id;
@@ -946,23 +946,26 @@ $scope.showEvents = function(events) {
                //$scope.data = [30,10,20,20,15,5];
             if(resAna.response.status==true){
                 var stAnalyticResults= resAna.response.student_result;
+                $scope.attention_message ="";
                 $scope.data =[];
                 angular.forEach(stAnalyticResults, function(value, key) {               
                    $scope.data.push(value);    
                 });
                 $("#menu1").addClass('in active');
+                console.log($scope.data);
           }
           else{
-            $scope.analytic_message = resAna.response.message;
+            $scope.analytic_message = resAna.response.message;                      
           }
         });
 
        }
-          else{
-            $scope.attention_message = resAtn.response.message;
-          }
-      });
-    // end-  Need For Atentions
+       else{
+           $scope.attention_message = resAtn.response.message;
+           $scope.data = [100,0,0,0,0,0]; 
+         }
+    });
+    // end-  NEEDS YOUR ATTENTION
 
 
     // Start-  Analytic Class Graph    
@@ -978,26 +981,27 @@ $scope.showEvents = function(events) {
                 $scope.data =[];
                 angular.forEach(stAnalyticResults, function(value, key) {               
                    $scope.data.push(value);    
-                });
+                });                
           }
           else{
-            $scope.analytic_message = resAna.response.message;
+            $scope.analytic_message = resAna.response.message;            
           }
-
-
         });
 
     };
-     $scope.labels = [];
+   /*  $scope.labels = [];
      angular.forEach(class_students_classification, function(value, key) {               
-        $scope.labels.push(key);    
-      });
-
+        $scope.labels.push(key); 
+        console.log($scope.labels);   
+      });*/
+      $scope.labels =["NO_ATTACK", "REMEDIAL", "STRUGGLING", "ON_TARGET", "OUTSTANDING", "GIFTED"];
       $scope.colors = ['#e8e8e8','#db4a4a','#f1c40f','#69e59d','#249626','#8a81e8'];
       //$scope.data = [30,10,20,20,15,5];
+
+      
       
       $scope.datasetOverride = [{ label: 'Bar chart', borderWidth: 1,  type: 'bar'  }];
-      $scope.options = {  
+      $scope.options = { 
           animation: {duration: 1000 },
           legend: { 
                     display: true, position: 'right',
