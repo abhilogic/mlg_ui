@@ -1721,17 +1721,26 @@ promise.then(function(result) {
 	$scope.skill_result = [];
 	
 	loginHttpService.getStudentCourseList(get_uid,pid).success(function(res_skill) {
+    // setting for student
+    $scope.settingSkill = res_skill.setting;
     var stu_skill = '';
     if(res_skill.by == 'scope') {
       stu_skill = angular.fromJson(res_skill.response[0].scope);
-      console.log(stu_skill);
     }else if(res_skill.by == 'course') {
       stu_skill = res_skill.response;
     }
     $scope.subject_detail = [];
 		if(stu_skill.length > 0){
+      var currentDate = $filter('date')(Date.now(), 'yyyy-MM-dd ');
+      var timestamp = new Date(currentDate).getTime();
+      var disable = false;
       angular.forEach(stu_skill,function(skil,key){
         if(skil['visibility'] == '1') {
+          var startDateDiff = timestamp  - (new Date(skil['start_date']).getTime());
+          var endDateDiff = (new Date(skil['start_date']).getTime()) - timestamp ;
+          if(startDateDiff < 0 &&  endDateDiff >= 0) {
+            disable = true;
+          }
          $scope.subject_detail.push({
            'course_id' : skil['course_id'],
            'name' : skil['name'],
@@ -1739,6 +1748,7 @@ promise.then(function(result) {
            'end_date' : skil['end_date'],
            'parent_id' : skil['parent_id'],
            'visibility' : skil['visibility'],
+           'disabled' : disable,
          }); 
         } 
       });
@@ -1776,6 +1786,13 @@ promise.then(function(result) {
 			$scope.subject_detail = 0;
 		} 
 	});
+  $scope.openSkillDoor = function(disable,courseName,courseId) {
+    if(disable == false) {
+      var lowerstr = courseName.toLowerCase(); 
+      lowerstr = lowerstr.replace(/\s+/g, '-');
+      window.location.href= 'skill-door/'+lowerstr+'/'+courseId;
+    }
+  }
 
 	// API to check arena  Flag/unflag	
 	var quiz_type_id = quiz_type.PRETEST;
@@ -2806,9 +2823,4 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 		}
 
 	});
-
-
-
-
-
 }]);

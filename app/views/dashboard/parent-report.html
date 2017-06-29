@@ -26,39 +26,34 @@
 								<div class="heading-elements">
 									<ul class="padding-left-0 list-inline list-filters">
 										<li class="toolbar-item">
-											<select class="mlg-selectpicker" title="DATE RANGE" data-width="auto" data-size="auto">
-												 <option>Student Name</option>
-												 <option>Mastered</option>
-												 <option>Started</option>
-												 <option>Not Started</option>
-												 <option>Area of Gaps</option>
+											<select class="mlg-selectpicker form-control" title="DATE RANGE" data-width="auto" data-size="auto"
+                              ng-model="scopeDateModel" ng-change="getDateModel(scopeDateModel)">
+												 <option value="">DATE RANGE</option>
+                         <option value="month">ONE MONTH</option>
+                         <option value="day">15 days</option>
+                         <option value="week">ONE WEEK</option>
+											</select>
+										</li>
+                    
+                    <li class="toolbar-item">
+                      <select class="mlg-selectpicker form-control" title="SUBJECT"  data-size="auto"
+                                     ng-model="scopeCourseModel"ng-init="scopeCourseModel=''" ng-change="getScopeCourse(scopeCourseModel)"
+                                    ng-options="cs.id as cs.name for cs in course">
+												 <option value="">SUBJECT</option>
 											</select>
 										</li>
                     <li class="toolbar-item">
-											<select class="mlg-selectpicker" title="SUBJECT" data-width="auto" data-size="auto">
-												 <option>Student Name</option>
-												 <option>Mastered</option>
-												 <option>Started</option>
-												 <option>Not Started</option>
-												 <option>Area of Gaps</option>
+											<select class="mlg-selectpicker form-control" title="SKILLS"  data-size="auto"
+                                     ng-model="scopeSkillModel"ng-init="scopeSkillModel=''" ng-change="getScopeSkill(scopeSkillModel)"
+                                    ng-options="skil.id as skil.name for skil in skill">
+												 <option value="">SKILLS</option>
 											</select>
 										</li>
-                    <li class="toolbar-item">
-											<select class="mlg-selectpicker" title="SKILLS" data-width="auto" data-size="auto">
-												 <option>Student Name</option>
-												 <option>Mastered</option>
-												 <option>Started</option>
-												 <option>Not Started</option>
-												 <option>Area of Gaps</option>
-											</select>
-										</li>
-                    <li class="toolbar-item">
-											<select class="mlg-selectpicker" title="SUBSKILLS" data-width="auto" data-size="auto">
-												 <option>Student Name</option>
-												 <option>Mastered</option>
-												 <option>Started</option>
-												 <option>Not Started</option>
-												 <option>Area of Gaps</option>
+                    <li><select class="mlg-selectpicker form-control" title="SUBSKILLS"  data-size="auto"
+                                     ng-model="scopeSubSkillModel"ng-init="scopeSubSkillModel=''"
+                                     ng-change="getScopeSubSkill(scopeSubSkillModel)"
+                                    ng-options="sub.id as sub.name for sub in subSkill">
+												 <option value="">SUBSKILLS</option>
 											</select>
 										</li>
 
@@ -75,78 +70,39 @@
 							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-report">
 								<thead>
 									<tr>
-										<th class="standard">STANDARD</th>
+										<th class="standard">S.No.</th>
                     <th class="skill_name">SUB SKILL</th>
-										<th class="time_taken">TIME TAKEN</th>
+										<!--<th class="time_taken">TIME TAKEN</th>-->
 										<th class="peer_average">PEER AVERAGE</th>
 										<th class="child_score">CHILD SCORE</th>
 										<th class="proficiency">PROFICIENCY</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="standard">1</td>
-										<td class="skill_name">Whole numbers</td>
-										<td class="time_taken">2 hrs</td>
-										<td class="peer_average">7/10</td>
-										<td class="child_score">9/10</td>
-										<td class="proficiency text-success"><i class="fa fa-thumbs-up"></i> Master</td>
-									</tr>
-                  <tr>
-										<td class="standard">2</td>
-										<td class="skill_name">Division</td>
-										<td class="time_taken">2 hrs</td>
-										<td class="peer_average">7/10</td>
-										<td class="child_score">9/10</td>
-										<td class="proficiency text-success"><i class="fa fa-thumbs-up"></i> Moderate</td>
-									</tr>
-                  <tr>
-										<td class="standard">3</td>
-										<td class="skill_name">Subtraction</td>
-										<td class="time_taken">2 hrs</td>
-										<td class="peer_average">7/10</td>
-										<td class="child_score">9/10</td>
-										<td class="proficiency text-danger"><i class="fa fa-thumbs-down"></i> Very Weak</td>
-									</tr>
-                  <tr>
-										<td class="standard">4</td>
-										<td class="skill_name">Multiplicator</td>
-										<td class="time_taken">2 hrs</td>
-										<td class="peer_average">7/10</td>
-										<td class="child_score">9/10</td>
-										<td class="proficiency text-danger"><i class="fa fa-thumbs-down"></i> Weak</td>
-									</tr>
-                  <tr>
-										<td class="standard">5</td>
-										<td class="skill_name">Addition</td>
-										<td class="time_taken">2 hrs</td>
-										<td class="peer_average">7/10</td>
-										<td class="child_score">9/10</td>
-										<td class="proficiency text-success"><i class="fa fa-thumbs-up"></i> Master</td>
-									</tr>
-                  <tr>
-										<td class="standard">6</td>
-										<td class="skill_name">Geometry</td>
-										<td class="time_taken">2 hrs</td>
-										<td class="peer_average">7/10</td>
-										<td class="child_score">9/10</td>
-										<td class="proficiency text-success"><i class="fa fa-thumbs-up"></i> Master</td>
-									</tr>
-                  <tr>
-										<td class="standard">7</td>
-										<td class="skill_name">Integeration</td>
-										<td class="time_taken">2 hrs</td>
-										<td class="peer_average">7/10</td>
-                    <td class="child_score">9/10</td>
-										<td class="proficiency text-danger"><i class="fa fa-thumbs-down"></i> Very Weak</td>
-									</tr>
-                  <tr>
-										<td class="standard">8</td>
-										<td class="skill_name">Probability</td>
-										<td class="time_taken">2 hrs</td>
-										<td class="peer_average">7/10</td>
-                    <td class="child_score">9/10</td>
-										<td class="proficiency text-danger"><i class="fa fa-thumbs-down"></i> Weak</td>
+                  <tr ng-if="sub_message != ''">
+                    <td></td>
+                    <td></td>
+                    <td>{{sub_message}}</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr ng-repeat="stu_details in details">
+										<td class="standard">{{$index+1}}</td>
+										<td class="skill_name">{{stu_details.course_name}}</td>
+										<td class="peer_average">{{stu_details.other_Student_average}}</td>
+                    <td class="child_score">{{stu_details.student_score}}/{{stu_details.exam_marks}}</td>
+                    <td ng-if="stu_details.category == 'GIFTED'" class="proficiency text-success">
+                      <img src="assets/img/icons/level-4.svg" alt="" class="icon-img"/> {{stu_details.category}}</td>
+                    <td ng-if="stu_details.category == 'OUTSTANDING'" class="proficiency text-success">
+                      <img src="assets/img/icons/level-3.svg" alt="" class="icon-img"/> {{stu_details.category}}</td>
+                    <td ng-if="stu_details.category == 'ON_TARGET'" class="proficiency text-success">
+                      <img src="assets/img/icons/level-2.svg" alt="" class="icon-img"/> {{stu_details.category}}</td>
+                    <td ng-if="stu_details.category == 'STRUGGLING'" class="proficiency text-success">
+                      <img src="assets/img/icons/level-2.svg" alt="" class="icon-img"/> {{stu_details.category}}</td>
+                    <td ng-if="stu_details.category == 'REMEDIAL'" class="proficiency text-danger">
+                      <img src="assets/img/icons/level-1.svg" alt="" class="icon-img"/> {{stu_details.category}}</td>
+                    <td ng-if="stu_details.category == 'NO_ATTACK'" class="">
+                      {{stu_details.category}}</td>
 									</tr>
 								</tbody>
                 <tfoot>
@@ -159,14 +115,8 @@
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li class="active">
-													<a>1</a>
-												</li>
-												<li>
-													<a>2</a>
-												</li>
-												<li>
-													<a>3</a>
+												<li ng-repeat="n in range(1,lastPage)">
+													<a href="#{{n}}">{{n}}</a>
 												</li>
 												<li>
 													<a aria-hidden="true">Next</a>
@@ -187,74 +137,34 @@
 						</div>
 						<div class="panel-body">
 							<div class="panel-toolbar responsive-md">
-
 							</div>
 							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-report">
 								<thead>
 									<tr>
-										<th class="standard">STANDARD</th>
+										<th class="standard">S.No.</th>
                     <th class="skill_name">SUB SKILL<span>(SKILL NAME)</span></th>
-										<th class="time_taken">TIME TAKEN</th>
+										<!--<th class="time_taken">TIME TAKEN</th>-->
 										<th class="peer_average">PEER AVERAGE</th>
 										<th class="child_score">CHILD SCORE</th>
 										<th class="asseignment">send assignment</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="standard" data-th="STANDARD">1</td>
-										<td class="skill_name" data-th="SUB SKILL">Whole numbers</td>
-										<td class="time_taken" data-th="TIME TAKEN">2 hrs</td>
-										<td class="peer_average" data-th="PEER AVERAGE">7/10</td>
-										<td class="child_score" data-th="CHILD SCORE">9/10</td>
-										<td class="asseignment" data-th="SEND ASSIGNMENT"><i class="fa fa-envelope"></i> Send</td>
-									</tr>
-                  <tr>
-										<td class="standard" data-th="STANDARD">1</td>
-										<td class="skill_name" data-th="SUB SKILL">Whole numbers</td>
-										<td class="time_taken" data-th="TIME TAKEN">2 hrs</td>
-										<td class="peer_average" data-th="PEER AVERAGE">7/10</td>
-										<td class="child_score" data-th="CHILD SCORE">9/10</td>
-										<td class="asseignment" data-th="SEND ASSIGNMENT"><i class="fa fa-envelope"></i> Send</td>
-									</tr>
-                  <tr>
-										<td class="standard" data-th="STANDARD">2</td>
-										<td class="skill_name" data-th="SUB SKILL">Addition</td>
-										<td class="time_taken" data-th="TIME TAKEN">2 hrs</td>
-										<td class="peer_average" data-th="PEER AVERAGE">7/10</td>
-										<td class="child_score" data-th="CHILD SCORE">9/10</td>
-										<td class="asseignment" data-th="SEND ASSIGNMENT"><i class="fa fa-envelope"></i> Send</td>
-									</tr>
-                  <tr>
-										<td class="standard" data-th="STANDARD">3</td>
-										<td class="skill_name" data-th="SUB SKILL">Mulitplication</td>
-										<td class="time_taken" data-th="TIME TAKEN">2 hrs</td>
-										<td class="peer_average" data-th="PEER AVERAGE">7/10</td>
-										<td class="child_score" data-th="CHILD SCORE">9/10</td>
-										<td class="asseignment" data-th="SEND ASSIGNMENT"><i class="fa fa-envelope"></i> Send</td>
-									</tr>
-                  <tr>
-										<td class="standard" data-th="STANDARD">4</td>
-										<td class="skill_name" data-th="SUB SKILL">Subtraction</td>
-										<td class="time_taken" data-th="TIME TAKEN">2 hrs</td>
-										<td class="peer_average" data-th="PEER AVERAGE">7/10</td>
-										<td class="child_score" data-th="CHILD SCORE">9/10</td>
-										<td class="asseignment" data-th="SEND ASSIGNMENT"><i class="fa fa-envelope"></i> Send</td>
-									</tr>
-                  <tr>
-										<td class="standard" data-th="STANDARD">5</td>
-										<td class="skill_name" data-th="SUB SKILL">Trigonometry</td>
-										<td class="time_taken" data-th="TIME TAKEN">2 hrs</td>
-										<td class="peer_average" data-th="PEER AVERAGE">7/10</td>
-										<td class="child_score" data-th="CHILD SCORE">9/10</td>
-										<td class="asseignment" data-th="SEND ASSIGNMENT"><i class="fa fa-envelope"></i> Send</td>
-									</tr>
-                  <tr>
-										<td class="standard" data-th="STANDARD">6</td>
-										<td class="skill_name" data-th="SUB SKILL">Integeration</td>
-										<td class="time_taken" data-th="TIME TAKEN">2 hrs</td>
-										<td class="peer_average" data-th="PEER AVERAGE">7/10</td>
-										<td class="child_score" data-th="CHILD SCORE">9/10</td>
+                  <tr ng-if="gapMessage != ''">
+                    <td></td>
+                    <td></td>
+                    <td>{{gapMessage}}</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr ng-if="stu_details.best_Student_average > '0' && 
+                      (stu_details.category == 'REMEDIAL' ||stu_details.category == 'STRUGGLING')"
+                      ng-repeat="stu_details in details">
+										<td class="standard" data-th="STANDARD">{{$index+1}}</td>
+										<td class="skill_name" data-th="SUB SKILL">{{stu_details.course_name}}</td>
+										<!--<td class="time_taken" data-th="TIME TAKEN">2 hrs</td>-->
+										<td class="peer_average" data-th="PEER AVERAGE">{{stu_details.best_Student_average}}</td>
+										<td class="child_score" data-th="CHILD SCORE">{{stu_details.student_score}}/{{stu_details.exam_marks}}</td>
 										<td class="asseignment" data-th="SEND ASSIGNMENT"><i class="fa fa-envelope"></i> Send</td>
 									</tr>
 								</tbody>
@@ -303,58 +213,33 @@
 									<tr>
 										<th class="standard">STANDARD</th>
                     <th class="assignment_name">ASSIGNMENT NAME</th>
-										<th class="time_taken">TIME TAKEN</th>
+										<!--<th class="time_taken">TIME TAKEN</th>-->
 										<th class="score">SCORE</th>
 										<th class="date_sent">DATE SENT</th>
 										<th class="date_attempted">DATE ATTEMPTED</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="standard">1</td>
-										<td class="assignment_name" data-th="STANDARD">A10: Whole numbers</td>
-										<td class="time_taken" data-th="ASSIGNMENT NAME">2 hrs</td>
-										<td class="score" data-th="TIME TAKEN">7/10</td>
-										<td class="date_sent" data-th="SCORE">02-05-2017</td>
-										<td class="date_attempted" data-th="DATE ATTEMPTED">07-05-2017</td>
+                  <tr ng-if="assi_len == '0'">{{assi_message}}</tr>
+                  <tr ng-repeat=" att in attemptAssignment">
+                    <td class="standard">{{$index+1}}</td>
+                    <td class="assignment_name" data-th="STANDARD">{{att.name}}</td>
+										<td class="score" data-th="TIME TAKEN">{{att.score}}/{{att.max_marks}}</td>
+										<td class="date_sent" data-th="SCORE">{{att.schedule_time}}</td>
+										<td class="date_attempted" data-th="DATE ATTEMPTED">{{att.attempt_quiz}}</td>
 									</tr>
-                  <tr>
-										<td class="standard">2</td>
-										<td class="assignment_name" data-th="STANDARD">A10: Whole numbers</td>
-										<td class="time_taken" data-th="ASSIGNMENT NAME">2 hrs</td>
-										<td class="score" data-th="TIME TAKEN">7/10</td>
-										<td class="date_sent" data-th="SCORE">02-05-2017</td>
-										<td class="date_attempted" data-th="DATE ATTEMPTED">07-05-2017</td>
-									</tr>
-                  <tr>
-										<td class="standard">3</td>
-										<td class="assignment_name" data-th="STANDARD">A10: Whole numbers</td>
-										<td class="time_taken" data-th="ASSIGNMENT NAME">2 hrs</td>
-										<td class="score" data-th="TIME TAKEN">7/10</td>
-										<td class="date_sent" data-th="SCORE">02-05-2017</td>
-										<td class="date_attempted" data-th="DATE ATTEMPTED">07-05-2017</td>
-									</tr>
-                  <tr>
-										<td class="standard">4</td>
-										<td class="assignment_name" data-th="STANDARD">A10: Whole numbers</td>
-										<td class="time_taken" data-th="ASSIGNMENT NAME">2 hrs</td>
-										<td class="score" data-th="TIME TAKEN">7/10</td>
-										<td class="date_sent" data-th="SCORE">02-05-2017</td>
-										<td class="date_attempted" data-th="DATE ATTEMPTED">07-05-2017</td>
-									</tr>
-                  <tr>
-										<td class="standard">5</td>
-										<td class="assignment_name" data-th="STANDARD">A10: Whole numbers</td>
-										<td class="time_taken" data-th="ASSIGNMENT NAME">2 hrs</td>
-										<td class="score" data-th="TIME TAKEN">7/10</td>
-										<td class="date_sent" data-th="SCORE">02-05-2017</td>
-										<td class="date_attempted" data-th="DATE ATTEMPTED">07-05-2017</td>
+									<tr ng-repeat=" ass in assignment">
+                    <td class="standard">{{$index+1}}</td>
+                    <td class="assignment_name" data-th="STANDARD">{{ass.name}}</td>
+										<td class="score" data-th="TIME TAKEN">0/{{ass.max_marks}}</td>
+										<td class="date_sent" data-th="SCORE">{{ass.schedule_time}}</td>
+										<td class="date_attempted" data-th="DATE ATTEMPTED">NOT ATTEMPTED</td>
 									</tr>
 								</tbody>
                 <tfoot>
 									<tr>
 										<td class="table-pagination" colspan="7">
-											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<!--<span class="pull-left">Showing 1-10 of 50 entries</span>-->
 											<ul class="pagination pagination-sm">
 												<li class="disabled">
 													<a>
@@ -389,7 +274,7 @@
 							<h5 class="panel-title text-uppercase">Rewards</h5>
 						</div>
 						<div class="panel-body">
-							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-report">4
+							<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-report">
 								<thead>
 									<tr>
 										<th class="sr_no">#</th>
@@ -400,84 +285,24 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="sr_no">1</td>
-										<td class="milestone" data-th="MILESTONE">M10: Whole numbers</td>
-										<td class="date" data-th="DATE">15-04-2017</td>
-										<td class="score" data-th="SCORE">7/10</td>
+                  <tr ng-if="rew_len == '0'">
+                    <td></td>
+                    <td></td>
+                    <td>{{rew_message}}</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+									<tr ng-repeat="rew in reward">
+										<td class="sr_no">{{$index+1}}</td>
+										<td class="milestone" data-th="MILESTONE">{{rew.name}}</td>
+										<td class="date" data-th="DATE">{{rew.date}}</td>
+										<td class="score" data-th="SCORE">{{rew.score}}/{{rew.total_marks}}</td>
 										<td class="share" data-th="SHARE">
-                      <a href="#" class="fa fa-twitter-square"></a>
-                      <a href="#" class="fa fa-facebook-square"></a>
+                      <a href="WWW.twitter.com" class="fa fa-twitter-square"></a>
+                      <a href="www.facebook.com" class="fa fa-facebook-square"></a>
                       <a href="#" class="fa fa-instagram"></a>
                     </td>
 									</tr>
-                  <tr>
-										<td class="sr_no">2</td>
-										<td class="milestone" data-th="MILESTONE">M10: Whole numbers</td>
-										<td class="date" data-th="DATE">15-04-2017</td>
-										<td class="score" data-th="SCORE">7/10</td>
-										<td class="share" data-th="SHARE">
-                      <a href="#" class="fa fa-twitter-square"></a>
-                      <a href="#" class="fa fa-facebook-square"></a>
-                      <a href="#" class="fa fa-instagram"></a>
-                    </td>
-									</tr>
-                  <tr>
-										<td class="sr_no">3</td>
-										<td class="milestone" data-th="MILESTONE">M10: Whole numbers</td>
-										<td class="date" data-th="DATE">15-04-2017</td>
-										<td class="score" data-th="SCORE">7/10</td>
-										<td class="share" data-th="SHARE">
-                      <a href="#" class="fa fa-twitter-square"></a>
-                      <a href="#" class="fa fa-facebook-square"></a>
-                      <a href="#" class="fa fa-instagram"></a>
-                    </td>
-									</tr>
-                  <tr>
-										<td class="sr_no">4</td>
-										<td class="milestone" data-th="MILESTONE">M10: Whole numbers</td>
-										<td class="date" data-th="DATE">15-04-2017</td>
-										<td class="score" data-th="SCORE">7/10</td>
-										<td class="share" data-th="SHARE">
-                      <a href="#" class="fa fa-twitter-square"></a>
-                      <a href="#" class="fa fa-facebook-square"></a>
-                      <a href="#" class="fa fa-instagram"></a>
-                    </td>
-									</tr>
-                  <tr>
-										<td class="sr_no">5</td>
-										<td class="milestone" data-th="MILESTONE">M10: Whole numbers</td>
-										<td class="date" data-th="DATE">15-04-2017</td>
-										<td class="score" data-th="SCORE">7/10</td>
-										<td class="share" data-th="SHARE">
-                      <a href="#" class="fa fa-twitter-square"></a>
-                      <a href="#" class="fa fa-facebook-square"></a>
-                      <a href="#" class="fa fa-instagram"></a>
-                    </td>
-									</tr>
-                  <tr>
-										<td class="sr_no">6</td>
-										<td class="milestone" data-th="MILESTONE">M10: Whole numbers</td>
-										<td class="date" data-th="DATE">15-04-2017</td>
-										<td class="score" data-th="SCORE">7/10</td>
-										<td class="share" data-th="SHARE">
-                      <a href="#" class="fa fa-twitter-square"></a>
-                      <a href="#" class="fa fa-facebook-square"></a>
-                      <a href="#" class="fa fa-instagram"></a>
-                    </td>
-									</tr>
-                  <tr>
-										<td class="sr_no">7</td>
-										<td class="milestone" data-th="MILESTONE">M10: Whole numbers</td>
-										<td class="date" data-th="DATE">15-04-2017</td>
-										<td class="score" data-th="SCORE">7/10</td>
-										<td class="share" data-th="SHARE">
-                      <a href="#" class="fa fa-twitter-square"></a>
-                      <a href="#" class="fa fa-facebook-square"></a>
-                      <a href="#" class="fa fa-instagram"></a>
-                    </td>
-									</tr>
-
 								</tbody>
                 <tfoot>
 									<tr>

@@ -165,13 +165,18 @@
           </div>
           <div class="panel-body">
             <ul class="row list-thumb group_list">
-             <li class="group">
+             <li class="group" ng-if="group_builder == 'true' || group_builder == ''">
                 <a class="add__group" href="teacher/create-group/class/{{grade_id}}/{{subject_name}}/{{course_id}}">
                   <img class="img-circle" src="assets/img/group-img/add_group_img.png" alt="Group Default"/>
                   <span class="group__name">Add Group</span>
                 </a>
-              </li>              
-             
+              </li>  
+              <li class="group" ng-if="group_builder == 'false'">
+                <a class="add__group" data-toggle="modal" data-target="#modal-groupAlert">
+                  <img class="img-circle" src="assets/img/group-img/add_group_img.png" alt="Group Default"/>
+                  <span class="group__name">Add Group</span>
+                </a>
+              </li> 
               <li class="group" ng-repeat="group in groups">
                 <a href="teacher/edit-group/{{group.URL_title}}/{{group.id}}">
                   <div class="group-thumb">
@@ -542,10 +547,42 @@
           </div>
           <!-- /planner panel  -->
         </div><!-- /content area -->
+        
+    <div id="modal-groupAlert" class="modal fade modal-saveTemplateAs" role="dialog"  >
+			<div class="modal-dialog" style="width: 30%; height: 10%" >
+				<div class="modal-content ">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+					</div>
+					<div class="modal-body">
+            <!--<span class="glyphicon glyphicon-envelope"></span></br>-->
+            <h3>Group add is disable</h3>
+					</div>
+					<div class="modal-footer text-right border-0">
+						<button type="button" class="btn btn-primary btn-preview" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
-        <!--end  /content area when dashboard is empty -->
 
-    </div><!-- /main content -->
-  </div><!-- /page content -->
-</div><!-- page container -->
+    </div>
+    <!-- /main content -->
+
+  </div>
+  <!-- /page content -->
+
+</div>
+  <!-- page container -->
+  <script type="text/javascript">
+//      $(document).ready(function(){
+//			// mlg-selectpicker
+//			$('.mlg-selectpicker').selectpicker();
+//			// tabCollapse
+//			$("#tabsAnalysis").tabCollapse({
+//        tabsClass: 'hidden-sm hidden-xs',
+//        accordionClass: 'visible-sm visible-xs'
+//      });
+//		});
+  </script>

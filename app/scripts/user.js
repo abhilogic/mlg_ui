@@ -354,7 +354,6 @@ angular.module('mlg').filter('moment', function() {
             url   : urlParams.baseURL+urlParams.getUserOrders
         });
 	}
-
 	loginHttpResponse.getAreaOfFocusForParent = function(child_id) {
         return $http({
             method:'GET',           
@@ -383,9 +382,44 @@ angular.module('mlg').filter('moment', function() {
             url   : urlParams.baseURL+urlParams.getUserQuizResponse+'?user_id='+child_id+'&user_quiz_id='+user_quiz_id
         });
 	}
-      
-
-
+  loginHttpResponse.getParentChildReport = function(user_id){
+      return $http({
+          	method:'GET',          	
+         	url   : urlParams.baseURL+urlParams.getParentChildReport+'/'+user_id
+      });
+	}
+  loginHttpResponse.getParentChildAssignment = function(childId,parentId,pgnum){
+      return $http({
+          method:'GET',          	
+         	url   : urlParams.baseURL+urlParams.getParentChildAssignment+'/'+childId+'/'+parentId+'/'+pgnum
+      });
+	}
+  loginHttpResponse.getParentChildReward = function(childId,pgnum){
+      return $http({
+          method:'GET',          	
+         	url   : urlParams.baseURL+urlParams.getParentChildReward+'/'+childId+'/'+pgnum
+      });
+	} 
+  loginHttpResponse.getParentChildrenSubjects = function(childId){
+      return $http({
+          method:'GET',          	
+         	url   : urlParams.baseURL+urlParams.getParentChildrenSubjects+'/'+childId
+      });
+	}
+  loginHttpResponse.filterParentChildReport = function(childId,day,subject,skills,subSkill){
+    var url = urlParams.baseURL+urlParams.filterParentChildReport+'/'+childId+'/'+day;
+    if(subject != null && skills == null && subSkill == null) {
+      url = url+'/'+subject;
+    }else if(subject != null && skills != null && subSkill == null) {
+      url = url+'/'+subject+'/'+skills;
+    }else if(subject != null && skills != null && subSkill != null) {
+      url = url+'/'+subject+'/'+skills+'/'+subSkill;
+    }
+      return $http({
+          method:'GET',          	
+         	url   : url
+      });
+	}
 	return loginHttpResponse;
 	
 }])
@@ -2045,8 +2079,266 @@ if (typeof $routeParams.slug != 'undefined') {
         });
       };
     }
- ]).controller('parentNotificationCntrl', ['$scope', 'loginHttpService', '$location', 'urlParams',
-   function ($scope, loginHttpService, $location, urlParams) {
- 
-   }
- ]);
+ ])
+.controller('teacherReportCtrl', ['$scope', 'loginHttpService', '$location', 'urlParams','commonActions','$routeParams','class_students_classification',
+   function ($scope, loginHttpService, $location, urlParams,commonActions,$routeParams,class_students_classification) { 
+      var get_uid=commonActions.getcookies(get_uid);
+      var child_id = $routeParams.id;
+      var tempSkill = '';
+      var tempSubSkill = '';
+      var subject = null;
+      var skills = null;
+      var subSkills = null;
+      var day = 0;
+      $scope.sub_message = '';
+      $scope.assi_message = '';
+      $scope.reward_message = '';
+      loginHttpService.getParentChildrenSubjects(child_id).success(function(res) {
+        $scope.course = res.subject;
+        tempSkill = res.skill;
+        tempSubSkill = res.subSkill;
+      });
+     $scope.details = [];
+     // Student Reports
+    loginHttpService.getParentChildReport(child_id).success(function(res_resport) {
+      if(res_resport.status == true){
+        angular.forEach(res_resport.response.details,function(val,key){
+          var percent = val['student_result_percent'];
+          var temp = 0;
+          $scope.gapMessage = 'No Report generated now.';
+          angular.forEach(class_students_classification,function(clss,key){
+            if(temp< percent && percent<=clss) {
+              $scope.details.push({
+                'user_quiz_id':val['user_quiz_id'],
+                'grade_id':val['grade_id'],
+                'course_id':val['course_id'],
+                'quiz_type_id':val['quiz_type_id'],
+                'quiz_id':val['quiz_id'],
+                'exam_marks':val['exam_marks'],
+                'student_score':val['student_score'],
+                'course_name':val['course_name'],
+                'student_result_percent':val['student_result_percent'],
+                'other_Student_average':val['other_Student_average'],
+                'best_Student_average':val['best_Student_average'],
+                'category':key,
+              });
+              if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                $scope.gap_message = '';
+              }
+            }
+            temp = clss;
+          });
+        }); 
+        $scope.lastPage = res_resport.lastPage;
+      }
+      else{
+        $scope.sub_message ="No Report generated now.";
+      }
+
+    });
+    $scope.range = function(min, max, step){
+      step = step || 1;
+      var input = [];
+      for (var i = min; i <= max; i += step) input.push(i);
+        return input;
+    };
+    loginHttpService.getParentChildAssignment(child_id,get_uid,'1').success(function(response) {
+       if((response.assignment_list).length != 0) {
+         $scope.assignment = response.assignment_list;
+         $scope.count = ($scope.assignment).length;
+         $scope.attemptAssignment = response.attempted_assignment;
+       }else{
+         $scope.assi_len = (response.response).length;
+         $scope.assi_message = 'No Report generated now.';
+       }
+    }); 
+    loginHttpService.getParentChildReward(child_id,'1').success(function(response) {
+       if((response.response).length != 0) {
+         $scope.reward = response.response;
+       }else{
+         $scope.rew_len = (response.response).length;
+         $scope.reward_message = 'No Report generated now.';
+       }
+    });
+    $scope.skill = '';
+    $scope.getScopeCourse = function(data) {
+      subject = data;
+      angular.forEach(tempSkill,function(val,ki){
+        if(ki == data){
+          $scope.skill = val; 
+        }
+      });
+      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkill).success(function(response) {
+        if(response.status == true){
+          $scope.sub_message = '';
+          $scope.details = [];
+          angular.forEach(response.response.details,function(val,key){
+           var percent = val['student_result_percent'];
+           var temp = 0;
+           $scope.gapMessage = 'No Report generated now.';
+           angular.forEach(class_students_classification,function(clss,key){
+             if(temp< percent && percent<=clss) {
+               $scope.details.push({
+                 'user_quiz_id':val['user_quiz_id'],
+                 'grade_id':val['grade_id'],
+                 'course_id':val['course_id'],
+                 'quiz_type_id':val['quiz_type_id'],
+                 'quiz_id':val['quiz_id'],
+                 'exam_marks':val['exam_marks'],
+                 'student_score':val['student_score'],
+                 'course_name':val['course_name'],
+                 'student_result_percent':val['student_result_percent'],
+                 'other_Student_average':val['other_Student_average'],
+                 'best_Student_average':val['best_Student_average'],
+                 'category':key,
+               });
+               if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                 $scope.gap_message = '';
+               }
+             }
+             temp = clss;
+           });
+         }); 
+         $scope.lastPage = response.lastPage;
+       }
+       else{
+         $scope.details = [];
+         $scope.sub_message ="No Report generated now.";
+       }
+      });
+    }
+    $scope.getScopeSkill = function(data) {
+      skills = data;
+      angular.forEach(tempSubSkill,function(val,ki){
+        if(ki == data){
+          $scope.subSkill = val; 
+        }
+      });
+      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkill).success(function(response) {
+       if(response.status == true){
+         $scope.sub_message = '';
+         $scope.details = [];
+        angular.forEach(response.response.details,function(val,key){
+          var percent = val['student_result_percent'];
+          var temp = 0;
+          $scope.gapMessage = 'No Report generated now.';
+          angular.forEach(class_students_classification,function(clss,key){
+            if(temp< percent && percent<=clss) {
+              $scope.details.push({
+                'user_quiz_id':val['user_quiz_id'],
+                'grade_id':val['grade_id'],
+                'course_id':val['course_id'],
+                'quiz_type_id':val['quiz_type_id'],
+                'quiz_id':val['quiz_id'],
+                'exam_marks':val['exam_marks'],
+                'student_score':val['student_score'],
+                'course_name':val['course_name'],
+                'student_result_percent':val['student_result_percent'],
+                'other_Student_average':val['other_Student_average'],
+                'best_Student_average':val['best_Student_average'],
+                'category':key,
+              });
+              if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                $scope.gap_message = '';
+              }
+            }
+            temp = clss;
+          });
+        }); 
+        $scope.lastPage = response.lastPage;
+      }
+      else{
+        $scope.details = [];
+        $scope.sub_message ="No Report generated now.";
+      }
+    });
+    }
+    $scope.getDateModel = function(data) {
+      if(data == 'week') {
+        day = 7;
+      }else if(data == 'days') {
+        day = 15;
+      }else if(data == 'month') {
+        day = 30;
+      }
+      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkill).success(function(response) {
+       if(response.status == true){
+         $scope.sub_message = '';
+         $scope.details = [];
+        angular.forEach(response.response.details,function(val,key){
+          var percent = val['student_result_percent'];
+          var temp = 0;
+          $scope.gapMessage = 'No Report generated now.';
+          angular.forEach(class_students_classification,function(clss,key){
+            if(temp< percent && percent<=clss) {
+              $scope.details.push({
+                'user_quiz_id':val['user_quiz_id'],
+                'grade_id':val['grade_id'],
+                'course_id':val['course_id'],
+                'quiz_type_id':val['quiz_type_id'],
+                'quiz_id':val['quiz_id'],
+                'exam_marks':val['exam_marks'],
+                'student_score':val['student_score'],
+                'course_name':val['course_name'],
+                'student_result_percent':val['student_result_percent'],
+                'other_Student_average':val['other_Student_average'],
+                'best_Student_average':val['best_Student_average'],
+                'category':key,
+              });
+              if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                $scope.gap_message = '';
+              }
+            }
+            temp = clss;
+          });
+        }); 
+        $scope.lastPage = response.lastPage;
+      }
+      else{
+        $scope.details = [];
+        $scope.sub_message ="No Report generated now.";
+      }
+    });
+    }
+    $scope.getScopeSubSkill = function(data) {
+      subSkills = data;
+      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkills).success(function(response) {
+        if(response.status == true){
+          $scope.sub_message = '';
+          $scope.details = [];
+          angular.forEach(response.response.details,function(val,key){
+           var percent = val['student_result_percent'];
+           var temp = 0;
+           $scope.gapMessage = 'No Report generated now.';
+           angular.forEach(class_students_classification,function(clss,key){
+             if(temp< percent && percent<=clss) {
+               $scope.details.push({
+                 'user_quiz_id':val['user_quiz_id'],
+                 'grade_id':val['grade_id'],
+                 'course_id':val['course_id'],
+                 'quiz_type_id':val['quiz_type_id'],
+                 'quiz_id':val['quiz_id'],
+                 'exam_marks':val['exam_marks'],
+                 'student_score':val['student_score'],
+                 'course_name':val['course_name'],
+                 'student_result_percent':val['student_result_percent'],
+                 'other_Student_average':val['other_Student_average'],
+                 'best_Student_average':val['best_Student_average'],
+                 'category':key,
+               });
+               if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                 $scope.gap_message = '';
+               }
+             }
+             temp = clss;
+           });
+         }); 
+         $scope.lastPage = response.lastPage;
+       }
+       else{
+         $scope.details = [];
+         $scope.sub_message ="No Report generated now.";
+       }
+      });
+    }
+}]);

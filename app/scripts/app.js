@@ -112,7 +112,11 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getChildSubskillResult :'/users/getChildSubskillResult', 
   setAutoAssignmentByParents :'/users/setAutoAssignmentByParents',
   getUserQuizResponse :'/users/getUserQuizResponse', 
-  
+  getParentChildReport : '/users/getParentChildReport',  
+  getParentChildAssignment : '/users/getParentChildAssignment',
+  getParentChildReward : '/users/getParentChildReward',
+  getParentChildrenSubjects : '/users/getParentChildrenSubjects',
+  filterParentChildReport : '/users/filterParentChildReport',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -273,7 +277,7 @@ principal  : 30,
 	}).when('/teacher/dashboard/class/:gradeid/:subject_name/:courseid',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
 		controller : 'teacherDashboardViewCtrl',
-	}).when('/parent/report',{
+	}).when('/parent/report/:id',{
 		templateUrl : 'views/dashboard/parent-report.html',
 		controller : 'teacherReportCtrl',
 	}).when('/teacher/message',{
@@ -626,8 +630,14 @@ return {
                // dateFormat: 'DD, d  MM, yy',
                dateFormat: 'yy-mm-d',
                 onSelect: function (date) {
+                  if(attrs.ngModel== 'startDate' ) {
+                    scope.startDate = date;
+                  }else if(attrs.ngModel== 'endDate') {
+                    scope.endDate = date;
+                  }else{
                     scope.date = date;
-                    scope.$apply();
+                  } 
+                  scope.$apply();
                 }
             });
         }

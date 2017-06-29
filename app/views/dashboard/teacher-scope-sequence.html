@@ -124,6 +124,7 @@
                 <!--teacher/scope-sequence-subskill/{{skill.course_id}}**/-->
 								<div class="scope-sequence-listing">
 								<p class="para">Click a skill to see the subskills. Hold and drag to change the order.</p>
+                {{auto_progression}} {{auto_progression_for}} {{auto_progression_for_individual}} {{grpId}}
 									<ul as-sortable="sortableOptions" data-ng-model="scopeSkills">
                     <li ng-repeat="skill in scopeSkills" as-sortable-item>
 											<a href="teacher/scope-sequence-subskill/{{skill.course_id}}/{{scopeGradeModel}}/{{scopeCourseModel}}/{{option}}/{{grpId}}">
@@ -133,25 +134,38 @@
 															<div class="col-md-5">
 																<h5 class="topic_name margin-sm-top-0"><i class="icon icon-drag"></i>{{skill.name}}</h5>
 															</div>
-															<div class="col-md-7 text-right text-sm-left margin-sm-top-15">
-																<h5>{{skill.start_date}}</h5>
+															<div class="col-md-7 text-right text-sm-left margin-sm-top-15" ng-if="auto_progression == true">
+																<h5 ng-if="(auto_progression_for == 'all_class')">
+                                  START DATE :{{skill.start_date}}</h5>
+                                <h5 ng-if="(auto_progression_for == 'group' && auto_progression_for_group == grpId)">
+                                  START DATE :{{skill.start_date}}</h5>
+                                <h5 ng-if="(auto_progression_for == 'individual' && auto_progression_for_individual == grpId)">
+                                  START DATE :{{skill.start_date}}</h5>
 															</div>
 														</div>
 													</div>
 													<div class="col-lg-5 col-lg-offset-2">
 														<div class="row">
-															<div class="col-md-7">
-																<h5 class="margin-sm-top-0">{{skill.end_date}}</h5>
+															<div class="col-md-7" >
+																<h5 class="margin-sm-top-0" 
+                                    ng-if="(auto_progression == true) && (auto_progression_for == 'all_class')">
+                                  END DATE :{{skill.end_date}}</h5>
+                                <h5 class="margin-sm-top-0"
+                                    ng-if="(auto_progression == true) && (auto_progression_for == 'group')&& (auto_progression_for_group == grpId)">
+                                  END DATE :{{skill.end_date}}</h5>
+                                <h5 class="margin-sm-top-0"
+                                 ng-if="(auto_progression == true) && (auto_progression_for == 'individual')&& (auto_progression_for_individual == grpId)">
+                                  END DATE :{{skill.end_date}}</h5>
 															</div>
                               <div class="col-md-5 text-right text-sm-left margin-top-5">
 																<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
                                   <label>
                                   <input class="js-switch" type="checkbox" >
                                   <span class="off">OFF</span>
-                                  <span class="switchery switchery-default {{skill.course_id}}"ng-if="skill.visibility == '1'">
+                                  <span class="switchery switchery-default switchery-skills {{skill.course_id}}"ng-if="skill.visibility == '1'">
                                     <small></small>
                                   </span>
-                                  <span class="switchery switchery-default off {{skill.course_id}}" ng-if="skill.visibility != '1'">
+                                  <span class="switchery switchery-default switchery-skills off {{skill.course_id}}" ng-if="skill.visibility != '1'">
                                   <small></small>
                                   </span>
                                   <span class="on">ON</span>
@@ -176,18 +190,18 @@
 									<button type="button" class="btn btn-outline border-color-gray btn-default text-uppercase btn-block border-radius-0">Restore to Default</button>
 									<div class="row margin-top-10">
 										<div class="col-xs-6">
-											<button type="button" class="btn btn-outline btn-default btn-block btn-print"><i class="icon icon-print margin-right-5"></i> Print</button>
+											<!--<button type="button" class="btn btn-outline btn-default btn-block btn-print"><i class="icon icon-print margin-right-5"></i> Print</button>-->
 										</div>
 										<div class="col-xs-6">
-											<button type="button" class="btn btn-outline btn-default btn-block btn-email"><i class="icon icon-mail margin-right-5"></i> eMail</button>
+											<!--<button type="button" class="btn btn-outline btn-default btn-block btn-email"><i class="icon icon-mail margin-right-5"></i> eMail</button>-->
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-9 col-md-6 margin-sm-top-10">
-									<div class="col-lg-8  text-center text-md-right text-sm-center padding-md-right-0">
+<!--									<div class="col-lg-8  text-center text-md-right text-sm-center padding-md-right-0">
 										<button type="button" class="btn btn-background-none padding-sm-left-0"><i class="icon icon-undo"></i> Undo</button>
 										<button type="button" class="btn btn-background-none padding-sm-right-0"> Redo <i class="icon icon-redo"></i></button>
-									</div>
+									</div>-->
 									<div class="col-lg-4  text-right padding-right-0 text-sm-center margin-sm-top-10">
 											<button type="button" class="btn btn-background-none">Cancel</button>
 											<button type="button" class="btn btn-primary btn-preview" data-toggle="modal" data-target="#modal-SequencePreview">Preview</button>
@@ -252,7 +266,29 @@
 						<form class="form">
 							<div class="form-group float-label">
 								<label class="control-label">Add Skills</label>
-                <input type="text" class="form-control float-input" value="" ng-model="frm.newSkill"/>
+                <input type="text" class="form-control float-input" value="" ng-model="frm.newSkill"/></br>
+                <div class="col-xs-6" ng-if="(auto_progression == true) && (auto_progression_for == 'all_class')">
+                  <label>Start Date :</label> <input type="text" ng-model="startDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div> 
+                <div class="col-xs-6" ng-if="(auto_progression == true) && 
+                     (auto_progression_for == 'group') && (auto_progression_for_group == grpId)">
+                  <label>Start Date :</label> <input type="text" ng-model="startDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div> 
+                <div class="col-xs-6" ng-if="(auto_progression == true) && 
+                     (auto_progression_for == 'individual') && (auto_progression_for_individual == grpId)">
+                  <label>Start Date :</label> <input type="text" ng-model="startDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div>
+                <div class="col-xs-6" ng-if="(auto_progression == true) && (auto_progression_for == 'all_class')">
+                  <label>End Date :</label><input type="text" ng-model="endDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div> 
+                <div class="col-xs-6" ng-if="(auto_progression == true) && 
+                     (auto_progression_for == 'group') && (auto_progression_for_group == grpId)">
+                  <label>End Date :</label><input type="text" ng-model="endDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div> 
+                <div class="col-xs-6" ng-if="(auto_progression == true) && 
+                     (auto_progression_for == 'individual') && (auto_progression_for_individual == grpId)">
+                  <label>End Date :</label><input type="text" ng-model="endDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div>
 							</div>
 		        </form>
 					</div>

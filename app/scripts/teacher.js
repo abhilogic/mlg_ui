@@ -695,13 +695,26 @@ $scope.submitSkip = function(){
            $scope.students_count =null;
          } 
        });
+       // API to call teacher setting
+
+      var data = {user_id : get_uid, level_id: $scope.grade_id, course_id: $scope.course_id}
+      teacherHttpService.getTeacherSettings(data).success(function(response) {
+        if (response.status == true) {
+          var result = response.result;
+          var settings = JSON.parse(result.settings);
+          $scope.group_builder = (settings.group_builder == true) ? 'true' : 'false';
+        }
+      });
       // API to call all groups of a teacher
       teacherHttpService.getGroupsOfSubjectForTeacher(get_uid,$scope.course_id).success(function(respGroup) {
        if (respGroup.response.status == "true") {
          $scope.groups = respGroup.response.groups;
        }
      });
-
+     //alert when add group is disable
+      $scope.alertgroup = function() {
+        alert('');
+      }
       // calender event show
       $scope.event = 'all';
       var date = new Date();
@@ -2780,14 +2793,17 @@ $scope.subSkillEvents = {
      $scope.msg = 'unable to fetch question type';
      $timeout(function () {$scope.msg = ""; }, 3000);
    });
-    $scope.quesTypeEvents = {
-     onItemSelect: function(item) {   
-      qType.push(item['id']);
-    },
-    onItemDeselect: function(item) {
-      qType.splice(item['id'],1);
-    }
-  };               
+//    $scope.quesTypeEvents = {
+//     onItemSelect: function(item) {   
+//      qType.push(item['id']);
+//    },
+//    onItemDeselect: function(item) {
+//      qType.splice(item['id'],1);
+//    }
+//  }; 
+  $scope.quesTypeEvents = function(data){
+    qType = data;
+  }
   var question = {};
   $scope.submitQuestion = function(data) {
     var answerList = '';
@@ -3540,9 +3556,15 @@ $scope.deleteImage = function(j,data) {
           diffLevel.splice(item['id'],1);
         }
       };
-
-
-
+      // Get settings
+      var data = {user_id : get_uid, level_id: $scope.grade_id, course_id: $scope.course_id}
+      teacherHttpService.getTeacherSettings(data).success(function(response) {
+        if (response.status == true) {
+          var result = response.result;
+          var settings = JSON.parse(result.settings);
+          $scope.group_builder = (settings.group_builder == true) ? 'true' : 'false';
+        }
+      });
 // Step 2 - To generate the questions and change questions
 
     //Click on generate button and get question as per field values
@@ -4153,7 +4175,6 @@ $scope.deleteQuestions = function(Qid,uniqId){
     unique_id : uniqId
   }
   teacherHttpService.deleteQuestions(questionIds).success(function(response) {
-    console.log(response);
     if(response.status == true) {
       alert(response.message);
       teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
@@ -4715,9 +4736,15 @@ $scope.deleteQuestions = function(Qid,uniqId){
     skill = $routeParams.skill;
     var frm = {};
     $scope.skill = [];
-    $scope.grpId = 0;
+    $scope.grpId = '0';
     var optionChecked = '';
     $scope.scopeSubSkills = [];
+    $scope.startDate = [];
+    $scope.endDate = [];
+    $scope.auto_progression = '';
+    $scope.auto_progression_by = '';
+    $scope.auto_progression_for_individual = '';
+    $scope.auto_progression_for_group = '';
     var radios = document.getElementsByName('SCOPE');
     for (var i = 0, length = radios.length; i < length; i++) {
       if (radios[i].checked) {
@@ -4787,7 +4814,21 @@ $scope.deleteQuestions = function(Qid,uniqId){
         }).error(function(error) {
           $scope.msg= 'Some technical error occured.';
         });
-
+        // get teachersettings for autoprogression on and off.
+       
+        var data = {user_id : get_uid, level_id: grade, course_id: course}
+        teacherHttpService.getTeacherSettings(data).success(function(response) {
+          if (response.status == true) {
+            var result = response.result;
+            var settings = JSON.parse(result.settings);
+            $scope.auto_progression = settings.auto_progression;
+            $scope.auto_progression_for = settings.auto_progression_by;
+            $scope.auto_progression_for_individual = (typeof settings.auto_progression_for_individual != 'undefined') ?
+               settings.auto_progression_for_individual : '';
+            $scope.auto_progression_for_group = (typeof settings.auto_progression_for_group != 'undefined') ?
+                settings.auto_progression_for_group : '';
+          }
+        });
         /**get teacher scopes end**/
         /** get teacher student start**/
         teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,course).success(function(response_students) { 
@@ -4809,16 +4850,24 @@ $scope.deleteQuestions = function(Qid,uniqId){
     // add new skill
     $scope.setNewSkill = function(data) {
       var newSkill = '';
+      var start_date = '';
+      var end_date = '';
       if(data != undefined){
         var newSkill = data.newSkill;
+      }
+      if($scope.startDate != undefined) {
+       start_date = $scope.startDate; 
+      }
+      if($scope.startDate != undefined) {
+       end_date = $scope.endDate; 
       }
       var skillDetail = {
         uid : get_uid,
         grade : grade,
         course_id : course,
         skill_name : newSkill,
-//        start_date : ll,
-//        end_date : ll,
+        start_date : start_date,
+        end_date : end_date,
       }; 
       teacherHttpService.addNewScope(skillDetail).success(function(response) {
         if(response.status == true) {
@@ -4895,6 +4944,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     /**chang in group start**/
     $scope.getGroup = function(data) {
       $scope.grpId = data;
+      ($scope.grpId).toString();
       $scope.option = 'group';
       /**get teacher scopes start**/
         teacherHttpService.teacherScope(get_uid,course,$scope.option,data).success(function(response) {
@@ -4914,6 +4964,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     /**chang in group start**/
     $scope.getPeople = function(data) {
       $scope.grpId = data;
+      ($scope.grpId).toString();
       $scope.option = 'people';
       /**get teacher scopes start**/
         teacherHttpService.teacherScope(get_uid,course,$scope.option,data).success(function(response) {
@@ -4928,7 +4979,6 @@ $scope.deleteQuestions = function(Qid,uniqId){
           $scope.msg= 'Some technical error occured.';
         });
         /**get teacher scopes end**/
-      
     }
     /**chang in group end**/
     /**save scope as template**/
@@ -5024,7 +5074,21 @@ $scope.deleteQuestions = function(Qid,uniqId){
     }
     /** subskil scope and sequence start**/
     if(skill != undefined) {
-      $scope.grpId = $routeParams.id;
+      // get teachersettings for autoprogression on and off.
+      var data = {user_id : get_uid, level_id: $routeParams.grade, course_id: $routeParams.subject}
+      teacherHttpService.getTeacherSettings(data).success(function(response) {
+        if (response.status == true) {
+          var result = response.result;
+          var settings = JSON.parse(result.settings);
+          $scope.auto_progression = settings.auto_progression;
+          $scope.auto_progression_for = settings.auto_progression_by;
+          $scope.auto_progression_for_individual = (typeof settings.auto_progression_for_individual != 'undefined') ?
+             settings.auto_progression_for_individual : '';
+          $scope.auto_progression_for_group = (typeof settings.auto_progression_for_group != 'undefined') ?
+              settings.auto_progression_for_group : '';
+        }
+      });
+    $scope.grpId = $routeParams.id;
         // this api used for get templates
       teacherHttpService.getScopeTemplates(get_uid,'subSkill').success(function(response) {
         if (response.status == true) {          
@@ -5034,14 +5098,25 @@ $scope.deleteQuestions = function(Qid,uniqId){
       var courses = $routeParams.subject;
       var options = $routeParams.group;
       $scope.setNewSubSkill = function(data) {
-       
+        var newSubSkill = '';
+        var start_date = '';
+        var end_date = '';
+        if(data != undefined){
+          newSubSkill = data.newSubSkill;
+        }
+        if($scope.startDate != undefined) {
+         start_date = $scope.startDate; 
+        }
+        if($scope.startDate != undefined) {
+         end_date = $scope.endDate; 
+        }
         var skillDetail = {
           uid : get_uid,
           grade : $routeParams.grade,
           course_id : skill,
-          skill_name : data.newSubSkill,
-  //        start_date : ll,
-  //        end_date : ll,
+          skill_name : newSubSkill,
+          start_date : start_date,
+          end_date : end_date,
         };
         teacherHttpService.addNewScope(skillDetail).success(function(response) {
           if(response.status == true) {
@@ -5066,6 +5141,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
         });
       } 
       /** get subskill**/
+      $scope.Skills = [];
       teacherHttpService.teacherScope(get_uid,skill,options,null).success(function(response) {
         if(response.status == true) {
           if(response.by == 'course') {
@@ -5085,10 +5161,11 @@ $scope.deleteQuestions = function(Qid,uniqId){
             angular.forEach(temp,function(val,key){
               console.log(val['course_id']+';'+skill);
               if(val['course_id'] == skill ) {
-                $scope.Skills = val;
+                $scope.Skills.push(val);
               }
             });
           }else if(response.by == 'scope' && response.response != '') {
+            console.log(response.response);
             var temp = angular.fromJson(response.response[0].scope);
             angular.forEach(temp,function(val,key){
               console.log(val['course_id']+';'+skill);
@@ -5096,8 +5173,8 @@ $scope.deleteQuestions = function(Qid,uniqId){
                 tempArray[0] = val;
               }
             });
+            $scope.Skills = tempArray;
           }
-          $scope.Skills = tempArray;
         } 
       }).error(function(error) {
         $scope.msg= 'Some technical error occured.';
@@ -5193,13 +5270,12 @@ $scope.deleteQuestions = function(Qid,uniqId){
           if(scope['course_id'] == id) {
             scope['visibility'] = '1';
           }
-        }); 
-        console.log($scope.scopeSkills);
+        });
         angular.forEach($scope.scopeSubSkills,function(scope,key){
           if(scope['course_id'] == id) {
             scope['visibility'] = '1';
           }
-        }); 
+        });
       }else if(status == false) {
         angular.forEach($scope.scopeSkills,function(scope ,key){
           if(scope['course_id'] == id) {
@@ -5211,7 +5287,13 @@ $scope.deleteQuestions = function(Qid,uniqId){
             scope['visibility'] = '0';
           }
         });
-      } 
+      }
+      if($scope.scopeSkills != 'undefined') {
+        return $scope.scopeSkills;
+      }
+      if($scope.scopeSubSkills != 'undefined') {
+        return $scope.scopeSubSkills;
+      }
     }
     /** js **/
 //    var headertext = [],
