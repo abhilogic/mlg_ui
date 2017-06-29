@@ -444,7 +444,7 @@ teacherHttpResponse.getSubskillAnalytic=function(teacher_id,subject_id,subskill_
 teacherHttpResponse.getStudentProgress=function(student_id){
   return $http({
     method:'GET',
-    url   : urlParams.baseURL+urlParams.getStudentProgress+'/'+user_id
+    url   : urlParams.baseURL+urlParams.getStudentProgress+'/'+student_id
   });
 }
 
