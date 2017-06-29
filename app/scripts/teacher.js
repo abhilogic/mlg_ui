@@ -3870,8 +3870,6 @@ $scope.deleteImage = function(j,data) {
 
 
 
-
-
     //Start-  Student Analytic graph  $routeParams.id = student_id
     teacherHttpService.getStudentProgress($routeParams.id).success(function (result) {
           if (result.response.status == true) {
@@ -3879,33 +3877,40 @@ $scope.deleteImage = function(j,data) {
             var conquered_count = result.response.conquered_count*10;
             var practice_count = result.response.practice_count*10;
            
-            $scope.stprogress_labels = ["Conquered", "Practiced", "Not Attacked"];
-            $scope.stprogress_data = [conquered_count, practice_count, total_subskill-practice_count];
-            $scope.stprogress_colors = ['#f1c40f', '#2ecc71', '#e8e8e8'];
-            $scope.datasetOverride = [{ label: 'Bar chart', borderWidth: 1, type: 'bar' } ];
-            $scope.stprogress_options = { 
-              animation: { duration: 1000 },
-              legend: { display: true, position: 'right', labels: {fontColor: '#333',fontSize: 14,boxWidth: 15, }, },
-             tooltips: {
-                 callbacks: {
-                label: function(tooltipItem, data) {
-                 var allData = data.datasets[tooltipItem.datasetIndex].data;
-                 var tooltipLabel = data.labels[tooltipItem.index];
-                 var tooltipData = allData[tooltipItem.index];
-                 var total = 0;
-                 for (var i in allData) {
-                  total += allData[i];
-                }
-                //var tooltipPercentage = total_subskill;
-                return tooltipLabel + ': ' + tooltipData + '%';
-                    //return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
-              }
+     
+          }else{
+              $scope.prgress_message=result.response.message;
+              var total_subskill = 100;
+            var conquered_count = 0;
+            var practice_count = 0;
             }
-          }
-        };
-    }else{
-        $scope.prgress_message=result.response.message;
-      }
+
+                $scope.stprogress_labels = ["Conquered", "Practiced", "Not Attacked"];
+                $scope.stprogress_data = [conquered_count, practice_count, total_subskill-practice_count];
+                $scope.stprogress_colors = ['#f1c40f', '#2ecc71', '#e8e8e8'];
+                $scope.datasetOverride = [{ label: 'Bar chart', borderWidth: 1, type: 'bar' } ];
+                $scope.stprogress_options = { 
+                  animation: { duration: 1000 },
+                  legend: { display: true, position: 'right', labels: {fontColor: '#333',fontSize: 14,boxWidth: 15, }, },
+                 tooltips: {
+                     callbacks: {
+                    label: function(tooltipItem, data) {
+                     var allData = data.datasets[tooltipItem.datasetIndex].data;
+                     var tooltipLabel = data.labels[tooltipItem.index];
+                     var tooltipData = allData[tooltipItem.index];
+                     var total = 0;
+                     for (var i in allData) {
+                      total += allData[i];
+                    }
+                    //var tooltipPercentage = total_subskill;
+                    return tooltipLabel + ': ' + tooltipData + '%';
+                        //return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                  }
+                }
+              }
+            };
+
+
     });    
 //end-  Student Analytic graph
 
