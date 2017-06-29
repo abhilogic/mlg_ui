@@ -117,6 +117,9 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getParentChildReward : '/users/getParentChildReward',
   getParentChildrenSubjects : '/users/getParentChildrenSubjects',
   filterParentChildReport : '/users/filterParentChildReport',
+  getStudentProgress :'/students/getStudentProgress',
+  getAwardsofChild :'/students/getAwardsofChild', 
+
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -577,8 +580,6 @@ $scope.userInfo=userInfo;
 };
 
 })
-
-
 .directive('topSearchBar', function () {
 return {
 	restrict: 'E',
@@ -642,6 +643,41 @@ return {
             });
         }
     };
-});
+})
+.directive("owlCarousel", function() {
+  return {
+    restrict: 'E',
+    transclude: false,
+    replace : true,
+    link: function (scope) {
+      scope.initCarousel = function(element) {
+        // provide any default options you want
+        var defaultOptions = {};
+        var customOptions = scope.$eval($(element).attr('data-options'));
+        // combine the two options objects
+        for(var key in customOptions) {
+          defaultOptions[key] = customOptions[key];
+        }
+
+        // init carousel
+        $(element).owlCarousel(defaultOptions);
+      };
+    }
+  };
+})
+.directive('owlCarouselItem', [function() {
+  return {
+    restrict: 'A',
+    transclude: false,
+    link: function(scope, element) {
+      // wait for the last item in the ng-repeat then call init
+      if(scope.$last) {
+        scope.initCarousel(element.parent());
+      }
+    }
+  };
+}]);
+
+
 
 

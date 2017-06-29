@@ -382,6 +382,7 @@ angular.module('mlg').filter('moment', function() {
             url   : urlParams.baseURL+urlParams.getUserQuizResponse+'?user_id='+child_id+'&user_quiz_id='+user_quiz_id
         });
 	}
+
   loginHttpResponse.getParentChildReport = function(user_id){
       return $http({
           	method:'GET',          	
@@ -419,8 +420,25 @@ angular.module('mlg').filter('moment', function() {
           method:'GET',          	
          	url   : url
       });
+	}	
+
+	loginHttpResponse.getStudentProgress=function(child_id){
+		  return $http({
+		    method:'GET',
+		    url   : urlParams.baseURL+urlParams.getStudentProgress+'/'+child_id
+		  });
 	}
-	return loginHttpResponse;
+
+	loginHttpResponse.getAwardsofChild=function(child_id){
+		  return $http({
+		    method:'GET',
+		    url   : urlParams.baseURL+urlParams.getAwardsofChild+'/'+child_id
+		  });
+	}
+      
+
+return loginHttpResponse;
+
 	
 }])
 .factory('commonActions',['$http','urlParams','loginHttpService',function($http,urlParams,loginHttpService){
@@ -716,39 +734,81 @@ angular.module('mlg').filter('moment', function() {
 	// end to call dynamic step slider
 
 
-//  $rootScope.username=$location.search().uid;
 
-	//Block-  Area of focus
+	 //Start-  Student Analytic graph  $routeParams.id = student_id
+    loginHttpService.getStudentProgress($routeParams.id).success(function (result) {
+          if (result.response.status == true) {
+            var total_subskill = result.response.total_subskill*10;
+            var conquered_count = result.response.conquered_count*10;
+            var practice_count = result.response.practice_count*10;           
+      
+    	}else{
+       			 $scope.prgress_message=result.response.message;
+       			 var total_subskill = 100;
+            	var conquered_count = 0;
+            	var practice_count = 0;
+      		}
+
+            $scope.stprogress_labels = ["Conquered", "Practiced", "Not Attacked"];
+            $scope.stprogress_data = [conquered_count, practice_count, total_subskill-practice_count];
+            $scope.stprogress_colors = ['#f1c40f', '#2ecc71', '#e8e8e8'];
+            $scope.datasetOverride = [{ label: 'Bar chart', borderWidth: 1, type: 'bar' } ];
+            $scope.stprogress_options = { 
+              animation: { duration: 1000 },
+              legend: { display: true, position: 'right', labels: {fontColor: '#333',fontSize: 14,boxWidth: 15, }, },
+             tooltips: {
+                 callbacks: {
+                label: function(tooltipItem, data) {
+                 var allData = data.datasets[tooltipItem.datasetIndex].data;
+                 var tooltipLabel = data.labels[tooltipItem.index];
+                 var tooltipData = allData[tooltipItem.index];
+                 var total = 0;
+                 for (var i in allData) {
+                  total += allData[i];
+                }
+                //var tooltipPercentage = total_subskill;
+                return tooltipLabel + ': ' + tooltipData + '%';
+                    //return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+              }
+            }
+          }
+        };
+    
+
+    });    
+//end-  Student Analytic graph
+
+
+	//Start-  Block Area of focus
 	loginHttpService.getAreaOfFocusForParent($routeParams.id).success(function(record) {
-			if(record.response.status==true){
-				$scope.strecords = record.response.attention_records;
+		if(record.response.status==true){
+			$scope.strecords = record.response.attention_records;
 
-				// to make active first records of loop				
-				var subskillid =  record.response.attention_records[0].course_id;
-				var user_quiz_id =  record.response.attention_records[0].id;
-				 loginHttpService.getChildSubskillResult($routeParams.id,subskillid,user_quiz_id).success(function(record) {
-	        		if(record.response.status==true){
-	        			$scope.child_name = record.response.child_result['child_name'];
-	        			$scope.child_score_percentage = (record.response.child_result['score']*100) / record.response.child_result['exam_marks']
-	        			$scope.course_name = record.response.child_result['course_name'];
-	        			$scope.child_grade_id = record.response.child_result['grade_id'];
-        				$scope.child_course_id = record.response.child_result['course_id'];
-	        			$scope.peer_result = record.response.peer_children_result;
-	        			$scope.child_user_quiz_id = record.response.child_result['id'];
-	        			$scope.child_attempts = record.response.child_result['attempts'];
-	        			$scope.child_quiz_questions = record.response.child_result['quiz_questions'];
-	        			$scope.child_score = record.response.child_result['score'];
-	        			$scope.child_exam_marks = record.response.child_result['exam_marks'];
-	        			$("#menu"+1).addClass('in active');
-	        		}else{
-	        			$scope.err_quiz_message = record.response.message;
-	        		}
-	        	});
-			}else{
+			// to make active first records of loop				
+			var subskillid =  record.response.attention_records[0].course_id;
+			var user_quiz_id =  record.response.attention_records[0].id;
+			loginHttpService.getChildSubskillResult($routeParams.id,subskillid,user_quiz_id).success(function(record) {
+	        	if(record.response.status==true){
+	        		$scope.child_name = record.response.child_result['child_name'];
+	        		$scope.child_score_percentage = (record.response.child_result['score']*100) / record.response.child_result['exam_marks']
+	        		$scope.course_name = record.response.child_result['course_name'];
+	        		$scope.child_grade_id = record.response.child_result['grade_id'];
+        			$scope.child_course_id = record.response.child_result['course_id'];
+	        		$scope.peer_result = record.response.peer_children_result;
+	        		$scope.child_user_quiz_id = record.response.child_result['id'];
+	        		$scope.child_attempts = record.response.child_result['attempts'];
+	        		$scope.child_quiz_questions = record.response.child_result['quiz_questions'];
+	        		$scope.child_score = record.response.child_result['score'];
+	        		$scope.child_exam_marks = record.response.child_result['exam_marks'];
+	        		$("#menu"+1).addClass('in active');
+	        	}else{
+	        		$scope.err_quiz_message = record.response.message;
+	        	}
+			});
+		}else{
 				$scope.blankmsg_areaoffocus= record.response.message;
 			}
 	});
-
 
 	// On click on any one of item in area of focus 
 	$scope.clickAreaOfFocus= function(indx, subskillid,user_quiz_id){
@@ -805,30 +865,33 @@ angular.module('mlg').filter('moment', function() {
     }
 
     
-
     // On click of view Assignment button
     $scope.clickViewAssignment = function(){
     	$('#modal-childQuizView').modal('show');
 
     	// API to show the result of items attempted by child in his/her quiz
 		loginHttpService.getUserQuizResponse($routeParams.id, $scope.child_user_quiz_id).success(function(record) {
-        		if(record.response.status==true){
-        			$scope.userQuizResponse = record.response.user_quiz_response
-        			
-        		}else{
+        	if(record.response.status==true){
+        		$scope.userQuizResponse = record.response.user_quiz_response
+        	}else{
         			$scope.auto_quiz_message = record.response.message;
         		}
-        });
-
-
-
-
-
-    	
-    	
+        }); 	
     }
-
+	//End-  Block Area of focus
     
+
+
+//Start -  Award Block
+loginHttpService.getAwardsofChild($routeParams.id).success(function(record) {
+   	if(record.response.status==true){
+ 		$scope.child_awards = record.response.student_awards_results;
+  	}else{
+		$scope.auto_quiz_message = record.response.message;
+		}
+}); 
+
+//End - Award Block
 
 
 

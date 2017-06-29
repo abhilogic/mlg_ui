@@ -48,17 +48,17 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6" id="bar-chart" ng-controller="studentProgress">
+              <div class="col-md-6" id="bar-chart" >
                 <div class="container-progress-chart">
                   <!---<img src="assets/img/progress-chart-1.png" class="img-responsive" alt="Student Progress"/>-->
                   <canvas id="doughnut" class="chart chart-doughnut"
-                          chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
+                          chart-data="stprogress_data" chart-labels="stprogress_labels" chart-colors="stprogress_colors" chart-options="stprogress_options" chart-dataset-override="datasetOverride">
                   </canvas> 
                 </div>
-                <div class="student-progress-allover">
+                <!-- <div class="student-progress-allover">
                   <p class="text-uppercase">System recommended progress: <b>35%</b></p>
                   <p class="text-uppercase">Class average progress: <b>30%</b></p>
-                </div>
+                </div> -->
               </div>
             </div>
 
