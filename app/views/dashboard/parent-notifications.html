@@ -37,7 +37,7 @@
                 <p ng-if="notifications.analytics != ''" class="para">{{notifications.analytics}}</p>
                 <p ng-if="notifications.analytics == ''" class="para">No events to show</p>
                 <div class="text-right">
-                  <time ng-if="analytics_time != ''" >{{analytics_time.days}} days {{analytics_time.h}} hours {{analytics_time.m}} minutes ago</time>
+                  <time ng-if="notifications.analytics_time != ''" >{{notifications.analytics_time.days}} days {{notifications.analytics_time.h}} hours {{notifications.analytics_time.i}} minutes ago</time>
                 </div>
               </div>
             </div>
@@ -48,9 +48,9 @@
               <div class="media-body">
                 <h5 class="hd text-uppercase"><i class="icon icon-my_subscriptions hidden-lg hidden-md hidden-sm"></i>OFFERS</h5>
                 <p ng-if="notifications.offers != ''" class="para">{{notifications.offers}}</p>
-                <p ng-if="notifications.offers == ''" class="para">NO offers to show</p>
+                <p ng-if="notifications.offers == ''" class="para">No offers to show</p>
                 <div class="text-right">
-                  <time ng-if="offers_time != ''" >{{offers_time.days}} days {{offers_time.h}} hours {{offers_time.m}} minutes ago</time>
+                  <time ng-if="notifications.offers_time != ''" >{{notifications.offers_time.days}} days {{notifications.offers_time.h}} hours {{notifications.offers_time.i}} minutes ago</time>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@
                 <p ng-if="notifications.subcriptions != ''" class="para">{{notifications.subcriptions}}</p>
                 <p ng-if="notifications.subcriptions == ''" class="para">No events to show</p>
                 <div class="text-right">
-                  <time ng-if="subcriptions_time != ''" >{{subcriptions_time.days}} days {{subcriptions_time.h}} hours {{subcriptions_time.m}} minutes ago</time>
+                  <time ng-if="notifications.subcriptions_time != ''" >{{subcriptions_time.days}} days {{subcriptions_time.h}} hours {{subcriptions_time.i}} minutes ago</time>
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@
                 <p ng-if="notifications.coupons != '' " class="para">{{notifications.coupons}}</p>
                 <p ng-if="notifications.coupons == '' " class="para">No coupons to show</p>
                 <div class="text-right">
-                  <time ng-if="coupons_time != ''" >{{coupons_time.days}} days {{coupons_time.h}} hours {{coupons_time.m}} minutes ago</time>                  
+                  <time ng-if="notifications.coupons_time != ''" >{{notifications.coupons_time.days}} days {{notifications.coupons_time.h}} hours {{notifications.coupons_time.i}} minutes ago</time>                  
                 </div>
               </div>
             </div>
