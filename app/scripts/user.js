@@ -911,15 +911,15 @@ loginHttpService.getAwardsofChild($routeParams.id).success(function(record) {
     // Call API to get child details for time spent in dashboard
     // total time spent
 
-    loginHttpService.childTimeSpentOnPlatform({"user_id" : [$routeParams.id]}).success(function(childResponse) {
+    loginHttpService.childTimeSpentOnPlatform({"user_ids" : [$routeParams.id]}).success(function(childResponse) {
       $scope.student_total_time_spent = childResponse.total_duration_in_hrs;
 	});
     // total time spent in week
-    loginHttpService.childTimeSpentOnPlatform({"user_id" : [$routeParams.id]}).success(function(childResponseInWeek) {
+    loginHttpService.childTimeSpentOnPlatform({"user_ids" : [$routeParams.id], "week": -1}).success(function(childResponseInWeek) {
       $scope.student_total_time_spent_in_week = childResponseInWeek.total_duration_in_hrs;
 	});
     // total time spent in month
-    loginHttpService.childTimeSpentOnPlatform({"user_id" : [$routeParams.id]}).success(function(childResponseInMonth) {
+    loginHttpService.childTimeSpentOnPlatform({"user_ids" : [$routeParams.id], "month": -1}).success(function(childResponseInMonth) {
       $scope.student_total_time_spent_in_month = childResponseInMonth.total_duration_in_hrs;
 	});
 
