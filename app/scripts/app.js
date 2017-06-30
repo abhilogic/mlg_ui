@@ -283,7 +283,7 @@ principal  : 30,
 		controller : 'teacherDashboardViewCtrl',
 	}).when('/parent/report/:id',{
 		templateUrl : 'views/dashboard/parent-report.html',
-		controller : 'teacherReportCtrl',
+		controller : 'parentReportCtrl',
 	}).when('/teacher/message',{
 		templateUrl : 'views/dashboard/teacher-message.html',
 		controller : 'teacherMessageCtrl',

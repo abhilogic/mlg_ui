@@ -2153,7 +2153,7 @@ if (typeof $routeParams.slug != 'undefined') {
      });
    }
  ])
-.controller('teacherReportCtrl', ['$scope', 'loginHttpService', '$location', 'urlParams','commonActions','$routeParams','class_students_classification',
+.controller('parentReportCtrl', ['$scope', 'loginHttpService', '$location', 'urlParams','commonActions','$routeParams','class_students_classification',
    function ($scope, loginHttpService, $location, urlParams,commonActions,$routeParams,class_students_classification) { 
       var get_uid=commonActions.getcookies(get_uid);
       var child_id = $routeParams.id;
@@ -2241,7 +2241,7 @@ if (typeof $routeParams.slug != 'undefined') {
           $scope.skill = val; 
         }
       });
-      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkill).success(function(response) {
+      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkills).success(function(response) {
         if(response.status == true){
           $scope.sub_message = '';
           $scope.details = [];
