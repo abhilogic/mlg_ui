@@ -30,7 +30,10 @@
 								<div class="row">
 
 									<div class="col-md-6">
-										<img src="assets/img/progress-chart-1.png" alt="Overall Progress Chart">
+										<!-- <img src="assets/img/progress-chart-1.png" alt="Overall Progress Chart"> -->
+										 <canvas id="doughnut" class="chart chart-doughnut"
+					                          chart-data="stprogress_data" chart-labels="stprogress_labels" chart-colors="stprogress_colors" chart-options="stprogress_options" chart-dataset-override="datasetOverride">
+					                  </canvas> 
 									</div>
 
 									<div class="col-md-6 text-center">
@@ -65,97 +68,59 @@
 							<div class="tab-content tab-content-left col-sm-6 ">
 								<h4 class="category-content text-uppercase no-margin">Areas of Focus</h4>
 								<ul id="myNav" class="nav nav-tabs-analysis row">
-									<li class="active">
-										<a data-toggle="tab" href="#menu">
-												<h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span></h5>
-												<p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-												eiusmod tempor incididunt ut labore et dolore magna aliqua.
-												Ut enim ad minim veniam,</p>
-										</a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#menu1">
-											<h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span></h5>
-											<p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-											eiusmod tempor incididunt ut labore et dolore magna aliqua.
-											Ut enim ad minim veniam,</p>
-										</a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#menu2">
-											<h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span></h5>
-											<p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-											eiusmod tempor incididunt ut labore et dolore magna aliqua.
-											Ut enim ad minim veniam,</p>
-										</a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#menu3">
-											<h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span></h5>
-											<p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-											eiusmod tempor incididunt ut labore et dolore magna aliqua.
-											Ut enim ad minim veniam,</p>
-										</a>
-									</li>
+									<li class="active" ng-if="blankmsg_areaoffocus==null" ng-repeat="atnRecord in strecords">
+					                  <a data-toggle1="tab" ng-click="clickAreaOfFocus($index+1, atnRecord.course_id, atnRecord.id)">
+					                      <h5 class="nav__title">MATHS - <span>{{atnRecord.course_name}}</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
+					                      <h6>
+					                          <span><strong>Username:</strong> {{atnRecord.username}}</span>  
+					                          <span><strong>  Student Name:</strong> {{atnRecord.first_name +' '+atnRecord.last_name}} </span>
+					                      </h6>
+					                      <p class="nav__text">                        
+					                          <span><strong>Result On :</strong> {{atnRecord.quiz_type_name}}</span><br>
+					                          <span ><strong>Attempt :</strong> {{atnRecord.attempts}} OUT OF: {{atnRecord.quiz_questions}} </span><br>
+					                          <span ><strong>Scored :</strong> {{atnRecord.score}} OUT OF: {{atnRecord.exam_marks}} </span><br>
+					                           <span ><strong>Scored(%) :</strong> {{ ((atnRecord.score/atnRecord.exam_marks)*100)|number :2 }} % </span>
+					                      </p>
+					                  </a>
+
+					                </li>                
+					                <li ng-if="blankmsg_areaoffocus"><h5 style="color:green">{{blankmsg_areaoffocus}}</h5></li>
+
 								</ul>
 								<h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
 							</div>
 
 							<div class="tab-content tab-content-right col-sm-6">
-								<div id="menu" class="tab-pane fade in active">
-									<h3 class="nav__title text-center">MATHS - <span>H.C.F & L.C.M</span></h3>
+								<div id="menu{{$index+1}}" class="tab-pane fade" ng-repeat="atnRecord in strecords" >
+									<h3 class="nav__title text-center">MATHS - <span>{{course_name}}</span></h3>
 
 									 <ul class="list-unstyled list_scoreAnalysis">
 											 <li>
-												 Andrew's Score <span class="text-danger score__value">42</span>
+												 {{child_name}} 
+												 <span class="text-danger score__value">{{child_score_percentage | number:2}}</span>
 											 </li>
 											 <li>
-												 Peer Group Average <span class="text-warning score__value">42</span>
+												 Peer Group Average 
+												 <span class="text-warning score__value">{{peer_result}}</span>
 											 </li>
 											 <li>
-												 Class Average <span class="text-succes score__value">42</span>
-											 </li>
+												 Class Average 
+												 <span class="text-warning score__value">{{peer_result}}</span>
+											 </li>											 
 									 </ul>
 									 <br>
-									 <h5 class="text-uppercase">Problem Areas:</h5>
-									 <div class="tags-problems-area">
-										 <h4>
-											 <span class="label label-danger">Loreum ipsum dolor sit</span>
-											 <span class="label label-danger">dolor sit</span>
-											 <span class="label label-danger">ipsum dolor</span>
-										 </h4>
+									
+									 <div class="row">
+									 	<div class="col-lg-6">
+									 		<!-- <button type="button" class="btn btn-outline btn-danger text-uppercase btn-block border-radius-0" ng-click="clickSendAssignment()">SEND ASSIGNMENT</button> -->
+									 		<button type="button" class="btn btn-outline btn-danger text-uppercase btn-block border-radius-0"  data-toggle="modal"  title="The platform will automatically send an assignment to close your child's gap"  data-toggle="modal" data-target="#modal-parentAssignment">SEND ASSIGNMENT</button>
+									 	</div>
+										<div class="col-lg-6">										
+											<button type="button" class="btn btn-outline btn-purple text-uppercase btn-block border-radius-0" ng-click="clickViewAssignment()">VIEW ASSIGNMENT</button>
+										</div>
 									 </div>
-									 <br>
-									 <div class="text-center">
-										 <button class="btn btn-default btn-outline" data-toggle="modal" data-target="#modal-parentAssignment">Create Assignment</button>
-									 </div>
-								</div>
-
-								<div id="menu1" class="tab-pane fade">
-									<!-- remove below image in the case of using plugins -->
-									 <img src="assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
-
-									 <br>
-									 <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
-								</div>
-
-								<div id="menu2" class="tab-pane fade">
-									<!-- remove below image in the case of using plugins -->
-									 <img src="assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
-
-									 <br>
-									 <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
-								</div>
-
-								<div id="menu3" class="tab-pane fade">
-									<!-- remove below image in the case of using plugins -->
-									 <img src="assets/img/student-gap-analysis/analysis_img_1.png" alt="" class="img-responsive"/>
-
-									 <br>
-									 <div class="text-center"><button type="button" class="btn btn-default btn-outline">CREATE ASSIGNMENT</button></div>
 								</div>
 							</div>
-
 						</div>
 					</div>
 					<!-- /student gap analysis panel  -->
@@ -166,108 +131,27 @@
 							<h5 class="panel-title text-uppercase">Awards Achived</h5>
 						</div>
 						<div class="panel-body">
-							<div award-carousel class="award-achived owl-carousel">
-								<div class="item ">
-									<img src="assets/img/award-achived-img/logo_2.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">Level Up to 6th</h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_4.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">Achieved a new Skill in Maths</h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_1.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">3 Challenges Completed</h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_3.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">Conquered a Castle</h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_2.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">Level Up to 7<sup>th</sup></h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_2.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">Level Up to 6th</h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_4.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">Achieved a new Skill in Maths</h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_1.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">3 Challenges Completed</h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_3.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">Conquered a Castle</h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-								<div class="item">
-									<img src="assets/img/award-achived-img/logo_2.png" alt="" class="award-achived-logo">
-									<h5 class="award-hd">Level Up to 7<sup>th</sup></h5>
-									<ul class="list-inline social-share">
-										<li><span>Share</span></li>
-										<li><a href="#" class="fa fa-facebook-square"></a></li>
-										<li><a href="#" class="fa fa-instagram"></a></li>
-										<li><a href="#" class="fa fa-twitter-square"></a></li>
-									</ul>
-								</div>
-							</div>
+						
+							 <data-owl-carousel class="owl-carousel owl-theme award-achived" data-options="{margin: 0, loop: false,nav:true, responsive: { 0: {items: 1}, 600: {items:4}, 1000: {items:6} }}">
+                 					 <div owl-carousel-item=""  class="item" ng-repeat="award in child_awards" class="item">      
+                      						 <img src="assets/img/award-achived-img/logo_1.png" alt="" class="award-achived-logo" ng-if="award.badge_type=='red_badge' ">
+									
+											<img src="assets/img/award-achived-img/logo_2.png" alt="" class="award-achived-logo" ng-if="award.badge_type=='green_badge' ">
+											
+											<img src="assets/img/award-achived-img/logo_4.png" alt="" class="award-achived-logo" ng-if="award.badge_type=='star_badge' ">
+											
+											<img src="assets/img/award-achived-img/logo_3.png" alt="" class="award-achived-logo" ng-if="award.badge_type=='crown_badge' "> 
+											
+											<h5 class="award-hd">{{award.marks_percentage | number:0}} % in {{award.quiz_type}} {{award.course_name}}</h5>
+											<ul class="list-inline social-share">
+												<li><span>Share</span></li>
+												<li><a href="#" class="fa fa-facebook-square"></a></li>
+												<li><a href="#" class="fa fa-instagram"></a></li>
+												<li><a href="#" class="fa fa-twitter-square"></a></li>
+											</ul>
+                  					</div>
+             				 </data-owl-carousel>
+
 						</div>
 					</div>
 					<!-- award achived  -->
@@ -283,6 +167,7 @@
 
 	</div>
 	
+	<!-- To send assignment -->
 	<section class="modal-section">
 		<!-- Modal -->
 		<div id="modal-parentAssignment" class="modal fade modal-parentAssignment" role="dialog">
@@ -294,18 +179,130 @@
 		        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
 		      </div>
 		      <div class="modal-body">
-		        <p>Confirm Sending an Assignment</p>
-						<div class="confirm-success-msg">
-							<i class="icon icon-check"></i>
-							<p>Your assignment has been succefully  sent to  your child</p>
-						</div>
+		        <p>Confirmation before Sending an Assignment</p>
+				<div class="confirm-success-msg">
+					<i class="icon icon-check"></i>
+					<p>Are you sure, You want to send extra practice to your child. Please confirm.</p>
+				</div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-background-none" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-primary" onclick="showTargetElement('.modal-parentAssignment .modal-content', 'success')">Confirm</button>
+				<button type="button" class="btn btn-primary" ng-click="confirmSendAssignment(child_grade_id, child_course_id)">Confirm</button>
 		      </div>
+		    </div>
+		  </div>
+		</div>
+	</section>
+
+	<!-- model to show the sucess full send assignment to his/her child -->
+	<section class="modal-section">
+		<!-- Modal -->
+		<div id="modal-parentAssignmentsubmitted" class="modal fade modal-parentAssignment" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+		      </div>
+		      <div class="modal-body">
+		        <p>Assignment has been sent.</p>
+				<div class="confirm-success-msg">
+					<i class="icon icon-check"></i>
+					<p>Your assignment has been sent succefully to your child.</p>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <!-- <button type="button" class="btn btn-background-none" data-dismiss="modal">OK</button> -->
+				<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</section>
+
+
+
+	<!-- To view Result of Quiz of child -->
+	<section class="modal-section">
+		<!-- Modal -->
+		<div id="modal-childQuizView" class="modal fade modal-childQuizView" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+		      </div>
+		      <div class="modal-body">
+			        
+			        <!-- Student List Panel  -->
+					<div class="panel panel-flat panel-view-assignement">
+						<div class="panel-heading">
+							<h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i></h5>
+						</div>
+						<div class="panel-body">
+              				<div class="row">
+                				<div class="col-md-6">
+                  					<img src="assets/img/papar-pencile.svg" class="img-repsonsive assignment-img" alt=""/>
+                				</div>
+                				<div class="col-md-6">
+	                  				<h5 class="assignment_name">{{course_name}}</h5>
+	                  				<table class="table table-assignment-status">
+	                    				<tr>
+	                      					<td>Total No. of Questions:</td>
+	                      					<td>{{child_quiz_questions}}</td>
+	                    				</tr>	                    				
+	                    				<tr>
+	                      					<td>Attempted:</td>
+	                      					<td>{{child_attempts}}</td>
+	                    				</tr>
+	                    				<tr>
+	                      					<td>Quiz Marks:</td>
+	                      					<td>{{child_exam_marks}}</td>
+	                    				</tr>
+	                    				<tr>
+	                      					<td>Score:</td>
+	                      					<td>{{child_score}}</td>
+	                    				</tr>	                    				
+	                 				</table>
+                				</div>
+             				 </div>
+             				<div class="panel panel-flat">
+                				<div class="panel-heading">
+                  					<h5 class="panel-title">Assignment Brief</h5>
+                				</div>
+	                			<div class="panel-body">
+	                  				<div class="assignment-block" ng-repeat="qresponse in userQuizResponse">
+	                    				<h5 class="ques" ng-bind-html="$index+1 +'. '+qresponse.questionName "></h5>
+	                    				<p class="no_of_student_attempted">Answer by student: {{qresponse.response}}</p>
+	                    				
+
+	                    				<span class="ans_status correct" ng-if="qresponse.correct==1"><i class="icon icon-tick"></i> Correct</span>
+
+	                    				<span class="ans_status wrong" ng-if="qresponse.score==0 && qresponse.skip_count==0"><i class="icon icon-close"></i> Wrong</span>
+
+	                    				<span class="ans_status wrong" ng-if="qresponse.skip_count==1"><i class="icon icon-close"></i> SKIP</span>
+	                  				</div>                  				
+
+	                  				<div class="text-center">
+										<button type="button" class="btn btn-primary panel-view-assignement btn-submit" data-dismiss="modal">Ok</button>
+									</div>
+	                			</div>
+              				</div>
+						</div>
+					</div>
+					<!-- /student list panel  -->
+
+		      </div> <!-- model body -->
+		      <!-- <div class="modal-footer">
+		        <button type="button" class="btn btn-background-none" data-dismiss="modal">OK</button>
+						
+		      </div> -->
 		    </div>
 
 		  </div>
 		</div>
 	</section>
+
+

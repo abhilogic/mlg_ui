@@ -59,7 +59,7 @@ student : 4,
   PRETEST : '3',
   SUBSKILLQUIZ : '15',
   KNIGHTCHALLENGE :'15',
-  PRACTICES : '10',  
+  PRACTICE : '10',  
 }).value('quiz_type', {
       PRETEST            : 1,
       SUBSKILLQUIZ       : 2,

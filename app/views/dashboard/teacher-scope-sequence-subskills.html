@@ -15,9 +15,9 @@
 					<!-- Teacher Setting  Panel  -->
 					<div class="panel panel-flat panel panel-scope-sequence">
 						<div class="panel-heading padding-bottom-5">
-							<h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i><span ng-repeat="skill in Skills">
+							<a href="/teacher/scope-sequence/grade_id/"><h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i><span ng-repeat="skill in Skills">
                     <h4 class="hd">{{skill.name}}</h4>
-                  </span></h5>
+                  </span></h5></a>
 						</div>
 						<div class="panel-body">
 							<form class="form">
@@ -55,24 +55,37 @@
 															<h5 class="topic_name margin-sm-top-0"><i class="icon icon-drag"></i>{{subskill.name}}</h5>
 															</div>
 															<div class="col-md-7 text-right text-sm-left margin-sm-top-15">
-															<h5>START DATE : {{subskill.start_date}}</h5>
+                              <h5 ng-if="(auto_progression == true) && (auto_progression_for == 'all_class')">
+                                  START DATE :{{subskill.start_date}}</h5>
+                              <h5 ng-if="(auto_progression == true) && (auto_progression_for == 'group') && (auto_progression_for_group == grpId)">
+                                START DATE :{{subskill.start_date}}</h5>
+                              <h5 ng-if="(auto_progression == true) && (auto_progression_for == 'individual') && (auto_progression_for_individual == grpId)">
+                                START DATE :{{subskill.start_date}}</h5>
 															</div>
 														</div>
 													</div>
 													<div class="col-lg-5 col-lg-offset-2">
 														<div class="row">
 															<div class="col-md-7">
-																<h5 class="margin-sm-top-0">{{subskill.end_date}}</h5>
+                                <h5 class="margin-sm-top-0" 
+                                    ng-if="(auto_progression == true) && (auto_progression_for == 'all_class')">
+                                  END DATE :{{subskill.end_date}}</h5>
+                                <h5 class="margin-sm-top-0"
+                                    ng-if="(auto_progression == true) && (auto_progression_for == 'group')&& (auto_progression_for_group == grpId)">
+                                  END DATE :{{subskill.end_date}}</h5>
+                                <h5 class="margin-sm-top-0"
+                                 ng-if="(auto_progression == true) && (auto_progression_for == 'individual')&& (auto_progression_for_individual == grpId)">
+                                  END DATE :{{subskill.end_date}}</h5>
 															</div>
                               <div class="col-md-5 text-right text-sm-left margin-top-5">
 																<div class="checkbox checkbox-switchery checkbox-inline switchery-sm switchery-double">
                                   <label>
                                   <input class="js-switch" type="checkbox" >
                                   <span class="off">OFF</span>
-                                  <span class="switchery switchery-default {{subskill.course_id}}"ng-if="subskill.visibility == '1'">
+                                  <span class="switchery switchery-default switchery-subskills {{subskill.course_id}}"ng-if="subskill.visibility == '1'">
                                     <small></small>
                                   </span>
-                                  <span class="switchery switchery-default off {{subskill.course_id}}" ng-if="subskill.visibility != '1'">
+                                  <span class="switchery switchery-default switchery-subskills off {{subskill.course_id}}" ng-if="subskill.visibility != '1'">
                                   <small></small>
                                   </span>
                                   <span class="on">ON</span>
@@ -165,7 +178,29 @@
 						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
 					</div>
 					<div class="modal-body">
-						<input type="text" class="form-control" placeholder="Add Skills" ng-model="frm.newSubSkill">
+						<input type="text" class="form-control" placeholder="Add Sub Skills" ng-model="frm.newSubSkill"></br>
+             <div class="col-xs-6" ng-if="(auto_progression == true) && (auto_progression_for == 'all_class')">
+                  <label>Start Date :</label> <input type="text" ng-model="startDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div> 
+                <div class="col-xs-6" ng-if="(auto_progression == true) && 
+                     (auto_progression_for == 'group') && (auto_progression_for_group == grpId)">
+                  <label>Start Date :</label> <input type="text" ng-model="startDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div> 
+                <div class="col-xs-6" ng-if="(auto_progression == true) && 
+                     (auto_progression_for == 'individual') && (auto_progression_for_individual == grpId)">
+                  <label>Start Date :</label> <input type="text" ng-model="startDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div>
+                <div class="col-xs-6" ng-if="(auto_progression == true) && (auto_progression_for == 'all_class')">
+                  <label>End Date :</label><input type="text" ng-model="endDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div> 
+                <div class="col-xs-6" ng-if="(auto_progression == true) && 
+                     (auto_progression_for == 'group') && (auto_progression_for_group == grpId)">
+                  <label>End Date :</label><input type="text" ng-model="endDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div> 
+                <div class="col-xs-6" ng-if="(auto_progression == true) && 
+                     (auto_progression_for == 'individual') && (auto_progression_for_individual == grpId)">
+                  <label>End Date :</label><input type="text" ng-model="endDate" jqdatepicker /> <!-- {{ date }}  -->
+                </div>
 					</div>
 					<div class="modal-footer text-right border-0">
 						<button type="button" class="btn btn-background-none" data-dismiss="modal">Close</button>

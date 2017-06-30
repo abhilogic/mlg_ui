@@ -1,12 +1,16 @@
-	<div class="subject_door_page">
-		<div class="main_cover subject_door">
+
+	
+		<div class="subject_door">
 			<div class="main_wrapper">
 				<header></header>
 			</div>
-			
+			<!-- main_container -->
+
+			<!-- Change adding animate gate gif image in all subject-gate -->
 			<div class="main_container">
-				<ul class="subject_gate_cover">
-					<li class="item" ng-repeat="subject in subject_detail">
+				<ul class="subject_gate_cover" style="">
+
+				<li class="item" ng-repeat="subject in subject_detail">
 						<div class="subject_board"><span><i class="fa fa-check"></i> {{subject.name}}</span></div>
 						<a href="sub-skill/{{ subject.name |changeInURL}}/{{subject.course_id}}">
 							<div class="subject_gate">
@@ -14,7 +18,8 @@
 							</div>
 						</a>
 					</li>
-					<!-- knight challenge status locked -->
+					
+						<!-- knight challenge status locked -->
 					<li class="item locked" ng-if="kstatus!=1"  ng-click="show_knight_mascot();">
 						<div class="subject_board"><span><i class="fa fa-check"></i> Knight Challanges</span></div>
 						<a href=""><div class="challenge_gate"></div></a>
@@ -25,15 +30,14 @@
 						<div class="subject_board"><span><i class="fa fa-check"></i> Knight Challanges</span></div>
 						<a href="knight-challenge/{{URLskill_name}}/{{URLskill_id}}"><div class="challenge_gate"></div></a>
 					</li>
+					
 
 				</ul>
 			</div>
+			<!-- main_container -->
 	</div>
-	<!--start- chating-->
-	
-	<!--end- chating-->
-</div>
-<!-- masscourts block -->
+
+	<!-- masscourts block -->
 <div class="masscourt-block active" id="skillmascot">
 			<div class="masscourt-cover in">
 				<img ng-src="assets/img/mascort-img/{{mascot_img}}" class="masccort-img" alt=""/>
@@ -52,6 +56,9 @@
 				</div>
 			</div>
 </div>
+
+
+
 
 <div class="masscourt-block" id="knight_challanges">
 			<div class="masscourt-cover in">
@@ -74,17 +81,17 @@
 			</div>
 </div>
 		<!-- masscourts block -->
-		<!-- plugins -->
-    <div class="loader" loading>
+
+	
+
+	<!-- page loader  -->
+	<div class="loader" loading>
 		<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
 	</div>
-	
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-		<script src="assets/js/plugins/jquery.transit.min.js"></script>
-		<!-- plugins -->
-		<script src="assets/js/main.js"></script>
+	<!-- page loader  -->
+		<!-- Latest compiled and minified jQuery -->
 		
+		<!-- page specific js  -->
 		<script type="text/javascript">
 			$(document).ready(function(){
 				function navbarPos() {
@@ -97,31 +104,45 @@
 				$(window).resize(function(){
 					navbarPos();
 				});
-				$(".subject_door_page").mCustomScrollbar({
+				$("body").mCustomScrollbar({
 					horizontalScroll: true,
+					
 				});
+				// preventing the anchor default click
+				/*$('.subject_gate_cover li a').click(function(event) {
+				    event.preventDefault();
+						$(this).children("div").addClass("open");
+						$(this).find(".open-gate-animation").attr("src","assets/img/subject_animate_gate.gif");
+						var href= $(this).attr("href");
+						console.log(href);
+						var url = document.location.href;
+						url = url.replace("http://","");
+						if(url.indexOf("\/")>=0){
+							url = url.substr(0,url.lastIndexOf("\/"));
+							url= "http://"+url+"/";
+						 }
+						 else {
+							 url = document.location.href;
+						 }
+						 console.log(url);
+						setTimeout(function(){
+			        window.location.href = (url + href);
+					 },1800);
+				});
+				// subject_door width js
+				var numOfDoor = $(".item").length;
+				var subject_door_width = 256*numOfDoor;
+				$(".subject_door").width(subject_door_width + "px");
 
-				/*var owl = $('.subject_gate_cover');
-        owl.owlCarousel({
-          margin: 0,
-          loop: false,
-					mouseDrag: false,
-          responsive: {
-            375: {
-              items: 10
-            },
-            600: {
-              items: 10
-            },
-            1000: {
-              items: 10
-            }
-          }
-        });*/
-				$(".subject_gate").click(function(){
-					$(".subject_gate").removeClass("open");
-					$(this).addClass("open");
-					$("body").transition({ scale: 4,  x: 35, y: -104, opacity: 0},5000);
-				});
+				// placement of the door
+				subject_door_width = $(".subject_door").width();
+				subject_door_width = parseInt(subject_door_width);
+				var total_gap_width = (subject_door_width - 256*numOfDoor);
+				var numOfGaps = numOfDoor + 1;
+				var gaps = (total_gap_width/numOfGaps)/2;
+				var marginLR = gaps + "px";
+					$(".subject_gate_cover .item").css({"margin-left":marginLR, "margin-right":marginLR});*/
 			});
 		</script>
+		<!-- page specific js  -->
+	

@@ -48,17 +48,17 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6" id="bar-chart" ng-controller="studentProgress">
+              <div class="col-md-6" id="bar-chart" >
                 <div class="container-progress-chart">
                   <!---<img src="assets/img/progress-chart-1.png" class="img-responsive" alt="Student Progress"/>-->
                   <canvas id="doughnut" class="chart chart-doughnut"
-                          chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
+                          chart-data="stprogress_data" chart-labels="stprogress_labels" chart-colors="stprogress_colors" chart-options="stprogress_options" chart-dataset-override="datasetOverride">
                   </canvas> 
                 </div>
-                <div class="student-progress-allover">
+                <!-- <div class="student-progress-allover">
                   <p class="text-uppercase">System recommended progress: <b>35%</b></p>
                   <p class="text-uppercase">Class average progress: <b>30%</b></p>
-                </div>
+                </div> -->
               </div>
             </div>
 
@@ -80,42 +80,30 @@
             <div class="row">
               <div class="tab-content tab-content-left col-sm-6">
                 <h4 class="category-content text-uppercase no-margin">Needs Your Attention</h4>
+                
                 <ul id="myNav" class="nav nav-tabs-analysis row">
-                  <li class="active">
-                    <a data-toggle="tab" href="#menu">
-                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
-                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam,</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#menu1">
-                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="outstanding status"><i class="fa fa-circle"></i></span></h5>
-                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam,</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#menu2">
-                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="ontarget status"><i class="fa fa-circle"></i></span></h5>
-                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam,</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a data-toggle="tab" href="#menu3">
-                      <h5 class="nav__title">MATHS - <span>H.C.F & L.C.M</span> <span class="struggling status"><i class="fa fa-circle"></i></span></h5>
-                      <p class="nav__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam,</p>
-                    </a>
-                  </li>
+                  <li class="active" ng-repeat="atnRecord in st_atnrecords">
+                      
+                      <a data-toggle1="tab" ng-click="clickNeedAttention($index+1, atnRecord.course_id)">
+                      <h5 class="nav__title">MATHS - <span>{{atnRecord.course_name}}</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
+                      <h6>
+                          <span><strong>Username:</strong> {{atnRecord.username}}</span>  
+                          <span><strong>  Student Name:</strong> {{atnRecord.first_name +' '+atnRecord.last_name}} </span>
+                      </h6>
+                      <p class="nav__text">                        
+                          <span><strong>Result On :</strong> {{atnRecord.quiz_type_name}}</span><br>
+                          <span ><strong>Attempt :</strong> {{atnRecord.attempts}} OUT OF: {{atnRecord.attempts}} </span><br>
+                          <span ><strong>Scored :</strong> {{atnRecord.score}} OUT OF: {{atnRecord.exam_marks}} </span><br>
 
-                  
+                          <span ><strong>Scored(%) :</strong> {{ ((atnRecord.score/atnRecord.exam_marks)*100)|number :2 }} % </span>
+
+                      </p>
+                  </a>
+                  </li>
+                  <li ng-if="attention_message"><h5 style="color:green">{{attention_message}}</h5></li>                 
                 </ul>
+
+
                 <h5 class="text-center"><a class="fa fa-2x fa-angle-down link link-gray-light"></a></h5>
               </div>
 
@@ -139,6 +127,8 @@
                     </li>
                   </ul>
                 </div>
+
+
                 <div id="menu" class="tab-pane fade in active">
                   <!-- remove below image in the case of using plugins -->
                   <div class="analysis-chart-container" ng-controller="subjectPerformance">
@@ -155,50 +145,10 @@
                   </div>
                 </div>
 
-                <div id="menu1" class="tab-pane fade">
-                  <!-- remove below image in the case of using plugins -->
-                  <div class="analysis-chart-container">
-                    <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
-                  </div>
-                  <div class="row">
-                    <div class="text-center col-sm-8 col-sm-offset-2">
-                      <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-                      <br>
-                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-                    </div>
-                  </div>
-                </div>
+         
 
-                <div id="menu2" class="tab-pane fade">
-                  <!-- remove below image in the case of using plugins -->
-                  <div class="analysis-chart-container">
-                    <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
-                  </div>
-                  <div class="row">
-                    <div class="text-center col-sm-8 col-sm-offset-2">
-                      <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-                      <br>
-                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-                    </div>
-                  </div>
-                </div>
 
-                <div id="menu3" class="tab-pane fade">
-                  <!-- remove below image in the case of using plugins -->
-                  <div class="analysis-chart-container">
-                    <img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>
-                  </div>
-
-                  <div class="row">
-                    <div class="text-center col-sm-8 col-sm-offset-2">
-                      <a href="teacher-autoGenerateAssignment.html" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
-                      <br>
-                      <a href="teacher-createCustomAssignement.html" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
-                    </div>
-                  </div>
-                </div>
               </div>
-
             </div>
           </div>
 

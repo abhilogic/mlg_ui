@@ -105,11 +105,21 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   scopeAndSequenceTemplate : '/teachers/saveScopesAsTemplate',
   scopeAndSequence : '/teachers/saveScopesAsSequence',
   getScopeTemplates : '/teachers/getScopeTemplate',
-  getNeedAttention : '/teachers/getNeedAttention',
+  getNeedAttentionForTeacher : '/teachers/getNeedAttentionForTeacher',
+  getNeedAttentionOFStudent : '/teachers/getNeedAttentionOFStudent',  
   getSubskillAnalytic : '/teachers/getSubskillAnalytic',
   getNotificationForParent : '/users/getNotificationForParent',
-
-  
+  getAreaOfFocusForParent :'/users/getAreaOfFocusForParent',
+  getChildSubskillResult :'/users/getChildSubskillResult', 
+  setAutoAssignmentByParents :'/users/setAutoAssignmentByParents',
+  getUserQuizResponse :'/users/getUserQuizResponse', 
+  getParentChildReport : '/users/getParentChildReport',  
+  getParentChildAssignment : '/users/getParentChildAssignment',
+  getParentChildReward : '/users/getParentChildReward',
+  getParentChildrenSubjects : '/users/getParentChildrenSubjects',
+  filterParentChildReport : '/users/filterParentChildReport',
+  getStudentProgress :'/students/getStudentProgress',
+  getAwardsofChild :'/students/getAwardsofChild', 
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -165,6 +175,20 @@ principal  : 30,
 	ON_TARGET  	: 85,  //student scored 80 to 85
 	OUTSTANDING : 95,  // student scored 86 to 95
 	GIFTED		: 100     // 96 to 100
+}).value('questionslimit', {
+  PRETEST : 3,
+  SUBSKILLQUIZ : 15,
+  KNIGHTCHALLENGE :15,
+  PRACTICE : 10,
+  PARENTS_ASSIGNMENT :15,  
+}).value('quiz_type', {
+      PRETEST            : 1,
+      SUBSKILLQUIZ       : 2,
+      PRACTICE          : 3, 
+      KNIGHTCHALLENGE    : 4,
+      TEACHERCUSTOMASSIGNMENT : 5,
+      TEACHERAUTOASSIGNMENT : 6, 
+      PARENTAUTOASSIGNMENT :7,
 })
 .config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	var access = routingConfig.accessLevels;
@@ -256,7 +280,7 @@ principal  : 30,
 	}).when('/teacher/dashboard/class/:gradeid/:subject_name/:courseid',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
 		controller : 'teacherDashboardViewCtrl',
-	}).when('/parent/report',{
+	}).when('/parent/report/:id',{
 		templateUrl : 'views/dashboard/parent-report.html',
 		controller : 'teacherReportCtrl',
 	}).when('/teacher/message',{
@@ -556,8 +580,6 @@ $scope.userInfo=userInfo;
 };
 
 })
-
-
 .directive('topSearchBar', function () {
 return {
 	restrict: 'E',
@@ -609,12 +631,53 @@ return {
                // dateFormat: 'DD, d  MM, yy',
                dateFormat: 'yy-mm-d',
                 onSelect: function (date) {
+                  if(attrs.ngModel== 'startDate' ) {
+                    scope.startDate = date;
+                  }else if(attrs.ngModel== 'endDate') {
+                    scope.endDate = date;
+                  }else{
                     scope.date = date;
-                    scope.$apply();
+                  } 
+                  scope.$apply();
                 }
             });
         }
     };
-});
+})
+.directive("owlCarousel", function() {
+  return {
+    restrict: 'E',
+    transclude: false,
+    replace : true,
+    link: function (scope) {
+      scope.initCarousel = function(element) {
+        // provide any default options you want
+        var defaultOptions = {};
+        var customOptions = scope.$eval($(element).attr('data-options'));
+        // combine the two options objects
+        for(var key in customOptions) {
+          defaultOptions[key] = customOptions[key];
+        }
+
+        // init carousel
+        $(element).owlCarousel(defaultOptions);
+      };
+    }
+  };
+})
+.directive('owlCarouselItem', [function() {
+  return {
+    restrict: 'A',
+    transclude: false,
+    link: function(scope, element) {
+      // wait for the last item in the ng-repeat then call init
+      if(scope.$last) {
+        scope.initCarousel(element.parent());
+      }
+    }
+  };
+}]);
+
+
 
 

@@ -191,10 +191,10 @@ angular.module('mlg_student')
 		});
 	}
 
-	loginHttpResponse.getStudentAssignments = function(uid){
+	loginHttpResponse.getStudentAssignments = function(uid,course_id){ //course_id may be subject_id or skill_id
       return $http({
           method:'GET',
-          url   : urlParams.baseURL+urlParams.getStudentAssignments + '/' + uid
+          url   : urlParams.baseURL+urlParams.getStudentAssignments + '/' + uid+'/'+course_id
       });
 	}
 
@@ -739,15 +739,15 @@ promise.then(function(result) {
 	        	$("#pretestmasscourt_id").removeClass("active");
 	        } 
 	        else if(st_result=='pass'){
-	        	window.location.href='skill-door/whole-numbers/13';
+	        	window.location.href='subject-view/'+$routeParams.id;
 	        } else if(st_result=='fail') {
-	        	window.location.href='skill-door/whole-numbers/13';
+	        	window.location.href='subject-view/'+$routeParams.id;
 	        }  
 	        else{
 	        	$("#pretestmasscourt_id").removeClass("active");
 	        }                   
 		}
-
+ 
 
 	  	$scope.submitQuestion=function(frm){
 	  		//console.log(frm);	
@@ -876,7 +876,7 @@ promise.then(function(result) {
 		  								var st_result="";
 		  								if(quizResultResponse.response. student_result_percent < quiz_mastered_score.PRETEST){
 		  									$scope.st_result= "fail";
-		  									$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
+		  									$scope.masscourt_message="Opps.. Your require more practice.";
 						 						
 						 						//alert("Your are Fail");
 						 						//$("#mascot_quiz").removeClass("active");
@@ -942,6 +942,10 @@ promise.then(function(result) {
 	$scope.course_name = result.data.response.course_Information.course_name;
 	$scope.selected_subject = result.data.response.parent_info_of_skill.course_name;
 	
+	$scope.skill_id_URL = result.data.response.skill_info_of_subskill.id;
+	var skillname = result.data.response.skill_info_of_subskill.course_name.toLowerCase();
+	$scope.skill_name_URL =	skillname.replace(/\s+/g, '-'); 
+	
 		 $scope.numToAlpha =function(idx) {
           var getAlpha = ['A','B','C','D','E','F','G'];
           return getAlpha[idx];
@@ -965,9 +969,9 @@ promise.then(function(result) {
 
 
 	// To maintain old quiz questions if user quize questions response is incomplete
-	var localQuizResponse = JSON.parse(localStorage.getItem('localQuizResponse'));
-	var localQuestions= JSON.parse(localStorage.getItem('ngStorage-localquestions'));
-	if(localQuizResponse ==null && localQuestions==null ){
+	var localsubskillQuizResponse = JSON.parse(localStorage.getItem('localsubskillQuizResponse'));
+	var localsubskillquestions= JSON.parse(localStorage.getItem('ngStorage-localsubskillquestions'));
+	if(localsubskillQuizResponse ==null && localsubskillquestions==null ){
 		
 		// API to create quiz and questions list of quiz created for user 
 		loginHttpService.createQuizOnStudent(senddata).success(function(resitem){
@@ -977,8 +981,8 @@ promise.then(function(result) {
 				var quizquestions = resitem.data.questions;
 
 				//local storage functionality implementation
-		  		$localStorage.localquestions= quizquestions; //set value in local storage	  	
-		  		$scope.data.questions= $localStorage.localquestions //get value in localstorage
+		  		$localStorage.localsubskillquestions= quizquestions; //set value in local storage	  	
+		  		$scope.data.questions= $localStorage.localsubskillquestions //get value in localstorage
 
 
 
@@ -988,7 +992,7 @@ promise.then(function(result) {
 		  		}else{
 		  			$scope.sequence=0;	  				  			
 		  			var a=[];
-		  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+		  			localStorage.setItem('localsubskillQuizResponse', JSON.stringify(a));
 		  		}
 
 		  		// Set current question
@@ -1014,13 +1018,16 @@ promise.then(function(result) {
 			  	$scope.questions_status = attempt_questions_status;		  		
 
 			}else{
-					$scope.message = "Issue in traversing page";
+					//$scope.message = "Issue in traversing page";
+					$scope.creatquiz_message = "Soon Quiz will generate for you. Till then read lesson"+
+												"<br><br><a href='subskill_content/"+$routeParams.subskill_name+"/"+$routeParams.subskill_id+"'> Click here</a>"
+					;
 			}
-		}); // end createquiz APi
+		}); // end createquiz APi 
 			
 
 	}else{ // if quiz attemped incomplete then pick question from localstorage
-		$scope.data.questions= $localStorage.localquestions;
+		$scope.data.questions= $localStorage.localsubskillquestions;
 		
 		// To check the sequence of the question in quiz	  	
 	  		if(localStorage.getItem('userQuesSequence')!=null && localStorage.getItem('userQuesSequence') !=0 ) {
@@ -1028,7 +1035,7 @@ promise.then(function(result) {
 	  		}else{
 	  			$scope.sequence=0;
 	  			var a=[];
-	  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
+	  			localStorage.setItem('localsubskillQuizResponse', JSON.stringify(a));
 	  		}	  	
 	  	
 	  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
@@ -1070,9 +1077,9 @@ promise.then(function(result) {
         	$("#skillquizmasscourt_id").removeClass("active");
         } 
         else if(st_result=='pass'){
-        	window.location.href='skill-door/whole-numbers/13';
+        	window.location.href='skill-door/'+$scope.skill_name_URL+'/'+$scope.skill_id_URL;
         } else{
-        	window.location.href='subskill_content/place-values-in-whole-numbers/18';
+        	window.location.href='subskill_content/'+$routeParams.subskill_name+'/'+$routeParams.subskill_id;
         }                     
 	}
 	
@@ -1198,9 +1205,9 @@ promise.then(function(result) {
 			//3.1 Add the quiz response in local storage
        		//var b;
        		//console.log(a); 
-       		a = JSON.parse(localStorage.getItem('localQuizResponse')); 
+       		a = JSON.parse(localStorage.getItem('localsubskillQuizResponse')); 
        		a.push(userExamResponse); 
-    		localStorage.setItem('localQuizResponse', JSON.stringify(a));
+    		localStorage.setItem('localsubskillQuizResponse', JSON.stringify(a));
 		 	localStorage.setItem('userQuesSequence', $scope.sequence+1);
 		 	$scope.sequence+=1;
 		 	$scope.currentquestion= $scope.data.questions[$scope.sequence];
@@ -1224,7 +1231,7 @@ promise.then(function(result) {
 			//localStorage.setItem('userQuesSequence', 0);
 			localStorage.removeItem("userQuesSequence");
 					
-			var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
+			var userQuizAttandResponses=localStorage.getItem('localsubskillQuizResponse')
 			loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
 				if (apiresponse.response.status == "true") {
 					var user_quiz_id=apiresponse.response.quiz_attempt_id;
@@ -1233,11 +1240,11 @@ promise.then(function(result) {
 					// Step -5 to Get the User Result
 					loginHttpService.getUserQuizResponse(get_uid,$scope.currentquestion.quiz_id,user_quiz_id).success(function(quizResultResponse) {
 			 			// a=[];
-						//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
-			 			//localStorage.setItem('ngStorage-localquestions', JSON.stringify(a));
+						//localStorage.setItem('subskillQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+			 			//localStorage.setItem('ngStorage-localsubskillquestions', JSON.stringify(a));
 					 			
-			 			localStorage.removeItem("localQuizResponse"); // empty the local storage
-			 			localStorage.removeItem("ngStorage-localquestions");
+			 			localStorage.removeItem("localsubskillQuizResponse"); // empty the local storage
+			 			localStorage.removeItem("ngStorage-localsubskillquestions");
 
 			 			if (quizResultResponse.response.status == true) {
 		 					//var correct_answer= quizResultResponse.response.correct_questions;
@@ -1303,6 +1310,10 @@ promise.then(function(result) {
 promise.then(function(result) {
 	$scope.course_name = result.data.response.course_Information.course_name;
 	$scope.selected_subject = result.data.response.parent_info_of_skill.course_name;
+
+	$scope.skill_id_URL = result.data.response.skill_info_of_subskill.id;
+	var skillname = result.data.response.skill_info_of_subskill.course_name.toLowerCase();
+	$scope.skill_name_URL =	skillname.replace(/\s+/g, '-'); 
 	
 		 $scope.numToAlpha =function(idx) {
           var getAlpha = ['A','B','C','D','E','F','G'];
@@ -1329,7 +1340,8 @@ promise.then(function(result) {
 	// To maintain old quiz questions if user quize questions response is incomplete
 	var localQuizResponse = JSON.parse(localStorage.getItem('localQuizResponse'));
 	var localQuestions= JSON.parse(localStorage.getItem('ngStorage-localquestions'));
-	if(localQuizResponse ==null && localQuestions==null ){
+	//if(localQuizResponse ==null && localQuestions==null ){
+		if(localQuestions==null ){
 		
 		// API to create quiz and questions list of quiz created for user 
 		loginHttpService.createQuizOnStudent(senddata).success(function(resitem){
@@ -1376,7 +1388,8 @@ promise.then(function(result) {
 			  	$scope.questions_status = attempt_questions_status;		  		
 
 			}else{
-					$scope.message = "Issue in traversing page";
+					$scope.creatquiz_message = "Soon Quiz will generate for you for this susbkill.";
+
 			}
 		}); // end createquiz APi
 			
@@ -1432,9 +1445,9 @@ promise.then(function(result) {
         	$("#skillquizmasscourt_id").removeClass("active");
         } 
         else if(st_result=='pass'){
-        	window.location.href='skill-door/whole-numbers/13';
+        	window.location.href='skill-door/'+$scope.skill_name_URL+'/'+$scope.skill_id_URL;
         } else{
-        	window.location.href='subskill_content/place-values-in-whole-numbers/18';
+        	window.location.href='subskill_content/'+$routeParams.subskill_name+'/'+$routeParams.subskill_id;
         }                     
 	}
 	
@@ -1609,12 +1622,12 @@ promise.then(function(result) {
 		 						$scope.st_result= "fail";
 		 						$("#skillquizmasscourt_id").addClass("active");
 		 						//alert("Your are Fail");
-		 						$scope.masscourt_message="You need more attention. Your are not mastered.";
+		 						$scope.masscourt_message="Your this practice will not scored good.";
 		 					}
 		 					else{
 			 						$scope.st_result= "pass";			 						
 			 						//alert("Your are Pass");
-			 						$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
+			 						$scope.masscourt_message="Excellent... You did good.";
 			 					}
 								//window.location.href='challenges';
 							// Check Masscourt image and message			
@@ -1708,17 +1721,26 @@ promise.then(function(result) {
 	$scope.skill_result = [];
 	
 	loginHttpService.getStudentCourseList(get_uid,pid).success(function(res_skill) {
+    // setting for student
+    $scope.settingSkill = res_skill.setting;
     var stu_skill = '';
     if(res_skill.by == 'scope') {
       stu_skill = angular.fromJson(res_skill.response[0].scope);
-      console.log(stu_skill);
     }else if(res_skill.by == 'course') {
       stu_skill = res_skill.response;
     }
     $scope.subject_detail = [];
 		if(stu_skill.length > 0){
+      var currentDate = $filter('date')(Date.now(), 'yyyy-MM-dd ');
+      var timestamp = new Date(currentDate).getTime();
+      var disable = false;
       angular.forEach(stu_skill,function(skil,key){
         if(skil['visibility'] == '1') {
+          var startDateDiff = timestamp  - (new Date(skil['start_date']).getTime());
+          var endDateDiff = (new Date(skil['start_date']).getTime()) - timestamp ;
+          if(startDateDiff < 0 &&  endDateDiff >= 0) {
+            disable = true;
+          }
          $scope.subject_detail.push({
            'course_id' : skil['course_id'],
            'name' : skil['name'],
@@ -1726,6 +1748,7 @@ promise.then(function(result) {
            'end_date' : skil['end_date'],
            'parent_id' : skil['parent_id'],
            'visibility' : skil['visibility'],
+           'disabled' : disable,
          }); 
         } 
       });
@@ -1763,6 +1786,13 @@ promise.then(function(result) {
 			$scope.subject_detail = 0;
 		} 
 	});
+  $scope.openSkillDoor = function(disable,courseName,courseId) {
+    if(disable == false) {
+      var lowerstr = courseName.toLowerCase(); 
+      lowerstr = lowerstr.replace(/\s+/g, '-');
+      window.location.href= 'skill-door/'+lowerstr+'/'+courseId;
+    }
+  }
 
 	// API to check arena  Flag/unflag	
 	var quiz_type_id = quiz_type.PRETEST;
@@ -1795,6 +1825,10 @@ promise.then(function(result) {
 
 }])
 .controller('skillDoorCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$localStorage',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$localStorage) {
+		
+
+				
+
 	var get_uid=commonActions.getcookies(get_uid);
 	if (document.cookie == '' || get_uid == 'null') {
 		alert('kindly login');
@@ -1978,10 +2012,11 @@ $scope.apiTabs=function(){
 	//$(tabIdactivated).addClass("active in");				
 }
 }])
-.controller('challengesCtrl',['$rootScope','$scope','$localStorage','$filter','loginHttpService','$location','urlParams','$routeParams','$http','user_roles','commonActions','$sce','$q',function($rootScope,$scope,$localStorage,$filter, loginHttpService,$location,urlParams,$routeParams,$http,user_roles,commonActions,$sce,$q) {
+.controller('challengesCtrl',['$rootScope','$scope','$localStorage','$filter','loginHttpService','$location','urlParams','$routeParams','$http','user_roles','quiz_type','quiz_mastered_score','questionslimit','mlg_subjects_for_masscourt','commonActions','$sce','$q',function($rootScope,$scope,$localStorage,$filter, loginHttpService,$location,urlParams,$routeParams,$http,user_roles,quiz_type,quiz_mastered_score,questionslimit,mlg_subjects_for_masscourt,commonActions,$sce,$q) {
 
 	var get_uid=commonActions.getcookies(get_uid);
 	var assignment_id ="37";
+	$scope.mastered = quiz_mastered_score.TEACHERCUSTOMASSIGNMENT;
 
 
 	// To masscourt Action
@@ -2000,35 +2035,59 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 		if(res.response.status="TRUE"){
 			var st_grade_id=res.response.student_class;
 			$scope.student_courses = res.response.student_courses;
-			var first_subj = $scope.student_courses[0].id;	
+			var first_subj = $scope.student_courses[0].id;
+
+
+				// to make first tab of subject active
+				//API to call number of assignments
+			 	loginHttpService.getStudentAssignments(get_uid,first_subj).success(function(respAssgn) {			 		
+			 		//console.log(respAssgn.response.status);
+		    	if (respAssgn.response.status == true) {
+		    			$scope.assignments =[];
+		    		  angular.forEach(respAssgn.response.assignment, function(assgnitem){
+		                   if(assgnitem.subject_id == first_subj ){                   	
+		                   		$scope.assignments.push(assgnitem); 
+		                   }                   
+		               });
+		   		}
+		   		else{
+		   			//$scope.err_assignment_message = respAssgn.response.message ;
+		   			$scope.err_assignment_message = "Wait!! No challenges are assigned you by your teacher." ;
+		   		}
+		   		$(".subject_"+first_subj).addClass('active in');
+		    });
+
+
+
+
 		}else{
-			$scope.error_message= "Issue in finding the curses.";
+			$scope.error_message= "Issue in finding the courses.";
 		}
 	});
 
 
 	$scope.onClickSubject = function(subid){
 
-		$('ul li.active').removeClass('active');
+		$('ul li.active').removeClass('active in');
+		$('.tab-pane').removeClass('active in');
 		$(".subject_"+subid).addClass('active in');
-		$("#subject_"+subid).show();
-
+		
 
 		
 		//API to call number of assignments
-	 	loginHttpService.getStudentAssignments(get_uid).success(function(respAssgn) {
+	 	loginHttpService.getStudentAssignments(get_uid,subid).success(function(respAssgn) {
 	 		console.log(respAssgn.response.status);
     	if (respAssgn.response.status == true) {
     			$scope.assignments =[];
     		  angular.forEach(respAssgn.response.assignment, function(assgnitem){
-                   if(assgnitem.subject_id == subid ){
-                   	console.log(assgnitem.subject_id);
-                   	$scope.assignments.push(assgnitem); 
+                   if(assgnitem.subject_id == subid ){                   	
+                   		$scope.assignments.push(assgnitem); 
                    }                   
                });
    		}
    		else{
-   			$scope.error_message = respAssgn.response.message ;
+   			//$scope.err_assignment_message = respAssgn.response.message ;
+   			$scope.err_assignment_message = "Wait!! No challenges are assigned you by your teacher." ;
    		}
     });
 
@@ -2083,14 +2142,25 @@ else{
             responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
 	  	}
 
-
+	  	//close masscourt
+	$scope.closeMascot=function(st_result){         
+        if(st_result=='correct' || st_result=='wrong'){
+        	$("#skillquizmasscourt_id").removeClass("active");
+        } 
+        else if(st_result=='pass'){
+        	window.location.href='challenges';
+        } else{
+        	window.location.href='challenges';
+        }                     
+	}
+	
 
 
     //get student response for question/ on Submit question answer.
     $scope.onSubmitQuestion = function(frm,skip){ 
     	$scope.error_optionmessage=""; 
-    	var correctoption=$scope.currentquestion.answer[0].value;
-		 var question_marks=$scope.currentquestion.answer[0].score;
+    	var correctoption=$scope.currentquestion.answers[0].value;
+		 var question_marks=$scope.currentquestion.answers[0].score;
 
 
     	// step 1- To check buton click is submit or skip button (if skip = 0 means click on submit/ skip)
@@ -2102,11 +2172,14 @@ else{
        				user_id 	: get_uid,
        				exam_id 	: $scope.assignment_details.quiz_id,
        				item_id 	: $scope.currentquestion.question_id,
+       				item_marks	: question_marks,
        				response 	: '',
        				correct 	: 0,
-       				score 		: 0,
-       				item_marks	: question_marks,
+       				score 		: 0,       				
        				skip_count 	: 1,
+       				grade_id 	: $scope.assignment_details.grade_id,
+					course_id : $scope.assignment_details.course_id,
+					quiz_type_id : quiz_type.TEACHERCUSTOMASSIGNMENT, // id of the table quiz_types
        				//time_taken 	: 1,
        			}
 
@@ -2124,16 +2197,20 @@ else{
 		 		if(frm.selectedoption==correctoption){
 		 			console.log(frm.selectedoption);
 		 			var selectedAnswer=1; // select option is correct
-		 			$scope.answer_response="Awesome, you got this correct";
-		 			alert('Correct');
-		 			var score= $scope.currentquestion.answer[0].score;
+		 			$scope.masscourt_message="Awesome, you got this correct";
+		 			//alert('Correct');
+		 			var score= $scope.currentquestion.answers[0].score;
+		 			$scope.current_quesstatus="correct";
+		 			$scope.st_result="correct";
 		 		}
 		 		else{
 		 			selectedAnswer=0; // select option is wrong
 		 			if(typeof $scope.currentquestion.penalty_score=='undefined'){ score=0}
 		 			else{ score =$scope.currentquestion.penalty_score; }
-		 			$scope.answer_response="Oops, This is not the correct answer";		 				
-		 			alert('wrong'); 
+		 			$scope.masscourt_message="Oops, This is not the correct answer";		 				
+		 			//alert('wrong'); 
+		 			$scope.current_quesstatus="wrong";
+		 			$scope.st_result="wrong";
 		 		}
 
 		 		//Step-2  Set required coulum values
@@ -2142,14 +2219,42 @@ else{
        				user_id 	: get_uid,
        				exam_id 	: $scope.assignment_details.quiz_id,
        				item_id 	: $scope.currentquestion.question_id,
+       				item_marks	: question_marks,
        				response 	: frm.selectedoption,
        				correct 	: selectedAnswer,
-       				score 		: score,
-       				item_marks	: question_marks,
-       				//skip_count 	: 1,
+       				score 		: score,       				
+       				skip_count 	: 0,
+       				grade_id 	: $scope.assignment_details.grade_id,
+					course_id : $scope.assignment_details.course_id,
+					quiz_type_id : quiz_type.TEACHERCUSTOMASSIGNMENT, // id of the table quiz_types
        				//time_taken 	: 1,
        			}
-       		}
+
+       			// Check Masscourt image and message			
+				//var selected_subject = $scope.currentquestion.subject; 
+				var selected_subject = "Math"; 
+				if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
+					if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="math_right.png";}
+					else{ $scope.masscourt_image ="math_wrong.png";	}
+				}
+				else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
+					if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="english_right.png";}
+					else{ $scope.masscourt_image ="english_wrong.png";	}
+				}
+				else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
+					if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="science_right.png";}
+					else{ $scope.masscourt_image ="science_wrong.png";	}
+				}
+				else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
+					if($scope.current_quesstatus =="correct"){	$scope.masscourt_image ="social_studies_right.png";}
+					else{ $scope.masscourt_image ="social_studies_wrong.png";	}
+
+				}else{
+					$scope.masscourt_image='mascot.png';
+				} 
+				$("#skillquizmasscourt_id").addClass("active"); // show masscourt with value of masscourt_image and masscourt_message
+   		
+   			}
     	}	
     			//Step-3 Procceed check questions sequence either for next question or show result if sequence is on last.
 		 		if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
@@ -2171,30 +2276,59 @@ else{
 				else{ 
 
 						//Step- 4 send local Stoage Quiz attand Response to API						
-						localStorage.setItem('userQuesSequence', 0);
+						//localStorage.setItem('userQuesSequence', 0);
+
 						
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
 						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
 							if (apiresponse.response.status == "true") {
-								var quiz_id=apiresponse.response.quiz_attampt;
+								var quiz_id=apiresponse.response.quiz_attempt_id;
 								localStorage.setItem('quiz_id', quiz_id);				
 		  						// Step -5 to Get the User Result
 		  						loginHttpService.getUserQuizResponse(get_uid,$scope.assignment_details.quiz_id,quiz_id).success(function(quizResultResponse) {
-						 			 a=[];
-		  							localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
-						 			if (quizResultResponse.response.status == "true") {
+						 			 //a=[];
+		  							//localStorage.setItem('localQuizResponse', JSON.stringify(a)); // empty localstorage userquiz response
+						 			localStorage.removeItem("localQuizResponse"); // empty the local storage
+									localStorage.removeItem("ngStorage-localquestions");
+									localStorage.removeItem("userQuesSequence");
+
+						 			if (quizResultResponse.response.status == true) {
 						 					var correct_answer= quizResultResponse.response.correct_questions;
 						 					var wrong_answer= quizResultResponse.response.correct_questions;
-						 					var st_result="";
+						 					 $scope.st_result="";
 						 					if(quizResultResponse.response.student_result< 60){
-						 						 st_result= "Your are Fail";
-						 						alert("Your are Fail");
+						 						 $scope.st_result= "fail";
+						 						 $("#skillquizmasscourt_id").addClass("active");
+						 						//alert("Your are Fail");
+						 						$scope.masscourt_message="You need more attention. Your are not mastered.";
 						 					}
 						 					else{
-						 						st_result= "Your are Pass";
-						 						alert("Your are Pass");
+						 						$scope.st_result= "pass";
+						 						//alert("Your are Pass");
+						 						$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
 						 					}
-											window.location.href='challenges';
+											//window.location.href='challenges';
+											// Check Masscourt image and message			
+											//var selected_subject = $scope.currentquestion.subject;
+											var selected_subject = "Math";
+											if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
+												$scope.masscourt_image ='math_normal.png';
+											}
+											else if(selected_subject==mlg_subjects_for_masscourt.ENGLISH){
+												$scope.masscourt_image ='english_normal.png';
+											}
+											else if(selected_subject==mlg_subjects_for_masscourt.SCIENCE){
+												$scope.masscourt_image = 'science_normal.png';
+											}
+											else if(selected_subject==mlg_subjects_for_masscourt.SOCIALSCIENCE){
+												$scope.masscourt_image = 'social_studies_normal.png';
+											}else{
+												$scope.masscourt_image='mascot.png';
+											} 
+											$("#skillquizmasscourt_id").addClass("active"); // show masscourt with value of masscourt_image and masscourt_message
+   	
+
+											
 						 					}
 						 				});
 
@@ -2460,7 +2594,7 @@ else{
 
 			//Step- 4 send local Stoage Quiz attand Response to API						
 			//localStorage.setItem('userQuesSequence', 0);
-			localStorage.removeItem("ngStorage-localquestions");
+			localStorage.removeItem("userQuesSequence");
 						
 			var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
 			loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							
@@ -2689,9 +2823,4 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 		}
 
 	});
-
-
-
-
-
 }]);

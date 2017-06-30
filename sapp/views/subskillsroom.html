@@ -6,6 +6,7 @@
     <div class="main_cover subskillsroom_page subskillsoverview">
 			<div class="main_div_center">
 			 <header></header>
+       
         <div class="link_block">
           <a href="subskill_content/{{URLsubskill_name}}/{{URLsubskill_id}}">
 						<div class="lesson_link"><span>Lesson</span></div>
@@ -20,39 +21,4 @@
 		<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
 	</div>
 	
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  	
-    <script type="text/javascript">
-      $(document).ready(function(){
-        var owl = $('.overview-owl-carousel');
-        owl.owlCarousel({
-          margin: 19,
-					nav: true,
-          loop: false,
-          responsive: {
-						320: {
-							items: 1
-						},
-						600: {
-							items: 1
-						},
-            992: {
-              items: 1
-            },
-            1000: {
-              items: 2
-            }
-          }
-        });
-        $(".owl-nav .owl-prev").html("<i class='icon left-arrow'></i> <span>Previous</span>");
-        $(".owl-nav .owl-next").html("<i class='icon right-arrow'></i><span>Next</span>");
-        $(".video-mcustomscroller").mCustomScrollbar({
-			horizontalScroll: true,
-		});
-		
-		$('.subskillModelBox').on('click', function(){
-			$('.modal-subskillsoverview').show();
-		});
-		
-      });
-    </script>
+	
