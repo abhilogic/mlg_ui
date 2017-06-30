@@ -120,6 +120,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   filterParentChildReport : '/users/filterParentChildReport',
   getStudentProgress :'/students/getStudentProgress',
   getAwardsofChild :'/students/getAwardsofChild', 
+  getTeacherStudentReport : '/teachers/getTeacherStudentReport',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -380,6 +381,9 @@ principal  : 30,
   }).when('/static/:slug',{
 		templateUrl : 'views/comingsoon.html',
 		controller : 'staticCtrl',
+	}).when('/teacher/dashboard/report/:gradeid/:subject_name/:courseid',{
+		templateUrl : 'views/dashboard/teacher-report.html',
+		controller : 'teacherReportCtrl',
 	}).otherwise({
 		redirectTo : '/',
   });
@@ -469,7 +473,8 @@ principal  : 30,
 return {
 	restrict: 'E',
 	templateUrl: 'include/sidebar-teacher.html',
-	controller: ['$scope','$cookieStore','teacherHttpService','user_roles', function ($scope,$cookieStore,teacherHttpService,user_roles) {                         	
+	controller: ['$scope','$cookieStore','teacherHttpService','user_roles','$routeParams',
+    function ($scope,$cookieStore,teacherHttpService,user_roles,$routeParams) {                         	
 		$scope.isCollapsedmyClass = true;
 		$scope.isCollapsedmyContent = true;
 		$scope.open_menu=function(menu_class,menu_item){
@@ -513,13 +518,19 @@ $scope.userInfo=userInfo;
 
 	// Get Teacher selected class and subjects
 	var get_uid= cookieString=$cookieStore.get("uid");
-	
+	$scope.frm={};
 	  teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
     if (response.status == true) {
       $scope.subject_grade = response.response;
       $scope.level = response.grade;
       $scope.subject = (response.subject.course_name).split(',');  
-
+      angular.forEach($scope.subject_grade,function(val,ki){
+        if(val['course_id'] == $routeParams.courseid) {
+          $scope.frm.selected_course = val['course_id'];
+          $scope.frm.selected_grade = val['level_id'];
+          $scope.frm.selected_courseName = val['course_name'];
+        }
+      });
 
     }
   });

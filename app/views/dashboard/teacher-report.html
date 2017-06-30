@@ -1,71 +1,18 @@
 
-	<!-- Main navbar -->
+<!-- Main navbar -->
 	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top"></top-search-bar>
+		
+
 	<!-- /main navbar -->
 
-	<!-- Page container -->
+<!-- Page container -->
 	<div class="page-container">
 
 		<!-- Page content -->
 		<div class="page-content">
 
 			<!-- Main Sidebar -->
-			<aside class="sidebar sidebar-main">
-					<ul class="nav sidebar_nav sidebar_nav-main">
-						<li>
-							<a href="#myClass" data-toggle="collapse" class="collapsed"><i class="icon icon-my_class"></i><span class="link__text">My Class</span></a>
-							<ul id="myClass" class="sub-menu collapse">
-								<li class="active">
-									<a href="teacher-myClass.html"><span class="link__text">Class 7th A Math</span></a>
-								</li>
-								<li>
-									<a href="teacher-myClass.html"><span class="link__text">Class 7th A Math</span></a>
-								</li>
-								<li>
-									<a href="teacher-myClass.html"><span class="link__text">Class 7th A Math</span></a>
-								</li>
-								<li>
-									<a href="teacher-myClass.html"><span class="link__text"><i class="icon icon-plus-outline"></i> Add class</span></a>
-								</li>
-							</ul>
-						</li>
-						<li class="active">
-							<a href="teacher-report.html"><i class="icon icon-report"></i><span class="link__text">Report</span></a>
-						</li>
-						<li >
-							<a href="teacher-subscription.html"><i class="icon icon-my_subscriptions"></i><span class="link__text">My Subscription</span></a>
-						</li>
-						<li >
-							<a href="teacher-rewards.html"><i class="icon icon-my_rewards"></i><span class="link__text">My Rewards</span></a>
-						</li>
-						<li >
-							<a href="#myContent" data-toggle="collapse" class="collapsed"><i class="icon icon-my_data"></i><span class="link__text">My Content</span></a>
-							<ul id="myContent" class="sub-menu collapse">
-								<li class="active">
-									<a href="teacher-content-questions.html"><span class="link__text">Questions</span></a>
-								</li>
-								<li>
-									<a href="teacher-content-lessons.html"><span class="link__text">Lessons</span></a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="teacher-message.html"><i class="icon icon-message"></i><span class="link__text">Messaging</span></a>
-						</li>
-						<li>
-							<a href="teacher-scope-sequence.html"><i class="icon icon-my_blueprinting_tool"></i><span class="link__text">scope and sequence</span></a>
-						</li>
-						<li>
-							<a href="teacher-notification.html"><i class="icon icon-notification"></i><span class="link__text">Notification</span></a>
-						</li>
-            <li class="hidden-sm hidden-md hidden-lg">
-							<a href="teacher-setting.html"><i class="icon icon-my_settings"></i><span class="link__text">Setting</span></a>
-						</li>
-            <li class="hidden-sm hidden-md hidden-lg">
-							<a href="#"><i class="icon icon-logout"></i><span class="link__text">Logout</span></a>
-						</li>
-					</ul>
-			</aside>
+			<aside class="sidebar sidebar-main"></aside>
 			<!-- /sidebar -->
 
 
@@ -110,84 +57,30 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="standard">1</td>
-										<td class="studen_name">Henston</td>
-										<td class="mastered">20%</td>
-										<td class="started">30%</td>
-										<td class="not_started">50%</td>
-										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
-									</tr>
-									<tr>
-										<td class="standard">2</td>
-										<td class="studen_name">Henston</td>
-										<td class="mastered">20%</td>
-										<td class="started">30%</td>
-										<td class="not_started">50%</td>
-										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
-									</tr>
-									<tr>
-										<td class="standard">3</td>
-										<td class="studen_name">Henston</td>
-										<td class="mastered">20%</td>
-										<td class="started">30%</td>
-										<td class="not_started">50%</td>
-										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
-									</tr>
-									<tr>
-										<td class="standard">4</td>
-										<td class="studen_name">Henston</td>
-										<td class="mastered">20%</td>
-										<td class="started">30%</td>
-										<td class="not_started">50%</td>
-										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
-									</tr>
-									<tr>
-										<td class="standard">5</td>
-										<td class="studen_name">Henston</td>
-										<td class="mastered">20%</td>
-										<td class="started">30%</td>
-										<td class="not_started">50%</td>
-										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
-									</tr>
-									<tr>
-										<td class="standard">6</td>
-										<td class="studen_name">Henston</td>
-										<td class="mastered">20%</td>
-										<td class="started">30%</td>
-										<td class="not_started">50%</td>
-										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
-									</tr>
-									<tr>
-										<td class="standard">7</td>
-										<td class="studen_name">Henston</td>
-										<td class="mastered">20%</td>
-										<td class="started">30%</td>
-										<td class="not_started">50%</td>
-										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">5</td>
+									<tr ng-repeat="details in assisment">
+										<td class="standard">{{$index+1}}</td>
+										<td class="studen_name">{{details.name}}</td>
+										<td class="mastered">{{details.mastered}}%</td>
+										<td class="started">{{details.started}}%</td>
+										<td class="not_started">{{details.notstarted}}%</td>
+										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">{{details.gap}}</td>
 									</tr>
 								</tbody>
                 <tfoot>
 									<tr>
 										<td class="table-pagination" colspan="7">
-											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<!--<span class="pull-left">Showing 1-10 of 50 entries</span>-->
 											<ul class="pagination pagination-sm">
-												<li class="disabled">
-													<a>
+												<li class="{{preClass}}">
+													<a ng-click="getPrevious()">
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li class="active">
-													<a>1</a>
+                        <li ng-repeat="n in range(1,lastPage)">
+													<a href="#{{n}}">{{n}}</a>
 												</li>
-												<li>
-													<a>2</a>
-												</li>
-												<li>
-													<a>3</a>
-												</li>
-												<li>
-													<a aria-hidden="true">Next</a>
+												<li class="{{nexClass}}">
+													<a aria-hidden="true" ng-click="getNext()">Next</a>
 												</li>
 											</ul>
 										</td>
