@@ -2149,7 +2149,7 @@ if (typeof $routeParams.slug != 'undefined') {
    function ($scope, loginHttpService, $location, urlParams, commonActions) {
      var get_uid=commonActions.getcookies(get_uid);
      loginHttpService.getNotificationForParent({parent_id : get_uid}).success(function(response) {
-        $scope.notifications = response.notification_message;
+        $scope.notifications = response.notifications;
      });
    }
  ])
