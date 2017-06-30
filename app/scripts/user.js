@@ -355,7 +355,14 @@ angular.module('mlg').filter('moment', function() {
         });
 	}
 
-      
+    loginHttpResponse.getNotificationForParent = function(data) {
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.getNotificationForParent
+        });
+	}
+
 	return loginHttpResponse;
 	
 }])
@@ -1534,8 +1541,8 @@ if (typeof $routeParams.slug != 'undefined') {
     function(response) {
       if (response.status) {
         $scope.offers = response.result;
+        }
       }
-    }
   );
 
   $scope.requestOffer = function (offer) {
@@ -1733,7 +1740,6 @@ if (typeof $routeParams.slug != 'undefined') {
     }
 
     $scope.modal_couponReject = function(coupon) {
-      console.log(coupon);
       $("#modal-couponReject").modal();
       $scope.rejected_coupon_id = coupon.coupon_id;
       $scope.coupon_prev_state = coupon.status;
@@ -2051,8 +2057,11 @@ if (typeof $routeParams.slug != 'undefined') {
         });
       };
     }
- ]).controller('parentNotificationCntrl', ['$scope', 'loginHttpService', '$location', 'urlParams',
-   function ($scope, loginHttpService, $location, urlParams) {
- 
+ ]).controller('parentNotificationCntrl', ['$scope', 'loginHttpService', '$location', 'urlParams', 'commonActions',
+   function ($scope, loginHttpService, $location, urlParams, commonActions) {
+     var get_uid=commonActions.getcookies(get_uid);
+     loginHttpService.getNotificationForParent({parent_id : get_uid}).success(function(response) {
+        var notifications = response.notification_message;
+     });
    }
  ]);

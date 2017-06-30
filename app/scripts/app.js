@@ -107,6 +107,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getScopeTemplates : '/teachers/getScopeTemplate',
   getNeedAttention : '/teachers/getNeedAttention',
   getSubskillAnalytic : '/teachers/getSubskillAnalytic',
+  getNotificationForParent : '/users/getNotificationForParent',
 
   
 }).value('REGEX', {
@@ -245,7 +246,7 @@ principal  : 30,
 		controller : 'parentSettingCtrl',
 	}).when('/parent/dashboard/notifications', {
 		templateUrl : 'views/dashboard/parent-notifications.html',
-		controller : 'parentOffers',
+		controller : 'parentNotificationCntrl',
 	}).when('/teacher/create_account',{
 		templateUrl : 'views/account-teacher.html',
 		controller : 'teacherOnBoardingCtrl',

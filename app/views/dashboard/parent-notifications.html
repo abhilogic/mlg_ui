@@ -1,147 +1,105 @@
-	<!-- Main navbar -->
-	<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
-		
-	</top-search-bar>
-	<!-- /main navbar -->
+<!-- Main navbar -->
+<top-search-bar class="navbar navbar-default navbar-dashboard navbar-static-top">
 
-	<!-- Page container -->
-	<div class="page-container">
+</top-search-bar>
+<!-- /main navbar -->
 
-		<!-- Page content -->
-		<div class="page-content">
+<!-- Page container -->
+<div class="page-container">
 
-			<!-- Main Sidebar -->
-			<aside-parent class="sidebar sidebar-main"></aside-parent>
-			<!-- /sidebar -->
+  <!-- Page content -->
+  <div class="page-content">
+
+    <!-- Main Sidebar -->
+    <aside-parent class="sidebar sidebar-main"></aside-parent>
+    <!-- /sidebar -->
 
 
-			<!-- Main content -->
-			<div class="content-wrapper">
-				<!-- Content area -->
-				<div class="content">
+    <!-- Main content -->
+    <div class="content-wrapper">
+      <!-- Content area -->
+      <div class="content">
 
-					<div class="panel panel-flat panel-notification">
-            <div class="panel-heading">
-              <h5 class="panel-title"><i class="icon icon-arrow-left"></i> Notifications</h5>
+        <div class="panel panel-flat panel-notification">
+          <div class="panel-heading">
+            <h5 class="panel-title"><i class="icon icon-arrow-left"></i> Notifications</h5>
+          </div>
+          <div class="panel-body">
+            <div class="media-list">
+              <div class="media-left hidden-xs">
+                <i class="icon icon-my_class"></i>
+              </div>
+              <div class="media-body">
+                <h5 class="hd text-uppercase">
+                  <i class="icon icon-my_class hidden-lg hidden-md hidden-sm"></i>
+                  ANALYTICS
+                </h5>
+                <p ng-if="notifications.analytics != ''" class="para">{{notifications.analytics}}</p>
+                <p ng-if="notifications.analytics == ''" class="para">No events to show</p>
+                <div class="text-right">
+                  <time ng-if="analytics_time != ''" >{{analytics_time.days}} days {{analytics_time.h}} hours {{analytics_time.m}} minutes ago</time>
+                </div>
+              </div>
             </div>
-            <div class="panel-body">
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_class"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_class hidden-lg hidden-md hidden-sm"></i> My CLass</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
+            <div class="media-list">
+              <div class="media-left hidden-xs">
+                <i class="icon icon-my_subscriptions"></i>
+              </div>
+              <div class="media-body">
+                <h5 class="hd text-uppercase"><i class="icon icon-my_subscriptions hidden-lg hidden-md hidden-sm"></i>OFFERS</h5>
+                <p ng-if="notifications.offers != ''" class="para">{{notifications.offers}}</p>
+                <p ng-if="notifications.offers == ''" class="para">NO offers to show</p>
+                <div class="text-right">
+                  <time ng-if="offers_time != ''" >{{offers_time.days}} days {{offers_time.h}} hours {{offers_time.m}} minutes ago</time>
                 </div>
               </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_subscriptions"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_subscriptions hidden-lg hidden-md hidden-sm"></i> my subscriptions</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_data"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_data hidden-lg hidden-md hidden-sm"></i> My Content</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_rewards"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_rewards hidden-lg hidden-md hidden-sm"></i> My Rewards</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_class"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_class hidden-lg hidden-md hidden-sm"></i> My CLass</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_subscriptions"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_subscriptions hidden-lg hidden-md hidden-sm"></i> my subscriptions</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_data"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_data hidden-lg hidden-md hidden-sm"></i> My Content</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-redeem"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-redeem hidden-lg hidden-md hidden-sm"></i> My Redeem</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-
             </div>
-					</div>
+            <div class="media-list">
+              <div class="media-left hidden-xs">
+                <i class="icon icon-my_data"></i>
+              </div>
+              <div class="media-body">
+                <h5 class="hd text-uppercase"><i class="icon icon-my_data hidden-lg hidden-md hidden-sm"></i> My Subscriptions</h5>
+                <p ng-if="notifications.subcriptions != ''" class="para">{{notifications.subcriptions}}</p>
+                <p ng-if="notifications.subcriptions == ''" class="para">No events to show</p>
+                <div class="text-right">
+                  <time ng-if="subcriptions_time != ''" >{{subcriptions_time.days}} days {{subcriptions_time.h}} hours {{subcriptions_time.m}} minutes ago</time>
+                </div>
+              </div>
+            </div>
+            <div class="media-list">
+              <div class="media-left hidden-xs">
+                <i class="icon icon-my_rewards"></i>
+              </div>
+              <div class="media-body">
+                <h5 class="hd text-uppercase"><i class="icon icon-my_rewards hidden-lg hidden-md hidden-sm"></i> My Coupons</h5>
+                <p ng-if="notifications.coupons != '' " class="para">{{notifications.coupons}}</p>
+                <p ng-if="notifications.coupons == '' " class="para">No coupons to show</p>
+                <div class="text-right">
+                  <time ng-if="coupons_time != ''" >{{coupons_time.days}} days {{coupons_time.h}} hours {{coupons_time.m}} minutes ago</time>                  
+                </div>
+              </div>
+            </div>
 
-				</div>
-				<!-- /content area -->
+          </div>
+        </div>
 
-			</div>
-			<!-- /main content -->
+      </div>
+      <!-- /content area -->
 
-		</div>
-		<!-- /page content -->
+    </div>
+    <!-- /main content -->
 
-	</div>
-	<!-- page container -->
+  </div>
+  <!-- /page content -->
 
-	<!-- Latest compiled and minified jQuery -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</div>
+<!-- page container -->
 
-	<!-- Page Specific JavaScript -->
-	<script src="../assets/js/main.js"></script>
+<!-- Latest compiled and minified jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Page Specific JavaScript -->
+<script src="../assets/js/main.js"></script>
