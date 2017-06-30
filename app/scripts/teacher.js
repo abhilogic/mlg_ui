@@ -3792,21 +3792,10 @@ $scope.deleteImage = function(j,data) {
               });
             }
 
-
-
           }
-
-
-
-
           //end- Step 3 - To save the selected questions , Resources and comment in Database
 
-
-
-
-
-
-        }])
+}])
 
 
 //teacherStudentProfile  studentPerformance 
@@ -3835,6 +3824,7 @@ $scope.deleteImage = function(j,data) {
     $scope.image_directory = '';
     $scope.student_courses = {};
     $scope.student_class = '';
+    var get_uid=commonActions.getcookies(get_uid);
     loginHttpService.getUserDetails($routeParams.id).success(function (response) {
       if (response.data.user_all_details != '') {
         $scope.student = response.data.user_all_details[0];
@@ -3877,19 +3867,18 @@ $scope.deleteImage = function(j,data) {
     //Start-  Student Analytic graph  $routeParams.id = student_id
     teacherHttpService.getStudentProgress($routeParams.id).success(function (result) {
           if (result.response.status == true) {
-            var total_subskill = result.response.total_subskill*10;
-            var conquered_count = result.response.conquered_count*10;
-            var practice_count = result.response.practice_count*10;
-           
+              var total_subskill = result.response.total_subskill*10;
+              var conquered_count = result.response.conquered_count*10;
+              var practice_count = result.response.practice_count*10;     
      
           }else{
               $scope.prgress_message=result.response.message;
               var total_subskill = 100;
-            var conquered_count = 0;
-            var practice_count = 0;
+              var conquered_count = 0;
+              var practice_count = 0;
             }
 
-                $scope.stprogress_labels = ["Conquered", "Practiced", "Not Attacked"];
+            $scope.stprogress_labels = ["Conquered", "Practiced", "Not Attacked"];
                 $scope.stprogress_data = [conquered_count, practice_count, total_subskill-practice_count];
                 $scope.stprogress_colors = ['#f1c40f', '#2ecc71', '#e8e8e8'];
                 $scope.datasetOverride = [{ label: 'Bar chart', borderWidth: 1, type: 'bar' } ];
@@ -3920,33 +3909,89 @@ $scope.deleteImage = function(j,data) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     //Need Your Attention Block
     teacherHttpService.getNeedAttentionOFStudent($routeParams.id).success(function(resAtn) {
           if(resAtn.response.status==true){
-              $scope.st_atnrecords = resAtn.response.attention_records ;             
+              $scope.strecords = resAtn.response.student_attention_records ; 
+              var first_subskill_id =resAtn.response.student_attention_records[0].course_id;
 
+              teacherHttpService.getSubskillAnalytic(get_uid,1,first_subskill_id).success(function(resAna) {
+                  //$scope.data = [30,10,20,20,15,5];
+                  if(resAna.response.status==true){
+                    var stAnalyticResults= resAna.response.student_result;
+                    $scope.data =[];
+                    angular.forEach(stAnalyticResults, function(value, key) {               
+                           $scope.data.push(value);    
+                    });
+                    $("#menu1").addClass('in active');
+                    $scope.st_attention_message ='';
+                  }
+                  else{
+                    // $scope.analytic_message = resAna.response.message;
+                    $scope.st_attention_message = resAna.response.message;
+                     $scope.data = [100,0,0,0,0,0];
+                  }
+            });
           }else{
-              $scope.attention_message = resAtn.response.message;
+              $scope.st_attention_message = resAtn.response.message;
+              $scope.data = [100,0,0,0,0,0];
           }
 
       });
 
 
-    $scope.clickNeedAttention= function(idx,course_id){
+    $scope.clickNeedAttention= function(indx,subskillid){
+        $(".tab-pane.in.active").removeClass('in active'); 
+        $("#menu"+indx).addClass('in active');
 
-
+        teacherHttpService.getSubskillAnalytic(get_uid,1,subskillid).success(function(resAna) {
+          //$scope.data = [30,10,20,20,15,5];
+          if(resAna.response.status==true){
+              var stAnalyticResults= resAna.response.student_result;
+              $scope.data =[];
+              angular.forEach(stAnalyticResults, function(value, key) {               
+                  $scope.data.push(value);    
+              });
+          }
+          else{
+            $scope.analytic_message = resAna.response.message;
+          }
+        });
     }
+
+    /*$scope.labels = [];
+    angular.forEach(class_students_classification, function(value, key) {               
+        $scope.labels.push(key);    
+      });*/
+      $scope.labels =["NO_ATTACK", "REMEDIAL", "STRUGGLING", "ON_TARGET", "OUTSTANDING", "GIFTED"];
+      $scope.colors = ['#e8e8e8','#db4a4a','#f1c40f','#69e59d','#249626','#8a81e8'];
+      //$scope.data = [30,10,20,20,15,5];
+      
+      $scope.datasetOverride = [{ label: 'Bar chart', borderWidth: 1,  type: 'bar'  }];
+      $scope.options = {  
+          animation: {duration: 1000 },
+          legend: { 
+                    display: true, position: 'right',
+                    labels: {  fontColor: '#333', fontSize: 14, boxWidth: 15, },
+                  },
+
+          tooltips: {
+              callbacks: {
+                    label: function(tooltipItem, data) {
+                        var allData = data.datasets[tooltipItem.datasetIndex].data;
+                        var tooltipLabel = data.labels[tooltipItem.index];
+                        var tooltipData = allData[tooltipItem.index];
+                        var total = 0;
+                        for (var i in allData) {
+                              total += allData[i];
+                        }
+                        //var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                        return tooltipLabel + ': ' + tooltipData + '%';
+          
+                    }
+              }
+          }
+      };
 
 
 
@@ -3960,7 +4005,7 @@ $scope.deleteImage = function(j,data) {
 
 
   }])
-.directive('owlcarousel', function() {
+/*.directive('owlcarousel', function() {
 
   var linker = function(scope, element, attr) {
     var loadCarousel = function() {
@@ -3985,9 +4030,9 @@ $scope.deleteImage = function(j,data) {
   }
 
 })
+*/
 
-
-.directive('awardCarousel', function() {
+/*.directive('awardCarousel', function() {
 
   var linker = function(scope, element, attr) {
     var loadCarousel = function() {
@@ -4020,7 +4065,7 @@ $scope.deleteImage = function(j,data) {
     link: linker
   }
 
-})
+})*/
 
 
 /*.directive('radioSlider', function() {

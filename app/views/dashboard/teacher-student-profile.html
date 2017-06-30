@@ -82,10 +82,10 @@
                 <h4 class="category-content text-uppercase no-margin">Needs Your Attention</h4>
                 
                 <ul id="myNav" class="nav nav-tabs-analysis row">
-                  <li class="active" ng-repeat="atnRecord in st_atnrecords">
+                  <li class="active" ng-repeat="atnRecord in strecords">
                       
                       <a data-toggle1="tab" ng-click="clickNeedAttention($index+1, atnRecord.course_id)">
-                      <h5 class="nav__title">MATHS - <span>{{atnRecord.course_name}}</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
+                      <h5 class="nav__title">{{atnRecord.subject_name}} - <span>{{atnRecord.course_name}}</span> <span class="gifted status"><i class="fa fa-circle"></i></span></h5>
                       <h6>
                           <span><strong>Username:</strong> {{atnRecord.username}}</span>  
                           <span><strong>  Student Name:</strong> {{atnRecord.first_name +' '+atnRecord.last_name}} </span>
@@ -109,7 +109,7 @@
 
               <div class="tab-content tab-content-right col-sm-6">
                 <div class="text-center">
-                  <ul class="list-inline list-filters">
+               <!--    <ul class="list-inline list-filters">
                     <li>
                       <select class="form-control input-sm no-border">
                         <option value="Standard">Standard</option>
@@ -125,25 +125,36 @@
                         <option value="Skills">Skills</option>
                       </select>
                     </li>
-                  </ul>
+                  </ul> -->
                 </div>
 
-
-                <div id="menu" class="tab-pane fade in active">
-                  <!-- remove below image in the case of using plugins -->
-                  <div class="analysis-chart-container" ng-controller="subjectPerformance">
-                    <!--<img src="assets/img/analysis_img_1.png" alt="" class="img-responsive"/>-->
-                    <canvas id="doughnut" class="chart chart-doughnut ng-isolate-scope" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
-                    </canvas>
-                  </div>
+                  <!-- if records are present in Need Your attention block -->
+              <div id="menu{{$index+1}}" class="tab-pane fade" ng-repeat="atnRecord in strecords" >               
+                 <div class="analysis-chart-container" id="bar-chart">                   
+                    <div class="container-progress-chart">                 
+                      <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
+                      </canvas> 
+                    </div>
+                </div>
                   <div class="row">
                     <div class="text-center col-sm-8 col-sm-offset-2">
-                      <a href="teacher/auto-generate-assignment" type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</a>
+                      <button type="button" class="btn btn-danger btn-outline btn-block">Send auto-generated assignment</button>
                       <br>
-                      <a href="teacher/custom-assignment" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
+                      
+                      <a href="teacher/custom-assignment/{{atnRecord.grade_id}}/{{atnRecord.subject_name}}/{{atnRecord.subject_id}}" type="button" class="btn btn-default btn-outline btn-block">Create custom assignment</a>
                     </div>
                   </div>
-                </div>
+              </div>
+
+              <!-- if record is not present in Need Your attention block -->
+              <div id="menu" class="tab-pane fade active in" ng-if="st_attention_message!='' " >              
+                 <div class="analysis-chart-container" id="bar-chart">              
+                    <div class="container-progress-chart">                 
+                      <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">
+                      </canvas> 
+                    </div>
+                </div>              
+              </div>
 
          
 
