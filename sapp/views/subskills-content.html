@@ -38,23 +38,28 @@
         <!--Teacher Contents-->
         <div ng-repeat="teacher_content in teacher_contents"  id="teacher_{{$index+1}}" class="tab-pane fade active in ">
           <!--<span ng-if="teacher_content.kind == 'image'"><embed ng-src="{{getEmbedSrc(teacher_content.descriptions)}}"/></span>-->
-          <span ng-if="teacher_content.kind.toUpperCase() == 'IMAGE'">
-            <span ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">
-              <a href="{{getImgSrc(value)}}" target="_blank"><img ng-src="{{getImgSrc(value)}}" width="130px" height="100px"></a>
-            <br>
-            <br>
-            </span>
-          </span>
-          <span ng-if="teacher_content.kind.toUpperCase() == 'VIDEO'">
-            <span class="MLG-{{networkState}}" ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">
-              <video width="320" height="240" controls>
-                  <source ng-src="{{getVideoSrc(value)}}">
-              </video>
+          <div ng-if="teacher_content.descriptions != ''">
+            <span ng-if="teacher_content.kind.toUpperCase() == 'IMAGE'">
+              <span ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">
+                <a href="{{getImgSrc(value)}}" target="_blank"><img ng-src="{{getImgSrc(value)}}" width="130px" height="100px"></a>
               <br>
               <br>
+              </span>
             </span>
-          </span>
-          <span ng-if="teacher_content.kind == 'text'" ng-bind-html="teacher_content.descriptions">&nbsp;</span>
+            <span ng-if="teacher_content.kind.toUpperCase() == 'VIDEO'">
+              <span class="MLG-{{networkState}}" ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">
+                <video width="320" height="240" controls>
+                    <source ng-src="{{getVideoSrc(value)}}">
+                </video>
+                <br>
+                <br>
+              </span>
+            </span>
+            <span ng-if="teacher_content.kind == 'text'" ng-bind-html="teacher_content.descriptions">&nbsp;</span>
+          </div>
+          <div ng-if="teacher_content.descriptions == ''">
+            <b>NO CONTENT TO SHOW.</b>
+          </div>
         </div>
 
         <!-- KHAN Content -->
