@@ -443,6 +443,14 @@ angular.module('mlg').filter('moment', function() {
         });
 	}
 
+    loginHttpResponse.childTimeSpentOnPlatform = function(data) {
+        return $http({
+            method:'POST',
+            data  : data,
+            url   : urlParams.baseURL+urlParams.childTimeSpentOnPlatform
+        });
+	}
+
     return loginHttpResponse;	
 }])
 .factory('commonActions',['$http','urlParams','loginHttpService',function($http,urlParams,loginHttpService){
@@ -897,7 +905,23 @@ loginHttpService.getAwardsofChild($routeParams.id).success(function(record) {
 
 //End - Award Block
 
+     $scope.student_total_time_spent = 0;
+     $scope.student_total_time_spent_in_week = 0;
+     $scope.student_total_time_spent_in_month = 0;
+    // Call API to get child details for time spent in dashboard
+    // total time spent
 
+    loginHttpService.childTimeSpentOnPlatform({"user_id" : [$routeParams.id]}).success(function(childResponse) {
+      $scope.student_total_time_spent = childResponse.total_duration_in_hrs;
+	});
+    // total time spent in week
+    loginHttpService.childTimeSpentOnPlatform({"user_id" : [$routeParams.id]}).success(function(childResponseInWeek) {
+      $scope.student_total_time_spent_in_week = childResponseInWeek.total_duration_in_hrs;
+	});
+    // total time spent in month
+    loginHttpService.childTimeSpentOnPlatform({"user_id" : [$routeParams.id]}).success(function(childResponseInMonth) {
+      $scope.student_total_time_spent_in_month = childResponseInMonth.total_duration_in_hrs;
+	});
 
 }])
 .controller('parentSubscriptionCtrl',['$rootScope','$scope','loginHttpService','$location','user_roles','$routeParams','commonActions','urlParams','subscription_days',function($rootScope,$scope, loginHttpService, $location, user_roles, $routeParams,commonActions,urlParams,subscription_days) {
