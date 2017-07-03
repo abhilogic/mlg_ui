@@ -24,26 +24,17 @@
             <h5 class="panel-title text-uppercase">My Class</h5>
             <div class="heading-elements">
                 <ul class="list-inline heading-text list-filters">
+                
                   <li>
-                    <select class="form-control input-sm no-border">
-                      <option value="Standard">Standard</option>
-
-                    </select>
+                    <select class="form-control input-sm no-border" title="skills" data-width1="auto" data-size1="auto" ng-model="frm.selectedSkill" ng-init="frm.selectedSkill=''" ng-change="onChangeSkill(frm.selectedSkill)" >
+                          <option value="">Select Skill</option>
+                          <option ng-repeat="skill in skills" value="{{skill.course_id}}">{{skill.course_name}}</option>         
+                   </select>
                   </li>
                   <li>
-                    <select class="form-control input-sm no-border">
-                      <option value="Subject">Subject</option>
-                      
-                    </select>
-                  </li>
-                  <li>
-                    <select class="form-control input-sm no-border">
-                      <option value="Skills">Skills</option>
-                    </select>
-                  </li>
-                  <li>
-                    <select class="form-control input-sm no-border">
-                      <option value="Sub Skills">Sub Skills</option>
+                    <select class="form-control input-sm no-border"  id="slcsubskill" title="subSkills" data-width1="auto" data-size1="auto" ng-model="frm.selectedSubskill" ng-init="frm.selectedSubskill=''" ng-disabled="frm.selectedSkill == '' " ng-change="onChangeSubSkill(frm.selectedSubskill)">
+                       <option value="">Select SubSkill</option>
+                        <option ng-repeat="subskill in subskills" value="{{subskill.course_id}}">{{subskill.course_name}}</option>     
                     </select>
                   </li>
                   <li>

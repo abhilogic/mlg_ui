@@ -897,9 +897,9 @@ angular.module('mlg').filter('moment', function() {
 //Start -  Award Block
 loginHttpService.getAwardsofChild($routeParams.id).success(function(record) {
    	if(record.response.status==true){
- 		$scope.child_awards = record.response.student_awards_results;
+ 		$scope.child_awards = record.response.student_awards_results; 		
   	}else{
-		$scope.auto_quiz_message = record.response.message;
+		$scope.award_message = record.response.message;
 		}
 }); 
 

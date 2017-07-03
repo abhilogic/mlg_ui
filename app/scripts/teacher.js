@@ -128,6 +128,21 @@ teacherHttpResponse.getStudentsOfSubjectForTeacher=function(tid,course_id){
  });
 }
 
+teacherHttpResponse.getDashboardStudentsOfTeacher=function(tid,course_id,skill_id=null,subskill_id=null){
+  if(skill_id!=null && subskill_id!=null){
+    var URLstr = '?teacher_id='+tid+'&subject_id='+course_id+'&skill_id='+skill_id+'&subskill_id='+subskill_id;
+  }else if (skill_id!=null && subskill_id==null){
+      var URLstr ='?teacher_id='+tid+'&subject_id='+course_id+'&skill_id='+skill_id;
+  }else{
+      var URLstr ='?teacher_id='+tid+'&subject_id='+course_id;
+  }
+
+  return $http({
+   method:'GET',            
+   url  : urlParams.baseURL+urlParams.getDashboardStudentsOfTeacher+URLstr
+ });
+}
+
 teacherHttpResponse.updateStudent=function(stUpdate){
  return $http({
    method:'POST', 
@@ -446,6 +461,7 @@ teacherHttpResponse.getStudentProgress=function(student_id){
     url   : urlParams.baseURL+urlParams.getStudentProgress+'/'+student_id
   });
 }
+
 teacherHttpResponse.getTeacherStudentReport=function(user_id,grade,course,pgnum){
   return $http({
     method:'GET',
@@ -462,6 +478,16 @@ teacherHttpResponse.getTeacherStudentGap=function(user_id,grade,course,pgnum,stu
     url   : url,
   });
 }
+
+
+teacherHttpResponse.getStudentScoreForSubskills=function(student_id,subject_id){
+  return $http({
+    method:'GET',
+    url   : urlParams.baseURL+urlParams.getStudentScoreForSubskills+'/'+student_id+'/'+subject_id
+  });
+}
+
+
 
 return teacherHttpResponse;
 
@@ -699,15 +725,73 @@ $scope.submitSkip = function(){
 .controller('teacherDashboardViewCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','$routeParams','user_roles','class_students_classification','commonActions','$filter','$localStorage',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,$routeParams,user_roles,class_students_classification,commonActions,$filter,$localStorage) {
       //Step- 1 check students of teacher to show empty / non-empty dashboard
-
-       // Api to call all students of a teacher
-       var get_uid=commonActions.getcookies(get_uid);
+      var get_uid=commonActions.getcookies(get_uid);
        $scope.baseURL= urlParams.baseURL;
        $scope.grade_id = $routeParams.gradeid ;
        $scope.course_id = $routeParams.courseid ;
        $scope.subject_name = $routeParams.subject_name ;
-       teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,$scope.course_id).success(function(response_students) { 
-         if (response_students.response.status == "true") {
+       $scope.frm={};
+
+
+
+
+      // API to call LIST of skills and subskills
+      //API to call skill
+       var parent_id = $routeParams.courseid;
+       teacherHttpService.getCourseSkillSubskills($routeParams.gradeid,parent_id).success(function(rescourse) {
+         if (rescourse.response.status == "True") {                       
+          $scope.skills = rescourse.response.courses;
+        }
+
+      });
+
+
+       //API to call subskill
+       $scope.onChangeSkill = function(slctSkill){
+        var parentid = slctSkill;
+        $scope.subskills={}; 
+        $scope.selected_skill_id=slctSkill;
+        teacherHttpService.getCourseSkillSubskills($scope.grade_id,parentid).success(function(rescourse) {
+           if (rescourse.response.status == "True") {
+            $scope.subskills = rescourse.response.courses;
+          }         
+        });
+
+        // get students
+        teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id,slctSkill).success(function(response_students) { 
+         if (response_students.response.status == true) {
+           $scope.students=response_students.response.students; 
+           $scope.students_count=  $scope.students.length;
+         }else{
+           $scope.student_Errormessage=response_students.response.message;
+           $scope.students_count =null;
+         } 
+       });
+
+      };
+
+      $scope.onChangeSubSkill = function(slctsubSkill){
+        teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id,$scope.selected_skill_id,slctsubSkill).success(function(response_students) { 
+         if (response_students.response.status == true) {
+           $scope.students=response_students.response.students; 
+           $scope.students_count=  $scope.students.length;
+         }else{
+           $scope.student_Errormessage=response_students.response.message;
+           $scope.students_count =null;
+         } 
+       });
+
+
+      };
+
+
+
+
+
+
+       // Api to call all students of a teacher       
+       teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id).success(function(response_students) { 
+         if (response_students.response.status == true) {
            $scope.students=response_students.response.students; 
            $scope.students_count=  $scope.students.length;
          }else{
@@ -3827,8 +3911,8 @@ $scope.deleteImage = function(j,data) {
             smartButtonMaxItems: 2,
           };*/
         }])
-.controller('studentProfileForTeacherCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','commonActions','$routeParams',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location, urlParams,commonActions,$routeParams) {
+.controller('studentProfileForTeacherCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','commonActions','$routeParams','quiz_mastered_score',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location, urlParams,commonActions,$routeParams,quiz_mastered_score) {
     if (typeof $routeParams.id == 'undefined' || $routeParams.id  == '') {
       alert('No child selected');
       return false;
@@ -3922,6 +4006,62 @@ $scope.deleteImage = function(j,data) {
 
 
 
+//Second Graph Grade Analysis
+$scope.gradeAnalysis_labels = ["Prime or composite", "Prime factorization", "Multiplicative inverses", "Divisibility rules", "Greatest common factor", "Least common factor", "GCF and LCM word problem", "Scientific nation"];
+  $scope.series = ['Recommended progress', 'Average score', 'Andrew score'];
+  $scope.gradeAnalysis_data = [
+  [50, 62, 80, 60, 40, 55, 48, 48],
+  [60, 72, 90, 68, 60, 68, 58, 58],
+  [70, 88, 100, 90, 82, 89, 72, 70]
+  ];
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  $scope.gradeAnalysis_colors = ['#b0baaf', '#f39c12', '#00a651'];
+  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+  
+  $scope.gradeAnalysis_options = {
+    scales: {
+      yAxes: [
+      {
+        id: 'y-axis-1',
+        type: 'linear',
+        display: true,
+        position: 'left'
+      },
+      ],
+
+      gradeAnalysis_labels: [
+      {
+       fontColor: '#fa4229'
+     }
+     ]
+   },
+
+   legend: {
+    display: true,
+    position: 'top',
+    labels: {
+     fontColor: '#333',
+     fontSize: 14,
+     boxWidth: 15
+   },
+ },
+ title: {
+  display: true,
+  text: 'SCORE POINTS',
+  fontColor: '#333',
+  position: 'left',
+  fontSize: 16
+}
+};
+
+
+
+//end - Second Graph Grade Analysis
+
+
+
     //Need Your Attention Block
     teacherHttpService.getNeedAttentionOFStudent($routeParams.id).success(function(resAtn) {
           if(resAtn.response.status==true){
@@ -4006,6 +4146,41 @@ $scope.deleteImage = function(j,data) {
           }
       };
 
+
+// Last Block - Student Result in panle-subjects
+  
+  //API to call student courses 
+  $scope.mastered = quiz_mastered_score.SUBSKILLQUIZ;
+  teacherHttpService.getStudentCourses($routeParams.id).success(function (response) {
+      if (response.response.status == 'TRUE') {
+          $scope.student_courses = response.response.student_courses;            
+      }
+    });
+    $scope.clickAccordionSubject = function(index, subject_id){
+      $("#subjectblock_"+index).toggleClass('in');
+      $scope.st_skillresult_message = "";
+      teacherHttpService.getStudentScoreForSubskills($routeParams.id,subject_id).success(function (response) {
+          if (response.response.status == true) {
+              $scope.student_results = response.response.student_percentage;
+              angular.forEach($scope.student_results, function(subdata){
+                  if(subdata['student_subskill_percentage'] >= $scope.mastered ){              
+                    subdata['subjectblock_class']  ='complete';               
+                  }
+                  else if( subdata['student_subskill_percentage'] < $scope.mastered && subdata['student_subskill_percentage']!=0){
+                      subdata['subjectblock_class']  ='progress-block';
+                  }else{
+                      subdata['subjectblock_class']  ='not-attempted';
+                   }                
+              }); 
+                       
+          }else{
+            $scope.st_skillresult_message = response.response.message;
+
+          }
+        });
+
+
+    };
 
 
 

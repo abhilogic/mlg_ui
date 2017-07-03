@@ -106,7 +106,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   scopeAndSequence : '/teachers/saveScopesAsSequence',
   getScopeTemplates : '/teachers/getScopeTemplate',
   getNeedAttentionForTeacher : '/teachers/getNeedAttentionForTeacher',
-  getNeedAttentionOFStudent : '/students/getNeedAttentionOFStudent',  
+  getNeedAttentionOFStudent : '/students/getNeedAttentionOFStudent',
+  getStudentScoreForSubskills : '/students/getStudentScoreForSubskills',  
   getSubskillAnalytic : '/teachers/getSubskillAnalytic',
   getNotificationForParent : '/users/getNotificationForParent',
   getAreaOfFocusForParent :'/users/getAreaOfFocusForParent',
@@ -123,6 +124,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getTeacherStudentReport : '/teachers/getTeacherStudentReport',
   childTimeSpentOnPlatform : '/users/childTimeSpentOnPlatform',
   getTeacherStudentGap : '/teachers/getTeacherStudentGap',
+  getDashboardStudentsOfTeacher :'/students/getDashboardStudentsOfTeacher',
+
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',
@@ -192,6 +195,14 @@ principal  : 30,
       TEACHERCUSTOMASSIGNMENT : 5,
       TEACHERAUTOASSIGNMENT : 6, 
       PARENTAUTOASSIGNMENT :7,
+}).value('quiz_mastered_score', {
+      PRETEST            : 80,
+      SUBSKILLQUIZ       : 80,
+      PRACTICES           : 80, 
+      KNIGHTCHALLENGE    : 80,
+      TEACHERCUSTOMASSIGNMENT : 80,
+      TEACHERAUTOASSIGNMENT : 80, 
+      PARENTAUTOASSIGNMENT :80,
 })
 .config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	var access = routingConfig.accessLevels;

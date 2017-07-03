@@ -69,9 +69,9 @@
           </div>
 
           <!-- grade Analysis -->
-          <div class="panel-body grade-analysis" id="doughnut-chart" ng-controller="GradeAnalysis">
+          <div class="panel-body grade-analysis" id="doughnut-chart">
             <!--<img src="assets/img/chart-grade-analysis.png" class="img-responsive"/>-->
-            <canvas id="line" class="chart chart-line ng-isolate-scope" chart-data="data"  chart-colors="colors" chart-labels="labels" chart-click="onClick" chart-hover="onHover" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride"></canvas>
+            <canvas id="line" class="chart chart-line ng-isolate-scope" chart-data="gradeAnalysis_data"  chart-colors="gradeAnalysis_gradeAnalysis_colors" chart-labels="gradeAnalysis_labels" chart-click="onClick" chart-hover="onHover" chart-series="series" chart-options="gradeAnalysis_options" chart-dataset-override="datasetOverride"></canvas>
           </div>
 
 
@@ -96,11 +96,10 @@
                           <span ><strong>Scored :</strong> {{atnRecord.score}} OUT OF: {{atnRecord.exam_marks}} </span><br>
 
                           <span ><strong>Scored(%) :</strong> {{ ((atnRecord.score/atnRecord.exam_marks)*100)|number :2 }} % </span>
-
                       </p>
                   </a>
                   </li>
-                  <li ng-if="attention_message"><h5 style="color:green">{{attention_message}}</h5></li>                 
+                  <li ng-if="attention_message"><h5 style="color:green">{{attention_message}}</h5></li>                
                 </ul>
 
 
@@ -163,213 +162,118 @@
             </div>
           </div>
 
-          <!-- grade Analysis -->
-          <div class="panel-body subjects-analysis">
-            <div class="panel-group subject-panel-group" id="subjectAccordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-subject">
-                <div class="panel-heading" role="tab" id="subjectId1">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#subjectAccordion" href="#subjectMath" aria-expanded="true" aria-controls="subjectMath">
-                      Subject - <span class="subject-name">Math</span>
-                    </a>
-                  </h4>
-                </div>
-                <div id="subjectMath" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="subjectId1">
-                  <div class="panel-body">
-                    <ul class="media-list sub-skill-list">
-                      <li class="media skill completed">
-                        <div class="media-left">
-                          <i class="status-icon text-success fa fa-check-circle fa-2x"></i>
-                          <div class="skill-title">
-                            <span>Sub Skill 1</span>
-                            <h4>Calculas</h4>
-                          </div>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading">
-                            <span class="status-text text-success">Completed</span>
-                            <span class="proficiency">Proficiency Level: 6/10</span>
-                            <a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
-                          </h4>
-                        </div>
-                        <div class="media-right">
-                          <button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
-                        </div>
-                      </li>
-                      <li class="media skill completed">
-                        <div class="media-left">
-                          <i class="status-icon text-success fa fa-check-circle fa-2x"></i>
-                          <div class="skill-title">
-                            <span>Sub Skill 1</span>
-                            <h4>Calculas</h4>
-                          </div>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading">
-                            <span class="status-text text-success">Completed</span>
-                            <span class="proficiency">Proficiency Level: 6/10</span>
-                            <a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
-                          </h4>
-                        </div>
-                        <div class="media-right">
-                          <button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+          <!-- bootstrap accordian  -->
+            <div class="panel-group panel-group-subskills-report" id="accordian">
+                <div class="panel  panel-flat" ng-repeat="stcourse in student_courses">
+                    
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a id="sublink_{{$index+1}}" ng-click="clickAccordionSubject($index+1,stcourse.id)">{{stcourse.course_name}}</a>
+                        </h4>
+                    </div>
 
-              <div class="panel panel-subject">
-                <div class="panel-heading" role="tab" id="subjectId2">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#subjectAccordion" href="#subjectEnglish" aria-expanded="true" aria-controls="collapseOne">
-                      Subject - <span class="subject-name">English</span>
-                    </a>
-                  </h4>
-                </div>
-                <div id="subjectEnglish" class="panel-collapse collapse" role="tabpanel" aria-labelledby="subjectEnglish">
-                  <div class="panel-body">
-                    <ul class="media-list sub-skill-list">
-                      <li class="media skill completed">
-                        <div class="media-left">
-                          <i class="status-icon text-success fa fa-check-circle fa-2x"></i>
-                          <div class="skill-title">
-                            <span>Sub Skill 1</span>
-                            <h4>Calculas</h4>
-                          </div>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading">
-                            <span class="status-text text-success">Completed</span>
-                            <span class="proficiency">Proficiency Level: 6/10</span>
-                            <a href="#" class="link link-danger" data-toggle="modal" data-target="#modal-viewSkills">view Info</a>
-                          </h4>
-                        </div>
-                        <div class="media-right">
-                          <button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
-                        </div>
-                      </li>
-                      <li class="media skill inProgress">
-                        <div class="media-left">
-                          <i class="status-icon fa fa-play-circle text-warning fa-2x"></i>
-                          <div class="skill-title">
-                            <span>Sub Skill 1</span>
-                            <h4>Calculas</h4>
-                          </div>
-                        </div>
-                        <div class="media-body">
-                          <div class="progress">
-                            <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                              <span class="sr-only">60% Complete (warning)</span>
+
+                    <div id="subjectblock_{{$index+1}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            
+                            <!-- 1. if subject have any subskills -->
+                            <div class="subskils-report-block {{stresult.subjectblock_class}}" ng-repeat="stresult in student_results">
+                              
+                              <!--1.1 if student is mastered in subskill quiz -->
+                              <div class="row" ng-if="stresult.student_subskill_percentage >= mastered">
+                                <div class="col-md-5">
+                                  <div class="row">
+                                    <div class="col-xs-6">
+                                      <div class="row">
+                                        <div class="col-xs-2 icon">
+                                          <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-xs-9 subskills-name">
+                                            <span>{{stresult.subskill_name}}</span>
+                                            <span>{{stresult.skill_name}}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-6 status" >
+                                      <span>Completed</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="row">
+                                    <div class="col-xs-8 rating">
+                                      <p>Proficiency Level:<span>{{stresult.student_subskill_percentage/10}}/10</span></p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                      <a href="#" class="view_info" data-toggle="modal" data-target="#modal-viewSkills">View info</a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <button type="button" class="btn btn-danger btn-rounded btn-block text-uppercase">Send assignment</button>
+                                </div>
+                              </div>
+
+                              <!--1.2 if student is not mastered in subskill quiz -->
+                              <div class="row" ng-if="stresult.student_subskill_percentage < mastered && stresult.student_subskill_percentage !=0">
+                                <div class="col-md-7">
+                                  <div class="row">
+                                    <div class="col-sm-4 col-xs-6">
+                                      <div class="row">
+                                        <div class="col-xs-2 icon">
+                                          <i class="fa fa-play-circle-o text-warning" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-xs-9 subskills-name">
+                                            <span>{{stresult.subskill_name}}</span>
+                                            <span>{{stresult.skill_name}}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-8 col-xs-6">
+                                      <div class="progress">
+                                         <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"  aria-valuenow="{{stresult.student_subskill_percentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{stresult.student_subskill_percentage}}%; font-size: 12px;">
+                                        {{stresult.student_subskill_percentage}}%
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- 1.3. if student is not started subskill quiz -->
+                              <div class="row"  ng-if="stresult.student_subskill_percentage ==0">
+                                <div class="col-md-7">
+                                  <div class="row">
+                                    <div class="col-sm-4 col-xs-6">
+                                      <div class="row">
+                                        <div class="col-xs-2 icon">
+                                          <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-xs-9 subskills-name">
+                                            <span>{{stresult.subskill_name}}</span>
+                                            <span>{{stresult.skill_name}}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-8 col-xs-6 status">
+                                      <span>not attempted yet</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                          </div>
+
+                            <!--2. if subject doesn't have any subskills -->
+                            <div class="subskils-report-block" ng-if="st_skillresult_message !='' ">
+                                <div class="row mesg" >{{st_skillresult_message}}</div>
+                            </div> 
+
                         </div>
-                        <div class="media-right">
-                          <button  class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#modal-addAssignment">Send Assignment</button>
-                        </div>
-                      </li>
-                      <li class="media skill notAttepted">
-                        <div class="media-left">
-                          <i class="status-icon fa fa-minus-circle fa-2x"></i>
-                          <div class="skill-title">
-                            <span>Sub Skill 1</span>
-                            <h4>Calculas</h4>
-                          </div>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading">Not Attempted Yet<h4>
-                              </div>
-                              </li>
-                              </ul>
-                              </div>
-                              </div>
-                              </div>
+                    </div>
+                </div>
+                
 
-                              </div>
-                              </div>
+            </div>
+            <!-- bootstrap accordian -->
 
-                              </div>
-                              <!-- /student list panel  -->
-
-                              </div>
-                              <!-- /content area -->
-
-                              </div>
-                              <!-- /main content -->
-
-                              </div>
-                              <!-- /page content -->
-
-                              </div>
-                              <!-- page container -->
-
-
-                              <section class="modal-section">
-                                <div id="modal-addAssignment" class="modal fade modal-addAssignment modal-option" role="dialog">
-                                  <div class="modal-dialog">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
-                                        <h4 class="modal-title">Send Assignment</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                        <a href="teacher-autoGenerateAssignment.html" class='btn btn-outline btn-danger  btn-block'>Send Auto Generated Assignemt</a>
-                                        <a href="teacher-createCustomAssignement.html" class='btn btn-outline  btn-default btn-block'>Create a custom assignment</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- Modal content-->
-                                </div>
-
-                                <div id="modal-viewSkills" class="modal fade modal-viewSkills" role="dialog">
-                                  <div class="modal-dialog">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
-                                        <h4 class="modal-title"><span>Skills Name</span>Calculus</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                        <table>
-                                          <tbody>
-                                            <tr>
-                                              <td>Time Taken:</td>
-                                              <th>20 Days</th>
-                                            </tr>
-                                            <tr>
-                                              <td>Start Date:</td>
-                                              <th>02 FEB  2017</th>
-                                            </tr>
-                                            <tr>
-                                              <td>Question Attempted:</td>
-                                              <th>30</th>
-                                            </tr>
-                                            <tr>
-                                              <td>Correct Answerd:</td>
-                                              <th>20</th>
-                                            </tr>
-                                            <tr>
-                                              <td>Class Average:</td>
-                                              <th>23</th>
-                                            </tr>
-                                            <tr>
-                                              <td>Andrew Average: </td>
-                                              <th>22</th>
-                                            </tr>
-                                            <tr>
-                                              <td>Recommended Average</td>
-                                              <th>27</th>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                        <h5><span>proficiency level:</span> 8/10</h5>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- Modal content-->
-                                </div>
-                              </section>
+              
