@@ -5603,7 +5603,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     }else if(pgnum == $scope.lastPage) {
       $scope.nexClass = 'disabled';
       $scope.preClass = '';
-      teacherHttpService.getTeacherStudentReport(get_uid,grade,course,pgnum,).success(function(response) {
+      teacherHttpService.getTeacherStudentReport(get_uid,grade,course,pgnum).success(function(response) {
         if (response.status == true) {          
           $scope.assisment = response.response;
           $scope.NoGap = response.gap;

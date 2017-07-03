@@ -2187,6 +2187,10 @@ if (typeof $routeParams.slug != 'undefined') {
       var skills = null;
       var subSkills = null;
       var day = 0;
+      var pronum = 1;
+      var gapPgnum = 1;
+      var assignum = 1;
+      var rewnum = 1;
       $scope.sub_message = '';
       $scope.assi_message = '';
       $scope.reward_message = '';
@@ -2197,7 +2201,7 @@ if (typeof $routeParams.slug != 'undefined') {
       });
      $scope.details = [];
      // Student Reports
-    loginHttpService.getParentChildReport(child_id).success(function(res_resport) {
+    loginHttpService.getParentChildReport(child_id,pronum).success(function(res_resport) {
       if(res_resport.status == true){
         angular.forEach(res_resport.response.details,function(val,key){
           var percent = val['student_result_percent'];
@@ -2239,19 +2243,21 @@ if (typeof $routeParams.slug != 'undefined') {
       for (var i = min; i <= max; i += step) input.push(i);
         return input;
     };
-    loginHttpService.getParentChildAssignment(child_id,get_uid,'1').success(function(response) {
+    loginHttpService.getParentChildAssignment(child_id,get_uid,assignum).success(function(response) {
        if((response.assignment_list).length != 0) {
          $scope.assignment = response.assignment_list;
          $scope.count = ($scope.assignment).length;
          $scope.attemptAssignment = response.attempted_assignment;
+         $scope.assigPage = response.lastPage;
        }else{
          $scope.assi_len = (response.response).length;
          $scope.assi_message = 'No Report generated now.';
        }
     }); 
-    loginHttpService.getParentChildReward(child_id,'1').success(function(response) {
+    loginHttpService.getParentChildReward(child_id,rewnum).success(function(response) {
        if((response.response).length != 0) {
          $scope.reward = response.response;
+          $scope.rewPage = response.lastPage;
        }else{
          $scope.rew_len = (response.response).length;
          $scope.reward_message = 'No Report generated now.';
@@ -2311,7 +2317,7 @@ if (typeof $routeParams.slug != 'undefined') {
           $scope.subSkill = val; 
         }
       });
-      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkill).success(function(response) {
+      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkills).success(function(response) {
        if(response.status == true){
          $scope.sub_message = '';
          $scope.details = [];
@@ -2438,4 +2444,414 @@ if (typeof $routeParams.slug != 'undefined') {
        }
       });
     }
+    //pagination
+    $scope.nexClass = '';
+    $scope.preClass = 'disabled';
+    if(pronum > 1) {
+      $scope.preClass = '';
+    }else if(typeof $scope.lastPage != undefined && pronum >= $scope.lastPage  ) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+    }else if(pronum > 1 && typeof $scope.lastPage != undefined && pronum >= $scope.lastPage){
+      $scope.nexClass = '';
+      $scope.preClass = '';
+    }
+    if(gapPgnum > 1) {
+      $scope.preClass = '';
+    }else if(typeof $scope.endPage != undefined && gapPgnum >= $scope.endPage  ) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+    }else if(gapPgnum > 1 && typeof $scope.endPage != undefined && gapPgnum >= $scope.endPage){
+      $scope.nexClass = '';
+      $scope.preClass = '';
+    }
+    // assignment
+    if(assignum > 1) {
+      $scope.preClass = '';
+    }else if(typeof $scope.lastPage != undefined && assignum >= $scope.lastPage  ) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+    }else if(assignum > 1 && typeof $scope.lastPage != undefined && assignum >= $scope.lastPage){
+      $scope.nexClass = '';
+      $scope.preClass = '';
+    }
+    // reward
+    if(rewnum > 1) {
+      $scope.preClass = '';
+    }else if(typeof $scope.lastPage != undefined && rewnum >= $scope.lastPage  ) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+    }else if(rewnum > 1 && typeof $scope.lastPage != undefined && rewnum >= $scope.lastPage){
+      $scope.nexClass = '';
+      $scope.preClass = '';
+    }
+    var tempUrl = $location.url();
+    var temp = tempUrl.split('#');
+    if(typeof temp[1] != 'undefined') {
+      pronum = temp[1];
+      gapPgnum = temp[1];
+      assignum = temp[1];
+      rewnum = temp[1];
+    }
+   $scope.getPrevious = function(data) {
+     if(data == 'pro') {
+      pronum = pronum - 1;
+      if(pronum < '1') {
+        pronum = 1;
+        $scope.nexClass = '';
+        $scope.preClass = 'disabled';
+      }else if(pronum == '1'){
+        pronum = 1;
+        $scope.nexClass = '';
+        $scope.preClass = 'disabled';
+        // Student Reports
+          loginHttpService.getParentChildReport(child_id,pronum).success(function(res_resport) {
+            if(res_resport.status == true){
+              angular.forEach(res_resport.response.details,function(val,key){
+                var percent = val['student_result_percent'];
+                var temp = 0;
+                $scope.gapMessage = 'No Report generated now.';
+                angular.forEach(class_students_classification,function(clss,key){
+                  if(temp< percent && percent<=clss) {
+                    $scope.details.push({
+                      'user_quiz_id':val['user_quiz_id'],
+                      'grade_id':val['grade_id'],
+                      'course_id':val['course_id'],
+                      'quiz_type_id':val['quiz_type_id'],
+                      'quiz_id':val['quiz_id'],
+                      'exam_marks':val['exam_marks'],
+                      'student_score':val['student_score'],
+                      'course_name':val['course_name'],
+                      'student_result_percent':val['student_result_percent'],
+                      'other_Student_average':val['other_Student_average'],
+                      'best_Student_average':val['best_Student_average'],
+                      'category':key,
+                    });
+                    if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                      $scope.gap_message = '';
+                    }
+                  }
+                  temp = clss;
+                });
+              }); 
+              $scope.lastPage = res_resport.lastPage;
+            }
+            else{
+              $scope.sub_message ="No Report generated now.";
+            }
+
+          });
+      }else{
+        if(pronum > 1) {
+         $scope.preClass = '';
+       }else if(typeof $scope.lastPage != undefined && pronum == $scope.lastPage  ) {
+         $scope.nexClass = 'disabled';
+         $scope.preClass = '';
+       }else if(pronum > 1 && typeof $scope.lastPage != undefined && pronum >= $scope.lastPage){
+         $scope.nexClass = '';
+         $scope.preClass = '';
+       }
+       // Student Reports
+          loginHttpService.getParentChildReport(child_id,pronum).success(function(res_resport) {
+            if(res_resport.status == true){
+              angular.forEach(res_resport.response.details,function(val,key){
+                var percent = val['student_result_percent'];
+                var temp = 0;
+                $scope.gapMessage = 'No Report generated now.';
+                angular.forEach(class_students_classification,function(clss,key){
+                  if(temp< percent && percent<=clss) {
+                    $scope.details.push({
+                      'user_quiz_id':val['user_quiz_id'],
+                      'grade_id':val['grade_id'],
+                      'course_id':val['course_id'],
+                      'quiz_type_id':val['quiz_type_id'],
+                      'quiz_id':val['quiz_id'],
+                      'exam_marks':val['exam_marks'],
+                      'student_score':val['student_score'],
+                      'course_name':val['course_name'],
+                      'student_result_percent':val['student_result_percent'],
+                      'other_Student_average':val['other_Student_average'],
+                      'best_Student_average':val['best_Student_average'],
+                      'category':key,
+                    });
+                    if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                      $scope.gap_message = '';
+                    }
+                  }
+                  temp = clss;
+                });
+              }); 
+              $scope.lastPage = res_resport.lastPage;
+            }
+            else{
+              $scope.sub_message ="No Report generated now.";
+            }
+
+          });
+      } 
+    }
+    if(data == 'assig') {
+      assignum = assignum - 1;
+      if(assignum < '1') {
+        assignum = 1;
+        $scope.nexClass = '';
+        $scope.preClass = 'disabled';
+      }else if(assignum == '1'){
+        assignum = 1;
+        $scope.nexClass = '';
+        $scope.preClass = 'disabled';
+        loginHttpService.getParentChildAssignment(child_id,get_uid,assignum).success(function(response) {
+        if((response.assignment_list).length != 0) {
+          $scope.assignment = response.assignment_list;
+          $scope.count = ($scope.assignment).length;
+          $scope.attemptAssignment = response.attempted_assignment;
+          $scope.assigPage = response.lastPage;
+        }else{
+          $scope.assi_len = (response.response).length;
+          $scope.assi_message = 'No Report generated now.';
+        }
+       }); 
+      }else{
+        if(assignum > 1) {
+         $scope.preClass = '';
+       }else if(typeof $scope.lastPage != undefined && assignum == $scope.lastPage  ) {
+         $scope.nexClass = 'disabled';
+         $scope.preClass = '';
+       }else if(assignum > 1 && typeof $scope.lastPage != undefined && assignum >= $scope.lastPage){
+         $scope.nexClass = '';
+         $scope.preClass = '';
+       }
+       loginHttpService.getParentChildAssignment(child_id,get_uid,assignum).success(function(response) {
+        if((response.assignment_list).length != 0) {
+          $scope.assignment = response.assignment_list;
+          $scope.count = ($scope.assignment).length;
+          $scope.attemptAssignment = response.attempted_assignment;
+          $scope.assigPage = response.lastPage;
+        }else{
+          $scope.assi_len = (response.response).length;
+          $scope.assi_message = 'No Report generated now.';
+        }
+       }); 
+      } 
+    }
+    if(data == 'reward') {
+      rewnum = rewnum - 1;
+      if(rewnum < '1') {
+        rewnum = 1;
+        $scope.nexClass = '';
+        $scope.preClass = 'disabled';
+      }else if(rewnum == '1'){
+        rewnum = 1;
+        $scope.nexClass = '';
+        $scope.preClass = 'disabled';   
+      loginHttpService.getParentChildReward(child_id,rewnum).success(function(response) {
+         if((response.response).length != 0) {
+           $scope.reward = response.response;
+            $scope.rewPage = response.lastPage;
+         }else{
+           $scope.rew_len = (response.response).length;
+           $scope.reward_message = 'No Report generated now.';
+         }
+      });
+      }else{
+        if(rewnum > 1) {
+         $scope.preClass = '';
+       }else if(typeof $scope.lastPage != undefined && rewnum == $scope.lastPage  ) {
+         $scope.nexClass = 'disabled';
+         $scope.preClass = '';
+       }else if(rewnum > 1 && typeof $scope.lastPage != undefined && rewnum >= $scope.lastPage){
+         $scope.nexClass = '';
+         $scope.preClass = '';
+       }  
+        loginHttpService.getParentChildReward(child_id,rewnum).success(function(response) {
+           if((response.response).length != 0) {
+             $scope.reward = response.response;
+              $scope.rewPage = response.lastPage;
+           }else{
+             $scope.rew_len = (response.response).length;
+             $scope.reward_message = 'No Report generated now.';
+           }
+        });
+      } 
+    }
+ }
+ $scope.getNext = function(data) {
+   if(data == 'pro') {
+    pronum = pronum + 1;
+    if(pronum > $scope.lastPage) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+      pronum = pronum -1 ;
+    }else if(pronum == $scope.lastPage) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+      // Student Reports
+          loginHttpService.getParentChildReport(child_id,pronum).success(function(res_resport) {
+            if(res_resport.status == true){
+              angular.forEach(res_resport.response.details,function(val,key){
+                var percent = val['student_result_percent'];
+                var temp = 0;
+                $scope.gapMessage = 'No Report generated now.';
+                angular.forEach(class_students_classification,function(clss,key){
+                  if(temp< percent && percent<=clss) {
+                    $scope.details.push({
+                      'user_quiz_id':val['user_quiz_id'],
+                      'grade_id':val['grade_id'],
+                      'course_id':val['course_id'],
+                      'quiz_type_id':val['quiz_type_id'],
+                      'quiz_id':val['quiz_id'],
+                      'exam_marks':val['exam_marks'],
+                      'student_score':val['student_score'],
+                      'course_name':val['course_name'],
+                      'student_result_percent':val['student_result_percent'],
+                      'other_Student_average':val['other_Student_average'],
+                      'best_Student_average':val['best_Student_average'],
+                      'category':key,
+                    });
+                    if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                      $scope.gap_message = '';
+                    }
+                  }
+                  temp = clss;
+                });
+              }); 
+              $scope.lastPage = res_resport.lastPage;
+            }
+            else{
+              $scope.sub_message ="No Report generated now.";
+            }
+
+          });
+    }else{
+     // Student Reports
+          loginHttpService.getParentChildReport(child_id,pronum).success(function(res_resport) {
+            if(res_resport.status == true){
+              angular.forEach(res_resport.response.details,function(val,key){
+                var percent = val['student_result_percent'];
+                var temp = 0;
+                $scope.gapMessage = 'No Report generated now.';
+                angular.forEach(class_students_classification,function(clss,key){
+                  if(temp< percent && percent<=clss) {
+                    $scope.details.push({
+                      'user_quiz_id':val['user_quiz_id'],
+                      'grade_id':val['grade_id'],
+                      'course_id':val['course_id'],
+                      'quiz_type_id':val['quiz_type_id'],
+                      'quiz_id':val['quiz_id'],
+                      'exam_marks':val['exam_marks'],
+                      'student_score':val['student_score'],
+                      'course_name':val['course_name'],
+                      'student_result_percent':val['student_result_percent'],
+                      'other_Student_average':val['other_Student_average'],
+                      'best_Student_average':val['best_Student_average'],
+                      'category':key,
+                    });
+                    if(key == 'REMEDIAL' || key == 'STRUGGLING') {
+                      $scope.gap_message = '';
+                    }
+                  }
+                  temp = clss;
+                });
+              }); 
+              $scope.lastPage = res_resport.lastPage;
+            }
+            else{
+              $scope.sub_message ="No Report generated now.";
+            }
+
+          });
+   }
+   if(pronum > 1) {
+       $scope.preClass = '';
+     }else if(typeof $scope.lastPage != undefined && pronum == $scope.lastPage  ) {
+       $scope.nexClass = 'disabled';
+       $scope.preClass = '';
+     }else if(pronum > 1 && typeof $scope.lastPage != undefined && pronum < $scope.lastPage){
+       $scope.nexClass = '';
+       $scope.preClass = '';
+     } 
+   }
+   if(data == 'assig') {
+    assignum = assignum + 1;
+    if(assignum > $scope.lastPage) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+      assignum = assignum -1 ;
+    }else if(assignum == $scope.lastPage) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+       loginHttpService.getParentChildAssignment(child_id,get_uid,assignum).success(function(response) {
+        if((response.assignment_list).length != 0) {
+          $scope.assignment = response.assignment_list;
+          $scope.count = ($scope.assignment).length;
+          $scope.attemptAssignment = response.attempted_assignment;
+          $scope.assigPage = response.lastPage;
+        }else{
+          $scope.assi_len = (response.response).length;
+          $scope.assi_message = 'No Report generated now.';
+        }
+     })
+    }else{
+      loginHttpService.getParentChildAssignment(child_id,get_uid,assignum).success(function(response) {
+        if((response.assignment_list).length != 0) {
+          $scope.assignment = response.assignment_list;
+          $scope.count = ($scope.assignment).length;
+          $scope.attemptAssignment = response.attempted_assignment;
+          $scope.assigPage = response.lastPage;
+        }else{
+          $scope.assi_len = (response.response).length;
+          $scope.assi_message = 'No Report generated now.';
+        }
+      });
+   }
+   if(assignum > 1) {
+       $scope.preClass = '';
+     }else if(typeof $scope.lastPage != undefined && assignum == $scope.lastPage  ) {
+       $scope.nexClass = 'disabled';
+       $scope.preClass = '';
+     }else if(assignum > 1 && typeof $scope.lastPage != undefined && assignum < $scope.lastPage){
+       $scope.nexClass = '';
+       $scope.preClass = '';
+     } 
+   }
+   if(data == 'reward') {
+    rewnum = rewnum + 1;
+    if(rewnum > $scope.lastPage) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+      rewnum = rewnum -1 ;
+    }else if(rewnum == $scope.lastPage) {
+      $scope.nexClass = 'disabled';
+      $scope.preClass = '';
+      loginHttpService.getParentChildReward(child_id,rewnum).success(function(response) {
+       if((response.response).length != 0) {
+         $scope.reward = response.response;
+         $scope.rewPage = response.lastPage;
+       }else{
+         $scope.rew_len = (response.response).length;
+         $scope.reward_message = 'No Report generated now.';
+       }
+    });
+    }else{
+     loginHttpService.getParentChildReward(child_id,rewnum).success(function(response) {
+       if((response.response).length != 0) {
+         $scope.reward = response.response;
+          $scope.rewPage = response.lastPage;
+       }else{
+         $scope.rew_len = (response.response).length;
+         $scope.reward_message = 'No Report generated now.';
+       }
+    });
+   }
+   if(rewnum > 1) {
+       $scope.preClass = '';
+     }else if(typeof $scope.lastPage != undefined && rewnum == $scope.lastPage  ) {
+       $scope.nexClass = 'disabled';
+       $scope.preClass = '';
+     }else if(rewnum > 1 && typeof $scope.lastPage != undefined && rewnum < $scope.lastPage){
+       $scope.nexClass = '';
+       $scope.preClass = '';
+     } 
+   }
+}
 }]);

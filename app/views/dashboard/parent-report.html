@@ -108,18 +108,18 @@
                 <tfoot>
 									<tr>
 										<td class="table-pagination" colspan="7">
-											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<!--<span class="pull-left">Showing 1-10 of 50 entries</span>-->
 											<ul class="pagination pagination-sm">
-												<li class="disabled">
-													<a>
+												<li class="{{preClass}}">
+													<a ng-click="getPrevious('pro')">
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li ng-repeat="n in range(1,lastPage)">
+                        <li ng-repeat="n in range(1,lastPage)">
 													<a href="#{{n}}">{{n}}</a>
 												</li>
-												<li>
-													<a aria-hidden="true">Next</a>
+												<li class="{{nexClass}}">
+													<a aria-hidden="true" ng-click="getNext('pro')">Next</a>
 												</li>
 											</ul>
 										</td>
@@ -171,24 +171,18 @@
                 <tfoot>
 									<tr>
 										<td class="table-pagination" colspan="7">
-											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<!--<span class="pull-left">Showing 1-10 of 50 entries</span>-->
 											<ul class="pagination pagination-sm">
-												<li class="disabled">
-													<a>
+												<li class="{{preClass}}">
+													<a ng-click="getPrevious('pro')">
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li class="active">
-													<a>1</a>
+                        <li ng-repeat="n in range(1,lastPage)">
+													<a href="#{{n}}">{{n}}</a>
 												</li>
-												<li>
-													<a>2</a>
-												</li>
-												<li>
-													<a>3</a>
-												</li>
-												<li>
-													<a aria-hidden="true">Next</a>
+												<li class="{{nexClass}}">
+													<a aria-hidden="true" ng-click="getNext('pro')">Next</a>
 												</li>
 											</ul>
 										</td>
@@ -241,22 +235,16 @@
 										<td class="table-pagination" colspan="7">
 											<!--<span class="pull-left">Showing 1-10 of 50 entries</span>-->
 											<ul class="pagination pagination-sm">
-												<li class="disabled">
-													<a>
+												<li class="{{preClass}}">
+													<a ng-click="getPrevious('assig')">
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li class="active">
-													<a>1</a>
+                        <li ng-repeat="n in range(1,assigPage)">
+													<a href="#{{n}}">{{n}}</a>
 												</li>
-												<li>
-													<a>2</a>
-												</li>
-												<li>
-													<a>3</a>
-												</li>
-												<li>
-													<a aria-hidden="true">Next</a>
+												<li class="{{nexClass}}">
+													<a aria-hidden="true" ng-click="getNext('assig')">Next</a>
 												</li>
 											</ul>
 										</td>
@@ -307,24 +295,18 @@
                 <tfoot>
 									<tr>
 										<td class="table-pagination" colspan="7">
-											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<!--<span class="pull-left">Showing 1-10 of 50 entries</span>-->
 											<ul class="pagination pagination-sm">
-												<li class="disabled">
-													<a>
+												<li class="{{preClass}}">
+													<a ng-click="getPrevious('reward')">
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li class="active">
-													<a>1</a>
+                        <li ng-repeat="n in range(1,rewPage)">
+													<a href="#{{n}}">{{n}}</a>
 												</li>
-												<li>
-													<a>2</a>
-												</li>
-												<li>
-													<a>3</a>
-												</li>
-												<li>
-													<a aria-hidden="true">Next</a>
+												<li class="{{nexClass}}">
+													<a aria-hidden="true" ng-click="getNext('reward')">Next</a>
 												</li>
 											</ul>
 										</td>
