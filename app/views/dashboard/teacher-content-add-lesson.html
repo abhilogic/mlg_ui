@@ -256,7 +256,7 @@
 									<span>LESSON NAME</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<p>{{previewLesson}}</p>
+									<p><span ng-bind-html="previewLesson"></span></p>
 								</div>
 							</div>
 							<div class="row table-repeat-row">
@@ -282,7 +282,7 @@
 									<span>Image</span>
 								</div>
 								<div class="col-md-9 table-cell">
-									<img ng-repeat="pre in previewImage" src="{{preht}}://{{preHst}}/mlg/webroot/upload/{{pre}}" alt="{{pre}}"width="50px" height="50px"></img>
+									<img ng-repeat="pre in previewImage" src="{{mlgUrl}}/webroot/upload/{{pre}}" alt="{{pre}}"width="50px" height="50px"></img>
 								</div>
 							</div>
 <!--							<iframe src="http://www.youtube.com/embed/W7qWa52k-nE"

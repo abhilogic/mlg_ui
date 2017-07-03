@@ -2703,6 +2703,7 @@ $scope.removePerson = function(index){
     $scope.ansCount = 0;
     $scope.show = 'false';
     $scope.option = '';
+    $scope.mlgUrl = urlParams.baseURL;
     // template detail show
     teacherHttpService.getTemplateDetail(get_uid,'question').success(function(response) {
       if (response.status == true) {
@@ -3072,7 +3073,6 @@ $scope.closeTemplate = function(){
       var myEleme = angular.element(document.querySelector('#save-question'));
       myEleme.append($compile('<button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE QUESTION</button>')($scope));  
     }else{
-      alert(response.message);
       $scope.message = response.message;
       $timeout(function () {$scope.message = "";}, 3000);
     }
@@ -3199,7 +3199,8 @@ qType = value['ques_type'];
 angular.forEach(value['ques_type'],function(type,key){
   angular.forEach($scope.questionType,function(qlist,key){
     if(type == qlist['id']){
-      $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['lable']});
+//      $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['lable']});
+        $scope.questionTypeModel = qlist['id'];
     }
   });
 });
@@ -3276,7 +3277,8 @@ $scope.addImgAns=function(){
           });
           $scope.standardmodel.push({'id' : value['standard'],'label': value['standard'] });
           standard = value['standard'];
-          $scope.questionTypeModel.push({'id' : value['type']});
+          $scope.questionTypeModel = value['type'].toString();
+//          $scope.questionTypeModel.push({'id' : value['type']});
           qType = value['type'];
           $scope.frm.questionStatement = value['questionName'];
         //answer listing
@@ -5052,10 +5054,100 @@ $scope.deleteQuestions = function(Qid,uniqId){
         break;
       }
     }
+    var groupId = '';
+    var groupName = '';
+    $scope.scopeGradeModel = [];
+    var lUrl = $location.url();
+    if(typeof lUrl.split('?') != 'undefined') {
+      var LId = lUrl.split('?');
+    }
+    if(typeof LId[1] != 'undefined') {  
+      var cId =  LId[1].split('&F');
+      grade = cId[0].toString();
+      course = cId[1].toString();
+      groupName  = cId[2].toString();
+      groupId = cId[3].toString();
+      optionChecked = groupName;
+    }
     $scope.option = optionChecked;
     teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
       if (response.status == true) {          
         $scope.scopeLevel = response.grade;
+        if(grade != 'undefined') {
+          angular.forEach($scope.scopeLevel,function(val,ki){
+            if(val['id'] == grade){
+              $scope.scopeGradeModel = val['id'];
+            }
+          });
+          teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
+            $scope.scopeSubject = response.response;
+            angular.forEach($scope.scopeSubject,function(val,ki){
+              if(val['course_id'] == course){
+                $scope.scopeCourseModel = val['course_id'];
+              }
+            });
+          }).error(function(error) {
+//                $scope.msg= 'Some technical error occured.';
+          });
+          /** get teacher student start**/
+            teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,course).success(function(response_students) { 
+             if (response_students.response.status == "true") {
+               $scope.students = response_students.response.students;
+               if(groupName == 'people'){
+                angular.forEach($scope.students,function(val,ki){
+                  if(val['id'] == groupId){
+                    $scope.scopePeopleModel = val['id'];
+                  }
+                });
+              }
+             }else{
+               $scope.student_Errormessage=response_students.response.message;
+             } 
+            });
+             /** get teacher student end**/
+            // API to call all groups of a teacher
+            teacherHttpService.getGroupsOfSubjectForTeacher(get_uid,course).success(function(respGroup) {
+             if (respGroup.response.status == "true") {
+               $scope.groups = respGroup.response.groups;
+               if(groupName == 'group'){
+                angular.forEach($scope.groups,function(val,ki){
+                  if(val['id'] == groupId){
+                    $scope.scopeGroupModel = val['id'];
+                  }
+                });
+              }
+             }
+            });
+            
+          teacherHttpService.teacherScope(get_uid,course,groupName,groupId).success(function(response) {
+            if(response.status == true) {
+              if(response.by == 'course') {
+                $scope.scopeSkills = response.response;
+              }else if(response.by == 'scope') {
+                $scope.scopeSkills = angular.fromJson(response.response[0].scope);
+              }
+              angular.forEach($scope.scopeSkills,function(sub,key){
+                teacherHttpService.teacherScope(get_uid,sub['course_id'],optionChecked,id).success(function(response) {
+                 if(response.status == true) {
+                   if(response.by == 'course') {
+                     if(response.response != '') {
+                       $scope.subSkill.push(response.response);
+                     }
+                   }else if(response.by == 'scope') {
+                     if(angular.fromJson(response.response[0].scope) != '') {
+                       $scope.subSkill.push(angular.fromJson(response.response[0].scope));
+                     }
+                   }
+                 } 
+               }).error(function(error) {
+                 $scope.msg= 'Some technical error occured.';
+               });          
+            });
+            } 
+          }).error(function(error) {
+            $scope.msg= 'Some technical error occured.';
+          });
+          }
         mlg = response.url;
       }else{
         $scope.msg = 'unable to find class';
@@ -5084,7 +5176,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.getScopeCourse = function(data){
       if(data != '') {
         course = data;
-        id = null;
+        var id = null;
         /**get teacher scopes start**/
         teacherHttpService.teacherScope(get_uid,course,optionChecked,id).success(function(response) {
           if(response.status == true) {
@@ -5557,6 +5649,9 @@ $scope.deleteQuestions = function(Qid,uniqId){
           $timeout(function () {$scope.message = ""; }, 3000);
         }
       });
+    }
+    $scope.backFunction = function() {
+       window.location.href='teacher/scope-sequence?'+$routeParams.grade+'&F'+$routeParams.subject+'&F'+$routeParams.group+'&F'+$routeParams.id;
     }
     /** ng-sortable**/
    $scope.sortableOptions = {

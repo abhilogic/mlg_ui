@@ -124,7 +124,6 @@
                 <!--teacher/scope-sequence-subskill/{{skill.course_id}}**/-->
 								<div class="scope-sequence-listing">
 								<p class="para">Click a skill to see the subskills. Hold and drag to change the order.</p>
-                {{auto_progression}} {{auto_progression_for}} {{auto_progression_for_individual}} {{grpId}}
 									<ul as-sortable="sortableOptions" data-ng-model="scopeSkills">
                     <li ng-repeat="skill in scopeSkills" as-sortable-item>
 											<a href="teacher/scope-sequence-subskill/{{skill.course_id}}/{{scopeGradeModel}}/{{scopeCourseModel}}/{{option}}/{{grpId}}">

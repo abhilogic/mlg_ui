@@ -194,8 +194,13 @@
 	                    <div class="form-group">
 												<label for="" class="col-xs-5 control-label text-left">Question Type:</label>
 	                      <div class="col-xs-7">
-											    <div ng-dropdown-multiselect="" options="questionType" selected-model="questionTypeModel" events="quesTypeEvents">
-                          </div>
+<!--											    <div ng-dropdown-multiselect="" options="questionType" selected-model="questionTypeModel" events="quesTypeEvents">
+                          </div>-->
+                           <select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="questionTypeModel" ng-change="quesTypeEvents(questionTypeModel)" title="Class" 
+                            ng-options="qTyp.id as qTyp.label for qTyp in questionType">
+                             <option value="" disabled>- Select QuestionType -</option>
+                          </select>
 	                      </div>
 	                  </div>
 	                </div>
@@ -306,9 +311,9 @@
 						<div class="panel-footer text-center">
               <div id="save-question">
                 <button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
-                <!--<button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>-->
+                <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>
               </div>
-              <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>
+              <!--<button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>-->
               <span style="color:green">{{msg}}</span>
               <span style="color:red">{{message}}</span>
             </div>
@@ -404,7 +409,7 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<h5 class="ques">{{frm.questionStatement}}</h5></br>
+                    <h5 class="ques"><span ng-bind-html="frm.questionStatement"></span></h5> </br>
                     <p>Options</p>
 									</div>
 								</div>
@@ -429,7 +434,7 @@
 		      </div>
 		      <div class="modal-footer border-top-0 padding-top-0">
 						<div class="text-center">
-		        	<button type="button" class="btn btn-primary" data-dismiss="modal">Submit Question</button>
+		        	<button type="button" class="btn btn-primary" data-dismiss="modal">CLOSE</button>
 						</div>
 		      </div>
 		    </div>
