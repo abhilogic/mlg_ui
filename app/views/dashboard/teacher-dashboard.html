@@ -38,8 +38,9 @@
                     </select>
                   </li>
                   <li>
-                    <select class="form-control input-sm no-border">
-                      <option value="Time relevance">Time relevance</option>
+                    <select class="form-control input-sm no-border"  id="slcperform" title="performance" data-width1="auto" data-size1="auto" ng-model="frm.selectedPerform" ng-init="frm.selectedPerform=''"  ng-change="onChangePerform(frm.selectedPerform)">
+                       <option value="">Select SubSkill</option>
+                        <option ng-repeat="subskill in subskills" value="{{subskill.course_id}}">{{subskill.course_name}}</option>     
                     </select>
                   </li>
                 </ul>
@@ -64,8 +65,9 @@
                 </div>
                   <span class="student__name">{{student.first_name }}</span>
                 </a>
-              </li>
+              </li>              
             </ul>
+            <div ng-if="student_searchmessage!=null " style="color:red;">{{student_searchmessage}}</div>
           </div>
           <!-- <div class="panel-footer text-center">
               <a class="link link-gray-dark" href="#">Show All</a>
@@ -144,7 +146,7 @@
               </div>
 
               <!-- if record is not present in Need Your attention block -->
-              <div id="menu" class="tab-pane fade active in" ng-if="scope.attention_message!='' " >              
+              <div id="menu" class="tab-pane fade active in" ng-if="attention_message!='' " >              
                  <div class="analysis-chart-container" id="bar-chart">                   
                     <div class="container-progress-chart">                 
                       <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels" chart-colors="colors" chart-options="options" chart-dataset-override="datasetOverride">

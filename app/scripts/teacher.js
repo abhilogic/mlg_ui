@@ -745,11 +745,14 @@ $scope.submitSkip = function(){
 
       });
 
+      var classify = class_students_classification
 
-       //API to call subskill
+
+       //On change skill call API to subskill List
        $scope.onChangeSkill = function(slctSkill){
         var parentid = slctSkill;
         $scope.subskills={}; 
+        $scope.students={};
         $scope.selected_skill_id=slctSkill;
         teacherHttpService.getCourseSkillSubskills($scope.grade_id,parentid).success(function(rescourse) {
            if (rescourse.response.status == "True") {
@@ -763,24 +766,24 @@ $scope.submitSkip = function(){
            $scope.students=response_students.response.students; 
            $scope.students_count=  $scope.students.length;
          }else{
-           $scope.student_Errormessage=response_students.response.message;
-           $scope.students_count =null;
+           $scope.student_searchmessage=response_students.response.message;
+           $scope.students_count =0;
          } 
        });
 
       };
 
       $scope.onChangeSubSkill = function(slctsubSkill){
+        $scope.students={};
         teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id,$scope.selected_skill_id,slctsubSkill).success(function(response_students) { 
          if (response_students.response.status == true) {
            $scope.students=response_students.response.students; 
            $scope.students_count=  $scope.students.length;
          }else{
-           $scope.student_Errormessage=response_students.response.message;
-           $scope.students_count =null;
+           $scope.student_searchmessage=response_students.response.message;
+           $scope.students_count =0;
          } 
        });
-
 
       };
 
