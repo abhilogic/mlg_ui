@@ -787,7 +787,10 @@ $scope.submitSkip = function(){
 
       };
 
+      
+      $scope.onChangePerformance = function(propertyName){
 
+      };
 
 
 
