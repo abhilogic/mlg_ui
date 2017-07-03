@@ -210,7 +210,7 @@
                                   </div>
                                 </div>
                                 <div class="col-md-3">
-                                  <button type="button" class="btn btn-danger btn-rounded btn-block text-uppercase">Send assignment</button>
+                                  <a href="teacher/custom-assignment/{{stresult.grade_id}}/{{stresult.subject_name}}/{{stresult.subject_id}}" class="btn btn-danger btn-rounded btn-block text-uppercase">Send assignment</a>
                                 </div>
                               </div>
 
@@ -229,13 +229,17 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <div class="col-sm-8 col-xs-6">
+                                    <div class="col-md-4">
                                       <div class="progress">
                                          <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"  aria-valuenow="{{stresult.student_subskill_percentage}}" aria-valuemin="0" aria-valuemax="100" style="width:{{stresult.student_subskill_percentage}}%; font-size: 12px;">
                                         {{stresult.student_subskill_percentage}}%
                                         </div>
                                       </div>
                                     </div>
+
+                                    <div class="col-md-3">
+                                  <a href="teacher/custom-assignment/{{stresult.grade_id}}/{{stresult.subject_name}}/{{stresult.subject_id}}" class="btn btn-danger btn-rounded btn-block text-uppercase">Send assignment</a>
+                                </div>
                                   </div>
                                 </div>
                               </div>
