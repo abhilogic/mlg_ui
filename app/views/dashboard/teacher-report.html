@@ -27,12 +27,13 @@
 								<div class="heading-elements">
 									<ul class="padding-left-0 list-inline">
 										<li class="toolbar-item">
-											<select class="mlg-selectpicker" title="Sort By" data-width="auto" data-size="auto">
-												 <option>Student Name</option>
-												 <option>Mastered</option>
-												 <option>Started</option>
-												 <option>Not Started</option>
-												 <option>Area of Gaps</option>
+											<select class="mlg-selectpicker form-control" title="Sort By" data-width="auto" data-size="auto"
+                            ng-model="sortModel"  ng-click="sortBy(sortModel)">
+												 <option value="name">Student Name</option>
+												 <option value="mastered">Mastered</option>
+												 <option value="started">Started</option>
+												 <option value="notstarted">Not Started</option>
+												 <option value="gap">Area of Gaps</option>
 											</select>
 										</li>
 										<li class="toolbar-item">
@@ -57,13 +58,15 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="details in assisment">
+                  {{sort}}
+									<tr ng-repeat="details in assisment | orderObjectBy:sortModel:true">
 										<td class="standard">{{$index+1}}</td>
 										<td class="studen_name">{{details.name}}</td>
 										<td class="mastered">{{details.mastered}}%</td>
 										<td class="started">{{details.started}}%</td>
 										<td class="not_started">{{details.notstarted}}%</td>
-										<td class="area_of_gaps" data-toggle="modal" data-target="#modal-areaOfGaps">{{details.gap}}</td>
+                    <!--data-target="#modal-areaOfGaps"-->
+										<td class="area_of_gaps" data-toggle="modal"ng-click="getStudentGap(details.id)" >{{details.gap}}</td>
 									</tr>
 								</tbody>
                 <tfoot>
@@ -72,7 +75,7 @@
 											<!--<span class="pull-left">Showing 1-10 of 50 entries</span>-->
 											<ul class="pagination pagination-sm">
 												<li class="{{preClass}}">
-													<a ng-click="getPrevious()">
+													<a ng-click="getPrevious('report')">
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
@@ -80,7 +83,7 @@
 													<a href="#{{n}}">{{n}}</a>
 												</li>
 												<li class="{{nexClass}}">
-													<a aria-hidden="true" ng-click="getNext()">Next</a>
+													<a aria-hidden="true" ng-click="getNext('report')">Next</a>
 												</li>
 											</ul>
 										</td>
@@ -99,7 +102,7 @@
 									<div class="row filter-cover">
 										<div class="col-lg-2 col-md-4 margin-sm-bottom-15">
 											<div class="radio radio-primary radio-inline">
-												<input type="radio" id="inlineRadio1"  value="option1" name="challengesGroup" checked="">
+												<input type="radio" id="inlineRadio1"  value="all" name="GAP" ng-model="option" checked="">
 												<label for="inlineRadio1" class="text-uppercase"> All Class</label>
 											</div>
 										</div>
@@ -107,19 +110,16 @@
 											<div class="row">
 												<div class="col-sm-1 col-xs-2">
 													<div class="radio radio-primary radio-inline margin-sm-top-10">
-														<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+														<input type="radio" id="inlineRadio1" value="group" name="GAP" ng-model="option">
 														<label></label>
 													</div>
 												</div>
 												<div class="col-sm-10 col-xs-10">
-													<select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
-														 <option>Approved</option>
-														 <option>Not Approved</option>
-														 <option>Submitted</option>
-														 <option>Pending</option>
-														 <option>Under review</option>
-														 <option>Draft</option>
-													</select>
+													<select class="mlg-selectpicker form-control" title="Group"  data-size="auto"
+                                ng-model="gapGroupModel" ng-init="gapGroupModel=''" ng-change="getGroup(gapGroupModel)"
+                           ng-options="grp.id as grp.title for grp in groups" >
+													 <option value="">Select Group</option>
+												</select>
 												</div>
 											</div>
 										</div>
@@ -127,19 +127,16 @@
 											<div class="row">
 												<div class="col-sm-1 col-xs-2">
 													<div class="radio radio-primary radio-inline margin-sm-top-10">
-														<input type="radio" id="inlineRadio1" value="option1" name="challengesGroup" checked="">
+														<input type="radio" id="inlineRadio1" value="student" name="GAP"  ng-model="option">
 														<label></label>
 													</div>
 												</div>
 												<div class="col-sm-10 col-xs-10 padding-right-0 padding-sm-right-15">
-													<select class="mlg-selectpicker" title="Status" data-width="auto" data-size="auto">
-														 <option>Approved</option>
-														 <option>Not Approved</option>
-														 <option>Submitted</option>
-														 <option>Pending</option>
-														 <option>Under review</option>
-														 <option>Draft</option>
-													</select>
+													<select class="mlg-selectpicker form-control" title="people" data-width="auto" data-size="auto"
+                                  ng-model="gapPeopleModel" ng-init="gapPeopleModel='' " ng-change="getPeople(gapPeopleModel)"
+                                      ng-options="student.id as student.first_name+' '+student.last_name for student in students">
+                          <option value="">Select People</option>
+                          </select>
 												</div>
 											</div>
 										</div>
@@ -158,86 +155,33 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="standard" data-th="STANDARD">1</td>
-										<td class="skill_name" data-th="SKILLS NAME">Whole Number</td>
+									<tr ng-repeat="sgp in studentGap">
+										<td class="standard" data-th="STANDARD">{{$index+1}}</td>
+										<td class="skill_name" data-th="SKILLS NAME">{{sgp.skill_name}}</td>
 										<td class="subskill" data-th="SUBSKILLS">
-											<div class="subkills-cover">
-												<button type="button" class="btn btn-danger btn-outline">Divison</button>
-												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-												<button type="button" class="btn btn-danger btn-outline">decimal</button>
-												<button type="button" class="btn btn-danger btn-outline border-0">+5 more</button>
+											<div class="subkills-cover" ng-repeat="sub in sgp.sub_skill ">
+												<button type="button" class="btn btn-danger btn-outline">{{sub.sub_skill_name}}</button>
+												<!--<button type="button" class="btn btn-danger btn-outline border-0">+5 more</button>-->
 											</div>
 										</td>
-										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
+										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">{{sgp.lack_student}}</td>
 									</tr>
-									<tr>
-										<td class="standard" data-th="STANDARD">2</td>
-										<td class="skill_name" data-th="SKILLS NAME">Divison</td>
-										<td class="subskill" data-th="SUBSKILLS">
-											<div class="subkills-cover">
-												<button type="button" class="btn btn-danger btn-outline">Divison</button>
-												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-											</div>
-										</td>
-										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
-									</tr>
-									<tr>
-										<td class="standard" data-th="STANDARD">3</td>
-										<td class="skill_name" data-th="SKILLS NAME">Multiplication</td>
-										<td class="subskill" data-th="SUBSKILLS">
-											<div class="subkills-cover">
-												<button type="button" class="btn btn-danger btn-outline">Divison</button>
-												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-											</div>
-										</td>
-										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
-									</tr>
-									<tr>
-										<td class="standard" data-th="STANDARD">4</td>
-										<td class="skill_name" data-th="SKILLS NAME">Subtraction</td>
-										<td class="subskill" data-th="SUBSKILLS">
-											<div class="subkills-cover">
-												<button type="button" class="btn btn-danger btn-outline">Divison</button>
-												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-											</div>
-										</td>
-										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
-									</tr>
-									<tr>
-										<td class="standard" data-th="STANDARD">5</td>
-										<td class="skill_name" data-th="SKILLS NAME">Addition</td>
-										<td class="subskill" data-th="SUBSKILLS">
-											<div class="subkills-cover">
-												<button type="button" class="btn btn-danger btn-outline">Divison</button>
-												<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-											</div>
-										</td>
-										<td class="no_of_students" data-th="NO OF STUDENTS LACKING">30</td>
-									</tr>
-
 								</tbody>
 								<tfoot>
 									<tr>
 										<td class="table-pagination" colspan="7">
-											<span class="pull-left">Showing 1-10 of 50 entries</span>
+											<!--<span class="pull-left">Showing 1-10 of 50 entries</span>-->
 											<ul class="pagination pagination-sm">
-												<li class="disabled">
-													<a>
+												<li class="{{preClass}}">
+													<a ng-click="getPrevious('gap')">
 														<span aria-hidden="true">Previous</span>
 													</a>
 												</li>
-												<li class="active">
-													<a>1</a>
+                        <li ng-repeat="n in range(1,endPage)">
+													<a href="#{{n}}">{{n}}</a>
 												</li>
-												<li>
-													<a>2</a>
-												</li>
-												<li>
-													<a>3</a>
-												</li>
-												<li>
-													<a aria-hidden="true">Next</a>
+												<li class="{{nexClass}}">
+													<a aria-hidden="true" ng-click="getNext('gap')">Next</a>
 												</li>
 											</ul>
 										</td>
@@ -270,7 +214,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
-						<h4 class="modal-title">JOHN DOE - AREA OF GAPS</h4>
+						<h4 class="modal-title">{{gapStudentName}} - AREA OF GAPS</h4>
 					</div>
 					<div class="modal-body">
 						<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-area-of-gaps">
@@ -282,56 +226,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr ng-repeat=" skill in gapSkill">
 									<td class="standard" data-th="STANDARD">1</td>
-									<td class="skill_name" data-th="SKILLS NAME">Whole Number</td>
+									<td class="skill_name" data-th="SKILLS NAME">{{skill.skill_name}}</td>
 									<td class="subskill" data-th="SUBSKILLS">
-										<div class="subkills-cover">
-											<button type="button" class="btn btn-danger btn-outline">Divison</button>
-											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-											<button type="button" class="btn btn-danger btn-outline">decimal</button>
-											<button type="button" class="btn btn-danger btn-outline border-0">+5 more</button>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="standard" data-th="STANDARD">2</td>
-									<td class="skill_name" data-th="SKILLS NAME">Divison</td>
-									<td class="subskill" data-th="SUBSKILLS">
-										<div class="subkills-cover">
-											<button type="button" class="btn btn-danger btn-outline">Divison</button>
-											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="standard" data-th="STANDARD">3</td>
-									<td class="skill_name" data-th="SKILLS NAME">Multiplication</td>
-									<td class="subskill" data-th="SUBSKILLS">
-										<div class="subkills-cover">
-											<button type="button" class="btn btn-danger btn-outline">Divison</button>
-											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="standard" data-th="STANDARD">4</td>
-									<td class="skill_name" data-th="SKILLS NAME">Subtraction</td>
-									<td class="subskill" data-th="SUBSKILLS">
-										<div class="subkills-cover">
-											<button type="button" class="btn btn-danger btn-outline">Divison</button>
-											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="standard" data-th="STANDARD">5</td>
-									<td class="skill_name" data-th="SKILLS NAME">Addition</td>
-									<td class="subskill" data-th="SUBSKILLS">
-										<div class="subkills-cover">
-											<button type="button" class="btn btn-danger btn-outline">Divison</button>
-											<button type="button" class="btn btn-danger btn-outline">Multiplication</button>
-										</div>
+                      <div class="subkills-cover" ng-repeat=" subskill in gapSubSkill" ng-if="skill.skill_id == subskill.parent_id">
+                        <button type="button" class="btn btn-danger btn-outline" >{{subskill.sub_skill_name}}</button>
+                        <!--<button type="button" class="btn btn-danger btn-outline border-0">+5 more</button>-->
+                      </div>
 									</td>
 								</tr>
 							</tbody>
@@ -342,7 +244,6 @@
 		</div>
 	</section>
 
-</section>
 
 
 	<script>
@@ -367,4 +268,4 @@
 			// mlg-selectpicker
 			$('.mlg-selectpicker').selectpicker();
 	});
-	</script>
+	</script>        
