@@ -2312,6 +2312,7 @@ if (typeof $routeParams.slug != 'undefined') {
     }
     $scope.getScopeSkill = function(data) {
       skills = data;
+      $scope.subSkill = [];
       angular.forEach(tempSubSkill,function(val,ki){
         if(ki == data){
           $scope.subSkill = val; 

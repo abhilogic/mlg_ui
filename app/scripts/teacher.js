@@ -2033,11 +2033,14 @@ $scope.submitDocDetail = function(data) {
         $scope.frm.htmlcontent = '';
         $scope.type = 'video';
         $scope.videoClass = 'active';
-        var myVideo = angular.element(document.querySelector('#uploded-doc'));
+        var myVideo = angular.element(document.querySelector('#upload-video'));
         var videoContent = val['content'].split(',');
         $scope.editValue = val['content'];
         angular.forEach(videoContent,function(videoValue,videoKey){
-          myDoc.append('<a href="'+mlg+'upload/'+videoValue+'" target="_new">'+videoValue+'</a>');
+          alert(videoValue);
+//          myVideo.append('<video width="300" height="200" controls><source src="'+mlg+'upload/'+videoValue+'" type="video/mp4"></video> ');
+//          myVideo.append('<iframe src="'+mlg+'upload/'+videoValue+'" width="100%" height="315" frameborder="0" allowfullscreen></iframe>');
+          myVideo.append('<a href="'+mlg+'upload/'+videoValue+'" target="_new">'+videoValue+'</a>');
           countVideo++;
         });
       }
@@ -2409,28 +2412,41 @@ if(typeof LId[1] != 'undefined') {
  .directive('dropZone', function() {
   return function($scope, element, attrs) {    
     var video_extsn = ['video/ogg', 'video/mp4', 'video/3gp'];
+    var image_extsn = ['image/jpeg', 'image/png'];
+    var file_extsn = ['application/pdf'];
+    
     return element.dropzone({
       url: "/mlg/teachers/uploadfile",
       maxFilesize: 100,
       paramName: "uploadfile",
       maxThumbnailFilesize: 3,
       accept:function(file,done) {
-        if (element.context.id == 'file-doc' && file.type == 'application/pdf') {
+        console.log(file);
+        if (element.context.id == 'file-doc' && file_extsn.indexOf(file.type) != -1) {
           done();
-        }else if (element.context.id == 'file-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
+        }else if (element.context.id == 'file-img' && image_extsn.indexOf(file.type) != -1) {
           done();
-        }else if (element.context.id == 'file-video' && video_extsn.indexOf(file.type) != -1 && (file.type == 'video/.mp3' || file.type == 'video/.ogg')) {
+        }else if (element.context.id == 'file-video' && video_extsn.indexOf(file.type) != -1 && file.size <=2097152) {
           done();
-        }else if (element.context.id == 'ans-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {
-          done();
-        }
-        else if( (element.context.id == 'file-all') && (file.type == 'application/pdf' || file.type == 'image/jpeg' || file.type == 'video/*' || file.type == 'image/png') ){
+        }else if (element.context.id == 'ans-img' && image_extsn.indexOf(file.type) != -1) {
           done();
         }
-
-        else{
+        else if( (element.context.id == 'file-all') && (file_extsn.indexOf(file.type) != -1 ||
+                image_extsn.indexOf(file.type) != -1 || (video_extsn.indexOf(file.type) != -1 && file.size <=2097152)) ){
+          done();
+        }else{
          this.removeFile(file);
-         alert('please choose appropriate file');
+         if(element.context.id == 'file-doc'){
+           alert('upload only pdf file.');
+         }else if(element.context.id == 'file-img' || element.context.id == 'ans-img' ){
+           alert('image should be in .jpeg or png format');
+         }else if(element.context.id == 'file-video'){
+           alert('video  be in mp4,3gp and ogg format and video size less than 2mb.');
+         }else {
+           alert('image should be in .jpeg or png format OR video  be in mp4,3gp\n\
+and ogg format and video size less than 2mb. OR upload only pdf file.');
+         }
+         
        }
      },
      init: function() {
@@ -2534,7 +2550,7 @@ if(typeof LId[1] != 'undefined') {
             count++;
             alert('YOU can upload only 4 images.');
           }
-        }else if(video_extsn.indexOf(file.type) != -1 && file.type == 'video/.mp3') {
+        }else if(video_extsn.indexOf(file.type) != -1) {
           if (videos != '') {
             videos = videos +','+file.xhr.response;
             $scope.video = videos;

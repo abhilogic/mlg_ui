@@ -23,7 +23,7 @@
 					<!-- Teacher Setting  Panel  -->
 					<div class="panel panel-flat add-content-panel">
 						<div class="panel-heading">
-							<h5 class="panel-title"><i class="icon icon-arrow-left"></i>  Add Lessons</h5>
+							<h5 class="panel-title"><a href="teacher/lessons"><i class="icon icon-arrow-left"></i></a>  Add Lessons</h5>
 							<div class="heading-elements">
 								<select class="mlg-selectpicker form-control" title="Import Template" data-width="auto" data-size="auto"ng-model="selectedTemplateModel" ng-change="getTemplate(selectedTemplate)">
 									 <option  ng-repeat="temp in template" value="{{temp.id}}">{{temp.template_name}}</option>
@@ -183,7 +183,9 @@
 													<div id="video" class="tab-pane fade in {{videoClass}}" ng-show="type == 'ALL' || type=='video'">
 														<form action="" class="dropzone" drop-zone="" id="file-video"ng-model="fileVideoModel"></form>
 														<br/>
-                            <div id="upload-video"></div>
+                            <div id="upload-video">
+                              
+                            </div>
 														<br/>
                             <input type="text" class="form-control" placeholder="Enter Video Url" ng-model="htmlcontent.video_url"/>
 													</div>
