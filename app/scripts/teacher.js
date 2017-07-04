@@ -813,6 +813,8 @@ $scope.submitSkip = function(){
           var result = response.result;
           var settings = JSON.parse(result.settings);
           $scope.group_builder = (settings.group_builder == true) ? 'true' : 'false';
+        }else{
+          $scope.group_builder = 'true';
         }
       });
       // API to call all groups of a teacher
@@ -821,10 +823,10 @@ $scope.submitSkip = function(){
          $scope.groups = respGroup.response.groups;
        }
      });
-     //alert when add group is disable
-      $scope.alertgroup = function() {
-        alert('');
-      }
+//     //alert when add group is disable
+//      $scope.alertgroup = function() {
+//        alert('');
+//      }
       // calender event show
       $scope.event = 'all';
       var date = new Date();

@@ -2364,7 +2364,7 @@ if (typeof $routeParams.slug != 'undefined') {
       }else if(data == 'month') {
         day = 30;
       }
-      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkill).success(function(response) {
+      loginHttpService.filterParentChildReport(child_id,day,subject,skills,subSkills).success(function(response) {
        if(response.status == true){
          $scope.sub_message = '';
          $scope.details = [];
