@@ -722,8 +722,8 @@ $scope.submitSkip = function(){
 
 }])
 
-.controller('teacherDashboardViewCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','$routeParams','user_roles','class_students_classification','commonActions','$filter','$localStorage',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,$routeParams,user_roles,class_students_classification,commonActions,$filter,$localStorage) {
+.controller('teacherDashboardViewCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','$routeParams','user_roles','class_students_classification','questionslimit','quiz_type','commonActions','$filter','$localStorage',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,$routeParams,user_roles,class_students_classification,questionslimit,quiz_type,commonActions,$filter,$localStorage) {
       //Step- 1 check students of teacher to show empty / non-empty dashboard
       var get_uid=commonActions.getcookies(get_uid);
        $scope.baseURL= urlParams.baseURL;
@@ -1043,6 +1043,12 @@ $scope.showEvents = function(events) {
           if(resAtn.response.status==true){
             $scope.strecords= resAtn.response.attention_records;
             var first_subskill_id =resAtn.response.attention_records[0].course_id;
+
+            $scope.selectedStudent_id = resAtn.response.attention_records[0].id;
+            $scope.selectedStudent_grade_id = resAtn.response.attention_records[0].grade_id;
+            $scope.selectedStudent_subskillid = resAtn.response.attention_records[0].course_id;
+
+
             
             teacherHttpService.getSubskillAnalytic(get_uid,$routeParams.courseid,first_subskill_id).success(function(resAna) {
            
@@ -1054,8 +1060,7 @@ $scope.showEvents = function(events) {
                 angular.forEach(stAnalyticResults, function(value, key) {               
                    $scope.data.push(value);    
                 });
-                $("#menu1").addClass('in active');
-                console.log($scope.data);
+                $("#menu1").addClass('in active');                
           }
           else{
             $scope.analytic_message = resAna.response.message;                      
@@ -1072,9 +1077,15 @@ $scope.showEvents = function(events) {
 
 
     // Start-  Analytic Class Graph    
-    $scope.clickNeedAttention= function(indx, subskillid){
+    $scope.clickNeedAttention= function(indx, subskillid,studentid, gradeid){
         $(".tab-pane.in.active").removeClass('in active'); 
         $("#menu"+indx).addClass('in active');
+
+        $scope.selectedStudent_id = studentid;
+        $scope.selectedStudent_grade_id = gradeid;
+        $scope.selectedStudent_subskillid = subskillid;
+        
+
 
         teacherHttpService.getSubskillAnalytic(get_uid,$routeParams.courseid,subskillid).success(function(resAna) {
             console.log();
@@ -1130,6 +1141,35 @@ $scope.showEvents = function(events) {
       };
 
    // end-  Analytic Class Graph
+
+
+   /* Start - Auto generated Assignment    */
+    // On click of send Assignment button
+      $scope.confirmSendAssignment = function(student_id,gradeid, courseid){
+        var d = new Date();
+        var senddata ={
+          user_id   : student_id,
+          parent_id   : get_uid,
+          grade_id  : gradeid,
+          subskill_id : courseid,
+          quiz_type_id : quiz_type.TEACHERAUTOASSIGNMENT, // id of the table quiz_types
+          questions_limit : questionslimit.TEACHER_AUTO_ASSIGNMENT,
+          quiz_name : 'teacherAutoAssignment-'+ d.getFullYear()+(d.getMonth()+1)+d.getDate(),
+        };
+
+        // API to create the auto assignment by parent
+        loginHttpService.setAutoAssignmentByParents(senddata).success(function(record) {
+                if(record.response.status==true){
+                  $scope.auto_quiz_message = '';
+                  $('#modal-parentAssignment').modal('hide');
+                  $('#modal-parentAssignmentsubmitted').modal('show');
+                }else{
+                  $scope.auto_quiz_message = record.response.message;
+                }
+            });
+        }
+
+  /* End - Auto generated assignment */
 
 
     }])
