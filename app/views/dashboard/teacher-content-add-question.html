@@ -55,9 +55,9 @@
 								<div class="row repeat-row">
 									<div class="col-lg-5">
 										<div class="form-group">
-									    <label class="col-xs-5 control-label" for="email">Standards:</label>
+									    <label class="col-xs-5 control-label" for="email">Standard Type:</label>
 									    <div class="col-sm-7 padding-right-0">
-                        <div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"></div>
+                        <div ng-dropdown-multiselect="" options="standardType" selected-model="standardTypemodel" events="standardTypeEvents"></div>
 									    </div>
 									  </div>
 									</div>
@@ -216,6 +216,16 @@
 										</div>
                   </div>
                 </div>
+                <div class="row repeat-row">
+									<div class="col-lg-5">
+										<div class="form-group">
+									    <label class="col-xs-5 control-label" for="email">Standards:</label>
+									    <div class="col-sm-7 padding-right-0">
+                        <div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"></div>
+									    </div>
+									  </div>
+									</div>
+								</div>
 								<h5>Enter Question statement below :</h5>
 								<!-- summernotes  -->
 								<div class="summernote" text-angular="text-angular" name="questionStatement" ng-model="frm.questionStatement"></div>

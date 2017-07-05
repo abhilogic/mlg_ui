@@ -125,7 +125,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   childTimeSpentOnPlatform : '/users/childTimeSpentOnPlatform',
   getTeacherStudentGap : '/teachers/getTeacherStudentGap',
   getDashboardStudentsOfTeacher :'/students/getDashboardStudentsOfTeacher',
-
+  getStandard :'/courses/getStandard',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',

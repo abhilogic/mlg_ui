@@ -486,7 +486,12 @@ teacherHttpResponse.getStudentScoreForSubskills=function(student_id,subject_id){
     url   : urlParams.baseURL+urlParams.getStudentScoreForSubskills+'/'+student_id+'/'+subject_id
   });
 }
-
+teacherHttpResponse.getStandard=function(type,grade,course){
+  return $http({
+    method:'GET',
+    url   : urlParams.baseURL+urlParams.getStandard+'/'+type+'/'+grade+'/'+course
+  });
+}
 
 
 return teacherHttpResponse;
@@ -1733,46 +1738,54 @@ $scope.subSkillEvents = {
     });
   }
 };
-$scope.standardmodel = [];
-$scope.standard = [
+
+$scope.standardTypemodel = [];
+$scope.standardType = [
 {id:"Alabama", label: "Alabama"},
 {id:"Alaska", label: "Alaska"},
-{id:"Arizona", label: "Arizona"},
-{id:"Arkansas", label: "Arkansas"},
-{id:"California", label: "California"},
-{id:"Colorado", label: "Colorado"},
-{id:"Connecticut", label: "Connecticut"},
-{id:"D.C.", label: "D.C."},
-{id:"Massachusetts", label: "Massachusetts"},
+{id:"cc", label: "Common Core"},
 ];
-$scope.standardEvents = {
+$scope.standardmodel = [];
+$scope.standard = [];
+var tempStandard = '';
+$scope.standardTypeEvents = {
   onItemSelect: function(item) {   
+    standardType.push(item['id']);
+    teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
+      if (response.message == '') {
+        angular.forEach(response.response,function(val,key){
+          $scope.standard.push({
+            id: val['standard'], label: val['standard']
+          });
+        });
+      }else{
+        $scope.standard = [];
+      }
+    });
+  },
+  onItemDeselect: function(item) {
+    standardType.splice(item['id'],1);
+    teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
+      if (response.message == '') {
+        angular.forEach(response.response,function(val,key){
+          angular.forEach($scope.standard,function(value,ki){
+            if(val['standard'] == value['id']) {
+              $scope.standard.splice(ki,1);
+            }
+          });
+        });
+      }
+    });
+  }
+};
+$scope.standardEvents = {
+  onItemSelect: function(item) { 
     if(item != '') {
       standard.push(item['id']);
     }
   },
   onItemDeselect: function(item) {
     standard.splice(item['id'],1);
-  }
-};
-$scope.standardTypemodel = [];
-$scope.standardType = [
-{id:"Alabama", label: "Alabama"},
-{id:"Alaska", label: "Alaska"},
-{id:"Arizona", label: "Arizona"},
-{id:"Arkansas", label: "Arkansas"},
-{id:"California", label: "California"},
-{id:"Colorado", label: "Colorado"},
-{id:"Connecticut", label: "Connecticut"},
-{id:"D.C.", label: "D.C."},
-{id:"Massachusetts", label: "Massachusetts"},
-];
-$scope.standardTypeEvents = {
-  onItemSelect: function(item) {   
-    standardType.push(item['id']);
-  },
-  onItemDeselect: function(item) {
-    standardType.splice(item['id'],1);
   }
 };
 var lessonDetail = {};
@@ -2879,54 +2892,58 @@ $scope.subSkillEvents = {
       if (value == item['id']) {
        subSkills.splice(key);
      }
-     console.log(subSkills);
    });
   }
 };
-      //standard
-      $scope.standardmodel = [];
-      $scope.standard = [
-      {id:"Alabama", label: "Alabama"},
-      {id:"Alaska", label: "Alaska"},
-      {id:"Arizona", label: "Arizona"},
-      {id:"Arkansas", label: "Arkansas"},
-      {id:"California", label: "California"},
-      {id:"Colorado", label: "Colorado"},
-      {id:"Connecticut", label: "Connecticut"},
-      {id:"D.C.", label: "D.C."},
-      {id:"Massachusetts", label: "Massachusetts"},
-      ];
-      $scope.standardEvents = {
-        onItemSelect: function(item) {   
-          if(item != '') {
-            standard.push(item['id']);
-          }
-        },
-        onItemDeselect: function(item) {
-          standard.splice(item['id'],1);
+      
+  $scope.standardTypemodel = [];
+  $scope.standardType = [
+  {id:"Alabama", label: "Alabama"},
+  {id:"Alaska", label: "Alaska"},
+  {id:"cc", label: "Common Core"},
+  ];
+  $scope.standardmodel = [];
+  $scope.standard = [];
+  var tempStandard = '';
+  $scope.standardTypeEvents = {
+    onItemSelect: function(item) {   
+      standardType.push(item['id']);
+      teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
+        if (response.message == '') {
+          angular.forEach(response.response,function(val,key){
+            $scope.standard.push({
+              id: val['standard'], label: val['standard']
+            });
+          });
         }
-      };
-      //standard type
-      $scope.standardTypemodel = [];
-      $scope.standardType = [
-      {id:"Alabama", label: "Alabama"},
-      {id:"Alaska", label: "Alaska"},
-      {id:"Arizona", label: "Arizona"},
-      {id:"Arkansas", label: "Arkansas"},
-      {id:"California", label: "California"},
-      {id:"Colorado", label: "Colorado"},
-      {id:"Connecticut", label: "Connecticut"},
-      {id:"D.C.", label: "D.C."},
-      {id:"Massachusetts", label: "Massachusetts"},
-      ];
-      $scope.standardTypeEvents = {
-        onItemSelect: function(item) {   
-          standardType.push(item['id']);
-        },
-        onItemDeselect: function(item) {
-          standardType.splice(item['id'],1);
+      });
+    },
+    onItemDeselect: function(item) {
+      standardType.splice(item['id'],1);
+      teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
+        if (response.message == '') {
+          angular.forEach(response.response,function(val,key){
+            angular.forEach($scope.standard,function(value,ki){
+              if(val['standard'] == value['id']) {
+                $scope.standard.splice(ki,1);
+              }
+            });
+          });
         }
-      };
+      });
+    }
+  };
+  $scope.standardEvents = {
+    onItemSelect: function(item) { 
+      alert(standardType);
+      if(item != '') {
+        standard.push(item['id']);
+      }
+    },
+    onItemDeselect: function(item) {
+      standard.splice(item['id'],1);
+    }
+  };
       //claim
       $scope.getClaimVal = function() {
         claim = $scope.claimModel;
@@ -3049,6 +3066,7 @@ $scope.subSkillEvents = {
       course : course,
       course_name : courseName,
       standard : standard,
+      standard_type :standardType,
       skills : skillId,
       sub_skill : subSkills,
       ques_diff : difficulity,
@@ -3235,12 +3253,13 @@ skillId = value['skills'];
 subSkills = value['sub_skill'];
 standard = value['standard'];
 angular.forEach(value['standard'] , function(val, ki) {
- $scope.standardmodel.push({'id' : val,'label': val });
+  $scope.standard.push({'id' : val, 'label': val });
+  $scope.standardmodel.push({'id' : val,'label': val });
 });
-//      standardType = value['standard_type'];
-//      angular.forEach(value['standard_type'] , function(val, ki) {
-//      $scope.standardTypemodel.push({'id' : val, 'label': val });
-//      })
+standardType = value['standard_type'];
+angular.forEach(value['standard_type'] , function(val, ki) {
+  $scope.standardTypemodel.push({'id' : val, 'label': val });
+});
 $scope.diffulityModel = value['ques_diff'];
 angular.forEach($scope.difficulty,function(diffValue,diffKey){
   if(diffValue['id'] == $scope.diffulityModel){
@@ -3339,8 +3358,8 @@ $scope.addImgAns=function(){
               difficulityName = diffValue['name'];
             }
           });
-          $scope.standardmodel.push({'id' : value['standard'],'label': value['standard'] });
-          standard = value['standard'];
+//          $scope.standardmodel.push({'id' : value['standard'],'label': value['standard'] });
+//          standard = value['standard'];
           $scope.questionTypeModel = value['type'].toString();
 //          $scope.questionTypeModel.push({'id' : value['type']});
           qType = value['type'];
@@ -3428,6 +3447,7 @@ teacherHttpService.getAllCourseList(skillId,'lesson','-1',get_uid).success(funct
   $scope.subSkillmodel.push({'id' : subskil['course_id']});
   subSkills.push(subskil['course_id']);
   });
+  console.log(response.template);
   angular.forEach(response.template, function(temp, ki) {
    $scope.claimModel = temp['claim'];
    $scope.dOKModel = temp['depth_of_knowledge'];
@@ -3437,6 +3457,16 @@ teacherHttpService.getAllCourseList(skillId,'lesson','-1',get_uid).success(funct
    $scope.frm.target = temp['secondary_target'];
    $scope.frm.task = temp['task_noties'];
    $scope.frm.complexity = temp['text_compexity'];
+   standard = temp['standard'];
+   angular.forEach(temp['standard'].split(',') , function(val, ki) {
+      $scope.standard.push({'id' : val, 'label': val });
+      $scope.standardmodel.push({'id' : val,'label': val });
+   });
+   standardType = temp['standard_type'];
+   angular.forEach(temp['standard_type'].split(','),function(val, ki) {
+     $scope.standardTypemodel.push({'id' : val, 'label': val });
+   });
+   
   }); 
 }
 });
@@ -3539,6 +3569,7 @@ $scope.updateQuestion = function(data) {
     course : course,
     course_name : courseName,
     standard : standard,
+    standard_type : standardType,
     skills : skillId,
     sub_skill : subSkills,
     ques_diff : difficulity,
