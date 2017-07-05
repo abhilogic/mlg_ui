@@ -3668,6 +3668,9 @@ $scope.deleteImage = function(j,data) {
     var  assgresources = {};
 
 
+
+
+
     $scope.$on('UploadedImage', function(event, mass) { 
       assgresources.image = mass;
     });
@@ -6174,4 +6177,4 @@ $scope.deleteQuestions = function(Qid,uniqId){
     if(reverse) filtered.reverse();
     return filtered;
   };
-});;
+});
