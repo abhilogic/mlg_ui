@@ -486,12 +486,23 @@ teacherHttpResponse.getStudentScoreForSubskills=function(student_id,subject_id){
     url   : urlParams.baseURL+urlParams.getStudentScoreForSubskills+'/'+student_id+'/'+subject_id
   });
 }
+
 teacherHttpResponse.getStandard=function(type,grade,course){
   return $http({
     method:'GET',
     url   : urlParams.baseURL+urlParams.getStandard+'/'+type+'/'+grade+'/'+course
   });
 }
+
+
+teacherHttpResponse.getStudentScoreForSkills=function(student_id,subject_id){
+  return $http({
+    method:'GET',
+    url   : urlParams.baseURL+urlParams.getStudentScoreForSkills+'/'+student_id+'/'+subject_id
+  });
+}
+
+
 
 
 return teacherHttpResponse;
@@ -1339,7 +1350,7 @@ $scope.sendEmailMe=function(selected_students){
 
 
 $scope.currentPage = 0;
-$scope.pageSize = 100;
+$scope.pageSize = 10;
 //$scope.data = [];
 $scope.q = '';
 
@@ -3651,7 +3662,7 @@ $scope.deleteImage = function(j,data) {
     $scope.subject_name = $routeParams.subject_name ;
     $scope.frm ={}; 
     $scope.frm.questions_limit =5;      
-    $scope.frm.assignmentFor = 'class';
+    $scope.frm.assignmentFor="class";
     $scope.frm.selectedStd =[];
     $scope.frm.asscomments ="";
     var  assgresources = {};
@@ -3761,28 +3772,31 @@ $scope.deleteImage = function(j,data) {
         }
       };
       // Get settings
-      var data = {user_id : get_uid, level_id: $scope.grade_id, course_id: $scope.course_id}
+      /*var data = {user_id : get_uid, level_id: $scope.grade_id, course_id: $scope.course_id}
       teacherHttpService.getTeacherSettings(data).success(function(response) {
         if (response.status == true) {
           var result = response.result;
           var settings = JSON.parse(result.settings);
           $scope.group_builder = (settings.group_builder == true) ? 'true' : 'false';
         }
-      });
+      });*/
 // Step 2 - To generate the questions and change questions
 
     //Click on generate button and get question as per field values
     $scope.generateQuestion = function(frmdata){
       $scope.err_message =[];
 
-      if(frmdata.selectedSkill == ""){
+      if(typeof frmdata.selectedSkill == 'undefined'  || frmdata.selectedSkill == ""){
         $scope.err_message[1] = "Please select Skill.";
       }
-      else if(frmdata.selectedSubskill == ""){
+      else if(typeof frmdata.selectedSubskill == 'undefined'  || frmdata.selectedSubskill == ""){
         $scope.err_message[2] = "Please select SubSkill.";
       } 
-      else if( (5 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
+      else if( (typeof frmdata.questions_limit == 'undefined') || (5 >(parseInt(frmdata.questions_limit)) ) || ((parseInt(frmdata.questions_limit)) > 20) ){
         $scope.err_message[3] = "Please enter question less than 20 but greater than 5.";
+      }
+      else if(typeof frmdata.assignmentFor=='undefined') {
+          frmdata.assignmentFor="class";
       }
       else{
 
@@ -3889,7 +3903,7 @@ $scope.deleteImage = function(j,data) {
 
             $count_slectedQues = Object.keys(frmdata.selected_questions).length;          
             
-            if($count_slectedQues !=frmdata.questions_limit){
+            if($count_slectedQues !=frmdata.questions_limit || (typeof frmdata.selected_questions=='undefined') ){
               $scope.err_message[5] ="Your selected question is not equal to 'Number of question'. ."
               $count_slectedQues = "";
               $timeout(function () { $scope.err_message[5] = ""; }, 3000);
@@ -3933,11 +3947,19 @@ $scope.deleteImage = function(j,data) {
 
           $scope.onclickAssignmentLater = function(frmdata){
             frmdata.attachedresource = $scope.img;         ;
-
-            $count_slectedQues = Object.keys(frmdata.selected_questions).length;           
-            if($count_slectedQues !=frmdata.questions_limit){
+                       
+            if(typeof frmdata.selected_questions=='undefined') {
+                  $scope.err_message[5] ="Your selected question is not equal to 'Number of question'. ."
+                  count_slectedQues = "";
+                  $timeout(function () { $scope.err_message[5] = ""; }, 4000);
+            } 
+            else{
+               var count_slectedQues = Object.keys(frmdata.selected_questions).length;
+            }        
+            
+            if(count_slectedQues !=frmdata.questions_limit){
               $scope.err_message[5] ="Your selected question is not equal to 'Number of question'. ."
-              $count_slectedQues = "";
+              count_slectedQues = "";
               $timeout(function () { $scope.err_message[5] = ""; }, 4000);
             }
             else{
@@ -3989,11 +4011,12 @@ $scope.deleteImage = function(j,data) {
           }
           //end- Step 3 - To save the selected questions , Resources and comment in Database
 
+
 }])
 
 
 //teacherStudentProfile  studentPerformance 
-.controller('teacherAutoGenerateAssignment', ['$scope', function($scope) {
+/*.controller('teacherAutoGenerateAssignment', ['$scope', function($scope) {
 
   $scope.autoGenerateAssignmentModel = [];
   $scope.autoGenerateAssignmentData = [
@@ -4004,10 +4027,10 @@ $scope.deleteImage = function(j,data) {
   {id: 5, label: "Rahul Gandhi"},	
   {id: 6, label: "Soniya Gandhi"}];
 
-        /*$scope.autoGenerateAssignmentSetting = {
+        $scope.autoGenerateAssignmentSetting = {
             smartButtonMaxItems: 2,
-          };*/
-        }])
+          };
+        }])*/
 .controller('studentProfileForTeacherCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','commonActions','$routeParams','quiz_mastered_score',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location, urlParams,commonActions,$routeParams,quiz_mastered_score) {
     if (typeof $routeParams.id == 'undefined' || $routeParams.id  == '') {
@@ -4019,6 +4042,7 @@ $scope.deleteImage = function(j,data) {
     $scope.student_courses = {};
     $scope.student_class = '';
     var get_uid=commonActions.getcookies(get_uid);
+    
     loginHttpService.getUserDetails($routeParams.id).success(function (response) {
       if (response.data.user_all_details != '') {
         $scope.student = response.data.user_all_details[0];
@@ -4036,7 +4060,8 @@ $scope.deleteImage = function(j,data) {
           }
         });
       }
-    });
+    });   
+
 
     // duration will be calculated on the basis of weeks
     // such as -1 for 1 past 1 week.
@@ -4103,55 +4128,88 @@ $scope.deleteImage = function(j,data) {
 
 
 
-//Second Graph Grade Analysis
-$scope.gradeAnalysis_labels = ["Prime or composite", "Prime factorization", "Multiplicative inverses", "Divisibility rules", "Greatest common factor", "Least common factor", "GCF and LCM word problem", "Scientific nation"];
+//Start-- Second Graph Grade Analysis
+  $scope.gradeAnalysis_labels = [];
+  var gradeAnalysis_studentmarks = [];
+  var gradeAnalysis_systemrecommended = [];
+  var gradeAnalysis_averagemarks_ofclass = [];
+//API to call student courses 
+    $scope.mastered = quiz_mastered_score.SUBSKILLQUIZ;
+    teacherHttpService.getStudentCourses($routeParams.id).success(function (response) {
+        if (response.response.status == 'TRUE') {
+            $scope.student_courses = response.response.student_courses;  //$scope.student_courses[0].id
+            teacherHttpService.getStudentScoreForSkills($routeParams.id,1).success(function (result) {
+                  console.log(result);
+                  if(result.response.status==true){
+                      var gradeAnayisis = result.response.student_skill_percentage;
+                      angular.forEach(gradeAnayisis,function(key,value){
+                          if(key['student_quiz_attempt']==1){
+                              gradeAnalysis_studentmarks.push(key['student_percentage']);                            
+                          }else{
+                              gradeAnalysis_studentmarks.push(0);
+                          }
+                          $scope.gradeAnalysis_labels.push(key['skill_name']);                          
+                          gradeAnalysis_systemrecommended.push(80);
+                          gradeAnalysis_averagemarks_ofclass.push(75);
+                      });                      
+                  }
+                  else{
+                    $scope.gradeAnalysis_message = result.response.message;
+                  }
+
+                  $scope.gradeAnalysis_data =[gradeAnalysis_systemrecommended ,gradeAnalysis_averagemarks_ofclass,gradeAnalysis_studentmarks ];
+
+             });
+
+
+        }
+      });
+
+
+
+    $scope.onChangeGradeSubject= function(){
+
+
+    }
+
+
+
+ 
+
+console.log($scope.gradeAnalysis_data); 
+
+//$scope.gradeAnalysis_labels = ["Prime or composite", "Prime factorization", "Multiplicative inverses", "Divisibility rules", "Greatest common factor", "Least common factor", "GCF and LCM word problem", "Scientific nation"];
   $scope.series = ['Recommended progress', 'Average score', 'Andrew score'];
-  $scope.gradeAnalysis_data = [
-  [50, 62, 80, 60, 40, 55, 48, 48],
-  [60, 72, 90, 68, 60, 68, 58, 58],
-  [70, 88, 100, 90, 82, 89, 72, 70]
-  ];
-  $scope.onClick = function (points, evt) {
+  /*$scope.gradeAnalysis_data = [ 
+                                [50, 62, 80, 60, 40, 55, 48, 48],
+                                [60, 72, 90, 68, 60, 68, 58, 58],
+                                [70, 88, 100, 90, 82, 89, 72, 70]
+                              ];*/
+  /*$scope.onClick = function (points, evt) {
     console.log(points, evt);
-  };
+  };*/
   $scope.gradeAnalysis_colors = ['#b0baaf', '#f39c12', '#00a651'];
-  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+  $scope.gradeAnalysis_datasetOverride = [{ yAxisID: 'y-axis-1' }];
   
   $scope.gradeAnalysis_options = {
-    scales: {
-      yAxes: [
-      {
-        id: 'y-axis-1',
-        type: 'linear',
-        display: true,
-        position: 'left'
-      },
-      ],
+        scales: {
+          yAxes: [ { id: 'y-axis-1', type: 'linear', display: true, position: 'left' }, ],
+          gradeAnalysis_labels: [ {fontColor: '#fa4229' }]
+        },
 
-      gradeAnalysis_labels: [
-      {
-       fontColor: '#fa4229'
-     }
-     ]
-   },
-
-   legend: {
-    display: true,
-    position: 'top',
-    labels: {
-     fontColor: '#333',
-     fontSize: 14,
-     boxWidth: 15
-   },
- },
- title: {
-  display: true,
-  text: 'SCORE POINTS',
-  fontColor: '#333',
-  position: 'left',
-  fontSize: 16
-}
-};
+        legend: {
+            display: true,
+            position: 'top',
+            labels: { fontColor: '#333',fontSize: 14, boxWidth: 15 },
+        },
+        title: {
+            display: true,
+            text: 'SCORE POINTS',
+            fontColor: '#333',
+            position: 'left',
+            fontSize: 16
+        }
+  };
 
 
 
@@ -4244,15 +4302,7 @@ $scope.gradeAnalysis_labels = ["Prime or composite", "Prime factorization", "Mul
       };
 
 
-// Last Block - Student Result in panle-subjects
-  
-  //API to call student courses 
-  $scope.mastered = quiz_mastered_score.SUBSKILLQUIZ;
-  teacherHttpService.getStudentCourses($routeParams.id).success(function (response) {
-      if (response.response.status == 'TRUE') {
-          $scope.student_courses = response.response.student_courses;            
-      }
-    });
+// Start --Last Block :Student Result in panle-subjects  
     $scope.clickAccordionSubject = function(index, subject_id){
       $("#subjectblock_"+index).toggleClass('in');
       $scope.st_skillresult_message = "";

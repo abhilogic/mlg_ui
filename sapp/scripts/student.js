@@ -678,7 +678,7 @@ promise.then(function(result) {
 		// To maintain old quiz questions if user quize questions response is incomplete
 		var localQuizResponse = JSON.parse(localStorage.getItem('localQuizResponse'));
 		var localQuestions= JSON.parse(localStorage.getItem('ngStorage-localquestions'));
-		if(localQuizResponse ==null && localQuestions==null ){
+		if( (localQuizResponse ==null || localQuizResponse.length==0 ) && localQuestions==null ){
 			
 			// API to create quiz and questions list of quiz created for user 
 		loginHttpService.createQuizOnStudent(senddata).success(function(resitem){
@@ -705,7 +705,7 @@ promise.then(function(result) {
 		  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
 		  		$scope.total_questions=$scope.data.questions.length-1;
 			}else{
-					$scope.message = "Issue in traversing page";
+					$scope.createquiz_message = resitem.data.message;
 			}
 		}); // end createquiz APi
 
@@ -2652,6 +2652,11 @@ else{
 	$scope.display_front_cards = 5;
 	$scope.acquired_coupon_count = 0;
 
+	$scope.currentPage = 1;
+  $scope.pageSize = 10;
+
+  $scope.pageChangeHandler = function(num) {};
+
 	loginHttpService.getUserDetails(get_uid).success(function(response) {
 		if (typeof (response.data.user_all_details) != 'undefined') {
 			var user = response.data.user_all_details;
@@ -2815,11 +2820,11 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 
 	// Student Reports
 	loginHttpService.getStudentReport(get_uid).success(function(res_resport) {
-		if(res_resport.response.status=true){
+		if(res_resport.response.status==true){
 			$scope.details = res_resport.response.details;
 		}
 		else{
-			$scope.error_message ="No Report generated now.";
+			$scope.report_message ="No Report generated now.";
 		}
 
 	});

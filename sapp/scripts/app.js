@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ngStorage','ngSanitize'])
+angular.module('mlg_student', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ngStorage','ngSanitize','angularUtils.directives.dirPagination'])
 .value('urlParams', {
 users : '/users',
 login: '/users/login',

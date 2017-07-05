@@ -367,7 +367,7 @@
           </h4>
         </div>
         <div class="modal-body">
-          <div class="report-row" ng-repeat="detail in details">
+          <div class="report-row" dir-paginate="detail in details|itemsPerPage:5">
             <ul>
               <li class="name">
                 <span>{{detail.course_name}}</span>
@@ -385,18 +385,14 @@
                 <span>{{detail.other_Student_average/10}}</span>
               </li>
             </ul>
-          </div>          
+          </div> 
+
+          <div class="report-row" ng-if="report_message!='' " style="color:red;" >{{report_message}}</div>
+
         </div>
-        <div class="modal-footer">
-          <ul class="pagination">
-            <li><a href="#">&#129024;<span>Previous</span></a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">...</a></li>
-            <li><a href="#"><span>Next</span> &#129026;</a></li>
-          </ul>
+        <div class="modal-footer">         
+          <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="views/dirPagination.tpl.html"></dir-pagination-controls>
+
         </div>
       </div>
     </div>
