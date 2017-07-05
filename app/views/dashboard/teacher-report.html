@@ -160,7 +160,7 @@
 										<td class="skill_name" data-th="SKILLS NAME">{{sgp.skill_name}}</td>
 										<td class="subskill" data-th="SUBSKILLS">
 											<div class="subkills-cover" ng-repeat="sub in sgp.sub_skill ">
-												<button type="button" class="btn btn-danger btn-outline">{{sub.sub_skill_name}}</button>
+												<button type="button" class="btn btn-danger btn-outline" ng_click="generateAssignment(sgp.skill_id)">{{sub.sub_skill_name}}</button>
 												<!--<button type="button" class="btn btn-danger btn-outline border-0">+5 more</button>-->
 											</div>
 										</td>
@@ -231,7 +231,7 @@
 									<td class="skill_name" data-th="SKILLS NAME">{{skill.skill_name}}</td>
 									<td class="subskill" data-th="SUBSKILLS">
                       <div class="subkills-cover" ng-repeat=" subskill in gapSubSkill" ng-if="skill.skill_id == subskill.parent_id">
-                        <button type="button" class="btn btn-danger btn-outline" >{{subskill.sub_skill_name}}</button>
+                        <button type="button" class="btn btn-danger btn-outline"ng_click="generateAssignment(skill.skill_id)">{{subskill.sub_skill_name}}</button>
                         <!--<button type="button" class="btn btn-danger btn-outline border-0">+5 more</button>-->
                       </div>
 									</td>

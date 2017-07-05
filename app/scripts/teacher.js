@@ -6108,6 +6108,10 @@ $scope.deleteQuestions = function(Qid,uniqId){
   $scope.sortBy = function(propertyName) {
    $scope.sortModel = propertyName;
   };
+  // function for generate assignment on gap
+  $scope.generateAssignment = function(data){
+    window.location.href='teacher/custom-assignment/'+grade+'/'+$routeParams.subject_name+'/'+course;
+  };
  }]).filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];
