@@ -87,6 +87,9 @@
                         <div owl-carousel-item=""  class="item" ng-repeat="assignment in assignments"> 
                             <!-- If student has not attemped challenge -->
                             <a href="challenge/{{assignment.assignment_id}}" style="text-decoration:none;" ng-if="assignment.has_attempted_challenge==0">
+                             <h2 ng-if="assignment.student_result_percent >= mastered" style="color:green" >Mastered</h2>
+                              <h2 ng-if="assignment.student_result_percent < mastered" style="color:red">Not Mastered</h2>
+                              
                                 <h1>{{assignment.type}}</h1>
                                     <div class="img_cover">
                                         <img src="assets/img/hat_img.png" alt="" data-center="center"/>
@@ -101,8 +104,7 @@
                                         <img src="assets/img/hat_img.png" alt="" data-center="center"/>
                                     </div>
                               <h2>{{assignment.course_name}}</h2><br>
-                              <h2 ng-if="assignment.student_result_percent >= mastered" style="color:green" >Mastered</h2>
-                              <h2 ng-if="assignment.student_result_percent < mastered" style="color:red">Not Mastered</h2>
+                             
                               <br>
                             </a>                            
 
