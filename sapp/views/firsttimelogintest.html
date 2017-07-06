@@ -21,7 +21,7 @@
                       </div>
                     </div>
                     <div class="panel-body">
-                      <div class="content" ng-init="frm={};" ng-if="createquiz_message=='' ">
+                      <div class="content" ng-init="frm={};" ng-if="!createquiz_message">
                       		<h4 class="ques">
                       			<span>Q{{sequence+1}} :</span>  
                       			<span ng-bind-html="currentquestion.questionName"></span>
@@ -89,7 +89,7 @@
   						        </div>
                   </div>
 
-              <div class="content" ng-if="createquiz_message!='' " style="color:red">{{createquiz_message}}</div>
+              <div class="content" ng-if="createquiz_message" style="color:red">{{createquiz_message}}</div>
 
               </div>
             </div>

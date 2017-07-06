@@ -646,7 +646,9 @@ promise.then(function(result) {
 
 		// Masscourt- Display in starting, before starting quiz(set Masscourt image and message)
 		var selected_subject = result.data.response.course_Information.course_name;
-		$scope.masscourt_message = "Ahh, looks like you need some practice. Get in the first castle to hone your skills.";		
+		
+
+		$scope.masscourt_message = "Hi "+userInfo.userName+", Give some quick answers to start your journey.";		
 		if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
 			$scope.masscourt_image ='math_normal.png';
 		}
@@ -704,6 +706,7 @@ promise.then(function(result) {
 		  		// Set current question
 		  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
 		  		$scope.total_questions=$scope.data.questions.length-1;
+
 			}else{
 					$scope.createquiz_message = resitem.data.message;
 			}
@@ -729,8 +732,12 @@ promise.then(function(result) {
 
 	  	// Read Question in UK voice
 	  	$scope.readQuestion=function(){            
-	  		var text= $scope.currentquestion.questionName;
-	  		responsiveVoice.speak("" + text +"", "UK English Male");                        
+	  		/*var text= $scope.currentquestion.questionName;
+	  		responsiveVoice.speak("" + text +"", "UK English Male");*/
+
+	  		var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");                           
 	  	}
 
 	  	//close masscourt
@@ -876,7 +883,7 @@ promise.then(function(result) {
 		  								var st_result="";
 		  								if(quizResultResponse.response. student_result_percent < quiz_mastered_score.PRETEST){
 		  									$scope.st_result= "fail";
-		  									$scope.masscourt_message="Opps.. Your require more practice.";
+		  									$scope.masscourt_message="Ahh, looks like you need some practice. Get in the first castle to hone your skills.";
 						 						
 						 						//alert("Your are Fail");
 						 						//$("#mascot_quiz").removeClass("active");
@@ -885,7 +892,7 @@ promise.then(function(result) {
 						 					}
 						 					else{
 						 						$scope.st_result= "pass";
-						 						$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
+						 						$scope.masscourt_message="You are good to go. Choose a skill to see what’s inside.";
 						 						//alert("Your are Pass");
 						 						//$("#mascot_quiz").removeClass("active");
 						 						//$("#mascot_pass").addClass("active");						 						
@@ -1066,8 +1073,9 @@ promise.then(function(result) {
 
 	// To read the question in male UK voice    
 	$scope.readQuestion=function(){            
-        var questiontext= $scope.currentquestion.questionName;          
-        responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+        var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");                        
 	}
 
 
@@ -1434,8 +1442,11 @@ promise.then(function(result) {
 
 	// To read the question in male UK voice    
 	$scope.readQuestion=function(){            
-        var questiontext= $scope.currentquestion.questionName;          
-        responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+        /*var questiontext= $scope.currentquestion.questionName;          
+        responsiveVoice.speak("" + questiontext +"", "UK English Male");*/
+        var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");
 	}
 
 
@@ -2138,8 +2149,12 @@ else{
 
     // To read the question in male UK voice    
 	  	$scope.readQuestion=function(){            
-            var questiontext= $scope.currentquestion.question_name;          
-            responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+            /*var questiontext= $scope.currentquestion.question_name;          
+            responsiveVoice.speak("" + questiontext +"", "UK English Male"); */
+
+            var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");                          
 	  	}
 
 	  	//close masscourt
@@ -2263,12 +2278,15 @@ else{
        				a = JSON.parse(localStorage.getItem('localQuizResponse'));    
     				a.push(userExamResponse); 
     				localStorage.setItem('localQuizResponse', JSON.stringify(a));
-
-
 		 			localStorage.setItem('userQuesSequence', $scope.sequence+1);
-		 			$scope.sequence+=1;
-		 			$scope.currentquestion= $scope.data.questions[$scope.sequence];
-		 			$scope.frm={};
+
+		 				if($scope.sequence < $scope.total_questions){
+		 					$scope.sequence+=1;
+				 			$scope.currentquestion= $scope.data.questions[$scope.sequence];
+				 			$scope.frm={};
+		 				}
+
+		 			
 		 		}
 		 		else if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
 		 			console.log($scope.error_optionmessage);
@@ -2277,6 +2295,9 @@ else{
 
 						//Step- 4 send local Stoage Quiz attand Response to API						
 						//localStorage.setItem('userQuesSequence', 0);
+						a = JSON.parse(localStorage.getItem('localQuizResponse'));    
+    				a.push(userExamResponse); 
+    				localStorage.setItem('localQuizResponse', JSON.stringify(a));
 
 						
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
@@ -2480,8 +2501,12 @@ else{
 	
 		// To read the question in male UK voice    
 	 	$scope.readQuestion=function(){            
-            var questiontext= $scope.currentquestion.questionName;          
-            responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+            /*var questiontext= $scope.currentquestion.questionName;          
+            responsiveVoice.speak("" + questiontext +"", "UK English Male");*/ 
+
+            var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");                          
 	  	}
 
 	
@@ -2822,6 +2847,8 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	loginHttpService.getStudentReport(get_uid).success(function(res_resport) {
 		if(res_resport.response.status==true){
 			$scope.details = res_resport.response.details;
+			$scope.report_message="";
+
 		}
 		else{
 			$scope.report_message ="No Report generated now.";
