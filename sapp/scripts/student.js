@@ -2272,7 +2272,7 @@ else{
    			}
     	}	
     			//Step-3 Procceed check questions sequence either for next question or show result if sequence is on last.
-		 		if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
+		 		if( ($scope.sequence <= $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
 		 			//3.1 Add the quiz response in local storage
        				//var b;
        				a = JSON.parse(localStorage.getItem('localQuizResponse'));    
@@ -2285,7 +2285,7 @@ else{
 		 			$scope.currentquestion= $scope.data.questions[$scope.sequence];
 		 			$scope.frm={};
 		 		}
-		 		else if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
+		 		else if( ($scope.sequence <= $scope.total_questions) && ($scope.error_optionmessage!="" ) ) {
 		 			console.log($scope.error_optionmessage);
 		 		}	 			 		
 				else{ 
