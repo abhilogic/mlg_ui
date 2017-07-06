@@ -879,7 +879,7 @@ promise.then(function(result) {
 		  								var st_result="";
 		  								if(quizResultResponse.response. student_result_percent < quiz_mastered_score.PRETEST){
 		  									$scope.st_result= "fail";
-		  									$scope.masscourt_message="Opps.. Your require more practice.";
+		  									$scope.masscourt_message="Ahh, looks like you need some practice. Get in the first castle to hone your skills.";
 						 						
 						 						//alert("Your are Fail");
 						 						//$("#mascot_quiz").removeClass("active");
@@ -888,7 +888,7 @@ promise.then(function(result) {
 						 					}
 						 					else{
 						 						$scope.st_result= "pass";
-						 						$scope.masscourt_message="Congrats.. Your are mastered in this skill.";
+						 						$scope.masscourt_message="You are good to go. Choose a skill to see what’s inside.";
 						 						//alert("Your are Pass");
 						 						//$("#mascot_quiz").removeClass("active");
 						 						//$("#mascot_pass").addClass("active");						 						
