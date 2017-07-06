@@ -706,7 +706,7 @@ promise.then(function(result) {
 		  		// Set current question
 		  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
 		  		$scope.total_questions=$scope.data.questions.length-1;
-		  		
+
 			}else{
 					$scope.createquiz_message = resitem.data.message;
 			}
@@ -732,8 +732,12 @@ promise.then(function(result) {
 
 	  	// Read Question in UK voice
 	  	$scope.readQuestion=function(){            
-	  		var text= $scope.currentquestion.questionName;
-	  		responsiveVoice.speak("" + text +"", "UK English Male");                        
+	  		/*var text= $scope.currentquestion.questionName;
+	  		responsiveVoice.speak("" + text +"", "UK English Male");*/
+
+	  		var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");                           
 	  	}
 
 	  	//close masscourt
@@ -1069,8 +1073,9 @@ promise.then(function(result) {
 
 	// To read the question in male UK voice    
 	$scope.readQuestion=function(){            
-        var questiontext= $scope.currentquestion.questionName;          
-        responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+        var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");                        
 	}
 
 
@@ -1437,8 +1442,11 @@ promise.then(function(result) {
 
 	// To read the question in male UK voice    
 	$scope.readQuestion=function(){            
-        var questiontext= $scope.currentquestion.questionName;          
-        responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+        /*var questiontext= $scope.currentquestion.questionName;          
+        responsiveVoice.speak("" + questiontext +"", "UK English Male");*/
+        var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");
 	}
 
 
@@ -2141,8 +2149,12 @@ else{
 
     // To read the question in male UK voice    
 	  	$scope.readQuestion=function(){            
-            var questiontext= $scope.currentquestion.question_name;          
-            responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+            /*var questiontext= $scope.currentquestion.question_name;          
+            responsiveVoice.speak("" + questiontext +"", "UK English Male"); */
+
+            var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");                          
 	  	}
 
 	  	//close masscourt
@@ -2483,8 +2495,12 @@ else{
 	
 		// To read the question in male UK voice    
 	 	$scope.readQuestion=function(){            
-            var questiontext= $scope.currentquestion.questionName;          
-            responsiveVoice.speak("" + questiontext +"", "UK English Male");                        
+            /*var questiontext= $scope.currentquestion.questionName;          
+            responsiveVoice.speak("" + questiontext +"", "UK English Male");*/ 
+
+            var questiontext= $scope.currentquestion.questionName; 
+         var questiontext_plain = questiontext.replace(/<\/?[^>]+(>|$)/g, "");
+        responsiveVoice.speak("" + questiontext_plain +"", "UK English Male");                          
 	  	}
 
 	
