@@ -274,7 +274,8 @@
                      <button type="submit" class="btn-send" ng-click="submitContactUs(cfrm)"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                     <!-- <input type="submit" name="submit" value="submit"> -->
                   </form>
-                  <div id="contact_submit_result" style="color:green">{{msg}}</div>
+                  <div id="contact_submit_result" style="color:red" ng-if="!contactstatus">{{msg}}</div>
+                  <div id="contact_submit_result" style="color:green" ng-if="contactstatus">{{msg}}</div>
                 </div>
                 <div class="col-md-4 col-sm-6 detail_cover">
                   <h4>Contact Information</h4>

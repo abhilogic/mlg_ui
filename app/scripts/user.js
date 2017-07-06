@@ -707,11 +707,15 @@ angular.module('mlg').filter('moment', function() {
 	$scope.submitContactUs = function(cfrmdata){			
 		loginHttpService.contactus(cfrmdata).success(function(response) {				
 				console.log(response);
-				if(response.data.status = "True"){
+				if(response.data.status == "True"){
 						$scope.msg=response.data.message;
 						$scope.cfrm={};
+						$scope.contactstatus=true;
 				}else{
-					$scope.msg=response.data.message;	
+					$scope.msg=response.data.message;
+					$scope.contactstatus=false;
+
+
 				}					
 			});
 	};
