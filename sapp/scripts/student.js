@@ -2841,6 +2841,8 @@ loginHttpService.getAvatarImage(get_uid).success(function(response) {
 	loginHttpService.getStudentReport(get_uid).success(function(res_resport) {
 		if(res_resport.response.status==true){
 			$scope.details = res_resport.response.details;
+			$scope.report_message="";
+
 		}
 		else{
 			$scope.report_message ="No Report generated now.";
