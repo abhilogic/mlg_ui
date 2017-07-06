@@ -2272,7 +2272,7 @@ else{
    			}
     	}	
     			//Step-3 Procceed check questions sequence either for next question or show result if sequence is on last.
-		 		if( ($scope.sequence <= $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
+		 		if( ($scope.sequence < $scope.total_questions) && ($scope.error_optionmessage=="" ) ) {
 		 			//3.1 Add the quiz response in local storage
        				//var b;
        				a = JSON.parse(localStorage.getItem('localQuizResponse'));    
@@ -2295,6 +2295,9 @@ else{
 
 						//Step- 4 send local Stoage Quiz attand Response to API						
 						//localStorage.setItem('userQuesSequence', 0);
+						a = JSON.parse(localStorage.getItem('localQuizResponse'));    
+    				a.push(userExamResponse); 
+    				localStorage.setItem('localQuizResponse', JSON.stringify(a));
 
 						
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
