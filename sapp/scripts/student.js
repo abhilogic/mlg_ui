@@ -646,7 +646,9 @@ promise.then(function(result) {
 
 		// Masscourt- Display in starting, before starting quiz(set Masscourt image and message)
 		var selected_subject = result.data.response.course_Information.course_name;
-		$scope.masscourt_message = "Ahh, looks like you need some practice. Get in the first castle to hone your skills.";		
+		
+
+		$scope.masscourt_message = "Hi "+userInfo.userName+", Give some quick answers to start your journey.";		
 		if(selected_subject==mlg_subjects_for_masscourt.MATH || selected_subject==mlg_subjects_for_masscourt.MATHS ){
 			$scope.masscourt_image ='math_normal.png';
 		}
@@ -704,6 +706,7 @@ promise.then(function(result) {
 		  		// Set current question
 		  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
 		  		$scope.total_questions=$scope.data.questions.length-1;
+		  		
 			}else{
 					$scope.createquiz_message = resitem.data.message;
 			}
