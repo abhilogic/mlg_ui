@@ -62,7 +62,7 @@
 						<!-- end pre Test -->
 
 						<!-- start skill links -->
-						<a ng-click="openSkillDoor(subject.disabled,subject.name,subject.course_id)" ng-if="pretest_result == 'pass'" 
+						<a href='javascript:void' ng-click="openSkillDoor(subject.disabled,subject.name,subject.course_id)" ng-if="pretest_result == 'pass'" 
                ng-model="mytest[$index]"  ng-repeat="subject in subject_detail">
               <div ng-if=" subject.visibility == '1'">
 							  <div class="castle topic_castle subskills_castle_{{$index+2}}" >
