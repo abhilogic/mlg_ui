@@ -128,9 +128,9 @@ teacherHttpResponse.getStudentsOfSubjectForTeacher=function(tid,course_id){
  });
 }
 
-teacherHttpResponse.getDashboardStudentsOfTeacher=function(tid,course_id,skill_id=null,subskill_id=null){
-  if(skill_id!=null && subskill_id!=null){
-    var URLstr = '?teacher_id='+tid+'&subject_id='+course_id+'&skill_id='+skill_id+'&subskill_id='+subskill_id;
+teacherHttpResponse.getDashboardStudentsOfTeacher=function(tid,course_id,skill_id=null,subskill_id=null,performance=null){
+  if(skill_id!=null && subskill_id!=null && performance!=null ){
+    var URLstr = '?teacher_id='+tid+'&subject_id='+course_id+'&skill_id='+skill_id+'&subskill_id='+subskill_id+'&student_classification='+performance;
   }else if (skill_id!=null && subskill_id==null){
       var URLstr ='?teacher_id='+tid+'&subject_id='+course_id+'&skill_id='+skill_id;
   }else{
@@ -770,6 +770,8 @@ $scope.submitSkip = function(){
         $scope.subskills={}; 
         $scope.students={};
         $scope.selected_skill_id=slctSkill;
+
+        //get subskill of selected skill
         teacherHttpService.getCourseSkillSubskills($scope.grade_id,parentid).success(function(rescourse) {
            if (rescourse.response.status == "True") {
             $scope.subskills = rescourse.response.courses;
@@ -778,18 +780,18 @@ $scope.submitSkip = function(){
 
         // get students
         teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id,slctSkill).success(function(response_students) { 
-         if (response_students.response.status == true) {
-           $scope.students=response_students.response.students; 
-           $scope.students_count=  $scope.students.length;
-         }else{
-           $scope.student_searchmessage=response_students.response.message;
-           $scope.students_count =0;
-         } 
+           if (response_students.response.status == true) {
+             $scope.students=response_students.response.students; 
+             $scope.students_count=  $scope.students.length;
+           }else{
+             $scope.student_searchmessage=response_students.response.message;
+             $scope.students_count =0;
+           } 
        });
 
       };
 
-      $scope.onChangeSubSkill = function(slctsubSkill){
+      $scope.onChangeSubSkill = function(stfrmdata){
         $scope.students={};
         teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id,$scope.selected_skill_id,slctsubSkill).success(function(response_students) { 
          if (response_students.response.status == true) {
@@ -804,7 +806,17 @@ $scope.submitSkip = function(){
       };
 
       
-      $scope.onChangePerformance = function(propertyName){
+      $scope.onChangePerformance = function(stfrmdata){
+          /*var newStudents =[];
+            angular.forEach($scope.students,function(key,value){        
+                if(key['student_marks_status']==propertyName){
+                    newStudents.push(key);
+                }
+
+            });
+            $scope.students = newStudents;*/
+
+            console.log(stfrmdata);
 
       };
 
@@ -4145,20 +4157,35 @@ $scope.deleteImage = function(j,data) {
                   console.log(result);
                   if(result.response.status==true){
                       var gradeAnayisis = result.response.student_skill_percentage;
+                      var stdetails = result.response.student_details;
+                      $scope.series = ['Recommended progress', 'Average score', stdetails.first_name+' '+stdetails.last_name];
+ 
+
                       angular.forEach(gradeAnayisis,function(key,value){
-                          if(key['student_quiz_attempt']==1){
+                          gradeAnalysis_systemrecommended.push(80);
+                          $scope.gradeAnalysis_labels.push(key['skill_name']);
+
+                          //student masrks percentage
+                          if(key['student_percentage']!=null){
                               gradeAnalysis_studentmarks.push(key['student_percentage']);                            
                           }else{
                               gradeAnalysis_studentmarks.push(0);
                           }
-                          $scope.gradeAnalysis_labels.push(key['skill_name']);                          
-                          gradeAnalysis_systemrecommended.push(80);
-                          gradeAnalysis_averagemarks_ofclass.push(75);
+                          
+                          //student's classmates mark
+                          if(key['other_Student_average']!=null){
+                              gradeAnalysis_averagemarks_ofclass.push(key['other_Student_average']);                            
+                          }else{
+                              gradeAnalysis_averagemarks_ofclass.push(0);
+                          }                
+                          
+                          //gradeAnalysis_averagemarks_ofclass.push(key['other_Student_average']);
                       });                      
                   }
                   else{
                     $scope.gradeAnalysis_message = result.response.message;
                   }
+                  //console.log(gradeAnalysis_studentmarks);
 
                   $scope.gradeAnalysis_data =[gradeAnalysis_systemrecommended ,gradeAnalysis_averagemarks_ofclass,gradeAnalysis_studentmarks ];
 
@@ -4166,24 +4193,11 @@ $scope.deleteImage = function(j,data) {
 
 
         }
-      });
+      }); 
 
-
-
-    $scope.onChangeGradeSubject= function(){
-
-
-    }
-
-
-
- 
-
-console.log($scope.gradeAnalysis_data); 
 
 //$scope.gradeAnalysis_labels = ["Prime or composite", "Prime factorization", "Multiplicative inverses", "Divisibility rules", "Greatest common factor", "Least common factor", "GCF and LCM word problem", "Scientific nation"];
-  $scope.series = ['Recommended progress', 'Average score', 'Andrew score'];
-  /*$scope.gradeAnalysis_data = [ 
+   /*$scope.gradeAnalysis_data = [ 
                                 [50, 62, 80, 60, 40, 55, 48, 48],
                                 [60, 72, 90, 68, 60, 68, 58, 58],
                                 [70, 88, 100, 90, 82, 89, 72, 70]

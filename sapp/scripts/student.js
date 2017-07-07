@@ -1237,6 +1237,10 @@ promise.then(function(result) {
 
 			//Step- 4 send local Stoage Quiz attand Response to API						
 			//localStorage.setItem('userQuesSequence', 0);
+			a = JSON.parse(localStorage.getItem('localsubskillQuizResponse')); 
+       		a.push(userExamResponse); 
+    		localStorage.setItem('localsubskillQuizResponse', JSON.stringify(a));
+	    				
 			localStorage.removeItem("userQuesSequence");
 					
 			var userQuizAttandResponses=localStorage.getItem('localsubskillQuizResponse')
@@ -1608,6 +1612,10 @@ promise.then(function(result) {
 
 			//Step- 4 send local Stoage Quiz attand Response to API						
 			//localStorage.setItem('userQuesSequence', 0);
+			a = JSON.parse(localStorage.getItem('localQuizResponse'));    
+	    	a.push(userExamResponse); 
+	    	localStorage.setItem('localQuizResponse', JSON.stringify(a));
+
 			localStorage.removeItem("userQuesSequence");
 					
 			var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
@@ -2280,11 +2288,11 @@ else{
     				localStorage.setItem('localQuizResponse', JSON.stringify(a));
 		 			localStorage.setItem('userQuesSequence', $scope.sequence+1);
 
-		 				if($scope.sequence < $scope.total_questions){
+		 				//if($scope.sequence < $scope.total_questions){
 		 					$scope.sequence+=1;
 				 			$scope.currentquestion= $scope.data.questions[$scope.sequence];
 				 			$scope.frm={};
-		 				}
+		 				//}
 
 		 			
 		 		}
@@ -2296,9 +2304,8 @@ else{
 						//Step- 4 send local Stoage Quiz attand Response to API						
 						//localStorage.setItem('userQuesSequence', 0);
 						a = JSON.parse(localStorage.getItem('localQuizResponse'));    
-    				a.push(userExamResponse); 
-    				localStorage.setItem('localQuizResponse', JSON.stringify(a));
-
+	    				a.push(userExamResponse); 
+	    				localStorage.setItem('localQuizResponse', JSON.stringify(a));
 						
 						var userQuizAttandResponses=localStorage.getItem('localQuizResponse')
 						loginHttpService.setUserQuizResponse(userQuizAttandResponses).success(function(apiresponse) {							

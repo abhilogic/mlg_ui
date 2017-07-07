@@ -26,25 +26,25 @@
                 <ul class="list-inline heading-text list-filters">
                 
                   <li>
-                    <select class="form-control input-sm no-border" title="skills" ng-model="frm.selectedSkill" ng-init="frm.selectedSkill=''" ng-change="onChangeSkill(frm.selectedSkill)" >
+                    <select class="form-control input-sm no-border" title="skills" ng-model="stfrm.selectedSkill" ng-init="stfrm.selectedSkill=''" ng-change="onChangeSkill(stfrm.selectedSkill)" >
                           <option value="">Select Skill</option>
                           <option ng-repeat="skill in skills" value="{{skill.course_id}}">{{skill.course_name}}</option>         
                    </select>
                   </li>
                   <li>
-                    <select class="form-control input-sm no-border"  id="slcsubskill" title="subSkills"  ng-model="frm.selectedSubskill" ng-init="frm.selectedSubskill=''" ng-disabled="frm.selectedSkill == '' " ng-change="onChangeSubSkill(frm.selectedSubskill)">
+                    <select class="form-control input-sm no-border"  id="slcsubskill" title="subSkills"  ng-model="stfrm.selectedSubskill" ng-init="stfrm.selectedSubskill=''" ng-disabled="stfrm.selectedSkill == '' " ng-change="onChangeSubSkill(stfrm)">
                        <option value="">Select SubSkill</option>
                         <option ng-repeat="subskill in subskills" value="{{subskill.course_id}}">{{subskill.course_name}}</option>     
                     </select>
                   </li>
                   <li>
-                    <select class="form-control input-sm no-border"  id="slcperform" title="performance" ng-model="frm.selectedPerform" ng-init="frm.selectedPerform=''"  ng-change="onChangePerform(frm.selectedPerform)">
+                    <select class="form-control input-sm no-border"  id="slcperform" title="performance" ng-model="stfrm.selectedPerform" ng-init="stfrm.selectedPerform=''"  ng-change="onChangePerformance(stfrm)">
                        <option value="">Performance</option>                        
-                        <option value="remedial">Remedial</li>
-                        <option value="struggling">Struggling</li> 
-                        <option value="ontarget">On Target</li> 
-                        <option value="outstanding">Outstanding</li>
-                        <option value="gifted">Gifted</li>
+                        <option value="REMEDIAL">Remedial</li>
+                        <option value="STRUGGLING">Struggling</li> 
+                        <option value="ON_TARGET">On Target</li> 
+                        <option value="OUTSTANDING">Outstanding</li>
+                        <option value="GIFTED">Gifted</li>
                    </select>
                   </li>
                 </ul>
