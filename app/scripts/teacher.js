@@ -6199,7 +6199,13 @@ $scope.deleteQuestions = function(Qid,uniqId){
   $scope.generateAssignment = function(data){
     window.location.href='teacher/custom-assignment/'+grade+'/'+$routeParams.subject_name+'/'+course;
   };
- }]).filter('orderObjectBy', function() {
+ }])
+.controller('teacherHelpCtrl', ['$scope', 'loginHttpService', '$location', 'urlParams', 'commonActions',
+   function ($scope, loginHttpService, $location, urlParams, commonActions) {
+     var get_uid=commonActions.getcookies(get_uid);
+     
+   }])
+.filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];
     angular.forEach(items, function(item) {

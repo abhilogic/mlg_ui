@@ -400,6 +400,15 @@ principal  : 30,
 	}).when('/teacher/dashboard/report/:gradeid/:subject_name/:courseid',{
 		templateUrl : 'views/dashboard/teacher-report.html',
 		controller : 'teacherReportCtrl',
+	}).when('/teacher/help',{
+		templateUrl : 'views/dashboard/teacher-help.html',
+		controller : 'teacherHelpCtrl',
+	}).when('/parent/help',{
+		templateUrl : 'views/dashboard/parent-help.html',
+		controller : 'parentHelpCtrl',
+	}).when('/contact-us',{
+		templateUrl : 'views/contact-us.html',
+		controller : 'loginCtrl',
 	}).otherwise({
 		redirectTo : '/',
   });
@@ -645,7 +654,7 @@ return {
         	$scope.URLHelp ='teacher/help';
         }else{
         	$scope.URLSetting ='parent/settings';
-        	$scope.URLHelp ='/parent/help';
+        	$scope.URLHelp ='parent/help';
         }
 
 

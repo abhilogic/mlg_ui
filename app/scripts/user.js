@@ -147,8 +147,6 @@ angular.module('mlg').filter('moment', function() {
 		});
 	}
 
-
-
 	loginHttpResponse.packageList=function(){
 		return $http({
 			method:'GET',			
@@ -2859,4 +2857,10 @@ if (typeof $routeParams.slug != 'undefined') {
      } 
    }
 }
-}]);
+}])
+.controller('parentHelpCtrl', ['$scope', 'loginHttpService', '$location', 'urlParams', 'commonActions',
+   function ($scope, loginHttpService, $location, urlParams, commonActions) {
+     var get_uid=commonActions.getcookies(get_uid);
+    
+     
+   }]);
