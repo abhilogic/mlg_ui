@@ -748,6 +748,10 @@ $scope.submitSkip = function(){
        $scope.subject_name = $routeParams.subject_name ;
        $scope.frm={};
 
+       var reporturl= $routeParams.gradeid+'/'+$routeParams.subject_name+'/'+$routeParams.courseid;
+       localStorage.setItem('reportURL',reporturl);
+
+
 
 
 

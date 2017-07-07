@@ -502,6 +502,8 @@ return {
     function ($scope,$cookieStore,teacherHttpService,user_roles,$routeParams) {                         	
 		$scope.isCollapsedmyClass = true;
 		$scope.isCollapsedmyContent = true;
+
+		$scope.reportURL = localStorage.getItem('reportURL');
 		$scope.open_menu=function(menu_class,menu_item){
 			if(menu_item=='myClass'){
 				$scope.isCollapsedmyClass = !$scope.isCollapsedmyClass;
