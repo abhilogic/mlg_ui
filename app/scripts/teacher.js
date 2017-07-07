@@ -4046,8 +4046,8 @@ $scope.deleteImage = function(j,data) {
             smartButtonMaxItems: 2,
           };
         }])*/
-.controller('studentProfileForTeacherCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','commonActions','$routeParams','quiz_mastered_score',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location, urlParams,commonActions,$routeParams,quiz_mastered_score) {
+.controller('studentProfileForTeacherCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','commonActions','$routeParams','quiz_mastered_score','questionslimit','quiz_type',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location, urlParams,commonActions,$routeParams,quiz_mastered_score,questionslimit,quiz_type) {
     if (typeof $routeParams.id == 'undefined' || $routeParams.id  == '') {
       alert('No child selected');
       return false;
@@ -4240,6 +4240,10 @@ $scope.deleteImage = function(j,data) {
               $scope.strecords = resAtn.response.student_attention_records ; 
               var first_subskill_id =resAtn.response.student_attention_records[0].course_id;
 
+              $scope.selectedStudent_id = $routeParams.id;
+              $scope.selectedStudent_grade_id = resAtn.response.student_attention_records[0].grade_id;
+              $scope.selectedStudent_subskillid = resAtn.response.student_attention_records[0].course_id;
+
               teacherHttpService.getSubskillAnalytic(get_uid,1,first_subskill_id).success(function(resAna) {
                   //$scope.data = [30,10,20,20,15,5];
                   if(resAna.response.status==true){
@@ -4264,10 +4268,15 @@ $scope.deleteImage = function(j,data) {
 
       });
 
-
-    $scope.clickNeedAttention= function(indx,subskillid){
+//$scope.clickNeedAttention= function(indx, subskillid,studentid, gradeid){
+    $scope.clickNeedAttention= function(indx,subskillid,gradeid){
         $(".tab-pane.in.active").removeClass('in active'); 
-        $("#menu"+indx).addClass('in active');
+        $("#menu"+indx).addClass('in active'); 
+
+        $scope.selectedStudent_id = $routeParams.id;
+        $scope.selectedStudent_grade_id = gradeid;
+        $scope.selectedStudent_subskillid = subskillid;
+
 
         teacherHttpService.getSubskillAnalytic(get_uid,1,subskillid).success(function(resAna) {
           //$scope.data = [30,10,20,20,15,5];
@@ -4318,6 +4327,35 @@ $scope.deleteImage = function(j,data) {
           }
       };
 
+      /* Start - Auto generated Assignment    */
+    // On click of send Assignment button
+      $scope.confirmSendAssignment = function(student_id,gradeid, courseid){
+        var d = new Date();
+        var senddata ={
+          user_id   : student_id,
+          parent_id   : get_uid,
+          grade_id  : gradeid,
+          subskill_id : courseid,
+          quiz_type_id : quiz_type.TEACHERAUTOASSIGNMENT, // id of the table quiz_types
+          questions_limit : questionslimit.TEACHER_AUTO_ASSIGNMENT,
+          quiz_name : 'teacherAutoAssignment-'+ d.getFullYear()+(d.getMonth()+1)+d.getDate(),
+        };
+
+        // API to create the auto assignment by parent
+        loginHttpService.setAutoAssignmentByParents(senddata).success(function(record) {
+                if(record.response.status==true){
+                  $scope.auto_quiz_message = '';
+                  $('#modal-parentAssignment').modal('hide');
+                  $('#modal-parentAssignmentsubmitted').modal('show');
+                }else{
+                  $scope.auto_quiz_message = record.response.message;
+                }
+            });
+        }
+
+  /* End - Auto generated assignment */
+
+/* end Need for Attention */
 
 // Start --Last Block :Student Result in panle-subjects  
     $scope.clickAccordionSubject = function(index, subject_id){
