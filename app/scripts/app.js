@@ -282,7 +282,7 @@ principal  : 30,
 	}).when('/parent/dashboard/redeem/:id',{
 		templateUrl : 'views/dashboard/parent-redeem.html',
 		controller : 'parentRedeemCtrl',
-	}).when('/parent/dashboard/settings',{
+	}).when('/parent/settings',{
 		templateUrl : 'views/dashboard/parent-settings.html',
 		controller : 'parentSettingCtrl',
 	}).when('/parent/dashboard/notifications', {
@@ -306,7 +306,7 @@ principal  : 30,
 	}).when('/teacher/subscription',{
 		templateUrl : 'views/dashboard/teacher-subscription.html',
 		controller : 'teacherSubscriptionCtrl',
-	}).when('/teacher/dashboard/settings',{
+	}).when('/teacher/settings',{
 		templateUrl : 'views/dashboard/teacher-setting.html',
 		controller : 'teacherSettingCtrl',
 	}).when('/teacher/add-new-event-ptm',{
@@ -612,15 +612,23 @@ return {
 	restrict: 'E',
 	templateUrl: 'include/search-bar.html',
 	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {  
-		 $('html').click(function (e) {      
+		 /*$('html').click(function (e) {      
     if ($(e.target).parents('#h_menu').length==1) {
         $('#h_menu').addClass('open')
     } else {
         $('#h_menu').removeClass('open')
     }
-});                        	
+});       */ 
+
+
+
+	$('.dropdown').click(function (e) {
+			$('.dropdown').toggleClass('open');
+	});
+
+
 		var cookieString=$cookieStore.get("userObj");
-		var userInfo=parseUser(cookieString);
+		var userInfo=parseUser(cookieString);		
 		function parseUser(cookie){
           var keyVals=cookie.split(',');
           var obj={};
@@ -631,6 +639,17 @@ return {
           return obj;
         }
         $scope.userInfo=userInfo;
+
+        if(userInfo.role!=null && userInfo.role=='teacher'){
+        	$scope.URLSetting ='teacher/settings'
+        	$scope.URLHelp ='teacher/help';
+        }else{
+        	$scope.URLSetting ='parent/settings';
+        	$scope.URLHelp ='/parent/help';
+        }
+
+
+       
 	}]
 };
 	

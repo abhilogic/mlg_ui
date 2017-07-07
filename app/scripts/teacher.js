@@ -4158,7 +4158,7 @@ $scope.deleteImage = function(j,data) {
                   if(result.response.status==true){
                       var gradeAnayisis = result.response.student_skill_percentage;
                       var stdetails = result.response.student_details;
-                      $scope.series = ['Recommended progress', 'Average score', stdetails.first_name+' '+stdetails.last_name];
+                      $scope.series = ['Recommended progress', 'Average score', stdetails.first_name+' '+stdetails.last_name+' Score'];
  
 
                       angular.forEach(gradeAnayisis,function(key,value){
@@ -4186,12 +4186,8 @@ $scope.deleteImage = function(j,data) {
                     $scope.gradeAnalysis_message = result.response.message;
                   }
                   //console.log(gradeAnalysis_studentmarks);
-
                   $scope.gradeAnalysis_data =[gradeAnalysis_systemrecommended ,gradeAnalysis_averagemarks_ofclass,gradeAnalysis_studentmarks ];
-
              });
-
-
         }
       }); 
 
@@ -4227,9 +4223,6 @@ $scope.deleteImage = function(j,data) {
             fontSize: 16
         }
   };
-
-
-
 //end - Second Graph Grade Analysis
 
 
@@ -4320,8 +4313,7 @@ $scope.deleteImage = function(j,data) {
                               total += allData[i];
                         }
                         //var tooltipPercentage = Math.round((tooltipData / total) * 100);
-                        return tooltipLabel + ': ' + tooltipData + '%';
-          
+                        return tooltipLabel + ': ' + tooltipData + '%';          
                     }
               }
           }
@@ -4381,18 +4373,7 @@ $scope.deleteImage = function(j,data) {
           }
         });
 
-
     };
-
-
-
-
-
-
-
-
-
-
 
   }])
 /*.directive('owlcarousel', function() {
