@@ -126,7 +126,6 @@ $(document).ready(function(){
   }
   floatInput();
 
-
   $(".icon-arrow-left").click(function(){
     goBack();
   });
