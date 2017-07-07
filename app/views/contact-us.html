@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>MyLearninGuru</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Description / Keywords -->
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+
+		<!-- Mobile web app capable -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="HandheldFriendly" content="true">
+
+		<!-- Facebook Open Graph -->
+		<meta property="og:title" content=""/>
+		<meta property="og:url" content=""/>
+		<meta property="og:image" content=""/>
+		<meta property="og:site_name" content=""/>
+		<meta property="og:description" content=""/>
+
+		<!-- Favicon & Touch Icons -->
+		<link rel="shortcut icon" href="assets/img/favicon/favicon.png">
+		<link rel="stylesheet" href="assets/font/font-awesome/css/font-awesome.min.css">
+		<!-- plugins -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+		<link rel="stylesheet" href="assets/css/plugins/owl.carousel.min.css"/>
+		<link rel="stylesheet" href="assets/css/plugins/owl.theme.default.css"/>
+
+		<!-- plugins -->
+		<!-- Bootstrap and core app CSS -->
+		<link rel="stylesheet" href="assets/css/bootstrap.css">
+		<link rel="stylesheet" href="assets/css/style.css" >
+	</head>
+	<body class="bg_none">
+    <div class="prelogin content_wrapper">
+      <!-- navigation  -->
+      <div class="navigation commingsoon">
+        <nav class="navbar navbar-default">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><img src="assets/img/logo_2.png" alt=""></a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav ">
+              <li><a href="static/english">English</a></li>
+              <li><a href="static/math">Maths</a></li>
+              <li class="bd"><a href="static/science">Science</a></li>
+              <li class="bd"><a href="static/socail_science">Social Science</a></li>
+            </ul>
+						<ul class="nav navbar-nav navbar-right">
+				      <!-- <li class="active"><a href="#modalFreeTrail" data-toggle="modal" class="btn navbar-btn" >Free Trial</a></li> -->
+				      <li><a href="signin">login</a></li>
+							 <li class="active"><a href="guest">Take a tour</a></li>
+				    </ul>
+          </div>
+        </nav>
+      </div>
+      <!-- navigation -->
+    <div class="div-center coming-soon">
+    	<div class="table-row">
+    		<div class="table-cell">
+    			 <img src="assets/img/prelogin_img/comingsoon.png" class="img-responsive comingsoon-img" alt >
+					<div ng-bind-html="html_value"></div>
+					<form class="form-horizontal">
+						<div class="row">
+							<div class="col-md-3">
+								<label>Stay Connected</label>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="email" class="form-control" placeholder="Enter your Email Id"/>
+								</div>
+							</div>
+							<div class="col-md-3 text-left">
+								<button type="submit" class="btn-send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+							</div>
+						</div>
+					</form>
+    		</div>
+    	</div>
+    </div>
+
+    <footer class="footer">
+      <div class="company_tab_line">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <p class="copyright_line">&copy; 2017 MyLearninGuru. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    </div><!--/ content-wrapper -->
+
+
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
+		<!-- Latest compiled and minified JavaScript -->
+		<!-- plugins -->
+		<script type="text/javascript" src="assets/js/plugins/owl.carousel.min.js"></script>
+		<script src="assets/js/plugins/jquery.mCustomScrollbar.min.js"></script>
+		<!-- plugins -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var windowHeight = $(window).height();
+				$(".coming-soon").height(windowHeight);
+			});
+		</script>
+	</body>
+
+</html>
