@@ -5276,14 +5276,14 @@ $scope.deleteQuestions = function(Qid,uniqId){
         if(grade != 'undefined') {
           angular.forEach($scope.scopeLevel,function(val,ki){
             if(val['id'] == grade){
-              $scope.scopeGradeModel = val['id'];
+             //need to ask shweta $scope.scopeGradeModel = val['id'];
             }
           });
           teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
             $scope.scopeSubject = response.response;
             angular.forEach($scope.scopeSubject,function(val,ki){
               if(val['course_id'] == course){
-                $scope.scopeCourseModel = val['course_id'];
+               //need to ask shweta $scope.scopeCourseModel = val['course_id'];
               }
             });
           }).error(function(error) {
