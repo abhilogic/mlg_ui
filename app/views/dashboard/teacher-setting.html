@@ -207,6 +207,7 @@
                                 <div class="col-md-7 col-sm-6">
                                   <select ng-change="getClassSettingsOnChange(frm.grade)" ng-model="frm.grade" class="mlg-selectpicker" 
                                        ng-options="grade.course_id+','+grade.course_name+','+grade.level_id+','+grade.name as grade.name +'-'+grade.course_name for grade in grades track by grade.course_id" title="Select Class" data-width="auto" data-size="auto">
+                                       <option value="">-Select Class-</option>
                                   </select>
                                 </div>
                               </div>
@@ -284,6 +285,7 @@
                                       <select class="mlg-selectpicker" title="Status" ng-model="pfrm.frequency_of_challenges_for_group" 
                                               ng-options="group.id as group.title for group in class_groups" 
                                               data-width="auto" data-size="auto">
+                                              <option value="">-Select Group-</option>
                                       </select>
                                     </div>
                                   </div>
@@ -300,6 +302,7 @@
                                       <select class="mlg-selectpicker" title="Status" ng-model="pfrm.frequency_of_challenges_for_individual" 
                                         ng-options="student.id as student.first_name +' '+student.last_name for student in class_students"  
                                         data-width="auto" data-size="auto">
+                                        <option value="">-Select People-</option>
                                       </select>
                                     </div>
                                   </div>
@@ -382,7 +385,7 @@
                               </div>
                             </div>
                             <div class="form-block">
-                              <h5>Placement Test : <a href="teacher-review-placement.html" class="padding-left-15"><u>Review placement test</u> </a>
+                              <h5>Placement Test : <!-- <a href="teacher-review-placement.html" class="padding-left-15"><u>Review placement test</u> </a> -->
                                 <i class="pull-right fa fa-question-circle margin-left-15" data-toggle="tooltip" data-placement="left" title="Turning of this Setting will automatically approve the coupon request by your kids"></i>
                                 <div class="switch-box pull-right padding-top-0 margin-bottom-5 checkbox-switchery checkbox-inline label-left is-success margin-top-0">
                                   <label class="switch-box-label margin-top-10" for="fillIntheBlanks"></label>

@@ -5111,6 +5111,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
   $scope.pfrm.auto_progression = true;
   $scope.changeStatus = function(question_id) {
     $scope.pfrm.question_type[question_id] = !$scope.pfrm.question_type[question_id];
+     $scope.pfrm[question_id] = !$scope.pfrm[question_id];
   };
 
   $scope.teacherClassSettings = function() {
