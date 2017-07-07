@@ -751,10 +751,6 @@ $scope.submitSkip = function(){
        var reporturl= $routeParams.gradeid+'/'+$routeParams.subject_name+'/'+$routeParams.courseid;
        localStorage.setItem('reportURL',reporturl);
 
-
-
-
-
       // API to call LIST of skills and subskills
       //API to call skill
        var parent_id = $routeParams.courseid;
@@ -6211,6 +6207,14 @@ $scope.deleteQuestions = function(Qid,uniqId){
    function ($scope, loginHttpService, $location, urlParams, commonActions) {
      var get_uid=commonActions.getcookies(get_uid);
   }])
+.controller('teacherNotificationCntrl', ['$scope', 'loginHttpService', '$location', 'urlParams', 'commonActions',
+   function ($scope, loginHttpService, $location, urlParams, commonActions) {
+     var get_uid=commonActions.getcookies(get_uid);
+     loginHttpService.getNotificationForParent({parent_id : get_uid}).success(function(response) {
+        $scope.notifications = response.notifications;
+     });
+   }
+ ])
 .filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];
