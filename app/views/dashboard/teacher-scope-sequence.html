@@ -124,7 +124,7 @@
                 <!--teacher/scope-sequence-subskill/{{skill.course_id}}**/-->
 								<div class="scope-sequence-listing">
 								<p class="para">Click a skill to see the subskills. Hold and drag to change the order.</p>
-									<ul as-sortable="sortableOptions" data-ng-model="scopeSkills">
+									<ul as-sortable="sortableOptions" data-ng-model="scopeSkills" ng-if="!sns_message">
                     <li ng-repeat="skill in scopeSkills" as-sortable-item>
 											<a href="teacher/scope-sequence-subskill/{{skill.course_id}}/{{scopeGradeModel}}/{{scopeCourseModel}}/{{option}}/{{grpId}}">
 												<div class="row"  as-sortable-item-handle>
@@ -177,10 +177,12 @@
 											</a>
 										</li>
 								</ul>
-								<div class="text-right text-sm-center"><!--#modal-approvedQuestion-->
+								<div class="text-right text-sm-center" ng-if="!sns_message"><!--#modal-approvedQuestion-->
 									<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-addSkills"><i class="icon icon-plus-outline margin-right-10"></i> Add own Skills</button>
 								</div>
 								</div>
+
+								<div ng-if="sns_message" style="color:red;">{{sns_message}}</div>
 							</form>
 						</div>
 						<div class="panel-footer">

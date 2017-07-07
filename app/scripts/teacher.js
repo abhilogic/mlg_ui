@@ -5384,7 +5384,10 @@ $scope.deleteQuestions = function(Qid,uniqId){
                $scope.msg= 'Some technical error occured.';
              });          
           });
-          } 
+          } else{
+              $scope.scopeSkills=[];
+              $scope.sns_message = "No skill add. Soon we will update this course with new skills.";
+            }
         }).error(function(error) {
           $scope.msg= 'Some technical error occured.';
         });
@@ -6203,8 +6206,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
 .controller('teacherHelpCtrl', ['$scope', 'loginHttpService', '$location', 'urlParams', 'commonActions',
    function ($scope, loginHttpService, $location, urlParams, commonActions) {
      var get_uid=commonActions.getcookies(get_uid);
-     
-   }])
+  }])
 .filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];
