@@ -1718,10 +1718,34 @@ promise.then(function(result) {
 				$scope.quiz_name = "Challenges";
 				$scope.quiz_link = "challenges";
 
+				loginHttpService.getCourseInfo($scope.URLsubskill_id).success(function(crinfo) {					
+					var subject_id =crinfo.response.parent_info_of_skill.id;
+					var allAssignments_count =0;
+					var masteredAssignments_count =0;
+					loginHttpService.getStudentAssignments(get_uid,subject_id).success(function(respAssgn) { 
+						console.log(respAssgn.response);
+						if (respAssgn.response.status == true) {
+							allAssignments_count = respAssgn.response.counts;
+							angular.forEach(respAssgn.response.assignment, function(assgnitem){								
+				                if(assgnitem.course_id == $scope.URLsubskill_id && assgnitem.student_result_percent>= quiz_mastered_score.ASSIGNMNENT ){ 
+				                   	masteredAssignments_count++;		                          
+				                }                 
+	              			});
 
+	              			//if mastered in all assignments then go practice else show challenges
+	              			if(allAssignments_count == masteredAssignments_count){
+								$scope.quiz_name = "Practice";
+								$scope.quiz_link = "practice/"+$scope.URLsubskill_name+'/'+$scope.URLsubskill_id;
+							}else{
+								$scope.quiz_name = "Challenges";
+								$scope.quiz_link = "challenges";
+							}
+						}
+						
+					});
 
-
-
+					
+				});
 			}				
 		}else{
 				$scope.quiz_name = "Quizes";
@@ -2074,8 +2098,7 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 		                   }else{
 		                   		$scope.assignments=[];
 		   						$scope.err_assignment_message = "Waittt!! No challenges are assigned you by your teacher." ;
-		   		
-		                   }                   
+		   		            }                   
 		               });
 		   		}
 		   		else{
@@ -2085,10 +2108,6 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 		   		}
 		   		$(".subject_"+first_subj).addClass('active in');
 		    });
-
-
-
-
 		}else{
 			$scope.error_message= "Issue in finding the courses.";
 		}
