@@ -1534,8 +1534,8 @@ $scope.numberOfPages=function(){
       }
     })
 
- .controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile','mlg_points','$timeout',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile,mlg_points,$timeout) {
+ .controller('teacherLessonCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile','mlg_points','$timeout','urlParams',
+  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile,mlg_points,$timeout,urlParams) {
     var get_uid=commonActions.getcookies(get_uid);
     var grade = '';
     var standard = [];
@@ -1643,7 +1643,10 @@ var mlg = '';
       skillId.push(parentId);
       var count = 0;
       teacherHttpService.getAllCourseList(parentId,'lesson','-1',get_uid).success(function(response) {
-        angular.forEach(response.response.course_details, function(value, key) {
+        if((response.response.course_details).length < 1){
+//          $scope.subSkill =$scope.subSkill;
+        }else{
+          angular.forEach(response.response.course_details, function(value, key) {
           $scope.subSkill.push({
             'id' : value['course_id'],
             'label': value['name']
@@ -1668,6 +1671,7 @@ var mlg = '';
             }); 
           }
         });
+      }
       }).error(function(error) {
        $scope.msg= 'Some technical error occured.';
        $timeout(function () {$scope.msg = ""; }, 3000);
@@ -1680,9 +1684,12 @@ var mlg = '';
           if (value == Id) {
            skillId.splice(key);         
            teacherHttpService.getAllCourseList(Id,'lesson','-1',get_uid).success(function(response) {
-            angular.forEach(response.response.course_details, function(value, key) {
+            if((response.response.course_details).length < 1){
+//              $scope.subSkill = $scope.subSkill;
+            }else{
+              angular.forEach(response.response.course_details, function(valu, ky) {
               angular.forEach($scope.subSkill, function(val, ki) {
-                if(value['course_id'] == val['id']) {
+                if(valu['course_id'] == val['id']) {
                   $scope.subSkill.splice(ki,1); 
                   subSkils.splice(ki,1);
                   $scope.tempsubskil= subSkils;
@@ -1706,6 +1713,7 @@ var mlg = '';
                 } 
               }); 
             });
+          }           
           }).error(function(error) {
            $scope.msg= 'Some technical error occured.';
            $timeout(function () {$scope.msg = ""; }, 3000);
@@ -1892,9 +1900,9 @@ $scope.submitDocDetail = function(data) {
       $scope.fileDocModel = '';
       $scope.fileImgModel = '';
       $scope.fileVideoModel = '';
-      $scope.doc = '';
-      $scope.img = '';
-      $scope.video = '';
+      $scope.doc = [];
+      $scope.img = [];
+      $scope.video = [];
       content = '';
       type = '';
       var subSkillDetail = {};
@@ -1925,6 +1933,7 @@ $scope.submitDocDetail = function(data) {
   $scope.setUserContent = function(data) {
     $scope.updateId = data;
     $scope.mesage = '';
+    mlg = urlParams.baseURL+'/';
     if(countImg == 0 && countDoc == 0 && countVideo ==0) {
       var mysave = angular.element(document.querySelector('#save-content button'));
       mysave.remove();
@@ -2073,7 +2082,6 @@ $scope.submitDocDetail = function(data) {
         var videoContent = val['content'].split(',');
         $scope.editValue = val['content'];
         angular.forEach(videoContent,function(videoValue,videoKey){
-          alert(videoValue);
 //          myVideo.append('<video width="300" height="200" controls><source src="'+mlg+'upload/'+videoValue+'" type="video/mp4"></video> ');
 //          myVideo.append('<iframe src="'+mlg+'upload/'+videoValue+'" width="100%" height="315" frameborder="0" allowfullscreen></iframe>');
           myVideo.append('<a href="'+mlg+'upload/'+videoValue+'" target="_new">'+videoValue+'</a>');
@@ -2445,19 +2453,18 @@ if(typeof LId[1] != 'undefined') {
       return false;
     };
  }])
- .directive('dropZone', function() {
+ .directive('dropZone',['urlParams', function(urlParams) {
   return function($scope, element, attrs) {    
     var video_extsn = ['video/ogg', 'video/mp4', 'video/3gp'];
     var image_extsn = ['image/jpeg', 'image/png'];
     var file_extsn = ['application/pdf'];
-    
+    var baseUrl = urlParams.baseURL;
     return element.dropzone({
-      url: "/mlg/teachers/uploadfile",
+      url: baseUrl+"/teachers/uploadfile",
       maxFilesize: 100,
       paramName: "uploadfile",
       maxThumbnailFilesize: 3,
       accept:function(file,done) {
-        console.log(file);
         if (element.context.id == 'file-doc' && file_extsn.indexOf(file.type) != -1) {
           done();
         }else if (element.context.id == 'file-img' && image_extsn.indexOf(file.type) != -1) {
@@ -2497,8 +2504,8 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
           this.removeFile(file);
         }  
       });
-      this.on("success", function (file) {  
-        if(file.type == 'application/pdf') {
+      this.on("success", function (file) {
+        if(file_extsn.indexOf(file.type) != -1) {
           if (doc != '') {
             doc = doc +','+file.xhr.response;
             $scope.doc = doc;
@@ -2507,9 +2514,12 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
             $scope.doc = doc;
 
           } 
-
           $scope.$emit('UploadedDocument', $scope.doc);              
-        }else if( (element.context.id == 'file-img' || element.context.id == 'file-all')&& (file.type == 'image/jpeg' || file.type == 'image/png')) {
+        }else if( (element.context.id == 'file-img')&& (image_extsn.indexOf(file.type) != -1)) {
+          if($scope.img == '' && $scope.updateId != ''){
+            images = '';
+//            file.xhr.response = '';
+          }
           if (images != '') {
             images = images +','+file.xhr.response;
             $scope.img = images;
@@ -2517,9 +2527,22 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
             images = file.xhr.response;
             $scope.img = images;
           }
-
           $scope.$emit('UploadedImage', $scope.img);             
-        }else if(element.context.id == 'ans-img' && (file.type == 'image/jpeg' || file.type == 'image/png')) {;
+        }else if( (element.context.id == 'file-all')&& (file_extsn.indexOf(file.type) != -1 ||
+                image_extsn.indexOf(file.type) != -1 || (video_extsn.indexOf(file.type) != -1 && file.size <=2097152))) {
+//          if($scope.img == '' && $scope.updateId != ''){
+//            images = '';
+//            file.xhr.response = '';
+//          }
+          if (images != '') {
+            images = images +','+file.xhr.response;
+            $scope.img = images;
+          }else{
+            images = file.xhr.response;
+            $scope.img = images;
+          }
+          $scope.$emit('UploadedImage', $scope.img);             
+        }else if(element.context.id == 'ans-img' && (image_extsn.indexOf(file.type) != -1)) {
           if($scope.ansCount < 4) {
             var i = 0;
             $scope.img = [];
@@ -2542,9 +2565,9 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
                    $scope.img = $scope.img+','+ansImg[0];
                  }
                  var myLabel = angular.element(document.querySelector('#answer-img ul'));
-                 myLabel.append('<li><input type="checkbox" id="inlineRadio1" value="'+i+'" name="IMAGESS" ><img src="http://localhost/mlg/webroot/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
+                 myLabel.append('<li><input type="checkbox" id="inlineRadio1" value="'+i+'" name="IMAGESS" ><img src="'+baseUrl+'/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
                  i++;
-               }); 
+               });
               }else{
                 angular.forEach(temp,function(val,ki){
                  var temp = val.split(': "');
@@ -2555,7 +2578,7 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
                    $scope.img = $scope.img+','+ansImg[0];
                  }
                  var myLabel = angular.element(document.querySelector('#answer-img ul'));
-                 myLabel.append('<li><input type="checkbox" id="inlineRadio1" value="'+i+'" name="IMAGESS" ><img src="http://localhost/mlg/webroot/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
+                 myLabel.append('<li><input type="checkbox" id="inlineRadio1" value="'+i+'" name="IMAGESS" ><img src="'+baseUrl+'/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
                  i++; 
                }); 
               }
@@ -2571,11 +2594,11 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
 //              myLabel.append('<li><input type="radio" id="inlineRadio1" value="0" name="IMAGESS" ><img src="http://localhost/mlg/webroot/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
               if($scope.updatedImageId != undefined) {
                  var myLabel = angular.element(document.querySelector('#answer-img ul'));
-                myLabel.append('<li><input type="checkbox" id="inlineRadio1" value="'+value+'" name="IMAGESS" ><img src="http://localhost/mlg/webroot/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
+                myLabel.append('<li><input type="checkbox" id="inlineRadio1" value="'+value+'" name="IMAGESS" ><img src="'+baseUrl+'/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
             
                 }else{
                 var myLabel = angular.element(document.querySelector('#answer-img ul'));
-                myLabel.append('<li><input type="checkbox" id="inlineRadio1" value="0" name="IMAGESS" ><img src="http://localhost/mlg/webroot/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
+                myLabel.append('<li><input type="checkbox" id="inlineRadio1" value="0" name="IMAGESS" ><img src="'+baseUrl+'/upload/'+ ansImg[0]+'"alt="opps" width="50px" height="50px" /></li>');
                 }
               count++;
               ($scope.ansCount)++;
@@ -2600,7 +2623,7 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
 }      
 }); 
 }   
-})
+}])
 .controller("tableRow", function ($scope) {
 	$scope.people = [
 	//{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
@@ -2781,7 +2804,7 @@ $scope.removePerson = function(index){
     var tempStatus = 0;
     var subStatus = 0;
     var difficulity = '';
-    var qType = [];
+    var qType = '';
     var claim = '';
     var dok = '';
     var difficulityName = '';
@@ -2957,8 +2980,7 @@ $scope.subSkillEvents = {
     }
   };
   $scope.standardEvents = {
-    onItemSelect: function(item) { 
-      alert(standardType);
+    onItemSelect: function(item) {
       if(item != '') {
         standard.push(item['id']);
       }
@@ -3313,7 +3335,7 @@ angular.forEach(value['ques_type'],function(type,key){
 }
 });
 }
-$scope.lessonPreview = function(data) {
+$scope.questionPreview = function(data) {
   angular.forEach($scope.level,function(value,key){
     if(value['id'] == $scope.gradeSelected){
       $scope.pregrade = value['name'];
@@ -3326,10 +3348,23 @@ $scope.lessonPreview = function(data) {
   });
   angular.forEach($scope.skill,function(sub,key){
     if(sub['id'] == $scope.skillmodel[0]['id']) {
-      $scope.preskil = sub['label']
+      $scope.preskil = sub['label'];
     }
   });
-
+  var previewImage = ($scope.img).split(',');
+   $scope.previewImageCount =  previewImage.length;
+  angular.forEach(previewImage,function(sub,key){
+    var i = key+1;
+    if( i == 1) {
+      $scope.frm.ans1 = urlParams.baseURL+'/upload/'+sub;
+    }else if( i == 2) {
+      $scope.frm.ans2 =urlParams.baseURL+'/upload/'+sub;
+    }else if( i == 3) {
+      $scope.frm.ans3 = urlParams.baseURL+'/upload/'+sub;
+    }else if( i == 4) {
+      $scope.frm.ans4 = urlParams.baseURL+'/upload/'+sub;
+    }
+  });
 }   
 
 $scope.addTxtAns=function(){
@@ -3397,7 +3432,7 @@ $scope.addImgAns=function(){
             var myLabel = angular.element(document.querySelector('#edit-answer-img ul'));
             angular.forEach(response.answer,function(ans,anski){
               var optin = opt['options'].split('/');
-              if(ki == 0) {
+              if(anski == 0) {
                $scope.option =  optin['1']; 
               }else{
                $scope.option = $scope.option +','+optin['1'];
@@ -3608,7 +3643,7 @@ $scope.updateQuestion = function(data) {
   teacherHttpService.updateQuestion(question).success(function(response) {
     if (response.status == true) {
       $scope.msg = response.message;
-      $('#modal-sucess').modal('show'); 
+      $('#modal-sucess').modal({backdrop: 'static', keyboard: false}); 
 //      window.location.href = window.location.origin+urlParams.siteRoot+'teacher/questions';
     }else{
       $scope.message = 'Some error occurred.';
@@ -3638,11 +3673,12 @@ $scope.deleteImage = function(j,data) {
                var myLabl = angular.element(document.querySelector('#edit-answer-img'));
                 myLabl.append('<ul></ul>');
               angular.forEach(response.option,function(opt,ki){
+                console .log(response.option);
                 var myLabel = angular.element(document.querySelector('#edit-answer-img ul'));
                 i = ki+1;
                 angular.forEach(response.answer,function(ans,anski){
                   var optin = opt['options'].split('/');
-                  if(anski == 0) {
+                  if(ki == 0) {
                    $scope.option =  optin['1']; 
                   }else{
                    $scope.option = $scope.option +','+optin['1'];
@@ -4705,10 +4741,11 @@ $scope.deleteQuestions = function(Qid,uniqId){
     // on the basis of courseid fetch skill
     $scope.skill = [];
     $scope.getCourse = function(data){
+      
       if(data != null) {
         $scope.skill = [];
         course = $scope.courseModel;
-        teacherHttpService.getAllCourseList(course,'lesson').success(function(response) {
+        teacherHttpService.getAllCourseList(course,'lesson','-1',get_uid).success(function(response) {
           var data = response.response.course_details;
           angular.forEach(data, function(value, key) {
             $scope.skill.push({
@@ -4889,11 +4926,20 @@ $scope.deleteQuestions = function(Qid,uniqId){
       course = '-1';
       $scope.skill = [];
       teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill).success(function(response) {
-        $scope.lessonList = response.data;
-        $scope.lastPage = response.lastPage;
-        $scope.start = response.start;
-        $scope.last = response.last;
-        $scope.total = response.total;
+        if(response.status == true) {
+          $scope.lessonList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }else if(response.status == false){
+          $scope.lessonList = [];
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }
+        
       });
     }
     // on the basis of courseid fetch skill
@@ -4914,11 +4960,19 @@ $scope.deleteQuestions = function(Qid,uniqId){
           $scope.msg= 'Some technical error occured.';
         });
         teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill).success(function(response) {
-          $scope.lessonList = response.data;
-          $scope.lastPage = response.lastPage;
-          $scope.start = response.start;
-          $scope.last = response.last;
-          $scope.total = response.total;
+          if(response.status == true) {
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }else if(response.status == false){
+            $scope.lessonList = [];
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }
         });
       }
     }
@@ -4926,11 +4980,19 @@ $scope.deleteQuestions = function(Qid,uniqId){
       if(skil != null) {
         skill = skil;
         teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill).success(function(response) {
-          $scope.lessonList = response.data;
-          $scope.lastPage = response.lastPage;
-          $scope.start = response.start;
-          $scope.last = response.last;
-          $scope.total = response.total;
+          if(response.status == true) {
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }else if(response.status == false){
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }
         })
       }
     }
@@ -5874,6 +5936,10 @@ $scope.deleteQuestions = function(Qid,uniqId){
       if($scope.scopeSubSkills != 'undefined') {
         return $scope.scopeSubSkills;
       }
+    }
+    // restore default value.
+    $scope.restoreDefault = function(){
+      
     }
     /** js **/
 //    var headertext = [],

@@ -544,18 +544,22 @@ return {
 $scope.userInfo=userInfo;
 
 	// Get Teacher selected class and subjects
-	var get_uid= cookieString=$cookieStore.get("uid");
-	$scope.sidefrm={};
+    var get_uid= cookieString=$cookieStore.get("uid");
+    $scope.frm={};
 	  teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
     if (response.status == true) {
       $scope.subject_grade = response.response;
       $scope.level = response.grade;
-      $scope.subject = (response.subject.course_name).split(',');  
+      $scope.subject = (response.subject.course_name).split(',');
       angular.forEach($scope.subject_grade,function(val,ki){
-        if(val['course_id'] == $routeParams.courseid) {
-          $scope.sidefrm.selected_course = val['course_id'];
-          $scope.sidefrm.selected_grade = val['level_id'];
-          $scope.sidefrm.selected_courseName = val['course_name'];
+        if($routeParams.courseid == undefined && ki == '0') {
+          $scope.frm.selected_course = val['course_id'];
+          $scope.frm.selected_grade = val['level_id'];
+          $scope.frm.selected_courseName = val['course_name'];  
+        }else if(val['course_id'] == $routeParams.courseid) {
+          $scope.frm.selected_course = val['course_id'];
+          $scope.frm.selected_grade = val['level_id'];
+          $scope.frm.selected_courseName = val['course_name'];
         }
       });
 

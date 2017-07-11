@@ -321,7 +321,7 @@
 						<div class="panel-footer text-center">
               <div id="save-question">
                 <button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE AS TEMPLATE</button>
-                <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>
+                <button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="questionPreview(data)">Preview</button>
               </div>
               <!--<button type="button" class="btn  btn-primary margin-xs-top-10" data-toggle="modal" data-target="#modal-contentPreview" ng-click="lessonPreview(data)">Preview</button>-->
               <span style="color:green">{{msg}}</span>
@@ -423,22 +423,26 @@
                     <p>Options</p>
 									</div>
 								</div>
-								<div class="row option-block">
-									<div class="col-md-7 margin-sm-bottom-10">
-										<span class="">{{frm.ans1}} </span>
-									</div>
-									<div class="col-md-5 margin-sm-bottom-10">
-										<span>{{frm.ans2}}</span>
-									</div>
-								</div>
-								<div class="row option-block margin-bottom-0 margin-sm-top-0">
-									<div class="col-md-7 margin-sm-bottom-10">
-										<span>{{frm.ans3}}</span>
-									</div>
-									<div class="col-md-5 margin-sm-bottom-10">
-										<span>{{frm.ans4}}</span>
-									</div>
-								</div>
+                  <div class="row option-block" >
+                    <div class="col-md-7 margin-sm-bottom-10">
+                      <span ng-if="previewImageCount == 0 ">{{frm.ans1}} </span>
+                      <span ng-if="previewImageCount > 0 "> <img src="{{frm.ans1}}"  width="80px" height="80px" /> </span>
+                    </div>
+                    <div class="col-md-5 margin-sm-bottom-10">
+                      <span ng-if="previewImageCount == 0 ">{{frm.ans2}} </span>
+                      <span ng-if="previewImageCount > 0 "> <img src="{{frm.ans2}}"width="80px" height="80px" /> </span>
+                    </div>
+								  </div>
+                  <div class="row option-block margin-bottom-0 margin-sm-top-0">
+                    <div class="col-md-7 margin-sm-bottom-10">
+                      <span ng-if="previewImageCount == 0 ">{{frm.ans3}} </span>
+                      <span ng-if="previewImageCount > 0 "> <img src="{{frm.ans3}}" width="80px" height="80px" /> </span>
+                    </div>
+                    <div class="col-md-5 margin-sm-bottom-10">
+                      <span ng-if="previewImageCount == 0 ">{{frm.ans4}} </span>
+                      <span ng-if="previewImageCount > 0 "> <img src="{{frm.ans4}}" width="80px" height="80px"/> </span>
+                    </div>
+								  </div> 
 							</div>
 						</div>
 		      </div>
