@@ -2108,7 +2108,7 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 	 		console.log(respAssgn.response.status);
     	if (respAssgn.response.status == true) {
     			$scope.assignments =[];
-    			$scope.err_assignment_message
+    			$scope.err_assignment_message ='';
     		  angular.forEach(respAssgn.response.assignment, function(assgnitem){
                    if(assgnitem.subject_id == subid ){                   	
                    		$scope.assignments.push(assgnitem); 
