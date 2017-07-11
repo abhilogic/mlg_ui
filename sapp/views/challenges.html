@@ -95,7 +95,10 @@
                             </a> 
 
                             <!-- If student has attemped challenge -->
-                          <a href="#" style="text-decoration:none;" ng-if="assignment.has_attempted_challenge==1">
+                            
+                         <!--  <a href="#" style="text-decoration:none;" ng-if="assignment.has_attempted_challenge==1"> -->
+
+                          <a href="#" style="text-decoration:none;" ng-if="err_assignment_message!='' ">
                                 <h2 ng-if="assignment.student_result_percent >= mastered" style="color:green" >Mastered</h2>
                               <h2 ng-if="assignment.student_result_percent < mastered" style="color:red">Not Mastered</h2>
                                 <h1>{{assignment.type}}</h1>

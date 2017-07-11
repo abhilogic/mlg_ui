@@ -1717,6 +1717,11 @@ promise.then(function(result) {
 				//$scope.skill_result = 'fail';
 				$scope.quiz_name = "Challenges";
 				$scope.quiz_link = "challenges";
+
+
+
+
+
 			}				
 		}else{
 				$scope.quiz_name = "Quizes";
@@ -2066,11 +2071,16 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 		    		  angular.forEach(respAssgn.response.assignment, function(assgnitem){
 		                   if(assgnitem.subject_id == first_subj ){                   	
 		                   		$scope.assignments.push(assgnitem); 
+		                   }else{
+		                   		$scope.assignments=[];
+		   						$scope.err_assignment_message = "Waittt!! No challenges are assigned you by your teacher." ;
+		   		
 		                   }                   
 		               });
 		   		}
 		   		else{
 		   			//$scope.err_assignment_message = respAssgn.response.message ;
+		   			$scope.assignments=[];
 		   			$scope.err_assignment_message = "Wait!! No challenges are assigned you by your teacher." ;
 		   		}
 		   		$(".subject_"+first_subj).addClass('active in');
@@ -2098,6 +2108,7 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
 	 		console.log(respAssgn.response.status);
     	if (respAssgn.response.status == true) {
     			$scope.assignments =[];
+    			$scope.err_assignment_message
     		  angular.forEach(respAssgn.response.assignment, function(assgnitem){
                    if(assgnitem.subject_id == subid ){                   	
                    		$scope.assignments.push(assgnitem); 
@@ -2106,7 +2117,9 @@ if(typeof($routeParams.assignment_id) == 'undefined') {
    		}
    		else{
    			//$scope.err_assignment_message = respAssgn.response.message ;
+   			
    			$scope.err_assignment_message = "Wait!! No challenges are assigned you by your teacher." ;
+   			$scope.assignments={};
    		}
     });
 
