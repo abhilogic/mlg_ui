@@ -66,20 +66,6 @@
 
 									<li class="toolbar-item">
 										<div class="btn-group" role="group" aria-label="...">
-											<button type="button" class="btn btn-default">Standard</button>
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												<span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="#">A</a></li>
-												<li><a href="#">B</a></li>
-												<li><a href="#">C</a></li>
-											</ul>
-										</div>
-									</li>
-
-									<li class="toolbar-item">
-										<div class="btn-group" role="group" aria-label="...">
 										  <select class="mlg-selectpicker form-control" data-width="auto"  
                             ng-model="courseModel" ng-change="getCourse(courseModel)" title="Class" 
                             ng-options="course.course_id as course.course_name for course in courses track by course.course_id">
@@ -91,7 +77,20 @@
 											
 										</div>
 									</li>
-
+                  <li class="toolbar-item">
+											<select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="standardTypeModel" ng-change="getStandardType(standardTypeModel)" 
+                            ng-init="standardTypeModel = ''" ng-options="sty.id as sty.label for sty in standardType">
+                      <option value="">Standard Type</option>
+                    </select>
+									</li>
+                  <li class="toolbar-item">
+											<select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="standardModel" ng-change="getStandard(standardModel)" 
+                            ng-init="standardModel = ''" ng-options="st.id as st.label for st in standard">
+                      <option value="">Standard</option>
+                    </select>
+									</li>
 									<li class="toolbar-item">
 										<div class="btn-group" role="group" aria-label="...">
 										  <select class="mlg-selectpicker form-control" data-width="auto"  

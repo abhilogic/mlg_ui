@@ -52,19 +52,26 @@
                       <option value="">- Select Class -</option>
                     </select>
 									</li>
-									<li class="toolbar-item">
-											<select class="selectpicker" title="Standard" data-width="auto" data-size="auto">
-												<option>standard A</option>
-												<option>standard B</option>
-												<option>standard C</option>
-											</select>
-									</li>
 
 									<li class="toolbar-item">
                     <select class="mlg-selectpicker form-control" data-width="auto"  
                             ng-model="courseModel" ng-change="getCourse(courseModel)" title="Class" 
                             ng-options="course.course_id as course.course_name for course in courses track by course.course_id">
                       <option value="">- Select Subject -</option>
+                    </select>
+									</li>
+                  <li class="toolbar-item">
+											<select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="standardTypeModel" ng-change="getStandardType(standardTypeModel)" 
+                            ng-init="standardTypeModel = ''" ng-options="sty.id as sty.label for sty in standardType">
+                      <option value="">Standard Type</option>
+                    </select>
+									</li>
+                  <li class="toolbar-item">
+											<select class="mlg-selectpicker form-control" data-width="auto"  
+                            ng-model="standardModel" ng-change="getStandard(standardModel)" 
+                            ng-init="standardModel = ''" ng-options="st.id as st.label for st in standard">
+                      <option value="">Standard</option>
                     </select>
 									</li>
 									<li class="toolbar-item">

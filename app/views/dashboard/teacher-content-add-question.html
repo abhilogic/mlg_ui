@@ -57,18 +57,27 @@
 										<div class="form-group">
 									    <label class="col-xs-5 control-label" for="email">Standard Type:</label>
 									    <div class="col-sm-7 padding-right-0">
-                        <div ng-dropdown-multiselect="" options="standardType" selected-model="standardTypemodel" events="standardTypeEvents"></div>
+                        <select class="mlg-selectpicker form-control" data-size="auto"
+                                ng-model="standardTypemodel" ng-change="standardTypeEvents(standardTypemodel)"
+                            ng-init="standardTypemodel = ''"    ng-options="sty.id as sty.label for sty in standardType">
+                          <option value="">Standard Type</option>
+												</select>
+                        <!--<div ng-dropdown-multiselect="" options="standardType" selected-model="standardTypemodel" events="standardTypeEvents"></div>-->
 									    </div>
 									  </div>
 									</div>
 
                   <div class="col-lg-5 col-lg-offset-2">
                     <div class="form-group">
-											<label for="" class="col-xs-5 control-label text-left">Skills :</label>
-                      <div class="col-xs-7">
-												<div ng-dropdown-multiselect="" options="skill" selected-model="skillmodel" events="skillEvents">
-                        </div>
-                      </div>
+											<label class="col-xs-5 control-label" for="email">Standards:</label>
+									    <div class="col-sm-7 padding-right-0">
+                        <select class="mlg-selectpicker form-control" data-size="auto"
+                                ng-model="standardmodel" ng-change="standardEvents(standardmodel)"
+                            ng-init="standardmodel = ''"    ng-options="sta.id as sta.label for sta in standard">
+                          <option value="">Standard</option>
+												</select>
+                        <!--<div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"></div>-->
+									    </div>
                     </div>
                   </div>
 								</div>
@@ -76,22 +85,21 @@
 								<div class="row repeat-row">
                   <div class="col-lg-5">
 										<div class="form-group">
-											<label for="" class="col-xs-5 control-label">Sub Skill :</label>
-											  <div class="col-xs-7">
-													<div ng-dropdown-multiselect="" options="subSkill" selected-model="subSkillmodel" events="subSkillEvents">
-                          </div>
-												</div>
+											<label for="" class="col-xs-5 control-label text-left">Skills :</label>
+                      <div class="col-xs-7">
+												<div ng-dropdown-multiselect="" options="skill" selected-model="skillmodel" events="skillEvents">
+                        </div>
+                      </div>
 										</div>
                   </div>
 
                   <div class="col-lg-5 col-lg-offset-2">
                     <div class="form-group">
-											<label for="" class="col-xs-5 control-label text-left">Difficulty Level :</label>
-                      <div class="col-xs-7">
-												<select class="mlg-selectpicker form-control" title="Moderate" data-size="auto"ng-model="diffulityModel" ng-change="getDifficulityVal(diffulityModel)">
-                            <option ng-repeat="diff in difficulty track by $index" value="{{diff.id}}">{{diff.name}}</option>
-												</select>
-                      </div>
+											<label for="" class="col-xs-5 control-label">Sub Skill :</label>
+											  <div class="col-xs-7">
+													<div ng-dropdown-multiselect="" options="subSkill" selected-model="subSkillmodel" events="subSkillEvents">
+                          </div>
+												</div>
                     </div>
                   </div>
                 </div>
@@ -99,7 +107,18 @@
 								<div class="row repeat-row">
                   <div class="col-lg-5">
 											<div class="form-group">
-												<label for="" class="col-xs-5 control-label">Claim :</label>
+												<label for="" class="col-xs-5 control-label text-left">Difficulty Level :</label>
+                        <div class="col-xs-7">
+                          <select class="mlg-selectpicker form-control" title="Moderate" data-size="auto"ng-model="diffulityModel" ng-change="getDifficulityVal(diffulityModel)">
+                              <option ng-repeat="diff in difficulty track by $index" value="{{diff.id}}">{{diff.name}}</option>
+                          </select>
+                        </div>
+										</div>
+                  </div>
+
+                  <div class="col-lg-5 col-lg-offset-2">
+                    <div class="form-group">
+											<label for="" class="col-xs-5 control-label">Claim :</label>
 												<div class="col-xs-7">
 														<select class="mlg-selectpicker form-control" title="Select Lessons" data-size="auto"ng-model="claimModel"ng-change="getClaimVal(claimModel)">
 														 <option value="" disabled>--Select Claim--</option>
@@ -109,15 +128,6 @@
                              <option value="4">4</option>
 													</select>
 												</div>
-										</div>
-                  </div>
-
-                  <div class="col-lg-5 col-lg-offset-2">
-                    <div class="form-group">
-											<label for="" class="col-xs-5 control-label text-left">Rubric/ Scope :</label>
-                      <div class="col-xs-7">
-												<input type="number" class="form-control normal-input" value="2" ng-model="frm.rScope"/>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -126,15 +136,26 @@
 								<div class="row repeat-row">
 									<div class="col-lg-5">
                     <div class="form-group">
-											<label for="" class="col-xs-5 control-label text-left">Assignment</label>
+											<label for="" class="col-xs-5 control-label text-left">Rubric/ Scope :</label>
                       <div class="col-xs-7">
-												<input type="text" class="form-control normal-input" ng-model="frm.assignment"/>
+												<input type="number" class="form-control normal-input" value="2" ng-model="frm.rScope"/>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-lg-5 col-lg-offset-2">
 										<div class="form-group">
+											<label for="" class="col-xs-5 control-label text-left">Assignment</label>
+                      <div class="col-xs-7">
+												<input type="text" class="form-control normal-input" ng-model="frm.assignment"/>
+                      </div>
+										</div>
+                  </div>
+								</div>
+
+								<div class="row repeat-row">
+                  <div class="col-lg-5">
+                    <div class="form-group">
 											<label for="" class="col-xs-5 control-label">Depth of Knowledge :</label>
 											<div class="col-xs-7">
 													<select class="mlg-selectpicker form-control" title="Select DOK"
@@ -146,31 +167,29 @@
 														 <option value="4">4</option>
 													</select>
 											</div>
-										</div>
-                  </div>
-								</div>
-
-								<div class="row repeat-row">
-                  <div class="col-lg-5">
-                    <div class="form-group">
-											<label for="" class="col-xs-5 control-label text-left">Stimuli/ Passage :</label>
-                      <div class="col-xs-7">
-												<input type="text" class="form-control normal-input" ng-model="frm.passage" />
-                      </div>
                     </div>
                   </div>
 
 	                <div class="col-lg-5 col-lg-offset-2">
+										<div class="form-group">
+											<label for="" class="col-xs-5 control-label text-left">Stimuli/ Passage :</label>
+                      <div class="col-xs-7">
+												<input type="text" class="form-control normal-input" ng-model="frm.passage" />
+                      </div>
+										</div>
+	                </div>
+                </div>
+								<div class="row repeat-row">
+                  <div class="col-lg-5">
 										<div class="form-group">
 											<label for="" class="col-xs-5 control-label">Secondary Target :</label>
 											<div class="col-xs-7">
 													<input type="text" class="form-control normal-input" ng-model="frm.target" />
 											</div>
 										</div>
-	                </div>
-                </div>
-								<div class="row repeat-row">
-                  <div class="col-lg-5">
+                  </div>
+
+									<div class="col-lg-5  col-lg-offset-2">
 										<div class="form-group">
 											<label for="" class="col-xs-5 control-label">Item/ task notes :</label>
 											<div class="col-xs-7">
@@ -179,20 +198,19 @@
 										</div>
                   </div>
 
-									<div class="col-lg-5  col-lg-offset-2">
-										<div class="form-group">
-											<label for="" class="col-xs-5 control-label">Stimuli/ text complexity :</label>
-											<div class="col-xs-7">
-													<input type="text" class="form-control normal-input" ng-model="frm.complexity" />
-											</div>
-										</div>
-                  </div>
-
                 </div>
 								<div class="row repeat-row">
 									<div class="col-lg-5">
 	                    <div class="form-group">
-												<label for="" class="col-xs-5 control-label text-left">Question Type:</label>
+												<label for="" class="col-xs-5 control-label">Stimuli/ text complexity :</label>
+											<div class="col-xs-7">
+													<input type="text" class="form-control normal-input" ng-model="frm.complexity" />
+											</div>
+	                  </div>
+	                </div>
+                  <div class="col-lg-5 col-lg-offset-2">
+										<div class="form-group">
+											<label for="" class="col-xs-5 control-label text-left">Question Type:</label>
 	                      <div class="col-xs-7">
 <!--											    <div ng-dropdown-multiselect="" options="questionType" selected-model="questionTypeModel" events="quesTypeEvents">
                           </div>-->
@@ -202,27 +220,18 @@
                              <option value="" disabled>- Select QuestionType -</option>
                           </select>
 	                      </div>
-	                  </div>
-	                </div>
-                  <div class="col-lg-5 col-lg-offset-2">
-										<div class="form-group">
-											<label for="" class="col-xs-5 control-label">Choose Voice :</label>
-											<div class="col-xs-7">
-													<select class="mlg-selectpicker form-control" title="Google UK English" data-size="auto">
-													 <option>English</option>
-													
-												</select>
-											</div>
 										</div>
                   </div>
                 </div>
                 <div class="row repeat-row">
 									<div class="col-lg-5">
 										<div class="form-group">
-									    <label class="col-xs-5 control-label" for="email">Standards:</label>
-									    <div class="col-sm-7 padding-right-0">
-                        <div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"></div>
-									    </div>
+									    <label for="" class="col-xs-5 control-label">Choose Voice :</label>
+											<div class="col-xs-7">
+													<select class="mlg-selectpicker form-control" title="Google UK English" data-size="auto">
+													 <option>English</option>	
+												</select>
+											</div>
 									  </div>
 									</div>
 								</div>
