@@ -166,6 +166,14 @@ teacherHttpResponse.sendMeMail=function(selectd_students, get_uid){
  });
 }
 
+teacherHttpResponse.sendStudentMail=function(selectd_students,teacher_id){
+ return $http({
+   method:'POST', 
+   data :  selectd_students,                  
+   url  : urlParams.baseURL+urlParams.sendStudentMail+'?teacher_id='+teacher_id
+ });
+}
+
 teacherHttpResponse.getStudentOfTeacher=function(get_uid){
  return $http({
    method:'GET',                            
@@ -1357,8 +1365,16 @@ $scope.sendEmailMe=function(selected_students){
   teacherHttpService.sendMeMail(selected_students, get_uid).success(function(response) { 
     console.log(selectd_students);
   });
-
 }
+
+
+$scope.sentEmailStudent=function(selected_students){  
+  teacherHttpService.sendStudentMail(selected_students,get_uid).success(function(response) { 
+    
+  });
+}
+
+
 
 
 $scope.currentPage = 0;
@@ -4189,14 +4205,14 @@ $scope.deleteImage = function(j,data) {
     teacherHttpService.getStudentCourses($routeParams.id).success(function (response) {
         if (response.response.status == 'TRUE') {
             $scope.student_courses = response.response.student_courses;  //$scope.student_courses[0].id
-            teacherHttpService.getStudentScoreForSkills($routeParams.id,1).success(function (result) {
-                  console.log(result);
+
+            // To show the second graph of page (grade analysis) without onchange
+            teacherHttpService.getStudentScoreForSkills($routeParams.id,$scope.student_courses[0].id).success(function (result) {                  
                   if(result.response.status==true){
                       var gradeAnayisis = result.response.student_skill_percentage;
                       var stdetails = result.response.student_details;
                       $scope.series = ['Recommended progress', 'Average score', stdetails.first_name+' '+stdetails.last_name+' Score'];
  
-
                       angular.forEach(gradeAnayisis,function(key,value){
                           gradeAnalysis_systemrecommended.push(80);
                           $scope.gradeAnalysis_labels.push(key['skill_name']);
@@ -4213,30 +4229,58 @@ $scope.deleteImage = function(j,data) {
                               gradeAnalysis_averagemarks_ofclass.push(key['other_Student_average']);                            
                           }else{
                               gradeAnalysis_averagemarks_ofclass.push(0);
-                          }                
-                          
-                          //gradeAnalysis_averagemarks_ofclass.push(key['other_Student_average']);
-                      });                      
+                          }                            
+                      });
+                      $scope.gradeAnalysis_data =[gradeAnalysis_systemrecommended ,gradeAnalysis_averagemarks_ofclass,gradeAnalysis_studentmarks ];                      
                   }
                   else{
                     $scope.gradeAnalysis_message = result.response.message;
-                  }
-                  //console.log(gradeAnalysis_studentmarks);
-                  $scope.gradeAnalysis_data =[gradeAnalysis_systemrecommended ,gradeAnalysis_averagemarks_ofclass,gradeAnalysis_studentmarks ];
+                  }                  
              });
         }
-      }); 
+      });
 
 
-//$scope.gradeAnalysis_labels = ["Prime or composite", "Prime factorization", "Multiplicative inverses", "Divisibility rules", "Greatest common factor", "Least common factor", "GCF and LCM word problem", "Scientific nation"];
-   /*$scope.gradeAnalysis_data = [ 
-                                [50, 62, 80, 60, 40, 55, 48, 48],
-                                [60, 72, 90, 68, 60, 68, 58, 58],
-                                [70, 88, 100, 90, 82, 89, 72, 70]
-                              ];*/
-  /*$scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };*/
+      // To show the second graph of page (grade analysis) after onchange
+      $scope.onChangeGradeAnalysisSubject = function(subject_id){
+          teacherHttpService.getStudentScoreForSkills($routeParams.id,subject_id).success(function (result) {                  
+                  if(result.response.status==true){
+                      var gradeAnayisis = result.response.student_skill_percentage;
+                      var stdetails = result.response.student_details;
+                      $scope.series = ['Recommended progress', 'Average score', stdetails.first_name+' '+stdetails.last_name+' Score'];
+ 
+                      angular.forEach(gradeAnayisis,function(key,value){
+                          gradeAnalysis_systemrecommended.push(80);
+                          $scope.gradeAnalysis_labels.push(key['skill_name']);
+
+                          //student masrks percentage
+                          if(key['student_percentage']!=null){
+                              gradeAnalysis_studentmarks.push(key['student_percentage']);                            
+                          }else{
+                              gradeAnalysis_studentmarks.push(0);
+                          }
+                          
+                          //student's classmates mark
+                          if(key['other_Student_average']!=null){
+                              gradeAnalysis_averagemarks_ofclass.push(key['other_Student_average']);                            
+                          }else{
+                              gradeAnalysis_averagemarks_ofclass.push(0);
+                          }                            
+                      });
+                      $scope.gradeAnalysis_data =[gradeAnalysis_systemrecommended ,gradeAnalysis_averagemarks_ofclass,gradeAnalysis_studentmarks ];                      
+                  }
+                  else{
+                    $scope.gradeAnalysis_message = result.response.message;
+                  }                  
+             });
+
+
+      };
+            
+
+
+
+
   $scope.gradeAnalysis_colors = ['#b0baaf', '#f39c12', '#00a651'];
   $scope.gradeAnalysis_datasetOverride = [{ yAxisID: 'y-axis-1' }];
   
