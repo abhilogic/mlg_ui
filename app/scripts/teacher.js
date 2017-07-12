@@ -1361,14 +1361,14 @@ $scope.delete_Student=function(dtstudent,index){
 
 
 // Send Me Mail functionlity
-$scope.sendEmailMe=function(selected_students){  
+$scope.onClickSendEmailMe=function(selected_students){  
   teacherHttpService.sendMeMail(selected_students, get_uid).success(function(response) { 
     console.log(selectd_students);
   });
 }
 
 
-$scope.sentEmailStudent=function(selected_students){  
+$scope.onClickSentEmailStudent=function(selected_students){  
   teacherHttpService.sendStudentMail(selected_students,get_uid).success(function(response) { 
     
   });
