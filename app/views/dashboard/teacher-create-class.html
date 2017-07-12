@@ -57,6 +57,9 @@
 											</div>
 										</li> -->
 									</ul>
+
+									<div ng-if="(successmail_msg) || (successmail_msg!='')"  style="color:green;">{{successmail_msg}}</div>
+									<div ng-if="(errormail_msg) || (errormail_msg!='')"  style="color:red;">{{errormail_msg}}</div>
 								</div>
 						</div>
 						<div class="panel-body">

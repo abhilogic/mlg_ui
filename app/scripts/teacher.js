@@ -1227,6 +1227,7 @@ $scope.showEvents = function(events) {
 
     // Display the students in a class for a course
     $scope.onChangeGetStudents = function(stcourse){
+        $scope.frm.selectedstudent ={};
         var stcourseid=stcourse.split(',')[0];
         teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,stcourseid).success(function(student_response) {
             //console.log(student_response);
@@ -1303,6 +1304,10 @@ $scope.showEvents = function(events) {
         else{      
           $scope.course_Errormessage="Please select course";
         }
+
+        $timeout(function () { $scope.course_Errormessage = ""; }, 4000);
+      $timeout(function () { $scope.student_Errormessage = ""; }, 4000);
+
       }
 // end- add student in class
 
@@ -1362,19 +1367,29 @@ $scope.delete_Student=function(dtstudent,index){
 
 // Send Me Mail functionlity
 $scope.onClickSendEmailMe=function(selected_students){  
-  teacherHttpService.sendMeMail(selected_students, get_uid).success(function(response) { 
-    console.log(selectd_students);
+  teacherHttpService.sendMeMail(selected_students, get_uid).success(function(res) { 
+      if(res.response.status==true){
+        $scope.successmail_msg ="sucessfully mail is send to your mail id.";
+      }else{
+        $scope.errormail_msg = res.response.message;
+      }
+      $timeout(function () { $scope.successmail_msg = ""; }, 4000);
+      $timeout(function () { $scope.errormail_msg = ""; }, 4000);
   });
 }
 
 
 $scope.onClickSentEmailStudent=function(selected_students){  
-  teacherHttpService.sendStudentMail(selected_students,get_uid).success(function(response) { 
-    
+  teacherHttpService.sendStudentMail(selected_students,get_uid).success(function(res) { 
+      if(res.response.status==true){
+        $scope.successmail_msg ="sucessfully mail is send to your mail id.";
+      }else{
+        $scope.errormail_msg = res.response.message;
+      }
+      $timeout(function () { $scope.successmail_msg = ""; }, 4000);
+      $timeout(function () { $scope.errormail_msg = ""; }, 4000);
   });
 }
-
-
 
 
 $scope.currentPage = 0;
