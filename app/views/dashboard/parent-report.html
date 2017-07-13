@@ -214,7 +214,10 @@
 									</tr>
 								</thead>
 								<tbody>
-                  <tr ng-if="assi_len == '0'">{{assi_message}}</tr>
+                  <tr ng-if="assi_len == '0'">
+                     <td></td>
+                    <td>{{assi_message}}</td>
+                  </tr>
                   <tr ng-repeat=" att in attemptAssignment">
                     <td class="standard">{{$index+1}}</td>
                     <td class="assignment_name" data-th="STANDARD">{{att.name}}</td>
@@ -276,7 +279,7 @@
                   <tr ng-if="rew_len == '0'">
                     <td></td>
                     <td></td>
-                    <td>{{rew_message}}</td>
+                    <td>{{reward_message}}</td>
                     <td></td>
                     <td></td>
                   </tr>

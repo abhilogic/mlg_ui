@@ -377,16 +377,24 @@ teacherHttpResponse.getLessonForList=function(uid,pnum){
     url   : urlParams.baseURL+urlParams.getLessonForList+'/'+uid+'/'+pnum
   });
 }
-teacherHttpResponse.getFilterdQuestion=function(uid,pnum,grade,course,skill){
+teacherHttpResponse.getFilterdQuestion=function(uid,pnum,grade,course,skill,standard=null){
+  var url = urlParams.baseURL+urlParams.getFilterdQuestion+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill;
+  if(standard != null){
+    url = url+'/'+standard;
+  }
   return $http({
     method:'GET',
-    url   : urlParams.baseURL+urlParams.getFilterdQuestion+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill
+    url   : url,
   });
 }
-teacherHttpResponse.getFilterdLesson=function(uid,pnum,grade,course,skill){
+teacherHttpResponse.getFilterdLesson=function(uid,pnum,grade,course,skill,standard=null){
+  var url = urlParams.baseURL+urlParams.getFilterdLesson+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill;
+  if(standard != null) {
+     url = url+'/'+standard;
+  }
   return $http({
     method:'GET',
-    url   : urlParams.baseURL+urlParams.getFilterdLesson+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill
+    url   : url
   });
 }
 teacherHttpResponse.setTeacherSettings = function(data){
@@ -4639,6 +4647,8 @@ $scope.deleteImage = function(j,data) {
 .controller('teacherQuestions',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile) {
    var get_uid = commonActions.getcookies(get_uid);
+   var standard = [];
+   var standardType = [];
    var pgnum = 1;
    $scope.nexClass = '';
    $scope.preClass = 'disabled';
@@ -4833,9 +4843,45 @@ $scope.deleteQuestions = function(Qid,uniqId){
           $scope.start = response.start;
           $scope.last = response.last;
           $scope.total = response.total;
-        })
+        });
       }
     }
+   //standard
+    $scope.standardTypeModel = [];
+    $scope.standardType = [
+    {id:"state", label: "Statewise"},
+    {id:"cc", label: "Common Core"},
+    ];
+    $scope.standardModel = [];
+    $scope.standard = [];
+    $scope.getStandardType = function(data) {
+      $scope.standard =[];
+      teacherHttpService.getStandard(data,grade,course).success(function(response) {
+        if (response.message == '') {
+          angular.forEach(response.response,function(val,key){
+            $scope.standard.push({
+              id: val['standard'], label: val['standard']
+            });
+          });
+        }
+      });
+      teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,data).success(function(response) {
+        $scope.questionList = response.data;
+        $scope.lastPage = response.lastPage;
+        $scope.start = response.start;
+        $scope.last = response.last;
+        $scope.total = response.total;
+      });
+    }
+    $scope.getStandard = function(data){
+      teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,data).success(function(response) {
+        $scope.questionList = response.data;
+        $scope.lastPage = response.lastPage;
+        $scope.start = response.start;
+        $scope.last = response.last;
+        $scope.total = response.total;
+      });
+    };
   }])
 .controller('teacherLessonListingCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile) {
@@ -5055,6 +5101,58 @@ $scope.deleteQuestions = function(Qid,uniqId){
         })
       }
     }
+    //standard
+    $scope.standardTypeModel = [];
+    $scope.standardType = [
+    {id:"state", label: "Statewise"},
+    {id:"cc", label: "Common Core"},
+    ];
+    $scope.standardModel = [];
+    $scope.standard = [];
+    $scope.getStandardType = function(data) {
+      $scope.standard =[];
+      teacherHttpService.getStandard(data,grade,course).success(function(response) {
+        if (response.message == '') {
+          angular.forEach(response.response,function(val,key){
+            $scope.standard.push({
+              id: val['standard'], label: val['standard']
+            });
+          });
+        }
+      });
+      teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,data).success(function(response) {
+        if(response.status == true) {
+          $scope.lessonList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }else if(response.status == false){
+          $scope.lessonList = [];
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }
+      });
+    }
+    $scope.getStandard = function(data){
+      teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,data).success(function(response) {
+        if(response.status == true) {
+          $scope.lessonList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }else if(response.status == false){
+          $scope.lessonList = [];
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }
+      });
+    };
   }])
 .controller('teacherSettingCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile','urlParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile,urlParams) {

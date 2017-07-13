@@ -2215,11 +2215,11 @@ if (typeof $routeParams.slug != 'undefined') {
      $scope.details = [];
      // Student Reports
     loginHttpService.getParentChildReport(child_id,pronum).success(function(res_resport) {
+      $scope.gapMessage = 'No Report generated now.';
       if(res_resport.status == true){
         angular.forEach(res_resport.response.details,function(val,key){
           var percent = val['student_result_percent'];
           var temp = 0;
-          $scope.gapMessage = 'No Report generated now.';
           angular.forEach(class_students_classification,function(clss,key){
             if(temp< percent && percent<=clss) {
               $scope.details.push({
@@ -2263,7 +2263,7 @@ if (typeof $routeParams.slug != 'undefined') {
          $scope.attemptAssignment = response.attempted_assignment;
          $scope.assigPage = response.lastPage;
        }else{
-         $scope.assi_len = (response.response).length;
+         $scope.assi_len = 0;
          $scope.assi_message = 'No Report generated now.';
        }
     }); 
@@ -2272,7 +2272,7 @@ if (typeof $routeParams.slug != 'undefined') {
          $scope.reward = response.response;
           $scope.rewPage = response.lastPage;
        }else{
-         $scope.rew_len = (response.response).length;
+         $scope.rew_len = 0;
          $scope.reward_message = 'No Report generated now.';
        }
     });
