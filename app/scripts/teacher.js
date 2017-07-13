@@ -2919,7 +2919,6 @@ $scope.removePerson = function(index){
             'label': value['name']
           });
         });
-        console.log($scope.skill);
       }).error(function(error) {
         $scope.msg= 'Some technical error occured.';
         $timeout(function () {$scope.msg = ""; }, 3000);
@@ -3275,8 +3274,8 @@ $scope.closeTemplate = function(){
                 });
               });
               //for selected skill.
-              angular.forEach($scope.skill , function(val, ki) { 
-                teacherHttpService.getAllCourseList(val['id'],'lesson','-1',get_uid).success(function(response) {
+              angular.forEach(value['skills'] , function(val, ki) { 
+                teacherHttpService.getAllCourseList(val,'lesson','-1',get_uid).success(function(response) {
                   angular.forEach(response.response.course_details, function(subskil, key) {
                     $scope.subSkill.push({
                       'id' : subskil['course_id'],
@@ -3295,8 +3294,6 @@ $scope.closeTemplate = function(){
                     if(subSkillValue == subvalue['id']) {
                       if(subTemp.indexOf(subSkillValue) <0){
                         subTemp.push(subSkillValue);
-                        console.log(subSkillValue+','+subvalue['id']);
-                        console.log(subTemp);
                         $scope.subSkillmodel.push($scope.subSkill[kisub]);
                       }  
                     }
@@ -3304,7 +3301,7 @@ $scope.closeTemplate = function(){
                 });
                  });
                   angular.forEach(value['skills'] , function(skillValue, kil) {
-                    if(skillValue == val['id'] ) {
+                    if(skillValue == val ) {
                       $scope.skillmodel.push($scope.skill[ki]); 
                     }
                   });
@@ -3342,11 +3339,11 @@ $scope.frm.target = value['ques_target'];
 $scope.frm.task = value['task'];
 $scope.frm.complexity = value['ques_complexity'];
 $scope.frm.assignment = value['assignment'];
-qType = value['ques_type'];
 angular.forEach(value['ques_type'],function(type,key){
   angular.forEach($scope.questionType,function(qlist,key){
     if(type == qlist['id']){
 //      $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['lable']});
+        qType = qlist['id'];
         $scope.questionTypeModel = qlist['id'];
     }
   });
