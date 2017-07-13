@@ -110,7 +110,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getNeedAttentionOFStudent : '/students/getNeedAttentionOFStudent',
   getStudentScoreForSubskills : '/students/getStudentScoreForSubskills',  
   getSubskillAnalytic : '/teachers/getSubskillAnalytic',
-  getNotificationForParent : '/users/getNotificationForParent',
+  getNotifications : '/users/getNotifications',
   getAreaOfFocusForParent :'/users/getAreaOfFocusForParent',
   getChildSubskillResult :'/users/getChildSubskillResult', 
   setAutoAssignmentByParents :'/users/setAutoAssignmentByParents',
