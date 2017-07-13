@@ -38,7 +38,10 @@
                 <center ng-if="offer.status == '' " id="showOffer{{offer.id}}"><button  ng-click="requestOffer(offer)" class="btn btn-primary btn-accept">SHOW OFFER</button></center>
               </div>
             </div>
-            <!-- /student gap analysis panel  -->
+
+            <div ng-if="offer_err_message" style="color:red;">{{offer_err_message}}</div>
+
+          </div>
 
           </div>
           <!-- /content area -->
@@ -52,9 +55,9 @@
     </div>
     <!-- page container -->
 
-  </div><!--End of parentOffers--->
-</div>
+  </div> 
+
   <!-- Latest compiled and minified jQuery -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 
   <!-- Page Specific JavaScript -->

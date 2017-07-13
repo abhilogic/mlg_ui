@@ -1654,6 +1654,8 @@ if (typeof $routeParams.slug != 'undefined') {
     function(response) {
       if (response.status) {
         $scope.offers = response.result;
+        }else{
+        	$scope.offer_err_message = response.message;
         }
       }
   );
