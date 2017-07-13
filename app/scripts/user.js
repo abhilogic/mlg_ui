@@ -1794,7 +1794,12 @@ if (typeof $routeParams.slug != 'undefined') {
     $scope.avail_coupons = [];
     var coupon_data = {user_id: $routeParams.id};
     loginHttpService.getUsedCoupon(coupon_data).success(function (avail_coupons) {
-      $scope.avail_coupons = avail_coupons.result;
+    	if(avail_coupons.status==true){
+    		$scope.avail_coupons = avail_coupons.result;
+    	}else{
+    		$scope.copon_err_message = "No coupons are available.";
+    	}
+      
     });
 
     function setCoupon(coupon_id, updated_status, coupon_value) {
