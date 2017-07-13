@@ -1810,54 +1810,32 @@ $scope.subSkillEvents = {
 };
 
 $scope.standardTypemodel = [];
-$scope.standardType = [
-{id:"Alabama", label: "Alabama"},
-{id:"Alaska", label: "Alaska"},
-{id:"cc", label: "Common Core"},
-];
-$scope.standardmodel = [];
-$scope.standard = [];
-var tempStandard = '';
-$scope.standardTypeEvents = {
-  onItemSelect: function(item) {   
-    standardType.push(item['id']);
-    teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
+  $scope.standardType = [
+  {id:"state", label: "Statewise"},
+  {id:"cc", label: "Common Core"},
+  ];
+  $scope.standardmodel = [];
+  $scope.standard = [];
+  var tempStandard = '';
+  $scope.standardTypeEvents = function(data) {
+    standardType.push(data);
+    $scope.standard =[];
+    teacherHttpService.getStandard(data,grade,course).success(function(response) {
       if (response.message == '') {
         angular.forEach(response.response,function(val,key){
           $scope.standard.push({
             id: val['standard'], label: val['standard']
           });
         });
-      }else{
-        $scope.standard = [];
-      }
-    });
-  },
-  onItemDeselect: function(item) {
-    standardType.splice(item['id'],1);
-    teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
-      if (response.message == '') {
-        angular.forEach(response.response,function(val,key){
-          angular.forEach($scope.standard,function(value,ki){
-            if(val['standard'] == value['id']) {
-              $scope.standard.splice(ki,1);
-            }
-          });
-        });
       }
     });
   }
-};
-$scope.standardEvents = {
-  onItemSelect: function(item) { 
-    if(item != '') {
-      standard.push(item['id']);
+
+  $scope.standardEvents = function(data){
+    if(data != '') {
+      standard.push(data);
     }
-  },
-  onItemDeselect: function(item) {
-    standard.splice(item['id'],1);
-  }
-};
+  };
 var lessonDetail = {};
 var textDesc ='';
 var doc = '';
@@ -2057,13 +2035,13 @@ $scope.submitDocDetail = function(data) {
             $scope.standard = [];
             var standard = val['standards'].split(',');
             for(var $i=0;$i<standard.length;$i++){
-              console.log(standard[$i]);
               $scope.standard.push({
                 'id' : standard[$i],
                 'label': standard[$i]
-              }); 
+              });
+              $scope.standardmodel = standard[$i];
             }
-            $scope.standardmodel = $scope.standard;
+            
             $scope.standardType = [];
             console.log(val['standard_type']);
             var standardType = val['standard_type'].split(',');
@@ -2072,8 +2050,9 @@ $scope.submitDocDetail = function(data) {
                 'id' : standardType[$i],
                 'label': standardType[$i]
               }); 
+              $scope.standardTypemodel = standardType[$i];
             }
-            $scope.standardTypemodel = $scope.standardType;
+            
           }
         }).error(function(error) {
          $scope.msg= 'Some technical error occured.';
@@ -2202,8 +2181,8 @@ teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
                 });
               });
               //for selected skill.
-              angular.forEach($scope.skill , function(val, ki) { 
-                teacherHttpService.getAllCourseList(val['id'],'lesson','-1',get_uid).success(function(response) {
+              angular.forEach(value['skills'] , function(val, ki) { 
+                teacherHttpService.getAllCourseList(val,'lesson','-1',get_uid).success(function(response) {
                   angular.forEach(response.response.course_details, function(subskil, key) {
                     $scope.subSkill.push({
                       'id' : subskil['course_id'],
@@ -2222,16 +2201,14 @@ teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
                     if(subSkillValue == subvalue['id']) {
                       if(subTemp.indexOf(subSkillValue) <0){
                         subTemp.push(subSkillValue);
-                        console.log(subSkillValue+','+subvalue['id']);
-                        console.log(subTemp);
                         $scope.subSkillmodel.push($scope.subSkill[kisub]);
                       }  
                     }
                   }
                 });
                  });
-                  angular.forEach(value['skills'] , function(skillValue, kil) {
-                    if(skillValue == val['id'] ) {
+                  angular.forEach($scope.skill , function(skillValue, kil) {
+                    if(skillValue['id'] == val ) {
                       $scope.skillmodel.push($scope.skill[ki]); 
                     }
                   });
@@ -2244,11 +2221,11 @@ teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
     subSkills = value['sub_skill'];
     standard = value['standard'];
     angular.forEach(value['standard'] , function(val, ki) {
-     $scope.standardmodel.push({'id' : val,'label': val });
+     $scope.standardmodel = val;
     });
     standardType = value['standard_type'];
     angular.forEach(value['standard_type'] , function(val, ki) {
-     $scope.standardTypemodel.push({'id' : val, 'label': val });
+     $scope.standardTypemodel = val ;
     });
     }
   });
