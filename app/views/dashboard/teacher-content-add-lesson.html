@@ -66,10 +66,15 @@
                   <div class="col-lg-5">
                     <div class="row">
                       <div class="form-group">
-												<label for="" class="col-xs-5 control-label">Standard Type :</label>
-												<div class="col-xs-7">
-												  <div ng-dropdown-multiselect="" options="standardType" selected-model="standardTypemodel" events="standardTypeEvents"></div>
-												  <span style="color:red">{{message[3]}}</span>
+                        <label class="col-xs-5 control-label">Standard Type:</label>
+                        <div class="col-xs-7">
+                          <select class="mlg-selectpicker form-control" data-size="auto"
+                                  ng-model="standardTypemodel" ng-change="standardTypeEvents(standardTypemodel)"
+                              ng-init="standardTypemodel = ''"    ng-options="sty.id as sty.label for sty in standardType">
+                            <option value="">Standard Type</option>
+                          </select>
+                          <span style="color:red">{{message[3]}}</span>
+                          <!--<div ng-dropdown-multiselect="" options="standardType" selected-model="standardTypemodel" events="standardTypeEvents"></div>-->
                         </div>
 											</div>
                       
@@ -78,11 +83,15 @@
                   <div class="col-lg-5 col-lg-offset-2">
 										<div class="row">
 											<div class="form-group">
-												<label for="" class="col-xs-5 control-label">Standards :</label>
-	                      <div class="col-xs-7">
-                          <div ng-dropdown-multiselect="" options="standard" selected-model="standardmodel" events="standardEvents"></div>
+                        <label class="col-xs-5 control-label" for="email">Standards:</label>
+                        <div class="col-xs-7">
+                          <select class="mlg-selectpicker form-control" data-size="auto"
+                                  ng-model="standardmodel" ng-change="standardEvents(standardmodel)"
+                              ng-init="standardmodel = ''"    ng-options="sta.id as sta.label for sta in standard">
+                            <option value="">Standard</option>
+                          </select>
                           <span style="color:red">{{message[2]}}</span>
-	                      </div>
+                        </div>
                       </div>
 										</div>
                   </div>
