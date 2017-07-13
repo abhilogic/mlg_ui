@@ -2585,6 +2585,9 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
           if($scope.ansCount < 4) {
             var i = 0;
             $scope.img = [];
+            if($scope.ansCount == 0){
+              images = '';
+            }
             if (images != '') {
               images = images +','+file.xhr.response;
               var temp = images.split(',');
@@ -3197,7 +3200,6 @@ $scope.subSkillEvents = {
       var myEleme = angular.element(document.querySelector('#save-question'));
       myEleme.append($compile('<button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE QUESTION</button>')($scope));  
     }else{
-      console.log(response.message);
       $scope.message = response.message;
       $timeout(function () {$scope.message = "";}, 3000);
     }
@@ -3233,7 +3235,6 @@ $scope.closeTemplate = function(){
       tempStatus = 1;
       var tempId = $scope.selectedTemplateModel;
       templateId = $scope.selectedTemplateModel;
-      console.log(templateId);
       $scope.skill=[];
       $scope.subSkill=[];
       $scope.skillmodel = [];
@@ -3300,9 +3301,9 @@ $scope.closeTemplate = function(){
                   }
                 });
                  });
-                  angular.forEach(value['skills'] , function(skillValue, kil) {
-                    if(skillValue == val ) {
-                      $scope.skillmodel.push($scope.skill[ki]); 
+                  angular.forEach($scope.skill , function(skillValue, kil) {
+                    if(skillValue['id'] == val ) {
+                      $scope.skillmodel.push($scope.skill[kil]); 
                     }
                   });
                 });
