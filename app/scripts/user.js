@@ -433,11 +433,10 @@ angular.module('mlg').filter('moment', function() {
 		  });
 	}
       
-    loginHttpResponse.getNotificationForParent = function(data) {
+    loginHttpResponse.getNotifications = function(notificationfor,id) {  //id can be parent_id or teacher_id
         return $http({
-            method:'POST',
-            data  : data,
-            url   : urlParams.baseURL+urlParams.getNotificationForParent
+            method:'GET',           
+            url   : urlParams.baseURL+urlParams.getNotifications+'/'+notificationfor+'/'+id
         });
 	}
 
@@ -2173,11 +2172,16 @@ if (typeof $routeParams.slug != 'undefined') {
     }
  ]).controller('parentNotificationCntrl', ['$scope', 'loginHttpService', '$location', 'urlParams', 'commonActions',
    function ($scope, loginHttpService, $location, urlParams, commonActions) {
-     var get_uid=commonActions.getcookies(get_uid);
-     loginHttpService.getNotificationForParent({parent_id : get_uid}).success(function(response) {
-        $scope.notifications = response.notifications;
-     });
-   }
+     	var get_uid=commonActions.getcookies(get_uid);
+     
+	    loginHttpService.getNotifications('parents',get_uid).success(function(res) {
+		    if(res.response.status==true){
+		      	$scope.notifications = res.response.notifications;
+		    }else{
+		    		$scope.ntf_message = res.response.message;
+		        }        
+	    });
+   	}
  ])
 .controller('parentReportCtrl', ['$scope', 'loginHttpService', '$location', 'urlParams','commonActions','$routeParams','class_students_classification',
    function ($scope, loginHttpService, $location, urlParams,commonActions,$routeParams,class_students_classification) { 

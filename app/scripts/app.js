@@ -377,7 +377,7 @@ principal  : 30,
   }).when('/teacher/my-class',{
 		templateUrl : 'views/dashboard/teacher-myClass.html',
 		controller : 'teacherMyClass',
-  }).when('/teacher/notification',{
+  }).when('/teacher/notifications',{
 		templateUrl : 'views/dashboard/teacher-notification.html',
 		controller : 'teacherNotificationCntrl',
   }).when('/teacher/rewards',{

@@ -377,24 +377,16 @@ teacherHttpResponse.getLessonForList=function(uid,pnum){
     url   : urlParams.baseURL+urlParams.getLessonForList+'/'+uid+'/'+pnum
   });
 }
-teacherHttpResponse.getFilterdQuestion=function(uid,pnum,grade,course,skill,standard=null){
-  var url = urlParams.baseURL+urlParams.getFilterdQuestion+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill;
-  if(standard != null){
-    url = url+'/'+standard;
-  }
+teacherHttpResponse.getFilterdQuestion=function(uid,pnum,grade,course,skill){
   return $http({
     method:'GET',
-    url   : url,
+    url   : urlParams.baseURL+urlParams.getFilterdQuestion+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill
   });
 }
-teacherHttpResponse.getFilterdLesson=function(uid,pnum,grade,course,skill,standard=null){
-  var url = urlParams.baseURL+urlParams.getFilterdLesson+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill;
-  if(standard != null) {
-     url = url+'/'+standard;
-  }
+teacherHttpResponse.getFilterdLesson=function(uid,pnum,grade,course,skill){
   return $http({
     method:'GET',
-    url   : url
+    url   : urlParams.baseURL+urlParams.getFilterdLesson+'/'+uid+'/'+pnum+'/'+grade+'/'+course+'/'+skill
   });
 }
 teacherHttpResponse.setTeacherSettings = function(data){
@@ -1390,7 +1382,7 @@ $scope.onClickSendEmailMe=function(selected_students){
 $scope.onClickSentEmailStudent=function(selected_students){  
   teacherHttpService.sendStudentMail(selected_students,get_uid).success(function(res) { 
       if(res.response.status==true){
-        $scope.successmail_msg ="sucessfully mail is send to your mail id.";
+        $scope.successmail_msg ="sucessfully mail is sent to your mail id.";
       }else{
         $scope.errormail_msg = res.response.message;
       }
@@ -1810,32 +1802,54 @@ $scope.subSkillEvents = {
 };
 
 $scope.standardTypemodel = [];
-  $scope.standardType = [
-  {id:"state", label: "Statewise"},
-  {id:"cc", label: "Common Core"},
-  ];
-  $scope.standardmodel = [];
-  $scope.standard = [];
-  var tempStandard = '';
-  $scope.standardTypeEvents = function(data) {
-    standardType.push(data);
-    $scope.standard =[];
-    teacherHttpService.getStandard(data,grade,course).success(function(response) {
+$scope.standardType = [
+{id:"Alabama", label: "Alabama"},
+{id:"Alaska", label: "Alaska"},
+{id:"cc", label: "Common Core"},
+];
+$scope.standardmodel = [];
+$scope.standard = [];
+var tempStandard = '';
+$scope.standardTypeEvents = {
+  onItemSelect: function(item) {   
+    standardType.push(item['id']);
+    teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
       if (response.message == '') {
         angular.forEach(response.response,function(val,key){
           $scope.standard.push({
             id: val['standard'], label: val['standard']
           });
         });
+      }else{
+        $scope.standard = [];
+      }
+    });
+  },
+  onItemDeselect: function(item) {
+    standardType.splice(item['id'],1);
+    teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
+      if (response.message == '') {
+        angular.forEach(response.response,function(val,key){
+          angular.forEach($scope.standard,function(value,ki){
+            if(val['standard'] == value['id']) {
+              $scope.standard.splice(ki,1);
+            }
+          });
+        });
       }
     });
   }
-
-  $scope.standardEvents = function(data){
-    if(data != '') {
-      standard.push(data);
+};
+$scope.standardEvents = {
+  onItemSelect: function(item) { 
+    if(item != '') {
+      standard.push(item['id']);
     }
-  };
+  },
+  onItemDeselect: function(item) {
+    standard.splice(item['id'],1);
+  }
+};
 var lessonDetail = {};
 var textDesc ='';
 var doc = '';
@@ -2035,13 +2049,13 @@ $scope.submitDocDetail = function(data) {
             $scope.standard = [];
             var standard = val['standards'].split(',');
             for(var $i=0;$i<standard.length;$i++){
+              console.log(standard[$i]);
               $scope.standard.push({
                 'id' : standard[$i],
                 'label': standard[$i]
-              });
-              $scope.standardmodel = standard[$i];
+              }); 
             }
-            
+            $scope.standardmodel = $scope.standard;
             $scope.standardType = [];
             console.log(val['standard_type']);
             var standardType = val['standard_type'].split(',');
@@ -2050,9 +2064,8 @@ $scope.submitDocDetail = function(data) {
                 'id' : standardType[$i],
                 'label': standardType[$i]
               }); 
-              $scope.standardTypemodel = standardType[$i];
             }
-            
+            $scope.standardTypemodel = $scope.standardType;
           }
         }).error(function(error) {
          $scope.msg= 'Some technical error occured.';
@@ -2181,8 +2194,8 @@ teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
                 });
               });
               //for selected skill.
-              angular.forEach(value['skills'] , function(val, ki) { 
-                teacherHttpService.getAllCourseList(val,'lesson','-1',get_uid).success(function(response) {
+              angular.forEach($scope.skill , function(val, ki) { 
+                teacherHttpService.getAllCourseList(val['id'],'lesson','-1',get_uid).success(function(response) {
                   angular.forEach(response.response.course_details, function(subskil, key) {
                     $scope.subSkill.push({
                       'id' : subskil['course_id'],
@@ -2201,14 +2214,16 @@ teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
                     if(subSkillValue == subvalue['id']) {
                       if(subTemp.indexOf(subSkillValue) <0){
                         subTemp.push(subSkillValue);
+                        console.log(subSkillValue+','+subvalue['id']);
+                        console.log(subTemp);
                         $scope.subSkillmodel.push($scope.subSkill[kisub]);
                       }  
                     }
                   }
                 });
                  });
-                  angular.forEach($scope.skill , function(skillValue, kil) {
-                    if(skillValue['id'] == val ) {
+                  angular.forEach(value['skills'] , function(skillValue, kil) {
+                    if(skillValue == val['id'] ) {
                       $scope.skillmodel.push($scope.skill[ki]); 
                     }
                   });
@@ -2221,11 +2236,11 @@ teacherHttpService.setTemplateDetail(lessonDetail).success(function(response) {
     subSkills = value['sub_skill'];
     standard = value['standard'];
     angular.forEach(value['standard'] , function(val, ki) {
-     $scope.standardmodel = val;
+     $scope.standardmodel.push({'id' : val,'label': val });
     });
     standardType = value['standard_type'];
     angular.forEach(value['standard_type'] , function(val, ki) {
-     $scope.standardTypemodel = val ;
+     $scope.standardTypemodel.push({'id' : val, 'label': val });
     });
     }
   });
@@ -2562,9 +2577,6 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
           if($scope.ansCount < 4) {
             var i = 0;
             $scope.img = [];
-            if($scope.ansCount == 0){
-              images = '';
-            }
             if (images != '') {
               images = images +','+file.xhr.response;
               var temp = images.split(',');
@@ -2899,6 +2911,7 @@ $scope.removePerson = function(index){
             'label': value['name']
           });
         });
+        console.log($scope.skill);
       }).error(function(error) {
         $scope.msg= 'Some technical error occured.';
         $timeout(function () {$scope.msg = ""; }, 3000);
@@ -2962,29 +2975,49 @@ $scope.subSkillEvents = {
       
   $scope.standardTypemodel = [];
   $scope.standardType = [
-  {id:"state", label: "Statewise"},
+  {id:"Alabama", label: "Alabama"},
+  {id:"Alaska", label: "Alaska"},
   {id:"cc", label: "Common Core"},
   ];
   $scope.standardmodel = [];
   $scope.standard = [];
   var tempStandard = '';
-  $scope.standardTypeEvents = function(data) {
-    standardType.push(data);
-    $scope.standard =[];
-    teacherHttpService.getStandard(data,grade,course).success(function(response) {
-      if (response.message == '') {
-        angular.forEach(response.response,function(val,key){
-          $scope.standard.push({
-            id: val['standard'], label: val['standard']
+  $scope.standardTypeEvents = {
+    onItemSelect: function(item) {   
+      standardType.push(item['id']);
+      teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
+        if (response.message == '') {
+          angular.forEach(response.response,function(val,key){
+            $scope.standard.push({
+              id: val['standard'], label: val['standard']
+            });
           });
-        });
+        }
+      });
+    },
+    onItemDeselect: function(item) {
+      standardType.splice(item['id'],1);
+      teacherHttpService.getStandard(item['id'],grade,course).success(function(response) {
+        if (response.message == '') {
+          angular.forEach(response.response,function(val,key){
+            angular.forEach($scope.standard,function(value,ki){
+              if(val['standard'] == value['id']) {
+                $scope.standard.splice(ki,1);
+              }
+            });
+          });
+        }
+      });
+    }
+  };
+  $scope.standardEvents = {
+    onItemSelect: function(item) {
+      if(item != '') {
+        standard.push(item['id']);
       }
-    });
-  }
-
-  $scope.standardEvents = function(data){
-    if(data != '') {
-      standard.push(data);
+    },
+    onItemDeselect: function(item) {
+      standard.splice(item['id'],1);
     }
   };
       //claim
@@ -3177,6 +3210,7 @@ $scope.subSkillEvents = {
       var myEleme = angular.element(document.querySelector('#save-question'));
       myEleme.append($compile('<button type="button" class="btn btn-outline btn-default margin-right-10 margin-xs-top-10" data-toggle="modal" ng-click="submitQuestion(frm)"><i class="icon icon-plus-outline margin-right-5"></i> SAVE QUESTION</button>')($scope));  
     }else{
+      console.log(response.message);
       $scope.message = response.message;
       $timeout(function () {$scope.message = "";}, 3000);
     }
@@ -3212,6 +3246,7 @@ $scope.closeTemplate = function(){
       tempStatus = 1;
       var tempId = $scope.selectedTemplateModel;
       templateId = $scope.selectedTemplateModel;
+      console.log(templateId);
       $scope.skill=[];
       $scope.subSkill=[];
       $scope.skillmodel = [];
@@ -3252,8 +3287,8 @@ $scope.closeTemplate = function(){
                 });
               });
               //for selected skill.
-              angular.forEach(value['skills'] , function(val, ki) { 
-                teacherHttpService.getAllCourseList(val,'lesson','-1',get_uid).success(function(response) {
+              angular.forEach($scope.skill , function(val, ki) { 
+                teacherHttpService.getAllCourseList(val['id'],'lesson','-1',get_uid).success(function(response) {
                   angular.forEach(response.response.course_details, function(subskil, key) {
                     $scope.subSkill.push({
                       'id' : subskil['course_id'],
@@ -3272,15 +3307,17 @@ $scope.closeTemplate = function(){
                     if(subSkillValue == subvalue['id']) {
                       if(subTemp.indexOf(subSkillValue) <0){
                         subTemp.push(subSkillValue);
+                        console.log(subSkillValue+','+subvalue['id']);
+                        console.log(subTemp);
                         $scope.subSkillmodel.push($scope.subSkill[kisub]);
                       }  
                     }
                   }
                 });
                  });
-                  angular.forEach($scope.skill , function(skillValue, kil) {
-                    if(skillValue['id'] == val ) {
-                      $scope.skillmodel.push($scope.skill[kil]); 
+                  angular.forEach(value['skills'] , function(skillValue, kil) {
+                    if(skillValue == val['id'] ) {
+                      $scope.skillmodel.push($scope.skill[ki]); 
                     }
                   });
                 });
@@ -3293,12 +3330,11 @@ subSkills = value['sub_skill'];
 standard = value['standard'];
 angular.forEach(value['standard'] , function(val, ki) {
   $scope.standard.push({'id' : val, 'label': val });
-  $scope.standardmodel = val;
+  $scope.standardmodel.push({'id' : val,'label': val });
 });
 standardType = value['standard_type'];
 angular.forEach(value['standard_type'] , function(val, ki) {
-//  $scope.standardTypemodel.push({'id' : val, 'label': val });
-  $scope.standardTypemodel = val;
+  $scope.standardTypemodel.push({'id' : val, 'label': val });
 });
 $scope.diffulityModel = value['ques_diff'];
 angular.forEach($scope.difficulty,function(diffValue,diffKey){
@@ -3312,16 +3348,17 @@ claim = value['claim'];
 $scope.frm.rScope = value['scope'];
 $scope.dOKModel = value['dok'];
 dok = value['dok'];
+console.log(value['ques_passage']);
 $scope.frm.passage = value['ques_passage'];
 $scope.frm.target = value['ques_target'];
 $scope.frm.task = value['task'];
 $scope.frm.complexity = value['ques_complexity'];
 $scope.frm.assignment = value['assignment'];
+qType = value['ques_type'];
 angular.forEach(value['ques_type'],function(type,key){
   angular.forEach($scope.questionType,function(qlist,key){
     if(type == qlist['id']){
 //      $scope.questionTypeModel.push({'id':qlist['id'], 'label':qlist['lable']});
-        qType = qlist['id'];
         $scope.questionTypeModel = qlist['id'];
     }
   });
@@ -3512,13 +3549,11 @@ teacherHttpService.getAllCourseList(skillId,'lesson','-1',get_uid).success(funct
    standard = temp['standard'];
    angular.forEach(temp['standard'].split(',') , function(val, ki) {
       $scope.standard.push({'id' : val, 'label': val });
-//      $scope.standardmodel.push({'id' : val,'label': val });
-      $scope.standardmodel = val;
+      $scope.standardmodel.push({'id' : val,'label': val });
    });
    standardType = temp['standard_type'];
    angular.forEach(temp['standard_type'].split(','),function(val, ki) {
-//     $scope.standardTypemodel.push({'id' : val, 'label': val });
-     $scope.standardTypemodel = val;
+     $scope.standardTypemodel.push({'id' : val, 'label': val });
    });
    
   }); 
@@ -4604,8 +4639,6 @@ $scope.deleteImage = function(j,data) {
 .controller('teacherQuestions',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile) {
    var get_uid = commonActions.getcookies(get_uid);
-   var standard = [];
-   var standardType = [];
    var pgnum = 1;
    $scope.nexClass = '';
    $scope.preClass = 'disabled';
@@ -4800,45 +4833,9 @@ $scope.deleteQuestions = function(Qid,uniqId){
           $scope.start = response.start;
           $scope.last = response.last;
           $scope.total = response.total;
-        });
+        })
       }
     }
-   //standard
-    $scope.standardTypeModel = [];
-    $scope.standardType = [
-    {id:"state", label: "Statewise"},
-    {id:"cc", label: "Common Core"},
-    ];
-    $scope.standardModel = [];
-    $scope.standard = [];
-    $scope.getStandardType = function(data) {
-      $scope.standard =[];
-      teacherHttpService.getStandard(data,grade,course).success(function(response) {
-        if (response.message == '') {
-          angular.forEach(response.response,function(val,key){
-            $scope.standard.push({
-              id: val['standard'], label: val['standard']
-            });
-          });
-        }
-      });
-      teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,data).success(function(response) {
-        $scope.questionList = response.data;
-        $scope.lastPage = response.lastPage;
-        $scope.start = response.start;
-        $scope.last = response.last;
-        $scope.total = response.total;
-      });
-    }
-    $scope.getStandard = function(data){
-      teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,data).success(function(response) {
-        $scope.questionList = response.data;
-        $scope.lastPage = response.lastPage;
-        $scope.start = response.start;
-        $scope.last = response.last;
-        $scope.total = response.total;
-      });
-    };
   }])
 .controller('teacherLessonListingCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile) {
@@ -5058,58 +5055,6 @@ $scope.deleteQuestions = function(Qid,uniqId){
         })
       }
     }
-    //standard
-    $scope.standardTypeModel = [];
-    $scope.standardType = [
-    {id:"state", label: "Statewise"},
-    {id:"cc", label: "Common Core"},
-    ];
-    $scope.standardModel = [];
-    $scope.standard = [];
-    $scope.getStandardType = function(data) {
-      $scope.standard =[];
-      teacherHttpService.getStandard(data,grade,course).success(function(response) {
-        if (response.message == '') {
-          angular.forEach(response.response,function(val,key){
-            $scope.standard.push({
-              id: val['standard'], label: val['standard']
-            });
-          });
-        }
-      });
-      teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,data).success(function(response) {
-        if(response.status == true) {
-          $scope.lessonList = response.data;
-          $scope.lastPage = response.lastPage;
-          $scope.start = response.start;
-          $scope.last = response.last;
-          $scope.total = response.total;
-        }else if(response.status == false){
-          $scope.lessonList = [];
-          $scope.lastPage = response.lastPage;
-          $scope.start = response.start;
-          $scope.last = response.last;
-          $scope.total = response.total;
-        }
-      });
-    }
-    $scope.getStandard = function(data){
-      teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,data).success(function(response) {
-        if(response.status == true) {
-          $scope.lessonList = response.data;
-          $scope.lastPage = response.lastPage;
-          $scope.start = response.start;
-          $scope.last = response.last;
-          $scope.total = response.total;
-        }else if(response.status == false){
-          $scope.lessonList = [];
-          $scope.lastPage = response.lastPage;
-          $scope.start = response.start;
-          $scope.last = response.last;
-          $scope.total = response.total;
-        }
-      });
-    };
   }])
 .controller('teacherSettingCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile','urlParams',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile,urlParams) {
@@ -6389,11 +6334,16 @@ $scope.deleteQuestions = function(Qid,uniqId){
   }])
 .controller('teacherNotificationCntrl', ['$scope', 'loginHttpService', '$location', 'urlParams', 'commonActions',
    function ($scope, loginHttpService, $location, urlParams, commonActions) {
-     var get_uid=commonActions.getcookies(get_uid);
-     loginHttpService.getNotificationForParent({parent_id : get_uid}).success(function(response) {
-        $scope.notifications = response.notifications;
-     });
-   }
+       var get_uid=commonActions.getcookies(get_uid);
+       
+        loginHttpService.getNotifications('teacher',get_uid).success(function(res) {
+          if(res.response.status==true){
+              $scope.notifications = res.response.notifications;
+          }else{
+              $scope.ntf_message = res.response.message;
+              }        
+        });
+    }
  ])
 .filter('orderObjectBy', function() {
   return function(items, field, reverse) {

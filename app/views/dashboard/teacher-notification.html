@@ -19,113 +19,36 @@
 				<!-- Content area -->
 				<div class="content">
 
-					<!-- Student List Panel  -->
-					<div class="panel panel-flat panel-notification">
-            <div class="panel-heading">
-              <h5 class="panel-title"><i class="icon icon-arrow-left"></i> Notifications</h5>
-            </div>
-            <div class="panel-body">
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_class"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_class hidden-lg hidden-md hidden-sm"></i> My CLass</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_subscriptions"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_subscriptions hidden-lg hidden-md hidden-sm"></i> my subscriptions</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_data"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_data hidden-lg hidden-md hidden-sm"></i> My Content</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_rewards"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_rewards hidden-lg hidden-md hidden-sm"></i> My Rewards</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
+        <div class="panel panel-flat panel-notification">
+          <div class="panel-heading">
+            <h5 class="panel-title"><i class="icon icon-arrow-left"></i> Notifications</h5>
+          </div>
+          <div class="panel-body">
 
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_class"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_class hidden-lg hidden-md hidden-sm"></i> My CLass</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
+            <div ng-repeat="notification in notifications" class="media-list">
+              <div class="media-left hidden-xs">
+                <i class="icon icon-my_class"></i>
+              </div>
+              <div class="media-body">
+                <h5 class="hd text-uppercase">
+                  <i ng-if="notification.kind.toLowerCase() == 'analytics'" class="icon icon-my_class hidden-lg hidden-md hidden-sm"></i>
+                  <i ng-if="notification.kind.toLowerCase() == 'offers'" class="icon icon-my_subscriptions hidden-lg hidden-md hidden-sm"></i>
+                  <i ng-if="notification.kind.toLowerCase() == 'subcriptions'" class="icon icon-my_data hidden-lg hidden-md hidden-sm"></i>
+                  <i ng-if="notification.kind.toLowerCase() == 'coupons'" class="icon icon-my_rewards hidden-lg hidden-md hidden-sm"></i>
+                  {{notification.kind}}
+                </h5>
+                <p class="para">{{notification.message}}</p>
+                <div class="text-right">
+                  <time>{{notification.time_before.days}} days {{notification.time_before.h}} hours {{notification.time_before.i}} minutes ago</time>
                 </div>
               </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_subscriptions"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_subscriptions hidden-lg hidden-md hidden-sm"></i> my subscriptions</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_data"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_data hidden-lg hidden-md hidden-sm"></i> My Content</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-              <div class="media-list">
-                <div class="media-left hidden-xs">
-                  <i class="icon icon-my_rewards"></i>
-                </div>
-                <div class="media-body">
-                  <h5 class="hd text-uppercase"><i class="icon icon-my_rewards hidden-lg hidden-md hidden-sm"></i> My Rewards</h5>
-                  <p class="para">15 student have submitted their assignment.</p>
-                  <div class="text-right">
-                    <time>10 minutes ago</time>
-                  </div>
-                </div>
-              </div>
-
             </div>
-					</div>
-				</div>
+            <div ng-if="ntf_message">{{ntf_message}}</div>
+
+          </div>
+        </div>
+
+      </div>
 				<!-- /content area -->
 
 			</div>
