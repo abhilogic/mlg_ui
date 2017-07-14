@@ -40,7 +40,7 @@
               	</li>               	
 
               	<!-- type is yesNO -->
-              	<li ng-if="currentquestion.type=='yesNO' " ng-repeat="option in currentquestion.options">
+              	<li ng-if="currentquestion.type=='yesNO' || currentquestion.type=='yesNo' " ng-repeat="option in currentquestion.options">
               		<input type="radio" name="quiz_option" class="radio-proceed1" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required>   	
               		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
               	</li> 
