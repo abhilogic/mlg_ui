@@ -66,7 +66,7 @@
                       <div class="col-lg-9 col-sm-8">
                         <h4 class="text-muted">To extend your subscription pay here</h4>
                       </div>
-                      <div class="col-lg-3 col-sm-4"><a role="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-teacherPayment">Pay now</a></div>
+                      <div class="col-lg-3 col-sm-4"><a role="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-teacherPayment-updgrade">Pay now</a></div>
                     </div>
                   </div>
                 </div>
@@ -102,7 +102,7 @@
 <!-- modal-section  -->
 <section class="modal-section">
   <!-- Modal -->
-  <div id="modal-teacherPayment" class="modal fade modal-teacherPayment" role="dialog">
+  <div id="modal-teacherPayment-updgrade" class="modal fade modal-teacherPayment" role="dialog">
     <div class="modal-dialog modal-lg">
       <!-- Modal content-->
       <div class="modal-content">
@@ -110,89 +110,158 @@
           <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
         </div>
         <div class="modal-body">
-          <div class="row as-table">
-            <div class="col-sm-6 col-left">
-              <h2 class="text-light text-gray-light text-center">Your Choosen subjects</h2>
-              <br>
+          
+          <div class="row as-table" ng-controller="teacherOnBoardingCtrl">
+              <div class="col-sm-6 col-left">
+                <h2 class="text-light text-gray-light text-center">Your Choosen subjects</h2>
+                <br>
+                <span class="has_error" ng-if="message">{{message}}</span>
+                <ul class="list-cartItems">
+                  <li ng-repeat="grade in student" class="cart-item">
+                    <p><span class="item-label">Grade:</span><span class="item-value name">{{grade.grade}}</span></p>
+                    <p><span class="item-label">Subjects: </span><span class="item-value package">{{grade.course_name}}</span></p>
+                    <p><span class="item-label">Sub Total:</span><span class="item-value price">${{grade.price}}<small>/mo</small></span></p>
+                  </li>
+                </ul>
 
-              <ul class="list-cartItems">
-                <li class="cart-item">
-                  <p><span class="item-label">Grade:</span><span class="item-value name">6th</span></p>
-                  <p><span class="item-label">Subjects:	</span><span class="item-value package">English</span></p>
-                  <p><span class="item-label">Sub Total:</span><span class="item-value price">$90<small>/mo</small></span></p>
-                </li>
-                <li class="cart-item">
-                  <p><span class="item-label">Grade:</span><span class="item-value name">7th</span></p>
-                  <p><span class="item-label">Subjects:	</span><span class="item-value package">English, Science</span></p>
-                  <p><span class="item-label">Sub Total:</span><span class="item-value price">$90<small>/mo</small></span></p>
-                </li>
-                <li class="cart-item">
-                  <p><span class="item-label">Grade:</span><span class="item-value name">8th</span></p>
-                  <p><span class="item-label">Subjects:	</span><span class="item-value package">English, Math, Science</span></p>
-                  <p><span class="item-label">Sub Total:</span><span class="item-value price">$90<small>/mo</small></span></p>
-                </li>
-                <li class="cart-item">
-                  <p><span class="item-label">Grade:</span><span class="item-value name">10th</span></p>
-                  <p><span class="item-label">Subjects:	</span><span class="item-value package">Math, Social Science</span></p>
-                  <p><span class="item-label">Sub Total:</span><span class="item-value price">$90<small>/mo</small></span></p>
-                </li>
-              </ul>
+                <div class="total-cartValue">
+                  <h1 class="text-center text-light text-primary">Total: <span>${{totalAmount}}</span><small class="text-muted">/mo</small></h1>
+                </div>
+              </div>
 
-              <div class="total-cartValue">
-                <h1 class="text-center text-light text-primary">Total: <span>$360</span><small class="text-muted"></small></h1>
+              <div class="col-sm-6 col-right">
+               <br>
+                **DEFAULT CARD TYPE IS VISA**
+                <h3 class="text-light text-gray-dark text-center">Address details</h3>
+                <br>
+                <form class="form-payment">
+                  <div class="form-group float-label">
+                    <label class="control-label">Address Line 1</label>
+                    <input ng-model="frm.line1" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Address Line 2</label>
+                    <input ng-model="frm.line2" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">City</label>
+                        <input ng-model="frm.city" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">State</label>
+                        <input ng-model="frm.state" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Postal Code</label>
+                        <input ng-model="frm.postal_code" type="number" class="form-control float-input"/>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group float-label">
+                        <label class="control-label">Country Code</label>
+                        <input ng-model="frm.country_code" type="text" class="form-control float-input"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Phone</label>
+                    <input ng-model="frm.phone" type="text" class="form-control float-input"/>
+                  </div>
+                  <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
+                  <br>
+                  
+                  <div class="form-group float-label">
+                    <label class="control-label">Name on the card</label>
+                    <input ng-model="frm.name" type="text" class="form-control float-input"/>
+                  </div>
+                  <div class="form-group float-label">
+                    <label class="control-label">Card number</label>
+                    <input ng-model="frm.card_number" type="text" class="form-control float-input" required/>
+                  </div>
+                  <div class="form-group form-group-inline form-group-cardDetails">
+                    <label class="control-label">Card Expiry Date</label>
+                    <select  ng-model="frm.expiry_month" class="form-control input-mm">
+                       <option value="">MM</option>
+                       <option ng-repeat="(key , value) in card_months" value="{{key}}">{{value}}</option>
+                    </select>
+                    <select  ng-model="frm.expiry_year" class="form-control input-yy">
+                       <option value="">YYYY</option>
+                       <option ng-repeat="(key , value) in card_years" value="{{key}}">{{value}}</option>
+                    </select>
+                    <div class="form-group float-label">
+                      <label class="control-label">CVV</label>
+                      <input ng-required="true" ng-model="frm.cvv" type="text" class="form-control float-input input-cvv"/>
+                    </div>
+                  </div>
+
+                   <p class="text-danger"><small><sup>*</sup>Your money will be deducted after 30 days of trial.</small></p>
+                   <div class="form-group text-right">
+                    <img src="assets/img/icon-payment-cards.png" alt="Visa, Master">
+                   </div>
+                  <br><br>
+
+                  <div class="form-group text-center">
+                    <button ng-click="submitCardDetail(frm)"type="submit" class="btn btn-primary">Proceed</button> <button ng-click="submitSkip()" type="button" class="btn btn-link">Skip for now</button>
+                  </div>
+                  <span class="has_error" ng-if="msg">{{msg}}</span>
+                  <br><br>
+                  <div class="form-group text-right">
+                   <a href="#" class="link"><img src="assets/img/icon-donate.png" alt="Visa, Master"></a>
+                  </div>
+                </form>
               </div>
             </div>
+        
 
-            <div class="col-sm-6 col-right">
-              <h2 class="text-light text-gray-light text-center">Enter Credit Card Detail</h2>
-              <br>
-              <form action="" class="form-payment">
-                <div class="form-group float-label">
-                  <label class="control-label">Card number</label>
-                  <input type="text" class="form-control float-input"/>
-                </div>
 
-                <div class="form-group float-label">
-                  <label class="control-label">Name on the card</label>
-                  <input type="text" class="form-control float-input"/>
-                </div>
-
-                <div class="form-group form-group-inline form-group-cardDetails">
-                  <label class="control-label">Card Expiry Date</label>
-                  <select class="form-control input-mm">
-                    <option value="mm">MM</option>
-                  </select>
-                  <select class="form-control input-yy">
-                    <option value="mm">YYYY</option>
-                  </select>
-                  <div class="form-group float-label">
-                    <label class="control-label">CVV</label>
-                    <input type="text" class="form-control float-input input-cvv"/>
-                  </div>
-                </div>
-                <br><br>
-
-                <div class="form-group text-center">
-                  <button type="submit" class="btn btn-primary">Proceed</button> <button type="submit" class="btn btn-link">Skip for now</button>
-                </div>
-                <br><br>
-                <div class="form-group text-right">
-                  <a href="#" class="link"><img src="assets/img/icon-donate.png" alt="done image"></a>
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
   <!-- modal -->
 </section>
+
+<!-- Success message on sucessull payment-->
+<section>
+    <!-- Success message on sucessull payment-->
+  <div id="modal-paymentupgrade-done" class="modal fade modal-done" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+          </div>
+          <div class="modal-body ">
+            <div class="confirm-success-msg">
+              <i class="icon icon-check"></i>
+              <p>Your payment is done successfully.</p>
+
+            </div>
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>            
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+  
+
+
+
 <!-- Latest compiled and minified jQuery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/js/min/jquery-2.1.3.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- Page Specific JavaScript -->
+
 <script src="assets/js/main.js"></script>
-<script src="assets/js/pages/dashboard.js"></script>
+<script src="assets/js/pages/dashboard.js"></script> -->

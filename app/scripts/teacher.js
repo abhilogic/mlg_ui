@@ -657,6 +657,9 @@ $scope.submitCardDetail = function(data) {
   data.amount = $scope.totalAmount;
   teacherHttpService.saveCardToPaypalForTeacher(data).success(function(response) {
     if (response.status == true) {
+         $('#modal-teacherPayment-updgrade').modal('hide');
+        $('#modal-paymentupgrade-done').modal('show');
+        
          // $location.url('/teacher/dashboard'); 
          //$location.url('/teacher/dashboard/class/1/English/4');
 
