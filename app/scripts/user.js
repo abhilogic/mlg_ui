@@ -1556,9 +1556,11 @@ if (typeof $routeParams.slug != 'undefined') {
     $scope.card_years = card_years;
     $scope.frm.expiry_month = card_months['1'];
     $scope.submitCardDetail = function(data) {
+      $('#mlg-spin').show();
       var err_msg = validate_submission(data);
       if (err_msg !== null) {
         $scope.msg = err_msg;
+        $('#mlg-spin').hide();
         return false;
       }
       data.user_id = get_uid;
@@ -1572,13 +1574,16 @@ if (typeof $routeParams.slug != 'undefined') {
       }
       data.children_ids = children_ids;
       data.amount = $scope.total_amount;
+
+
       loginHttpService.saveCardToPaypal(data).success(function(response) {
-        if (response.status === true) {
+      		$('#mlg-spin').hide();
+        if (response.status === true) {        	
           $location.url('/parent/dashboard/110');
-        } else {
+        } else {        	
           if (response.message != null) {
             $scope.msg = response.message;
-          } else {
+          } else {          	
             $scope.msg = 'Some Error occured, Kindly contact to administrator';
           }
         }
