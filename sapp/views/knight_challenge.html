@@ -1,0 +1,120 @@
+
+    <div class="sub-skills-room">
+
+    <!-- main-content -->
+    <div class="main-content">
+      <a href="journey"><i class="icon icon-exit-door"></i></a>
+      <div class="google-speaker">
+				<img src="assets/img/speaker_icon_gray.png" alt=""/ ng-click="readQuestion()">
+				<span>Speaker<!-- Google Speaker <i>Off</i> --></span>
+			</div>
+			<div class="message" data-toggle="tooltip" data-placement="left" title="Students please see the video and answer the following Questions">
+				<i class="icon icon-message"></i>
+				<span >Message (<i>1</i>)</span>
+			</div>
+		</div>
+
+
+      <div class="board table" ng-init="frm={}">
+				<!-- <div class="table-animated-img"></div> -->
+          <h5 class="hd"><span>Knight Challenge:</span> {{course_name | limitTo: 21}}</h5>
+
+              
+
+
+          <div class="subskill-quiz-content">        
+            <div class="text-right"><button type="button" class="btn btn-hint"><img src="assets/img/hint-bulb-img.png" alt="" class="hint-img">HINT (3 left)</button></div>
+
+            <!-- <div class="text-center" >
+              <button  class="btn btn-skip" ng-click="onSubmitQuestion(frm,skip=1)">skip</button>
+              <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm,skip=0)">Submit</button>
+            </div> -->
+
+
+            <p class="ques" ng-bind-html="'Question- '+(sequence+1)+' : '+ currentquestion.questionName"></p>
+
+            <ul class="option pick_check_icon">
+
+            <!-- type is filling -->
+              	<li ng-if="currentquestion.type=='fillin'" ng-repeat="option in currentquestion.options">
+              	<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" class="checkbox-proceed1" ><span>{{numToAlpha($index) +'.  '+ option.label}}</span>
+              	</li>               	
+
+              	<!-- type is yesNO -->
+              	<li ng-if="currentquestion.type=='yesNO' " ng-repeat="option in currentquestion.options">
+              		<input type="radio" name="quiz_option" class="radio-proceed1" autocomplete="off" value="{{option.value}}" ng-model="frm.selectedoption" required>   	
+              		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
+              	</li> 
+
+
+              	<!-- type is mcq -->
+              	<li ng-if="currentquestion.type=='mcq'" ng-repeat="option in currentquestion.options">
+              		<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+              		
+              		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
+              	</li> 
+
+              	<!-- type is mrq -->
+              	<li ng-if="currentquestion.type=='mrq'" ng-repeat="option in currentquestion.options">
+              		<input type="checkbox" name="selectedchkoption" ng-model="frm.selectedoption" ng-true-value="'{{option.value}}'" ng-false-value="''" > 
+              		<span>{{numToAlpha($index) +'.  '+ option.label}}</span>
+              	</li>
+              	          
+            </ul>
+            <div class="text-center" >
+            	<span style="color:red; font-size:14px;">{{error_optionmessage}}</span>
+            </div>
+
+            
+
+             <div class="text-center" >
+              <button  class="btn btn-skip" ng-click="onSkipQuestion(frm)">skip</button>
+              <button  class="btn btn-submit" ng-click="onSubmitQuestion(frm)">Submit</button>
+            </div> 
+      
+               <data-owl-carousel class="owl-carousel owl-theme ques_no_indicator" data-options="{margin: 19, loop: false, responsive: { 320: {items: 4}, 375: {items: 8}, 600: {items: 10}, 1000: {items: 10} }}">
+           <div owl-carousel-item=""  class="item" ng-repeat="ques in questions_status" class="item">              
+                    <i class="icon"></i>
+                    <span class="ques_no">Ques <i>{{$index+1}}</i></span>
+              </div>
+        </data-owl-carousel> 
+
+          </div>
+      </div>
+    <!-- main-content -->
+
+     <!--start masscourt-->
+    <div class="masscourt-block" id="knightmasscourt_id">
+      <div class="masscourt-cover in">
+        <img ng-src="assets/img/mascort-img/{{mascot_img}}" class="masccort-img" alt=""/>
+        <div class="hint-block">
+          <div class="col-xs-2 padding-0">
+            <!-- <img src="assets/img/hint-bulb-img.png" alt="" class="bulb-img"/> -->
+          </div>
+          <div class="col-xs-10">
+            <span class="hint" ng-if="st_result=='fail' ">              
+              You Need More Practice to be mastered in this skill.              
+            </span>
+
+            <span class="hint" ng-if="st_result=='pass' ">              
+                Congrats you got mastered. You can move for our next subskill.             
+            </span>
+
+            <div class="text-right">
+              <button type="button" class="btn" id="gotIt1" ng-click="closeMascot(st_result);">Got it!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end- masscourt -->
+
+		
+
+		<!-- page loader  -->
+		<div class="loader" loading>
+			<img src="assets/img/loader.svg" class="loader-img" data-center="center" alt="">
+		</div>
+		<!-- page loader  -->
+
+	
