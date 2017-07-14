@@ -518,7 +518,12 @@ teacherHttpResponse.getStudentScoreForSkills=function(student_id,subject_id){
   });
 }
 
-
+teacherHttpResponse.restoreScope=function(uid,subject_id){
+  return $http({
+    method:'GET',
+    url   : urlParams.baseURL+urlParams.restoreScope+'/'+uid+'/'+subject_id
+  });
+}
 
 
 return teacherHttpResponse;
@@ -6197,9 +6202,13 @@ $scope.deleteQuestions = function(Qid,uniqId){
     }
     // restore default value.
     $scope.restoreDefault = function(){
-      
+      teacherHttpService.restoreScope(get_uid,course).success(function(response) {
+        if(response.status == true) {
+          $scope.scopeSkills = response.response;
+        }
+      });
     }
-    /** js **/
+    /** js
 //    var headertext = [],
 //    headers = document.querySelectorAll(".table-teacherContent th"),
 //    tablerows = document.querySelectorAll(".table-teacherContent th"),

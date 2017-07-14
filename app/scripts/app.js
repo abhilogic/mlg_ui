@@ -127,7 +127,8 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getTeacherStudentGap : '/teachers/getTeacherStudentGap',
   getDashboardStudentsOfTeacher :'/students/getDashboardStudentsOfTeacher',
   getStandard :'/courses/getStandard',
-  getStudentScoreForSkills :'/students/getStudentScoreForSkills'
+  getStudentScoreForSkills :'/students/getStudentScoreForSkills',
+  restoreScope :'/teachers/restoreScope',
 
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
