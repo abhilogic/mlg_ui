@@ -738,7 +738,20 @@ return {
       }
     }
   };
-}]);
+}])
+.directive('loaderBlock', function() {
+	return {
+		restrict : 'A',
+		scope : {
+			spinner : '=',
+			sh : '=?'
+		},
+		templateUrl : 'views/loading-block.html',
+		controller : [ '$scope', function($scope) {
+			$scope.sh = $scope.sh || "120";
+		} ]
+	}
+});
 
 
 

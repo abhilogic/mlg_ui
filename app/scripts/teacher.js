@@ -655,11 +655,17 @@ $scope.frm.expiry_year = card_years['2018'];
 $scope.submitCardDetail = function(data) {
   data.user_id = get_uid;
   data.amount = $scope.totalAmount;
+
+  //$scope.finderloader=false;  
+  $('#mlg-spin').show();
+
   teacherHttpService.saveCardToPaypalForTeacher(data).success(function(response) {
     if (response.status == true) {
+        $scope.finderloader=true;
          $('#modal-teacherPayment-updgrade').modal('hide');
         $('#modal-paymentupgrade-done').modal('show');
-        
+        $('#mlg-spin').hide();
+
          // $location.url('/teacher/dashboard'); 
          //$location.url('/teacher/dashboard/class/1/English/4');
 

@@ -210,6 +210,13 @@
 
                   <div class="form-group text-center">
                     <button ng-click="submitCardDetail(frm)"type="submit" class="btn btn-primary">Proceed</button> <button ng-click="submitSkip()" type="button" class="btn btn-link">Skip for now</button>
+                    
+                    <!-- <div loader-block spinner="finderloader" sh="10" ></div> -->
+
+                    <div align="center" style="display:none;" id="mlg-spin" ><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>
+
+
+
                   </div>
                   <span class="has_error" ng-if="msg">{{msg}}</span>
                   <br><br>
