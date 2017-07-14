@@ -1948,8 +1948,10 @@ promise.then(function(result) {
 
   // API to check the knight challenge will locked/unlocked
   loginHttpService.checkKnightQuizStatus($routeParams.id,get_uid).success(function(res) {  		
-  		if(res.response.status=true && res.response.KnightQuiz_status=="enable" ){  			
+  		if(res.response.status==true && res.response.KnightQuiz_status=="enable" ){  			
   			$scope.kstatus =1;
+  		}else{
+  			$scope.kstatus =0;
   		}
   });
 
