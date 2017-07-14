@@ -4626,8 +4626,11 @@ $scope.deleteImage = function(j,data) {
 .controller('teacherQuestions',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$compile',
   function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$compile) {
    var get_uid = commonActions.getcookies(get_uid);
-   var standard = [];
-   var standardType = [];
+   var grade = -"1";
+   var course = "-1";
+   var skill = "-1";
+   var standard = null;
+   var edit = '';
    var pgnum = 1;
    $scope.nexClass = '';
    $scope.preClass = 'disabled';
@@ -4666,13 +4669,23 @@ $scope.deleteImage = function(j,data) {
       pgnum = 1;
       $scope.nexClass = '';
       $scope.preClass = 'disabled';
-      teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
-        $scope.questionList = response.data;
-        $scope.lastPage = response.lastPage;
-        $scope.start = response.start;
-        $scope.last = response.last;
-        $scope.total = response.total;
-      });
+      if(edit == 'EDIT') {
+        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        });
+      }else{
+       teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }); 
+      }
     }else{
       if(pgnum > 1) {
        $scope.preClass = '';
@@ -4683,13 +4696,23 @@ $scope.deleteImage = function(j,data) {
        $scope.nexClass = '';
        $scope.preClass = '';
      }
-     teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
-      $scope.questionList = response.data;
-      $scope.lastPage = response.lastPage;
-      $scope.start = response.start;
-      $scope.last = response.last;
-      $scope.total = response.total;
-    }); 
+     if(edit == 'EDIT') {
+        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        });
+      }else{
+       teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }); 
+      } 
    }
  }
  $scope.getNext = function() {
@@ -4701,21 +4724,41 @@ $scope.deleteImage = function(j,data) {
   }else if(pgnum == $scope.lastPage) {
     $scope.nexClass = 'disabled';
     $scope.preClass = '';
-    teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
-      $scope.questionList = response.data;
-      $scope.lastPage = response.lastPage;
-      $scope.start = response.start;
-      $scope.last = response.last;
-      $scope.total = response.total;
-    });
+    if(edit == 'EDIT') {
+        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        });
+      }else{
+       teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }); 
+      }
   }else{
-   teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
-    $scope.questionList = response.data;
-    $scope.lastPage = response.lastPage;
-    $scope.start = response.start;
-    $scope.last = response.last;
-    $scope.total = response.total;
-  });
+   if(edit == 'EDIT') {
+        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        });
+      }else{
+       teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
+          $scope.questionList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }); 
+      }
  }
  if(pgnum > 1) {
      $scope.preClass = '';
@@ -4765,11 +4808,9 @@ $scope.deleteQuestions = function(Qid,uniqId){
    }
  });
      // on the basis of grade fetch the coursr list.
-     var grade = -"1";
-     var course = "-1";
-     var skill = "-1";
      $scope.skills = [];
      $scope.getGrade = function(){
+       edit = 'EDIT';
       grade = $scope.gradeModel;
       teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
         $scope.courses = response.response;
@@ -4816,7 +4857,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.getSkill = function(skil){
       if(skil != null) {
         skill = skil;
-        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
+        teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
           $scope.questionList = response.data;
           $scope.lastPage = response.lastPage;
           $scope.start = response.start;
@@ -4834,6 +4875,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.standardModel = [];
     $scope.standard = [];
     $scope.getStandardType = function(data) {
+      standard = data;
       $scope.standard =[];
       teacherHttpService.getStandard(data,grade,course).success(function(response) {
         if (response.message == '') {
@@ -4853,6 +4895,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
       });
     }
     $scope.getStandard = function(data){
+      standard = data;
       teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill,data).success(function(response) {
         $scope.questionList = response.data;
         $scope.lastPage = response.lastPage;
@@ -4869,6 +4912,11 @@ $scope.deleteQuestions = function(Qid,uniqId){
  //      window.location.href='teacher/add-content';
     } 
     var get_uid = commonActions.getcookies(get_uid);
+    var grade = -"1";
+    var course = "-1";
+    var skill = "-1";
+    var standard = null;
+    var edit = '';
     var pgnum = 1;
     $scope.nexClass = '';
     $scope.preClass = 'disabled';
@@ -4903,13 +4951,31 @@ $scope.deleteQuestions = function(Qid,uniqId){
       pgnum = 1;
       $scope.nexClass = '';
       $scope.preClass = 'disabled';
-      teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
-        $scope.lessonList = response.data;
-        $scope.lastPage = response.lastPage;
-        $scope.start = response.start;
-        $scope.last = response.last;
-        $scope.total = response.total;
-      });
+      if(edit = 'EDIT'){
+        teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
+          if(response.status == true) {
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }else if(response.status == false){
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }
+        });
+      }else{
+        teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
+          $scope.lessonList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }); 
+      }
     }else{
       if(pgnum > 1) {
        $scope.preClass = '';
@@ -4920,13 +4986,31 @@ $scope.deleteQuestions = function(Qid,uniqId){
        $scope.nexClass = '';
        $scope.preClass = '';
      }
-     teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
-      $scope.lessonList = response.data;
-      $scope.lastPage = response.lastPage;
-      $scope.start = response.start;
-      $scope.last = response.last;
-      $scope.total = response.total;
-    });
+     if(edit = 'EDIT'){
+        teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
+          if(response.status == true) {
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }else if(response.status == false){
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }
+        });
+      }else{
+        teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
+          $scope.lessonList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }); 
+      }
    }
  }
  $scope.getNext = function() {
@@ -4938,21 +5022,57 @@ $scope.deleteQuestions = function(Qid,uniqId){
   }else if(pgnum == $scope.lastPage) {
     $scope.nexClass = 'disabled';
     $scope.preClass = '';
-    teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
-      $scope.lessonList = response.data;
-      $scope.lastPage = response.lastPage;
-      $scope.start = response.start;
-      $scope.last = response.last;
-      $scope.total = response.total;
-    });
+    if(edit = 'EDIT'){
+        teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
+          if(response.status == true) {
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }else if(response.status == false){
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }
+        });
+      }else{
+        teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
+          $scope.lessonList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }); 
+      }
   }else{
-   teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
-      $scope.lessonList = response.data;
-      $scope.lastPage = response.lastPage;
-      $scope.start = response.start;
-      $scope.last = response.last;
-      $scope.total = response.total;
-    });
+   if(edit = 'EDIT'){
+        teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
+          if(response.status == true) {
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }else if(response.status == false){
+            $scope.lessonList = response.data;
+            $scope.lastPage = response.lastPage;
+            $scope.start = response.start;
+            $scope.last = response.last;
+            $scope.total = response.total;
+          }
+        });
+      }else{
+        teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
+          $scope.lessonList = response.data;
+          $scope.lastPage = response.lastPage;
+          $scope.start = response.start;
+          $scope.last = response.last;
+          $scope.total = response.total;
+        }); 
+      }
  }
  if(pgnum > 1) {
      $scope.preClass = '';
@@ -4996,11 +5116,9 @@ $scope.deleteQuestions = function(Qid,uniqId){
      }
    });
      // on the basis of grade fetch the coursr list.
-     var grade = -"1";
-     var course = "-1";
-     var skill = "-1";
      $scope.skills = [];
      $scope.getGrade = function(){
+     edit = 'EDIT';
       grade = $scope.gradeModel;
       teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
         $scope.courses = response.response;
@@ -5063,7 +5181,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.getSkill = function(skil){
       if(skil != null) {
         skill = skil;
-        teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill).success(function(response) {
+        teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
           if(response.status == true) {
             $scope.lessonList = response.data;
             $scope.lastPage = response.lastPage;
@@ -5077,7 +5195,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
             $scope.last = response.last;
             $scope.total = response.total;
           }
-        })
+        });
       }
     }
     //standard
@@ -5089,6 +5207,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.standardModel = [];
     $scope.standard = [];
     $scope.getStandardType = function(data) {
+      standard = data;
       $scope.standard =[];
       teacherHttpService.getStandard(data,grade,course).success(function(response) {
         if (response.message == '') {
@@ -5116,7 +5235,8 @@ $scope.deleteQuestions = function(Qid,uniqId){
       });
     }
     $scope.getStandard = function(data){
-      teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,data).success(function(response) {
+      standard = data;
+      teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
         if(response.status == true) {
           $scope.lessonList = response.data;
           $scope.lastPage = response.lastPage;
@@ -5456,14 +5576,16 @@ $scope.deleteQuestions = function(Qid,uniqId){
         if(grade != 'undefined') {
           angular.forEach($scope.scopeLevel,function(val,ki){
             if(val['id'] == grade){
-             //need to ask shweta $scope.scopeGradeModel = val['id'];
+             //need to ask shweta
+              $scope.scopeGradeModel = val['id'];
             }
           });
           teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
             $scope.scopeSubject = response.response;
             angular.forEach($scope.scopeSubject,function(val,ki){
               if(val['course_id'] == course){
-               //need to ask shweta $scope.scopeCourseModel = val['course_id'];
+//               need to ask shweta 
+               $scope.scopeCourseModel = val['course_id'];
               }
             });
           }).error(function(error) {
