@@ -299,6 +299,7 @@ principal  : 30,
 	}).when('/teacher/dashboard/class/:gradeid/:subject_name/:courseid',{
 		templateUrl : 'views/dashboard/teacher-dashboard.html',
 		controller : 'teacherDashboardViewCtrl',
+		access : access.teacher
 	}).when('/parent/report/:id',{
 		templateUrl : 'views/dashboard/parent-report.html',
 		controller : 'parentReportCtrl',
@@ -496,12 +497,12 @@ principal  : 30,
         element.height($(window).height() - $('.navbar').outerHeight());
     }
 })
-.directive('aside', function () {
+.directive('aside', function () {  
 return {
 	restrict: 'E',
 	templateUrl: 'include/sidebar-teacher.html',
-	controller: ['$scope','$cookieStore','teacherHttpService','user_roles','$routeParams',
-    function ($scope,$cookieStore,teacherHttpService,user_roles,$routeParams) {                         	
+	controller: ['$scope','$cookieStore','teacherHttpService','user_roles','$routeParams','urlParams',
+    function ($scope,$cookieStore,teacherHttpService,user_roles,$routeParams,urlParams) {                         	
 		$scope.isCollapsedmyClass = true;
 		$scope.isCollapsedmyContent = true;
 
@@ -532,8 +533,14 @@ return {
 			
 		   
 		}
-		var cookieString=$cookieStore.get("userObj");
-		var userInfo=parseUser(cookieString);
+		if($cookieStore.get("userObj") !=null && $cookieStore.get("userObj")!='undefined' ){
+			var cookieString=$cookieStore.get("userObj");
+			var userInfo=parseUser(cookieString);
+		}else{
+			window.location.href=urlParams.siteRoot;;
+		}
+		
+		
 		function parseUser(cookie){
 			var keyVals=cookie.split(',');
 			var obj={};
@@ -580,7 +587,15 @@ return {
 	templateUrl: 'include/sidebar.html',
 	controller: ['$scope','$cookieStore','loginHttpService','$routeParams',function ($scope,$cookieStore,loginHttpService,$routeParams) {                         	
 		var cookieString=$cookieStore.get("userObj");
-		var userInfo=parseUser(cookieString);
+		//var userInfo=parseUser(cookieString);
+
+		if($cookieStore.get("userObj") !=null && $cookieStore.get("userObj")!='undefined' ){
+			var cookieString=$cookieStore.get("userObj");
+			var userInfo=parseUser(cookieString);
+		}else{
+			window.location.href=urlParams.siteRoot;;
+		}
+
 		function parseUser(cookie){
 	var keyVals=cookie.split(',');
 	var obj={};
