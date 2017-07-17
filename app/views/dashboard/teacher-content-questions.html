@@ -35,7 +35,8 @@
 									</li>
 
 									<li class="toolbar-item">
-										<select class="selectpicker" title="Status" data-width="auto" data-size="auto">
+                    <div class="btn-group" role="group" aria-label="...">
+										<select class="mlg-selectpicker form-control" title="Status" data-width="auto" data-size="auto">
 											<option>Approved</option>
 											<option>Not Approved</option>
 											<option>Submitted</option>
@@ -43,43 +44,55 @@
 											<option>Under review</option>
 											<option>Draft</option>
 										</select>
+                    </div>
 									</li>
 
 									<li class="toolbar-item">
-                    <select class="mlg-selectpicker form-control" data-width="auto"  
+                   
+                    <div class="btn-group" role="group" aria-label="...">
+										   <select class="mlg-selectpicker form-control" data-width="auto"  
                             ng-model="gradeModel" ng-change="getGrade(gradeModel)" title="Class" 
                             ng-options="grade.id as grade.name for grade in grades track by grade.id">
-                      <option value="">- Select Class -</option>
-                    </select>
+                        <option value="">- Select Class -</option>
+                       </select>
+										</div>
 									</li>
 
 									<li class="toolbar-item">
+                    <div class="btn-group" role="group" aria-label="...">
                     <select class="mlg-selectpicker form-control" data-width="auto"  
                             ng-model="courseModel" ng-change="getCourse(courseModel)" title="Class" 
                             ng-options="course.course_id as course.course_name for course in courses track by course.course_id">
                       <option value="">- Select Subject -</option>
                     </select>
+                    </div>
 									</li>
                   <li class="toolbar-item">
+                    <div class="btn-group" role="group" aria-label="...">
 											<select class="mlg-selectpicker form-control" data-width="auto"  
                             ng-model="standardTypeModel" ng-change="getStandardType(standardTypeModel)" 
                             ng-init="standardTypeModel = ''" ng-options="sty.id as sty.label for sty in standardType">
                       <option value="">Standard Type</option>
                     </select>
+                    </div>
 									</li>
                   <li class="toolbar-item">
+                    <div class="btn-group" role="group" aria-label="...">
 											<select class="mlg-selectpicker form-control" data-width="auto"  
                             ng-model="standardModel" ng-change="getStandard(standardModel)" 
                             ng-init="standardModel = ''" ng-options="st.id as st.label for st in standard">
                       <option value="">Standard</option>
                     </select>
+                    </div>
 									</li>
 									<li class="toolbar-item">
+                    <div class="btn-group" role="group" aria-label="...">
 										<select class="mlg-selectpicker form-control" data-width="auto"  
                             ng-model="skillModel" ng-change="getSkill(skillModel)" title="Class" 
                             ng-options="skil.id as skil.label for skil in skill track by skil.id">
                       <option value="">- Select Skills -</option>
                     </select>
+                    </div>
 									</li>
 
 									<li class="toolbar-item pull-right">
@@ -152,7 +165,7 @@
 
 	<script>
 		//Bootstrap dropdown select
-		$('.selectpicker').selectpicker();
+//		$('.selectpicker').selectpicker();
 
 	</script>
 
