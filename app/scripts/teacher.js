@@ -5625,7 +5625,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
       if (response.status == true) {          
         $scope.scopeLevel = response.grade;
-        if(grade != 'undefined') {
+        if(grade != '') {
           angular.forEach($scope.scopeLevel,function(val,ki){
             if(val['id'] == grade){
              //need to ask shweta
