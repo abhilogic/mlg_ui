@@ -497,12 +497,12 @@ principal  : 30,
         element.height($(window).height() - $('.navbar').outerHeight());
     }
 })
-.directive('aside', function () {  
+.directive('aside', function () {
 return {
 	restrict: 'E',
 	templateUrl: 'include/sidebar-teacher.html',
-	controller: ['$scope','$cookieStore','teacherHttpService','user_roles','$routeParams','urlParams',
-    function ($scope,$cookieStore,teacherHttpService,user_roles,$routeParams,urlParams) {                         	
+	controller: ['$scope','$cookieStore','teacherHttpService','user_roles','$routeParams',
+    function ($scope,$cookieStore,teacherHttpService,user_roles,$routeParams) {                         	
 		$scope.isCollapsedmyClass = true;
 		$scope.isCollapsedmyContent = true;
 
@@ -533,14 +533,8 @@ return {
 			
 		   
 		}
-		if($cookieStore.get("userObj") !=null && $cookieStore.get("userObj")!='undefined' ){
-			var cookieString=$cookieStore.get("userObj");
-			var userInfo=parseUser(cookieString);
-		}else{
-			window.location.href=urlParams.siteRoot;;
-		}
-		
-		
+		var cookieString=$cookieStore.get("userObj");
+		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
 			var keyVals=cookie.split(',');
 			var obj={};
@@ -587,15 +581,7 @@ return {
 	templateUrl: 'include/sidebar.html',
 	controller: ['$scope','$cookieStore','loginHttpService','$routeParams',function ($scope,$cookieStore,loginHttpService,$routeParams) {                         	
 		var cookieString=$cookieStore.get("userObj");
-		//var userInfo=parseUser(cookieString);
-
-		if($cookieStore.get("userObj") !=null && $cookieStore.get("userObj")!='undefined' ){
-			var cookieString=$cookieStore.get("userObj");
-			var userInfo=parseUser(cookieString);
-		}else{
-			window.location.href=urlParams.siteRoot;;
-		}
-
+		var userInfo=parseUser(cookieString);
 		function parseUser(cookie){
 	var keyVals=cookie.split(',');
 	var obj={};
@@ -643,7 +629,7 @@ $scope.userInfo=userInfo;
 return {
 	restrict: 'E',
 	templateUrl: 'include/search-bar.html',
-	controller: ['$scope','$cookieStore',function ($scope,$cookieStore) {  
+	controller: ['$scope','$cookieStore','urlParams', function ($scope,$cookieStore,urlParams) {  
 		 /*$('html').click(function (e) {      
     if ($(e.target).parents('#h_menu').length==1) {
         $('#h_menu').addClass('open')
@@ -659,8 +645,17 @@ return {
 	});
 
 
-		var cookieString=$cookieStore.get("userObj");
-		var userInfo=parseUser(cookieString);		
+		//var cookieString=$cookieStore.get("userObj");
+		//var userInfo=parseUser(cookieString);	
+
+		if($cookieStore.get("userObj") !=null && $cookieStore.get("userObj")!='undefined' ){
+			var cookieString=$cookieStore.get("userObj");
+			var userInfo=parseUser(cookieString);
+		}else{
+			window.location.href=urlParams.siteRoot;;
+		}
+
+
 		function parseUser(cookie){
           var keyVals=cookie.split(',');
           var obj={};
