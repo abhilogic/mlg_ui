@@ -128,18 +128,19 @@ teacherHttpResponse.getStudentsOfSubjectForTeacher=function(tid,course_id){
  });
 }
 
-teacherHttpResponse.getDashboardStudentsOfTeacher=function(tid,course_id,skill_id=null,subskill_id=null,performance=null){
-  if(skill_id!=null && subskill_id!=null && performance!=null ){
+teacherHttpResponse.getDashboardStudentsOfTeacher=function(postdata){
+  /*if(skill_id!=null && subskill_id!=null && performance!=null ){
     var URLstr = '?teacher_id='+tid+'&subject_id='+course_id+'&skill_id='+skill_id+'&subskill_id='+subskill_id+'&student_classification='+performance;
   }else if (skill_id!=null && subskill_id==null){
       var URLstr ='?teacher_id='+tid+'&subject_id='+course_id+'&skill_id='+skill_id;
   }else{
       var URLstr ='?teacher_id='+tid+'&subject_id='+course_id;
-  }
+  }*/
 
   return $http({
-   method:'GET',            
-   url  : urlParams.baseURL+urlParams.getDashboardStudentsOfTeacher+URLstr
+   method:'POST', 
+   data : postdata,           
+   url  : urlParams.baseURL+urlParams.getDashboardStudentsOfTeacher
  });
 }
 
@@ -768,8 +769,8 @@ $scope.submitSkip = function(){
 
 }])
 
-.controller('teacherDashboardViewCtrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','urlParams','$routeParams','user_roles','class_students_classification','questionslimit','quiz_type','commonActions','$filter','$localStorage',
-  function($rootScope,$scope,teacherHttpService,loginHttpService,$location,urlParams,$routeParams,user_roles,class_students_classification,questionslimit,quiz_type,commonActions,$filter,$localStorage) {
+.controller('teacherDashboardViewCtrl',['$rootScope','$scope','$timeout','teacherHttpService','loginHttpService','$location','urlParams','$routeParams','user_roles','class_students_classification','questionslimit','quiz_type','commonActions','$filter','$localStorage',
+  function($rootScope,$scope,$timeout,teacherHttpService,loginHttpService,$location,urlParams,$routeParams,user_roles,class_students_classification,questionslimit,quiz_type,commonActions,$filter,$localStorage) {
       //Step- 1 check students of teacher to show empty / non-empty dashboard
       var get_uid=commonActions.getcookies(get_uid);
        $scope.baseURL= urlParams.baseURL;
@@ -777,6 +778,7 @@ $scope.submitSkip = function(){
        $scope.course_id = $routeParams.courseid ;
        $scope.subject_name = $routeParams.subject_name ;
        $scope.frm={};
+       var postdata ={};
 
        var reporturl= $routeParams.gradeid+'/'+$routeParams.subject_name+'/'+$routeParams.courseid;
        localStorage.setItem('reportURL',reporturl);
@@ -791,7 +793,7 @@ $scope.submitSkip = function(){
 
       });
 
-      var classify = class_students_classification
+      var classify = class_students_classification;
 
 
        //On change skill call API to subskill List
@@ -809,34 +811,77 @@ $scope.submitSkip = function(){
         });
 
         // get students
-        teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id,slctSkill).success(function(response_students) { 
+        postdata = {
+            teacher_id : get_uid,
+            subject_id : $scope.course_id,
+            skill_id   : slctSkill
+        }
+        teacherHttpService.getDashboardStudentsOfTeacher(postdata).success(function(response_students) { 
            if (response_students.response.status == true) {
              $scope.students=response_students.response.students; 
              $scope.students_count=  $scope.students.length;
            }else{
              $scope.student_searchmessage=response_students.response.message;
+             $scope.students={};
              $scope.students_count =0;
            } 
+           postdata ={};
+           $timeout(function () { $scope.student_searchmessage=""; }, 4000);
        });
 
       };
 
       $scope.onChangeSubSkill = function(stfrmdata){
         $scope.students={};
-        teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id,$scope.selected_skill_id,slctsubSkill).success(function(response_students) { 
-         if (response_students.response.status == true) {
-           $scope.students=response_students.response.students; 
-           $scope.students_count=  $scope.students.length;
+
+        postdata ={
+            teacher_id : get_uid,
+            subject_id : $scope.course_id,
+            skill_id   : stfrmdata.selectedSkill,
+            subskill_id: stfrmdata.selectedSubskill
+        }
+      //  teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id,$scope.selected_skill_id,slctsubSkill).success(function(response_students) { 
+         teacherHttpService.getDashboardStudentsOfTeacher(postdata).success(function(response_students) { 
+          if (response_students.response.status == true) {
+              $scope.students=response_students.response.students; 
+              $scope.students_count=  $scope.students.length;
          }else{
-           $scope.student_searchmessage=response_students.response.message;
-           $scope.students_count =0;
-         } 
+            $scope.student_searchmessage=response_students.response.message;
+            $scope.students={};
+            $scope.students_count =0;
+         }
+         postdata = {}; 
+         $timeout(function () { $scope.student_searchmessage=""; }, 4000);
+
        });
 
       };
 
       
       $scope.onChangePerformance = function(stfrmdata){
+          postdata ={
+            teacher_id : get_uid,
+            subject_id : $scope.course_id,
+            skill_id   : stfrmdata.selectedSkill,
+            subskill_id: stfrmdata.selectedSubskill,
+            student_classification : stfrmdata.selectedPerform
+        }
+
+        teacherHttpService.getDashboardStudentsOfTeacher(postdata).success(function(response_students) { 
+          if (response_students.response.status == true) {
+              $scope.students=response_students.response.students; 
+              $scope.students_count=  $scope.students.length;
+         }else{
+            $scope.student_searchmessage=response_students.response.message;
+            $scope.students={};
+            $scope.students_count =0;
+         }
+         postdata = {}; 
+         $timeout(function () { $scope.student_searchmessage=""; }, 4000);
+
+       });
+
+
           /*var newStudents =[];
             angular.forEach($scope.students,function(key,value){        
                 if(key['student_marks_status']==propertyName){
@@ -845,16 +890,18 @@ $scope.submitSkip = function(){
 
             });
             $scope.students = newStudents;*/
-
             console.log(stfrmdata);
-
       };
 
 
 
 
-       // Api to call all students of a teacher       
-       teacherHttpService.getDashboardStudentsOfTeacher(get_uid,$scope.course_id).success(function(response_students) { 
+       // Api to call all students of a teacher     
+        postdata = {
+            teacher_id : get_uid,
+            subject_id : $scope.course_id            
+        } 
+       teacherHttpService.getDashboardStudentsOfTeacher(postdata).success(function(response_students) { 
          if (response_students.response.status == true) {
            $scope.students=response_students.response.students; 
            $scope.students_count=  $scope.students.length;
@@ -2654,7 +2701,7 @@ and ogg format and video size less than 2mb. OR upload only pdf file.');
 }); 
 }   
 }])
-.controller("tableRow", function ($scope) {
+/*.controller("tableRow", function ($scope) {
 	$scope.people = [
 	//{id:'2', Fname:'naseem', Lname: 'akhtar', email: 'naseem@incaendo.com', Uname:'Naseem', pass:'naseem@123'}
 	];
@@ -2675,9 +2722,9 @@ $scope.removePerson = function(index){
   $scope.people.splice(index, 1);
 };
 
-})
+})*/
 
-.controller("studentProgress", function ($scope) {
+/*.controller("studentProgress", function ($scope) {
 	$scope.labels = ["Conquered", "Practiced", "Not Attacked"];
 	$scope.data = [5, 20, 75];
 	
@@ -2724,9 +2771,9 @@ $scope.removePerson = function(index){
   };
 
 
-})
+})*/
 
-.controller("GradeAnalysis", function ($scope) {
+/*.controller("GradeAnalysis", function ($scope) {
   $scope.labels = ["Prime or composite", "Prime factorization", "Multiplicative inverses", "Divisibility rules", "Greatest common factor", "Least common factor", "GCF and LCM word problem", "Scientific nation"];
   $scope.series = ['Recommended progress', 'Average score', 'Andrew score'];
   $scope.data = [
@@ -2776,7 +2823,7 @@ $scope.removePerson = function(index){
 }
 };
 })
-
+*/
 
 .controller("subjectPerformance", function ($scope) {
 	$scope.labels = ["Above Average", "Below Average"];
