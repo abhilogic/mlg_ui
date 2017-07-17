@@ -59,7 +59,15 @@
 									</tr>
 								</thead>
 								<tbody>
-                  {{sort}}
+                  <tr ng-if="message != ''">
+										<td class="standard"></td>
+										<td class="studen_name"></td>
+										<td class="mastered">{{message}}</td>
+										<td class="started"></td>
+										<td class="not_started"></td>
+                    <!--data-target="#modal-areaOfGaps"-->
+										<td class="area_of_gaps" style="cursor:pointer" data-toggle="modal"ng-click="getStudentGap(details.id)" >{{details.gap}}</td>
+									</tr>
 									<tr ng-repeat="details in assisment | orderObjectBy:sortModel:true">
 										<td class="standard">{{$index+1}}</td>
 										<td class="studen_name">{{details.name}}</td>
@@ -156,6 +164,13 @@
 									</tr>
 								</thead>
 								<tbody>
+                  <tr  ng-if="msg != ''">
+										<td class="standard" data-th="STANDARD"></td>
+										<td class="skill_name" data-th="SKILLS NAME">{{msg}}</td>
+										<td class="subskill" data-th="SUBSKILLS">
+										</td>
+										<td class="no_of_students" data-th="NO OF STUDENTS LACKING"></td>
+									</tr>
 									<tr ng-repeat="sgp in studentGap">
 										<td class="standard" data-th="STANDARD">{{$index+1}}</td>
 										<td class="skill_name" data-th="SKILLS NAME">{{sgp.skill_name}}</td>

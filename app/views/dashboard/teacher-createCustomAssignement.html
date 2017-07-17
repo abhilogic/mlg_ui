@@ -162,8 +162,42 @@
                 </div>
                 </div>		
               <div class="question-block-cover" ng-if=" questions.length >0 ">
+                <ul as-sortable="sortableOptions" data-ng-model="questions" ng-if="!sns_message">
+                    <li class="question-block add-question icon-drag" ng-repeat="question in questions" as-sortable-item>
+												<div class="row"  as-sortable-item-handle>
+                          <button type="button" class="btn  btn-check">
+                            <input type="checkbox" ng-model="frm.selected_questions[question.question_id]" ng-true-value="'{{question.level}}'" ng-false-value="''" >        
+                          </button>
+                        <div class="row">
+                          <div class="col-md-9">
+                            <h5 class="ques" ng-bind-html="$index+1 +'.'+' '+ question.questionName">    </h5>
+                          </div>
+                          <div class="col-md-3 text-right text-sm-left">
+                            <span  class="text-uppercase color-gray-light padding-left-0">
+                              <i class="icon icon-my_data margin-right-10 margin-bottom-20"></i> MY Content
+                            </span>
+                            <ul class="list-inline color-gray font-weight-bold">
+                              <li>Skills Level:</li>
+                                <li>{{question.level}}</li>
+                              </ul>
+                          </div>
+                        </div>
+                      <div class="row option-block">
+                          <div ng-class="((($index+1)%2)!= 0) ? 'col-md-7 margin-sm-bottom-10' : 'col-md-5 margin-sm-bottom-10'"  ng-repeat="option in question.options">
+                            <span>{{ numToAlpha($index) +'.  '+ option.label}}</span>
+                          </div>	                   	
+                      </div>                  	
+                        <div class="text-right">
+                          <button type="button" class="btn btn-background-none color-primary" ng-click="onChangeQues($index, question.question_id)">
+                            <u>Change Question</u>
+                          </button>
+                        </div>
+	               	</div>	
+												
+										</li>
+								</ul>
 
-					<div class="question-block add-question icon-drag" ng-repeat="question in questions">
+<!--					<div class="question-block add-question icon-drag" ng-repeat="question in questions">
 	        			<button type="button" class="btn  btn-check">
 	        				
 	        				<input type="checkbox" ng-model="frm.selected_questions[question.question_id]" ng-true-value="'{{question.level}}'" ng-false-value="''" >        
@@ -184,11 +218,11 @@
 	                      		</ul>
 	                    	</div>
 	                  	</div> 
-	                	<!-- <div  ng-class="(($index+1)< 2)?'row option-block': 'row option-block margin-bottom-0 margin-sm-top-0' " ng-repeat="option in question.options">
+	                	 <div  ng-class="(($index+1)< 2)?'row option-block': 'row option-block margin-bottom-0 margin-sm-top-0' " ng-repeat="option in question.options">
 	                    	<div ng-class="((($index+1)%2)!= 0) ? 'col-md-7 margin-sm-bottom-10' : 'col-md-5 margin-sm-bottom-10'">
 	                    		<span>{{ numToAlpha($index) +'.  '+ option.label}}</span>
 	                    	</div>	                   	
-	                	</div> -->
+	                	</div> 
 
 	                	<div class="row option-block">
 	                    	<div ng-class="((($index+1)%2)!= 0) ? 'col-md-7 margin-sm-bottom-10' : 'col-md-5 margin-sm-bottom-10'"  ng-repeat="option in question.options">
@@ -198,14 +232,14 @@
 
 
 
-	                  	<!-- <div class="row option-block margin-bottom-0 margin-sm-top-0 ">
+	                  	 <div class="row option-block margin-bottom-0 margin-sm-top-0 ">
 	                    	<div class="col-md-7 margin-sm-bottom-10">
 	                    		<span> C. 15 </span>
 	                    	</div>
 	                   		<div class="col-md-5 margin-sm-bottom-10">
 	                	   		<span> D. 14 </span>
 	            	       	</div>
-	            		</div> -->	                  	
+	            		</div> 	                  	
 
 
 	                  	<div class="text-right">
@@ -213,9 +247,8 @@
 	                    		<u>Change Question</u>
 	                    	</button>
 	                  	</div>
-	               	</div>	                		
-
-			
+	               	</div>	-->
+	
 				 <div class="add-resources-block">
 					<p><span>Resources</span><span>(optional)</span></p>
 					

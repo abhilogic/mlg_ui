@@ -3784,11 +3784,6 @@ $scope.deleteImage = function(j,data) {
     $scope.frm.selectedStd =[];
     $scope.frm.asscomments ="";
     var  assgresources = {};
-
-
-
-
-
     $scope.$on('UploadedImage', function(event, mass) { 
       assgresources.image = mass;
     });
@@ -6341,20 +6336,26 @@ $scope.deleteQuestions = function(Qid,uniqId){
       gapPgnum = temp[1];
     }
     teacherHttpService.getTeacherStudentReport(get_uid,grade,course,pgnum).success(function(response) {
-      if (response.status == true) {          
+      if (response.status == true) { 
+        $scope.message = '';
         $scope.assisment = response.response;
         $scope.NoGap = response.gap;
         $scope.lastPage = response.lastPage;
-//        $scope.propertyName = 'name';
-//        $scope.reverse = true;
-//        $scope.assisment = orderBy($scope.assisment, $scope.propertyName, $scope.reverse);
+      }else if(response.status == false){
+        $scope.message = 'Record Not Found.';
+        if(response.message != ''){
+          $scope.message = response.message;
+        }
       }
     });
     teacherHttpService.getTeacherStudentGap(get_uid,grade,course,gapPgnum,studentId,studentType).success(function(response) {
-//      if (response.status == true) {          
+      if (response.message == '') {
+        $scope.msg = '';
         $scope.studentGap = response.response;
         $scope.endPage = response.lastPage;
-//      }
+      }else{
+        $scope.msg = response.message;
+      }
     });
    $scope.getPrevious = function(data) {
      if(data == 'report') {
@@ -6368,10 +6369,16 @@ $scope.deleteQuestions = function(Qid,uniqId){
         $scope.nexClass = '';
         $scope.preClass = 'disabled';
         teacherHttpService.getTeacherStudentReport(get_uid,grade,course,pgnum).success(function(response) {
-          if (response.status == true) {          
+          if (response.status == true) { 
+            $scope.message = '';
             $scope.assisment = response.response;
             $scope.NoGap = response.gap;
             $scope.lastPage = response.lastPage;
+          }else if(response.status == false){
+            $scope.message = 'Record Not Found.';
+            if(response.message != ''){
+              $scope.message = response.message;
+            }
           }
         });
       }else{
@@ -6385,10 +6392,16 @@ $scope.deleteQuestions = function(Qid,uniqId){
          $scope.preClass = '';
        }
        teacherHttpService.getTeacherStudentReport(get_uid,grade,course,pgnum).success(function(response) {
-        if (response.status == true) {          
+        if (response.status == true) { 
+          $scope.message = '';
           $scope.assisment = response.response;
           $scope.NoGap = response.gap;
           $scope.lastPage = response.lastPage;
+        }else if(response.status == false){
+          $scope.message = 'Record Not Found.';
+          if(response.message != ''){
+            $scope.message = response.message;
+          }
         }
       });
       } 
@@ -6404,10 +6417,13 @@ $scope.deleteQuestions = function(Qid,uniqId){
         $scope.nexClass = '';
         $scope.preClass = 'disabled';
         teacherHttpService.getTeacherStudentGap(get_uid,grade,course,gapPgnum,studentId,studentType).success(function(response) {
-//      if (response.status == true) {          
-          $scope.studentGap = response.response;
-          $scope.endPage = response.lastPage;
-  //      }
+          if (response.message == '') {
+            $scope.msg = '';
+            $scope.studentGap = response.response;
+            $scope.endPage = response.lastPage;
+          }else{
+            $scope.msg = response.message;
+          }
       });
       }else{
         if(gapPgnum > 1) {
@@ -6420,10 +6436,13 @@ $scope.deleteQuestions = function(Qid,uniqId){
          $scope.preClass = '';
        }
        teacherHttpService.getTeacherStudentGap(get_uid,grade,course,gapPgnum,studentId,studentType).success(function(response) {
-  //      if (response.status == true) {          
+        if (response.message == '') {
+          $scope.msg = '';
           $scope.studentGap = response.response;
           $scope.endPage = response.lastPage;
-  //      }
+        }else{
+          $scope.msg = response.message;
+        }
       });
       } 
     }
@@ -6439,18 +6458,30 @@ $scope.deleteQuestions = function(Qid,uniqId){
       $scope.nexClass = 'disabled';
       $scope.preClass = '';
       teacherHttpService.getTeacherStudentReport(get_uid,grade,course,pgnum).success(function(response) {
-        if (response.status == true) {          
+        if (response.status == true) { 
+          $scope.message = '';
           $scope.assisment = response.response;
           $scope.NoGap = response.gap;
           $scope.lastPage = response.lastPage;
+        }else if(response.status == false){
+          $scope.message = 'Record Not Found.';
+          if(response.message != ''){
+            $scope.message = response.message;
+          }
         }
       });
     }else{
      teacherHttpService.getTeacherStudentReport(get_uid,grade,course,pgnum).success(function(response) {
-        if (response.status == true) {          
+        if (response.status == true) { 
+          $scope.message = '';
           $scope.assisment = response.response;
           $scope.NoGap = response.gap;
           $scope.lastPage = response.lastPage;
+        }else if(response.status == false){
+          $scope.message = 'Record Not Found.';
+          if(response.message != ''){
+            $scope.message = response.message;
+          }
         }
       });
    }
@@ -6474,17 +6505,23 @@ $scope.deleteQuestions = function(Qid,uniqId){
       $scope.nexClass = 'disabled';
       $scope.preClass = '';
       teacherHttpService.getTeacherStudentGap(get_uid,grade,course,gapPgnum,studentId,studentType).success(function(response) {
-  //      if (response.status == true) {          
+        if (response.message == '') {
+          $scope.msg = '';
           $scope.studentGap = response.response;
           $scope.endPage = response.lastPage;
-  //      }
+        }else{
+          $scope.msg = response.message;
+        }
       });
     }else{
      teacherHttpService.getTeacherStudentGap(get_uid,grade,course,gapPgnum,studentId,studentType).success(function(response) {
-  //      if (response.status == true) {          
+        if (response.message == '') {
+          $scope.msg = '';
           $scope.studentGap = response.response;
           $scope.endPage = response.lastPage;
-  //      }
+        }else{
+          $scope.msg = response.message;
+        }
       });
    }
    if(gapPgnum > 1) {
@@ -6527,7 +6564,6 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.gapStudentName = '';
     var temp_skill = '';
     var temp_subSkill = '';
-//    var data = {};
     var k = 0;
     angular.forEach($scope.NoGap,function(value,key){
       if(key == stdId) {
