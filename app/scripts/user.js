@@ -2242,7 +2242,7 @@ if (typeof $routeParams.slug != 'undefined') {
                 'category':key,
               });
               if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                $scope.gap_message = '';
+                $scope.gapMessage= '';
               }
             }
             temp = clss;
@@ -2314,7 +2314,7 @@ if (typeof $routeParams.slug != 'undefined') {
                  'category':key,
                });
                if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                 $scope.gap_message = '';
+                 $scope.gapMessage= '';
                }
              }
              temp = clss;
@@ -2361,7 +2361,7 @@ if (typeof $routeParams.slug != 'undefined') {
                 'category':key,
               });
               if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                $scope.gap_message = '';
+                $scope.gapMessage= '';
               }
             }
             temp = clss;
@@ -2408,7 +2408,7 @@ if (typeof $routeParams.slug != 'undefined') {
                 'category':key,
               });
               if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                $scope.gap_message = '';
+               $scope.gapMessage = '';
               }
             }
             temp = clss;
@@ -2449,7 +2449,7 @@ if (typeof $routeParams.slug != 'undefined') {
                  'category':key,
                });
                if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                 $scope.gap_message = '';
+                 $scope.gapMessage = '';
                }
              }
              temp = clss;
@@ -2547,7 +2547,7 @@ if (typeof $routeParams.slug != 'undefined') {
                       'category':key,
                     });
                     if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                      $scope.gap_message = '';
+                      $scope.gapMessage = '';
                     }
                   }
                   temp = clss;
@@ -2594,7 +2594,7 @@ if (typeof $routeParams.slug != 'undefined') {
                       'category':key,
                     });
                     if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                      $scope.gap_message = '';
+                      $scope.gapMessage = '';
                     }
                   }
                   temp = clss;
@@ -2728,7 +2728,7 @@ if (typeof $routeParams.slug != 'undefined') {
                       'category':key,
                     });
                     if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                      $scope.gap_message = '';
+                      $scope.gapMessage = '';
                     }
                   }
                   temp = clss;
@@ -2766,7 +2766,7 @@ if (typeof $routeParams.slug != 'undefined') {
                       'category':key,
                     });
                     if(key == 'REMEDIAL' || key == 'STRUGGLING') {
-                      $scope.gap_message = '';
+                      $scope.gapMessage = '';
                     }
                   }
                   temp = clss;
