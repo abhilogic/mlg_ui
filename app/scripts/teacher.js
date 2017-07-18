@@ -2470,6 +2470,10 @@ if(typeof LId[1] != 'undefined') {
         $scope.frm.first_name = teacher.first_name;
         $scope.frm.last_name = teacher.last_name;
         $scope.frm.email = teacher.email;
+//        $scope.frm.school = teacher.user_detail.school;
+//        $scope.frm.district = teacher.user_detail.district;
+//        $scope.frm.zip_code = teacher.user_detail.zipcode;
+//        $scope.frm.street = teacher.user_detail.address_line_1 +' '+teacher.user_detail.address_line_2;
       }
     });
     loginHttpService.getUserPreferences(get_uid).success(function (resp) {
@@ -5641,6 +5645,12 @@ $scope.deleteQuestions = function(Qid,uniqId){
     teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
       if (response.status == true) {          
         $scope.scopeLevel = response.grade;
+        // for automatically selected first value
+        grade = response.response[0].level_id;
+        course = response.response[0].course_id;
+        groupId = '0';
+        optionChecked = 'class';
+        groupName = 'class';
         if(grade != '') {
           angular.forEach($scope.scopeLevel,function(val,ki){
             if(val['id'] == grade){
@@ -5697,7 +5707,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
                 $scope.scopeSkills = angular.fromJson(response.response[0].scope);
               }
               angular.forEach($scope.scopeSkills,function(sub,key){
-                teacherHttpService.teacherScope(get_uid,sub['course_id'],optionChecked,id).success(function(response) {
+                teacherHttpService.teacherScope(get_uid,sub['course_id'],optionChecked,groupId).success(function(response) {
                  if(response.status == true) {
                    if(response.by == 'course') {
                      if(response.response != '') {
@@ -5733,6 +5743,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     // on the basis of grade fetch the course list.
     $scope.getScopeGrade = function(data){
       if(data != '') {
+        $scope.sns_message = '';
         grade = data;
         teacherHttpService.getTeacherDetailsForContent(get_uid,grade,-1,user_roles['teacher']).success(function(response) {
           $scope.scopeSubject = response.response;
