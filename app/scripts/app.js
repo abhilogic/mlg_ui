@@ -129,6 +129,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   getStandard :'/courses/getStandard',
   getStudentScoreForSkills :'/students/getStudentScoreForSkills',
   restoreScope :'/teachers/restoreScope',
+  getTeacherPointsIndividual :'/teachers/getTeacherPointsIndividual',
 
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
@@ -529,8 +530,7 @@ return {
 					$('#'+menu_class).addClass('collapsed');
 			}
 
-			}
-			
+			}		
 		   
 		}
 		var cookieString=$cookieStore.get("userObj");

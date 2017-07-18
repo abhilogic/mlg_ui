@@ -525,6 +525,12 @@ teacherHttpResponse.restoreScope=function(uid,subject_id){
     url   : urlParams.baseURL+urlParams.restoreScope+'/'+uid+'/'+subject_id
   });
 }
+teacherHttpResponse.getTeacherPointsIndividual=function(uid,type){
+  return $http({
+    method:'GET',
+    url   : urlParams.baseURL+urlParams.getTeacherPointsIndividual+'/'+uid+'/'+type
+  });
+}
 
 
 return teacherHttpResponse;
@@ -4709,6 +4715,12 @@ $scope.deleteImage = function(j,data) {
       $scope.nexClass = 'disabled';
     }
   });
+  // user points
+   teacherHttpService.getTeacherPointsIndividual(get_uid,'question').success(function(response) {
+      if(response.status == true){
+        $scope.points = response.response[0].point;
+      }
+   });
    $scope.getPrevious = function() {
     pgnum = pgnum - 1;
     if(pgnum < '1') {
@@ -4985,11 +4997,17 @@ $scope.deleteQuestions = function(Qid,uniqId){
       pgnum = temp[1];
     }
     teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
-     $scope.lessonList = response.data;
-     $scope.lastPage = response.lastPage;
-     $scope.start = response.start;
-     $scope.last = response.last;
-     $scope.total = response.total;
+      $scope.lessonList = response.data;
+      $scope.lastPage = response.lastPage;
+      $scope.start = response.start;
+      $scope.last = response.last;
+      $scope.total = response.total;
+    });
+   // get points 
+   teacherHttpService.getTeacherPointsIndividual(get_uid,'lesson').success(function(response) {
+      if(response.status == true){
+        $scope.points = response.response[0].point;
+      }
    });
    $scope.getPrevious = function() {
     pgnum = pgnum - 1;
