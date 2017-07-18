@@ -1143,8 +1143,10 @@ $scope.showEvents = function(events) {
           }
         });
       }
-
-
+     // calender back button
+      $scope.calenderBackButton = function(){
+        $scope.event = 'all';
+      }
       // start-  NEEDS YOUR ATTENTION
       teacherHttpService.getNeedAttentionForTeacher(get_uid,$routeParams.courseid).success(function(resAtn) {
           if(resAtn.response.status==true){
@@ -4025,7 +4027,8 @@ $scope.deleteImage = function(j,data) {
               $timeout(function () { $scope.err_message[5] = ""; }, 3000);
             }
             else{
-
+                 console.log();
+                 console.log(frmdata.selected_questions);
               var assgData ={
                 teacher_id      : get_uid,
                 grade_id        : $scope.grade_id,
