@@ -22,7 +22,7 @@
 					<!-- Student List Panel  -->
 					<div class="panel panel-flat edit-group">
 					   <div class="edited-block">
-			              <i class="fa fa-arrow-left"></i>
+			              <a href="teacher/dashboard/class/{{sidefrm.selected_grade}}/{{sidefrm.selected_courseName}}/{{sidefrm.selected_course}}"><i class="fa fa-arrow-left"></i></a>
 			              <ul>
 			                <li>
 			                	<img src="{{baseURL}}/{{group_icon}}" alt="" class=" img-circle" style="max-width:134px" >
@@ -37,7 +37,9 @@
 			            </div>
 						
 						<div class="panel-heading">
-							<h5 class="panel-title text-uppercase"><i class="icon icon-arrow-left"></i> Member</h5>
+							<h5 class="panel-title text-uppercase">
+                <!--<i class="icon icon-arrow-left"></i>-->
+                Member</h5>
 						</div>
 						<div class="panel-body">
 							<ul class="row list-thumb student_list">

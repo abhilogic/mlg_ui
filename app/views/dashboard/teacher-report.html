@@ -111,7 +111,7 @@
 									<div class="row filter-cover">
 										<div class="col-lg-2 col-md-4 margin-sm-bottom-15">
 											<div class="radio radio-primary radio-inline">
-												<input type="radio" id="inlineRadio1"  value="all" name="GAP" ng-model="option" checked="">
+                        <input type="radio" id="inlineRadio1"  value="all" name="GAP" ng-model="option" ng-change="getAllGap()" checked="">
 												<label for="inlineRadio1" class="text-uppercase"> All Class</label>
 											</div>
 										</div>
@@ -236,14 +236,14 @@
 						<table id="tableAllQuestions" class="table table-condenced table-teacherContent table-area-of-gaps">
 							<thead>
 								<tr>
-									<th class="standard">STANDARD</th>
+									<th class="standard">S.No.</th>
 									<th class="student_name">SKILL NAME</th>
 									<th class="mastered">SUBSKILLS <span>(Click tab to send  assignement)</span></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat=" skill in gapSkill">
-									<td class="standard" data-th="STANDARD">1</td>
+									<td class="standard" data-th="STANDARD">{{$index+1}}</td>
 									<td class="skill_name" data-th="SKILLS NAME">{{skill.skill_name}}</td>
 									<td class="subskill" data-th="SUBSKILLS">
                       <div class="subkills-cover" ng-repeat=" subskill in gapSubSkill" ng-if="skill.skill_id == subskill.parent_id">

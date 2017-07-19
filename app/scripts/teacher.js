@@ -2528,11 +2528,11 @@ if(typeof LId[1] != 'undefined') {
     };
     $scope.setQuotation = function(frm) {
       if (frm.first_name === '') {
-        $scope.msg = 'first name cannot be empty';
+        $scope.msg = 'first name cannot be empty.';
         $timeout(function () {$scope.msg = ""; }, 3000);
         return false;
       }else if (frm.phone_number == null) {
-        $scope.msg = 'Phone number cannot be empty';
+        $scope.msg = 'Phone number cannot be empty.';
         $timeout(function () {$scope.msg = ""; }, 3000);
         return false;
       }
@@ -4196,7 +4196,7 @@ $scope.deleteImage = function(j,data) {
         if ($scope.student.user_detail.profile_pic != '' && $scope.student.user_detail.profile_pic != null) {
           $scope.profile_pic = image_directory + '/' + $scope.student.user_detail.profile_pic;
         } else {
-          $scope.profile_pic = image_directory + '/' + 'profile_img/default_studentAvtar.png';
+          $scope.profile_pic = image_directory + '/' + 'upload/profile_img/default_studentAvtar.png';
         }
         teacherHttpService.getStudentCourses($routeParams.id).success(function (response) {
           if (response.response.status.toLowerCase() == 'true') {
@@ -6618,6 +6618,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     angular.forEach($scope.NoGap,function(value,key){
       if(key == stdId) {
         angular.forEach(value,function(val,ki){
+          $scope.gapStudentName = (val['name']).toUpperCase();
           if(temp_skill != val['skill_id']) {
             temp_skill = val['skill_id'];
             $scope.gapSkill.push({
@@ -6651,10 +6652,10 @@ $scope.deleteQuestions = function(Qid,uniqId){
     studentType = 'group';
     angular.forEach($scope.groups,function(val,key){
       if(val['id'] == data) {
-        studentId = val['student_id'];
+        studentId = val['id'];
       }
     });
-    teacherHttpService.getTeacherStudentGap(get_uid,grade,course,gapPgnum,studentId,studentId,studentType).success(function(response) {
+    teacherHttpService.getTeacherStudentGap(get_uid,grade,course,gapPgnum,studentId,studentType).success(function(response) {
   //      if (response.status == true) {          
           $scope.studentGap = response.response;
           $scope.endPage = response.lastPage;
@@ -6668,6 +6669,17 @@ $scope.deleteQuestions = function(Qid,uniqId){
   $scope.generateAssignment = function(data){
     window.location.href='teacher/custom-assignment/'+grade+'/'+$routeParams.subject_name+'/'+course;
   };
+  // all class
+  $scope.getAllGap = function(){
+    studentType = 'all';
+    studentId = null;
+    teacherHttpService.getTeacherStudentGap(get_uid,grade,course,gapPgnum,studentId,studentType).success(function(response) {
+  //      if (response.status == true) {          
+          $scope.studentGap = response.response;
+          $scope.endPage = response.lastPage;
+  //      }
+    });
+  }
  }])
 .controller('teacherHelpCtrl', ['$scope', 'loginHttpService', '$location', 'urlParams', 'commonActions',
    function ($scope, loginHttpService, $location, urlParams, commonActions) {

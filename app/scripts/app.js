@@ -626,7 +626,7 @@ $scope.userInfo=userInfo;
 return {
 	restrict: 'E',
 	templateUrl: 'include/search-bar.html',
-	controller: ['$scope','$cookieStore','urlParams', function ($scope,$cookieStore,urlParams) {  
+	controller: ['$scope','$cookieStore','urlParams','loginHttpService','$rootScope','commonActions', function ($scope,$cookieStore,urlParams,loginHttpService,$rootScope,commonActions) {  
 		 /*$('html').click(function (e) {      
     if ($(e.target).parents('#h_menu').length==1) {
         $('#h_menu').addClass('open')
@@ -671,7 +671,21 @@ return {
         	$scope.URLSetting ='parent/settings';
         	$scope.URLHelp ='parent/help';
         }
-
+   // get user detail
+   var get_uid = commonActions.getcookies(get_uid);
+   loginHttpService.getUserDetails(get_uid).success(function(response) {
+         if(response.data.user_all_details != ''){
+           if(response.data.user_all_details[0].user_detail.profile_pic == null 
+                   ||response.data.user_all_details[0].user_detail.profile_pic == '' ){
+            $scope.profilePic = "assets/img/student-img/stud_img_1.png"; 
+           }else{
+           $scope.profilePic= urlParams.baseURL+'/'+response.data.user_all_details[0].user_detail.profile_pic; 
+           }
+         }else{
+           $scope.profilePic = "assets/img/student-img/stud_img_1.png";
+         }
+	   }).error(function(error) {
+	   });
 
        
 	}]
