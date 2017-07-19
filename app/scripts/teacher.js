@@ -1051,12 +1051,15 @@ $scope.showEvents = function(events) {
       //calender event create.
       $scope.userDate = '';
       $scope.getUserSelectedDate = function(day){
-
         var temp = day.classes;
         var selectedDate = '';
         var tempData = temp.split(' ');
         if(tempData['1'] == 'past'){
-          selectedDate = tempData['2'].split('day-');
+          if(tempData['2'] == 'adjacent-month'){
+            selectedDate = tempData['4'].split('day-');
+          }else{
+            selectedDate = tempData['2'].split('day-'); 
+          } 
         }else if(tempData['1'] == 'today'){
           if(tempData['2'] == 'event') {
             selectedDate = tempData['3'].split('day-'); 
@@ -1065,6 +1068,8 @@ $scope.showEvents = function(events) {
           }
         }else if(tempData['1'] == 'event'){
           selectedDate = tempData['2'].split('day-');
+        }else if(tempData['1'] == 'adjacent-month'){
+          selectedDate = tempData['3'].split('day-');
         }else{
           selectedDate = tempData['1'].split('day-');
         }
@@ -2450,8 +2455,8 @@ if(typeof LId[1] != 'undefined') {
     };
 
  }])
- .controller('teacherQuoteCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams',
- function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams) {
+ .controller('teacherQuoteCntrl',['$rootScope','$scope','teacherHttpService','loginHttpService','$location','user_roles','commonActions','$routeParams','$timeout',
+ function($rootScope,$scope,teacherHttpService,loginHttpService,$location,user_roles,commonActions,$routeParams,$timeout) {
     var get_uid = commonActions.getcookies(get_uid);
     if (get_uid == '') {
       alert('Kindly login');
@@ -2470,10 +2475,18 @@ if(typeof LId[1] != 'undefined') {
         $scope.frm.first_name = teacher.first_name;
         $scope.frm.last_name = teacher.last_name;
         $scope.frm.email = teacher.email;
-//        $scope.frm.school = teacher.user_detail.school;
-//        $scope.frm.district = teacher.user_detail.district;
-//        $scope.frm.zip_code = teacher.user_detail.zipcode;
-//        $scope.frm.street = teacher.user_detail.address_line_1 +' '+teacher.user_detail.address_line_2;
+        $scope.frm.city = teacher.user_detail.city;
+        $scope.frm.country = teacher.user_detail.country;
+        $scope.frm.phone_number = teacher.mobile;
+        $scope.frm.school = teacher.user_detail.school;
+        $scope.frm.district = teacher.user_detail.district;
+        $scope.frm.zip_code = teacher.user_detail.zipcode;
+        if(teacher.user_detail.address_line_1 != null) {
+          $scope.frm.street = teacher.user_detail.address_line_1;
+        }
+        if(teacher.user_detail.address_line_2 != null) {
+          $scope.frm.street = $scope.frm.street +' '+teacher.user_detail.address_line_2;
+        } 
       }
     });
     loginHttpService.getUserPreferences(get_uid).success(function (resp) {
@@ -2495,7 +2508,7 @@ if(typeof LId[1] != 'undefined') {
             $scope.records=courseslistresult.response.course_list;
          } else {
            $scope.cousesListByGrade= courseslistresult.response.courses;
-           $scope.msg=courseslistresult.response.message;
+//           $scope.msg=courseslistresult.response.message;
            $scope.courserecords=courseslistresult.response.course_list;
          }
       });
@@ -2516,7 +2529,11 @@ if(typeof LId[1] != 'undefined') {
     $scope.setQuotation = function(frm) {
       if (frm.first_name === '') {
         $scope.msg = 'first name cannot be empty';
-        alert('first name cannot be empty');
+        $timeout(function () {$scope.msg = ""; }, 3000);
+        return false;
+      }else if (frm.phone_number == null) {
+        $scope.msg = 'Phone number cannot be empty';
+        $timeout(function () {$scope.msg = ""; }, 3000);
         return false;
       }
       frm.selected_course_values = $scope.stcourses;
@@ -5348,6 +5365,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
         $scope.frm.city = user.user_detail.city;
         $scope.frm.state = user.user_detail.state;
         $scope.frm.country = user.user_detail.country;
+        $scope.frm.school = user.user_detail.school;
       }
       loginHttpService.getUserPreferences(get_uid).success(function (resp) {
         if (resp.status == true) {

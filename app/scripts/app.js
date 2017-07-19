@@ -368,9 +368,6 @@ principal  : 30,
   }).when('/teacher/gap-analysis',{
 		templateUrl : 'views/dashboard/teacher-gapAnalysis.html',
 		controller : 'teacherGapAnalysis',
-  }).when('/teacher/get-a-quote',{
-		templateUrl : 'views/dashboard/teacher-getQuote.html',
-		controller : 'teacherGetQuote',
   }).when('/teacher/group-member',{
 		templateUrl : 'views/dashboard/teacher-groupMember.html',
 		controller : 'teacherGroupMember',
