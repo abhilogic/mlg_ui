@@ -4723,7 +4723,7 @@ $scope.deleteImage = function(j,data) {
    var tempUrl = $location.url();
    var temp = tempUrl.split('#');
    if(typeof temp[1] != 'undefined') {
-     pgnum = temp[1];
+     pgnum = parseInt(temp[1]);
    }
    teacherHttpService.getQuestions(get_uid,pgnum).success(function(response) {
     $scope.questionList = response.data;
@@ -5015,7 +5015,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
     var tempUrl = $location.url();
     var temp = tempUrl.split('#');
     if(typeof temp[1] != 'undefined') {
-      pgnum = temp[1];
+      pgnum = parseInt(temp[1]);
     }
     teacherHttpService.getLessonForList(get_uid,pgnum).success(function(response) {
       $scope.lessonList = response.data;
@@ -5040,7 +5040,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
       pgnum = 1;
       $scope.nexClass = '';
       $scope.preClass = 'disabled';
-      if(edit = 'EDIT'){
+      if(edit == 'EDIT'){
         teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
           if(response.status == true) {
             $scope.lessonList = response.data;
@@ -5075,7 +5075,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
        $scope.nexClass = '';
        $scope.preClass = '';
      }
-     if(edit = 'EDIT'){
+     if(edit == 'EDIT'){
         teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
           if(response.status == true) {
             $scope.lessonList = response.data;
@@ -5111,7 +5111,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
   }else if(pgnum == $scope.lastPage) {
     $scope.nexClass = 'disabled';
     $scope.preClass = '';
-    if(edit = 'EDIT'){
+    if(edit == 'EDIT'){
         teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
           if(response.status == true) {
             $scope.lessonList = response.data;
@@ -5137,7 +5137,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
         }); 
       }
   }else{
-   if(edit = 'EDIT'){
+   if(edit == 'EDIT'){
         teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill,standard).success(function(response) {
           if(response.status == true) {
             $scope.lessonList = response.data;
@@ -5650,25 +5650,26 @@ $scope.deleteQuestions = function(Qid,uniqId){
     var lUrl = $location.url();
     if(typeof lUrl.split('?') != 'undefined') {
       var LId = lUrl.split('?');
-    }
-    if(typeof LId[1] != 'undefined') {  
-      var cId =  LId[1].split('&F');
-      grade = cId[0].toString();
-      course = cId[1].toString();
-      groupName  = cId[2].toString();
-      groupId = cId[3].toString();
-      optionChecked = groupName;
-    }
+    }    
     $scope.option = optionChecked;
     teacherHttpService.getTeacherGrades(get_uid,user_roles['teacher']).success(function(response) {
       if (response.status == true) {          
         $scope.scopeLevel = response.grade;
-        // for automatically selected first value
-        grade = response.response[0].level_id;
-        course = response.response[0].course_id;
-        groupId = '0';
-        optionChecked = 'class';
-        groupName = 'class';
+        if(typeof LId[1] != 'undefined') {  
+          var cId =  LId[1].split('&F');
+          grade = cId[0].toString();
+          course = cId[1].toString();
+          groupName  = cId[2].toString();
+          groupId = cId[3].toString();
+          optionChecked = groupName;
+        }else{
+          // for automatically selected first value
+            grade = response.response[0].level_id;
+            course = response.response[0].course_id;
+            groupId = '0';
+            optionChecked = 'class';
+            groupName = 'class';
+        }
         if(grade != '') {
           angular.forEach($scope.scopeLevel,function(val,ki){
             if(val['id'] == grade){
@@ -5695,6 +5696,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
                 angular.forEach($scope.students,function(val,ki){
                   if(val['id'] == groupId){
                     $scope.scopePeopleModel = val['id'];
+                    $scope.option = optionChecked;
                   }
                 });
               }
@@ -5711,6 +5713,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
                 angular.forEach($scope.groups,function(val,ki){
                   if(val['id'] == groupId){
                     $scope.scopeGroupModel = val['id'];
+                    $scope.option = optionChecked;
                   }
                 });
               }
