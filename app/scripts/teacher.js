@@ -6034,6 +6034,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
                  if (respGroup.response.status == "true") {
                    $scope.groups = respGroup.response.groups;
                    $scope.scopeGroupModel = scope['created_for'];
+                   $scope.grpId = scope['created_for']; 
                  }
                 }); 
               }
@@ -6043,6 +6044,7 @@ $scope.deleteQuestions = function(Qid,uniqId){
                  if (response_students.response.status == "true") {
                    $scope.students = response_students.response.students;
                    scopePeopleModel = scope['created_for'];
+                   $scope.grpId = scope['created_for'];
                  } 
                 }); 
               }
