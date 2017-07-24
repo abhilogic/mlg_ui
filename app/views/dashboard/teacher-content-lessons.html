@@ -140,9 +140,10 @@
 											<ul class="pagination pagination-sm">
 												<li class="{{preClass}}">
 													<a ng-click="getPrevious()">
-														<span aria-hidden="true">Previous</span>
+														<span aria-hidden="true" >Previous</span>
 													</a>
 												</li>
+                        <!--style="border-color: #66818d"-->
 												<li ng-repeat="n in range(1,lastPage)">
 													<a href="#{{n}}">{{n}}</a>
 												</li>
@@ -200,7 +201,7 @@
 					<div class="modal-body">
 					<form action="http://localhost/mlg/courses/readCSV" class="dropzone" id="dropzone_multiple"></form>
 						<div class="text-right">
-							<a href="../assets/documents/doc.pdf" download><u>Dowload a sample Version</u></a>
+							<a href="assets/documents/doc.pdf" download><u>Dowload a sample Version</u></a>
 							<div class="text-center">
 									<button class="btn btn-primary" id="upload">Upload</button>
 							</div>

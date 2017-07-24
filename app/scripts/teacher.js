@@ -531,7 +531,13 @@ teacherHttpResponse.getTeacherPointsIndividual=function(uid,type){
     url   : urlParams.baseURL+urlParams.getTeacherPointsIndividual+'/'+uid+'/'+type
   });
 }
-
+teacherHttpResponse.addStudentCsv=function(file){
+  return $http({
+    method:'POST',
+    data  : file,
+    url   : urlParams.baseURL+urlParams.addStudentCsv
+  });
+}
 
 return teacherHttpResponse;
 
@@ -1486,7 +1492,20 @@ $scope.getData = function () {
 $scope.numberOfPages=function(){
 	return Math.ceil($scope.getData().length/$scope.pageSize);                
 }
-
+// upload csv
+$scope.uploadCsv = function(e){
+  alert(e.target.file[0]);
+  console.log(e.target.file[0]);
+  alert('hu1');
+  var file = $scope.myFile;
+  var d = JSON.stringify(file);
+  console.log(d);
+  console.log( $scope.myFile);
+  teacherHttpService.addStudentCsv(file).success(function(res) { 
+    alert('hu2');
+    console.log(res);
+  });
+}
 }])
 
 .controller('teacherGroupCtrl',['$rootScope','$scope','$timeout', 'teacherHttpService','loginHttpService','$routeParams','$location','user_roles','commonActions','$routeParams','urlParams',
@@ -4076,7 +4095,7 @@ $scope.deleteImage = function(j,data) {
 
               teacherHttpService.setCustomAssignmentByTeacher(assgData,get_uid).success(function(respAssg) {
                 if(respAssg.response.status == "True"){ 
-                  $('#modal-sucess').modal('show'); 
+                  $('#modal-sucess').modal({backdrop: 'static', keyboard: false}); 
 
                   $scope.onClickOk=function(){
                     window.location.href='teacher/custom-assignment/'+$scope.grade_id+'/'+$scope.subject_name+'/'+$scope.course_id;

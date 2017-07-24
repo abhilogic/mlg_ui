@@ -25,6 +25,11 @@
 							
 								<div class="heading-elements">
 									<ul class="padding-left-0 list-inline">
+                    <li class="toolbar-item">
+											<div class="btn-group" role="group" aria-label="...">
+												<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-uploadContent"><i class="icon icon-user"></i>Upload Csv</button>
+											</div>
+										</li>
 										<li class="toolbar-item">
 											<div class="btn-group" role="group" aria-label="...">
 												<button type="button" class="btn btn-default" ng-click="onClickSendEmailMe(frm)"><i class="icon icon-user"></i> Email Me</button>
@@ -219,6 +224,28 @@
 		<!-- /page content -->
 
 	</div>
+  <div id="modal-uploadContent" class="modal fade modal-uploadContent" role="dialog">
+			<div class="modal-dialog modal-lg">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><i class="icon icon-cross"></i></button>
+						<h4 class="modal-title">Upload A File</h4>
+					</div>
+					<div class="modal-body">
+            <form action="http://localhost/mlg/teachers/addStudentCsv" method="post" enctype="multipart/form-data">
+              <input  type="file" name="myFile" id="myFile"/>
+              <div class="text-right">
+                <div class="text-center">
+                  <button class="btn btn-primary" id="upload" name="upload" type="submit">Upload</button>
+                </div>
+              </div>
+            </form>
+					</div>
+				</div>
+			</div>s
+		</div>
 	<!-- page container -->
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
