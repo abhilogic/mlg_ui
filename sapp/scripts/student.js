@@ -1966,10 +1966,13 @@ promise.then(function(result) {
       return $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + videoId);
 	};
 	$scope.getImgSrc = function (imageUrl) {
-      return $sce.trustAsResourceUrl($scope.base_url + '/' + imageUrl.trim());
+      return $sce.trustAsResourceUrl($scope.base_url + '/upload/' + imageUrl.trim());
 	};
 	$scope.getVideoSrc = function (videoUrl) {
-      return $sce.trustAsResourceUrl($scope.base_url + '/' + videoUrl.trim());
+      return $sce.trustAsResourceUrl($scope.base_url + '/upload/' + videoUrl.trim());
+	};
+  $scope.getPdfSrc = function (pdfUrl) {
+      return $sce.trustAsResourceUrl($scope.base_url + '/upload/' + pdfUrl.trim());
 	};
     $scope.base_url = urlParams.baseURL;
 	var pid = $routeParams.pid;
@@ -1992,9 +1995,9 @@ promise.then(function(result) {
       };
 
       $scope.check_network_state();
-
       loginHttpService.getAllCourseList(pid, type, course_id, get_uid).success(function(response) {
         if (response.response.course_details.length > 0) {
+          $scope.subSkill = response.response.course_information[0].course_name;
           localStorage.setItem('responseForStudentContent', JSON.stringify(response));
           process_page(response);
         } else {
@@ -2053,8 +2056,6 @@ promise.then(function(result) {
           }
         $scope.khan_api_content = khan_api_response_content;
       }
-
-
 
 $scope.apiTabs=function(){
 	$(".table-of-content .nav-tabs li").removeClass("active");
@@ -2168,9 +2169,9 @@ else{
 			//local storage functionality implementation
 	  		$localStorage.localquestions= assigmentquestions; //set value in local storage	  	
 	  		$scope.data.questions= $localStorage.localquestions //get value in localstorage
-
+        
 	  		// To check the sequence of the question in quiz	  	
-	  		if(localStorage.getItem('userQuesSequence')!=null ) {
+	  		if(localStorage.getItem('userQuesSequence')!= null ) {
 	  			$scope.sequence=parseInt(localStorage.getItem('userQuesSequence'));
 	  		}else{
 	  			$scope.sequence=0;
@@ -2178,7 +2179,7 @@ else{
 	  			localStorage.setItem('localQuizResponse', JSON.stringify(a));
 	  		}	  	
 	  	
-	  		$scope.currentquestion= $scope.data.questions[$scope.sequence];	
+	  		$scope.currentquestion= $scope.data.questions[$scope.sequence];
 	  		$scope.total_questions=$scope.data.questions.length-1;
 
 			

@@ -11,7 +11,7 @@
     <span class="google-speaker"><img src="assets/img/speaker_icon_gray.png" alt=""/></div>
   <div class="board table subskills-content">
 				<div class="table-animated-img"></div>
-    <h5 class="hd"><span>Subskills:</span> Whole Numbers</h5>
+    <h5 class="hd"><span>Subskills:</span>{{subSkill}}</h5>
     <div class="row">
       <div class="col-md-4 table-of-content">
         <h6>Table of Content</h6>
@@ -21,6 +21,7 @@
               <i ng-if="teacher_content.kind.toUpperCase() == 'TEXT'" class="icon icon-document"></i>
               <i ng-if="teacher_content.kind.toUpperCase() == 'VIDEO'" class="icon icon-video"></i>
               <i ng-if="teacher_content.kind.toUpperCase() == 'IMAGE'" class="icon icon-document"></i>
+              <i ng-if="teacher_content.kind.toUpperCase() == 'DOC'" class="icon icon-doc"></i>
               <a data-toggle="tab" ng-click="apiTabs();" href="/subskill_content/#teacher_{{$index+1}}" id="teacher_link_{{$index}}">{{teacher_content.name}}</a>
             </li>
             <li ng-repeat="khan_content in khan_api_content" >
@@ -51,6 +52,14 @@
                 <video width="320" height="240" controls>
                     <source ng-src="{{getVideoSrc(value)}}">
                 </video>
+                <br>
+                <br>
+              </span>
+            </span>
+            <span ng-if="teacher_content.kind.toUpperCase() == 'DOC'">
+              <h>Click On the text to open file. </h></br>
+              <span class="MLG-{{networkState}}" ng-repeat="value in teacher_content.descriptions | commaBreak track by $index">   
+                <a href="{{getPdfSrc(value)}}">{{value}}</a>
                 <br>
                 <br>
               </span>
