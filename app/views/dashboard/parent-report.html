@@ -36,7 +36,7 @@
 										</li>
                     
                     <li class="toolbar-item">
-                      <select class="mlg-selectpicker form-control" title="SUBJECT"  data-size="auto"
+                      <select class= "mlg-selectpicker form-control"  title="SUBJECT"  data-size="auto"
                                      ng-model="scopeCourseModel"ng-init="scopeCourseModel=''" ng-change="getScopeCourse(scopeCourseModel)"
                                     ng-options="cs.id as cs.name for cs in course">
 												 <option value="">SUBJECT</option>
@@ -58,7 +58,7 @@
 										</li>
 
 										<li class="toolbar-item">
-											<button type="button" class="btn btn-primary">Print</button>
+											<button type="button" class="btn btn-primary" onClick="window.print();">Print</button>
 										</li>
 									</ul>
 								</div>

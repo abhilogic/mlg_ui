@@ -131,6 +131,7 @@ angular.module('mlg', [ 'ngAnimate', 'ngCookies', 'ngRoute', 'ui.bootstrap','ang
   restoreScope :'/teachers/restoreScope',
   getTeacherPointsIndividual :'/teachers/getTeacherPointsIndividual',
   addStudentCsv :'/teachers/addStudentCsv',
+  sendMailToStudents : '/teachers/sendEmailOfScopeToStudent',
 }).value('REGEX', {
 	LAT : '/-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}/',
 	PINCODE : '/^([0-9]{6})$/',

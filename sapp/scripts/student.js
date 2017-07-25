@@ -2706,11 +2706,18 @@ else{
     }; // end submit question operation
 
 }])
-.controller('backHistoryPage', function($scope){
+.controller('backHistoryPage',['$scope','$location','urlParams', function($scope,$location,urlParams){
 	$scope.goBack = function() {
-		window.history.back();
+    var url = $location.url();
+    var tempUrl = url.split('/');
+    if(tempUrl[1] == 'subskill_content'){  
+       window.location.href = window.location.origin+urlParams.studentsiteRoot+'sub-skill/'+tempUrl[2]+'/'+tempUrl[3];
+    }else{
+     window.history.back(); 
+    }
+		
 	};
-})
+}])
 .controller('profileCtrl',['$rootScope','$scope','$filter','loginHttpService','$location','urlParams','$http','user_roles','$routeParams','commonActions','$sce','$q',function($rootScope,$scope,$filter, loginHttpService,$location,urlParams,$http,user_roles,$routeParams,commonActions,$sce,$q) {
 	var get_uid = commonActions.getcookies(get_uid);
 	$scope.coupons = [];
