@@ -4914,6 +4914,9 @@ $scope.deleteQuestions = function(Qid,uniqId){
       });
       course = '-1';
       $scope.skill = [];
+      $scope.standardTypeModel = [];
+      $scope.standardModel = [];
+      $scope.standardModel = [];
       teacherHttpService.getFilterdQuestion(get_uid,pgnum,grade,course,skill).success(function(response) {
         $scope.questionList = response.data;
         $scope.lastPage = response.lastPage;
@@ -5228,6 +5231,9 @@ $scope.deleteQuestions = function(Qid,uniqId){
       });
       course = '-1';
       $scope.skill = [];
+      $scope.standardTypeModel = [];
+      $scope.standardModel = [];
+      $scope.standardModel = [];
       teacherHttpService.getFilterdLesson(get_uid,pgnum,grade,course,skill).success(function(response) {
         if(response.status == true) {
           $scope.lessonList = response.data;
@@ -6318,13 +6324,8 @@ $scope.deleteQuestions = function(Qid,uniqId){
     $scope.onClickSendEmail=function(){
       var selected_students = [];
       if($scope.option == 'class'){
-        teacherHttpService.getStudentsOfSubjectForTeacher(get_uid,course).success(function(response_students) { 
-          if (response_students.response.status == "true") {
-            $scope.students = response_students.response.students;
-            angular.forEach($scope.students,function(value,key){
-              selected_students.push(value['id']);
-            });
-          } 
+        angular.forEach($scope.students,function(value,key){
+          selected_students.push(value['id']);
         });
       }else if($scope.option == 'group'){
             angular.forEach($scope.groups,function(value,key){
